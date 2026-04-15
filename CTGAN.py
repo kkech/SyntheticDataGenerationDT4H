@@ -13,27 +13,20 @@ def run_gpu_synthesis():
     else:
         print(f"✅ GPU DETECTED: {torch.cuda.get_device_name(0)}")
 
-    print("--- 📂 LOADING DATA ---")
     df = pd.read_parquet(input_path)
-
-    # 1. Map Metadata
     metadata = SingleTableMetadata()
     metadata.detect_from_dataframe(data=df)
     
-    # 2. Initialize CTGANSynthesizer
-    # In newer SDV, we use CTGANSynthesizer
+    # We use 500 epochs for better clinical quality
     model = CTGANSynthesizer(metadata, epochs=500)
 
-    # 3. Train
-    print("\n--- 🤖 TRAINING ON GPU ---")
+    print("\n--- 🤖 TRAINING CTGAN ON GPU ---")
     model.fit(df)
 
-    # 4. Generate
     print("\n--- 🧪 GENERATING 5,000 RECORDS ---")
     synthetic_data = model.sample(num_rows=5000)
-    
     synthetic_data.to_csv(output_csv, index=False)
-    print(f"\n🎉 SUCCESS! Saved to: {output_csv}")
+    print(f"\n🎉 DONE! Saved to: {output_csv}")
 
 if __name__ == "__main__":
     run_gpu_synthesis()
