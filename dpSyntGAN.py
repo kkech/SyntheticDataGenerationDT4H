@@ -25,17 +25,17 @@ def run_dp_synthesis():
         if pd.api.types.is_datetime64_any_dtype(df[col]):
             df[col] = df[col].astype(str)
 
-    # 2. Explicitly define and clean columns
+    # 2. Explicitly define Continuous (Numerical) vs Categorical columns
     continuous_cols = []
     categorical_cols = []
 
     for col in df.columns:
         if pd.api.types.is_numeric_dtype(df[col]):
+            # Cast numericals to float to prevent Pandas integer-null crashes
             df[col] = df[col].astype(float)
             continuous_cols.append(col)
         else:
-            # FIX 1: Replace 'None' and 'NaN' with the string "Missing"
-            # Then force the entire column to be string type so the DP encoder doesn't crash
+            # Replace 'None' and 'NaN' with the string "Missing"
             df[col] = df[col].fillna("Missing").astype(str)
             categorical_cols.append(col)
 
@@ -45,12 +45,20 @@ def run_dp_synthesis():
     print(f"Algorithm: {algorithm_name.upper()}")
     print(f"Total Privacy Budget (ε): {epsilon_budget}")
     
-    synth = Synthesizer.create(algorithm_name, epsilon=epsilon_budget, epochs=300)
+    # Initialize the Synthesizer
+    # FIX: batch_size=50 prevents CUDA Out Of Memory (OOM) on the Tesla T4
+    synth = Synthesizer.create(
+        algorithm_name, 
+        epsilon=epsilon_budget, 
+        epochs=300,
+        batch_size=50 
+    )
 
     print("\n--- 🤖 TRAINING WITH DIFFERENTIAL PRIVACY ON GPU ---")
     print("Spending ε=1.0 to securely infer data bounds, and ε=14.0 to train...")
+    print("Injecting mathematical noise... This will take a few minutes.")
     
-    # FIX 2: Added nullable=True to handle the remaining numerical missing values
+    # Train the model
     synth.fit(
         df, 
         categorical_columns=categorical_cols, 
@@ -62,11 +70,10 @@ def run_dp_synthesis():
     print("\n--- 🧪 GENERATING 5,000 DP-PROTECTED RECORDS ---")
     synthetic_data = synth.sample(5000)
     
-    # We can convert "Missing" back to proper empty cells if you want, 
-    # but leaving them as "Missing" is usually fine for research datasets.
-    
+    # Add a clean, synthetic ID
     synthetic_data.insert(0, 'synthetic_id', [f"DT4H_DP_{i:04d}" for i in range(len(synthetic_data))])
     
+    # Save the final file
     synthetic_data.to_csv(output_csv, index=False)
     print(f"\n🎉 SUCCESS! Dataset saved to:\n{output_csv}")
 
