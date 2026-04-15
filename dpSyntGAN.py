@@ -21,17 +21,18 @@ def run_dp_synthesis():
     df = pd.read_parquet(input_path)
 
     # 1. Convert dates to strings
+    # DP models require datetimes to be treated as categorical strings
     for col in df.columns:
         if pd.api.types.is_datetime64_any_dtype(df[col]):
             df[col] = df[col].astype(str)
 
     # 2. Explicitly define Continuous (Numerical) vs Categorical columns
-    # We cast numericals to float to prevent Pandas integer-null crashes
     continuous_cols = []
     categorical_cols = []
 
     for col in df.columns:
         if pd.api.types.is_numeric_dtype(df[col]):
+            # Cast numericals to float to prevent Pandas integer-null crashes
             df[col] = df[col].astype(float)
             continuous_cols.append(col)
         else:
@@ -41,25 +42,32 @@ def run_dp_synthesis():
 
     print("\n--- 🔒 INITIALIZING SYNTHESIZER ---")
     print(f"Algorithm: {algorithm_name.upper()}")
-    print(f"Privacy Budget (ε): {epsilon_budget}")
+    print(f"Total Privacy Budget (ε): {epsilon_budget}")
     
+    # Initialize the Synthesizer
     synth = Synthesizer.create(algorithm_name, epsilon=epsilon_budget, epochs=300)
 
     print("\n--- 🤖 TRAINING WITH DIFFERENTIAL PRIVACY ON GPU ---")
+    print("Spending ε=1.0 to securely infer data bounds, and ε=14.0 to train...")
     print("Injecting mathematical noise... This will take a few minutes.")
     
-    # FIX: Explicitly pass BOTH column types to the synthesizer
+    # Train the model
+    # We pass preprocessor_eps=1.0 so the library can calculate the min/max 
+    # of the continuous columns securely without throwing an error.
     synth.fit(
         df, 
         categorical_columns=categorical_cols, 
-        continuous_columns=continuous_cols
+        continuous_columns=continuous_cols,
+        preprocessor_eps=1.0
     )
 
     print("\n--- 🧪 GENERATING 5,000 DP-PROTECTED RECORDS ---")
     synthetic_data = synth.sample(5000)
     
+    # Add a clean, synthetic ID
     synthetic_data.insert(0, 'synthetic_id', [f"DT4H_DP_{i:04d}" for i in range(len(synthetic_data))])
     
+    # Save the final file
     synthetic_data.to_csv(output_csv, index=False)
     print(f"\n🎉 SUCCESS! Dataset saved to:\n{output_csv}")
 
