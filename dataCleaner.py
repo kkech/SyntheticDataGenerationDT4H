@@ -1,90 +1,103 @@
-import pandas as pd
+import polars as pl
 import os
 import glob
-from functools import reduce
 
-def prepare_data_for_synthesis():
+def prepare_data_pairwise_polars():
     folder_path = "/mnt/data/DT4Hnew/"
-    
-    # Grab all .parquet files in the folder
     parquet_files = glob.glob(os.path.join(folder_path, "*.parquet"))
     
     if not parquet_files:
-        print(f"No .parquet files found in {folder_path}. Please check the path.")
+        print(f"No .parquet files found in {folder_path}.")
         return
 
-    dataframes = {}
-    col_sets = []
+    target_id = 'pseudo_id'
+    lazy_dfs = []
 
-    # 1. Read files, convert columns to lowercase, and print schemas
-    print("--- 📂 READING FILES & FORMATTING COLUMNS ---")
+    print("--- 📂 STEP 1: SCANNING FILES & FORMATTING ---")
     for file in parquet_files:
         file_name = os.path.basename(file)
-        try:
-            # Read the parquet file
-            df = pd.read_parquet(file)
-            
-            # --- NEW STEP: Convert all column names to lowercase ---
-            df.columns = df.columns.str.lower()
-            
-            dataframes[file_name] = df
-            col_sets.append(set(df.columns))
-            
-            print(f"\n📄 File: {file_name}")
-            print(f"Shape: {df.shape[0]} rows, {df.shape[1]} columns")
-            print("Columns and Types:")
-            print(df.dtypes.to_string())
-            
-        except Exception as e:
-            print(f"Error reading {file_name}: {e}")
+        
+        lf = pl.scan_parquet(file)
+        
+        # Convert columns to lowercase safely
+        lowercase_mapping = {col: col.lower() for col in lf.collect_schema().names()}
+        lf = lf.rename(lowercase_mapping)
+        
+        if target_id in lf.collect_schema().names():
+            lazy_dfs.append(lf)
+        else:
+            print(f"  -> Skipping {file_name} (No '{target_id}' found)")
 
-    # 2. Find the common column(s) for merging
-    common_columns = list(set.intersection(*col_sets))
-    
-    print("\n--- 🔗 MERGING DATA ---")
-    if not common_columns:
-        print("WARNING: No common columns were found across ALL files.")
-        print("You will need to manually specify the join key in the script.")
-        # Manual override: Using lowercase fallback based on our new formatting
-        common_columns = ['patientid'] 
-    else:
-        print(f"Common columns found for merging: {common_columns}")
-
-    # 3. Merge all dataframes
-    dfs_list = list(dataframes.values())
-    try:
-        merged_df = reduce(lambda left, right: pd.merge(left, right, on=common_columns, how='outer'), dfs_list)
-        print(f"Merged Dataframe Shape: {merged_df.shape[0]} rows, {merged_df.shape[1]} columns")
-    except Exception as e:
-        print(f"Error during merging: {e}")
+    if not lazy_dfs:
+        print(f"CRITICAL: '{target_id}' not found in any files. Aborting.")
         return
 
-    # 4. Data Cleansing
-    print("\n--- 🧹 DATA CLEANSING ---")
+    print("\n--- 🔗 STEP 2: BUILDING PAIRWISE MERGE GRAPH ---")
+    iteration = 1
     
+    # Loop until all LazyFrames are merged into a single one
+    while len(lazy_dfs) > 1:
+        print(f"Merge Pass {iteration} | Dataframes to merge: {len(lazy_dfs)}")
+        next_layer = []
+        
+        # Process in pairs (0 & 1, 2 & 3, etc.)
+        for i in range(0, len(lazy_dfs), 2):
+            # If we have a pair to merge
+            if i + 1 < len(lazy_dfs):
+                lf1 = lazy_dfs[i]
+                lf2 = lazy_dfs[i+1]
+                
+                # Find common columns for this specific pair
+                cols1 = set(lf1.collect_schema().names())
+                cols2 = set(lf2.collect_schema().names())
+                common_cols = list(cols1 & cols2)
+                
+                # Full join keeps all patients. Coalesce ensures the pseudo_ids 
+                # merge into one column instead of duplicating.
+                merged_lf = lf1.join(lf2, on=common_cols, how="full", coalesce=True)
+                next_layer.append(merged_lf)
+            else:
+                # Odd one out: just pass it to the next round
+                next_layer.append(lazy_dfs[i])
+                
+        # Update our list of frames for the next iteration
+        lazy_dfs = next_layer
+        iteration += 1
+
+    # The final remaining LazyFrame contains the entire graph
+    master_lf = lazy_dfs[0]
+
+    print("\n--- 🚀 STEP 3: EXECUTING MERGE (COLLECTING DATA) ---")
+    # streaming=True protects the RAM during heavy full joins
+    merged_df = master_lf.collect(streaming=True)
+    print(f"Merged Dataframe Shape: {merged_df.height} rows, {merged_df.width} columns")
+
+    print("\n--- 🧹 STEP 4: DATA CLEANSING ---")
     # a) Drop columns with > 80% nulls
-    threshold_pct = 0.80
-    min_non_nulls = int((1 - threshold_pct) * len(merged_df))
-    
     print("Dropping columns with more than 80% missing values...")
-    cleaned_df = merged_df.dropna(axis=1, thresh=min_non_nulls)
-    print(f"Shape after dropping sparse columns: {cleaned_df.shape[0]} rows, {cleaned_df.shape[1]} columns")
+    null_counts = merged_df.null_count()
+    num_rows = merged_df.height
+    
+    cols_to_keep = [
+        col for col in merged_df.columns 
+        if null_counts[col].item() / num_rows <= 0.80
+    ]
+    
+    cleaned_df = merged_df.select(cols_to_keep)
+    print(f"Shape after dropping sparse columns: {cleaned_df.height} rows, {cleaned_df.width} columns")
 
     # b) Drop rows with ANY nulls
     print("Dropping rows that contain any missing values...")
-    final_df = cleaned_df.dropna(axis=0, how='any')
-    print(f"Final Dataframe Shape: {final_df.shape[0]} rows, {final_df.shape[1]} columns")
+    final_df = cleaned_df.drop_nulls()
+    print(f"Final Dataframe Shape: {final_df.height} rows, {final_df.width} columns")
 
-    # 5. Save the final file
-    output_filename = "DT4H_ReadyForSynth.parquet"
+    # --- SAVE ---
+    output_filename = "DT4H_Pairwise_Polars.parquet"
     output_path = os.path.join(folder_path, output_filename)
     
     print("\n--- 💾 SAVING ---")
-    try:
-        final_df.to_parquet(output_path, index=False)
-        print(f"Successfully saved cleaned data to:\n{output_path}")
-    except Exception as e:
-        print(f"Error saving file: {e}")
+    final_df.write_parquet(output_path)
+    print(f"Successfully saved to:\n{output_path}")
 
 if __name__ == "__main__":
-    prepare_data_for_synthesis()
+    prepare_data_pairwise_polars()
