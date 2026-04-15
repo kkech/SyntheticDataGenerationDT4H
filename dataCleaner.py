@@ -24,6 +24,9 @@ def prepare_data_pairwise_polars():
         lf = lf.rename(lowercase_mapping)
         
         if target_id in lf.collect_schema().names():
+            # --- NEW FIX: Force pseudo_id to be a String ---
+            # This prevents SchemaErrors when joining files with mixed i32 and f64 IDs
+            lf = lf.with_columns(pl.col(target_id).cast(pl.String))
             lazy_dfs.append(lf)
         else:
             print(f"  -> Skipping {file_name} (No '{target_id}' found)")
@@ -42,38 +45,29 @@ def prepare_data_pairwise_polars():
         
         # Process in pairs (0 & 1, 2 & 3, etc.)
         for i in range(0, len(lazy_dfs), 2):
-            # If we have a pair to merge
             if i + 1 < len(lazy_dfs):
                 lf1 = lazy_dfs[i]
                 lf2 = lazy_dfs[i+1]
                 
-                # Find common columns for this specific pair
                 cols1 = set(lf1.collect_schema().names())
                 cols2 = set(lf2.collect_schema().names())
                 common_cols = list(cols1 & cols2)
                 
-                # Full join keeps all patients. Coalesce ensures the pseudo_ids 
-                # merge into one column instead of duplicating.
                 merged_lf = lf1.join(lf2, on=common_cols, how="full", coalesce=True)
                 next_layer.append(merged_lf)
             else:
-                # Odd one out: just pass it to the next round
                 next_layer.append(lazy_dfs[i])
                 
-        # Update our list of frames for the next iteration
         lazy_dfs = next_layer
         iteration += 1
 
-    # The final remaining LazyFrame contains the entire graph
     master_lf = lazy_dfs[0]
 
     print("\n--- 🚀 STEP 3: EXECUTING MERGE (COLLECTING DATA) ---")
-    # streaming=True protects the RAM during heavy full joins
     merged_df = master_lf.collect(streaming=True)
     print(f"Merged Dataframe Shape: {merged_df.height} rows, {merged_df.width} columns")
 
     print("\n--- 🧹 STEP 4: DATA CLEANSING ---")
-    # a) Drop columns with > 80% nulls
     print("Dropping columns with more than 80% missing values...")
     null_counts = merged_df.null_count()
     num_rows = merged_df.height
@@ -86,12 +80,10 @@ def prepare_data_pairwise_polars():
     cleaned_df = merged_df.select(cols_to_keep)
     print(f"Shape after dropping sparse columns: {cleaned_df.height} rows, {cleaned_df.width} columns")
 
-    # b) Drop rows with ANY nulls
     print("Dropping rows that contain any missing values...")
     final_df = cleaned_df.drop_nulls()
     print(f"Final Dataframe Shape: {final_df.height} rows, {final_df.width} columns")
 
-    # --- SAVE ---
     output_filename = "DT4H_Pairwise_Polars.parquet"
     output_path = os.path.join(folder_path, output_filename)
     
