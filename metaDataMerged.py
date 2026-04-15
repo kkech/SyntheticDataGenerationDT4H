@@ -1,87 +1,81 @@
 import polars as pl
 import os
-import glob
 
-def prepare_data_pairwise_polars():
-    folder_path = "/mnt/data/DT4Hnew/"
-    parquet_files = glob.glob(os.path.join(folder_path, "*.parquet"))
+def generate_synthesis_metadata():
+    # The path to your cleaned dataset from the previous step
+    file_path = "/mnt/data/DT4Hnew/DT4H_Cleaned_Data.parquet"
     
-    if not parquet_files:
-        print(f"No .parquet files found in {folder_path}.")
+    if not os.path.exists(file_path):
+        print(f"❌ Error: Could not find {file_path}")
         return
 
-    target_id = 'pseudo_id'
-    lazy_dfs = []
+    # Load the data
+    df = pl.read_parquet(file_path)
+    total_rows = df.height
+    
+    print(f"--- 📊 ANALYZING STRUCTURE: {total_rows} rows ---")
+    
+    cols_to_drop = []
+    metadata = []
 
-    print("--- 📂 STEP 1: FORMATTING & DEDUPLICATING ---")
-    for file in parquet_files:
-        file_name = os.path.basename(file)
-        file_base = os.path.splitext(file_name)[0].lower() 
+    # 1. Audit each column to see if it's "Generatable"
+    for col in df.columns:
+        unique_count = df[col].n_unique()
+        dtype = df[col].dtype
+        null_count = df[col].null_count()
         
-        lf = pl.scan_parquet(file)
+        # LOGIC: Identifying columns that break synthesis
         
-        rename_map = {col: (col.lower() if col.lower() == target_id else f"{col.lower()}_{file_base}") 
-                      for col in lf.collect_schema().names()}
-        
-        lf = lf.rename(rename_map)
-        
-        if target_id in lf.collect_schema().names():
-            # Standardize ID and keep one row per patient
-            lf = lf.with_columns(pl.col(target_id).cast(pl.String))
-            lf = lf.unique(subset=[target_id], keep="first")
-            lazy_dfs.append(lf)
-        else:
-            print(f"  -> Skipping {file_name} (No '{target_id}' found)")
+        # A) Drop Unique Identifiers
+        # Synthetic generators can't "learn" an ID. We drop pseudo_id here. 
+        # You should re-generate IDs later in your synthetic output.
+        if col == "pseudo_id":
+            reason = "Unique ID (Noise)"
+            cols_to_drop.append(col)
+            print(f"🗑️ Dropping '{col}': {reason}")
+            continue
 
-    print("\n--- 🔗 STEP 2: PAIRWISE MERGE ---")
-    while len(lazy_dfs) > 1:
-        next_layer = []
-        for i in range(0, len(lazy_dfs), 2):
-            if i + 1 < len(lazy_dfs):
-                next_layer.append(lazy_dfs[i].join(lazy_dfs[i+1], on=[target_id], how="full", coalesce=True))
-            else:
-                next_layer.append(lazy_dfs[i])
-        lazy_dfs = next_layer
+        # B) Drop Constant Columns
+        # If every patient has the same value, there is no variance for the AI to learn.
+        if unique_count == 1:
+            reason = "Constant Value"
+            cols_to_drop.append(col)
+            print(f"🗑️ Dropping '{col}': {reason}")
+            continue
 
-    print("\n--- 🚀 STEP 3: EXECUTING MERGE ---")
-    merged_df = lazy_dfs[0].collect(engine="streaming")
-    initial_rows = merged_df.height
-    print(f"Total unique patients found: {initial_rows}")
+        # If it survives, add to metadata report
+        metadata.append({
+            "name": col,
+            "type": str(dtype),
+            "uniques": unique_count,
+            "nulls": null_count
+        })
 
-    print("\n--- 📊 STEP 4: DATA STATISTICS & CLEANSING ---")
-    
-    # Calculate null percentage per column
-    null_pcts = (merged_df.null_count() / initial_rows).to_dicts()[0]
-    
-    # Drop columns with > 80% nulls
-    cols_to_keep = [col for col, pct in null_pcts.items() if pct <= 0.80]
-    cleaned_df = merged_df.select(cols_to_keep)
-    
-    dropped_cols = len(merged_df.columns) - len(cols_to_keep)
-    print(f"Dropped {dropped_cols} columns for being > 80% empty.")
-    print(f"Remaining columns: {len(cols_to_keep)}")
+    # Execute drops
+    df_synthesis = df.drop(cols_to_drop)
 
-    # Calculate row-wise statistics
-    # Instead of drop_nulls (which is too strict), let's see how much data each row has
-    # We define "completeness" as what % of medical columns are filled for that patient
-    medical_cols = [c for c in cleaned_df.columns if c != target_id]
+    # 2. Print the Final Metadata Table
+    print("\n" + "="*85)
+    print(f"{'COLUMN NAME':<45} | {'TYPE':<15} | {'UNIQUE':<10} | {'NULLS'}")
+    print("-" * 85)
     
-    # Filter rows: Keep patients who have at least 1 piece of medical data 
-    # (prevents dropping everyone because of one missing lab)
-    final_df = cleaned_df.filter(
-        pl.any_horizontal(pl.col(medical_cols).is_not_null())
-    )
+    for item in metadata:
+        print(f"{item['name']:<45} | {item['type']:<15} | {item['uniques']:<10} | {item['nulls']}")
+    print("="*85)
 
-    print(f"Rows before row-cleansing: {initial_rows}")
-    print(f"Rows after removing totally empty patients: {final_df.height}")
+    # 3. Summary for your Synthetic Generator Configuration
+    cat_cols = [c for c in df_synthesis.columns if df_synthesis[c].dtype == pl.String]
+    num_cols = [c for c in df_synthesis.columns if df_synthesis[c].dtype in [pl.Int32, pl.Int64, pl.Float32, pl.Float64]]
     
-    if final_df.height == 0:
-        print("⚠️ WARNING: 0 rows remain. The datasets might not overlap at all on pseudo_id.")
-    else:
-        # --- SAVE ---
-        output_path = os.path.join(folder_path, "DT4H_Cleaned_Data.parquet")
-        final_df.write_parquet(output_path)
-        print(f"\n✅ SUCCESS: Saved {final_df.height} rows to {output_path}")
+    print(f"\n✅ DATASET READY FOR SYNTHESIS ENGINE")
+    print(f"Total Features to Model: {df_synthesis.width}")
+    print(f"Categorical Features:   {len(cat_cols)} (Will need Categorical Transformers)")
+    print(f"Numerical Features:     {len(num_cols)} (Will need Scalar/Gaussian Transformers)")
+    
+    # Optional: Save a final version that is "pure" for the AI
+    output_path = "/mnt/data/DT4Hnew/DT4H_Synthesis_Ready.parquet"
+    df_synthesis.write_parquet(output_path)
+    print(f"\n💾 Saved synthesis-ready file to: {output_path}")
 
 if __name__ == "__main__":
-    prepare_data_pairwise_polars()
+    generate_synthesis_metadata()
