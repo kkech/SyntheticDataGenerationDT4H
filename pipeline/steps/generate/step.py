@@ -21,6 +21,7 @@ requirements beyond "produce some rows":
 import json
 import os
 import time
+import traceback
 
 import polars as pl
 
@@ -157,6 +158,7 @@ class GenerateStep(PipelineStep):
         params.setdefault("epochs", config.epochs)
         params.setdefault("batch_size", config.batch_size)
         params.setdefault("epsilon", config.epsilon)
+        params.setdefault("preprocessor_eps_per_column", config.preprocessor_eps_per_column)
 
         record = {"synthesizer": name, "params": params}
         started = time.time()
@@ -222,9 +224,14 @@ class GenerateStep(PipelineStep):
                 "status": "failed",
                 "error_type": type(e).__name__,
                 "error": str(e)[:500],
+                # Keep the traceback: the message alone ("could not find
+                # bounds") does not say which library call produced it,
+                # and a failed run is expensive to reproduce.
+                "traceback": traceback.format_exc()[-4000:],
                 "duration_seconds": round(time.time() - started, 1),
             })
             print(f"❌ {name} failed after {record['duration_seconds']}s: {type(e).__name__}: {e}")
+            print(traceback.format_exc())
 
         return record
 

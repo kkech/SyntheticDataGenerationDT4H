@@ -65,6 +65,14 @@ class PipelineConfig:
     # wide, so memory scales with column count as well as batch size.
     batch_size: int = 500
     epsilon: float = 15.0
+    # DP bound discovery: smartnoise splits this budget evenly across the
+    # continuous columns, and too little per column makes bound discovery
+    # fail outright ("BinTransformer could not find bounds"). Specified
+    # per-column so it scales with the feature count instead of silently
+    # thinning out; total spend is this times the number of continuous
+    # columns. Set synthesizer_params[name]["preprocessor_eps"] to pin an
+    # absolute value instead.
+    preprocessor_eps_per_column: float = 0.08
 
     # Seeds every RNG the synthesizers use, and is recorded in the run
     # provenance. Required for a reproducible published dataset.
