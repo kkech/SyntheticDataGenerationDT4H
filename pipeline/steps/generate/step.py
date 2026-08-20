@@ -202,14 +202,20 @@ class GenerateStep(PipelineStep):
             # the schema of the source dataset.
             synthetic = synthetic[[c for c in real.columns if c in synthetic.columns]].copy()
 
-            synthetic, decoded = self._decode_structural_missing(synthetic)
-            if decoded:
-                print(f"  Decoded sentinel back to null in {len(decoded)} time-to-event "
-                      f"column(s): {sum(decoded.values())} cells marked 'no event'.")
-                record["structural_missing_decoded"] = decoded
-
+            # Leakage check BEFORE decoding, so both sides are in
+            # sentinel space -- decoding first would turn a memorized
+            # row's sentinel into null and let it slip past the
+            # exact-match comparison against the sentinel-encoded real
+            # frame.
             leak = leakage.check_exact_duplicates(synthetic, real)
             print(leakage.summarize(leak))
+
+            synthetic, decoded = self._decode_numeric_missing(synthetic, config)
+            if decoded:
+                print(f"  Decoded sentinels back to null in {len(decoded)} numeric "
+                      f"column(s): {sum(decoded.values())} cells restored to null "
+                      f"('no event' / 'not measured').")
+                record["numeric_missing_decoded"] = decoded
 
             path = os.path.join(out_dir, f"DT4H_Synthetic_{name}.csv")
             synthetic.to_csv(path, index=False)
@@ -242,28 +248,39 @@ class GenerateStep(PipelineStep):
         return record
 
     @staticmethod
-    def _decode_structural_missing(synthetic):
+    def _decode_numeric_missing(synthetic, config):
         """
-        Turn the "no event" sentinel back into null.
+        Turn per-column missingness sentinels back into null.
 
-        Preprocessing encoded "this event never happened" as a negative
-        sentinel so the synthesizer would model it as a distinct state
-        rather than be handed fabricated event times. In the published
-        output that state should read as null again -- an empty cell says
-        "no event", where a negative number of days would be nonsense.
-        A generative model returns a continuous approximation rather than
-        exactly the sentinel, so anything below zero is treated as the
-        sentinel; real observed values in these columns are all >= 0.
+        Preprocessing encoded every numeric null (time-to-event "no
+        event", lab/vital "not measured") as a sentinel below that
+        column's observed range, so the synthesizer models missingness as
+        a state rather than being handed fabricated values. In the
+        published output that state must read as null again.
+
+        The exact per-column thresholds come from the encoding map the
+        preprocess step persisted next to its parquet -- a generative
+        model emits a continuous approximation of the sentinel, so
+        anything below the column's decode threshold (midpoint between
+        sentinel and observed minimum) is treated as the sentinel.
         """
         import pandas as pd
 
-        from pipeline.steps.preprocess.transforms import is_structurally_missing_column
+        from pipeline.steps.preprocess.transforms import NUMERIC_ENCODING_FILENAME
+
+        encoding_path = os.path.join(config.step_dir("preprocess"), NUMERIC_ENCODING_FILENAME)
+        if not os.path.exists(encoding_path):
+            print(f"⚠️  No numeric encoding map at {encoding_path} -- sentinels (if any) "
+                  f"are left as-is. Re-run the preprocess step to produce the map.")
+            return synthetic, {}
+        with open(encoding_path) as f:
+            encoding = json.load(f)
 
         decoded = {}
-        for col in synthetic.columns:
-            if not is_structurally_missing_column(col) or not pd.api.types.is_numeric_dtype(synthetic[col]):
+        for col, spec in encoding.items():
+            if col not in synthetic.columns or not pd.api.types.is_numeric_dtype(synthetic[col]):
                 continue
-            mask = synthetic[col] < 0
+            mask = synthetic[col] < spec["decode_threshold"]
             n = int(mask.sum())
             if n:
                 synthetic.loc[mask, col] = pd.NA

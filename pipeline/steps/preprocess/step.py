@@ -89,11 +89,13 @@ class PreprocessStep(PipelineStep):
 
         print("Final null cleanup...")
         df, summary["nyha_missing_imputation"] = t.impute_nyha_missing(df)
-        # Must precede bootstrap imputation: these columns' nulls mean
-        # "event did not occur", so they get a sentinel rather than a
-        # fabricated event time.
-        df, summary["structural_missing"] = t.encode_structural_missing(df, var_meta)
-        df, summary["numeric_imputation"] = t.impute_numeric_columns(df, var_meta)
+        # Numeric nulls carry meaning ("no event" for time-to-event
+        # columns, "not measured" for labs/vitals), so they are NOT
+        # imputed: each gets a per-column sentinel below the observed
+        # range, which the generate step decodes back to null in the
+        # synthetic output.
+        encoding_path = os.path.join(config.step_dir(self.name), t.NUMERIC_ENCODING_FILENAME)
+        df, summary["numeric_missing_encoding"] = t.encode_numeric_missing(df, var_meta, encoding_path)
         df, summary["categorical_imputation"] = t.impute_categorical_and_boolean(df, var_meta)
 
         # Count NaN as well as null: polars keeps them distinct, so a
@@ -199,24 +201,22 @@ class PreprocessStep(PipelineStep):
             "## Final null cleanup",
             f"- NYHA: filled {s['nyha_missing_imputation']['filled']} missing value(s) with sentinel "
             f"{s['nyha_missing_imputation'].get('sentinel')}",
-            f"- Numeric: imputed {len(s['numeric_imputation']['imputed'])} column(s) "
-            f"(bootstrap from observed values), added {s['numeric_imputation']['was_missing_flags_added']} "
-            f"'_was_missing' flag(s), dropped {len(s['numeric_imputation']['dropped_too_few'])} "
-            f"column(s) with too few observed values",
         ]
-        for d in s["numeric_imputation"]["dropped_too_few"]:
-            if isinstance(d, dict):
-                lines.append(f"  - dropped: `{d['column']}` (only {d['n_observed']} observed)")
-            else:
-                lines.append(f"  - dropped: `{d}`")
-        sm = s.get("structural_missing", {})
-        if sm.get("encoded"):
-            lines.append(
-                f"- Time-to-event columns encoded with sentinel {sm['sentinel']} "
-                f"('no event') instead of imputed -- imputing them would fabricate events:")
-            for e in sm["encoded"]:
-                lines.append(f"  - `{e['column']}`: {e['n_real_events']} real event(s), "
-                             f"{e['n_encoded']} marked 'no event'")
+        nm = s["numeric_missing_encoding"]
+        lines.append(
+            f"- Numeric nulls are NOT imputed -- missingness carries meaning. "
+            f"{nm['n_columns_encoded']} column(s) sentinel-encoded "
+            f"({nm['n_no_event_columns']} time-to-event 'no event', "
+            f"{nm['n_columns_encoded'] - nm['n_no_event_columns']} 'not measured'), "
+            f"each with a per-column sentinel below the observed range, decoded back "
+            f"to null in the synthetic output (map: `{nm['encoding_path']}`)."
+        )
+        lines.append(
+            f"- Dropped {len(nm['dropped_too_few'])} numeric column(s) with fewer than "
+            f"{nm['min_nonnull_required']} observed values:"
+        )
+        for d in nm["dropped_too_few"]:
+            lines.append(f"  - `{d['column']}` (only {d['n_observed']} observed)")
         lines.append(
             f"- Categorical/boolean: normalized "
             f"{s['categorical_imputation'].get('normalized_columns', 'n/a')} column(s) to String; "

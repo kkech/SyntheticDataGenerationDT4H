@@ -33,17 +33,14 @@ NUMERIC_MIN_NONNULL = 5
 # For these, a null does not mean "we failed to measure it" -- it means
 # THE EVENT NEVER HAPPENED. Only 110 of 4694 patients have a "days to
 # cardiovascular death" because only 110 died of cardiovascular causes;
-# for the rest no true value exists. Bootstrap-imputing them would
-# fabricate 4584 cardiovascular deaths, and a synthesizer would learn and
-# reproduce that fiction.
+# for the rest no true value exists. Imputing them would fabricate 4584
+# cardiovascular deaths, and a synthesizer would learn and reproduce
+# that fiction.
 #
-# So they are encoded with an explicit sentinel meaning "no event"
-# instead of being imputed, and the sentinel is decoded back to null in
-# the synthetic output (see the generate step). Observed values start at
-# 0, 1 and 3 across these columns, so a negative sentinel cannot collide
-# with a real measurement -- 0 would have been ambiguous with a same-day
-# event.
-STRUCTURAL_MISSING_SENTINEL = -1.0
+# All numeric missingness (this kind and ordinary "not measured") is now
+# handled by encode_numeric_missing() with per-column sentinels; these
+# patterns only label WHICH kind of missingness a column carries, so the
+# summary and the encoding map can say "no event" vs "not measured".
 STRUCTURAL_MISSING_PATTERNS = (
     "number_of_days_to_death",
     "number_of_days_to_rehosp",
@@ -506,67 +503,77 @@ def impute_nyha_missing(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     return df, {"filled": n_missing, "sentinel": NYHA_MISSING_SENTINEL}
 
 
-def encode_structural_missing(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
+# Filename for the per-column sentinel map written next to the
+# preprocessed parquet. The generate step reads it to decode sentinels
+# back to null in the synthetic output; keeping it on disk (rather than
+# in memory) means generation can decode correctly even in a separate
+# process or a later session.
+NUMERIC_ENCODING_FILENAME = "DT4H_Numeric_Missing_Encoding.json"
+
+# The sentinel sits below the observed minimum by this fraction of the
+# observed range (floor 1.0), and the decode threshold sits halfway
+# between the sentinel and the minimum. The gap gives the synthesizer's
+# continuous output room to scatter around the sentinel without bleeding
+# into the real-value region, and vice versa.
+SENTINEL_GAP_FRACTION = 0.25
+
+
+def encode_numeric_missing(df: pl.DataFrame, var_meta: dict, encoding_path: str) -> tuple[pl.DataFrame, dict]:
     """
-    Encode "event did not occur" with a sentinel instead of imputing it.
+    Encode every numeric null as a per-column sentinel below the observed
+    range, to be decoded back to null in the synthetic output.
 
-    No `_was_missing` companion flag is added here: unlike an unmeasured
-    lab, the sentinel already carries the full meaning, and a separate
-    flag would let a synthesizer emit contradictory rows (flag says no
-    event, value says day 47).
+    Missingness in this data carries meaning, in two flavours:
+
+      * time-to-event columns (days_to_death_*, days_to_rehosp_*): null
+        means THE EVENT NEVER HAPPENED -- no true value exists;
+      * measurement columns (labs, vitals): null means "not measured",
+        and per the data provider clinicians measure selectively, so
+        which patients lack a value is itself clinical signal.
+
+    Either way, filling nulls with plausible values destroys information
+    and fabricates data. The sentinel instead makes "missing" a state the
+    model learns JOINTLY with every other feature -- so synthetic
+    patients get realistic missingness patterns, correlated with the rest
+    of their row, and after decoding the published output has nulls
+    exactly where a real cohort would.
+
+    Why a per-column sentinel rather than a fixed 0 or -1: ranges differ
+    by orders of magnitude across columns, and some (e.g. ECG axis) can
+    legitimately be negative, so no single constant is safely outside
+    every observed range. Each column gets
+        sentinel = min_observed - max(range * SENTINEL_GAP_FRACTION, 1.0)
+    with the decode threshold at the midpoint between sentinel and
+    minimum. The full map is persisted to `encoding_path`.
+
+    This replaces the earlier bootstrap-imputation + `_was_missing`-flag
+    scheme. The flags are gone deliberately: imputed values were random
+    draws uncorrelated with the rest of the row (diluting every
+    correlation the synthesizer was supposed to learn), and a separate
+    flag lets a model emit contradictory rows -- flag says "not
+    measured", value says 4.2. The sentinel is one value carrying one
+    meaning, so no contradiction is possible.
+
+    Columns with fewer than max(NUMERIC_MIN_NONNULL,
+    NUMERIC_MIN_NONNULL_FRACTION * rows) observed values are dropped:
+    a handful of real values cannot be modelled meaningfully, and rare
+    observed values in a near-empty column are a re-identification risk
+    the leakage check would not catch.
     """
-    cols = [
-        name for name, v in var_meta.items()
-        if v.get("dataType") == "NUMERIC"
-        and name in df.columns
-        and is_structurally_missing_column(name)
-    ]
-
-    encoded = []
-    for col in cols:
-        n_null = df[col].null_count()
-        if n_null == 0:
-            continue
-        df = df.with_columns(pl.col(col).fill_null(STRUCTURAL_MISSING_SENTINEL).alias(col))
-        encoded.append({"column": col, "n_encoded": n_null, "n_real_events": df.height - n_null})
-
-    if encoded:
-        print(f"  Encoded {len(encoded)} time-to-event column(s) with sentinel "
-              f"{STRUCTURAL_MISSING_SENTINEL} ('no event') rather than imputing them:")
-        for e in encoded:
-            print(f"    {e['column']}: {e['n_real_events']} real event(s), "
-                  f"{e['n_encoded']} marked 'no event'")
-    return df, {"sentinel": STRUCTURAL_MISSING_SENTINEL, "encoded": encoded}
-
-
-def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> tuple[pl.DataFrame, dict]:
-    """
-    Nulls in NUMERIC columns are imputed by bootstrap-sampling (with
-    replacement) from that column's own observed values -- preserves the
-    real empirical distribution's shape without assuming a parametric
-    form. A companion "<col>_was_missing" boolean flag is added first,
-    since missingness itself may be clinically meaningful. Columns with
-    fewer than NUMERIC_MIN_NONNULL observed values are dropped entirely.
-    """
-    rng = np.random.default_rng(seed)
-    # Time-to-event columns are excluded: encode_structural_missing() has
-    # already given them a sentinel, and imputing them would fabricate
-    # events that never happened.
     numeric_cols = [name for name, v in var_meta.items()
                     if v.get("dataType") == "NUMERIC"
                     and name in df.columns
-                    and not is_structurally_missing_column(name)]
+                    and name != NYHA_COLUMN]
 
     min_nonnull = max(NUMERIC_MIN_NONNULL, int(NUMERIC_MIN_NONNULL_FRACTION * df.height))
 
-    flag_cols = []
+    encoding: dict = {}
     drop_cols = []
-    imputed_cols = []
+    n_no_event = 0
 
     for col in numeric_cols:
         series = df[col]
-        null_mask = series.is_null()
-        n_null = int(null_mask.sum())
+        n_null = int(series.null_count())
         if n_null == 0:
             continue
 
@@ -575,29 +582,53 @@ def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> t
             drop_cols.append({"column": col, "n_observed": non_null.len()})
             continue
 
-        flag_cols.append(null_mask.alias(f"{col}_was_missing"))
+        lo = float(non_null.min())
+        hi = float(non_null.max())
+        gap = max((hi - lo) * SENTINEL_GAP_FRACTION, 1.0)
+        sentinel = lo - gap
+        threshold = lo - gap / 2.0
 
-        sampled = rng.choice(non_null.to_numpy(), size=n_null, replace=True)
-        filled = series.to_numpy(zero_copy_only=False).astype(float).copy()
-        filled[null_mask.to_numpy()] = sampled
-        df = df.with_columns(pl.Series(col, filled))
-        imputed_cols.append({"column": col, "n_filled": n_null, "n_observed": non_null.len()})
+        kind = "no_event" if is_structurally_missing_column(col) else "not_measured"
+        if kind == "no_event":
+            n_no_event += 1
 
-    if flag_cols:
-        df = df.with_columns(flag_cols)
+        # Integer columns cannot hold a fractional sentinel; everything
+        # encoded becomes Float64 (decoded output is float-with-nulls).
+        df = df.with_columns(
+            pl.col(col).cast(pl.Float64).fill_null(sentinel).alias(col)
+        )
+        encoding[col] = {
+            "sentinel": sentinel,
+            "decode_threshold": threshold,
+            "min_observed": lo,
+            "max_observed": hi,
+            "n_encoded": n_null,
+            "n_observed": int(non_null.len()),
+            "missingness_kind": kind,
+        }
+
     if drop_cols:
         df = df.drop([d["column"] for d in drop_cols])
 
-    print(f"  Imputed {len(imputed_cols)} numeric column(s), added {len(flag_cols)} '_was_missing' flag(s), "
+    os.makedirs(os.path.dirname(encoding_path) or ".", exist_ok=True)
+    with open(encoding_path, "w") as f:
+        json.dump(encoding, f, indent=2)
+
+    print(f"  Sentinel-encoded {len(encoding)} numeric column(s) "
+          f"({n_no_event} time-to-event 'no event', {len(encoding) - n_no_event} 'not measured'); "
           f"dropped {len(drop_cols)} column(s) with fewer than {min_nonnull} observed values "
           f"({NUMERIC_MIN_NONNULL_FRACTION:.0%} of {df.height} rows).")
     for d in drop_cols:
         print(f"    dropped {d['column']} (only {d['n_observed']} observed)")
+    print(f"  Encoding map (for decoding synthetic output back to null) -> {encoding_path}")
+
     return df, {
-        "imputed": imputed_cols,
-        "was_missing_flags_added": len(flag_cols),
+        "encoded": {c: {k: v for k, v in spec.items()} for c, spec in encoding.items()},
+        "n_columns_encoded": len(encoding),
+        "n_no_event_columns": n_no_event,
         "min_nonnull_required": min_nonnull,
         "dropped_too_few": drop_cols,
+        "encoding_path": encoding_path,
     }
 
 
