@@ -311,41 +311,62 @@ class GenerateStep(PipelineStep):
     @staticmethod
     def _decode_numeric_missing(synthetic, config):
         """
-        Turn per-column missingness sentinels back into null.
+        Turn missingness sentinels back into null, and keep synthetic
+        observed values inside the observed support.
 
-        Preprocessing encoded every numeric null (time-to-event "no
-        event", lab/vital "not measured") as a sentinel below that
-        column's observed range, so the synthesizer models missingness as
-        a state rather than being handed fabricated values. In the
-        published output that state must read as null again.
+        Preprocessing encoded every numeric null as a sentinel below that
+        column's observed range. Generators emit continuous
+        approximations, and the first evaluation run showed them smearing
+        mass across the whole sentinel-to-minimum gap: values above the
+        sentinel midpoint but below the real minimum survived the old
+        threshold rule as impossible "observed" values (negative HDL,
+        negative troponin). So the decode rule is now the observed
+        minimum itself: anything below a column's real minimum is, by
+        construction, not a value that occurs -- it is the model's
+        rendering of "missing", and becomes null. The cost is honest and
+        stated: a synthetic value slightly below the real minimum that a
+        model intended as tail extrapolation is folded into missingness.
 
-        The exact per-column thresholds come from the encoding map the
-        preprocess step persisted next to its parquet -- a generative
-        model emits a continuous approximation of the sentinel, so
-        anything below the column's decode threshold (midpoint between
-        sentinel and observed minimum) is treated as the sentinel.
+        NYHA gets the same treatment for its ordinal encoding: values
+        are rounded to the nearest class, rounds of 0 or below (the "not
+        assessed" sentinel) become null, and rounds above 4 clamp to 4.
+        Idempotent, so it is safe to apply to already-decoded data.
         """
         import pandas as pd
 
-        from pipeline.steps.preprocess.transforms import NUMERIC_ENCODING_FILENAME
-
-        encoding_path = os.path.join(config.step_dir("preprocess"), NUMERIC_ENCODING_FILENAME)
-        if not os.path.exists(encoding_path):
-            print(f"⚠️  No numeric encoding map at {encoding_path} -- sentinels (if any) "
-                  f"are left as-is. Re-run the preprocess step to produce the map.")
-            return synthetic, {}
-        with open(encoding_path) as f:
-            encoding = json.load(f)
+        from pipeline.steps.preprocess.transforms import (
+            NUMERIC_ENCODING_FILENAME,
+            NYHA_COLUMN,
+        )
 
         decoded = {}
-        for col, spec in encoding.items():
-            if col not in synthetic.columns or not pd.api.types.is_numeric_dtype(synthetic[col]):
-                continue
-            mask = synthetic[col] < spec["decode_threshold"]
-            n = int(mask.sum())
+
+        encoding_path = os.path.join(config.step_dir("preprocess"), NUMERIC_ENCODING_FILENAME)
+        if os.path.exists(encoding_path):
+            with open(encoding_path) as f:
+                encoding = json.load(f)
+            for col, spec in encoding.items():
+                if col not in synthetic.columns or not pd.api.types.is_numeric_dtype(synthetic[col]):
+                    continue
+                floor = spec.get("min_observed", spec["decode_threshold"])
+                mask = synthetic[col] < floor
+                n = int(mask.sum())
+                if n:
+                    synthetic.loc[mask, col] = pd.NA
+                    decoded[col] = n
+        else:
+            print(f"⚠️  No numeric encoding map at {encoding_path} -- sentinels (if any) "
+                  f"are left as-is. Re-run the preprocess step to produce the map.")
+
+        if NYHA_COLUMN in synthetic.columns and pd.api.types.is_numeric_dtype(synthetic[NYHA_COLUMN]):
+            col = pd.to_numeric(synthetic[NYHA_COLUMN], errors="coerce").round()
+            not_assessed = col <= 0
+            n = int(not_assessed.sum())
+            synthetic[NYHA_COLUMN] = col.clip(upper=4)
             if n:
-                synthetic.loc[mask, col] = pd.NA
-                decoded[col] = n
+                synthetic.loc[not_assessed, NYHA_COLUMN] = pd.NA
+                decoded[NYHA_COLUMN] = n
+
         return synthetic, decoded
 
     def _write_summary(self, summary: dict, out_dir: str, quiet: bool = False) -> None:

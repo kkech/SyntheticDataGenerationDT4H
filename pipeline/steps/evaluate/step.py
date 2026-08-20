@@ -87,6 +87,14 @@ class EvaluateStep(PipelineStep):
         for path in synthetic_files:
             synth_name = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synthetic = pd.read_csv(path, low_memory=False)
+            # Defensive re-decode (idempotent): synthetic files written
+            # before a decode-rule fix may still contain gap-region or
+            # sentinel values; applying the current rule here means the
+            # evaluation always scores what the current pipeline would
+            # publish, without retraining anything.
+            from pipeline.steps.generate.step import GenerateStep
+
+            synthetic, _ = GenerateStep._decode_numeric_missing(synthetic, config)
             print(f"\nComparing against synthetic '{synth_name}' ({synthetic.shape[0]} rows)...")
 
             entry = {
@@ -127,21 +135,10 @@ class EvaluateStep(PipelineStep):
 
         from pipeline.steps.preprocess.transforms import NUMERIC_ENCODING_FILENAME
 
-        from pipeline.steps.preprocess.transforms import NYHA_COLUMN, NYHA_MISSING_SENTINEL
+        from pipeline.steps.generate.step import GenerateStep
 
         df = pl.read_parquet(config.preprocessed_output_path).to_pandas()
-        encoding_path = os.path.join(config.step_dir("preprocess"), NUMERIC_ENCODING_FILENAME)
-        if os.path.exists(encoding_path):
-            with open(encoding_path) as f:
-                encoding = json.load(f)
-            for col, spec in encoding.items():
-                if col in df.columns and pd.api.types.is_numeric_dtype(df[col]):
-                    df.loc[df[col] < spec["decode_threshold"], col] = pd.NA
-        # NYHA's "not assessed" sentinel lives outside the numeric
-        # encoding map; decode it too, so the comparison sees classes 1-4
-        # plus missingness rather than a fake class 0.
-        if NYHA_COLUMN in df.columns and pd.api.types.is_numeric_dtype(df[NYHA_COLUMN]):
-            df.loc[df[NYHA_COLUMN] == NYHA_MISSING_SENTINEL, NYHA_COLUMN] = pd.NA
+        df, _ = GenerateStep._decode_numeric_missing(df, config)
         return df
 
     def _prepare_original(self, df, config: PipelineConfig):
