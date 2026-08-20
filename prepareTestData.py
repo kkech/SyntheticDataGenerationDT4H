@@ -1,3 +1,4 @@
+import glob
 import json
 import os
 import shutil
@@ -52,19 +53,28 @@ def load_metadata(folder: str, output_folder: str) -> None:
         print(f"Copied metadata file -> {dest}")
 
 
-def load_data_parquet(folder: str) -> pl.DataFrame:
+def load_part_files(folder: str) -> pl.DataFrame:
     """
-    data.parquet is confirmed to already contain everything from the
-    part-*.parquet files (those are just its underlying Spark-partitioned
-    storage) -- so it's read directly as the full dataset, no concatenation
-    or reconciliation with the part files needed.
+    part-NNNNN-<uuid>-c000.snappy.parquet is the standard naming Spark uses
+    for row-wise partitions of a single logical table -- this is the
+    general shape future transfers will use, so these are concatenated
+    directly as the full dataset. Any standalone data.parquet in the same
+    folder is ignored.
     """
-    path = os.path.join(folder, "data.parquet")
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"{path} not found.")
-    df = pl.read_parquet(path)
-    print(f"\ndata.parquet: {df.height} rows x {df.width} cols")
-    return df
+    part_files = sorted(glob.glob(os.path.join(folder, "part-*.parquet")))
+    if not part_files:
+        raise FileNotFoundError(f"No part-*.parquet files found in {folder}.")
+
+    print(f"\nFound {len(part_files)} part file(s):")
+    frames = []
+    for f in part_files:
+        df = pl.read_parquet(f)
+        print(f"  {os.path.basename(f)}: {df.height} rows x {df.width} cols")
+        frames.append(df)
+
+    combined = pl.concat(frames, how="vertical_relaxed")
+    print(f"Concatenated: {combined.height} rows x {combined.width} cols")
+    return combined
 
 
 def analyze_full_dataset(df: pl.DataFrame, output_folder: str) -> None:
@@ -101,7 +111,7 @@ def prepare_test_data():
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
     inspect_folder(INPUT_FOLDER)
 
-    df_full = load_data_parquet(INPUT_FOLDER)
+    df_full = load_part_files(INPUT_FOLDER)
 
     load_metadata(INPUT_FOLDER, OUTPUT_FOLDER)
     analyze_full_dataset(df_full, OUTPUT_FOLDER)
