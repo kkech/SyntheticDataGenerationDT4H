@@ -1,51 +1,61 @@
 # UC1 synthetic data pipeline
 #
-# Targets Python 3.10 (the version on the analysis VM). These pins are the
-# newest releases that still support 3.10 -- notably numpy, which drops
-# 3.10 from 2.3 onward, so do not bump it without also moving the whole
-# environment to a newer Python.
+# Targets Python 3.10 (the version on the analysis VM).
 #
-# Install:
-#   pip install --upgrade pip setuptools wheel   # see build note at bottom
-#   pip install -r requirements.txt
+# STRONGLY RECOMMENDED: install into a dedicated virtualenv.
 #
-# Versions are pinned because this pipeline produces a dataset intended
-# for publication: the generation summary records these versions per run,
-# and an unpinned environment makes a published result unreproducible.
-# Verified to resolve together (sdv and smartnoise-synth share a
-# dependency tree and are not always co-installable across versions).
+#     python -m venv .synthenv && source .synthenv/bin/activate
+#     pip install --upgrade pip setuptools wheel
+#     pip install -r requirements.txt
+#
+# Not sharing an environment matters here. Other synthetic-data tooling
+# (e.g. mostlyai-engine) pins torch and pandas tightly, and installing
+# this pipeline alongside it will upgrade shared packages and break
+# whichever library loses. A separate venv costs disk and nothing else.
+#
+# --- pinning policy ---
+# The two libraries that determine the OUTPUT are pinned exactly, because
+# this pipeline produces a dataset intended for publication. The heavy
+# shared dependencies (torch, pandas, numpy) are given ranges instead:
+# nothing here needs a specific version of them, and pinning them exactly
+# forces needless upgrades that break co-installed tools. The exact
+# versions actually used are recorded per run in the generation summary's
+# provenance block, which is what makes a published result reproducible.
 
-# --- data handling ---
-polars==1.43.2
-pyarrow==25.0.1
-pandas==2.3.3          # upper-bounded by sdv; do not upgrade independently
-numpy==2.2.6           # 2.3+ drops Python 3.10
-
-# --- non-DP synthesis ---
+# --- synthesis libraries (pinned: these define the output) ---
 # NOTE: SDV is under the Business Source License (not MIT) since 2023.
 # Research use is fine; production use is restricted. Confirm with the
 # consortium before relying on it in a deployed setting.
 sdv==1.38.0
 
-# --- differentially private synthesis ---
 # Provides aim, mst, patectgan, dpctgan. AIM/MST are CPU-only
 # (marginal-based); only the GAN variants use the GPU.
 smartnoise-synth==1.0.8
 
+# --- data handling ---
+polars>=1.0,<2
+pyarrow>=14
+# sdv requires pandas<3; nothing here needs a specific 2.x.
+pandas>=2.0,<3
+# numpy 2.3+ drops Python 3.10 -- keep the upper bound until the whole
+# environment moves to a newer Python.
+numpy>=1.24,<2.3
+
 # --- deep learning backend ---
-# Pulled in by sdv/ctgan and the DP-GAN synthesizers.
+# Pulled in by sdv/ctgan and the DP-GAN synthesizers. On Python 3.10
+# ctgan only requires torch>=1.13, so any recent 2.x works: if the
+# environment already has a working torch, this will leave it alone.
+# The pipeline detects CUDA at runtime and falls back to CPU.
 #
-# The default PyPI wheel bundles CUDA and is large (~2-3 GB). It works on
-# both GPU and CPU machines -- the pipeline detects CUDA at runtime and
-# falls back to CPU automatically.
-#
-# For a CPU-only machine, install the much smaller CPU build instead:
-#   pip install torch==2.13.0 --index-url https://download.pytorch.org/whl/cpu
-torch==2.13.0
+# For a CPU-only machine, install the smaller CPU build as its own
+# command FIRST (never combined with -r, or PyPI packages fail to
+# resolve against the PyTorch index):
+#   pip install "torch>=2.0,<3" --index-url https://download.pytorch.org/whl/cpu
+torch>=2.0,<3
 
 # --- build note ---
-# smartnoise-synth pulls antlr4-python3-runtime, which fails to build
-# against older or distro-patched setuptools with:
+# smartnoise-synth pulls antlr4-python3-runtime 4.9.3, which is published
+# as an sdist only (no wheel) and so must compile locally. Against older
+# or distro-patched setuptools that fails with:
 #     AttributeError: install_layout
-# Upgrading pip/setuptools/wheel in the virtualenv first (see header)
-# resolves it.
+# Upgrading pip/setuptools/wheel in the virtualenv first resolves it.
