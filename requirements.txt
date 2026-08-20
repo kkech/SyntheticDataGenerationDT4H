@@ -1,6 +1,13 @@
-# UC1 synthetic data pipeline -- Python 3.10+
+# UC1 synthetic data pipeline
 #
-# Install:   pip install -r requirements.txt
+# Targets Python 3.10 (the version on the analysis VM). These pins are the
+# newest releases that still support 3.10 -- notably numpy, which drops
+# 3.10 from 2.3 onward, so do not bump it without also moving the whole
+# environment to a newer Python.
+#
+# Install:
+#   pip install --upgrade pip setuptools wheel   # see build note at bottom
+#   pip install -r requirements.txt
 #
 # Versions are pinned because this pipeline produces a dataset intended
 # for publication: the generation summary records these versions per run,
@@ -12,7 +19,7 @@
 polars==1.43.2
 pyarrow==25.0.1
 pandas==2.3.3          # upper-bounded by sdv; do not upgrade independently
-numpy==2.3.4
+numpy==2.2.6           # 2.3+ drops Python 3.10
 
 # --- non-DP synthesis ---
 # NOTE: SDV is under the Business Source License (not MIT) since 2023.
@@ -35,3 +42,10 @@ smartnoise-synth==1.0.8
 # For a CPU-only machine, install the much smaller CPU build instead:
 #   pip install torch==2.13.0 --index-url https://download.pytorch.org/whl/cpu
 torch==2.13.0
+
+# --- build note ---
+# smartnoise-synth pulls antlr4-python3-runtime, which fails to build
+# against older or distro-patched setuptools with:
+#     AttributeError: install_layout
+# Upgrading pip/setuptools/wheel in the virtualenv first (see header)
+# resolves it.
