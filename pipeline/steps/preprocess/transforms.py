@@ -48,19 +48,27 @@ def load_variable_metadata(path: str) -> dict:
     return {v["name"]: v for v in all_vars}
 
 
-def validate_against_metadata(df: pl.DataFrame, var_meta: dict) -> None:
+def validate_against_metadata(df: pl.DataFrame, var_meta: dict) -> dict:
     """QA check: flags any drift between the declared schema and the actual data columns."""
     df_cols = set(df.columns)
     meta_cols = set(var_meta.keys())
-    missing_from_data = meta_cols - df_cols
-    missing_from_meta = df_cols - meta_cols
+    missing_from_data = sorted(meta_cols - df_cols)
+    missing_from_meta = sorted(df_cols - meta_cols)
 
     print(f"  {len(meta_cols)} declared in metadata.json, {len(df_cols)} present in data, "
           f"{len(meta_cols & df_cols)} match.")
     if missing_from_data:
-        print(f"  ⚠️  {len(missing_from_data)} declared but not in data: {sorted(missing_from_data)[:10]}")
+        print(f"  ⚠️  {len(missing_from_data)} declared but not in data: {missing_from_data[:10]}")
     if missing_from_meta:
-        print(f"  ⚠️  {len(missing_from_meta)} in data but not declared: {sorted(missing_from_meta)[:10]}")
+        print(f"  ⚠️  {len(missing_from_meta)} in data but not declared: {missing_from_meta[:10]}")
+
+    return {
+        "declared_in_metadata": len(meta_cols),
+        "present_in_data": len(df_cols),
+        "matched": len(meta_cols & df_cols),
+        "declared_but_missing_from_data": missing_from_data,
+        "in_data_but_not_declared": missing_from_meta,
+    }
 
 
 # --- data-quality QA (from Machteld's email) ---
@@ -82,38 +90,46 @@ EXPECTED_NONNULL_PAIRS = [
 ]
 
 
-def report_expected_nonnull_mismatches(df: pl.DataFrame) -> None:
+def report_expected_nonnull_mismatches(df: pl.DataFrame) -> list[dict]:
     """
     Sanity checks from Machteld's email: certain lab/vital pairs are
     clinically expected to have similar non-null counts. Large gaps flag
     an export problem worth reporting back, not a real clinical pattern.
     """
+    results = []
     for base_a, base_b, note in EXPECTED_NONNULL_PAIRS:
         col_a = _first_existing(df, base_a)
         col_b = _first_existing(df, base_b)
         if col_a is None or col_b is None:
             print(f"  (skip) {base_a} / {base_b}: one or both not found (checked bare/_first/_last)")
+            results.append({"col_a": base_a, "col_b": base_b, "note": note, "skipped": True})
             continue
         n_a = df.height - df[col_a].null_count()
         n_b = df.height - df[col_b].null_count()
-        flag = "⚠️ " if n_b == 0 or n_a == 0 or abs(n_a - n_b) / max(n_a, 1) > 0.5 else ""
+        mismatch = n_b == 0 or n_a == 0 or abs(n_a - n_b) / max(n_a, 1) > 0.5
+        flag = "⚠️ " if mismatch else ""
         print(f"  {flag}{col_a}: {n_a} non-null vs {col_b}: {n_b} non-null ({note})")
+        results.append({
+            "col_a": col_a, "n_a": n_a, "col_b": col_b, "n_b": n_b, "note": note, "mismatch": mismatch,
+        })
+    return results
 
 
 # --- type-driven cleanup ---
 
-def flatten_array_columns(df: pl.DataFrame, var_meta: dict) -> pl.DataFrame:
+def flatten_array_columns(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
     """ARRAY[NOMINAL] columns store a List(String) per cell -- flattened to
     scalar (first list element) since GAN training needs scalars."""
     array_cols = [name for name, v in var_meta.items()
                   if v.get("dataType") == "ARRAY[NOMINAL]" and name in df.columns]
     if not array_cols:
-        return df
+        return df, {"flattened": []}
     print(f"  Flattening {len(array_cols)} ARRAY[NOMINAL] column(s) to scalar: {array_cols}")
-    return df.with_columns([pl.col(c).list.first().alias(c) for c in array_cols])
+    df = df.with_columns([pl.col(c).list.first().alias(c) for c in array_cols])
+    return df, {"flattened": array_cols}
 
 
-def report_symptom_columns(df: pl.DataFrame) -> None:
+def report_symptom_columns(df: pl.DataFrame) -> dict:
     """
     Per Machteld: symptom_* columns are currently all-False (NLP module
     not yet integrated) but should stay IN the data rather than be
@@ -122,14 +138,14 @@ def report_symptom_columns(df: pl.DataFrame) -> None:
     just reports their current state; nothing is removed.
     """
     symptom_cols = [c for c in df.columns if c.lower().startswith("symptom")]
-    if not symptom_cols:
-        return
     constant = [c for c in symptom_cols if df[c].drop_nulls().n_unique() <= 1]
-    print(f"  {len(symptom_cols)} symptom_* column(s) present, {len(constant)} currently constant "
-          f"(NLP module not yet integrated) -- kept in the data, not dropped.")
+    if symptom_cols:
+        print(f"  {len(symptom_cols)} symptom_* column(s) present, {len(constant)} currently constant "
+              f"(NLP module not yet integrated) -- kept in the data, not dropped.")
+    return {"count": len(symptom_cols), "currently_constant": len(constant), "dropped": False}
 
 
-def drop_identifiers_and_datetimes(df: pl.DataFrame, var_meta: dict) -> pl.DataFrame:
+def drop_identifiers_and_datetimes(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
     """
     IDENTIFIER columns (pid, encounterId) are direct identifiers and must
     never feed a synthesis model. DATETIME columns are either pipeline
@@ -143,7 +159,7 @@ def drop_identifiers_and_datetimes(df: pl.DataFrame, var_meta: dict) -> pl.DataF
     if drop_cols:
         print(f"  Dropping {len(drop_cols)} IDENTIFIER/DATETIME column(s): {drop_cols}")
         df = df.drop(drop_cols)
-    return df
+    return df, {"dropped": drop_cols}
 
 
 # --- medication / condition combining (Machteld's email) ---
@@ -152,7 +168,7 @@ def _strip_any_suffix(name: str) -> str:
     return name[: -len("_any")] if name.endswith("_any") else name
 
 
-def combine_medications(df: pl.DataFrame) -> pl.DataFrame:
+def combine_medications(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     """
     med_admins_<X>_any         / med_requests_<X>_any          -> med_<X>
     med_admins_history_<X>_any / med_requests_history_<X>_any  -> med_<X>_history
@@ -169,33 +185,34 @@ def combine_medications(df: pl.DataFrame) -> pl.DataFrame:
 
     new_cols = []
     drop_cols = []
+    features_created = []
 
     for med in med_types:
         present = [c for c in (f"med_admins_{med}", f"med_requests_{med}") if c in df.columns]
         if not present:
             continue
-        new_cols.append(
-            pl.any_horizontal([pl.col(c).fill_null(False) for c in present]).alias(f"med_{_strip_any_suffix(med)}")
-        )
+        feature_name = f"med_{_strip_any_suffix(med)}"
+        new_cols.append(pl.any_horizontal([pl.col(c).fill_null(False) for c in present]).alias(feature_name))
         drop_cols.extend(present)
+        features_created.append(feature_name)
 
     for med in med_hist_types:
         present = [c for c in (f"med_admins_history_{med}", f"med_requests_history_{med}") if c in df.columns]
         if not present:
             continue
-        new_cols.append(
-            pl.any_horizontal([pl.col(c).fill_null(False) for c in present]).alias(f"med_{_strip_any_suffix(med)}_history")
-        )
+        feature_name = f"med_{_strip_any_suffix(med)}_history"
+        new_cols.append(pl.any_horizontal([pl.col(c).fill_null(False) for c in present]).alias(feature_name))
         drop_cols.extend(present)
+        features_created.append(feature_name)
 
     df = df.with_columns(new_cols)
     df = df.drop([c for c in set(drop_cols) if c in df.columns])
     print(f"  Combined medication columns into {len(new_cols)} feature(s) "
           f"({len(med_types)} current + {len(med_hist_types)} history).")
-    return df
+    return df, {"features_created": features_created, "source_columns_dropped": len(set(drop_cols))}
 
 
-def combine_conditions(df: pl.DataFrame) -> pl.DataFrame:
+def combine_conditions(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     """
     conditions_<X>_pre_dc_any / _pre_adm_any / _during_pET_any -> conditions_<X>
     (True if the condition was flagged in any of the three windows.)
@@ -207,22 +224,23 @@ def combine_conditions(df: pl.DataFrame) -> pl.DataFrame:
 
     new_cols = []
     drop_cols = []
+    features_created = []
     for base in base_names:
         variants = [f"conditions_{base}{suf}" for suf in suffixes if f"conditions_{base}{suf}" in df.columns]
         if not variants:
             continue
-        new_cols.append(
-            pl.any_horizontal([pl.col(c).fill_null(False) for c in variants]).alias(f"conditions_{base}")
-        )
+        feature_name = f"conditions_{base}"
+        new_cols.append(pl.any_horizontal([pl.col(c).fill_null(False) for c in variants]).alias(feature_name))
         drop_cols.extend(variants)
+        features_created.append(feature_name)
 
     df = df.with_columns(new_cols)
     df = df.drop([c for c in set(drop_cols) if c in df.columns])
     print(f"  Combined condition columns into {len(new_cols)} feature(s).")
-    return df
+    return df, {"features_created": features_created, "source_columns_dropped": len(set(drop_cols))}
 
 
-def prefer_first_last_numerics(df: pl.DataFrame) -> pl.DataFrame:
+def prefer_first_last_numerics(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     """Wherever a measurement has _first/_last variants, drop its bare
     column (if any) and its _min/_max/_avg/_stddev siblings."""
     first_last = {c for c in df.columns if c.endswith("_first") or c.endswith("_last")}
@@ -238,7 +256,7 @@ def prefer_first_last_numerics(df: pl.DataFrame) -> pl.DataFrame:
         print(f"  Dropping {len(drop_cols)} numeric aggregate column(s) "
               f"(bare/_min/_max/_avg/_stddev) in favor of _first/_last.")
         df = df.drop(drop_cols)
-    return df
+    return df, {"dropped": drop_cols}
 
 
 def build_nyha_map(var_meta: dict, column: str = NYHA_COLUMN) -> dict:
@@ -255,13 +273,14 @@ def build_nyha_map(var_meta: dict, column: str = NYHA_COLUMN) -> dict:
     return mapping
 
 
-def encode_nyha(df: pl.DataFrame, var_meta: dict) -> pl.DataFrame:
+def encode_nyha(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
     if NYHA_COLUMN not in df.columns:
         print(f"  (skip) NYHA column '{NYHA_COLUMN}' not found.")
-        return df
+        return df, {"skipped": True}
     nyha_map = build_nyha_map(var_meta)
     print(f"  Encoding {NYHA_COLUMN} via metadata valueSet: {nyha_map}")
-    return df.with_columns(pl.col(NYHA_COLUMN).replace(nyha_map, default=None).alias(NYHA_COLUMN))
+    df = df.with_columns(pl.col(NYHA_COLUMN).replace(nyha_map, default=None).alias(NYHA_COLUMN))
+    return df, {"skipped": False, "map": nyha_map}
 
 
 # --- temporary dummy imputation (Machteld's placeholder rules) ---
@@ -308,7 +327,7 @@ def _resolve_variants(df: pl.DataFrame, base_col: str) -> list[str]:
     return [c for c in candidates if c in df.columns]
 
 
-def apply_dummy_imputation(df: pl.DataFrame, seed: int = 0) -> pl.DataFrame:
+def apply_dummy_imputation(df: pl.DataFrame, seed: int = 0) -> tuple[pl.DataFrame, dict]:
     """
     TEMPORARY: fills specific lab/vital columns with placeholder values
     per Machteld's clinically-motivated rules, wherever the given trigger
@@ -317,11 +336,14 @@ def apply_dummy_imputation(df: pl.DataFrame, seed: int = 0) -> pl.DataFrame:
     with real values for these fields arrives.
     """
     rng = np.random.default_rng(seed)
+    fills = []
+    skipped = []
 
     for trigger_base, targets in DUMMY_IMPUTATION_RULES:
         trigger_cols = _resolve_variants(df, trigger_base)
         if not trigger_cols:
             print(f"  (skip) trigger column '{trigger_base}' (or _first/_last) not found")
+            skipped.append({"reason": "trigger not found", "trigger": trigger_base})
             continue
 
         trigger_present = df[trigger_cols[0]].is_not_null()
@@ -332,6 +354,7 @@ def apply_dummy_imputation(df: pl.DataFrame, seed: int = 0) -> pl.DataFrame:
             target_cols = _resolve_variants(df, target_base)
             if not target_cols:
                 print(f"  (skip) target column '{target_base}' (or _first/_last) not found")
+                skipped.append({"reason": "target not found", "trigger": trigger_base, "target": target_base})
                 continue
 
             for target_col in target_cols:
@@ -345,24 +368,25 @@ def apply_dummy_imputation(df: pl.DataFrame, seed: int = 0) -> pl.DataFrame:
                 filled[needs_fill.to_numpy()] = values
                 df = df.with_columns(pl.Series(target_col, filled))
                 print(f"  Filled {n_fill} value(s) in '{target_col}' (triggered by '{trigger_base}' present).")
+                fills.append({"target": target_col, "trigger": trigger_base, "n_filled": n_fill})
 
-    return df
+    return df, {"fills": fills, "skipped": skipped}
 
 
 # --- final null cleanup (generic, by declared type) ---
 
-def impute_nyha_missing(df: pl.DataFrame) -> pl.DataFrame:
+def impute_nyha_missing(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     if NYHA_COLUMN not in df.columns:
-        return df
+        return df, {"filled": 0}
     n_missing = df[NYHA_COLUMN].null_count()
     if n_missing:
         print(f"  Filling {n_missing} missing '{NYHA_COLUMN}' value(s) with sentinel "
               f"{NYHA_MISSING_SENTINEL} ('not assessed', kept distinct from real classes 1-4).")
         df = df.with_columns(pl.col(NYHA_COLUMN).fill_null(NYHA_MISSING_SENTINEL))
-    return df
+    return df, {"filled": n_missing, "sentinel": NYHA_MISSING_SENTINEL}
 
 
-def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> pl.DataFrame:
+def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> tuple[pl.DataFrame, dict]:
     """
     Nulls in NUMERIC columns are imputed by bootstrap-sampling (with
     replacement) from that column's own observed values -- preserves the
@@ -377,7 +401,7 @@ def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> p
 
     flag_cols = []
     drop_cols = []
-    n_imputed = 0
+    imputed_cols = []
 
     for col in numeric_cols:
         series = df[col]
@@ -397,19 +421,19 @@ def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> p
         filled = series.to_numpy(zero_copy_only=False).astype(float).copy()
         filled[null_mask.to_numpy()] = sampled
         df = df.with_columns(pl.Series(col, filled))
-        n_imputed += 1
+        imputed_cols.append({"column": col, "n_filled": n_null, "n_observed": non_null.len()})
 
     if flag_cols:
         df = df.with_columns(flag_cols)
     if drop_cols:
         df = df.drop(drop_cols)
 
-    print(f"  Imputed {n_imputed} numeric column(s), added {len(flag_cols)} '_was_missing' flag(s), "
+    print(f"  Imputed {len(imputed_cols)} numeric column(s), added {len(flag_cols)} '_was_missing' flag(s), "
           f"dropped {len(drop_cols)} column(s) with fewer than {NUMERIC_MIN_NONNULL} observed values.")
-    return df
+    return df, {"imputed": imputed_cols, "was_missing_flags_added": len(flag_cols), "dropped_too_few": drop_cols}
 
 
-def impute_categorical_and_boolean(df: pl.DataFrame, var_meta: dict) -> pl.DataFrame:
+def impute_categorical_and_boolean(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
     """
     Nulls in BOOLEAN/NOMINAL/ARRAY[NOMINAL] columns become an explicit
     "Missing" category, consistent with how dpSyntGAN.py already treats
@@ -428,4 +452,4 @@ def impute_categorical_and_boolean(df: pl.DataFrame, var_meta: dict) -> pl.DataF
         df = df.with_columns(pl.col(col).cast(pl.String).fill_null("Missing").alias(col))
 
     print(f"  Filled {len(filled)} boolean/categorical column(s) with an explicit 'Missing' category.")
-    return df
+    return df, {"filled_columns": filled}

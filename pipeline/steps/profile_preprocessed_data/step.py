@@ -34,7 +34,10 @@ class ProfilePreprocessedDataStep(PipelineStep):
         copy_metadata(config.transfer_folder, config.for_repo_dir)
         self._write_analysis(df, config)
         write_row_sample(
-            df, os.path.join(config.for_repo_dir, "DT4H_Preprocessed_Sample20.parquet"), config.sample_rows
+            df,
+            os.path.join(config.for_repo_dir, "DT4H_Preprocessed_Sample20.parquet"),
+            config.sample_rows,
+            config.sample_seed,
         )
 
     def _write_analysis(self, df: pl.DataFrame, config: PipelineConfig) -> None:

@@ -34,8 +34,8 @@ def copy_metadata(source_folder: str, dest_dir: str) -> None:
         print(f"Copied metadata file -> {dest}")
 
 
-def write_row_sample(df: pl.DataFrame, dest_path: str, n: int) -> None:
-    """Writes the first n rows (deterministic, not a random sample) to dest_path."""
+def write_row_sample(df: pl.DataFrame, dest_path: str, n: int, seed: int = 0) -> None:
+    """Writes a random sample of n rows (fixed seed, reproducible) to dest_path."""
     n = min(n, df.height)
-    df.head(n).write_parquet(dest_path)
-    print(f"Saved first {n} row(s) -> {dest_path}")
+    df.sample(n=n, seed=seed).write_parquet(dest_path)
+    print(f"Saved random sample of {n} row(s) (seed={seed}) -> {dest_path}")

@@ -31,7 +31,9 @@ class ProfileDataStep(PipelineStep):
 
         copy_metadata(config.transfer_folder, config.for_repo_dir)
         self._write_analysis(df, config)
-        write_row_sample(df, os.path.join(config.for_repo_dir, "DT4H_Sample20.parquet"), config.sample_rows)
+        write_row_sample(
+            df, os.path.join(config.for_repo_dir, "DT4H_Sample20.parquet"), config.sample_rows, config.sample_seed
+        )
 
     def _write_analysis(self, df: pl.DataFrame, config: PipelineConfig) -> None:
         print(f"Profiling {df.height} rows x {df.width} columns...")
