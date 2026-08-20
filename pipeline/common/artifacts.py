@@ -1,4 +1,4 @@
-"""Shared helpers for writing the shareable pipeline artifacts under for_repo/."""
+"""Shared helpers for writing the shareable pipeline artifacts under output/<step>/."""
 
 import os
 import shutil

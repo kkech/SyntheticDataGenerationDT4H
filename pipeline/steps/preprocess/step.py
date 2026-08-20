@@ -9,7 +9,7 @@ imputation pass (bootstrap for numerics + missingness flags, "Missing"
 category for booleans/categoricals) so no nulls remain.
 
 Also writes a summary of every transformation decision made (what was
-combined/dropped/imputed and why) to for_repo/DT4H_Preprocessing_Summary
+combined/dropped/imputed and why) to output/preprocess/DT4H_Preprocessing_Summary
 -- this is what happened, distinct from profile_preprocessed_data's
 statistical profile of the resulting data.
 """
@@ -54,6 +54,11 @@ class PreprocessStep(PipelineStep):
         print("Flattening ARRAY[NOMINAL] columns...")
         df, summary["array_columns_flattened"] = t.flatten_array_columns(df, var_meta)
 
+        # Runs early so every numeric column is a clean Float64 with nulls
+        # (not Decimal, not NaN) before any imputation reads or writes it.
+        print("Normalizing numeric dtypes...")
+        df, summary["numeric_dtype_normalization"] = t.normalize_numeric_dtypes(df)
+
         print("Checking symptom columns...")
         summary["symptom_columns"] = t.report_symptom_columns(df)
 
@@ -82,19 +87,30 @@ class PreprocessStep(PipelineStep):
         print("Dropping near-unique identifier-like columns (safety net)...")
         df, summary["near_unique_columns_dropped"] = t.drop_near_unique_columns(df)
 
-        print("Normalizing numeric dtypes...")
-        df, summary["numeric_dtype_normalization"] = t.normalize_numeric_dtypes(df)
-
         print("Final null cleanup...")
         df, summary["nyha_missing_imputation"] = t.impute_nyha_missing(df)
         df, summary["numeric_imputation"] = t.impute_numeric_columns(df, var_meta)
         df, summary["categorical_imputation"] = t.impute_categorical_and_boolean(df, var_meta)
 
+        # Count NaN as well as null: polars keeps them distinct, so a
+        # null-only check reports a reassuring zero while NaN cells sit in
+        # the output. Both mean "missing" to a synthesizer.
         remaining_nulls = sum(df[c].null_count() for c in df.columns)
+        remaining_nans = sum(
+            int(df[c].is_nan().sum()) for c in df.columns if df[c].dtype in (pl.Float32, pl.Float64)
+        )
         summary["remaining_null_cells"] = remaining_nulls
+        summary["remaining_nan_cells"] = remaining_nans
         summary["output_rows"] = df.height
         summary["output_columns"] = df.width
-        print(f"Remaining null cells after all imputation: {remaining_nulls}")
+        print(f"Remaining missing cells after all imputation: {remaining_nulls} null, {remaining_nans} NaN")
+
+        if remaining_nulls or remaining_nans:
+            raise ValueError(
+                f"Preprocessing finished with missing values still present "
+                f"({remaining_nulls} null, {remaining_nans} NaN) -- the output is not "
+                f"ready for synthesis. Refusing to write it."
+            )
 
         os.makedirs(os.path.dirname(config.preprocessed_output_path), exist_ok=True)
         df.write_parquet(config.preprocessed_output_path)
@@ -124,7 +140,8 @@ class PreprocessStep(PipelineStep):
             f"- Input: {s['input_rows']} rows x {s['input_columns']} columns"
             + (f" ({s['unique_patients']} unique patients)" if s.get("unique_patients") is not None else ""),
             f"- Output: {s['output_rows']} rows x {s['output_columns']} columns",
-            f"- Remaining null cells: {s['remaining_null_cells']}",
+            f"- Remaining missing cells: {s['remaining_null_cells']} null, "
+            f"{s.get('remaining_nan_cells', 'n/a')} NaN",
             "",
             "## Metadata validation",
             f"- {s['metadata_validation']['matched']} / {s['metadata_validation']['declared_in_metadata']} "
@@ -159,7 +176,7 @@ class PreprocessStep(PipelineStep):
             f"- IDENTIFIER/DATETIME columns dropped: {s['identifiers_datetimes_dropped']['dropped']}",
             f"- Near-unique identifier-like columns dropped (safety net, not caught by declared type): "
             f"{s['near_unique_columns_dropped']['dropped']}",
-            f"- Decimal columns cast to Float64 (so they stay numeric downstream): "
+            f"- Decimal columns cast to Float64: "
             f"{s.get('numeric_dtype_normalization', {}).get('decimal_cast_to_float', [])}",
         ]
 

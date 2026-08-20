@@ -40,7 +40,7 @@ def load_variable_metadata(path: str) -> dict:
     for coded NOMINAL fields.
     """
     if not os.path.exists(path):
-        raise FileNotFoundError(f"{path} not found -- metadata.json should be committed under for_repo/.")
+        raise FileNotFoundError(f"{path} not found -- metadata.json should be under output/profile_data/ (written by the profile_data step).")
     with open(path) as f:
         raw = json.load(f)
     entry = raw["entries"][0]
@@ -394,10 +394,24 @@ def apply_dummy_imputation(df: pl.DataFrame, seed: int = 0) -> tuple[pl.DataFram
                 if n_fill == 0:
                     continue
 
+                # Scatter the generated values into a full-length array and
+                # merge via when/then, rather than round-tripping the whole
+                # column through numpy. A numpy round-trip turns every
+                # remaining null into a float NaN, and polars does not treat
+                # NaN as null -- those cells would then be invisible to
+                # is_null(), skipped by impute_numeric_columns(), and reach
+                # the "GAN-ready" output as NaN while the null count still
+                # reported zero.
                 values = _sample_right_skewed(rng, low, high, mean, n_fill)
-                filled = df[target_col].to_numpy(zero_copy_only=False).astype(float)
-                filled[needs_fill.to_numpy()] = values
-                df = df.with_columns(pl.Series(target_col, filled))
+                scattered = np.full(df.height, np.nan)
+                scattered[needs_fill.to_numpy()] = values
+
+                df = df.with_columns(
+                    pl.when(needs_fill)
+                    .then(pl.Series(target_col, scattered))
+                    .otherwise(pl.col(target_col))
+                    .alias(target_col)
+                )
                 print(f"  Filled {n_fill} value(s) in '{target_col}' (triggered by '{trigger_base}' present).")
                 fills.append({"target": target_col, "trigger": trigger_base, "n_filled": n_fill})
 
@@ -427,9 +441,24 @@ def normalize_numeric_dtypes(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     """
     decimal_cols = [c for c in df.columns if isinstance(df[c].dtype, pl.Decimal)]
     if decimal_cols:
-        print(f"  Casting {len(decimal_cols)} Decimal column(s) to Float64: {decimal_cols}")
+        print(f"  Casting {len(decimal_cols)} Decimal column(s) to Float64: {len(decimal_cols)} column(s)")
         df = df.with_columns([pl.col(c).cast(pl.Float64).alias(c) for c in decimal_cols])
-    return df, {"decimal_cast_to_float": decimal_cols}
+
+    # Defensive: polars treats NaN as a valid float distinct from null, so
+    # any NaN reaching this point would be invisible to every is_null()
+    # check downstream -- silently skipped by imputation and shipped in the
+    # final output while the null count still read zero. Normalize to null
+    # so missing values have exactly one representation.
+    float_cols = [c for c in df.columns if df[c].dtype in (pl.Float32, pl.Float64)]
+    nan_counts = {c: int(df[c].is_nan().sum()) for c in float_cols}
+    nan_cols = {c: n for c, n in nan_counts.items() if n}
+    if nan_cols:
+        print(f"  Converting NaN -> null in {len(nan_cols)} float column(s): {nan_cols}")
+        df = df.with_columns(
+            [pl.when(pl.col(c).is_nan()).then(None).otherwise(pl.col(c)).alias(c) for c in nan_cols]
+        )
+
+    return df, {"decimal_cast_to_float": decimal_cols, "nan_converted_to_null": nan_cols}
 
 
 # --- final null cleanup (generic, by declared type) ---

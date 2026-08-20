@@ -4,7 +4,7 @@ Step: load_data
 Concatenates the transfer folder's Spark part-*.parquet files (row-wise
 partitions of a single logical table, all sharing one schema) into the
 full dataset and saves it locally. This is real patient-level data and
-must never be written into for_repo/ or committed to git.
+must never be committed to git (excluded via .gitignore).
 """
 
 import glob
