@@ -1,0 +1,89 @@
+
+======================================================================
+▶️  RUNNING 'load_data'
+======================================================================
+Found 3 part file(s):
+  part-00000-ab6e8732-8495-4a9c-af13-fda00abb0899-c000.snappy.parquet: 2284 rows x 528 cols
+  part-00001-9aaa92e9-ddad-4861-94fb-c3abb59d94ea-c000.snappy.parquet: 2120 rows x 528 cols
+  part-00002-4eeb4ef0-377f-43b2-9f44-38c632f1f6c6-c000.snappy.parquet: 290 rows x 528 cols
+Concatenated: 4694 rows x 528 cols
+Saved full dataset (local only, not for git) -> /mnt/data/DT4Hnew/output/load_data/UC1_Resolved_Full.parquet
+✅ 'load_data' completed.
+
+======================================================================
+▶️  RUNNING 'profile_data'
+======================================================================
+Copied metadata file -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/metadata.json
+Profiling 4694 rows x 528 columns...
+Saved column analysis (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Column_Analysis.json
+Saved column analysis (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Column_Analysis.md
+Saved random sample of 20 row(s) (seed=0) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Sample20.parquet
+✅ 'profile_data' completed.
+
+======================================================================
+▶️  RUNNING 'preprocess'
+======================================================================
+Loaded 4694 rows x 528 columns.
+Unique patients (pid): 4694
+Validating against metadata...
+  528 declared in metadata.json, 528 present in data, 528 match.
+Checking expected non-null pairs...
+  lab_results_hdl_value_first: 418 non-null vs lab_results_ldl_value_first: 414 non-null (expected similar (ordered together))
+  lab_results_potassium_value_first: 4497 non-null vs lab_results_sodium_value_first: 4494 non-null (expected similar (ordered together))
+  ⚠️ lab_results_albuminBS_value_first: 1995 non-null vs lab_results_ntProBnp_value_first: 3787 non-null (expected similar)
+  ⚠️ lab_results_albuminBS_value_first: 1995 non-null vs lab_results_crpNonHs_value_first: 4152 non-null (expected similar)
+  ⚠️ lab_results_albuminBS_value_first: 1995 non-null vs lab_results_hba1c_value_first: 0 non-null (expected similar)
+  ⚠️ vital_signs_heartRate_value_first: 2436 non-null vs vital_signs_oxygenSaturation_value_first: 0 non-null (expected similar, oxygen sat maybe slightly lower)
+Flattening ARRAY[NOMINAL] columns...
+  Flattening 2 ARRAY[NOMINAL] column(s) to scalar: ['electrocardiographs_ecg_type_of_rhythms_pET_first', 'electrocardiographs_ecg_type_of_rhythms_pET_last']
+Checking symptom columns...
+  30 symptom_* column(s) present, 30 currently constant (NLP module not yet integrated) -- kept in the data, not dropped.
+Combining medication columns...
+  Combined medication columns into 54 feature(s) (27 current + 27 history).
+Combining condition columns...
+  Combined condition columns into 31 feature(s).
+Encoding NYHA...
+  Encoding nyha_nyha_pET via metadata valueSet: {'LA28404-4': 1, 'LA28405-1': 2, 'LA28406-9': 3, 'LA28407-7': 4}
+Applying temporary dummy imputation (Machteld's placeholder rules)...
+  (skip) target column 'lab_results_glucose_value' (or _first/_last) not found
+  Filled 1995 value(s) in 'lab_results_hba1c%_value_first' (triggered by 'lab_results_albuminBS_value' present).
+  Filled 1995 value(s) in 'lab_results_hba1c%_value_last' (triggered by 'lab_results_albuminBS_value' present).
+  Filled 1995 value(s) in 'lab_results_hba1c_value_first' (triggered by 'lab_results_albuminBS_value' present).
+  Filled 1995 value(s) in 'lab_results_hba1c_value_last' (triggered by 'lab_results_albuminBS_value' present).
+  Filled 277 value(s) in 'lab_results_ntProBnp_value_first' (triggered by 'lab_results_albuminBS_value' present).
+  Filled 277 value(s) in 'lab_results_ntProBnp_value_last' (triggered by 'lab_results_albuminBS_value' present).
+  Filled 114 value(s) in 'lab_results_crpNonHs_value_first' (triggered by 'lab_results_albuminBS_value' present).
+  Filled 114 value(s) in 'lab_results_crpNonHs_value_last' (triggered by 'lab_results_albuminBS_value' present).
+  Filled 391 value(s) in 'lab_results_tropTnHs_value_first' (triggered by 'lab_results_hdl_value' present).
+  Filled 391 value(s) in 'lab_results_tropTnHs_value_last' (triggered by 'lab_results_hdl_value' present).
+  Filled 4 value(s) in 'lab_results_ldl_value_first' (triggered by 'lab_results_hdl_value' present).
+  Filled 4 value(s) in 'lab_results_ldl_value_last' (triggered by 'lab_results_hdl_value' present).
+  Filled 37 value(s) in 'lab_results_sodium_value_first' (triggered by 'lab_results_potassium_value' present).
+  Filled 37 value(s) in 'lab_results_sodium_value_last' (triggered by 'lab_results_potassium_value' present).
+  Filled 2436 value(s) in 'vital_signs_oxygenSaturation_value_first' (triggered by 'vital_signs_heartRate_value' present).
+  Filled 2436 value(s) in 'vital_signs_oxygenSaturation_value_last' (triggered by 'vital_signs_heartRate_value' present).
+  Filled 2385 value(s) in 'electrocardiographs_ecg_qrs_axis_pET_first' (triggered by 'electrocardiographs_ecg_qrs_duration_pET' present).
+  Filled 2385 value(s) in 'electrocardiographs_ecg_qrs_axis_pET_last' (triggered by 'electrocardiographs_ecg_qrs_duration_pET' present).
+Preferring _first/_last numeric variants...
+  Dropping 140 numeric aggregate column(s) (bare/_min/_max/_avg/_stddev) in favor of _first/_last.
+Dropping identifier/datetime columns...
+  Dropping 7 IDENTIFIER/DATETIME column(s): ['pid', 'encounterId', 'eventTime', 'exitTime', 'referenceTimePoint', 'encounters_admissionDate', 'encounters_dischargeDate']
+Final null cleanup...
+  Filling 3530 missing 'nyha_nyha_pET' value(s) with sentinel 0 ('not assessed', kept distinct from real classes 1-4).
+  Imputed 50 numeric column(s), added 50 '_was_missing' flag(s), dropped 18 column(s) with fewer than 5 observed values.
+  Filled 66 boolean/categorical column(s) with an explicit 'Missing' category.
+Remaining null cells after all imputation: 0
+Saved 4694 rows x 312 columns -> /mnt/data/DT4Hnew/output/preprocess/UC1_Preprocessed.parquet
+Saved preprocessing summary (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessing_Summary.json
+Saved preprocessing summary (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessing_Summary.md
+✅ 'preprocess' completed.
+
+======================================================================
+▶️  RUNNING 'profile_preprocessed_data'
+======================================================================
+Copied metadata file -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/metadata.json
+Profiling 4694 rows x 312 columns (preprocessed)...
+Saved preprocessed column analysis (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessed_Column_Analysis.json
+Saved preprocessed column analysis (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessed_Column_Analysis.md
+Saved random sample of 20 row(s) (seed=0) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessed_Sample20.parquet
+✅ 'profile_preprocessed_data' completed.
