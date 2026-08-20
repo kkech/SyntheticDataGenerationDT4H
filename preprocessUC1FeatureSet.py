@@ -1,4 +1,3 @@
-import glob
 import os
 import re
 
@@ -6,10 +5,14 @@ import numpy as np
 import polars as pl
 
 # --- CONFIGURATION ---
-# Point this at the local folder where the two UC1 parquet files (from the
-# transfer inbox) were copied. They are combined into one frame, keyed on
-# pseudo_id, before any of the transforms below run.
-INPUT_FOLDER = "/mnt/data/DT4Hnew/uc1_transfer/"
+# Point this at the single resolved parquet file for the full dataset --
+# i.e. whatever prepareTestData.py's resolve_primary_dataset() picked
+# (data.parquet or the concatenated part-*.parquet files), saved locally.
+# Confirmed against the real for_repo/DT4H_Column_Analysis.json: the ID
+# column is "pid" (not "pseudo_id"), and the file is already one row per
+# patient -- no join/merge step is needed here, unlike the two-file
+# assumption in the original email.
+INPUT_PATH = "/mnt/data/DT4Hnew/UC1_Resolved_Full.parquet"
 OUTPUT_PATH = "/mnt/data/DT4Hnew/UC1_Preprocessed.parquet"
 
 # Machteld's export had missing lab/vital values that shouldn't be missing
@@ -27,31 +30,21 @@ NYHA_LOINC_MAP = {
 }
 
 
-def load_and_merge(folder: str) -> pl.DataFrame:
-    files = sorted(glob.glob(os.path.join(folder, "*.parquet")))
-    if len(files) != 2:
-        raise ValueError(f"Expected exactly 2 parquet files in {folder}, found {len(files)}: {files}")
+def load_dataset(path: str) -> pl.DataFrame:
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"{path} not found -- run prepareTestData.py first (or point INPUT_PATH at it).")
+    df = pl.read_parquet(path)
+    print(f"--- 📂 LOADED {os.path.basename(path)}: {df.height} rows, {df.width} columns ---")
+    return df
 
-    a, b = (pl.read_parquet(f) for f in files)
-    print(f"--- 📂 MERGING {os.path.basename(files[0])} + {os.path.basename(files[1])} ---")
 
-    # This assumes the two files split by COLUMN (same patients, different
-    # feature groups) and joins them on pseudo_id, matching the convention
-    # in dataCleaner.py. If they instead split by ROW (different patient
-    # batches, same schema), a join is wrong and they should be concat'd.
-    shared_cols = (set(a.columns) & set(b.columns)) - {"pseudo_id"}
-    shared_ids = set(a["pseudo_id"].to_list()) & set(b["pseudo_id"].to_list())
-    if shared_cols:
-        print(f"⚠️  WARNING: {len(shared_cols)} column(s) besides pseudo_id appear in BOTH files: "
-              f"{sorted(shared_cols)[:10]}{'...' if len(shared_cols) > 10 else ''}")
-        print("   This suggests the files may split by ROW (patient batches), not by column.")
-        print("   If so, use pl.concat([a, b]) instead of a join -- check with Machteld before trusting this output.")
-    print(f"   {a.height} rows in file 1, {b.height} rows in file 2, "
-          f"{len(shared_ids)} shared pseudo_id(s) between them.")
-
-    merged = a.join(b, on="pseudo_id", how="full", coalesce=True)
-    print(f"Merged frame: {merged.height} rows, {merged.width} columns.")
-    return merged
+def _first_existing(df: pl.DataFrame, base_col: str) -> str | None:
+    """The real export has no bare column, only _first/_last/_min/_max/_avg/
+    _stddev variants -- resolve to whichever exists, preferring _first."""
+    for candidate in (base_col, f"{base_col}_first", f"{base_col}_last"):
+        if candidate in df.columns:
+            return candidate
+    return None
 
 
 def report_expected_nonnull_mismatches(df: pl.DataFrame) -> None:
@@ -71,9 +64,11 @@ def report_expected_nonnull_mismatches(df: pl.DataFrame) -> None:
     ]
 
     print("\n--- 🩺 EXPECTED NON-NULL COUNT CHECKS ---")
-    for col_a, col_b, note in pairs:
-        if col_a not in df.columns or col_b not in df.columns:
-            print(f"  (skip) {col_a} / {col_b}: one or both columns not found")
+    for base_a, base_b, note in pairs:
+        col_a = _first_existing(df, base_a)
+        col_b = _first_existing(df, base_b)
+        if col_a is None or col_b is None:
+            print(f"  (skip) {base_a} / {base_b}: one or both not found (checked bare/_first/_last)")
             continue
         n_a = df.height - df[col_a].null_count()
         n_b = df.height - df[col_b].null_count()
@@ -87,15 +82,21 @@ def drop_symptom_columns(df: pl.DataFrame) -> pl.DataFrame:
     return df.drop(symptom_cols)
 
 
+def _strip_any_suffix(name: str) -> str:
+    return name[: -len("_any")] if name.endswith("_any") else name
+
+
 def combine_medications(df: pl.DataFrame) -> pl.DataFrame:
     """
-    med_admins_<X>         / med_requests_<X>          -> med_<X>
-    med_admins_history_<X> / med_requests_history_<X>  -> med_<X>_history
+    med_admins_<X>_any         / med_requests_<X>_any          -> med_<X>
+    med_admins_history_<X>_any / med_requests_history_<X>_any  -> med_<X>_history
 
     A medication is considered present if either the "admins" or "requests"
     table flags it (matches Machteld's rule: med_admins_diuretics=1 or
     med_requests_diuretics=0 -> med_diuretics=1). Null is treated as "not
     flagged" (False), not "unknown" -- these are presence/absence flags.
+    The trailing "_any" in the real column names is dropped from the
+    combined output name since it's redundant once combined.
     """
     admin_pat = re.compile(r"^med_admins_(?!history_)(.+)$")
     admin_hist_pat = re.compile(r"^med_admins_history_(.+)$")
@@ -111,7 +112,7 @@ def combine_medications(df: pl.DataFrame) -> pl.DataFrame:
         if not present:
             continue
         new_cols.append(
-            pl.any_horizontal([pl.col(c).fill_null(False) for c in present]).alias(f"med_{med}")
+            pl.any_horizontal([pl.col(c).fill_null(False) for c in present]).alias(f"med_{_strip_any_suffix(med)}")
         )
         drop_cols.extend(present)
 
@@ -120,7 +121,7 @@ def combine_medications(df: pl.DataFrame) -> pl.DataFrame:
         if not present:
             continue
         new_cols.append(
-            pl.any_horizontal([pl.col(c).fill_null(False) for c in present]).alias(f"med_{med}_history")
+            pl.any_horizontal([pl.col(c).fill_null(False) for c in present]).alias(f"med_{_strip_any_suffix(med)}_history")
         )
         drop_cols.extend(present)
 
@@ -133,15 +134,17 @@ def combine_medications(df: pl.DataFrame) -> pl.DataFrame:
 
 def combine_conditions(df: pl.DataFrame) -> pl.DataFrame:
     """
-    conditions_<X>_pre_dc / _pre_adm / _during_pET -> conditions_<X>
+    conditions_<X>_pre_dc_any / _pre_adm_any / _during_pET_any -> conditions_<X>
     (True if the condition was flagged in any of the three windows.)
 
     Columns that don't match one of these three suffixes (e.g. the
-    heart-failure-specific "..._occurred_prior_to_18_months" column) are
-    left untouched, since they're not part of this combination rule.
+    heart-failure-specific "..._occurred_prior_to_18_months_any" and
+    "..._hf_within_18mo_any" columns, or the numeric
+    "conditions_heartFailure_timeFromEarliest_first") are left untouched,
+    since they're not part of this combination rule.
     """
-    suffixes = ("_pre_dc", "_pre_adm", "_during_pET")
-    pat = re.compile(r"^conditions_(.+?)(?:_pre_dc|_pre_adm|_during_pET)$")
+    suffixes = ("_pre_dc_any", "_pre_adm_any", "_during_pET_any")
+    pat = re.compile(r"^conditions_(.+?)(?:_pre_dc_any|_pre_adm_any|_during_pET_any)$")
 
     base_names = sorted({m.group(1) for c in df.columns if (m := pat.match(c))})
 
@@ -162,27 +165,42 @@ def combine_conditions(df: pl.DataFrame) -> pl.DataFrame:
     return df
 
 
+# Every numeric measurement in the real export shows up as up to 6 variants:
+# _first, _last, _min, _max, _avg, _stddev (no bare column). Machteld's
+# guidance is to use only _first/_last for general processing.
+OTHER_NUMERIC_SUFFIXES = ("_min", "_max", "_avg", "_stddev")
+
+
 def prefer_first_last_numerics(df: pl.DataFrame) -> pl.DataFrame:
     """
-    Per Machteld's guidance ("for general processing of numerical values
-    please use the ones ending with _first and _last"): if a bare/aggregate
-    column exists alongside _first/_last variants of the same measurement,
-    drop the bare one and keep only _first/_last.
+    Wherever a measurement has _first/_last variants, drop its bare column
+    (if any) and its _min/_max/_avg/_stddev siblings, keeping only
+    _first/_last.
     """
     first_last = {c for c in df.columns if c.endswith("_first") or c.endswith("_last")}
     bases = {re.sub(r"_(first|last)$", "", c) for c in first_last}
-    drop_cols = [c for c in bases if c in df.columns]
+
+    drop_cols = []
+    for base in bases:
+        drop_cols.append(base)  # bare aggregate, if present
+        drop_cols.extend(f"{base}{suf}" for suf in OTHER_NUMERIC_SUFFIXES)
+    drop_cols = [c for c in drop_cols if c in df.columns]
+
     if drop_cols:
-        print(f"\nDropping {len(drop_cols)} bare numeric aggregate(s) in favor of _first/_last variants:")
-        print(f"  {drop_cols}")
+        print(f"\nDropping {len(drop_cols)} numeric aggregate column(s) in favor of _first/_last variants "
+              f"(bare/_min/_max/_avg/_stddev).")
         df = df.drop(drop_cols)
     return df
 
 
+NYHA_COLUMN = "nyha_nyha_pET"
+
+
 def encode_nyha(df: pl.DataFrame) -> pl.DataFrame:
-    if "nyha_class" not in df.columns:
+    if NYHA_COLUMN not in df.columns:
+        print(f"\n(skip) NYHA column '{NYHA_COLUMN}' not found.")
         return df
-    return df.with_columns(pl.col("nyha_class").replace(NYHA_LOINC_MAP, default=None).alias("nyha_class"))
+    return df.with_columns(pl.col(NYHA_COLUMN).replace(NYHA_LOINC_MAP, default=None).alias(NYHA_COLUMN))
 
 
 # --- Dummy imputation (TEMPORARY, see APPLY_DUMMY_IMPUTATION above) ---
@@ -275,10 +293,10 @@ def apply_dummy_imputation(df: pl.DataFrame, seed: int = 0) -> pl.DataFrame:
 
 
 def preprocess():
-    df = load_and_merge(INPUT_FOLDER)
+    df = load_dataset(INPUT_PATH)
 
-    total_patients = df["pseudo_id"].n_unique()
-    print(f"Unique patients: {total_patients}")
+    if "pid" in df.columns:
+        print(f"Unique patients (pid): {df['pid'].n_unique()}")
 
     report_expected_nonnull_mismatches(df)
 

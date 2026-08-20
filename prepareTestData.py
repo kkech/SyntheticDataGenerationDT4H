@@ -18,6 +18,11 @@ OUTPUT_FOLDER = os.path.join(REPO_ROOT, "for_repo")
 N_SAMPLE_ROWS = 20
 SAMPLE_SEED = 0
 
+# Full resolved dataset, saved LOCALLY ONLY (never copied into OUTPUT_FOLDER
+# / the repo). preprocessUC1FeatureSet.py's INPUT_PATH points here by
+# default, so the actual UC1 preprocessing runs against the real full data.
+LOCAL_FULL_OUTPUT_PATH = "/mnt/data/DT4Hnew/UC1_Resolved_Full.parquet"
+
 
 def inspect_folder(folder: str) -> None:
     print(f"--- 📂 INSPECTING {folder} ---")
@@ -149,10 +154,16 @@ def prepare_test_data():
     analyze_full_dataset(df_full, OUTPUT_FOLDER)
     write_sample(df_full, OUTPUT_FOLDER)
 
+    os.makedirs(os.path.dirname(LOCAL_FULL_OUTPUT_PATH), exist_ok=True)
+    df_full.write_parquet(LOCAL_FULL_OUTPUT_PATH)
+    print(f"✅ Full resolved dataset saved LOCALLY (not for git) to: {LOCAL_FULL_OUTPUT_PATH}")
+
     print(f"\n🎉 DONE. Review the contents of {OUTPUT_FOLDER} then push them to the repo:")
     print("   - metadata                          (schema info)")
     print("   - DT4H_Column_Analysis.json / .md    (full-dataset statistics)")
     print(f"   - DT4H_Sample20.parquet              ({N_SAMPLE_ROWS}-row sample for code testing)")
+    print(f"\n(Do NOT push {LOCAL_FULL_OUTPUT_PATH} -- it's the full dataset, stays local. "
+          f"preprocessUC1FeatureSet.py reads it from there by default.)")
 
 
 if __name__ == "__main__":
