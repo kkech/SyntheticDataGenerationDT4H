@@ -77,6 +77,17 @@ class PipelineConfig:
     # provenance. Required for a reproducible published dataset.
     seed: int = 0
 
+    # Hard wall-clock limit per synthesizer (fit + sample), in seconds.
+    # Added after AIM hung indefinitely at full column width (the
+    # documented Private-PGM scaling failure mode): a stuck model now
+    # fails cleanly with a TimeoutError in the summary and the remaining
+    # synthesizers and the evaluate step still run, instead of the whole
+    # pipeline sitting silent until someone kills it. Uses SIGALRM, so it
+    # applies on Unix main-thread runs (i.e. normal `python main.py`).
+    # None disables it. CTGAN at 500 epochs took ~19 min on the T4, so
+    # one hour leaves generous headroom for legitimate work.
+    synthesizer_timeout_seconds: int = 3600
+
     # Constant columns carry no signal: they waste model capacity and, for
     # DP synthesizers, privacy budget. Held out during training and
     # re-attached verbatim afterwards, so the output schema is unchanged.

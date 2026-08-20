@@ -13,6 +13,42 @@ import warnings
 from datetime import datetime, timezone
 
 
+class _TimestampingFile:
+    """Wraps the log file handle, prefixing a [HH:MM:SS] stamp at the
+    start of every line -- so the log shows when each step and each
+    synthesizer actually started and how long the gaps were. Only the
+    file gets stamps; the terminal output is left untouched. Carriage-
+    return progress updates (tqdm) are stamped once per real line, when
+    the newline finally arrives."""
+
+    def __init__(self, handle):
+        self._handle = handle
+        self._at_line_start = True
+
+    def write(self, data):
+        out = []
+        for ch in data:
+            if self._at_line_start and ch not in ("\n", "\r"):
+                out.append(datetime.now().strftime("[%H:%M:%S] "))
+                self._at_line_start = False
+            out.append(ch)
+            if ch == "\n":
+                self._at_line_start = True
+        self._handle.write("".join(out))
+        self._handle.flush()
+        return len(data)
+
+    def flush(self):
+        self._handle.flush()
+
+    @property
+    def closed(self):
+        return self._handle.closed
+
+    def close(self):
+        self._handle.close()
+
+
 class _Tee:
     """Write to two streams at once, flushing eagerly so a killed or
     crashed run still leaves a complete log on disk."""
@@ -48,7 +84,8 @@ def start_logging(path: str, argv: list[str] | None = None):
     Returns the opened file handle; the caller keeps it open for the
     lifetime of the run.
     """
-    handle = open(path, "w", buffering=1, encoding="utf-8")
+    raw = open(path, "w", buffering=1, encoding="utf-8")
+    handle = _TimestampingFile(raw)
 
     header = [
         "=" * 70,

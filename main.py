@@ -23,6 +23,8 @@ with --log <path>.
 """
 
 import argparse
+import time
+from datetime import datetime
 
 from pipeline.config import PipelineConfig
 from pipeline.logging_setup import start_logging, stop_logging
@@ -65,15 +67,20 @@ def run_pipeline(
                   f"Use --force or --force-step {step.name} to rerun.")
             continue
 
-        print(f"\n{'=' * 70}\n▶️  RUNNING '{step.name}'\n{'=' * 70}")
+        started = time.time()
+        print(f"\n{'=' * 70}\n▶️  RUNNING '{step.name}' (started {datetime.now().strftime('%H:%M:%S')})\n{'=' * 70}")
         try:
             step.run(config)
-        except Exception as e:
-            state.mark_failed(step.name, str(e))
-            print(f"❌ Step '{step.name}' failed: {e}")
+        except BaseException as e:
+            # BaseException so a Ctrl-C mid-step is recorded too, instead
+            # of leaving the status file silently claiming the previous
+            # state while the step actually died half-way.
+            state.mark_failed(step.name, f"{type(e).__name__}: {e}")
+            print(f"❌ Step '{step.name}' {'interrupted' if isinstance(e, KeyboardInterrupt) else 'failed'} "
+                  f"after {time.time() - started:.0f}s: {e}")
             raise
         state.mark_completed(step.name)
-        print(f"✅ '{step.name}' completed.")
+        print(f"✅ '{step.name}' completed in {time.time() - started:.0f}s.")
 
 
 def print_status(config: PipelineConfig | None = None) -> None:

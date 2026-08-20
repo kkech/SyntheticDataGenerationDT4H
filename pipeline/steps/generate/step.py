@@ -18,8 +18,10 @@ requirements beyond "produce some rows":
     count) neither loses the other results nor hides itself.
 """
 
+import contextlib
 import json
 import os
+import signal
 import time
 import traceback
 
@@ -152,6 +154,32 @@ class GenerateStep(PipelineStep):
         categorical = [c for c in df.columns if c not in continuous]
         return categorical, continuous
 
+    @staticmethod
+    @contextlib.contextmanager
+    def _time_limit(seconds, what):
+        """Raise TimeoutError inside the block after `seconds`. SIGALRM
+        interrupts CPU-bound fitting (AIM/MST) as well as torch training;
+        silently a no-op where alarms are unavailable (non-Unix or
+        non-main-thread), in which case there is simply no timeout."""
+        if not seconds or not hasattr(signal, "SIGALRM"):
+            yield
+            return
+
+        def _handler(signum, frame):
+            raise TimeoutError(f"{what} exceeded the {seconds}s time limit")
+
+        try:
+            old = signal.signal(signal.SIGALRM, _handler)
+        except ValueError:  # not the main thread
+            yield
+            return
+        signal.alarm(int(seconds))
+        try:
+            yield
+        finally:
+            signal.alarm(0)
+            signal.signal(signal.SIGALRM, old)
+
     def _run_one(self, name, train, real, categorical, continuous, constants, config, out_dir, n_rows) -> dict:
         print(f"\n{'=' * 70}\n▶️  SYNTHESIZER: {name}\n{'=' * 70}")
         params = dict(config.synthesizer_params.get(name, {}))
@@ -173,8 +201,13 @@ class GenerateStep(PipelineStep):
             if not synth.uses_gpu:
                 print("CPU-only synthesizer (no GPU acceleration available for this method).")
 
-            print("Training...")
-            synth.fit(train, categorical_columns=categorical, continuous_columns=continuous)
+            timeout = config.synthesizer_timeout_seconds
+            if timeout:
+                print(f"Training... (time limit: {timeout}s for fit, {timeout}s for sampling)")
+            else:
+                print("Training... (no time limit)")
+            with self._time_limit(timeout, f"'{name}' fit"):
+                synth.fit(train, categorical_columns=categorical, continuous_columns=continuous)
 
             # Persist the fitted generator so more synthetic records can
             # be produced later without retraining (see regenerate.py).
@@ -199,7 +232,8 @@ class GenerateStep(PipelineStep):
                 print(f"Saved SDV metadata (for replicability) -> {meta_path}")
 
             print(f"Sampling {n_rows} rows...")
-            synthetic = synth.sample(n_rows)
+            with self._time_limit(timeout, f"'{name}' sampling"):
+                synthetic = synth.sample(n_rows)
 
             # Re-attach the held-out constants in one concat rather than a
             # column at a time: inserting ~75 columns individually
