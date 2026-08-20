@@ -113,10 +113,20 @@ def flatten_array_columns(df: pl.DataFrame, var_meta: dict) -> pl.DataFrame:
     return df.with_columns([pl.col(c).list.first().alias(c) for c in array_cols])
 
 
-def drop_symptom_columns(df: pl.DataFrame) -> pl.DataFrame:
+def report_symptom_columns(df: pl.DataFrame) -> None:
+    """
+    Per Machteld: symptom_* columns are currently all-False (NLP module
+    not yet integrated) but should stay IN the data rather than be
+    dropped -- if the NLP module comes online, these columns gain real
+    signal on a future data refresh with no script change needed. This
+    just reports their current state; nothing is removed.
+    """
     symptom_cols = [c for c in df.columns if c.lower().startswith("symptom")]
-    print(f"  Dropping {len(symptom_cols)} symptom_* column(s) (NLP module not yet integrated).")
-    return df.drop(symptom_cols)
+    if not symptom_cols:
+        return
+    constant = [c for c in symptom_cols if df[c].drop_nulls().n_unique() <= 1]
+    print(f"  {len(symptom_cols)} symptom_* column(s) present, {len(constant)} currently constant "
+          f"(NLP module not yet integrated) -- kept in the data, not dropped.")
 
 
 def drop_identifiers_and_datetimes(df: pl.DataFrame, var_meta: dict) -> pl.DataFrame:

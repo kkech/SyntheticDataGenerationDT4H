@@ -42,8 +42,8 @@ class PreprocessStep(PipelineStep):
         print("Flattening ARRAY[NOMINAL] columns...")
         df = t.flatten_array_columns(df, var_meta)
 
-        print("Dropping symptom columns...")
-        df = t.drop_symptom_columns(df)
+        print("Checking symptom columns...")
+        t.report_symptom_columns(df)
 
         print("Combining medication columns...")
         df = t.combine_medications(df)
