@@ -113,7 +113,14 @@ class UtilityStep(PipelineStep):
         import pandas as pd
 
         if config.utility_targets:
-            return [t for t in config.utility_targets if t in real.columns]
+            picked = []
+            for t in config.utility_targets:
+                if t in real.columns and self._to_binary(real[t]) is not None:
+                    picked.append(t)
+                else:
+                    print(f"⚠️  Requested utility target '{t}' is absent or not a "
+                          "two-class boolean column; skipped.")
+            return picked
 
         candidates = []
         for col in outcome_cols:

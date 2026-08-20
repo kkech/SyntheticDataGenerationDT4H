@@ -24,6 +24,25 @@ Eight steps, run in order, each skipped once completed (tracked in
 | 7 | `utility` | Train-Synthetic-Test-Real: gradient boosting on real vs each synthetic dataset for metadata-declared clinical outcomes, scored on the same held-out real test split (AUC gap vs baseline) | `output/utility/` |
 | 8 | `privacy` | distance-to-closest-record and nearest-neighbor-distance-ratio per synthesizer against a real-to-real baseline | `output/privacy/` |
 
+### Long runs (survives SSH disconnect)
+
+A full run takes hours; run it as a detached job so closing the terminal
+does not kill it:
+
+```
+./run_job.sh start --force      # preflight, then detach the full run
+./run_job.sh status             # running? + per-step status + latest log lines
+./run_job.sh follow             # stream logs.txt live (Ctrl-C detaches, job keeps running)
+./run_job.sh stop               # stop without losing completed steps
+```
+
+`start` refuses to launch if preflight fails or a job is already running,
+archives the previous `logs.txt` into `logs/`, and reports a startup
+crash immediately instead of detaching silently. Progress is always
+visible in three places: `logs.txt` (timestamped, written live),
+`pipeline_status.json` (per-step completion), and each step's files
+appearing under `output/`.
+
 ### CLI
 
 ```
