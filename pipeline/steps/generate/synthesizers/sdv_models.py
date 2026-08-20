@@ -9,7 +9,7 @@ load-bearing. SDV's evaluation library (SDMetrics) remains MIT.
 
 import pandas as pd
 
-from pipeline.steps.generate.synthesizers.base import Synthesizer
+from pipeline.steps.generate.synthesizers.base import Synthesizer, gpu_available
 
 
 def _build_metadata(df: pd.DataFrame):
@@ -45,7 +45,7 @@ class SDVCTGANSynthesizer(Synthesizer):
             metadata,
             epochs=self.params.get("epochs", 500),
             batch_size=self.params.get("batch_size", 500),
-            cuda=self.params.get("cuda", True),
+            cuda=self.params.get("cuda", gpu_available()),
             verbose=self.params.get("verbose", True),
         )
         self._model.fit(df)
@@ -70,7 +70,7 @@ class SDVTVAESynthesizer(Synthesizer):
             metadata,
             epochs=self.params.get("epochs", 500),
             batch_size=self.params.get("batch_size", 500),
-            cuda=self.params.get("cuda", True),
+            cuda=self.params.get("cuda", gpu_available()),
         )
         self._model.fit(df)
 

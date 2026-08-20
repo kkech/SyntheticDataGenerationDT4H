@@ -1,0 +1,37 @@
+# UC1 synthetic data pipeline -- Python 3.10+
+#
+# Install:   pip install -r requirements.txt
+#
+# Versions are pinned because this pipeline produces a dataset intended
+# for publication: the generation summary records these versions per run,
+# and an unpinned environment makes a published result unreproducible.
+# Verified to resolve together (sdv and smartnoise-synth share a
+# dependency tree and are not always co-installable across versions).
+
+# --- data handling ---
+polars==1.43.2
+pyarrow==25.0.1
+pandas==2.3.3          # upper-bounded by sdv; do not upgrade independently
+numpy==2.3.4
+
+# --- non-DP synthesis ---
+# NOTE: SDV is under the Business Source License (not MIT) since 2023.
+# Research use is fine; production use is restricted. Confirm with the
+# consortium before relying on it in a deployed setting.
+sdv==1.38.0
+
+# --- differentially private synthesis ---
+# Provides aim, mst, patectgan, dpctgan. AIM/MST are CPU-only
+# (marginal-based); only the GAN variants use the GPU.
+smartnoise-synth==1.0.8
+
+# --- deep learning backend ---
+# Pulled in by sdv/ctgan and the DP-GAN synthesizers.
+#
+# The default PyPI wheel bundles CUDA and is large (~2-3 GB). It works on
+# both GPU and CPU machines -- the pipeline detects CUDA at runtime and
+# falls back to CPU automatically.
+#
+# For a CPU-only machine, install the much smaller CPU build instead:
+#   pip install torch==2.13.0 --index-url https://download.pytorch.org/whl/cpu
+torch==2.13.0

@@ -14,6 +14,23 @@ from abc import ABC, abstractmethod
 import pandas as pd
 
 
+def gpu_available() -> bool:
+    """
+    True only if torch is installed AND a CUDA device is actually usable.
+
+    Checked at fit time rather than hardcoded, so the same code runs on a
+    GPU box and a CPU-only one: the model trains either way, just slower
+    without a GPU. Passing cuda=True on a machine with no CUDA device
+    makes the SDV models raise instead of falling back.
+    """
+    try:
+        import torch
+
+        return torch.cuda.is_available()
+    except ImportError:
+        return False
+
+
 class Synthesizer(ABC):
     #: Registry key, used in config and as the output subfolder name.
     name: str
