@@ -1,37 +1,32 @@
-[18:57:55] ======================================================================
-[18:57:55] Run started: 2026-08-20T18:57:55.646749+00:00
-[18:57:55] Command: main.py
-[18:57:55] ======================================================================
-[18:57:55] ⏭️  Skipping 'load_data' (already completed). Use --force or --force-step load_data to rerun.
-[18:57:55] ⏭️  Skipping 'profile_data' (already completed). Use --force or --force-step profile_data to rerun.
-[18:57:55] ⏭️  Skipping 'preprocess' (already completed). Use --force or --force-step preprocess to rerun.
-[18:57:55] ⏭️  Skipping 'profile_preprocessed_data' (already completed). Use --force or --force-step profile_preprocessed_data to rerun.
-[18:57:55] ⏭️  Skipping 'generate' (already completed). Use --force or --force-step generate to rerun.
+[19:05:27] ======================================================================
+[19:05:27] Run started: 2026-08-20T19:05:27.209432+00:00
+[19:05:27] Command: main.py --only evaluate --force-step evaluate
+[19:05:27] ======================================================================
 
-[18:57:55] ======================================================================
-[18:57:55] ▶️  RUNNING 'evaluate' (started 18:57:55)
-[18:57:55] ======================================================================
-[18:57:55] Preprocessed (sentinels decoded to null): 4694 x 249
-[18:57:55]   Flattening 2 ARRAY[NOMINAL] column(s) to scalar: ['electrocardiographs_ecg_type_of_rhythms_pET_first', 'electrocardiographs_ecg_type_of_rhythms_pET_last']
-[18:57:55]   Casting 180 Decimal column(s) to Float64: 180 column(s)
-[18:57:55] Original: 4694 x 528
+[19:05:27] ======================================================================
+[19:05:27] ▶️  RUNNING 'evaluate' (started 19:05:27)
+[19:05:27] ======================================================================
+[19:05:27] Preprocessed (sentinels decoded to null): 4694 x 249
+[19:05:27]   Flattening 2 ARRAY[NOMINAL] column(s) to scalar: ['electrocardiographs_ecg_type_of_rhythms_pET_first', 'electrocardiographs_ecg_type_of_rhythms_pET_last']
+[19:05:27]   Casting 180 Decimal column(s) to Float64: 180 column(s)
+[19:05:27] Original: 4694 x 528
 
-[18:57:55] Comparing original vs preprocessed...
+[19:05:27] Comparing original vs preprocessed...
 
-[18:57:57] Comparing against synthetic 'ctgan' (4694 rows)...
-[18:58:03]   preprocessed vs ctgan: KS mean=0.3913 (frac<0.1: 0.0328), TVD mean=0.0597 (frac<0.05: 0.5957), missing-rate MAD=0.0747
+[19:05:28] Comparing against synthetic 'ctgan' (4694 rows)...
+[19:05:34]   preprocessed vs ctgan: KS mean=0.3199 (frac<0.1: 0.082), TVD mean=0.0597 (frac<0.05: 0.5957), missing-rate MAD=0.0938
 
-[18:58:03] Comparing against synthetic 'gaussian_copula' (4694 rows)...
-[18:58:08]   preprocessed vs gaussian_copula: KS mean=0.5243 (frac<0.1: 0.0667), TVD mean=0.0054 (frac<0.05: 0.9947), missing-rate MAD=0.1142
+[19:05:34] Comparing against synthetic 'gaussian_copula' (4694 rows)...
+[19:05:39]   preprocessed vs gaussian_copula: KS mean=0.4542 (frac<0.1: 0.1053), TVD mean=0.0054 (frac<0.05: 0.9947), missing-rate MAD=0.1174
 
-[18:58:08] Comparing against synthetic 'mst' (4694 rows)...
-[18:58:14]   preprocessed vs mst: KS mean=0.3881 (frac<0.1: 0.0), TVD mean=0.0016 (frac<0.05: 1.0), missing-rate MAD=0.0265
+[19:05:39] Comparing against synthetic 'mst' (4694 rows)...
+[19:05:45]   preprocessed vs mst: KS mean=0.3352 (frac<0.1: 0.0227), TVD mean=0.0016 (frac<0.05: 1.0), missing-rate MAD=0.0185
 
-[18:58:14] Comparing against synthetic 'tvae' (4694 rows)...
-[18:58:18]   preprocessed vs tvae: KS mean=0.2097 (frac<0.1: 0.2131), TVD mean=0.0487 (frac<0.05: 0.5957), missing-rate MAD=0.0462
+[19:05:45] Comparing against synthetic 'tvae' (4694 rows)...
+[19:05:49]   preprocessed vs tvae: KS mean=0.2059 (frac<0.1: 0.2131), TVD mean=0.0487 (frac<0.05: 0.5957), missing-rate MAD=0.0441
 
-[18:58:18] Saved evaluation detail (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/evaluate/DT4H_Evaluation.json
-[18:58:18] Saved evaluation overview (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/evaluate/DT4H_Evaluation.md
-[18:58:18] ✅ 'evaluate' completed in 23s.
+[19:05:49] Saved evaluation detail (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/evaluate/DT4H_Evaluation.json
+[19:05:49] Saved evaluation overview (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/evaluate/DT4H_Evaluation.md
+[19:05:49] ✅ 'evaluate' completed in 22s.
 
-[18:58:18] Run finished: 2026-08-20T18:58:18.810828+00:00
+[19:05:49] Run finished: 2026-08-20T19:05:49.503798+00:00

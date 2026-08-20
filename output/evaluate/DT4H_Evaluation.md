@@ -5,14 +5,14 @@ Metrics are computed per column over observed values (nulls excluded); missingne
 | comparison | cols | KS mean | KS median | KS<0.1 | W/std mean | TVD mean | TVD<0.05 | missing-rate MAD |
 |---|---|---|---|---|---|---|---|---|
 | original vs preprocessed | 164 | 0.0 | 0.0 | 1.0 | 0.0 | 0.0 | 1.0 | 0.0 |
-| preprocessed vs synthetic[ctgan] | 249 | 0.3913 | 0.3902 | 0.0328 | 0.7793 | 0.0597 | 0.5957 | 0.0747 |
-| original vs synthetic[ctgan] | 164 | 0.3913 | 0.3902 | 0.0328 | 0.7793 | 0.0426 | 0.699 | 0.0747 |
-| preprocessed vs synthetic[gaussian_copula] | 248 | 0.5243 | 0.4798 | 0.0667 | 1.5988 | 0.0054 | 0.9947 | 0.1142 |
-| original vs synthetic[gaussian_copula] | 163 | 0.5243 | 0.4798 | 0.0667 | 1.5988 | 0.0066 | 0.9903 | 0.1142 |
-| preprocessed vs synthetic[mst] | 235 | 0.3881 | 0.2689 | 0.0 | 0.4663 | 0.0016 | 1.0 | 0.0265 |
-| original vs synthetic[mst] | 150 | 0.3881 | 0.2689 | 0.0 | 0.4663 | 0.0016 | 1.0 | 0.0265 |
-| preprocessed vs synthetic[tvae] | 249 | 0.2097 | 0.1902 | 0.2131 | 0.312 | 0.0487 | 0.5957 | 0.0462 |
-| original vs synthetic[tvae] | 164 | 0.2097 | 0.1902 | 0.2131 | 0.312 | 0.042 | 0.6602 | 0.0462 |
+| preprocessed vs synthetic[ctgan] | 249 | 0.3199 | 0.2956 | 0.082 | 0.6724 | 0.0597 | 0.5957 | 0.0938 |
+| original vs synthetic[ctgan] | 164 | 0.3199 | 0.2956 | 0.082 | 0.6724 | 0.0426 | 0.699 | 0.0938 |
+| preprocessed vs synthetic[gaussian_copula] | 245 | 0.4542 | 0.4193 | 0.1053 | 1.285 | 0.0054 | 0.9947 | 0.1174 |
+| original vs synthetic[gaussian_copula] | 160 | 0.4542 | 0.4193 | 0.1053 | 1.285 | 0.0066 | 0.9903 | 0.1174 |
+| preprocessed vs synthetic[mst] | 232 | 0.3352 | 0.24 | 0.0227 | 0.3164 | 0.0016 | 1.0 | 0.0185 |
+| original vs synthetic[mst] | 147 | 0.3352 | 0.24 | 0.0227 | 0.3164 | 0.0016 | 1.0 | 0.0185 |
+| preprocessed vs synthetic[tvae] | 249 | 0.2059 | 0.2181 | 0.2131 | 0.2757 | 0.0487 | 0.5957 | 0.0441 |
+| original vs synthetic[tvae] | 164 | 0.2059 | 0.2181 | 0.2131 | 0.2757 | 0.042 | 0.6602 | 0.0441 |
 
 ## original vs preprocessed
 
@@ -32,11 +32,11 @@ Worst categorical columns (by TVD):
 ## preprocessed vs synthetic[ctgan]
 
 Worst numeric columns (by KS):
-- `nyha_nyha_pET`: KS=0.899, W/std=2.6716, mean 2.4579 -> 0.2501, missing 75% -> 0%
-- `lab_results_crpNonHs_value_first`: KS=0.7346, W/std=0.6178, mean 45.4252 -> 1.6987, missing 12% -> 8%
-- `lab_results_tropTHs_value_first`: KS=0.7045, W/std=0.3264, mean 0.2243 -> -0.0684, missing 63% -> 72%
-- `encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first`: KS=0.6904, W/std=0.5494, mean 119.1399 -> -4.9861, missing 80% -> 82%
-- `lab_results_albuminBS_value_last`: KS=0.6743, W/std=2.1241, mean 29.985 -> 15.3451, missing 57% -> 60%
+- `electrocardiographs_ecg_qt_duration_corrected_pET_first`: KS=0.6488, W/std=1.9653, mean 472.4841 -> 572.2142, missing 49% -> 42%
+- `vital_signs_heartRate_value_last`: KS=0.6437, W/std=0.828, mean 109.6174 -> 97.7177, missing 48% -> 20%
+- `lab_results_ferritin_value_first`: KS=0.6256, W/std=0.4723, mean 522.5048 -> 1366.6507, missing 80% -> 55%
+- `lab_results_tropTHs_value_last`: KS=0.6039, W/std=0.2693, mean 0.4651 -> 0.8967, missing 63% -> 89%
+- `lab_results_albuminBS_value_last`: KS=0.6018, W/std=1.6354, mean 29.985 -> 18.7145, missing 57% -> 71%
 Worst categorical columns (by TVD):
 - `conditions_vd`: TVD=0.2714, 2 -> 2 categories, missing 0% -> 0%
 - `encounters_admissionYear`: TVD=0.2657, 10 -> 10 categories, missing 0% -> 0%
@@ -47,11 +47,11 @@ Worst categorical columns (by TVD):
 ## original vs synthetic[ctgan]
 
 Worst numeric columns (by KS):
-- `nyha_nyha_pET`: KS=0.899, W/std=2.6716, mean 2.4579 -> 0.2501, missing 75% -> 0%
-- `lab_results_crpNonHs_value_first`: KS=0.7346, W/std=0.6178, mean 45.4252 -> 1.6987, missing 12% -> 8%
-- `lab_results_tropTHs_value_first`: KS=0.7045, W/std=0.3264, mean 0.2243 -> -0.0684, missing 63% -> 72%
-- `encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first`: KS=0.6904, W/std=0.5494, mean 119.1399 -> -4.9861, missing 80% -> 82%
-- `lab_results_albuminBS_value_last`: KS=0.6743, W/std=2.1241, mean 29.985 -> 15.3451, missing 57% -> 60%
+- `electrocardiographs_ecg_qt_duration_corrected_pET_first`: KS=0.6488, W/std=1.9653, mean 472.4841 -> 572.2142, missing 49% -> 42%
+- `vital_signs_heartRate_value_last`: KS=0.6437, W/std=0.828, mean 109.6174 -> 97.7177, missing 48% -> 20%
+- `lab_results_ferritin_value_first`: KS=0.6256, W/std=0.4723, mean 522.5048 -> 1366.6507, missing 80% -> 55%
+- `lab_results_tropTHs_value_last`: KS=0.6039, W/std=0.2693, mean 0.4651 -> 0.8967, missing 63% -> 89%
+- `lab_results_albuminBS_value_last`: KS=0.6018, W/std=1.6354, mean 29.985 -> 18.7145, missing 57% -> 71%
 Worst categorical columns (by TVD):
 - `encounters_admissionYear`: TVD=0.2657, 10 -> 10 categories, missing 0% -> 0%
 - `ckd_severity_calculated_or_measured`: TVD=0.2495, 7 -> 7 categories, missing 1% -> 0%
@@ -62,11 +62,11 @@ Worst categorical columns (by TVD):
 ## preprocessed vs synthetic[gaussian_copula]
 
 Worst numeric columns (by KS):
-- `lab_results_tropTnHs_value_first`: KS=1.0, W/std=1.5417, mean 211.6467 -> -623.3631, missing 88% -> 100%
-- `lab_results_triGly_value_last`: KS=1.0, W/std=2.4877, mean 1.5056 -> -1.0872, missing 91% -> 100%
-- `lab_results_triGly_value_first`: KS=1.0, W/std=2.265, mean 1.5481 -> -1.3779, missing 91% -> 100%
-- `lab_results_ldl_value_first`: KS=0.9928, W/std=2.7426, mean 2.1159 -> -0.5155, missing 91% -> 99%
-- `lab_results_hdl_value_first`: KS=0.9785, W/std=2.9503, mean 1.1884 -> -0.1361, missing 91% -> 99%
+- `lab_results_ldl_value_first`: KS=0.9928, W/std=1.8886, mean 2.1159 -> 0.3065, missing 91% -> 100%
+- `lab_results_hdl_value_first`: KS=0.9785, W/std=1.9288, mean 1.1884 -> 0.3228, missing 91% -> 100%
+- `lab_results_ldl_value_last`: KS=0.9686, W/std=1.8388, mean 2.1058 -> 0.3296, missing 91% -> 100%
+- `lab_results_ferritin_value_last`: KS=0.9548, W/std=0.9082, mean 493.6046 -> 1785.425, missing 80% -> 100%
+- `echocardiographs_lvef_pET_last`: KS=0.9076, W/std=2.778, mean 41.0664 -> 86.0552, missing 83% -> 83%
 Worst categorical columns (by TVD):
 - `encounters_admissionYear`: TVD=0.1741, 10 -> 9 categories, missing 0% -> 0%
 - `med_cortico_syst_history`: TVD=0.0219, 2 -> 2 categories, missing 0% -> 0%
@@ -77,11 +77,11 @@ Worst categorical columns (by TVD):
 ## original vs synthetic[gaussian_copula]
 
 Worst numeric columns (by KS):
-- `lab_results_tropTnHs_value_first`: KS=1.0, W/std=1.5417, mean 211.6467 -> -623.3631, missing 88% -> 100%
-- `lab_results_triGly_value_last`: KS=1.0, W/std=2.4877, mean 1.5056 -> -1.0872, missing 91% -> 100%
-- `lab_results_triGly_value_first`: KS=1.0, W/std=2.265, mean 1.5481 -> -1.3779, missing 91% -> 100%
-- `lab_results_ldl_value_first`: KS=0.9928, W/std=2.7426, mean 2.1159 -> -0.5155, missing 91% -> 99%
-- `lab_results_hdl_value_first`: KS=0.9785, W/std=2.9503, mean 1.1884 -> -0.1361, missing 91% -> 99%
+- `lab_results_ldl_value_first`: KS=0.9928, W/std=1.8886, mean 2.1159 -> 0.3065, missing 91% -> 100%
+- `lab_results_hdl_value_first`: KS=0.9785, W/std=1.9288, mean 1.1884 -> 0.3228, missing 91% -> 100%
+- `lab_results_ldl_value_last`: KS=0.9686, W/std=1.8388, mean 2.1058 -> 0.3296, missing 91% -> 100%
+- `lab_results_ferritin_value_last`: KS=0.9548, W/std=0.9082, mean 493.6046 -> 1785.425, missing 80% -> 100%
+- `echocardiographs_lvef_pET_last`: KS=0.9076, W/std=2.778, mean 41.0664 -> 86.0552, missing 83% -> 83%
 Worst categorical columns (by TVD):
 - `encounters_admissionYear`: TVD=0.1741, 10 -> 9 categories, missing 0% -> 0%
 - `encounter_primary_reason_HF_Disease_f5a_w6mo_first`: TVD=0.0164, 3 -> 3 categories, missing 53% -> 0%
@@ -92,11 +92,11 @@ Worst categorical columns (by TVD):
 ## preprocessed vs synthetic[mst]
 
 Worst numeric columns (by KS):
-- `lab_results_tropTHs_value_last`: KS=1.0, W/std=0.4783, mean 0.4651 -> -0.65, missing 63% -> 63%
-- `lab_results_hdl_value_last`: KS=1.0, W/std=2.8104, mean 1.1871 -> -0.051, missing 91% -> 91%
-- `lab_results_hdl_value_first`: KS=1.0, W/std=2.7591, mean 1.1884 -> -0.0502, missing 91% -> 91%
 - `smoking_status_smoker_startTime_count`: KS=0.9823, W/std=0.1346, mean 0.0807 -> 0.066, missing 0% -> 0%
-- `nyha_nyha_pET`: KS=0.7507, W/std=2.0298, mean 2.4579 -> 0.7805, missing 75% -> 0%
+- `lab_results_tropTHs_value_first`: KS=0.9264, W/std=0.6037, mean 0.2243 -> 0.55, missing 63% -> 89%
+- `conditions_heartFailure_timeFromEarliest_first`: KS=0.6716, W/std=0.1595, mean 11.3756 -> 12.3051, missing 0% -> 0%
+- `lab_results_sodium_value_last`: KS=0.665, W/std=1.3398, mean 137.8828 -> 136.2524, missing 4% -> 5%
+- `lab_results_sodium_value_first`: KS=0.6466, W/std=1.1967, mean 137.1365 -> 135.5718, missing 4% -> 4%
 Worst categorical columns (by TVD):
 - `hyperkalemia_severity_categorizedValue`: TVD=0.0081, 5 -> 5 categories, missing 0% -> 0%
 - `ckd_severity_categorizedValue`: TVD=0.0077, 7 -> 7 categories, missing 0% -> 0%
@@ -107,11 +107,11 @@ Worst categorical columns (by TVD):
 ## original vs synthetic[mst]
 
 Worst numeric columns (by KS):
-- `lab_results_tropTHs_value_last`: KS=1.0, W/std=0.4783, mean 0.4651 -> -0.65, missing 63% -> 63%
-- `lab_results_hdl_value_last`: KS=1.0, W/std=2.8104, mean 1.1871 -> -0.051, missing 91% -> 91%
-- `lab_results_hdl_value_first`: KS=1.0, W/std=2.7591, mean 1.1884 -> -0.0502, missing 91% -> 91%
 - `smoking_status_smoker_startTime_count`: KS=0.9823, W/std=0.1346, mean 0.0807 -> 0.066, missing 0% -> 0%
-- `nyha_nyha_pET`: KS=0.7507, W/std=2.0298, mean 2.4579 -> 0.7805, missing 75% -> 0%
+- `lab_results_tropTHs_value_first`: KS=0.9264, W/std=0.6037, mean 0.2243 -> 0.55, missing 63% -> 89%
+- `conditions_heartFailure_timeFromEarliest_first`: KS=0.6716, W/std=0.1595, mean 11.3756 -> 12.3051, missing 0% -> 0%
+- `lab_results_sodium_value_last`: KS=0.665, W/std=1.3398, mean 137.8828 -> 136.2524, missing 4% -> 5%
+- `lab_results_sodium_value_first`: KS=0.6466, W/std=1.1967, mean 137.1365 -> 135.5718, missing 4% -> 4%
 Worst categorical columns (by TVD):
 - `hyperkalemia_severity_categorizedValue`: TVD=0.0081, 5 -> 5 categories, missing 4% -> 0%
 - `ckd_severity_categorizedValue`: TVD=0.0077, 7 -> 7 categories, missing 6% -> 0%
@@ -122,11 +122,11 @@ Worst categorical columns (by TVD):
 ## preprocessed vs synthetic[tvae]
 
 Worst numeric columns (by KS):
-- `nyha_nyha_pET`: KS=0.9578, W/std=2.8587, mean 2.4579 -> 0.0954, missing 75% -> 0%
+- `conditions_heartFailure_timeFromEarliest_first`: KS=0.5376, W/std=0.1812, mean 11.3756 -> 14.2919, missing 0% -> 27%
 - `lab_results_creatUS_value_last`: KS=0.5117, W/std=0.6927, mean 678.5222 -> 382.0103, missing 90% -> 99%
+- `lab_results_tropTHs_value_last`: KS=0.4857, W/std=0.1812, mean 0.4651 -> 0.2611, missing 63% -> 64%
 - `lab_results_ferritin_value_first`: KS=0.429, W/std=0.1686, mean 522.5048 -> 465.1138, missing 80% -> 90%
-- `lab_results_ferritin_value_last`: KS=0.3735, W/std=0.1586, mean 493.6046 -> 432.8454, missing 80% -> 90%
-- `lab_results_tropTHs_value_last`: KS=0.3644, W/std=0.1749, mean 0.4651 -> 0.2091, missing 63% -> 57%
+- `lab_results_ferritin_value_last`: KS=0.3772, W/std=0.1593, mean 493.6046 -> 434.7788, missing 80% -> 90%
 Worst categorical columns (by TVD):
 - `ckd_severity_from_calculated_egfr`: TVD=0.2863, 6 -> 6 categories, missing 0% -> 0%
 - `ckd_severity_calculated_or_measured`: TVD=0.2825, 7 -> 7 categories, missing 0% -> 0%
@@ -137,11 +137,11 @@ Worst categorical columns (by TVD):
 ## original vs synthetic[tvae]
 
 Worst numeric columns (by KS):
-- `nyha_nyha_pET`: KS=0.9578, W/std=2.8587, mean 2.4579 -> 0.0954, missing 75% -> 0%
+- `conditions_heartFailure_timeFromEarliest_first`: KS=0.5376, W/std=0.1812, mean 11.3756 -> 14.2919, missing 0% -> 27%
 - `lab_results_creatUS_value_last`: KS=0.5117, W/std=0.6927, mean 678.5222 -> 382.0103, missing 90% -> 99%
+- `lab_results_tropTHs_value_last`: KS=0.4857, W/std=0.1812, mean 0.4651 -> 0.2611, missing 63% -> 64%
 - `lab_results_ferritin_value_first`: KS=0.429, W/std=0.1686, mean 522.5048 -> 465.1138, missing 80% -> 90%
-- `lab_results_ferritin_value_last`: KS=0.3735, W/std=0.1586, mean 493.6046 -> 432.8454, missing 80% -> 90%
-- `lab_results_tropTHs_value_last`: KS=0.3644, W/std=0.1749, mean 0.4651 -> 0.2091, missing 63% -> 57%
+- `lab_results_ferritin_value_last`: KS=0.3772, W/std=0.1593, mean 493.6046 -> 434.7788, missing 80% -> 90%
 Worst categorical columns (by TVD):
 - `ckd_severity_from_calculated_egfr`: TVD=0.2863, 6 -> 6 categories, missing 11% -> 0%
 - `ckd_severity_calculated_or_measured`: TVD=0.2825, 7 -> 7 categories, missing 1% -> 0%
