@@ -9,7 +9,11 @@ from exploreData import analyze_column, write_markdown
 
 # --- CONFIGURATION ---
 INPUT_FOLDER = "/mnt/data/transfer-2026-08-12-12-05-35-m.j.boonstra-3/"
-OUTPUT_FOLDER = "/mnt/data/DT4Hnew/for_repo/"
+
+# Written inside the repo itself (next to this script) so the output can be
+# `git add`-ed directly, without copying files in from /mnt/data by hand.
+REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_FOLDER = os.path.join(REPO_ROOT, "for_repo")
 
 N_SAMPLE_ROWS = 20
 SAMPLE_SEED = 0
