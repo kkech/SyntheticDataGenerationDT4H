@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+
+# Full patient-level data -- never committed. Everything else under
+# output/ (stats, samples, summaries, metadata) is safe to commit.
+output/load_data/UC1_Resolved_Full.parquet
+output/preprocess/UC1_Preprocessed.parquet

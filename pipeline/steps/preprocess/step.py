@@ -97,14 +97,15 @@ class PreprocessStep(PipelineStep):
         self._write_summary(summary, config)
 
     def _write_summary(self, summary: dict, config: PipelineConfig) -> None:
-        os.makedirs(config.for_repo_dir, exist_ok=True)
+        out_dir = config.step_dir(self.name)
+        os.makedirs(out_dir, exist_ok=True)
 
-        json_path = os.path.join(config.for_repo_dir, "DT4H_Preprocessing_Summary.json")
+        json_path = os.path.join(out_dir, "DT4H_Preprocessing_Summary.json")
         with open(json_path, "w") as f:
             json.dump(summary, f, indent=2, default=str)
         print(f"Saved preprocessing summary (JSON) -> {json_path}")
 
-        md_path = os.path.join(config.for_repo_dir, "DT4H_Preprocessing_Summary.md")
+        md_path = os.path.join(out_dir, "DT4H_Preprocessing_Summary.md")
         with open(md_path, "w") as f:
             f.write(self._render_markdown(summary))
         print(f"Saved preprocessing summary (Markdown) -> {md_path}")
