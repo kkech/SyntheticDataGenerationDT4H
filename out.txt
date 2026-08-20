@@ -91,3 +91,327 @@ Saved preprocessed column analysis (JSON) -> /home/konstantinos.kechagi@mydre.or
 Saved preprocessed column analysis (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Column_Analysis.md
 Saved random sample of 20 row(s) (seed=0) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Sample20.parquet
 ✅ 'profile_preprocessed_data' completed.
+
+======================================================================
+▶️  RUNNING 'generate'
+======================================================================
+Loaded preprocessed data: 4694 rows x 329 columns
+Seed: 0 | python 3.10.12
+GPU: Tesla T4 -- 16.59 GB free of 16.7 GB (CUDA 13.0)
+⚠️  Working tree has uncommitted changes -- this run is not reproducible from the recorded git commit alone.
+Holding out 38 constant column(s) from training (re-attached verbatim after sampling).
+Training columns: 73 continuous, 218 categorical
+
+======================================================================
+▶️  SYNTHESIZER: ctgan
+======================================================================
+No formal privacy guarantee (non-DP model).
+Training...
+PerformanceAlert: Using the CTGANSynthesizer on this data is not recommended. To model this data, CTGAN will generate a large number of columns.
+
+Original Column Name                                                                            Est # of Columns (CTGAN)
+patient_demographics_gender                                                                     2
+patient_demographics_age                                                                        11
+encounters_admissionYear                                                                        11
+encounters_lengthOfStay                                                                         11
+encounters_numOfPreviousHFStays_count                                                           11
+vital_signs_weight_value_p6mo_last                                                              11
+vital_signs_weight_value_p6mo_first                                                             11
+vital_signs_height_value_p1a_avg                                                                11
+vital_signs_weight_value_last                                                                   11
+vital_signs_height_value_last                                                                   11
+vital_signs_bmi_value_last                                                                      11
+vital_signs_systolicBp_value_first                                                              11
+vital_signs_systolicBp_value_last                                                               11
+vital_signs_diastolicBp_value_first                                                             11
+vital_signs_diastolicBp_value_last                                                              11
+vital_signs_heartRate_value_first                                                               11
+vital_signs_heartRate_value_last                                                                11
+vital_signs_oxygenSaturation_value_first                                                        11
+vital_signs_oxygenSaturation_value_last                                                         11
+lab_results_hemoglobin_value_last                                                               11
+lab_results_hemoglobin_value_first                                                              11
+lab_results_ferritin_value_last                                                                 11
+lab_results_ferritin_value_first                                                                11
+lab_results_ntProBnp_value_last                                                                 11
+lab_results_ntProBnp_value_first                                                                11
+lab_results_crpNonHs_value_last                                                                 11
+lab_results_crpNonHs_value_first                                                                11
+lab_results_tropTHs_value_last                                                                  11
+lab_results_tropTHs_value_first                                                                 11
+lab_results_tropTnHs_value_last                                                                 11
+lab_results_tropTnHs_value_first                                                                11
+lab_results_triGly_value_last                                                                   11
+lab_results_triGly_value_first                                                                  11
+lab_results_cholTot_value_last                                                                  11
+lab_results_cholTot_value_first                                                                 11
+lab_results_hdl_value_last                                                                      11
+lab_results_hdl_value_first                                                                     11
+lab_results_ldl_value_last                                                                      11
+lab_results_ldl_value_first                                                                     11
+lab_results_potassium_value_last                                                                11
+lab_results_potassium_value_first                                                               11
+lab_results_sodium_value_last                                                                   11
+lab_results_sodium_value_first                                                                  11
+lab_results_creatUS_value_last                                                                  11
+lab_results_creatUS_value_first                                                                 11
+lab_results_albuminBS_value_last                                                                11
+lab_results_albuminBS_value_first                                                               11
+lab_results_hba1c%_value_last                                                                   11
+lab_results_hba1c%_value_first                                                                  11
+lab_results_hba1c_value_last                                                                    11
+lab_results_hba1c_value_first                                                                   11
+lab_results_validSerumCreatinine_value_last                                                     11
+lab_results_validSerumCreatinine_value_first                                                    11
+lab_results_valideGFR_value_first                                                               11
+lab_results_valideGFR_value_last                                                                11
+echocardiographs_lvef_pET_last                                                                  11
+echocardiographs_lvef_pET_first                                                                 11
+electrocardiographs_ecg_qrs_duration_pET_first                                                  11
+electrocardiographs_ecg_qrs_duration_pET_last                                                   11
+electrocardiographs_ecg_qrs_axis_pET_last                                                       11
+electrocardiographs_ecg_qrs_axis_pET_first                                                      11
+electrocardiographs_ecg_qt_duration_corrected_pET_first                                         11
+electrocardiographs_ecg_qt_duration_corrected_pET_last                                          11
+smoking_status_smoker_last                                                                      3
+smoking_status_formerSmoker_last                                                                3
+smoking_status_smoker_totalSmokingDuration_sum                                                  11
+smoking_status_smoker_startTime_count                                                           11
+nyha_nyha_pET                                                                                   5
+hyperkalemia_severity_categorizedValue                                                          5
+ckd_severity_categorizedValue                                                                   7
+conditions_heartFailure_timeFromEarliest_first                                                  11
+conditions_heart_failure_hf_within_18mo_any                                                     2
+conditions_heart_failure_occurred_prior_to_18_months_any                                        2
+encounter_primary_reason_HF_Disease_f5a_w7d_first                                               3
+encounter_primary_reason_HF_Disease_f5a_w1mo_first                                              3
+encounter_primary_reason_HF_Disease_f5a_w3mo_first                                              3
+encounter_primary_reason_HF_Disease_f5a_w6mo_first                                              3
+encounter_primary_reason_HF_Disease_f5a_w1a_first                                               3
+encounter_primary_reason_HF_Disease_f5a_w3a_first                                               3
+encounter_primary_reason_HF_Disease_f5a_w5a_first                                               3
+encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first                   11
+encounter_primary_reason_CV_Disease_f5a_w7d_first                                               3
+encounter_primary_reason_CV_Disease_f5a_w1mo_first                                              3
+encounter_primary_reason_CV_Disease_f5a_w3mo_first                                              3
+encounter_primary_reason_CV_Disease_f5a_w6mo_first                                              3
+encounter_primary_reason_CV_Disease_f5a_w1a_first                                               3
+encounter_primary_reason_CV_Disease_f5a_w3a_first                                               3
+encounter_primary_reason_CV_Disease_f5a_w5a_first                                               3
+encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first                              11
+encounter_primary_reason_non_CV_Disease_f5a_w7d_first                                           3
+encounter_primary_reason_non_CV_Disease_f5a_w1mo_first                                          3
+encounter_primary_reason_non_CV_Disease_f5a_w3mo_first                                          3
+encounter_primary_reason_non_CV_Disease_f5a_w6mo_first                                          3
+encounter_primary_reason_non_CV_Disease_f5a_w1a_first                                           3
+encounter_primary_reason_non_CV_Disease_f5a_w3a_first                                           3
+encounter_primary_reason_non_CV_Disease_f5a_w5a_first                                           3
+encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first                          11
+encounter_primary_reason_renal_complications_f5a_w7d_first                                      3
+encounter_primary_reason_renal_complications_f5a_w1mo_first                                     3
+encounter_primary_reason_renal_complications_f5a_w3mo_first                                     3
+encounter_primary_reason_renal_complications_f5a_w6mo_first                                     3
+encounter_primary_reason_renal_complications_f5a_w1a_first                                      3
+encounter_primary_reason_renal_complications_f5a_w3a_first                                      3
+encounter_primary_reason_renal_complications_f5a_w5a_first                                      3
+encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first             11
+cause_of_death_isCV_f5a_w7d_first                                                               3
+cause_of_death_isCV_f5a_w1mo_first                                                              3
+cause_of_death_isCV_f5a_w3mo_first                                                              3
+cause_of_death_isCV_f5a_w6mo_first                                                              3
+cause_of_death_isCV_f5a_w1a_first                                                               3
+cause_of_death_isCV_f5a_w3a_first                                                               3
+cause_of_death_isCV_f5a_w5a_first                                                               3
+cause_of_death_number_of_days_to_death_for_CV_f5a_first                                         11
+cause_of_death_isRenal_f5a_w7d_first                                                            2
+cause_of_death_isRenal_f5a_w1mo_first                                                           2
+cause_of_death_isRenal_f5a_w3mo_first                                                           2
+cause_of_death_isRenal_f5a_w6mo_first                                                           2
+cause_of_death_isRenal_f5a_w1a_first                                                            2
+cause_of_death_isRenal_f5a_w3a_first                                                            2
+cause_of_death_isRenal_f5a_w5a_first                                                            2
+cause_of_death_isNonRenalAndNonCV_f5a_w7d_first                                                 2
+cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first                                                2
+cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first                                                2
+cause_of_death_isNonRenalAndNonCV_f5a_w6mo_first                                                2
+cause_of_death_isNonRenalAndNonCV_f5a_w1a_first                                                 2
+cause_of_death_isNonRenalAndNonCV_f5a_w3a_first                                                 2
+cause_of_death_isNonRenalAndNonCV_f5a_w5a_first                                                 2
+cause_of_death_isAllCause_f5a_w7d_first                                                         3
+cause_of_death_isAllCause_f5a_w1mo_first                                                        3
+cause_of_death_isAllCause_f5a_w3mo_first                                                        3
+cause_of_death_isAllCause_f5a_w6mo_first                                                        3
+cause_of_death_isAllCause_f5a_w1a_first                                                         3
+cause_of_death_isAllCause_f5a_w3a_first                                                         3
+cause_of_death_isAllCause_f5a_w5a_first                                                         3
+cause_of_death_number_of_days_to_death_for_all_cause_f5a_first                                  11
+eGFR_2021_ckd_epi_creatinine                                                                    11
+ckd_severity_from_calculated_egfr                                                               6
+ckd_severity_calculated_or_measured                                                             7
+beta_blocker_use_pre_dc                                                                         2
+ace_inhibitors_arb_use_pre_dc                                                                   2
+maggic_total_score                                                                              5
+med_acei                                                                                        2
+med_anti_coag                                                                                   2
+med_anti_plat                                                                                   2
+med_antiarrhytmic                                                                               2
+med_antiinfl                                                                                    2
+med_arb                                                                                         2
+med_arni                                                                                        2
+med_bb                                                                                          2
+med_ccb                                                                                         2
+med_cortico_syst                                                                                2
+med_digitalis                                                                                   2
+med_diuretics                                                                                   2
+med_diuretics_loop                                                                              2
+med_inotropes                                                                                   2
+med_insulins                                                                                    2
+med_ivabradine                                                                                  2
+med_ll                                                                                          2
+med_mra                                                                                         2
+med_oral_antidiabetic                                                                           2
+med_platelet                                                                                    2
+med_potassium_binders                                                                           2
+med_rasi                                                                                        2
+med_rdoad                                                                                       2
+med_rdoad_syst                                                                                  2
+med_thrombolytic                                                                                2
+med_vasodil                                                                                     2
+med_acei_history                                                                                2
+med_anti_coag_history                                                                           2
+med_anti_plat_history                                                                           2
+med_antiarrhytmic_history                                                                       2
+med_antiinfl_history                                                                            2
+med_arb_history                                                                                 2
+med_arni_history                                                                                2
+med_bb_history                                                                                  2
+med_ccb_history                                                                                 2
+med_cortico_syst_history                                                                        2
+med_digitalis_history                                                                           2
+med_diuretics_history                                                                           2
+med_diuretics_loop_history                                                                      2
+med_inotropes_history                                                                           2
+med_insulins_history                                                                            2
+med_ivabradine_history                                                                          2
+med_ll_history                                                                                  2
+med_mra_history                                                                                 2
+med_oral_antidiabetic_history                                                                   2
+med_platelet_history                                                                            2
+med_potassium_binders_history                                                                   2
+med_rasi_history                                                                                2
+med_rdoad_history                                                                               2
+med_rdoad_syst_history                                                                          2
+med_thrombolytic_history                                                                        2
+med_vasodil_history                                                                             2
+conditions_af                                                                                   2
+conditions_aidshiv                                                                              2
+conditions_ap                                                                                   2
+conditions_ckd_chronic                                                                          2
+conditions_cm                                                                                   2
+conditions_copd                                                                                 2
+conditions_dem                                                                                  2
+conditions_dep                                                                                  2
+conditions_devices                                                                              2
+conditions_diabetes                                                                             2
+conditions_dysl                                                                                 2
+conditions_hf                                                                                   2
+conditions_hyp                                                                                  2
+conditions_hyperthyroid                                                                         2
+conditions_hypothyroid                                                                          2
+conditions_ibd                                                                                  2
+conditions_ihd                                                                                  2
+conditions_ld                                                                                   2
+conditions_mc                                                                                   2
+conditions_mi                                                                                   2
+conditions_myocarditis                                                                          2
+conditions_osa                                                                                  2
+conditions_pad                                                                                  2
+conditions_pericardial                                                                          2
+conditions_rd                                                                                   2
+conditions_revasc                                                                               2
+conditions_stroke                                                                               2
+conditions_substance_abuse                                                                      2
+conditions_tia                                                                                  2
+conditions_vd                                                                                   2
+vital_signs_weight_value_p6mo_first_was_missing                                                 2
+vital_signs_weight_value_p6mo_last_was_missing                                                  2
+vital_signs_height_value_p1a_avg_was_missing                                                    2
+vital_signs_weight_value_last_was_missing                                                       2
+vital_signs_height_value_last_was_missing                                                       2
+vital_signs_bmi_value_last_was_missing                                                          2
+vital_signs_systolicBp_value_first_was_missing                                                  2
+vital_signs_systolicBp_value_last_was_missing                                                   2
+vital_signs_diastolicBp_value_first_was_missing                                                 2
+vital_signs_diastolicBp_value_last_was_missing                                                  2
+vital_signs_heartRate_value_first_was_missing                                                   2
+vital_signs_heartRate_value_last_was_missing                                                    2
+vital_signs_oxygenSaturation_value_first_was_missing                                            2
+vital_signs_oxygenSaturation_value_last_was_missing                                             2
+lab_results_hemoglobin_value_first_was_missing                                                  2
+lab_results_hemoglobin_value_last_was_missing                                                   2
+lab_results_ferritin_value_first_was_missing                                                    2
+lab_results_ferritin_value_last_was_missing                                                     2
+lab_results_ntProBnp_value_first_was_missing                                                    2
+lab_results_ntProBnp_value_last_was_missing                                                     2
+lab_results_crpNonHs_value_first_was_missing                                                    2
+lab_results_crpNonHs_value_last_was_missing                                                     2
+lab_results_tropTHs_value_first_was_missing                                                     2
+lab_results_tropTHs_value_last_was_missing                                                      2
+lab_results_tropTnHs_value_first_was_missing                                                    2
+lab_results_tropTnHs_value_last_was_missing                                                     2
+lab_results_triGly_value_first_was_missing                                                      2
+lab_results_triGly_value_last_was_missing                                                       2
+lab_results_cholTot_value_first_was_missing                                                     2
+lab_results_cholTot_value_last_was_missing                                                      2
+lab_results_hdl_value_first_was_missing                                                         2
+lab_results_hdl_value_last_was_missing                                                          2
+lab_results_ldl_value_first_was_missing                                                         2
+lab_results_ldl_value_last_was_missing                                                          2
+lab_results_potassium_value_first_was_missing                                                   2
+lab_results_potassium_value_last_was_missing                                                    2
+lab_results_sodium_value_first_was_missing                                                      2
+lab_results_sodium_value_last_was_missing                                                       2
+lab_results_creatUS_value_first_was_missing                                                     2
+lab_results_creatUS_value_last_was_missing                                                      2
+lab_results_albuminBS_value_first_was_missing                                                   2
+lab_results_albuminBS_value_last_was_missing                                                    2
+lab_results_hba1c%_value_first_was_missing                                                      2
+lab_results_hba1c%_value_last_was_missing                                                       2
+lab_results_hba1c_value_first_was_missing                                                       2
+lab_results_hba1c_value_last_was_missing                                                        2
+lab_results_validSerumCreatinine_value_first_was_missing                                        2
+lab_results_validSerumCreatinine_value_last_was_missing                                         2
+lab_results_valideGFR_value_first_was_missing                                                   2
+lab_results_valideGFR_value_last_was_missing                                                    2
+echocardiographs_lvef_pET_last_was_missing                                                      2
+echocardiographs_lvef_pET_first_was_missing                                                     2
+electrocardiographs_ecg_qrs_duration_pET_first_was_missing                                      2
+electrocardiographs_ecg_qrs_duration_pET_last_was_missing                                       2
+electrocardiographs_ecg_qrs_axis_pET_last_was_missing                                           2
+electrocardiographs_ecg_qrs_axis_pET_first_was_missing                                          2
+electrocardiographs_ecg_qt_duration_corrected_pET_last_was_missing                              2
+electrocardiographs_ecg_qt_duration_corrected_pET_first_was_missing                             2
+smoking_status_smoker_totalSmokingDuration_sum_was_missing                                      2
+conditions_heartFailure_timeFromEarliest_first_was_missing                                      2
+eGFR_2021_ckd_epi_creatinine_was_missing                                                        2
+maggic_total_score_was_missing                                                                  2
+encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first_was_missing       2
+encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first_was_missing                  2
+encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first_was_missing              2
+encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first_was_missing 2
+cause_of_death_number_of_days_to_death_for_CV_f5a_first_was_missing                             2
+cause_of_death_number_of_days_to_death_for_all_cause_f5a_first_was_missing                      2
+
+We recommend preprocessing discrete columns that can have many values, using 'update_transformers'. Or you may drop columns that are not necessary to model. (Exit this script using ctrl-C)
+Sampling 4694 rows...
+✅ No verbatim training records in the synthetic output (4694 rows, 329 columns compared).
+✅ ctgan: 4694 x 329 -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/generate/DT4H_Synthetic_ctgan.csv (1149.0s)
+
+======================================================================
+▶️  SYNTHESIZER: aim
+======================================================================
+Differential privacy ON -- total epsilon budget: 15.0
+CPU-only synthesizer (no GPU acceleration available for this method).
+Training...
+Spent 0.9589441418575746 epsilon on preprocessor, leaving 14.041055858142425 for training
+291
