@@ -82,6 +82,9 @@ class PreprocessStep(PipelineStep):
         print("Dropping near-unique identifier-like columns (safety net)...")
         df, summary["near_unique_columns_dropped"] = t.drop_near_unique_columns(df)
 
+        print("Normalizing numeric dtypes...")
+        df, summary["numeric_dtype_normalization"] = t.normalize_numeric_dtypes(df)
+
         print("Final null cleanup...")
         df, summary["nyha_missing_imputation"] = t.impute_nyha_missing(df)
         df, summary["numeric_imputation"] = t.impute_numeric_columns(df, var_meta)
@@ -156,6 +159,8 @@ class PreprocessStep(PipelineStep):
             f"- IDENTIFIER/DATETIME columns dropped: {s['identifiers_datetimes_dropped']['dropped']}",
             f"- Near-unique identifier-like columns dropped (safety net, not caught by declared type): "
             f"{s['near_unique_columns_dropped']['dropped']}",
+            f"- Decimal columns cast to Float64 (so they stay numeric downstream): "
+            f"{s.get('numeric_dtype_normalization', {}).get('decimal_cast_to_float', [])}",
         ]
 
         lines += ["", "## Dummy imputation (Machteld's temporary placeholder rules)"]
@@ -181,8 +186,10 @@ class PreprocessStep(PipelineStep):
         for col in s["numeric_imputation"]["dropped_too_few"]:
             lines.append(f"  - dropped: `{col}`")
         lines.append(
-            f"- Categorical/boolean: filled {len(s['categorical_imputation']['filled_columns'])} "
-            f"column(s) with explicit 'Missing' category"
+            f"- Categorical/boolean: normalized "
+            f"{s['categorical_imputation'].get('normalized_columns', 'n/a')} column(s) to String; "
+            f"{len(s['categorical_imputation']['filled_columns'])} of them had nulls filled "
+            f"with an explicit 'Missing' category"
         )
 
         return "\n".join(lines) + "\n"

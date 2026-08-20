@@ -404,6 +404,34 @@ def apply_dummy_imputation(df: pl.DataFrame, seed: int = 0) -> tuple[pl.DataFram
     return df, {"fills": fills, "skipped": skipped}
 
 
+# --- dtype normalization ---
+
+def normalize_numeric_dtypes(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
+    """
+    Casts Decimal columns to Float64.
+
+    The source export stores some labs (hemoglobin, potassium, sodium) as
+    Decimal. Polars Decimal converts to a pandas *object* column holding
+    decimal.Decimal instances, for which pandas' is_numeric_dtype()
+    returns False -- so dpSyntGAN.py would route these continuous lab
+    values down its CATEGORICAL branch and model them as thousands of
+    discrete categories.
+
+    Today this is masked by luck: all six currently contain nulls, and
+    impute_numeric_columns() rebuilds them via numpy as Float64 as a side
+    effect. Any of them becoming null-free would silently restore the
+    Decimal dtype and the bug -- and improved completeness for exactly
+    these labs is the change the data provider has said is coming. So the
+    cast is made explicit here rather than left to depend on whether a
+    column happens to have missing values.
+    """
+    decimal_cols = [c for c in df.columns if isinstance(df[c].dtype, pl.Decimal)]
+    if decimal_cols:
+        print(f"  Casting {len(decimal_cols)} Decimal column(s) to Float64: {decimal_cols}")
+        df = df.with_columns([pl.col(c).cast(pl.Float64).alias(c) for c in decimal_cols])
+    return df, {"decimal_cast_to_float": decimal_cols}
+
+
 # --- final null cleanup (generic, by declared type) ---
 
 def impute_nyha_missing(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
@@ -466,21 +494,39 @@ def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> t
 
 def impute_categorical_and_boolean(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
     """
-    Nulls in BOOLEAN/NOMINAL/ARRAY[NOMINAL] columns become an explicit
-    "Missing" category, consistent with how dpSyntGAN.py already treats
-    categorical nulls downstream. Boolean columns become 3-valued string
-    categories (True/False/Missing). NYHA is handled separately.
+    Every categorical-like column is normalized to String, with nulls
+    becoming an explicit "Missing" category -- consistent with how
+    dpSyntGAN.py treats categorical nulls downstream. Boolean columns
+    become 3-valued string categories (true/false/Missing).
+
+    Selection is by actual dtype, NOT by declared metadata type or by
+    whether a column happens to contain nulls. Both of those are traps:
+
+      * Null-conditional casting left every null-free boolean as dtype
+        Boolean while its null-carrying siblings became String. Since
+        pandas' is_numeric_dtype() returns True for bool, dpSyntGAN.py
+        would then route those columns down its CONTINUOUS branch and
+        model yes/no clinical flags as floats (generating values like
+        0.43 for "patient is on diuretics").
+      * Metadata-driven selection misses every column this pipeline
+        derives itself -- the combined med_*/conditions_* features, the
+        <col>_was_missing indicators -- since none of them exist in
+        metadata.json.
+
+    NYHA is excluded: it is an ordinal integer (1-4 plus a 0 sentinel)
+    by this point, and must stay numeric rather than become a category.
     """
-    candidate_types = ("BOOLEAN", "NOMINAL", "ARRAY[NOMINAL]")
-    cols = [name for name, v in var_meta.items()
-            if v.get("dataType") in candidate_types and name in df.columns and name != NYHA_COLUMN]
+    cols = [
+        c for c in df.columns
+        if df[c].dtype in (pl.Boolean, pl.String) and c != NYHA_COLUMN
+    ]
 
     filled = []
     for col in cols:
-        if df[col].null_count() == 0:
-            continue
-        filled.append(col)
+        if df[col].null_count() > 0:
+            filled.append(col)
         df = df.with_columns(pl.col(col).cast(pl.String).fill_null("Missing").alias(col))
 
-    print(f"  Filled {len(filled)} boolean/categorical column(s) with an explicit 'Missing' category.")
-    return df, {"filled_columns": filled}
+    print(f"  Normalized {len(cols)} boolean/categorical column(s) to String; "
+          f"{len(filled)} of them had nulls filled with an explicit 'Missing' category.")
+    return df, {"normalized_columns": len(cols), "filled_columns": filled}
