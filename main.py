@@ -2,7 +2,7 @@
 UC1 data pipeline entrypoint.
 
 Runs load_data -> profile_data -> preprocess -> profile_preprocessed_data
--> generate -> evaluate in order, skipping any step already marked completed
+-> generate -> evaluate -> privacy in order, skipping any step already marked completed
 (tracked in pipeline_status.json) unless explicitly forced.
 
 Which synthesizers the generate step runs is config-driven
@@ -35,6 +35,7 @@ from pipeline.steps.preprocess import PreprocessStep
 from pipeline.steps.profile_preprocessed_data import ProfilePreprocessedDataStep
 from pipeline.steps.generate import GenerateStep
 from pipeline.steps.evaluate import EvaluateStep
+from pipeline.steps.privacy import PrivacyStep
 
 STEPS = [
     LoadDataStep(),
@@ -43,6 +44,7 @@ STEPS = [
     ProfilePreprocessedDataStep(),
     GenerateStep(),
     EvaluateStep(),
+    PrivacyStep(),
 ]
 
 
@@ -83,6 +85,64 @@ def run_pipeline(
         print(f"✅ '{step.name}' completed in {time.time() - started:.0f}s.")
 
 
+def preflight(config: PipelineConfig | None = None) -> bool:
+    """Everything a long run needs, checked in seconds. Returns True if
+    the run can proceed."""
+    import importlib
+    import os
+    import shutil
+
+    config = config or PipelineConfig()
+    ok = True
+
+    def check(name, passed, detail=""):
+        nonlocal ok
+        mark = "✅" if passed else "❌"
+        print(f"  {mark} {name}" + (f" -- {detail}" if detail else ""))
+        ok = ok and passed
+
+    print("Preflight checks:")
+    for mod in ("polars", "pandas", "numpy", "scipy", "sdv", "snsynth", "torch", "cloudpickle"):
+        try:
+            m = importlib.import_module(mod)
+            check(f"import {mod}", True, getattr(m, "__version__", ""))
+        except Exception as e:
+            check(f"import {mod}", False, f"{type(e).__name__}: {e}")
+
+    try:
+        import torch
+
+        if torch.cuda.is_available():
+            free, total = torch.cuda.mem_get_info()
+            check("CUDA GPU", True, f"{torch.cuda.get_device_name(0)}, {free/1e9:.1f} GB free of {total/1e9:.1f} GB")
+        else:
+            print("  ⚠️  no CUDA GPU -- ctgan/tvae/dpctgan will train on CPU (much slower); "
+                  "gaussian_copula/mst/aim unaffected")
+    except Exception:
+        pass
+
+    have_transfer = os.path.isdir(config.transfer_folder)
+    have_loaded = os.path.exists(config.local_full_dataset_path)
+    check("input data", have_transfer or have_loaded,
+          config.transfer_folder if have_transfer else config.local_full_dataset_path)
+    check("metadata.json", os.path.exists(config.metadata_path) or have_transfer, config.metadata_path)
+
+    free_gb = shutil.disk_usage(os.path.dirname(config.output_dir) or ".").free / 1e9
+    check("disk space >= 5 GB", free_gb >= 5, f"{free_gb:.1f} GB free")
+
+    from pipeline.steps.generate.synthesizers import REGISTRY
+
+    unknown = [n for n in config.synthesizers if n not in REGISTRY]
+    check("synthesizers registered", not unknown, ", ".join(config.synthesizers))
+    print(f"\n  Plan: {' -> '.join(config.synthesizers)}")
+    print(f"  Per-model timeout: fit {config.synthesizer_timeout_seconds/3600:.1f}h, "
+          f"sample {config.synthesizer_timeout_seconds/3600:.1f}h | seed {config.seed} | "
+          f"DP epsilon {config.epsilon}")
+    print(f"  Ordering is cheapest/most-reliable first, so a late timeout costs only the tail of the run.")
+    print("\n" + ("Preflight PASSED -- ready for a long run." if ok else "Preflight FAILED -- fix the items above first."))
+    return ok
+
+
 def print_status(config: PipelineConfig | None = None) -> None:
     config = config or PipelineConfig()
     state = PipelineState(config.status_path)
@@ -106,6 +166,9 @@ def main() -> None:
     parser.add_argument("--only", action="append", default=None,
                          help="Run only these step(s) (repeatable).")
     parser.add_argument("--status", action="store_true", help="Print step-completion status and exit.")
+    parser.add_argument("--preflight", action="store_true",
+                         help="Verify libraries, GPU, inputs, disk and config, then exit. "
+                              "Run this before a long run.")
     parser.add_argument("--log", default="logs.txt",
                          help="File to tee all console output (stdout, stderr and warnings) to. "
                               "Default: logs.txt. Pass --log '' to disable.")
@@ -114,6 +177,9 @@ def main() -> None:
     if args.status:
         print_status()
         return
+
+    if args.preflight:
+        raise SystemExit(0 if preflight() else 1)
 
     # Tee everything to a log file so a failing run can be shared whole,
     # rather than only the stdout half that shell redirection captures.

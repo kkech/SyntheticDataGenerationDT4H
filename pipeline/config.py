@@ -50,7 +50,7 @@ class PipelineConfig:
     # Private-PGM, which is documented to struggle as column count grows,
     # and this dataset is ~329 columns wide: if it exhausts memory, set
     # max_columns to trial a subset, or stop at mst.
-    synthesizers: tuple = ("gaussian_copula", "tvae", "ctgan", "mst", "aim")
+    synthesizers: tuple = ("gaussian_copula", "tvae", "ctgan", "mst", "dpctgan", "aim")
     synthesizer_params: dict = None  # per-synthesizer overrides, keyed by name
 
     # None = generate as many rows as the real dataset. Matching the real
@@ -115,6 +115,11 @@ class PipelineConfig:
     def __post_init__(self) -> None:
         if self.synthesizer_params is None:
             self.synthesizer_params = {}
+        # DP-CTGAN trains with opacus per-sample gradients, which are far
+        # more memory-hungry than ordinary training -- batch 500 OOMs a
+        # 16 GB T4. These are the settings the project's original script
+        # ran successfully on this exact GPU.
+        self.synthesizer_params.setdefault("dpctgan", {"epochs": 300, "batch_size": 50})
         if self.metadata_path is None:
             self.metadata_path = os.path.join(self.output_dir, "profile_data", "metadata.json")
         if self.local_full_dataset_path is None:

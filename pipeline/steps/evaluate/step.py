@@ -28,6 +28,7 @@ import os
 
 from pipeline.config import PipelineConfig
 from pipeline.steps.base import PipelineStep
+from pipeline.steps.evaluate.associations import association_profile, compare_association_profiles
 from pipeline.steps.evaluate.metrics import compare_frames
 
 
@@ -77,6 +78,19 @@ class EvaluateStep(PipelineStep):
         out_dir = config.step_dir(self.name)
         os.makedirs(out_dir, exist_ok=True)
 
+        # Association structure of the real (preprocessed, decoded) frame,
+        # computed once and compared against each synthetic frame. The
+        # original frame needs no separate profile: its observed values
+        # are identical to the decoded preprocessed frame on every common
+        # column (the marginal comparison proves this at KS=0), so its
+        # associations are identical by construction.
+        print("\nProfiling association structure of the real data...")
+        real_assoc = association_profile(preprocessed)
+        print(f"  {sum(len(v) for v in real_assoc.values())} measurable column pairs "
+              f"(numeric-numeric {len(real_assoc['num_num'])}, "
+              f"categorical-categorical {len(real_assoc['cat_cat'])}, "
+              f"numeric-categorical {len(real_assoc['num_cat'])})")
+
         results = {"comparisons": []}
         if original is not None:
             print("\nComparing original vs preprocessed...")
@@ -118,6 +132,11 @@ class EvaluateStep(PipelineStep):
                 entry["original_vs_synthetic"] = compare_frames(
                     original, synthetic, "original", f"synthetic[{synth_name}]"
                 )
+
+            print(f"  Profiling association structure of '{synth_name}'...")
+            entry["associations"] = compare_association_profiles(
+                real_assoc, association_profile(synthetic)
+            )
             results["comparisons"].append(entry)
 
             agg = entry["preprocessed_vs_synthetic"]["aggregates"]
@@ -125,6 +144,12 @@ class EvaluateStep(PipelineStep):
                   f"KS mean={agg['ks'].get('mean')} (frac<0.1: {agg['ks_frac_below_0.1']}), "
                   f"TVD mean={agg['tvd'].get('mean')} (frac<0.05: {agg['tvd_frac_below_0.05']}), "
                   f"missing-rate MAD={agg['missing_rate_mean_abs_diff']}")
+            for kind, label in (("num_num", "num-num Spearman"), ("cat_cat", "Cramer's V"),
+                                ("num_cat", "corr-ratio")):
+                a = entry["associations"].get(kind, {})
+                if a.get("pairs"):
+                    print(f"    assoc {label}: mean |Δ|={a['mean_abs_delta']} over {a['pairs']} pairs "
+                          f"(frac<0.1: {a['frac_below_0.1']})")
 
         json_path = os.path.join(out_dir, "DT4H_Evaluation.json")
         with open(json_path, "w") as f:
@@ -195,6 +220,30 @@ class EvaluateStep(PipelineStep):
                     f"| {a['tvd'].get('mean', '-')} "
                     f"| {a['tvd_frac_below_0.05'] if a['tvd_frac_below_0.05'] is not None else '-'} "
                     f"| {a['missing_rate_mean_abs_diff']} |")
+
+        lines += [
+            "",
+            "## Association structure (preprocessed vs synthetic)",
+            "",
+            "Absolute change in pairwise association; 0 = relationship perfectly preserved.",
+            "",
+            "| synthesizer | pair type | pairs | mean \|Δ\| | median \|Δ\| | \|Δ\|<0.1 | worst pair |",
+            "|---|---|---|---|---|---|---|",
+        ]
+        for c in results["comparisons"]:
+            if "pair" in c or "associations" not in c:
+                continue
+            for kind, label in (("num_num", "Spearman (num-num)"), ("cat_cat", "Cramer's V (cat-cat)"),
+                                ("num_cat", "corr-ratio (num-cat)")):
+                a = c["associations"].get(kind, {})
+                if not a.get("pairs"):
+                    lines.append(f"| {c['synthesizer']} | {label} | 0 | - | - | - | - |")
+                    continue
+                w = a["worst"][0]
+                lines.append(
+                    f"| {c['synthesizer']} | {label} | {a['pairs']} | {a['mean_abs_delta']} "
+                    f"| {a['median_abs_delta']} | {a['frac_below_0.1']} "
+                    f"| `{w['pair']}` ({w['real']} -> {w['synthetic']}) |")
 
         detail_sections = []
         for c in results["comparisons"]:
