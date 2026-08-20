@@ -87,18 +87,29 @@ class EvaluateStep(PipelineStep):
         for path in synthetic_files:
             synth_name = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synthetic = pd.read_csv(path, low_memory=False)
-            # Defensive re-decode (idempotent): synthetic files written
-            # before a decode-rule fix may still contain gap-region or
-            # sentinel values; applying the current rule here means the
-            # evaluation always scores what the current pipeline would
-            # publish, without retraining anything.
+            print(f"\nComparing against synthetic '{synth_name}' ({synthetic.shape[0]} rows)...")
+
+            # Files are scored EXACTLY as they are on disk -- never
+            # silently repaired. This check only detects staleness: a
+            # correctly generated file re-decodes to itself, so any cell
+            # the current decoder would change means the file was written
+            # by an older pipeline version and the generate step needs a
+            # full rerun. The mismatch is scored as-is and flagged loudly,
+            # so the report can never look better than the actual files.
             from pipeline.steps.generate.step import GenerateStep
 
-            synthetic, _ = GenerateStep._decode_numeric_missing(synthetic, config)
-            print(f"\nComparing against synthetic '{synth_name}' ({synthetic.shape[0]} rows)...")
+            _, would_change = GenerateStep._decode_numeric_missing(synthetic.copy(), config)
+            stale_cells = sum(would_change.values())
+            if stale_cells:
+                print(f"🚨 STALE FILE: {os.path.basename(path)} contains {stale_cells} cell(s) "
+                      f"across {len(would_change)} column(s) that the current pipeline would not "
+                      f"produce (undecoded sentinel-region values). Scores below describe the "
+                      f"stale file. Re-run the generate step to refresh it.")
 
             entry = {
                 "synthesizer": synth_name,
+                "stale_file": bool(stale_cells),
+                "stale_cells": stale_cells,
                 "preprocessed_vs_synthetic": compare_frames(
                     preprocessed, synthetic, "preprocessed", f"synthetic[{synth_name}]"
                 ),
@@ -191,6 +202,9 @@ class EvaluateStep(PipelineStep):
                 lines.append(_row(c))
                 detail_sections.append(c)
             else:
+                if c.get("stale_file"):
+                    lines.append(f"| 🚨 synthetic[{c['synthesizer']}] IS STALE "
+                                 f"({c['stale_cells']} undecoded cells) -- rerun generate | | | | | | | | |")
                 lines.append(_row(c["preprocessed_vs_synthetic"]))
                 detail_sections.append(c["preprocessed_vs_synthetic"])
                 if "original_vs_synthetic" in c:

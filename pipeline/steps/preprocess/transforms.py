@@ -539,9 +539,8 @@ def impute_categorical_and_boolean(df: pl.DataFrame, var_meta: dict) -> tuple[pl
         model yes/no clinical flags as floats (generating values like
         0.43 for "patient is on diuretics").
       * Metadata-driven selection misses every column this pipeline
-        derives itself -- the combined med_*/conditions_* features, the
-        <col>_was_missing indicators -- since none of them exist in
-        metadata.json.
+        derives itself -- the combined med_*/conditions_* features --
+        since none of them exist in metadata.json.
 
     NYHA is excluded: it is an ordinal integer (1-4 plus a 0 sentinel)
     by this point, and must stay numeric rather than become a category.
