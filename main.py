@@ -2,10 +2,11 @@
 UC1 data pipeline entrypoint.
 
 Runs load_data -> profile_data -> preprocess -> profile_preprocessed_data
-in order, skipping any step already marked completed (tracked in
-pipeline_status.json) unless explicitly forced. This is the data
-preparation phase; synthetic data generation is a separate step run
-afterward once this output looks right.
+-> generate in order, skipping any step already marked completed
+(tracked in pipeline_status.json) unless explicitly forced.
+
+Which synthesizers the generate step runs is config-driven
+(config.synthesizers), so comparing models is a config change.
 
 Usage:
     python main.py                          # run everything not yet done
@@ -25,8 +26,15 @@ from pipeline.steps.load_data import LoadDataStep
 from pipeline.steps.profile_data import ProfileDataStep
 from pipeline.steps.preprocess import PreprocessStep
 from pipeline.steps.profile_preprocessed_data import ProfilePreprocessedDataStep
+from pipeline.steps.generate import GenerateStep
 
-STEPS = [LoadDataStep(), ProfileDataStep(), PreprocessStep(), ProfilePreprocessedDataStep()]
+STEPS = [
+    LoadDataStep(),
+    ProfileDataStep(),
+    PreprocessStep(),
+    ProfilePreprocessedDataStep(),
+    GenerateStep(),
+]
 
 
 def run_pipeline(

@@ -30,6 +30,43 @@ class PipelineConfig:
     metadata_path: str = None  # defaults to <output_dir>/profile_data/metadata.json
     apply_dummy_imputation: bool = True
 
+    # --- generate step ---
+    # Which synthesizers to run, by registry name. Non-DP: ctgan, tvae,
+    # gaussian_copula. DP: aim, mst, patectgan, dpctgan.
+    #
+    # Defaults pair one non-DP and one DP model. AIM is chosen over the
+    # project's original dpctgan because utility benchmarks consistently
+    # favour marginal-based methods over DP-GANs on tabular data -- but
+    # AIM builds on Private-PGM, which is documented to struggle as column
+    # count grows, and this dataset is ~329 columns wide. If AIM exhausts
+    # memory, either set max_columns to trial a subset or fall back to mst.
+    synthesizers: tuple = ("ctgan", "aim")
+    synthesizer_params: dict = None  # per-synthesizer overrides, keyed by name
+
+    # None = generate as many rows as the real dataset. Matching the real
+    # row count is the usual convention for a released synthetic twin;
+    # set an explicit number to over- or under-sample deliberately.
+    n_synthetic_rows: int = None
+    epochs: int = 500
+    # Sized for a 16 GB T4 with the whole card free. SDV requires this to
+    # be divisible by 10 (pac=10). Drop it (240, 120, 60) if training hits
+    # CUDA OOM -- ~250 categorical columns make the conditional vector
+    # wide, so memory scales with column count as well as batch size.
+    batch_size: int = 500
+    epsilon: float = 15.0
+
+    # Seeds every RNG the synthesizers use, and is recorded in the run
+    # provenance. Required for a reproducible published dataset.
+    seed: int = 0
+
+    # Constant columns carry no signal: they waste model capacity and, for
+    # DP synthesizers, privacy budget. Held out during training and
+    # re-attached verbatim afterwards, so the output schema is unchanged.
+    drop_constant_columns: bool = True
+    # Cap training width, for trialling Private-PGM-based synthesizers
+    # (aim/mst) before a full-width run. None = use every column.
+    max_columns: int = None
+
     # Defaults to <output_dir>/load_data/UC1_Resolved_Full.parquet (gitignored)
     local_full_dataset_path: str = None
     # Defaults to <output_dir>/preprocess/UC1_Preprocessed.parquet (gitignored)
@@ -41,6 +78,8 @@ class PipelineConfig:
     status_path: str = os.path.join(REPO_ROOT, "pipeline_status.json")
 
     def __post_init__(self) -> None:
+        if self.synthesizer_params is None:
+            self.synthesizer_params = {}
         if self.metadata_path is None:
             self.metadata_path = os.path.join(self.output_dir, "profile_data", "metadata.json")
         if self.local_full_dataset_path is None:
