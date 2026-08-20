@@ -36,6 +36,8 @@ Checking expected non-null pairs...
   ⚠️ vital_signs_heartRate_value_first: 2436 non-null vs vital_signs_oxygenSaturation_value_first: 0 non-null (expected similar, oxygen sat maybe slightly lower)
 Flattening ARRAY[NOMINAL] columns...
   Flattening 2 ARRAY[NOMINAL] column(s) to scalar: ['electrocardiographs_ecg_type_of_rhythms_pET_first', 'electrocardiographs_ecg_type_of_rhythms_pET_last']
+Normalizing numeric dtypes...
+  Casting 180 Decimal column(s) to Float64: 180 column(s)
 Checking symptom columns...
   30 symptom_* column(s) present, 30 currently constant (NLP module not yet integrated) -- kept in the data, not dropped.
 Combining medication columns...
@@ -68,12 +70,14 @@ Preferring _first/_last numeric variants...
   Dropping 140 numeric aggregate column(s) (bare/_min/_max/_avg/_stddev) in favor of _first/_last.
 Dropping identifier/datetime columns...
   Dropping 7 IDENTIFIER/DATETIME column(s): ['pid', 'encounterId', 'eventTime', 'exitTime', 'referenceTimePoint', 'encounters_admissionDate', 'encounters_dischargeDate']
+Dropping near-unique identifier-like columns (safety net)...
+  Dropping 1 near-unique identifier-like column(s) not caught by declared type: ['patient_demographics_sourceIdentifier']
 Final null cleanup...
   Filling 3530 missing 'nyha_nyha_pET' value(s) with sentinel 0 ('not assessed', kept distinct from real classes 1-4).
-  Imputed 50 numeric column(s), added 50 '_was_missing' flag(s), dropped 18 column(s) with fewer than 5 observed values.
-  Filled 66 boolean/categorical column(s) with an explicit 'Missing' category.
-Remaining null cells after all imputation: 0
-Saved 4694 rows x 312 columns -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/preprocess/UC1_Preprocessed.parquet
+  Imputed 68 numeric column(s), added 68 '_was_missing' flag(s), dropped 18 column(s) with fewer than 5 observed values.
+  Normalized 256 boolean/categorical column(s) to String; 66 of them had nulls filled with an explicit 'Missing' category.
+Remaining missing cells after all imputation: 0 null, 0 NaN
+Saved 4694 rows x 329 columns -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/preprocess/UC1_Preprocessed.parquet
 Saved preprocessing summary (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/preprocess/DT4H_Preprocessing_Summary.json
 Saved preprocessing summary (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/preprocess/DT4H_Preprocessing_Summary.md
 ✅ 'preprocess' completed.
@@ -82,7 +86,7 @@ Saved preprocessing summary (Markdown) -> /home/konstantinos.kechagi@mydre.org/g
 ▶️  RUNNING 'profile_preprocessed_data'
 ======================================================================
 Copied metadata file -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/metadata.json
-Profiling 4694 rows x 312 columns (preprocessed)...
+Profiling 4694 rows x 329 columns (preprocessed)...
 Saved preprocessed column analysis (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Column_Analysis.json
 Saved preprocessed column analysis (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Column_Analysis.md
 Saved random sample of 20 row(s) (seed=0) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Sample20.parquet
