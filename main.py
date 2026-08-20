@@ -1,9 +1,11 @@
 """
 UC1 data pipeline entrypoint.
 
-Runs load_data -> profile_data -> preprocess in order, skipping any step
-already marked completed (tracked in pipeline_status.json) unless
-explicitly forced.
+Runs load_data -> profile_data -> preprocess -> profile_preprocessed_data
+in order, skipping any step already marked completed (tracked in
+pipeline_status.json) unless explicitly forced. This is the data
+preparation phase; synthetic data generation is a separate step run
+afterward once this output looks right.
 
 Usage:
     python main.py                          # run everything not yet done
@@ -22,8 +24,9 @@ from pipeline.state import PipelineState
 from pipeline.steps.load_data import LoadDataStep
 from pipeline.steps.profile_data import ProfileDataStep
 from pipeline.steps.preprocess import PreprocessStep
+from pipeline.steps.profile_preprocessed_data import ProfilePreprocessedDataStep
 
-STEPS = [LoadDataStep(), ProfileDataStep(), PreprocessStep()]
+STEPS = [LoadDataStep(), ProfileDataStep(), PreprocessStep(), ProfilePreprocessedDataStep()]
 
 
 def run_pipeline(
