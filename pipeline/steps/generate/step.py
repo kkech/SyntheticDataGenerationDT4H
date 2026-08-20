@@ -74,6 +74,11 @@ class GenerateStep(PipelineStep):
             summary["runs"].append(
                 self._run_one(name, train, real, categorical, continuous, constants, config, out_dir, n_rows)
             )
+            # Rewrite the summary after every synthesizer rather than once
+            # at the end: a long run (CTGAN at 500 epochs takes ~20 min on
+            # a T4) should not lose the results already obtained if a
+            # later model hangs or the process is interrupted.
+            self._write_summary(summary, out_dir, quiet=True)
 
         self._write_summary(summary, out_dir)
 
@@ -169,14 +174,31 @@ class GenerateStep(PipelineStep):
             print("Training...")
             synth.fit(train, categorical_columns=categorical, continuous_columns=continuous)
 
+            from pipeline.steps.generate.synthesizers.sdv_models import save_metadata
+
+            meta_path = os.path.join(out_dir, f"DT4H_SDV_Metadata_{name}.json")
+            if save_metadata(getattr(synth, "_model", None), meta_path):
+                record["sdv_metadata_path"] = meta_path
+                print(f"Saved SDV metadata (for replicability) -> {meta_path}")
+
             print(f"Sampling {n_rows} rows...")
             synthetic = synth.sample(n_rows)
 
-            for col, value in constants.items():
-                synthetic[col] = value
+            # Re-attach the held-out constants in one concat rather than a
+            # column at a time: inserting ~75 columns individually
+            # fragments the frame and pandas rightly complains about it.
+            if constants:
+                import pandas as pd
+
+                held_out = pd.DataFrame(
+                    {col: [value] * len(synthetic) for col, value in constants.items()},
+                    index=synthetic.index,
+                )
+                synthetic = pd.concat([synthetic, held_out], axis=1)
+
             # Restore the real column order so the published file matches
             # the schema of the source dataset.
-            synthetic = synthetic[[c for c in real.columns if c in synthetic.columns]]
+            synthetic = synthetic[[c for c in real.columns if c in synthetic.columns]].copy()
 
             leak = leakage.check_exact_duplicates(synthetic, real)
             print(leakage.summarize(leak))
@@ -206,16 +228,18 @@ class GenerateStep(PipelineStep):
 
         return record
 
-    def _write_summary(self, summary: dict, out_dir: str) -> None:
+    def _write_summary(self, summary: dict, out_dir: str, quiet: bool = False) -> None:
         json_path = os.path.join(out_dir, "DT4H_Generation_Summary.json")
         with open(json_path, "w") as f:
             json.dump(summary, f, indent=2, default=str)
-        print(f"\nSaved generation summary (JSON) -> {json_path}")
 
         md_path = os.path.join(out_dir, "DT4H_Generation_Summary.md")
         with open(md_path, "w") as f:
             f.write(self._render_markdown(summary))
-        print(f"Saved generation summary (Markdown) -> {md_path}")
+
+        if not quiet:
+            print(f"\nSaved generation summary -> {json_path}")
+            print(f"Saved generation summary -> {md_path}")
 
     @staticmethod
     def _render_markdown(s: dict) -> str:

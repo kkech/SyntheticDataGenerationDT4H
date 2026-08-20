@@ -16,11 +16,16 @@ Usage:
                                                #   still respects its own completed
                                                #   status unless also forced)
     python main.py --status                 # print current step-completion status
+
+All console output (including warnings and tracebacks, which shell
+redirection alone would miss) is teed to logs.txt by default; override
+with --log <path>.
 """
 
 import argparse
 
 from pipeline.config import PipelineConfig
+from pipeline.logging_setup import start_logging, stop_logging
 from pipeline.state import PipelineState
 from pipeline.steps.load_data import LoadDataStep
 from pipeline.steps.profile_data import ProfileDataStep
@@ -92,13 +97,24 @@ def main() -> None:
     parser.add_argument("--only", action="append", default=None,
                          help="Run only these step(s) (repeatable).")
     parser.add_argument("--status", action="store_true", help="Print step-completion status and exit.")
+    parser.add_argument("--log", default="logs.txt",
+                         help="File to tee all console output (stdout, stderr and warnings) to. "
+                              "Default: logs.txt. Pass --log '' to disable.")
     args = parser.parse_args()
 
     if args.status:
         print_status()
         return
 
-    run_pipeline(force=args.force, force_steps=args.force_step, only=args.only)
+    # Tee everything to a log file so a failing run can be shared whole,
+    # rather than only the stdout half that shell redirection captures.
+    handle = start_logging(args.log) if args.log else None
+    try:
+        run_pipeline(force=args.force, force_steps=args.force_step, only=args.only)
+    finally:
+        if handle:
+            stop_logging(handle)
+            print(f"\nFull log written to {args.log}")
 
 
 if __name__ == "__main__":

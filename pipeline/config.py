@@ -34,13 +34,24 @@ class PipelineConfig:
     # Which synthesizers to run, by registry name. Non-DP: ctgan, tvae,
     # gaussian_copula. DP: aim, mst, patectgan, dpctgan.
     #
-    # Defaults pair one non-DP and one DP model. AIM is chosen over the
-    # project's original dpctgan because utility benchmarks consistently
-    # favour marginal-based methods over DP-GANs on tabular data -- but
-    # AIM builds on Private-PGM, which is documented to struggle as column
-    # count grows, and this dataset is ~329 columns wide. If AIM exhausts
-    # memory, either set max_columns to trial a subset or fall back to mst.
-    synthesizers: tuple = ("ctgan", "aim")
+    # Ordered cheapest-first, so a misconfiguration surfaces in seconds
+    # rather than after a ~20-minute CTGAN run. Each model's output and
+    # the run summary are written as it finishes, so partial results
+    # survive an interrupted or failed later model.
+    #
+    #   gaussian_copula  seconds   no training, statistical baseline
+    #   tvae             minutes   usually stronger than CTGAN
+    #   ctgan            ~20 min   the long-standing baseline
+    #   mst              varies    DP, cheaper than AIM
+    #   aim              varies    DP, best utility but heaviest
+    #
+    # AIM is preferred over the project's original dpctgan because
+    # utility benchmarks consistently favour marginal-based methods over
+    # DP-GANs on tabular data. It is listed last because AIM builds on
+    # Private-PGM, which is documented to struggle as column count grows,
+    # and this dataset is ~329 columns wide: if it exhausts memory, set
+    # max_columns to trial a subset, or stop at mst.
+    synthesizers: tuple = ("gaussian_copula", "tvae", "ctgan", "mst", "aim")
     synthesizer_params: dict = None  # per-synthesizer overrides, keyed by name
 
     # None = generate as many rows as the real dataset. Matching the real

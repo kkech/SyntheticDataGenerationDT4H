@@ -29,6 +29,48 @@ def _build_metadata(df: pd.DataFrame):
         return md
 
 
+def _gpu_kwarg(model_cls) -> dict:
+    """
+    SDV renamed the GPU flag from `cuda` to `enable_gpu` and deprecated
+    the old name. Pick whichever the installed version actually accepts,
+    so this works across versions without emitting a deprecation warning
+    on new ones or crashing on old ones.
+    """
+    import inspect
+
+    try:
+        params = inspect.signature(model_cls.__init__).parameters
+    except (TypeError, ValueError):
+        return {}
+
+    use_gpu = gpu_available()
+    if "enable_gpu" in params:
+        return {"enable_gpu": use_gpu}
+    if "cuda" in params:
+        return {"cuda": use_gpu}
+    return {}
+
+
+def save_metadata(model, path: str) -> bool:
+    """
+    Persist the detected SDV metadata alongside the run.
+
+    SDV warns that metadata should be saved for replicability across
+    versions, and for a dataset headed for publication that warning is
+    worth heeding: the metadata records how each column was interpreted
+    (categorical vs numerical vs datetime), which is exactly the detail
+    needed to regenerate the same output later.
+    """
+    md = getattr(model, "metadata", None) or getattr(model, "_metadata", None)
+    if md is None or not hasattr(md, "save_to_json"):
+        return False
+    try:
+        md.save_to_json(path)
+        return True
+    except Exception:
+        return False
+
+
 class SDVCTGANSynthesizer(Synthesizer):
     """Conditional Tabular GAN. The long-standing baseline; recent
     benchmarks report diffusion-based models and TVAE outperforming it."""
@@ -45,8 +87,8 @@ class SDVCTGANSynthesizer(Synthesizer):
             metadata,
             epochs=self.params.get("epochs", 500),
             batch_size=self.params.get("batch_size", 500),
-            cuda=self.params.get("cuda", gpu_available()),
             verbose=self.params.get("verbose", True),
+            **_gpu_kwarg(CTGANSynthesizer),
         )
         self._model.fit(df)
 
@@ -70,7 +112,7 @@ class SDVTVAESynthesizer(Synthesizer):
             metadata,
             epochs=self.params.get("epochs", 500),
             batch_size=self.params.get("batch_size", 500),
-            cuda=self.params.get("cuda", gpu_available()),
+            **_gpu_kwarg(TVAESynthesizer),
         )
         self._model.fit(df)
 
