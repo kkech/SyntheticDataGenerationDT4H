@@ -19,9 +19,41 @@ NYHA_COLUMN = "nyha_nyha_pET"
 # general processing.
 OTHER_NUMERIC_SUFFIXES = ("_min", "_max", "_avg", "_stddev")
 
-# A category value is only reported/kept distinct if at least this many
-# rows share it -- see NUMERIC_MIN_NONNULL below for the numeric analog.
+# Below this share of rows, a numeric column has too few real values for
+# bootstrap imputation to mean anything: resampling 4688 values from 6
+# observations just replicates those six numbers across the cohort. Held
+# as a fraction rather than an absolute count so it scales with the
+# dataset (5% of 4694 rows is ~235).
+NUMERIC_MIN_NONNULL_FRACTION = 0.05
+# Absolute floor, applied alongside the fraction for very small inputs.
 NUMERIC_MIN_NONNULL = 5
+
+# --- structurally missing (time-to-event) columns ---
+#
+# For these, a null does not mean "we failed to measure it" -- it means
+# THE EVENT NEVER HAPPENED. Only 110 of 4694 patients have a "days to
+# cardiovascular death" because only 110 died of cardiovascular causes;
+# for the rest no true value exists. Bootstrap-imputing them would
+# fabricate 4584 cardiovascular deaths, and a synthesizer would learn and
+# reproduce that fiction.
+#
+# So they are encoded with an explicit sentinel meaning "no event"
+# instead of being imputed, and the sentinel is decoded back to null in
+# the synthetic output (see the generate step). Observed values start at
+# 0, 1 and 3 across these columns, so a negative sentinel cannot collide
+# with a real measurement -- 0 would have been ambiguous with a same-day
+# event.
+STRUCTURAL_MISSING_SENTINEL = -1.0
+STRUCTURAL_MISSING_PATTERNS = (
+    "number_of_days_to_death",
+    "number_of_days_to_rehosp",
+)
+
+
+def is_structurally_missing_column(name: str) -> bool:
+    """True if a null in this column means "event did not occur" rather
+    than "value unknown"."""
+    return any(pattern in name for pattern in STRUCTURAL_MISSING_PATTERNS)
 
 # NYHA is ordinal (1-4) by the time imputation runs, not a free numeric
 # value -- a missing assessment gets this sentinel instead of a
@@ -474,6 +506,39 @@ def impute_nyha_missing(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     return df, {"filled": n_missing, "sentinel": NYHA_MISSING_SENTINEL}
 
 
+def encode_structural_missing(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
+    """
+    Encode "event did not occur" with a sentinel instead of imputing it.
+
+    No `_was_missing` companion flag is added here: unlike an unmeasured
+    lab, the sentinel already carries the full meaning, and a separate
+    flag would let a synthesizer emit contradictory rows (flag says no
+    event, value says day 47).
+    """
+    cols = [
+        name for name, v in var_meta.items()
+        if v.get("dataType") == "NUMERIC"
+        and name in df.columns
+        and is_structurally_missing_column(name)
+    ]
+
+    encoded = []
+    for col in cols:
+        n_null = df[col].null_count()
+        if n_null == 0:
+            continue
+        df = df.with_columns(pl.col(col).fill_null(STRUCTURAL_MISSING_SENTINEL).alias(col))
+        encoded.append({"column": col, "n_encoded": n_null, "n_real_events": df.height - n_null})
+
+    if encoded:
+        print(f"  Encoded {len(encoded)} time-to-event column(s) with sentinel "
+              f"{STRUCTURAL_MISSING_SENTINEL} ('no event') rather than imputing them:")
+        for e in encoded:
+            print(f"    {e['column']}: {e['n_real_events']} real event(s), "
+                  f"{e['n_encoded']} marked 'no event'")
+    return df, {"sentinel": STRUCTURAL_MISSING_SENTINEL, "encoded": encoded}
+
+
 def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> tuple[pl.DataFrame, dict]:
     """
     Nulls in NUMERIC columns are imputed by bootstrap-sampling (with
@@ -484,8 +549,15 @@ def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> t
     fewer than NUMERIC_MIN_NONNULL observed values are dropped entirely.
     """
     rng = np.random.default_rng(seed)
+    # Time-to-event columns are excluded: encode_structural_missing() has
+    # already given them a sentinel, and imputing them would fabricate
+    # events that never happened.
     numeric_cols = [name for name, v in var_meta.items()
-                    if v.get("dataType") == "NUMERIC" and name in df.columns]
+                    if v.get("dataType") == "NUMERIC"
+                    and name in df.columns
+                    and not is_structurally_missing_column(name)]
+
+    min_nonnull = max(NUMERIC_MIN_NONNULL, int(NUMERIC_MIN_NONNULL_FRACTION * df.height))
 
     flag_cols = []
     drop_cols = []
@@ -499,8 +571,8 @@ def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> t
             continue
 
         non_null = series.drop_nulls()
-        if non_null.len() < NUMERIC_MIN_NONNULL:
-            drop_cols.append(col)
+        if non_null.len() < min_nonnull:
+            drop_cols.append({"column": col, "n_observed": non_null.len()})
             continue
 
         flag_cols.append(null_mask.alias(f"{col}_was_missing"))
@@ -514,11 +586,19 @@ def impute_numeric_columns(df: pl.DataFrame, var_meta: dict, seed: int = 0) -> t
     if flag_cols:
         df = df.with_columns(flag_cols)
     if drop_cols:
-        df = df.drop(drop_cols)
+        df = df.drop([d["column"] for d in drop_cols])
 
     print(f"  Imputed {len(imputed_cols)} numeric column(s), added {len(flag_cols)} '_was_missing' flag(s), "
-          f"dropped {len(drop_cols)} column(s) with fewer than {NUMERIC_MIN_NONNULL} observed values.")
-    return df, {"imputed": imputed_cols, "was_missing_flags_added": len(flag_cols), "dropped_too_few": drop_cols}
+          f"dropped {len(drop_cols)} column(s) with fewer than {min_nonnull} observed values "
+          f"({NUMERIC_MIN_NONNULL_FRACTION:.0%} of {df.height} rows).")
+    for d in drop_cols:
+        print(f"    dropped {d['column']} (only {d['n_observed']} observed)")
+    return df, {
+        "imputed": imputed_cols,
+        "was_missing_flags_added": len(flag_cols),
+        "min_nonnull_required": min_nonnull,
+        "dropped_too_few": drop_cols,
+    }
 
 
 def impute_categorical_and_boolean(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:

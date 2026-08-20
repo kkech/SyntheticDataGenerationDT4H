@@ -202,6 +202,12 @@ class GenerateStep(PipelineStep):
             # the schema of the source dataset.
             synthetic = synthetic[[c for c in real.columns if c in synthetic.columns]].copy()
 
+            synthetic, decoded = self._decode_structural_missing(synthetic)
+            if decoded:
+                print(f"  Decoded sentinel back to null in {len(decoded)} time-to-event "
+                      f"column(s): {sum(decoded.values())} cells marked 'no event'.")
+                record["structural_missing_decoded"] = decoded
+
             leak = leakage.check_exact_duplicates(synthetic, real)
             print(leakage.summarize(leak))
 
@@ -234,6 +240,35 @@ class GenerateStep(PipelineStep):
             print(traceback.format_exc())
 
         return record
+
+    @staticmethod
+    def _decode_structural_missing(synthetic):
+        """
+        Turn the "no event" sentinel back into null.
+
+        Preprocessing encoded "this event never happened" as a negative
+        sentinel so the synthesizer would model it as a distinct state
+        rather than be handed fabricated event times. In the published
+        output that state should read as null again -- an empty cell says
+        "no event", where a negative number of days would be nonsense.
+        A generative model returns a continuous approximation rather than
+        exactly the sentinel, so anything below zero is treated as the
+        sentinel; real observed values in these columns are all >= 0.
+        """
+        import pandas as pd
+
+        from pipeline.steps.preprocess.transforms import is_structurally_missing_column
+
+        decoded = {}
+        for col in synthetic.columns:
+            if not is_structurally_missing_column(col) or not pd.api.types.is_numeric_dtype(synthetic[col]):
+                continue
+            mask = synthetic[col] < 0
+            n = int(mask.sum())
+            if n:
+                synthetic.loc[mask, col] = pd.NA
+                decoded[col] = n
+        return synthetic, decoded
 
     def _write_summary(self, summary: dict, out_dir: str, quiet: bool = False) -> None:
         json_path = os.path.join(out_dir, "DT4H_Generation_Summary.json")
