@@ -1,4 +1,3 @@
-import glob
 import json
 import os
 import shutil
@@ -53,63 +52,19 @@ def load_metadata(folder: str, output_folder: str) -> None:
         print(f"Copied metadata file -> {dest}")
 
 
-def load_part_files(folder: str) -> pl.DataFrame | None:
+def load_data_parquet(folder: str) -> pl.DataFrame:
     """
-    part-NNNNN-<uuid>-c000.snappy.parquet is the standard naming Spark uses
-    for row-wise partitions of a single logical table -- these all share
-    one schema and should be concatenated, not joined.
+    data.parquet is confirmed to already contain everything from the
+    part-*.parquet files (those are just its underlying Spark-partitioned
+    storage) -- so it's read directly as the full dataset, no concatenation
+    or reconciliation with the part files needed.
     """
-    part_files = sorted(glob.glob(os.path.join(folder, "part-*.parquet")))
-    if not part_files:
-        return None
-
-    print(f"\nFound {len(part_files)} Spark-style part file(s):")
-    frames = []
-    for f in part_files:
-        df = pl.read_parquet(f)
-        print(f"  {os.path.basename(f)}: {df.height} rows x {df.width} cols")
-        frames.append(df)
-
-    combined = pl.concat(frames, how="vertical_relaxed")
-    print(f"Concatenated parts: {combined.height} rows x {combined.width} cols")
-    return combined
-
-
-def load_data_parquet(folder: str) -> pl.DataFrame | None:
     path = os.path.join(folder, "data.parquet")
     if not os.path.exists(path):
-        return None
+        raise FileNotFoundError(f"{path} not found.")
     df = pl.read_parquet(path)
     print(f"\ndata.parquet: {df.height} rows x {df.width} cols")
     return df
-
-
-def resolve_primary_dataset(df_data: pl.DataFrame | None, df_parts: pl.DataFrame | None) -> pl.DataFrame:
-    """
-    We don't know upfront whether data.parquet is a separate/redundant
-    export or the already-merged version of the part files, so this makes
-    the decision explicit and loud rather than silently picking one.
-    """
-    if df_data is None and df_parts is None:
-        raise ValueError("Neither data.parquet nor part-*.parquet files were found.")
-    if df_data is None:
-        print("\nUsing concatenated part files as the dataset (no data.parquet found).")
-        return df_parts
-    if df_parts is None:
-        print("\nUsing data.parquet as the dataset (no part files found).")
-        return df_data
-
-    same_cols = set(df_data.columns) == set(df_parts.columns)
-    print(f"\ndata.parquet columns {'MATCH' if same_cols else 'DIFFER FROM'} concatenated part-file columns.")
-    if same_cols:
-        print("Treating data.parquet as the canonical merged file; ignoring part files to avoid double-counting.")
-        print("⚠️  If that's wrong (e.g. data.parquet is a different subset/sample), edit resolve_primary_dataset().")
-        return df_data
-
-    print("⚠️  Schemas differ -- defaulting to the concatenated part files, but this needs manual review:")
-    print(f"   data.parquet-only columns: {sorted(set(df_data.columns) - set(df_parts.columns))[:10]}")
-    print(f"   parts-only columns: {sorted(set(df_parts.columns) - set(df_data.columns))[:10]}")
-    return df_parts
 
 
 def analyze_full_dataset(df: pl.DataFrame, output_folder: str) -> None:
@@ -146,9 +101,7 @@ def prepare_test_data():
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
     inspect_folder(INPUT_FOLDER)
 
-    df_data = load_data_parquet(INPUT_FOLDER)
-    df_parts = load_part_files(INPUT_FOLDER)
-    df_full = resolve_primary_dataset(df_data, df_parts)
+    df_full = load_data_parquet(INPUT_FOLDER)
 
     load_metadata(INPUT_FOLDER, OUTPUT_FOLDER)
     analyze_full_dataset(df_full, OUTPUT_FOLDER)
