@@ -1,17 +1,7 @@
 # Column Analysis
 
 Total rows: 4694
-Total columns: 312
-
-## patient_demographics_sourceIdentifier
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 4694
-- ⚠️ high-cardinality column (4694 distinct values)
-- top values (shown only where count ≥ 5):
-  - (none met the display threshold)
-  - 4694 other distinct value(s) suppressed, covering 4694 row(s) (count below 5 and/or ranked beyond top 20)
+Total columns: 311
 
 ## patient_demographics_gender
 

@@ -79,6 +79,9 @@ class PreprocessStep(PipelineStep):
         print("Dropping identifier/datetime columns...")
         df, summary["identifiers_datetimes_dropped"] = t.drop_identifiers_and_datetimes(df, var_meta)
 
+        print("Dropping near-unique identifier-like columns (safety net)...")
+        df, summary["near_unique_columns_dropped"] = t.drop_near_unique_columns(df)
+
         print("Final null cleanup...")
         df, summary["nyha_missing_imputation"] = t.impute_nyha_missing(df)
         df, summary["numeric_imputation"] = t.impute_numeric_columns(df, var_meta)
@@ -151,6 +154,8 @@ class PreprocessStep(PipelineStep):
             f"- Numeric aggregate columns dropped (bare/_min/_max/_avg/_stddev): "
             f"{len(s['numeric_aggregates_dropped']['dropped'])}",
             f"- IDENTIFIER/DATETIME columns dropped: {s['identifiers_datetimes_dropped']['dropped']}",
+            f"- Near-unique identifier-like columns dropped (safety net, not caught by declared type): "
+            f"{s['near_unique_columns_dropped']['dropped']}",
         ]
 
         lines += ["", "## Dummy imputation (Machteld's temporary placeholder rules)"]

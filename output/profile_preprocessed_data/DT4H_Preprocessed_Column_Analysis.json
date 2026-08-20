@@ -1,23 +1,7 @@
 {
   "total_rows": 4694,
-  "total_columns": 312,
+  "total_columns": 311,
   "columns": {
-    "patient_demographics_sourceIdentifier": {
-      "dtype": "String",
-      "inferred_type": "categorical",
-      "row_count": 4694,
-      "null_count": 0,
-      "null_pct": 0.0,
-      "unique_count": 4694,
-      "is_constant": false,
-      "high_cardinality": true,
-      "top_values": {},
-      "suppressed": {
-        "distinct_values_suppressed": 4694,
-        "rows_covered": 4694,
-        "reason": "count below 5 and/or ranked beyond top 20"
-      }
-    },
     "patient_demographics_gender": {
       "dtype": "String",
       "inferred_type": "categorical",

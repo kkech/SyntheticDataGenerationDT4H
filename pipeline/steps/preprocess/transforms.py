@@ -162,6 +162,37 @@ def drop_identifiers_and_datetimes(df: pl.DataFrame, var_meta: dict) -> tuple[pl
     return df, {"dropped": drop_cols}
 
 
+# A string column this close to 100% unique behaves like a raw identifier
+# regardless of how metadata.json tags it -- e.g.
+# patient_demographics_sourceIdentifier is declared NOMINAL, not
+# IDENTIFIER, but is 100% unique per row in the real export.
+NEAR_UNIQUE_THRESHOLD = 0.9
+
+
+def drop_near_unique_columns(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
+    """
+    Safety net beyond drop_identifiers_and_datetimes: catches
+    identifier-like string columns the declared type missed. Only
+    triggers on near-total uniqueness (>90% of rows), so it won't catch
+    ordinary high-cardinality categoricals -- just ones that are
+    effectively a row-level identifier.
+    """
+    height = df.height
+    drop_cols = []
+    for col in df.columns:
+        if df[col].dtype != pl.String:
+            continue
+        n_unique = df[col].n_unique()
+        if height and n_unique / height > NEAR_UNIQUE_THRESHOLD:
+            drop_cols.append(col)
+
+    if drop_cols:
+        print(f"  Dropping {len(drop_cols)} near-unique identifier-like column(s) "
+              f"not caught by declared type: {drop_cols}")
+        df = df.drop(drop_cols)
+    return df, {"dropped": drop_cols}
+
+
 # --- medication / condition combining (Machteld's email) ---
 
 def _strip_any_suffix(name: str) -> str:

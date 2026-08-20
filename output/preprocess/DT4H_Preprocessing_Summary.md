@@ -1,7 +1,7 @@
 # Preprocessing Summary
 
 - Input: 4694 rows x 528 columns (4694 unique patients)
-- Output: 4694 rows x 312 columns
+- Output: 4694 rows x 311 columns
 - Remaining null cells: 0
 
 ## Metadata validation
@@ -23,6 +23,7 @@
 - NYHA encoding: {'LA28404-4': 1, 'LA28405-1': 2, 'LA28406-9': 3, 'LA28407-7': 4}
 - Numeric aggregate columns dropped (bare/_min/_max/_avg/_stddev): 140
 - IDENTIFIER/DATETIME columns dropped: ['pid', 'encounterId', 'eventTime', 'exitTime', 'referenceTimePoint', 'encounters_admissionDate', 'encounters_dischargeDate']
+- Near-unique identifier-like columns dropped (safety net, not caught by declared type): ['patient_demographics_sourceIdentifier']
 
 ## Dummy imputation (Machteld's temporary placeholder rules)
 - Filled 1995 value(s) in `lab_results_hba1c%_value_first` (triggered by `lab_results_albuminBS_value` present)

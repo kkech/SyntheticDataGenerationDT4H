@@ -781,5 +781,10 @@
   },
   "remaining_null_cells": 0,
   "output_rows": 4694,
-  "output_columns": 312
+  "output_columns": 311,
+  "near_unique_columns_dropped": {
+    "dropped": [
+      "patient_demographics_sourceIdentifier"
+    ]
+  }
 }
