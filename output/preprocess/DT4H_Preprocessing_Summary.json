@@ -359,173 +359,96 @@
       "LA28407-7": 4
     }
   },
-  "dummy_imputation": {
-    "fills": [
-      {
-        "target": "lab_results_hba1c%_value_first",
-        "trigger": "lab_results_albuminBS_value",
-        "n_filled": 1995
-      },
-      {
-        "target": "lab_results_hba1c%_value_last",
-        "trigger": "lab_results_albuminBS_value",
-        "n_filled": 1995
-      },
-      {
-        "target": "lab_results_hba1c_value_first",
-        "trigger": "lab_results_albuminBS_value",
-        "n_filled": 1995
-      },
-      {
-        "target": "lab_results_hba1c_value_last",
-        "trigger": "lab_results_albuminBS_value",
-        "n_filled": 1995
-      },
-      {
-        "target": "lab_results_ntProBnp_value_first",
-        "trigger": "lab_results_albuminBS_value",
-        "n_filled": 277
-      },
-      {
-        "target": "lab_results_ntProBnp_value_last",
-        "trigger": "lab_results_albuminBS_value",
-        "n_filled": 277
-      },
-      {
-        "target": "lab_results_crpNonHs_value_first",
-        "trigger": "lab_results_albuminBS_value",
-        "n_filled": 114
-      },
-      {
-        "target": "lab_results_crpNonHs_value_last",
-        "trigger": "lab_results_albuminBS_value",
-        "n_filled": 114
-      },
-      {
-        "target": "lab_results_tropTnHs_value_first",
-        "trigger": "lab_results_hdl_value",
-        "n_filled": 391
-      },
-      {
-        "target": "lab_results_tropTnHs_value_last",
-        "trigger": "lab_results_hdl_value",
-        "n_filled": 391
-      },
-      {
-        "target": "lab_results_ldl_value_first",
-        "trigger": "lab_results_hdl_value",
-        "n_filled": 4
-      },
-      {
-        "target": "lab_results_ldl_value_last",
-        "trigger": "lab_results_hdl_value",
-        "n_filled": 4
-      },
-      {
-        "target": "lab_results_sodium_value_first",
-        "trigger": "lab_results_potassium_value",
-        "n_filled": 37
-      },
-      {
-        "target": "lab_results_sodium_value_last",
-        "trigger": "lab_results_potassium_value",
-        "n_filled": 37
-      },
-      {
-        "target": "vital_signs_oxygenSaturation_value_first",
-        "trigger": "vital_signs_heartRate_value",
-        "n_filled": 2436
-      },
-      {
-        "target": "vital_signs_oxygenSaturation_value_last",
-        "trigger": "vital_signs_heartRate_value",
-        "n_filled": 2436
-      },
-      {
-        "target": "electrocardiographs_ecg_qrs_axis_pET_first",
-        "trigger": "electrocardiographs_ecg_qrs_duration_pET",
-        "n_filled": 2385
-      },
-      {
-        "target": "electrocardiographs_ecg_qrs_axis_pET_last",
-        "trigger": "electrocardiographs_ecg_qrs_duration_pET",
-        "n_filled": 2385
-      }
-    ],
-    "skipped": [
-      {
-        "reason": "target not found",
-        "trigger": "lab_results_albuminBS_value",
-        "target": "lab_results_glucose_value"
-      }
-    ]
-  },
   "numeric_aggregates_dropped": {
     "dropped": [
-      "vital_signs_diastolicBp_value_min",
-      "vital_signs_diastolicBp_value_max",
-      "vital_signs_diastolicBp_value_avg",
-      "vital_signs_diastolicBp_value_stddev",
-      "lab_results_hemoglobin_value_min",
-      "lab_results_hemoglobin_value_max",
-      "lab_results_hemoglobin_value_avg",
-      "lab_results_hemoglobin_value_stddev",
-      "lab_results_ferritin_value_min",
-      "lab_results_ferritin_value_max",
-      "lab_results_ferritin_value_avg",
-      "lab_results_ferritin_value_stddev",
-      "lab_results_albuminBS_value_min",
-      "lab_results_albuminBS_value_max",
-      "lab_results_albuminBS_value_avg",
-      "lab_results_albuminBS_value_stddev",
-      "lab_results_acr_value_min",
-      "lab_results_acr_value_max",
-      "lab_results_acr_value_avg",
-      "lab_results_acr_value_stddev",
-      "lab_results_tropTHs_value_min",
-      "lab_results_tropTHs_value_max",
-      "lab_results_tropTHs_value_avg",
-      "lab_results_tropTHs_value_stddev",
+      "vital_signs_oxygenSaturation_value_min",
+      "vital_signs_oxygenSaturation_value_max",
+      "vital_signs_oxygenSaturation_value_avg",
+      "vital_signs_oxygenSaturation_value_stddev",
+      "lab_results_triGly_value_min",
+      "lab_results_triGly_value_max",
+      "lab_results_triGly_value_avg",
+      "lab_results_triGly_value_stddev",
+      "lab_results_ntProBnp_value_min",
+      "lab_results_ntProBnp_value_max",
+      "lab_results_ntProBnp_value_avg",
+      "lab_results_ntProBnp_value_stddev",
       "echocardiographs_lvef_pET_min",
       "echocardiographs_lvef_pET_max",
       "echocardiographs_lvef_pET_avg",
       "echocardiographs_lvef_pET_stddev",
-      "lab_results_crpNonHs_value_min",
-      "lab_results_crpNonHs_value_max",
-      "lab_results_crpNonHs_value_avg",
-      "lab_results_crpNonHs_value_stddev",
-      "lab_results_bnp_value_min",
-      "lab_results_bnp_value_max",
-      "lab_results_bnp_value_avg",
-      "lab_results_bnp_value_stddev",
+      "lab_results_validSerumCreatinine_value_min",
+      "lab_results_validSerumCreatinine_value_max",
+      "lab_results_validSerumCreatinine_value_avg",
+      "lab_results_validSerumCreatinine_value_stddev",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_min",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_max",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_avg",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_stddev",
       "lab_results_hdl_value_min",
       "lab_results_hdl_value_max",
       "lab_results_hdl_value_avg",
       "lab_results_hdl_value_stddev",
-      "lab_results_crpHs_value_min",
-      "lab_results_crpHs_value_max",
-      "lab_results_crpHs_value_avg",
-      "lab_results_crpHs_value_stddev",
-      "vital_signs_weight_value_p6mo_min",
-      "vital_signs_weight_value_p6mo_max",
-      "vital_signs_weight_value_p6mo_avg",
-      "vital_signs_weight_value_p6mo_stddev",
+      "lab_results_crpNonHs_value_min",
+      "lab_results_crpNonHs_value_max",
+      "lab_results_crpNonHs_value_avg",
+      "lab_results_crpNonHs_value_stddev",
+      "vital_signs_systolicBp_value_min",
+      "vital_signs_systolicBp_value_max",
+      "vital_signs_systolicBp_value_avg",
+      "vital_signs_systolicBp_value_stddev",
       "lab_results_creatUS_value_min",
       "lab_results_creatUS_value_max",
       "lab_results_creatUS_value_avg",
       "lab_results_creatUS_value_stddev",
+      "lab_results_ferritin_value_min",
+      "lab_results_ferritin_value_max",
+      "lab_results_ferritin_value_avg",
+      "lab_results_ferritin_value_stddev",
+      "vital_signs_heartRate_value_min",
+      "vital_signs_heartRate_value_max",
+      "vital_signs_heartRate_value_avg",
+      "vital_signs_heartRate_value_stddev",
+      "vital_signs_diastolicBp_value_min",
+      "vital_signs_diastolicBp_value_max",
+      "vital_signs_diastolicBp_value_avg",
+      "vital_signs_diastolicBp_value_stddev",
+      "lab_results_albuminBS_value_min",
+      "lab_results_albuminBS_value_max",
+      "lab_results_albuminBS_value_avg",
+      "lab_results_albuminBS_value_stddev",
+      "lab_results_tropTHs_value_min",
+      "lab_results_tropTHs_value_max",
+      "lab_results_tropTHs_value_avg",
+      "lab_results_tropTHs_value_stddev",
       "lab_results_ldl_value_min",
       "lab_results_ldl_value_max",
       "lab_results_ldl_value_avg",
       "lab_results_ldl_value_stddev",
-      "lab_results_albuminUS_value_min",
-      "lab_results_albuminUS_value_max",
-      "lab_results_albuminUS_value_avg",
-      "lab_results_albuminUS_value_stddev",
-      "electrocardiographs_ecg_qrs_axis_pET_min",
-      "electrocardiographs_ecg_qrs_axis_pET_max",
-      "electrocardiographs_ecg_qrs_axis_pET_avg",
-      "electrocardiographs_ecg_qrs_axis_pET_stddev",
+      "lab_results_cholTot_value_min",
+      "lab_results_cholTot_value_max",
+      "lab_results_cholTot_value_avg",
+      "lab_results_cholTot_value_stddev",
+      "lab_results_sodium_value_min",
+      "lab_results_sodium_value_max",
+      "lab_results_sodium_value_avg",
+      "lab_results_sodium_value_stddev",
+      "vital_signs_weight_value_p6mo_min",
+      "vital_signs_weight_value_p6mo_max",
+      "vital_signs_weight_value_p6mo_avg",
+      "vital_signs_weight_value_p6mo_stddev",
+      "lab_results_tropTnHs_value_min",
+      "lab_results_tropTnHs_value_max",
+      "lab_results_tropTnHs_value_avg",
+      "lab_results_tropTnHs_value_stddev",
+      "lab_results_crpHs_value_min",
+      "lab_results_crpHs_value_max",
+      "lab_results_crpHs_value_avg",
+      "lab_results_crpHs_value_stddev",
+      "lab_results_acr_value_min",
+      "lab_results_acr_value_max",
+      "lab_results_acr_value_avg",
+      "lab_results_acr_value_stddev",
       "lab_results_tfs_value_min",
       "lab_results_tfs_value_max",
       "lab_results_tfs_value_avg",
@@ -534,74 +457,50 @@
       "electrocardiographs_ecg_qrs_duration_pET_max",
       "electrocardiographs_ecg_qrs_duration_pET_avg",
       "electrocardiographs_ecg_qrs_duration_pET_stddev",
-      "vital_signs_systolicBp_value_min",
-      "vital_signs_systolicBp_value_max",
-      "vital_signs_systolicBp_value_avg",
-      "vital_signs_systolicBp_value_stddev",
-      "lab_results_validSerumCreatinine_value_min",
-      "lab_results_validSerumCreatinine_value_max",
-      "lab_results_validSerumCreatinine_value_avg",
-      "lab_results_validSerumCreatinine_value_stddev",
-      "lab_results_tropIHs_value_min",
-      "lab_results_tropIHs_value_max",
-      "lab_results_tropIHs_value_avg",
-      "lab_results_tropIHs_value_stddev",
-      "vital_signs_heartRate_value_min",
-      "vital_signs_heartRate_value_max",
-      "vital_signs_heartRate_value_avg",
-      "vital_signs_heartRate_value_stddev",
-      "lab_results_hba1c_value_min",
-      "lab_results_hba1c_value_max",
-      "lab_results_hba1c_value_avg",
-      "lab_results_hba1c_value_stddev",
-      "electrocardiographs_ecg_qt_duration_corrected_pET_min",
-      "electrocardiographs_ecg_qt_duration_corrected_pET_max",
-      "electrocardiographs_ecg_qt_duration_corrected_pET_avg",
-      "electrocardiographs_ecg_qt_duration_corrected_pET_stddev",
-      "lab_results_hba1c%_value_min",
-      "lab_results_hba1c%_value_max",
-      "lab_results_hba1c%_value_avg",
-      "lab_results_hba1c%_value_stddev",
-      "lab_results_potassium_value_min",
-      "lab_results_potassium_value_max",
-      "lab_results_potassium_value_avg",
-      "lab_results_potassium_value_stddev",
-      "lab_results_valideGFR_value_min",
-      "lab_results_valideGFR_value_max",
-      "lab_results_valideGFR_value_avg",
-      "lab_results_valideGFR_value_stddev",
-      "lab_results_triGly_value_min",
-      "lab_results_triGly_value_max",
-      "lab_results_triGly_value_avg",
-      "lab_results_triGly_value_stddev",
       "lab_results_bun_value_min",
       "lab_results_bun_value_max",
       "lab_results_bun_value_avg",
       "lab_results_bun_value_stddev",
-      "lab_results_ntProBnp_value_min",
-      "lab_results_ntProBnp_value_max",
-      "lab_results_ntProBnp_value_avg",
-      "lab_results_ntProBnp_value_stddev",
-      "lab_results_cholTot_value_min",
-      "lab_results_cholTot_value_max",
-      "lab_results_cholTot_value_avg",
-      "lab_results_cholTot_value_stddev",
-      "lab_results_tropTnHs_value_min",
-      "lab_results_tropTnHs_value_max",
-      "lab_results_tropTnHs_value_avg",
-      "lab_results_tropTnHs_value_stddev",
+      "lab_results_tropIHs_value_min",
+      "lab_results_tropIHs_value_max",
+      "lab_results_tropIHs_value_avg",
+      "lab_results_tropIHs_value_stddev",
+      "lab_results_potassium_value_min",
+      "lab_results_potassium_value_max",
+      "lab_results_potassium_value_avg",
+      "lab_results_potassium_value_stddev",
+      "lab_results_hba1c_value_min",
+      "lab_results_hba1c_value_max",
+      "lab_results_hba1c_value_avg",
+      "lab_results_hba1c_value_stddev",
+      "lab_results_hemoglobin_value_min",
+      "lab_results_hemoglobin_value_max",
+      "lab_results_hemoglobin_value_avg",
+      "lab_results_hemoglobin_value_stddev",
+      "lab_results_bnp_value_min",
+      "lab_results_bnp_value_max",
+      "lab_results_bnp_value_avg",
+      "lab_results_bnp_value_stddev",
+      "lab_results_albuminUS_value_min",
+      "lab_results_albuminUS_value_max",
+      "lab_results_albuminUS_value_avg",
+      "lab_results_albuminUS_value_stddev",
+      "electrocardiographs_ecg_qrs_axis_pET_min",
+      "electrocardiographs_ecg_qrs_axis_pET_max",
+      "electrocardiographs_ecg_qrs_axis_pET_avg",
+      "electrocardiographs_ecg_qrs_axis_pET_stddev",
       "lab_results_tropInHs_value_min",
       "lab_results_tropInHs_value_max",
       "lab_results_tropInHs_value_avg",
       "lab_results_tropInHs_value_stddev",
-      "vital_signs_oxygenSaturation_value_min",
-      "vital_signs_oxygenSaturation_value_max",
-      "vital_signs_oxygenSaturation_value_avg",
-      "vital_signs_oxygenSaturation_value_stddev",
-      "lab_results_sodium_value_min",
-      "lab_results_sodium_value_max",
-      "lab_results_sodium_value_avg",
-      "lab_results_sodium_value_stddev"
+      "lab_results_valideGFR_value_min",
+      "lab_results_valideGFR_value_max",
+      "lab_results_valideGFR_value_avg",
+      "lab_results_valideGFR_value_stddev",
+      "lab_results_hba1c%_value_min",
+      "lab_results_hba1c%_value_max",
+      "lab_results_hba1c%_value_avg",
+      "lab_results_hba1c%_value_stddev"
     ]
   },
   "identifiers_datetimes_dropped": {
@@ -624,373 +523,642 @@
     "filled": 3530,
     "sentinel": 0
   },
-  "numeric_imputation": {
-    "imputed": [
-      {
-        "column": "vital_signs_weight_value_p6mo_first",
-        "n_filled": 391,
-        "n_observed": 4303
+  "numeric_missing_encoding": {
+    "encoded": {
+      "vital_signs_weight_value_p6mo_first": {
+        "sentinel": -17.875,
+        "decode_threshold": 8.0125,
+        "min_observed": 33.9,
+        "max_observed": 241.0,
+        "n_encoded": 391,
+        "n_observed": 4303,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_weight_value_p6mo_last",
-        "n_filled": 391,
-        "n_observed": 4303
+      "vital_signs_weight_value_p6mo_last": {
+        "sentinel": -12.149999999999999,
+        "decode_threshold": 9.925,
+        "min_observed": 32.0,
+        "max_observed": 208.6,
+        "n_encoded": 391,
+        "n_observed": 4303,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_height_value_p1a_avg",
-        "n_filled": 959,
-        "n_observed": 3735
+      "vital_signs_height_value_p1a_avg": {
+        "sentinel": 69.43749999999999,
+        "decode_threshold": 83.19375,
+        "min_observed": 96.94999999999999,
+        "max_observed": 207.0,
+        "n_encoded": 959,
+        "n_observed": 3735,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_weight_value_last",
-        "n_filled": 718,
-        "n_observed": 3976
+      "vital_signs_weight_value_last": {
+        "sentinel": -12.149999999999999,
+        "decode_threshold": 9.925,
+        "min_observed": 32.0,
+        "max_observed": 208.6,
+        "n_encoded": 718,
+        "n_observed": 3976,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_height_value_last",
-        "n_filled": 2057,
-        "n_observed": 2637
+      "vital_signs_height_value_last": {
+        "sentinel": 85.75,
+        "decode_threshold": 97.875,
+        "min_observed": 110.0,
+        "max_observed": 207.0,
+        "n_encoded": 2057,
+        "n_observed": 2637,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_bmi_value_last",
-        "n_filled": 2195,
-        "n_observed": 2499
+      "vital_signs_bmi_value_last": {
+        "sentinel": -3.3814626314492653,
+        "decode_threshold": 4.915161140346182,
+        "min_observed": 13.21178491214163,
+        "max_observed": 79.5847750865052,
+        "n_encoded": 2195,
+        "n_observed": 2499,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_systolicBp_value_first",
-        "n_filled": 241,
-        "n_observed": 4453
+      "vital_signs_systolicBp_value_first": {
+        "sentinel": -6.75,
+        "decode_threshold": 19.625,
+        "min_observed": 46.0,
+        "max_observed": 257.0,
+        "n_encoded": 241,
+        "n_observed": 4453,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_systolicBp_value_last",
-        "n_filled": 241,
-        "n_observed": 4453
+      "vital_signs_systolicBp_value_last": {
+        "sentinel": 7.25,
+        "decode_threshold": 28.625,
+        "min_observed": 50.0,
+        "max_observed": 221.0,
+        "n_encoded": 241,
+        "n_observed": 4453,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_diastolicBp_value_first",
-        "n_filled": 241,
-        "n_observed": 4453
+      "vital_signs_diastolicBp_value_first": {
+        "sentinel": -40.25,
+        "decode_threshold": -16.125,
+        "min_observed": 8.0,
+        "max_observed": 201.0,
+        "n_encoded": 241,
+        "n_observed": 4453,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_diastolicBp_value_last",
-        "n_filled": 241,
-        "n_observed": 4453
+      "vital_signs_diastolicBp_value_last": {
+        "sentinel": -32.0,
+        "decode_threshold": -13.0,
+        "min_observed": 6.0,
+        "max_observed": 158.0,
+        "n_encoded": 241,
+        "n_observed": 4453,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_heartRate_value_first",
-        "n_filled": 2258,
-        "n_observed": 2436
+      "vital_signs_heartRate_value_first": {
+        "sentinel": -54.5,
+        "decode_threshold": -26.75,
+        "min_observed": 1.0,
+        "max_observed": 223.0,
+        "n_encoded": 2258,
+        "n_observed": 2436,
+        "missingness_kind": "not_measured"
       },
-      {
-        "column": "vital_signs_heartRate_value_last",
-        "n_filled": 2258,
-        "n_observed": 2436
+      "vital_signs_heartRate_value_last": {
+        "sentinel": -63.5,
+        "decode_threshold": -31.75,
+        "min_observed": 0.0,
+        "max_observed": 254.0,
+        "n_encoded": 2258,
+        "n_observed": 2436,
+        "missingness_kind": "not_measured"
       },
+      "lab_results_hemoglobin_value_first": {
+        "sentinel": -54.586175,
+        "decode_threshold": -27.2125175,
+        "min_observed": 0.16114,
+        "max_observed": 219.1504,
+        "n_encoded": 147,
+        "n_observed": 4547,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_hemoglobin_value_last": {
+        "sentinel": -18.128249999999994,
+        "decode_threshold": 7.049875000000004,
+        "min_observed": 32.228,
+        "max_observed": 233.653,
+        "n_encoded": 147,
+        "n_observed": 4547,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_ferritin_value_first": {
+        "sentinel": -10514.0,
+        "decode_threshold": -5255.0,
+        "min_observed": 4.0,
+        "max_observed": 42076.0,
+        "n_encoded": 3765,
+        "n_observed": 929,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_ferritin_value_last": {
+        "sentinel": -10514.0,
+        "decode_threshold": -5255.0,
+        "min_observed": 4.0,
+        "max_observed": 42076.0,
+        "n_encoded": 3765,
+        "n_observed": 929,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_ntProBnp_value_first": {
+        "sentinel": -17456.875,
+        "decode_threshold": -8711.1875,
+        "min_observed": 34.5,
+        "max_observed": 70000.0,
+        "n_encoded": 907,
+        "n_observed": 3787,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_ntProBnp_value_last": {
+        "sentinel": -17458.75,
+        "decode_threshold": -8712.875,
+        "min_observed": 33.0,
+        "max_observed": 70000.0,
+        "n_encoded": 907,
+        "n_observed": 3787,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_crpNonHs_value_first": {
+        "sentinel": -144.15,
+        "decode_threshold": -71.92500000000001,
+        "min_observed": 0.3,
+        "max_observed": 578.1,
+        "n_encoded": 542,
+        "n_observed": 4152,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_crpNonHs_value_last": {
+        "sentinel": -157.05,
+        "decode_threshold": -78.37500000000001,
+        "min_observed": 0.3,
+        "max_observed": 629.7,
+        "n_encoded": 542,
+        "n_observed": 4152,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_tropTHs_value_first": {
+        "sentinel": -4.34225,
+        "decode_threshold": -2.1691249999999997,
+        "min_observed": 0.004,
+        "max_observed": 17.389,
+        "n_encoded": 2969,
+        "n_observed": 1725,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_tropTHs_value_last": {
+        "sentinel": -16.4075,
+        "decode_threshold": -8.20175,
+        "min_observed": 0.004,
+        "max_observed": 65.65,
+        "n_encoded": 2969,
+        "n_observed": 1725,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_tropTnHs_value_first": {
+        "sentinel": -1531.25,
+        "decode_threshold": -764.125,
+        "min_observed": 3.0,
+        "max_observed": 6140.0,
+        "n_encoded": 4125,
+        "n_observed": 569,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_tropTnHs_value_last": {
+        "sentinel": -3846.25,
+        "decode_threshold": -1921.625,
+        "min_observed": 3.0,
+        "max_observed": 15400.0,
+        "n_encoded": 4125,
+        "n_observed": 569,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_triGly_value_first": {
+        "sentinel": -3.875,
+        "decode_threshold": -1.8375000000000001,
+        "min_observed": 0.2,
+        "max_observed": 16.5,
+        "n_encoded": 4251,
+        "n_observed": 443,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_triGly_value_last": {
+        "sentinel": -2.5875,
+        "decode_threshold": -1.19375,
+        "min_observed": 0.2,
+        "max_observed": 11.35,
+        "n_encoded": 4251,
+        "n_observed": 443,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_cholTot_value_first": {
+        "sentinel": -0.7150000000000003,
+        "decode_threshold": 0.2274999999999998,
+        "min_observed": 1.17,
+        "max_observed": 8.71,
+        "n_encoded": 4180,
+        "n_observed": 514,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_cholTot_value_last": {
+        "sentinel": -0.7150000000000003,
+        "decode_threshold": 0.2274999999999998,
+        "min_observed": 1.17,
+        "max_observed": 8.71,
+        "n_encoded": 4180,
+        "n_observed": 514,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_hdl_value_first": {
+        "sentinel": -0.84,
+        "decode_threshold": -0.33999999999999997,
+        "min_observed": 0.16,
+        "max_observed": 3.85,
+        "n_encoded": 4276,
+        "n_observed": 418,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_hdl_value_last": {
+        "sentinel": -0.78,
+        "decode_threshold": -0.28,
+        "min_observed": 0.22,
+        "max_observed": 3.76,
+        "n_encoded": 4276,
+        "n_observed": 418,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_ldl_value_first": {
+        "sentinel": -1.561875,
+        "decode_threshold": -0.7609374999999999,
+        "min_observed": 0.04,
+        "max_observed": 6.4475,
+        "n_encoded": 4280,
+        "n_observed": 414,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_ldl_value_last": {
+        "sentinel": -1.561875,
+        "decode_threshold": -0.7609374999999999,
+        "min_observed": 0.04,
+        "max_observed": 6.4475,
+        "n_encoded": 4280,
+        "n_observed": 414,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_potassium_value_first": {
+        "sentinel": 0.11249999999999982,
+        "decode_threshold": 0.98125,
+        "min_observed": 1.85,
+        "max_observed": 8.8,
+        "n_encoded": 197,
+        "n_observed": 4497,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_potassium_value_last": {
+        "sentinel": 0.4375,
+        "decode_threshold": 1.14375,
+        "min_observed": 1.85,
+        "max_observed": 7.5,
+        "n_encoded": 197,
+        "n_observed": 4497,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_sodium_value_first": {
+        "sentinel": 95.0,
+        "decode_threshold": 102.0,
+        "min_observed": 109.0,
+        "max_observed": 165.0,
+        "n_encoded": 200,
+        "n_observed": 4494,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_sodium_value_last": {
+        "sentinel": 96.25,
+        "decode_threshold": 102.625,
+        "min_observed": 109.0,
+        "max_observed": 160.0,
+        "n_encoded": 200,
+        "n_observed": 4494,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_creatUS_value_first": {
+        "sentinel": -654.1163999999999,
+        "decode_threshold": -304.77356,
+        "min_observed": 44.56928,
+        "max_observed": 2839.312,
+        "n_encoded": 4217,
+        "n_observed": 477,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_creatUS_value_last": {
+        "sentinel": -621.0287999999999,
+        "decode_threshold": -288.22976,
+        "min_observed": 44.56928,
+        "max_observed": 2706.9616,
+        "n_encoded": 4217,
+        "n_observed": 477,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_albuminBS_value_first": {
+        "sentinel": 0.0,
+        "decode_threshold": 5.0,
+        "min_observed": 10.0,
+        "max_observed": 50.0,
+        "n_encoded": 2699,
+        "n_observed": 1995,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_albuminBS_value_last": {
+        "sentinel": -1.25,
+        "decode_threshold": 3.875,
+        "min_observed": 9.0,
+        "max_observed": 50.0,
+        "n_encoded": 2699,
+        "n_observed": 1995,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_validSerumCreatinine_value_first": {
+        "sentinel": -4.51269,
+        "decode_threshold": -1.803945,
+        "min_observed": 0.9048,
+        "max_observed": 22.57476,
+        "n_encoded": 504,
+        "n_observed": 4190,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_validSerumCreatinine_value_last": {
+        "sentinel": -4.654065000000001,
+        "decode_threshold": -1.9311825000000002,
+        "min_observed": 0.7917,
+        "max_observed": 22.57476,
+        "n_encoded": 504,
+        "n_observed": 4190,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_valideGFR_value_first": {
+        "sentinel": -18.75,
+        "decode_threshold": -7.875,
+        "min_observed": 3.0,
+        "max_observed": 90.0,
+        "n_encoded": 280,
+        "n_observed": 4414,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_valideGFR_value_last": {
+        "sentinel": -18.75,
+        "decode_threshold": -7.875,
+        "min_observed": 3.0,
+        "max_observed": 90.0,
+        "n_encoded": 280,
+        "n_observed": 4414,
+        "missingness_kind": "not_measured"
+      },
+      "echocardiographs_lvef_pET_last": {
+        "sentinel": -247.75,
+        "decode_threshold": -213.375,
+        "min_observed": -179.0,
+        "max_observed": 96.0,
+        "n_encoded": 3902,
+        "n_observed": 792,
+        "missingness_kind": "not_measured"
+      },
+      "echocardiographs_lvef_pET_first": {
+        "sentinel": -80.0,
+        "decode_threshold": -62.0,
+        "min_observed": -44.0,
+        "max_observed": 100.0,
+        "n_encoded": 3853,
+        "n_observed": 841,
+        "missingness_kind": "not_measured"
+      },
+      "electrocardiographs_ecg_qrs_duration_pET_first": {
+        "sentinel": -38.0,
+        "decode_threshold": -9.0,
+        "min_observed": 20.0,
+        "max_observed": 252.0,
+        "n_encoded": 2309,
+        "n_observed": 2385,
+        "missingness_kind": "not_measured"
+      },
+      "electrocardiographs_ecg_qrs_duration_pET_last": {
+        "sentinel": 7.5,
+        "decode_threshold": 31.75,
+        "min_observed": 56.0,
+        "max_observed": 250.0,
+        "n_encoded": 2310,
+        "n_observed": 2384,
+        "missingness_kind": "not_measured"
+      },
+      "electrocardiographs_ecg_qt_duration_corrected_pET_last": {
+        "sentinel": 26.75,
+        "decode_threshold": 97.375,
+        "min_observed": 168.0,
+        "max_observed": 733.0,
+        "n_encoded": 2311,
+        "n_observed": 2383,
+        "missingness_kind": "not_measured"
+      },
+      "electrocardiographs_ecg_qt_duration_corrected_pET_first": {
+        "sentinel": 40.75,
+        "decode_threshold": 113.375,
+        "min_observed": 186.0,
+        "max_observed": 767.0,
+        "n_encoded": 2310,
+        "n_observed": 2384,
+        "missingness_kind": "not_measured"
+      },
+      "conditions_heartFailure_timeFromEarliest_first": {
+        "sentinel": -30.75,
+        "decode_threshold": -15.375,
+        "min_observed": 0.0,
+        "max_observed": 123.0,
+        "n_encoded": 11,
+        "n_observed": 4683,
+        "missingness_kind": "not_measured"
+      },
+      "eGFR_2021_ckd_epi_creatinine": {
+        "sentinel": -32.807120499999996,
+        "decode_threshold": -6.357724749999999,
+        "min_observed": 20.091671,
+        "max_observed": 231.686837,
+        "n_encoded": 504,
+        "n_observed": 4190,
+        "missingness_kind": "not_measured"
+      },
+      "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first": {
+        "sentinel": -450.0,
+        "decode_threshold": -224.5,
+        "min_observed": 1.0,
+        "max_observed": 1805.0,
+        "n_encoded": 4452,
+        "n_observed": 242,
+        "missingness_kind": "no_event"
+      },
+      "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first": {
+        "sentinel": -451.25,
+        "decode_threshold": -225.625,
+        "min_observed": 0.0,
+        "max_observed": 1805.0,
+        "n_encoded": 3765,
+        "n_observed": 929,
+        "missingness_kind": "no_event"
+      },
+      "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first": {
+        "sentinel": -423.5,
+        "decode_threshold": -211.75,
+        "min_observed": 0.0,
+        "max_observed": 1694.0,
+        "n_encoded": 2968,
+        "n_observed": 1726,
+        "missingness_kind": "no_event"
+      },
+      "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first": {
+        "sentinel": -455.25,
+        "decode_threshold": -227.125,
+        "min_observed": 1.0,
+        "max_observed": 1826.0,
+        "n_encoded": 2789,
+        "n_observed": 1905,
+        "missingness_kind": "no_event"
+      }
+    },
+    "n_columns_encoded": 56,
+    "n_no_event_columns": 4,
+    "min_nonnull_required": 234,
+    "dropped_too_few": [
       {
         "column": "vital_signs_oxygenSaturation_value_first",
-        "n_filled": 2258,
-        "n_observed": 2436
+        "n_observed": 0
       },
       {
         "column": "vital_signs_oxygenSaturation_value_last",
-        "n_filled": 2258,
-        "n_observed": 2436
+        "n_observed": 0
       },
       {
-        "column": "lab_results_hemoglobin_value_first",
-        "n_filled": 147,
-        "n_observed": 4547
+        "column": "lab_results_tfs_value_first",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_hemoglobin_value_last",
-        "n_filled": 147,
-        "n_observed": 4547
+        "column": "lab_results_tfs_value_last",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_ferritin_value_first",
-        "n_filled": 3765,
-        "n_observed": 929
+        "column": "lab_results_bnp_value_first",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_ferritin_value_last",
-        "n_filled": 3765,
-        "n_observed": 929
+        "column": "lab_results_bnp_value_last",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_ntProBnp_value_first",
-        "n_filled": 630,
-        "n_observed": 4064
+        "column": "lab_results_crpHs_value_first",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_ntProBnp_value_last",
-        "n_filled": 630,
-        "n_observed": 4064
+        "column": "lab_results_crpHs_value_last",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_crpNonHs_value_first",
-        "n_filled": 428,
-        "n_observed": 4266
+        "column": "lab_results_tropIHs_value_first",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_crpNonHs_value_last",
-        "n_filled": 428,
-        "n_observed": 4266
+        "column": "lab_results_tropIHs_value_last",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_tropTHs_value_first",
-        "n_filled": 2969,
-        "n_observed": 1725
+        "column": "lab_results_tropInHs_value_first",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_tropTHs_value_last",
-        "n_filled": 2969,
-        "n_observed": 1725
+        "column": "lab_results_tropInHs_value_last",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_tropTnHs_value_first",
-        "n_filled": 3734,
-        "n_observed": 960
+        "column": "lab_results_albuminUS_value_first",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_tropTnHs_value_last",
-        "n_filled": 3734,
-        "n_observed": 960
+        "column": "lab_results_albuminUS_value_last",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_triGly_value_first",
-        "n_filled": 4251,
-        "n_observed": 443
+        "column": "lab_results_bun_value_first",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_triGly_value_last",
-        "n_filled": 4251,
-        "n_observed": 443
+        "column": "lab_results_bun_value_last",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_cholTot_value_first",
-        "n_filled": 4180,
-        "n_observed": 514
+        "column": "lab_results_acr_value_first",
+        "n_observed": 0
       },
       {
-        "column": "lab_results_cholTot_value_last",
-        "n_filled": 4180,
-        "n_observed": 514
-      },
-      {
-        "column": "lab_results_hdl_value_first",
-        "n_filled": 4276,
-        "n_observed": 418
-      },
-      {
-        "column": "lab_results_hdl_value_last",
-        "n_filled": 4276,
-        "n_observed": 418
-      },
-      {
-        "column": "lab_results_ldl_value_first",
-        "n_filled": 4276,
-        "n_observed": 418
-      },
-      {
-        "column": "lab_results_ldl_value_last",
-        "n_filled": 4276,
-        "n_observed": 418
-      },
-      {
-        "column": "lab_results_potassium_value_first",
-        "n_filled": 197,
-        "n_observed": 4497
-      },
-      {
-        "column": "lab_results_potassium_value_last",
-        "n_filled": 197,
-        "n_observed": 4497
-      },
-      {
-        "column": "lab_results_sodium_value_first",
-        "n_filled": 163,
-        "n_observed": 4531
-      },
-      {
-        "column": "lab_results_sodium_value_last",
-        "n_filled": 163,
-        "n_observed": 4531
-      },
-      {
-        "column": "lab_results_creatUS_value_first",
-        "n_filled": 4217,
-        "n_observed": 477
-      },
-      {
-        "column": "lab_results_creatUS_value_last",
-        "n_filled": 4217,
-        "n_observed": 477
-      },
-      {
-        "column": "lab_results_albuminBS_value_first",
-        "n_filled": 2699,
-        "n_observed": 1995
-      },
-      {
-        "column": "lab_results_albuminBS_value_last",
-        "n_filled": 2699,
-        "n_observed": 1995
+        "column": "lab_results_acr_value_last",
+        "n_observed": 0
       },
       {
         "column": "lab_results_hba1c%_value_first",
-        "n_filled": 2699,
-        "n_observed": 1995
+        "n_observed": 0
       },
       {
         "column": "lab_results_hba1c%_value_last",
-        "n_filled": 2699,
-        "n_observed": 1995
+        "n_observed": 0
       },
       {
         "column": "lab_results_hba1c_value_first",
-        "n_filled": 2699,
-        "n_observed": 1995
+        "n_observed": 0
       },
       {
         "column": "lab_results_hba1c_value_last",
-        "n_filled": 2699,
-        "n_observed": 1995
-      },
-      {
-        "column": "lab_results_validSerumCreatinine_value_first",
-        "n_filled": 504,
-        "n_observed": 4190
-      },
-      {
-        "column": "lab_results_validSerumCreatinine_value_last",
-        "n_filled": 504,
-        "n_observed": 4190
-      },
-      {
-        "column": "lab_results_valideGFR_value_first",
-        "n_filled": 280,
-        "n_observed": 4414
-      },
-      {
-        "column": "lab_results_valideGFR_value_last",
-        "n_filled": 280,
-        "n_observed": 4414
-      },
-      {
-        "column": "echocardiographs_lvef_pET_last",
-        "n_filled": 3902,
-        "n_observed": 792
-      },
-      {
-        "column": "echocardiographs_lvef_pET_first",
-        "n_filled": 3853,
-        "n_observed": 841
-      },
-      {
-        "column": "electrocardiographs_ecg_qrs_duration_pET_first",
-        "n_filled": 2309,
-        "n_observed": 2385
-      },
-      {
-        "column": "electrocardiographs_ecg_qrs_duration_pET_last",
-        "n_filled": 2310,
-        "n_observed": 2384
+        "n_observed": 0
       },
       {
         "column": "electrocardiographs_ecg_qrs_axis_pET_last",
-        "n_filled": 2309,
-        "n_observed": 2385
+        "n_observed": 0
       },
       {
         "column": "electrocardiographs_ecg_qrs_axis_pET_first",
-        "n_filled": 2309,
-        "n_observed": 2385
-      },
-      {
-        "column": "electrocardiographs_ecg_qt_duration_corrected_pET_last",
-        "n_filled": 2311,
-        "n_observed": 2383
-      },
-      {
-        "column": "electrocardiographs_ecg_qt_duration_corrected_pET_first",
-        "n_filled": 2310,
-        "n_observed": 2384
+        "n_observed": 0
       },
       {
         "column": "smoking_status_smoker_totalSmokingDuration_sum",
-        "n_filled": 4611,
         "n_observed": 83
       },
       {
-        "column": "conditions_heartFailure_timeFromEarliest_first",
-        "n_filled": 11,
-        "n_observed": 4683
-      },
-      {
-        "column": "eGFR_2021_ckd_epi_creatinine",
-        "n_filled": 504,
-        "n_observed": 4190
-      },
-      {
         "column": "maggic_total_score",
-        "n_filled": 4688,
         "n_observed": 6
       },
       {
-        "column": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first",
-        "n_filled": 4452,
-        "n_observed": 242
-      },
-      {
-        "column": "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first",
-        "n_filled": 3765,
-        "n_observed": 929
-      },
-      {
-        "column": "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first",
-        "n_filled": 2968,
-        "n_observed": 1726
-      },
-      {
         "column": "encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first",
-        "n_filled": 4633,
         "n_observed": 61
       },
       {
         "column": "cause_of_death_number_of_days_to_death_for_CV_f5a_first",
-        "n_filled": 4584,
         "n_observed": 110
       },
       {
-        "column": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
-        "n_filled": 2789,
-        "n_observed": 1905
+        "column": "cause_of_death_number_of_days_to_death_for_renal_f5a_first",
+        "n_observed": 0
+      },
+      {
+        "column": "cause_of_death_number_of_days_to_death_for_non_renal_and_non_CV_f5a_first",
+        "n_observed": 0
       }
     ],
-    "was_missing_flags_added": 68,
-    "dropped_too_few": [
-      "lab_results_tfs_value_first",
-      "lab_results_tfs_value_last",
-      "lab_results_bnp_value_first",
-      "lab_results_bnp_value_last",
-      "lab_results_crpHs_value_first",
-      "lab_results_crpHs_value_last",
-      "lab_results_tropIHs_value_first",
-      "lab_results_tropIHs_value_last",
-      "lab_results_tropInHs_value_first",
-      "lab_results_tropInHs_value_last",
-      "lab_results_albuminUS_value_first",
-      "lab_results_albuminUS_value_last",
-      "lab_results_bun_value_first",
-      "lab_results_bun_value_last",
-      "lab_results_acr_value_first",
-      "lab_results_acr_value_last",
-      "cause_of_death_number_of_days_to_death_for_renal_f5a_first",
-      "cause_of_death_number_of_days_to_death_for_non_renal_and_non_CV_f5a_first"
-    ]
+    "encoding_path": "/home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/preprocess/DT4H_Numeric_Missing_Encoding.json"
   },
   "categorical_imputation": {
-    "normalized_columns": 256,
+    "normalized_columns": 188,
     "filled_columns": [
       "electrocardiographs_ecg_st_pET",
       "electrocardiographs_ecg_ischemia_without_st_pET",
@@ -1063,5 +1231,5 @@
   "remaining_null_cells": 0,
   "remaining_nan_cells": 0,
   "output_rows": 4694,
-  "output_columns": 329
+  "output_columns": 249
 }

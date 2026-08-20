@@ -1,7 +1,7 @@
 # Column Analysis
 
 Total rows: 4694
-Total columns: 329
+Total columns: 249
 
 ## patient_demographics_gender
 
@@ -66,401 +66,353 @@ Total columns: 329
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 32.0 / 208.6
-- mean/std: 77.4137 / 19.82206258247233
-- quantiles: {'0.05': 50.2, '0.25': 63.6, '0.5': 74.7, '0.75': 87.9, '0.95': 113.0}
+- min/max: -12.149999999999999 / 208.6
+- mean/std: 70.0049 / 31.243358495877064
+- quantiles: {'0.05': -12.149999999999999, '0.25': 60.6, '0.5': 72.8, '0.75': 86.2, '0.95': 111.8}
 
 ## vital_signs_weight_value_p6mo_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 33.9 / 241.0
-- mean/std: 79.8160 / 20.27092061865717
-- quantiles: {'0.05': 52.0, '0.25': 66.0, '0.5': 77.0, '0.75': 90.0, '0.95': 116.0}
+- min/max: -17.875 / 241.0
+- mean/std: 71.6087 / 33.280508520322165
+- quantiles: {'0.05': -17.875, '0.25': 62.1, '0.5': 75.0, '0.75': 89.0, '0.95': 115.0}
 
 ## vital_signs_height_value_p1a_avg
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 96.94999999999999 / 207.0
-- mean/std: 171.1361 / 10.645669102075086
-- quantiles: {'0.05': 154.0, '0.25': 164.0, '0.5': 171.5, '0.75': 178.0, '0.95': 188.0}
+- min/max: 69.43749999999999 / 207.0
+- mean/std: 150.3669 / 42.08120802741982
+- quantiles: {'0.05': 69.43749999999999, '0.25': 155.0, '0.5': 168.0, '0.75': 176.0, '0.95': 186.0}
 
 ## vital_signs_weight_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 32.0 / 208.6
-- mean/std: 77.3783 / 19.749029501610078
-- quantiles: {'0.05': 50.2, '0.25': 63.6, '0.5': 74.5, '0.75': 87.7, '0.95': 113.0}
+- min/max: -12.149999999999999 / 208.6
+- mean/std: 63.7557 / 37.111593537189556
+- quantiles: {'0.05': -12.149999999999999, '0.25': 56.0, '0.5': 70.7, '0.75': 85.0, '0.95': 111.0}
 
 ## vital_signs_height_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 110.0 / 207.0
-- mean/std: 171.5836 / 10.38403261877741
-- quantiles: {'0.05': 155.0, '0.25': 165.0, '0.5': 172.0, '0.75': 178.0, '0.95': 188.0}
+- min/max: 85.75 / 207.0
+- mean/std: 133.9408 / 43.29328737413144
+- quantiles: {'0.05': 85.75, '0.25': 85.75, '0.5': 158.5, '0.75': 173.0, '0.95': 185.0}
 
 ## vital_signs_bmi_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 13.21178491214163 / 79.5847750865052
-- mean/std: 26.8488 / 6.413166116548382
-- quantiles: {'0.05': 18.39741049015722, '0.25': 22.545071323723135, '0.5': 25.858572201189833, '0.75': 29.950132879452955, '0.95': 38.204081632653065}
+- min/max: -3.3814626314492653 / 79.5847750865052
+- mean/std: 12.7445 / 15.841776803245297
+- quantiles: {'0.05': -3.3814626314492653, '0.25': -3.3814626314492653, '0.5': 18.920068027210885, '0.75': 26.299357208448118, '0.95': 34.85952133194589}
 
 ## vital_signs_systolicBp_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 46.0 / 257.0
-- mean/std: 130.2904 / 28.71232965890652
-- quantiles: {'0.05': 91.0, '0.25': 110.0, '0.5': 126.0, '0.75': 148.0, '0.95': 181.0}
+- min/max: -6.75 / 257.0
+- mean/std: 123.3156 / 41.169908358972776
+- quantiles: {'0.05': -6.75, '0.25': 107.0, '0.5': 124.0, '0.75': 147.0, '0.95': 180.0}
 
 ## vital_signs_systolicBp_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 50.0 / 221.0
-- mean/std: 121.1858 / 22.70389542659586
-- quantiles: {'0.05': 90.0, '0.25': 105.0, '0.5': 118.0, '0.75': 135.0, '0.95': 161.0}
+- min/max: 7.25 / 221.0
+- mean/std: 115.2953 / 33.34934022541762
+- quantiles: {'0.05': 7.25, '0.25': 103.0, '0.5': 116.0, '0.75': 134.0, '0.95': 160.0}
 
 ## vital_signs_diastolicBp_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 8.0 / 201.0
-- mean/std: 75.6174 / 18.361876155391204
-- quantiles: {'0.05': 50.0, '0.25': 63.0, '0.5': 73.0, '0.75': 85.0, '0.95': 109.0}
+- min/max: -40.25 / 201.0
+- mean/std: 69.5996 / 31.135519313945515
+- quantiles: {'0.05': -40.25, '0.25': 62.0, '0.5': 72.0, '0.75': 85.0, '0.95': 108.0}
 
 ## vital_signs_diastolicBp_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 6.0 / 158.0
-- mean/std: 69.0782 / 13.55072158338932
-- quantiles: {'0.05': 48.0, '0.25': 60.0, '0.5': 68.0, '0.75': 77.0, '0.95': 92.0}
+- min/max: -32.0 / 158.0
+- mean/std: 63.9617 / 25.906621057394084
+- quantiles: {'0.05': -32.0, '0.25': 59.0, '0.5': 68.0, '0.75': 77.0, '0.95': 91.0}
 
 ## vital_signs_heartRate_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 1.0 / 223.0
-- mean/std: 112.6747 / 17.60663685872408
-- quantiles: {'0.05': 100.0, '0.25': 102.0, '0.5': 108.0, '0.75': 119.0, '0.95': 146.0}
+- min/max: -54.5 / 223.0
+- mean/std: 32.1949 / 84.32726490839673
+- quantiles: {'0.05': -54.5, '0.25': -54.5, '0.5': 100.0, '0.75': 108.0, '0.95': 134.0}
 
 ## vital_signs_heartRate_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.0 / 254.0
-- mean/std: 109.1623 / 14.926357337424573
-- quantiles: {'0.05': 100.0, '0.25': 101.0, '0.5': 105.0, '0.75': 112.0, '0.95': 135.0}
-
-## vital_signs_oxygenSaturation_value_first
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 85.14609103804591 / 98.99998835996726
-- mean/std: 95.9205 / 3.1406401619826694
-- quantiles: {'0.05': 89.27671513326105, '0.25': 94.2416980706493, '0.5': 96.98149205260373, '0.75': 98.46991132520152, '0.95': 98.97360289087904}
-
-## vital_signs_oxygenSaturation_value_last
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 85.2815288561821 / 98.99999998947361
-- mean/std: 95.9769 / 3.056388282119711
-- quantiles: {'0.05': 89.71562851846002, '0.25': 94.29487363330105, '0.5': 97.02646254702454, '0.75': 98.47743388690844, '0.95': 98.97095293752955}
+- min/max: -63.5 / 254.0
+- mean/std: 26.3411 / 87.1626820559667
+- quantiles: {'0.05': -63.5, '0.25': -63.5, '0.5': 100.0, '0.75': 106.0, '0.95': 126.0}
 
 ## lab_results_hemoglobin_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 32.228 / 233.653
-- mean/std: 119.8420 / 22.99466092400255
-- quantiles: {'0.05': 85.4042, '0.25': 103.1296, '0.5': 119.2436, '0.75': 135.3576, '0.95': 159.5286}
+- min/max: -18.128249999999994 / 233.653
+- mean/std: 115.4606 / 32.98599848397717
+- quantiles: {'0.05': 77.3472, '0.25': 101.5182, '0.5': 117.6322, '0.75': 135.3576, '0.95': 157.9172}
 
 ## lab_results_hemoglobin_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.16114 / 219.1504
-- mean/std: 121.5593 / 24.31985134349875
-- quantiles: {'0.05': 82.1814, '0.25': 104.741, '0.5': 122.4664, '0.75': 138.5804, '0.95': 159.5286}
+- min/max: -54.586175 / 219.1504
+- mean/std: 116.0506 / 38.87815542080427
+- quantiles: {'0.05': 72.513, '0.25': 103.1296, '0.5': 120.855, '0.75': 136.969, '0.95': 159.5286}
 
 ## lab_results_ferritin_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 4.0 / 42076.0
-- mean/std: 458.7733 / 1548.713948451277
-- quantiles: {'0.05': 20.0, '0.25': 72.73, '0.5': 183.4, '0.75': 438.1, '0.95': 1350.0}
+- min/max: -10514.0 / 42076.0
+- mean/std: -8335.4605 / 4453.0885458139255
+- quantiles: {'0.05': -10514.0, '0.25': -10514.0, '0.5': -10514.0, '0.75': -10514.0, '0.95': 438.1}
 
 ## lab_results_ferritin_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 4.0 / 42076.0
-- mean/std: 533.6565 / 2224.467988628124
-- quantiles: {'0.05': 20.0, '0.25': 74.0, '0.5': 176.0, '0.75': 414.0, '0.95': 1302.0}
+- min/max: -10514.0 / 42076.0
+- mean/std: -8329.7407 / 4481.541767800647
+- quantiles: {'0.05': -10514.0, '0.25': -10514.0, '0.5': -10514.0, '0.75': -10514.0, '0.95': 423.0}
 
 ## lab_results_ntProBnp_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 33.0 / 70000.0
-- mean/std: 9396.4910 / 13390.783699922595
-- quantiles: {'0.05': 465.0, '0.25': 1887.0, '0.5': 4272.0, '0.75': 10457.0, '0.95': 35502.0}
+- min/max: -17458.75 / 70000.0
+- mean/std: 4707.8375 / 16573.254571901765
+- quantiles: {'0.05': -17458.75, '0.25': 613.0, '0.5': 3131.0000000000005, '0.75': 8951.0, '0.95': 34274.0}
 
 ## lab_results_ntProBnp_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 34.5 / 70000.0
-- mean/std: 9654.2694 / 13331.470068201128
-- quantiles: {'0.05': 509.0, '0.25': 2010.0, '0.5': 4399.41878846508, '0.75': 11359.0, '0.95': 35000.0}
+- min/max: -17456.875 / 70000.0
+- mean/std: 4777.6985 / 16294.573073119645
+- quantiles: {'0.05': -17456.875, '0.25': 649.0, '0.5': 3344.9999999999995, '0.75': 9516.000000000002, '0.95': 33083.0}
 
 ## lab_results_crpNonHs_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.3 / 629.7
-- mean/std: 43.8801 / 60.10645091854466
-- quantiles: {'0.05': 1.6, '0.25': 7.0, '0.5': 21.0, '0.75': 53.5, '0.95': 163.4}
+- min/max: -157.05 / 629.7
+- mean/std: 20.7614 / 86.32173961764433
+- quantiles: {'0.05': -157.05, '0.25': 3.8, '0.5': 15.2, '0.75': 47.2, '0.95': 159.0}
 
 ## lab_results_crpNonHs_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.3 / 578.1
-- mean/std: 45.2796 / 69.16600751072484
-- quantiles: {'0.05': 1.3, '0.25': 5.4, '0.5': 17.0, '0.75': 52.7, '0.95': 199.7}
+- min/max: -144.15 / 578.1
+- mean/std: 23.5356 / 90.0225384239732
+- quantiles: {'0.05': -144.15, '0.25': 2.9, '0.5': 12.0, '0.75': 44.0, '0.95': 191.8}
 
 ## lab_results_tropTHs_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.004 / 65.65
-- mean/std: 0.4144 / 1.8969712536824055
-- quantiles: {'0.05': 0.015, '0.25': 0.032, '0.5': 0.06, '0.75': 0.156, '0.95': 1.452}
+- min/max: -16.4075 / 65.65
+- mean/std: -10.2070 / 8.25741333184113
+- quantiles: {'0.05': -16.4075, '0.25': -16.4075, '0.5': -16.4075, '0.75': 0.039, '0.95': 0.496}
 
 ## lab_results_tropTHs_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.004 / 17.389
-- mean/std: 0.1980 / 0.7323346319454687
-- quantiles: {'0.05': 0.013, '0.25': 0.028, '0.5': 0.051, '0.75': 0.113, '0.95': 0.792}
+- min/max: -4.34225 / 17.389
+- mean/std: -2.6641 / 2.268041932929854
+- quantiles: {'0.05': -4.34225, '0.25': -4.34225, '0.5': -4.34225, '0.75': 0.034, '0.95': 0.25}
 
 ## lab_results_tropTnHs_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 3.0 / 15400.0
-- mean/std: 267.2598 / 784.283568926492
-- quantiles: {'0.05': 20.0, '0.25': 57.0, '0.5': 136.0, '0.75': 251.36586693052115, '0.95': 776.0}
+- min/max: -3846.25 / 15400.0
+- mean/std: -3344.2135 / 1385.3238580691257
+- quantiles: {'0.05': -3846.25, '0.25': -3846.25, '0.5': -3846.25, '0.75': -3846.25, '0.95': 98.0}
 
 ## lab_results_tropTnHs_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 3.0 / 6140.0
-- mean/std: 210.7147 / 422.6383131032351
-- quantiles: {'0.05': 19.0, '0.25': 46.0, '0.5': 120.0, '0.75': 237.16638372530934, '0.95': 578.0}
+- min/max: -1531.25 / 6140.0
+- mean/std: -1319.9785 / 599.3517801696339
+- quantiles: {'0.05': -1531.25, '0.25': -1531.25, '0.5': -1531.25, '0.75': -1531.25, '0.95': 76.0}
 
 ## lab_results_triGly_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.2 / 11.35
-- mean/std: 1.5192 / 1.0758671992332545
-- quantiles: {'0.05': 0.61, '0.25': 0.89, '0.5': 1.18, '0.75': 1.87, '0.95': 3.26}
+- min/max: -2.5875 / 11.35
+- mean/std: -2.2012 / 1.2388397444044164
+- quantiles: {'0.05': -2.5875, '0.25': -2.5875, '0.5': -2.5875, '0.75': -2.5875, '0.95': 1.12}
 
 ## lab_results_triGly_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.2 / 16.5
-- mean/std: 1.5290 / 1.226180685768635
-- quantiles: {'0.05': 0.6, '0.25': 0.887, '0.5': 1.18, '0.75': 1.84, '0.95': 3.26}
+- min/max: -3.875 / 16.5
+- mean/std: -3.3632 / 1.6345195301522157
+- quantiles: {'0.05': -3.875, '0.25': -3.875, '0.5': -3.875, '0.75': -3.875, '0.95': 1.13}
 
 ## lab_results_cholTot_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 1.17 / 8.71
-- mean/std: 3.8966 / 1.1288857995028336
-- quantiles: {'0.05': 2.24, '0.25': 3.14, '0.5': 3.8, '0.75': 4.49, '0.95': 6.04}
+- min/max: -0.7150000000000003 / 8.71
+- mean/std: -0.2076 / 1.4954801556956043
+- quantiles: {'0.05': -0.7150000000000003, '0.25': -0.7150000000000003, '0.5': -0.7150000000000003, '0.75': -0.7150000000000003, '0.95': 3.92}
 
 ## lab_results_cholTot_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 1.17 / 8.71
-- mean/std: 3.9338 / 1.1315928287547634
-- quantiles: {'0.05': 2.27, '0.25': 3.17, '0.5': 3.83, '0.75': 4.51, '0.95': 6.06}
+- min/max: -0.7150000000000003 / 8.71
+- mean/std: -0.2065 / 1.4979863803754487
+- quantiles: {'0.05': -0.7150000000000003, '0.25': -0.7150000000000003, '0.5': -0.7150000000000003, '0.75': -0.7150000000000003, '0.95': 3.95}
 
 ## lab_results_hdl_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.22 / 3.76
-- mean/std: 1.1853 / 0.4440020719287386
-- quantiles: {'0.05': 0.62, '0.25': 0.89, '0.5': 1.1, '0.75': 1.39, '0.95': 2.03}
+- min/max: -0.78 / 3.76
+- mean/std: -0.6048 / 0.5755344590611388
+- quantiles: {'0.05': -0.78, '0.25': -0.78, '0.5': -0.78, '0.75': -0.78, '0.95': 1.06}
 
 ## lab_results_hdl_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.16 / 3.85
-- mean/std: 1.1875 / 0.4458263417416143
-- quantiles: {'0.05': 0.62, '0.25': 0.89, '0.5': 1.1, '0.75': 1.4, '0.95': 2.03}
+- min/max: -0.84 / 3.85
+- mean/std: -0.6594 / 0.5931275774185593
+- quantiles: {'0.05': -0.84, '0.25': -0.84, '0.5': -0.84, '0.75': -0.84, '0.95': 1.06}
 
 ## lab_results_ldl_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.04 / 7.124584861764171
-- mean/std: 2.1072 / 1.016859036022466
-- quantiles: {'0.05': 0.803, '0.25': 1.38, '0.5': 1.97, '0.75': 2.636, '0.95': 3.99}
+- min/max: -1.561875 / 6.4475
+- mean/std: -1.2384 / 1.0790694183895384
+- quantiles: {'0.05': -1.561875, '0.25': -1.561875, '0.5': -1.561875, '0.75': -1.561875, '0.95': 1.85}
 
 ## lab_results_ldl_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.04 / 6.4475
-- mean/std: 2.1366 / 0.9647013927324339
-- quantiles: {'0.05': 0.88825, '0.25': 1.44, '0.5': 1.998, '0.75': 2.67, '0.95': 3.94}
+- min/max: -1.561875 / 6.4475
+- mean/std: -1.2375 / 1.0812921968667804
+- quantiles: {'0.05': -1.561875, '0.25': -1.561875, '0.5': -1.561875, '0.75': -1.561875, '0.95': 1.86}
 
 ## lab_results_potassium_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 1.85 / 7.5
-- mean/std: 4.1760 / 0.5805482638534415
-- quantiles: {'0.05': 3.3, '0.25': 3.8, '0.5': 4.11, '0.75': 4.5, '0.95': 5.2}
+- min/max: 0.4375 / 7.5
+- mean/std: 4.0209 / 0.9405741270962902
+- quantiles: {'0.05': 3.0, '0.25': 3.74, '0.5': 4.1, '0.75': 4.49, '0.95': 5.16}
 
 ## lab_results_potassium_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 1.85 / 8.8
-- mean/std: 4.2902 / 0.6833355706517081
-- quantiles: {'0.05': 3.3, '0.25': 3.89, '0.5': 4.22, '0.75': 4.66, '0.95': 5.5}
+- min/max: 0.11249999999999982 / 8.8
+- mean/std: 4.1142 / 1.0730361932794357
+- quantiles: {'0.05': 2.76, '0.25': 3.8, '0.5': 4.2, '0.75': 4.61, '0.95': 5.5}
 
 ## lab_results_sodium_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 109.0 / 160.0
-- mean/std: 137.9180 / 4.622158916977535
-- quantiles: {'0.05': 130.0, '0.25': 135.5, '0.5': 138.0, '0.75': 140.9, '0.95': 144.5}
+- min/max: 96.25 / 160.0
+- mean/std: 136.1089 / 9.537349683837508
+- quantiles: {'0.05': 124.0, '0.25': 135.0, '0.5': 138.0, '0.75': 140.6, '0.95': 144.2}
 
 ## lab_results_sodium_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 109.0 / 165.0
-- mean/std: 137.1844 / 4.990878711067265
-- quantiles: {'0.05': 128.0, '0.25': 135.0, '0.5': 138.0, '0.75': 140.4, '0.95': 143.6}
+- min/max: 95.0 / 165.0
+- mean/std: 135.3411 / 9.809221150922442
+- quantiles: {'0.05': 119.0, '0.25': 134.0, '0.5': 137.7, '0.75': 140.1, '0.95': 143.4}
 
 ## lab_results_creatUS_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 44.56928 / 2706.9616
-- mean/std: 668.1596 / 474.993720573076
-- quantiles: {'0.05': 174.2048, '0.25': 337.0976, '0.5': 520.352, '0.75': 859.712, '0.95': 1640.24}
+- min/max: -621.0287999999999 / 2706.9616
+- mean/std: -488.9696 / 421.4404675052635
+- quantiles: {'0.05': -621.0287999999999, '0.25': -621.0287999999999, '0.5': -621.0287999999999, '0.75': -621.0287999999999, '0.95': 535.0576}
 
 ## lab_results_creatUS_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 44.56928 / 2839.312
-- mean/std: 715.7823 / 484.06734735152867
-- quantiles: {'0.05': 169.68, '0.25': 369.9024, '0.5': 599.536, '0.75': 938.896, '0.95': 1699.0624}
+- min/max: -654.1163999999999 / 2839.312
+- mean/std: -513.1379 / 448.24269065801525
+- quantiles: {'0.05': -654.1163999999999, '0.25': -654.1163999999999, '0.5': -654.1163999999999, '0.75': -654.1163999999999, '0.95': 622.16}
 
 ## lab_results_albuminBS_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 9.0 / 50.0
-- mean/std: 29.9478 / 6.936591628577627
-- quantiles: {'0.05': 18.0, '0.25': 25.0, '0.5': 30.0, '0.75': 35.0, '0.95': 41.0}
+- min/max: -1.25 / 50.0
+- mean/std: 12.0252 / 16.083019280566806
+- quantiles: {'0.05': -1.25, '0.25': -1.25, '0.5': -1.25, '0.75': 28.6, '0.95': 38.0}
 
 ## lab_results_albuminBS_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 10.0 / 50.0
-- mean/std: 31.2694 / 6.678788242029741
-- quantiles: {'0.05': 20.0, '0.25': 27.0, '0.5': 31.7, '0.75': 36.0, '0.95': 42.0}
-
-## lab_results_hba1c%_value_last
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 3.057644111307257 / 14.72464629199165
-- mean/std: 7.0072 / 2.16880351023253
-- quantiles: {'0.05': 3.8910068259235318, '0.25': 5.302519936507979, '0.5': 6.756160760246311, '0.75': 8.463509701690388, '0.95': 11.001813944096032}
-
-## lab_results_hba1c%_value_first
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 3.030634140968014 / 15.084526345323734
-- mean/std: 7.0072 / 2.269655054509925
-- quantiles: {'0.05': 3.8222272015073426, '0.25': 5.256968592000472, '0.5': 6.742511459986003, '0.75': 8.429288830041305, '0.95': 11.37400261778497}
-
-## lab_results_hba1c_value_last
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 15.281738621585285 / 130.36519624223948
-- mean/std: 49.8867 / 20.655157162176938
-- quantiles: {'0.05': 21.93682944640017, '0.25': 34.202716262245204, '0.5': 46.49990127613459, '0.75': 62.07882732908545, '0.95': 89.10149607332094}
-
-## lab_results_hba1c_value_first
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 15.336777091546635 / 151.99290291300636
-- mean/std: 50.1265 / 20.236958330390483
-- quantiles: {'0.05': 22.656890062789095, '0.25': 34.97063096940555, '0.5': 47.04509719055218, '0.75': 62.506361376874246, '0.95': 88.93246873827263}
+- min/max: 0.0 / 50.0
+- mean/std: 13.2616 / 16.04857350219392
+- quantiles: {'0.05': 0.0, '0.25': 0.0, '0.5': 0.0, '0.75': 30.0, '0.95': 39.0}
 
 ## lab_results_validSerumCreatinine_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.7917 / 22.57476
-- mean/std: 12.2237 / 4.5562648874541205
-- quantiles: {'0.05': 5.9943, '0.25': 8.73132, '0.5': 11.4231, '0.75': 15.1554, '0.95': 21.0366}
+- min/max: -4.654065000000001 / 22.57476
+- mean/std: 10.4043 / 6.769829361724951
+- quantiles: {'0.05': -4.654065000000001, '0.25': 7.79259, '0.5': 10.72188, '0.75': 14.5899, '0.95': 20.8104}
 
 ## lab_results_validSerumCreatinine_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.9048 / 22.57476
-- mean/std: 12.3857 / 4.495995592898377
-- quantiles: {'0.05': 6.3336, '0.25': 8.87835, '0.5': 11.4231, '0.75': 15.4947, '0.95': 21.0366}
+- min/max: -4.51269 / 22.57476
+- mean/std: 10.5510 / 6.727587290513293
+- quantiles: {'0.05': -4.51269, '0.25': 8.00748, '0.5': 10.8576, '0.75': 14.8161, '0.95': 20.6973}
 
 ## lab_results_valideGFR_value_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 3.0 / 90.0
-- mean/std: 53.0230 / 24.705154633921595
-- quantiles: {'0.05': 13.0, '0.25': 33.0, '0.5': 54.0, '0.75': 74.0, '0.95': 90.0}
+- min/max: -18.75 / 90.0
+- mean/std: 48.8560 / 29.332048881379112
+- quantiles: {'0.05': -18.75, '0.25': 29.0, '0.5': 51.0, '0.75': 72.0, '0.95': 90.0}
 
 ## lab_results_valideGFR_value_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 3.0 / 90.0
-- mean/std: 53.4212 / 25.089315566921876
-- quantiles: {'0.05': 13.0, '0.25': 33.0, '0.5': 54.0, '0.75': 75.0, '0.95': 90.0}
+- min/max: -18.75 / 90.0
+- mean/std: 49.3460 / 29.732852868819776
+- quantiles: {'0.05': -18.75, '0.25': 29.0, '0.5': 51.0, '0.75': 74.0, '0.95': 90.0}
 
 ## symptoms_Ankle_swelling_display_pET_any
 
@@ -736,65 +688,49 @@ Total columns: 329
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: -179.0 / 96.0
-- mean/std: 40.9288 / 20.169029449882135
-- quantiles: {'0.05': 16.0, '0.25': 27.56, '0.5': 39.08, '0.75': 53.0, '0.95': 74.36}
+- min/max: -247.75 / 96.0
+- mean/std: -199.0191 / 108.46347836737515
+- quantiles: {'0.05': -247.75, '0.25': -247.75, '0.5': -247.75, '0.75': -247.75, '0.95': 50.86}
 
 ## echocardiographs_lvef_pET_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: -44.0 / 100.0
-- mean/std: 41.6242 / 18.25551968400103
-- quantiles: {'0.05': 15.0, '0.25': 27.57, '0.5': 40.45, '0.75': 53.67, '0.95': 74.0}
+- min/max: -80.0 / 100.0
+- mean/std: -58.2251 / 47.244731609764926
+- quantiles: {'0.05': -80.0, '0.25': -80.0, '0.5': -80.0, '0.75': -80.0, '0.95': 52.0}
 
 ## electrocardiographs_ecg_qrs_duration_pET_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 20.0 / 252.0
-- mean/std: 119.1615 / 34.615675058336244
-- quantiles: {'0.05': 79.0, '0.25': 93.0, '0.5': 108.0, '0.75': 143.0, '0.95': 186.0}
+- min/max: -38.0 / 252.0
+- mean/std: 41.9022 / 82.35581789334437
+- quantiles: {'0.05': -38.0, '0.25': -38.0, '0.5': 72.0, '0.75': 109.0, '0.95': 170.0}
 
 ## electrocardiographs_ecg_qrs_duration_pET_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 56.0 / 250.0
-- mean/std: 118.1937 / 34.268431128427714
-- quantiles: {'0.05': 78.0, '0.25': 92.0, '0.5': 108.0, '0.75': 140.0, '0.95': 184.0}
-
-## electrocardiographs_ecg_qrs_axis_pET_last
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 31.883716394672575 / 119.3168883233668
-- mean/std: 75.1237 / 20.220950998462875
-- quantiles: {'0.05': 41.99090807250303, '0.25': 59.12817967990101, '0.5': 74.72103074095722, '0.75': 90.8751172336469, '0.95': 108.4294570226809}
-
-## electrocardiographs_ecg_qrs_axis_pET_first
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 31.304142944626363 / 118.15545187557217
-- mean/std: 75.1315 / 19.926424375428695
-- quantiles: {'0.05': 43.14075434566796, '0.25': 59.935420795620445, '0.5': 73.94689409003226, '0.75': 90.41785031245855, '0.95': 107.78871389810605}
+- min/max: 7.5 / 250.0
+- mean/std: 63.9122 / 60.78353781785869
+- quantiles: {'0.05': 7.5, '0.25': 7.5, '0.5': 71.0, '0.75': 109.0, '0.95': 170.0}
 
 ## electrocardiographs_ecg_qt_duration_corrected_pET_first
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 186.0 / 767.0
-- mean/std: 472.4625 / 50.71370216044284
-- quantiles: {'0.05': 399.0, '0.25': 439.0, '0.5': 469.0, '0.75': 501.0, '0.95': 558.0}
+- min/max: 40.75 / 767.0
+- mean/std: 260.0201 / 218.87256073341533
+- quantiles: {'0.05': 40.75, '0.25': 40.75, '0.5': 377.0, '0.75': 470.0, '0.95': 537.0}
 
 ## electrocardiographs_ecg_qt_duration_corrected_pET_last
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 168.0 / 733.0
-- mean/std: 469.1170 / 53.54576653300427
-- quantiles: {'0.05': 393.0, '0.25': 436.0, '0.5': 463.0, '0.75': 497.0, '0.95': 560.0}
+- min/max: 26.75 / 733.0
+- mean/std: 251.1647 / 224.2075725693615
+- quantiles: {'0.05': 26.75, '0.25': 26.75, '0.5': 368.0, '0.75': 464.0, '0.95': 536.0}
 
 ## electrocardiographs_ecg_st_pET
 
@@ -852,14 +788,6 @@ Total columns: 329
   - `true`: 264
   - `false`: 21
 
-## smoking_status_smoker_totalSmokingDuration_sum
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 889.0 / 339891.0
-- mean/std: 70585.2880 / 76590.38178209506
-- quantiles: {'0.05': 3498.0, '0.25': 15838.0, '0.5': 39168.0, '0.75': 99402.0, '0.95': 233189.0}
-
 ## smoking_status_smoker_startTime_count
 
 - dtype: `Int64` (numeric)
@@ -906,8 +834,8 @@ Total columns: 329
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.0 / 123.0
-- mean/std: 11.3513 / 21.985106765036
+- min/max: -30.75 / 123.0
+- mean/std: 11.2769 / 22.073221388517265
 - quantiles: {'0.05': 0.0, '0.25': 0.0, '0.5': 0.0, '0.75': 11.0, '0.95': 65.0}
 
 ## conditions_heart_failure_hf_within_18mo_any
@@ -1002,9 +930,9 @@ Total columns: 329
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 1.0 / 1805.0
-- mean/std: 92.3854 / 198.70472523923473
-- quantiles: {'0.05': 1.0, '0.25': 13.0, '0.5': 34.0, '0.75': 78.0, '0.95': 460.0}
+- min/max: -450.0 / 1805.0
+- mean/std: -422.1253 / 127.59553841778593
+- quantiles: {'0.05': -450.0, '0.25': -450.0, '0.5': -450.0, '0.75': -450.0, '0.95': 1.0}
 
 ## encounter_primary_reason_CV_Disease_f5a_w7d_first
 
@@ -1080,9 +1008,9 @@ Total columns: 329
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.0 / 1805.0
-- mean/std: 123.0548 / 234.09118504742963
-- quantiles: {'0.05': 1.0, '0.25': 11.0, '0.5': 37.0, '0.75': 114.0, '0.95': 598.0}
+- min/max: -451.25 / 1805.0
+- mean/std: -338.3629 / 248.5220964548068
+- quantiles: {'0.05': -451.25, '0.25': -451.25, '0.5': -451.25, '0.75': -451.25, '0.95': 110.0}
 
 ## encounter_primary_reason_non_CV_Disease_f5a_w7d_first
 
@@ -1158,9 +1086,9 @@ Total columns: 329
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 0.0 / 1694.0
-- mean/std: 129.6506 / 230.51206535974094
-- quantiles: {'0.05': 2.0, '0.25': 15.0, '0.5': 45.0, '0.75': 119.0, '0.95': 630.0}
+- min/max: -423.5 / 1694.0
+- mean/std: -219.3941 / 304.524922949788
+- quantiles: {'0.05': -423.5, '0.25': -423.5, '0.5': -423.5, '0.75': 20.0, '0.95': 279.0}
 
 ## encounter_primary_reason_renal_complications_f5a_w7d_first
 
@@ -1232,14 +1160,6 @@ Total columns: 329
   - `Missing`: 2039
   - `true`: 61
 
-## encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 3.0 / 815.0
-- mean/std: 116.8609 / 169.8978385693773
-- quantiles: {'0.05': 5.0, '0.25': 17.0, '0.5': 54.0, '0.75': 135.0, '0.95': 476.0}
-
 ## cause_of_death_isCV_f5a_w7d_first
 
 - dtype: `String` (categorical)
@@ -1309,14 +1229,6 @@ Total columns: 329
   - `Missing`: 2680
   - `false`: 1904
   - `true`: 110
-
-## cause_of_death_number_of_days_to_death_for_CV_f5a_first
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 1.0 / 1499.0
-- mean/std: 358.3860 / 362.7978472539952
-- quantiles: {'0.05': 1.0, '0.25': 72.0, '0.5': 248.0, '0.75': 519.0, '0.95': 1099.0}
 
 ## cause_of_death_isRenal_f5a_w7d_first
 
@@ -1518,17 +1430,17 @@ Total columns: 329
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 1.0 / 1826.0
-- mean/std: 453.6971 / 487.9840266157686
-- quantiles: {'0.05': 4.0, '0.25': 54.0, '0.5': 256.0, '0.75': 737.0, '0.95': 1494.0}
+- min/max: -455.25 / 1826.0
+- mean/std: -86.3181 / 544.6524489735771
+- quantiles: {'0.05': -455.25, '0.25': -455.25, '0.5': -455.25, '0.75': 130.0, '0.95': 1157.0}
 
 ## eGFR_2021_ckd_epi_creatinine
 
 - dtype: `Float64` (numeric)
 - nulls: 0 (0.00%)
-- min/max: 20.091671 / 231.686837
-- mean/std: 64.1668 / 25.883872591652775
-- quantiles: {'0.05': 29.351947, '0.25': 42.191502, '0.5': 60.84842, '0.75': 84.753518, '0.95': 107.004857}
+- min/max: -32.807120499999996 / 231.686837
+- mean/std: 53.6113 / 38.7027671330604
+- quantiles: {'0.05': -32.807120499999996, '0.25': 35.872781, '0.5': 56.39836, '0.75': 80.832657, '0.95': 105.515767}
 
 ## ckd_severity_from_calculated_egfr
 
@@ -1574,14 +1486,6 @@ Total columns: 329
 - top values (shown only where count ≥ 5):
   - `true`: 3399
   - `false`: 1295
-
-## maggic_total_score
-
-- dtype: `Float64` (numeric)
-- nulls: 0 (0.00%)
-- min/max: 14.0 / 29.0
-- mean/std: 22.2968 / 6.445622514658633
-- quantiles: {'0.05': 14.0, '0.25': 16.0, '0.5': 18.0, '0.75': 29.0, '0.95': 29.0}
 
 ## med_acei
 
@@ -2347,615 +2251,3 @@ Total columns: 329
 - top values (shown only where count ≥ 5):
   - `false`: 2714
   - `true`: 1980
-
-## vital_signs_weight_value_p6mo_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4303
-  - `true`: 391
-
-## vital_signs_weight_value_p6mo_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4303
-  - `true`: 391
-
-## vital_signs_height_value_p1a_avg_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 3735
-  - `true`: 959
-
-## vital_signs_weight_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 3976
-  - `true`: 718
-
-## vital_signs_height_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2637
-  - `true`: 2057
-
-## vital_signs_bmi_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2499
-  - `true`: 2195
-
-## vital_signs_systolicBp_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4453
-  - `true`: 241
-
-## vital_signs_systolicBp_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4453
-  - `true`: 241
-
-## vital_signs_diastolicBp_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4453
-  - `true`: 241
-
-## vital_signs_diastolicBp_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4453
-  - `true`: 241
-
-## vital_signs_heartRate_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2436
-  - `true`: 2258
-
-## vital_signs_heartRate_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2436
-  - `true`: 2258
-
-## vital_signs_oxygenSaturation_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2436
-  - `true`: 2258
-
-## vital_signs_oxygenSaturation_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2436
-  - `true`: 2258
-
-## lab_results_hemoglobin_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4547
-  - `true`: 147
-
-## lab_results_hemoglobin_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4547
-  - `true`: 147
-
-## lab_results_ferritin_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 3765
-  - `false`: 929
-
-## lab_results_ferritin_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 3765
-  - `false`: 929
-
-## lab_results_ntProBnp_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4064
-  - `true`: 630
-
-## lab_results_ntProBnp_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4064
-  - `true`: 630
-
-## lab_results_crpNonHs_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4266
-  - `true`: 428
-
-## lab_results_crpNonHs_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4266
-  - `true`: 428
-
-## lab_results_tropTHs_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2969
-  - `false`: 1725
-
-## lab_results_tropTHs_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2969
-  - `false`: 1725
-
-## lab_results_tropTnHs_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 3734
-  - `false`: 960
-
-## lab_results_tropTnHs_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 3734
-  - `false`: 960
-
-## lab_results_triGly_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4251
-  - `false`: 443
-
-## lab_results_triGly_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4251
-  - `false`: 443
-
-## lab_results_cholTot_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4180
-  - `false`: 514
-
-## lab_results_cholTot_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4180
-  - `false`: 514
-
-## lab_results_hdl_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4276
-  - `false`: 418
-
-## lab_results_hdl_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4276
-  - `false`: 418
-
-## lab_results_ldl_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4276
-  - `false`: 418
-
-## lab_results_ldl_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4276
-  - `false`: 418
-
-## lab_results_potassium_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4497
-  - `true`: 197
-
-## lab_results_potassium_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4497
-  - `true`: 197
-
-## lab_results_sodium_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4531
-  - `true`: 163
-
-## lab_results_sodium_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4531
-  - `true`: 163
-
-## lab_results_creatUS_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4217
-  - `false`: 477
-
-## lab_results_creatUS_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4217
-  - `false`: 477
-
-## lab_results_albuminBS_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2699
-  - `false`: 1995
-
-## lab_results_albuminBS_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2699
-  - `false`: 1995
-
-## lab_results_hba1c%_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2699
-  - `false`: 1995
-
-## lab_results_hba1c%_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2699
-  - `false`: 1995
-
-## lab_results_hba1c_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2699
-  - `false`: 1995
-
-## lab_results_hba1c_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2699
-  - `false`: 1995
-
-## lab_results_validSerumCreatinine_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4190
-  - `true`: 504
-
-## lab_results_validSerumCreatinine_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4190
-  - `true`: 504
-
-## lab_results_valideGFR_value_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4414
-  - `true`: 280
-
-## lab_results_valideGFR_value_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4414
-  - `true`: 280
-
-## echocardiographs_lvef_pET_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 3902
-  - `false`: 792
-
-## echocardiographs_lvef_pET_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 3853
-  - `false`: 841
-
-## electrocardiographs_ecg_qrs_duration_pET_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2385
-  - `true`: 2309
-
-## electrocardiographs_ecg_qrs_duration_pET_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2384
-  - `true`: 2310
-
-## electrocardiographs_ecg_qrs_axis_pET_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2385
-  - `true`: 2309
-
-## electrocardiographs_ecg_qrs_axis_pET_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2385
-  - `true`: 2309
-
-## electrocardiographs_ecg_qt_duration_corrected_pET_last_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2383
-  - `true`: 2311
-
-## electrocardiographs_ecg_qt_duration_corrected_pET_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 2384
-  - `true`: 2310
-
-## smoking_status_smoker_totalSmokingDuration_sum_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4611
-  - `false`: 83
-
-## conditions_heartFailure_timeFromEarliest_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4683
-  - `true`: 11
-
-## eGFR_2021_ckd_epi_creatinine_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `false`: 4190
-  - `true`: 504
-
-## maggic_total_score_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4688
-  - `false`: 6
-
-## encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4452
-  - `false`: 242
-
-## encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 3765
-  - `false`: 929
-
-## encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2968
-  - `false`: 1726
-
-## encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4633
-  - `false`: 61
-
-## cause_of_death_number_of_days_to_death_for_CV_f5a_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 4584
-  - `false`: 110
-
-## cause_of_death_number_of_days_to_death_for_all_cause_f5a_first_was_missing
-
-- dtype: `String` (categorical)
-- nulls: 0 (0.00%)
-- unique values: 2
-- top values (shown only where count ≥ 5):
-  - `true`: 2789
-  - `false`: 1905
