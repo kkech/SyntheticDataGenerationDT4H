@@ -5,7 +5,8 @@ Same privacy-safe profiler as profile_data, but run against the OUTPUT of
 the preprocess step instead of the raw loaded data. Lets before/after
 preprocessing statistics be compared directly (e.g. confirm imputation
 left no nulls, combined feature columns look sane, column count dropped
-as expected) without needing the full local dataset to check by hand.
+as expected). Also copies metadata.json again so this step's output is
+self-contained even if run on its own (e.g. via --only).
 """
 
 import json
@@ -13,6 +14,7 @@ import os
 
 import polars as pl
 
+from pipeline.common.artifacts import copy_metadata, write_row_sample
 from pipeline.common.profiling import analyze_column, write_markdown
 from pipeline.config import PipelineConfig
 from pipeline.steps.base import PipelineStep
@@ -29,8 +31,11 @@ class ProfilePreprocessedDataStep(PipelineStep):
         df = pl.read_parquet(config.preprocessed_output_path)
         os.makedirs(config.for_repo_dir, exist_ok=True)
 
+        copy_metadata(config.transfer_folder, config.for_repo_dir)
         self._write_analysis(df, config)
-        self._write_sample(df, config)
+        write_row_sample(
+            df, os.path.join(config.for_repo_dir, "DT4H_Preprocessed_Sample20.parquet"), config.sample_rows
+        )
 
     def _write_analysis(self, df: pl.DataFrame, config: PipelineConfig) -> None:
         print(f"Profiling {df.height} rows x {df.width} columns (preprocessed)...")
@@ -49,10 +54,3 @@ class ProfilePreprocessedDataStep(PipelineStep):
         md_path = os.path.join(config.for_repo_dir, "DT4H_Preprocessed_Column_Analysis.md")
         write_markdown(analysis, df.height, md_path)
         print(f"Saved preprocessed column analysis (Markdown) -> {md_path}")
-
-    def _write_sample(self, df: pl.DataFrame, config: PipelineConfig) -> None:
-        n = min(config.sample_rows, df.height)
-        sample = df.sample(n=n, seed=config.sample_seed)
-        path = os.path.join(config.for_repo_dir, "DT4H_Preprocessed_Sample20.parquet")
-        sample.write_parquet(path)
-        print(f"Saved {n}-row preprocessed sample -> {path}")
