@@ -94,6 +94,13 @@ class PipelineConfig:
     # bounding a truly wedged fit.
     synthesizer_timeout_seconds: int = 21600
 
+    # --- utility step (TSTR) ---
+    # None = auto-select up to utility_max_targets BOOLEAN outcome
+    # variables from the feature-set metadata (best class balance first).
+    # Set an explicit tuple of column names to override.
+    utility_targets: tuple = None
+    utility_max_targets: int = 5
+
     # Constant columns carry no signal: they waste model capacity and, for
     # DP synthesizers, privacy budget. Held out during training and
     # re-attached verbatim afterwards, so the output schema is unchanged.

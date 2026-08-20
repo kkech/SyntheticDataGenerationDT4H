@@ -2,7 +2,7 @@
 UC1 data pipeline entrypoint.
 
 Runs load_data -> profile_data -> preprocess -> profile_preprocessed_data
--> generate -> evaluate -> privacy in order, skipping any step already marked completed
+-> generate -> evaluate -> utility -> privacy in order, skipping any step already marked completed
 (tracked in pipeline_status.json) unless explicitly forced.
 
 Which synthesizers the generate step runs is config-driven
@@ -36,6 +36,7 @@ from pipeline.steps.profile_preprocessed_data import ProfilePreprocessedDataStep
 from pipeline.steps.generate import GenerateStep
 from pipeline.steps.evaluate import EvaluateStep
 from pipeline.steps.privacy import PrivacyStep
+from pipeline.steps.utility import UtilityStep
 
 STEPS = [
     LoadDataStep(),
@@ -44,6 +45,7 @@ STEPS = [
     ProfilePreprocessedDataStep(),
     GenerateStep(),
     EvaluateStep(),
+    UtilityStep(),
     PrivacyStep(),
 ]
 

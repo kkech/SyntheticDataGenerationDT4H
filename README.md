@@ -10,7 +10,7 @@ differential privacy, intended to support a public dataset release.
 python main.py
 ```
 
-Seven steps, run in order, each skipped once completed (tracked in
+Eight steps, run in order, each skipped once completed (tracked in
 `pipeline_status.json`) unless forced:
 
 | # | step | what it does | output |
@@ -21,7 +21,8 @@ Seven steps, run in order, each skipped once completed (tracked in
 | 4 | `profile_preprocessed_data` | same profiler over the training frame | `output/profile_preprocessed_data/` |
 | 5 | `generate` | trains every configured synthesizer, writes synthetic CSVs, saves fitted generators, checks for verbatim training records | `output/generate/` |
 | 6 | `evaluate` | marginal fidelity (KS, Wasserstein, TVD, missingness) **and** pairwise association structure (Spearman, Cramer's V, correlation ratio) across original / preprocessed / synthetic | `output/evaluate/` |
-| 7 | `privacy` | distance-to-closest-record and nearest-neighbor-distance-ratio per synthesizer against a real-to-real baseline | `output/privacy/` |
+| 7 | `utility` | Train-Synthetic-Test-Real: gradient boosting on real vs each synthetic dataset for metadata-declared clinical outcomes, scored on the same held-out real test split (AUC gap vs baseline) | `output/utility/` |
+| 8 | `privacy` | distance-to-closest-record and nearest-neighbor-distance-ratio per synthesizer against a real-to-real baseline | `output/privacy/` |
 
 ### CLI
 
