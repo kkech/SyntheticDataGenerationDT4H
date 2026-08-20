@@ -2,7 +2,7 @@
 UC1 data pipeline entrypoint.
 
 Runs load_data -> profile_data -> preprocess -> profile_preprocessed_data
--> generate in order, skipping any step already marked completed
+-> generate -> evaluate in order, skipping any step already marked completed
 (tracked in pipeline_status.json) unless explicitly forced.
 
 Which synthesizers the generate step runs is config-driven
@@ -32,6 +32,7 @@ from pipeline.steps.profile_data import ProfileDataStep
 from pipeline.steps.preprocess import PreprocessStep
 from pipeline.steps.profile_preprocessed_data import ProfilePreprocessedDataStep
 from pipeline.steps.generate import GenerateStep
+from pipeline.steps.evaluate import EvaluateStep
 
 STEPS = [
     LoadDataStep(),
@@ -39,6 +40,7 @@ STEPS = [
     PreprocessStep(),
     ProfilePreprocessedDataStep(),
     GenerateStep(),
+    EvaluateStep(),
 ]
 
 

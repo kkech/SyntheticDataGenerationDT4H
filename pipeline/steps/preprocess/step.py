@@ -3,10 +3,10 @@ Step: preprocess
 
 Turns the full raw dataset into a GAN-ready feature set: combines
 medication/condition columns, encodes NYHA via the metadata valueSet,
-drops identifiers/datetimes, applies Machteld's temporary dummy
-imputation for currently-missing labs (toggleable), then a generic final
-imputation pass (bootstrap for numerics + missingness flags, "Missing"
-category for booleans/categoricals) so no nulls remain.
+drops identifiers/datetimes, then resolves all remaining missingness:
+numeric nulls become per-column sentinels (decoded back to null after
+generation -- numeric missingness carries meaning and is never imputed),
+boolean/categorical nulls become an explicit "Missing" category.
 
 Also writes a summary of every transformation decision made (what was
 combined/dropped/imputed and why) to output/preprocess/DT4H_Preprocessing_Summary
@@ -70,13 +70,6 @@ class PreprocessStep(PipelineStep):
 
         print("Encoding NYHA...")
         df, summary["nyha_encoding"] = t.encode_nyha(df, var_meta)
-
-        if config.apply_dummy_imputation:
-            print("Applying temporary dummy imputation (Machteld's placeholder rules)...")
-            df, summary["dummy_imputation"] = t.apply_dummy_imputation(df)
-        else:
-            print("Skipping dummy imputation (apply_dummy_imputation=False).")
-            summary["dummy_imputation"] = {"disabled": True}
 
         print("Preferring _first/_last numeric variants...")
         df, summary["numeric_aggregates_dropped"] = t.prefer_first_last_numerics(df)
@@ -185,16 +178,6 @@ class PreprocessStep(PipelineStep):
             f"- Decimal columns cast to Float64: "
             f"{s.get('numeric_dtype_normalization', {}).get('decimal_cast_to_float', [])}",
         ]
-
-        lines += ["", "## Dummy imputation (Machteld's temporary placeholder rules)"]
-        if s["dummy_imputation"].get("disabled"):
-            lines.append("- Skipped (apply_dummy_imputation=False)")
-        else:
-            for fill in s["dummy_imputation"]["fills"]:
-                lines.append(f"- Filled {fill['n_filled']} value(s) in `{fill['target']}` "
-                              f"(triggered by `{fill['trigger']}` present)")
-            for sk in s["dummy_imputation"]["skipped"]:
-                lines.append(f"- (skipped) {sk}")
 
         lines += [
             "",

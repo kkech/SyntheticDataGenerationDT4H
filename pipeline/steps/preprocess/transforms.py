@@ -9,7 +9,6 @@ import json
 import os
 import re
 
-import numpy as np
 import polars as pl
 
 NYHA_COLUMN = "nyha_nyha_pET"
@@ -343,141 +342,32 @@ def encode_nyha(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
     return df, {"skipped": False, "map": nyha_map}
 
 
-# --- temporary dummy imputation (Machteld's placeholder rules) ---
-
-def _sample_right_skewed(rng: np.random.Generator, low: float, high: float, mean: float | None, n: int) -> np.ndarray:
-    """Draw n samples in [low, high] with a right-skewed shape hitting the
-    requested mean (defaults to the range midpoint)."""
-    if mean is None:
-        mean = (low + high) / 2
-    span = high - low
-    target = min(max((mean - low) / span, 1e-3), 1 - 1e-3)
-    a = 2.0
-    b = a * (1 - target) / target
-    return low + rng.beta(a, b, size=n) * span
-
-
-# (trigger_col, [(target_col, low, high, mean_or_None), ...])
-DUMMY_IMPUTATION_RULES = [
-    ("lab_results_albuminBS_value", [
-        ("lab_results_glucose_value", 0, 60, 7),
-        ("lab_results_hba1c%_value", 3, 17, 7),
-        ("lab_results_hba1c_value", 15, 167, 50),
-        ("lab_results_ntProBnp_value", 100, 8000, 3000),
-        ("lab_results_crpNonHs_value", 10, 500, 50),
-    ]),
-    ("lab_results_hdl_value", [
-        ("lab_results_tropTnHs_value", 2, 400, None),
-        ("lab_results_ldl_value", 0, 20, 2),
-    ]),
-    ("lab_results_potassium_value", [
-        ("lab_results_sodium_value", 131, 175, 140),
-    ]),
-    ("vital_signs_heartRate_value", [
-        ("vital_signs_oxygenSaturation_value", 85, 99, 96),
-    ]),
-    ("electrocardiographs_ecg_qrs_duration_pET", [
-        ("electrocardiographs_ecg_qrs_axis_pET", 30, 120, None),
-    ]),
-]
-
-
-def _resolve_variants(df: pl.DataFrame, base_col: str) -> list[str]:
-    candidates = [base_col, f"{base_col}_first", f"{base_col}_last"]
-    return [c for c in candidates if c in df.columns]
-
-
-def apply_dummy_imputation(df: pl.DataFrame, seed: int = 0) -> tuple[pl.DataFrame, dict]:
-    """
-    TEMPORARY: fills specific lab/vital columns with placeholder values
-    per Machteld's clinically-motivated rules, wherever the given trigger
-    column is present but the target is null. Remove/disable
-    (config.apply_dummy_imputation = False) once the corrected export
-    with real values for these fields arrives.
-    """
-    rng = np.random.default_rng(seed)
-    fills = []
-    skipped = []
-
-    for trigger_base, targets in DUMMY_IMPUTATION_RULES:
-        trigger_cols = _resolve_variants(df, trigger_base)
-        if not trigger_cols:
-            print(f"  (skip) trigger column '{trigger_base}' (or _first/_last) not found")
-            skipped.append({"reason": "trigger not found", "trigger": trigger_base})
-            continue
-
-        trigger_present = df[trigger_cols[0]].is_not_null()
-        for c in trigger_cols[1:]:
-            trigger_present = trigger_present | df[c].is_not_null()
-
-        for target_base, low, high, mean in targets:
-            target_cols = _resolve_variants(df, target_base)
-            if not target_cols:
-                print(f"  (skip) target column '{target_base}' (or _first/_last) not found")
-                skipped.append({"reason": "target not found", "trigger": trigger_base, "target": target_base})
-                continue
-
-            for target_col in target_cols:
-                needs_fill = trigger_present & df[target_col].is_null()
-                n_fill = int(needs_fill.sum())
-                if n_fill == 0:
-                    continue
-
-                # Scatter the generated values into a full-length array and
-                # merge via when/then, rather than round-tripping the whole
-                # column through numpy. A numpy round-trip turns every
-                # remaining null into a float NaN, and polars does not treat
-                # NaN as null -- those cells would then be invisible to
-                # is_null(), skipped by impute_numeric_columns(), and reach
-                # the "GAN-ready" output as NaN while the null count still
-                # reported zero.
-                values = _sample_right_skewed(rng, low, high, mean, n_fill)
-                scattered = np.full(df.height, np.nan)
-                scattered[needs_fill.to_numpy()] = values
-
-                df = df.with_columns(
-                    pl.when(needs_fill)
-                    .then(pl.Series(target_col, scattered))
-                    .otherwise(pl.col(target_col))
-                    .alias(target_col)
-                )
-                print(f"  Filled {n_fill} value(s) in '{target_col}' (triggered by '{trigger_base}' present).")
-                fills.append({"target": target_col, "trigger": trigger_base, "n_filled": n_fill})
-
-    return df, {"fills": fills, "skipped": skipped}
-
-
 # --- dtype normalization ---
 
 def normalize_numeric_dtypes(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     """
-    Casts Decimal columns to Float64.
+    Casts Decimal columns to Float64 and converts NaN to null.
 
     The source export stores some labs (hemoglobin, potassium, sodium) as
     Decimal. Polars Decimal converts to a pandas *object* column holding
     decimal.Decimal instances, for which pandas' is_numeric_dtype()
-    returns False -- so dpSyntGAN.py would route these continuous lab
-    values down its CATEGORICAL branch and model them as thousands of
-    discrete categories.
+    returns False -- so a downstream synthesizer would route these
+    continuous lab values down its CATEGORICAL branch and model them as
+    thousands of discrete categories. The cast is explicit rather than
+    left to depend on whether a column happens to have missing values.
 
-    Today this is masked by luck: all six currently contain nulls, and
-    impute_numeric_columns() rebuilds them via numpy as Float64 as a side
-    effect. Any of them becoming null-free would silently restore the
-    Decimal dtype and the bug -- and improved completeness for exactly
-    these labs is the change the data provider has said is coming. So the
-    cast is made explicit here rather than left to depend on whether a
-    column happens to have missing values.
+    NaN handling is defensive: polars treats NaN as a valid float
+    distinct from null, so any NaN reaching this point would be invisible
+    to every is_null() check downstream -- silently skipped by the
+    missingness encoding and shipped in the final output while the null
+    count still read zero. Normalizing to null gives missing values
+    exactly one representation.
     """
     decimal_cols = [c for c in df.columns if isinstance(df[c].dtype, pl.Decimal)]
     if decimal_cols:
         print(f"  Casting {len(decimal_cols)} Decimal column(s) to Float64: {len(decimal_cols)} column(s)")
         df = df.with_columns([pl.col(c).cast(pl.Float64).alias(c) for c in decimal_cols])
 
-    # Defensive: polars treats NaN as a valid float distinct from null, so
-    # any NaN reaching this point would be invisible to every is_null()
-    # check downstream -- silently skipped by imputation and shipped in the
-    # final output while the null count still read zero. Normalize to null
-    # so missing values have exactly one representation.
     float_cols = [c for c in df.columns if df[c].dtype in (pl.Float32, pl.Float64)]
     nan_counts = {c: int(df[c].is_nan().sum()) for c in float_cols}
     nan_cols = {c: n for c, n in nan_counts.items() if n}

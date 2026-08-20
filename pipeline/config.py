@@ -28,7 +28,6 @@ class PipelineConfig:
     sample_seed: int = 0
 
     metadata_path: str = None  # defaults to <output_dir>/profile_data/metadata.json
-    apply_dummy_imputation: bool = True
 
     # --- generate step ---
     # Which synthesizers to run, by registry name. Non-DP: ctgan, tvae,

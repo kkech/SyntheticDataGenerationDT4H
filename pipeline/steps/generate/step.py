@@ -176,6 +176,21 @@ class GenerateStep(PipelineStep):
             print("Training...")
             synth.fit(train, categorical_columns=categorical, continuous_columns=continuous)
 
+            # Persist the fitted generator so more synthetic records can
+            # be produced later without retraining (see regenerate.py).
+            # Saved locally only -- the models directory is gitignored,
+            # since a fitted generator has memorized aspects of the real
+            # patient data and must be treated as sensitively as the
+            # data itself.
+            model_path = os.path.join(out_dir, "models", f"{name}.pkl")
+            try:
+                self._save_generator(synth, model_path)
+                record["model_path"] = model_path
+                print(f"Saved fitted generator (local only, gitignored) -> {model_path}")
+            except Exception as save_err:
+                record["model_save_error"] = f"{type(save_err).__name__}: {save_err}"
+                print(f"⚠️  Could not save generator: {type(save_err).__name__}: {save_err}")
+
             from pipeline.steps.generate.synthesizers.sdv_models import save_metadata
 
             meta_path = os.path.join(out_dir, f"DT4H_SDV_Metadata_{name}.json")
@@ -246,6 +261,18 @@ class GenerateStep(PipelineStep):
             print(traceback.format_exc())
 
         return record
+
+    @staticmethod
+    def _save_generator(synth, path: str) -> None:
+        """Serialize the fitted Synthesizer wrapper (params + underlying
+        model) with cloudpickle, which handles the lambdas/closures inside
+        SDV's transformers that plain pickle can reject. cloudpickle
+        output loads with the standard pickle module."""
+        import cloudpickle
+
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "wb") as f:
+            cloudpickle.dump(synth, f)
 
     @staticmethod
     def _decode_numeric_missing(synthetic, config):

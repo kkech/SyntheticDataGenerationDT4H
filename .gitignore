@@ -11,3 +11,7 @@ output/preprocess/UC1_Preprocessed.parquet
 # specific vetted file deliberately (git add -f) once its leakage and
 # privacy assessment have been reviewed. Summaries stay tracked.
 output/generate/*.csv
+
+# Fitted generators memorize aspects of the real patient data -- treat
+# them like the data itself. Kept locally for regenerate.py, never pushed.
+output/generate/models/
