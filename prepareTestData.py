@@ -35,16 +35,20 @@ def inspect_folder(folder: str) -> None:
 
 def load_metadata(folder: str, output_folder: str) -> None:
     """
-    Copies whatever is at <folder>/metadata (file or directory) into the
-    output folder verbatim. This is schema/column definition info, not
-    patient-level data, so it's safe to carry through unmodified.
+    Copies whatever metadata is next to the data (file or directory) into
+    the output folder verbatim -- schema/column definition info, not
+    patient-level data, so it's safe to carry through unmodified. Checks
+    a few likely names/extensions since this has varied between transfers
+    (e.g. "metadata" vs "metadata.json").
     """
-    meta_path = os.path.join(folder, "metadata")
-    if not os.path.exists(meta_path):
-        print("⚠️  No 'metadata' file/folder found next to the data.")
+    candidates = ["metadata.json", "metadata", "metadata.parquet"]
+    meta_path = next((os.path.join(folder, c) for c in candidates if os.path.exists(os.path.join(folder, c))), None)
+
+    if meta_path is None:
+        print(f"⚠️  No metadata file/folder found next to the data (checked: {candidates}).")
         return
 
-    dest = os.path.join(output_folder, "metadata")
+    dest = os.path.join(output_folder, os.path.basename(meta_path))
     if os.path.isdir(meta_path):
         shutil.copytree(meta_path, dest, dirs_exist_ok=True)
         print(f"Copied metadata folder ({len(os.listdir(meta_path))} entries) -> {dest}")
