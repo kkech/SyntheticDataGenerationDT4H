@@ -7,17 +7,17 @@ Found 3 part file(s):
   part-00001-9aaa92e9-ddad-4861-94fb-c3abb59d94ea-c000.snappy.parquet: 2120 rows x 528 cols
   part-00002-4eeb4ef0-377f-43b2-9f44-38c632f1f6c6-c000.snappy.parquet: 290 rows x 528 cols
 Concatenated: 4694 rows x 528 cols
-Saved full dataset (local only, not for git) -> /mnt/data/DT4Hnew/output/load_data/UC1_Resolved_Full.parquet
+Saved full dataset (local only, not for git) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/load_data/UC1_Resolved_Full.parquet
 ✅ 'load_data' completed.
 
 ======================================================================
 ▶️  RUNNING 'profile_data'
 ======================================================================
-Copied metadata file -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/metadata.json
+Copied metadata file -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_data/metadata.json
 Profiling 4694 rows x 528 columns...
-Saved column analysis (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Column_Analysis.json
-Saved column analysis (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Column_Analysis.md
-Saved random sample of 20 row(s) (seed=0) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Sample20.parquet
+Saved column analysis (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_data/DT4H_Column_Analysis.json
+Saved column analysis (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_data/DT4H_Column_Analysis.md
+Saved random sample of 20 row(s) (seed=0) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_data/DT4H_Sample20.parquet
 ✅ 'profile_data' completed.
 
 ======================================================================
@@ -73,17 +73,17 @@ Final null cleanup...
   Imputed 50 numeric column(s), added 50 '_was_missing' flag(s), dropped 18 column(s) with fewer than 5 observed values.
   Filled 66 boolean/categorical column(s) with an explicit 'Missing' category.
 Remaining null cells after all imputation: 0
-Saved 4694 rows x 312 columns -> /mnt/data/DT4Hnew/output/preprocess/UC1_Preprocessed.parquet
-Saved preprocessing summary (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessing_Summary.json
-Saved preprocessing summary (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessing_Summary.md
+Saved 4694 rows x 312 columns -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/preprocess/UC1_Preprocessed.parquet
+Saved preprocessing summary (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/preprocess/DT4H_Preprocessing_Summary.json
+Saved preprocessing summary (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/preprocess/DT4H_Preprocessing_Summary.md
 ✅ 'preprocess' completed.
 
 ======================================================================
 ▶️  RUNNING 'profile_preprocessed_data'
 ======================================================================
-Copied metadata file -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/metadata.json
+Copied metadata file -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/metadata.json
 Profiling 4694 rows x 312 columns (preprocessed)...
-Saved preprocessed column analysis (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessed_Column_Analysis.json
-Saved preprocessed column analysis (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessed_Column_Analysis.md
-Saved random sample of 20 row(s) (seed=0) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/for_repo/DT4H_Preprocessed_Sample20.parquet
+Saved preprocessed column analysis (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Column_Analysis.json
+Saved preprocessed column analysis (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Column_Analysis.md
+Saved random sample of 20 row(s) (seed=0) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Sample20.parquet
 ✅ 'profile_preprocessed_data' completed.
