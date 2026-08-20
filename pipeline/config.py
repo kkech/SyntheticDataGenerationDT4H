@@ -84,9 +84,15 @@ class PipelineConfig:
     # synthesizers and the evaluate step still run, instead of the whole
     # pipeline sitting silent until someone kills it. Uses SIGALRM, so it
     # applies on Unix main-thread runs (i.e. normal `python main.py`).
-    # None disables it. CTGAN at 500 epochs took ~19 min on the T4, so
-    # one hour leaves generous headroom for legitimate work.
-    synthesizer_timeout_seconds: int = 3600
+    # None disables it.
+    #
+    # Calibrated against measured full-data runs, not guesses: CTGAN at
+    # 500 epochs took ~14 min and MST -- CPU-bound and slow but
+    # legitimately converging -- took 2.7 HOURS (9883s) to succeed. A
+    # 1-hour limit would have killed that success, so the default is six
+    # hours: far above every observed legitimate runtime, while still
+    # bounding a truly wedged fit.
+    synthesizer_timeout_seconds: int = 21600
 
     # Constant columns carry no signal: they waste model capacity and, for
     # DP synthesizers, privacy budget. Held out during training and
