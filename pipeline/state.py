@@ -28,6 +28,26 @@ class PipelineState:
     def is_completed(self, step_name: str) -> bool:
         return self._data.get(step_name, {}).get("completed", False)
 
+    def mark_pending(self, step_name: str) -> None:
+        """The step WILL run in the current pipeline run but has not
+        started yet. Replaces any stale completed/failed entry from a
+        previous run, so the status never claims 'completed' for a step
+        that is about to be redone."""
+        self._data[step_name] = {
+            "completed": False,
+            "pending": True,
+            "queued_at": datetime.now(timezone.utc).isoformat(),
+        }
+        self._save()
+
+    def mark_running(self, step_name: str) -> None:
+        self._data[step_name] = {
+            "completed": False,
+            "running": True,
+            "started_at": datetime.now(timezone.utc).isoformat(),
+        }
+        self._save()
+
     def mark_completed(self, step_name: str) -> None:
         self._data[step_name] = {
             "completed": True,

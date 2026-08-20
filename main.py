@@ -64,23 +64,49 @@ def run_pipeline(
     if not steps:
         raise ValueError(f"No matching step(s) for --only {only}. Known steps: {[s.name for s in STEPS]}")
 
+    import os
+    import shutil
+
+    to_run = []
     for step in steps:
         should_force = force or step.name in force_steps
         if state.is_completed(step.name) and not should_force:
             print(f"⏭️  Skipping '{step.name}' (already completed). "
                   f"Use --force or --force-step {step.name} to rerun.")
             continue
+        to_run.append(step)
 
+    # Mark every step this run WILL execute as pending up front, so a
+    # status check mid-run never shows a stale 'completed' from a
+    # previous run for a step that is queued to be redone.
+    for step in to_run:
+        state.mark_pending(step.name)
+
+    for step in to_run:
+        # A rerun replaces the step's outputs wholesale: delete the old
+        # ones first so nothing stale can survive next to fresh files.
+        step_out = config.step_dir(step.name)
+        if os.path.isdir(step_out):
+            if step.name == "load_data" and not os.path.isdir(config.transfer_folder):
+                raise FileNotFoundError(
+                    f"Refusing to delete {step_out} before rerunning load_data: the transfer "
+                    f"folder {config.transfer_folder} is not available to rebuild it from."
+                )
+            shutil.rmtree(step_out)
+            print(f"🧹 Deleted previous outputs of '{step.name}' ({step_out}) for a clean rerun.")
+
+        state.mark_running(step.name)
         started = time.time()
         print(f"\n{'=' * 70}\n▶️  RUNNING '{step.name}' (started {datetime.now().strftime('%H:%M:%S')})\n{'=' * 70}")
         try:
             step.run(config)
         except BaseException as e:
-            # BaseException so a Ctrl-C mid-step is recorded too, instead
-            # of leaving the status file silently claiming the previous
-            # state while the step actually died half-way.
+            # BaseException so a Ctrl-C or SIGTERM mid-step is recorded
+            # too, instead of leaving the status file claiming 'running'
+            # while the step actually died half-way.
             state.mark_failed(step.name, f"{type(e).__name__}: {e}")
-            print(f"❌ Step '{step.name}' {'interrupted' if isinstance(e, KeyboardInterrupt) else 'failed'} "
+            print(f"❌ Step '{step.name}' "
+                  f"{'interrupted' if isinstance(e, (KeyboardInterrupt, SystemExit)) else 'failed'} "
                   f"after {time.time() - started:.0f}s: {e}")
             raise
         state.mark_completed(step.name)
@@ -156,6 +182,10 @@ def print_status(config: PipelineConfig | None = None) -> None:
             print(f"  {step.name}: never run")
         elif info.get("completed"):
             print(f"  {step.name}: ✅ completed at {info.get('completed_at')}")
+        elif info.get("running"):
+            print(f"  {step.name}: 🔄 running (started {info.get('started_at')})")
+        elif info.get("pending"):
+            print(f"  {step.name}: ⏳ pending (queued in the current run)")
         else:
             print(f"  {step.name}: ❌ failed at {info.get('failed_at')} -- {info.get('error')}")
 
@@ -182,6 +212,18 @@ def main() -> None:
 
     if args.preflight:
         raise SystemExit(0 if preflight() else 1)
+
+    # ./run_job.sh stop (and plain `kill`) send SIGTERM, which by default
+    # ends the process without unwinding Python -- leaving the status
+    # file claiming a step is still 'running'. Raise instead, so the
+    # normal failure path records the interrupted step and the log gets
+    # its closing line.
+    import signal
+
+    def _on_sigterm(signum, frame):
+        raise SystemExit("terminated (SIGTERM)")
+
+    signal.signal(signal.SIGTERM, _on_sigterm)
 
     # Tee everything to a log file so a failing run can be shared whole,
     # rather than only the stdout half that shell redirection captures.

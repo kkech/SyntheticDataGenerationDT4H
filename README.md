@@ -11,7 +11,12 @@ python main.py
 ```
 
 Eight steps, run in order, each skipped once completed (tracked in
-`pipeline_status.json`) unless forced:
+`pipeline_status.json`) unless forced. The status file reflects the
+true lifecycle at all times — every step a run will execute is marked
+⏳ pending up front (replacing any stale entry from a previous run),
+then 🔄 running, then ✅ completed or ❌ failed — and a step's previous
+output files are deleted right before it reruns, so nothing stale ever
+sits next to fresh results:
 
 | # | step | what it does | output |
 |---|------|--------------|--------|
