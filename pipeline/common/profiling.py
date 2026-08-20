@@ -1,23 +1,18 @@
+"""
+Privacy-safe per-column profiler, used by the profile_data step to
+summarize the full dataset before any of it leaves the local machine.
+
+Every category value is only reported by name if at least
+SUPPRESSION_THRESHOLD rows share it (a k-anonymity-style guard); rarer
+values -- including entire near-unique/free-text/identifier columns -- are
+rolled into a "suppressed" bucket instead, so raw record-level values never
+end up in a committed report.
+"""
+
 import polars as pl
-import json
-import os
 
-# --- CONFIGURATION ---
-INPUT_PATH = "/mnt/data/DT4Hnew/DT4H_Cleaned_Data.parquet"
-OUTPUT_JSON = "/mnt/data/DT4Hnew/DT4H_Column_Analysis.json"
-OUTPUT_MD = "/mnt/data/DT4Hnew/DT4H_Column_Analysis.md"
-
-# Columns with more distinct values than this are treated as high-cardinality:
-# only the top N values are reported (matches the cutoff used later in
-# metaDataMergedAndClean.py to drop noisy high-cardinality string columns).
 HIGH_CARDINALITY_THRESHOLD = 50
 TOP_N_CATEGORIES = 20
-ID_NAME_PATTERNS = ["id_", "contactid", "metingid", "prescriptionid", "pseudo_id"]
-
-# Privacy guard: a category value is only reported by name if at least this
-# many rows share it. Rarer values (including near-unique / free-text /
-# identifier columns) are rolled into a "suppressed" bucket instead, so raw
-# record-level values never end up in the committed report.
 SUPPRESSION_THRESHOLD = 5
 
 
@@ -74,15 +69,12 @@ def analyze_numeric(series: pl.Series) -> dict:
     if non_null.len() == 0:
         return {"note": "All values are null."}
 
-    quantiles = {
-        str(q): non_null.quantile(q) for q in (0.05, 0.25, 0.5, 0.75, 0.95)
-    }
-    std = non_null.std()
+    quantiles = {str(q): non_null.quantile(q) for q in (0.05, 0.25, 0.5, 0.75, 0.95)}
     return {
         "min": non_null.min(),
         "max": non_null.max(),
         "mean": non_null.mean(),
-        "std": std,
+        "std": non_null.std(),
         "quantiles": quantiles,
         "is_constant": non_null.n_unique() <= 1,
     }
@@ -104,7 +96,6 @@ def analyze_column(df: pl.DataFrame, col: str) -> dict:
     total = df.height
     null_count = series.null_count()
     col_type = classify_column(series.dtype)
-    col_lower = col.lower()
 
     info = {
         "dtype": str(series.dtype),
@@ -112,7 +103,6 @@ def analyze_column(df: pl.DataFrame, col: str) -> dict:
         "row_count": total,
         "null_count": null_count,
         "null_pct": round(null_count / total, 4) if total else None,
-        "looks_like_id": any(pat in col_lower for pat in ID_NAME_PATTERNS),
     }
 
     if col_type == "boolean":
@@ -138,9 +128,11 @@ def write_markdown(analysis: dict, total_rows: int, path: str) -> None:
         lines.append(f"## {col}")
         lines.append("")
         lines.append(f"- dtype: `{info['dtype']}` ({info['inferred_type']})")
-        lines.append(f"- nulls: {info['null_count']} ({info['null_pct']:.2%})" if info["null_pct"] is not None else "- nulls: n/a")
-        if info.get("looks_like_id"):
-            lines.append("- ⚠️ looks like an identifier column (by name)")
+        lines.append(
+            f"- nulls: {info['null_count']} ({info['null_pct']:.2%})"
+            if info["null_pct"] is not None
+            else "- nulls: n/a"
+        )
 
         if info["inferred_type"] == "numeric":
             if "note" in info:
@@ -174,34 +166,3 @@ def write_markdown(analysis: dict, total_rows: int, path: str) -> None:
 
     with open(path, "w") as f:
         f.write("\n".join(lines))
-
-
-def explore_data():
-    if not os.path.exists(INPUT_PATH):
-        print(f"❌ Error: Could not find {INPUT_PATH}")
-        return
-
-    df = pl.read_parquet(INPUT_PATH)
-    total_rows = df.height
-    print(f"--- 📊 ANALYZING: {total_rows} rows, {df.width} columns ---")
-
-    analysis = {}
-    for col in df.columns:
-        print(f"  -> profiling '{col}'")
-        analysis[col] = analyze_column(df, col)
-
-    with open(OUTPUT_JSON, "w") as f:
-        json.dump(
-            {"total_rows": total_rows, "total_columns": df.width, "columns": analysis},
-            f,
-            indent=2,
-            default=str,
-        )
-    print(f"\n✅ JSON analysis saved to: {OUTPUT_JSON}")
-
-    write_markdown(analysis, total_rows, OUTPUT_MD)
-    print(f"✅ Markdown summary saved to: {OUTPUT_MD}")
-
-
-if __name__ == "__main__":
-    explore_data()
