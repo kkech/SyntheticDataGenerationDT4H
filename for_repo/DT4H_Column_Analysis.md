@@ -31,25 +31,25 @@ Total columns: 528
 - ⚠️ high-cardinality column (2305 distinct values)
 - top values (shown only where count ≥ 5):
   - `2024-01-12 00:00:00`: 9
-  - `2022-10-28 00:00:00`: 8
   - `2022-12-21 00:00:00`: 8
+  - `2022-10-28 00:00:00`: 8
+  - `2024-04-03 00:00:00`: 7
+  - `2019-02-01 00:00:00`: 7
   - `2024-02-28 00:00:00`: 7
   - `2023-06-20 00:00:00`: 7
   - `2022-06-28 00:00:00`: 7
-  - `2024-04-03 00:00:00`: 7
-  - `2019-02-01 00:00:00`: 7
-  - `2019-10-01 00:00:00`: 6
-  - `2019-01-15 00:00:00`: 6
-  - `2024-01-23 00:00:00`: 6
-  - `2023-03-21 00:00:00`: 6
-  - `2021-07-02 00:00:00`: 6
-  - `2024-03-15 00:00:00`: 6
+  - `2023-12-22 00:00:00`: 6
   - `2023-09-01 00:00:00`: 6
+  - `2023-03-21 00:00:00`: 6
+  - `2017-03-03 00:00:00`: 6
+  - `2016-04-13 00:00:00`: 6
+  - `2023-02-21 00:00:00`: 6
   - `2017-04-07 00:00:00`: 6
-  - `2023-01-04 00:00:00`: 6
-  - `2016-11-24 00:00:00`: 6
+  - `2024-03-05 00:00:00`: 6
   - `2022-08-09 00:00:00`: 6
-  - `2020-11-20 00:00:00`: 6
+  - `2024-04-26 00:00:00`: 6
+  - `2024-01-23 00:00:00`: 6
+  - `2019-01-15 00:00:00`: 6
   - 2285 other distinct value(s) suppressed, covering 4562 row(s) (count below 5 and/or ranked beyond top 20)
 
 ## eventTime
@@ -61,24 +61,24 @@ Total columns: 528
 - top values (shown only where count ≥ 5):
   - `2023-12-18 00:00:00`: 8
   - `2024-01-16 00:00:00`: 7
-  - `2021-06-24 00:00:00`: 6
-  - `2023-09-26 00:00:00`: 6
   - `2022-12-22 00:00:00`: 6
   - `2022-12-20 00:00:00`: 6
-  - `2023-11-28 00:00:00`: 6
-  - `2024-04-01 00:00:00`: 6
-  - `2019-02-08 00:00:00`: 6
   - `2019-03-07 00:00:00`: 6
-  - `2024-02-15 00:00:00`: 6
-  - `2019-01-17 00:00:00`: 6
-  - `2019-09-16 00:00:00`: 6
-  - `2021-10-15 00:00:00`: 6
-  - `2018-04-09 00:00:00`: 6
   - `2021-02-01 00:00:00`: 6
+  - `2019-02-08 00:00:00`: 6
+  - `2024-04-01 00:00:00`: 6
+  - `2024-02-15 00:00:00`: 6
   - `2021-07-09 00:00:00`: 6
+  - `2023-11-28 00:00:00`: 6
   - `2016-10-11 00:00:00`: 6
-  - `2024-05-03 00:00:00`: 6
+  - `2018-04-09 00:00:00`: 6
+  - `2023-09-26 00:00:00`: 6
+  - `2021-06-24 00:00:00`: 6
+  - `2019-09-16 00:00:00`: 6
+  - `2019-01-17 00:00:00`: 6
+  - `2021-10-15 00:00:00`: 6
   - `2023-06-12 00:00:00`: 6
+  - `2024-05-03 00:00:00`: 6
   - 2385 other distinct value(s) suppressed, covering 4571 row(s) (count below 5 and/or ranked beyond top 20)
 
 ## exitTime
@@ -160,24 +160,24 @@ Total columns: 528
 - top values (shown only where count ≥ 5):
   - `2023-12-18 00:00:00`: 8
   - `2024-01-16 00:00:00`: 7
-  - `2024-02-15 00:00:00`: 6
-  - `2022-12-20 00:00:00`: 6
-  - `2023-11-28 00:00:00`: 6
-  - `2023-09-26 00:00:00`: 6
-  - `2016-10-11 00:00:00`: 6
-  - `2024-05-03 00:00:00`: 6
-  - `2019-02-08 00:00:00`: 6
   - `2022-12-22 00:00:00`: 6
-  - `2023-06-12 00:00:00`: 6
   - `2018-04-09 00:00:00`: 6
-  - `2021-06-24 00:00:00`: 6
-  - `2019-09-16 00:00:00`: 6
-  - `2021-02-01 00:00:00`: 6
-  - `2019-01-17 00:00:00`: 6
-  - `2021-10-15 00:00:00`: 6
-  - `2021-07-09 00:00:00`: 6
   - `2019-03-07 00:00:00`: 6
+  - `2019-01-17 00:00:00`: 6
+  - `2023-11-28 00:00:00`: 6
+  - `2021-07-09 00:00:00`: 6
+  - `2021-06-24 00:00:00`: 6
+  - `2016-10-11 00:00:00`: 6
+  - `2023-09-26 00:00:00`: 6
+  - `2019-09-16 00:00:00`: 6
   - `2024-04-01 00:00:00`: 6
+  - `2021-10-15 00:00:00`: 6
+  - `2022-12-20 00:00:00`: 6
+  - `2024-02-15 00:00:00`: 6
+  - `2024-05-03 00:00:00`: 6
+  - `2023-06-12 00:00:00`: 6
+  - `2021-02-01 00:00:00`: 6
+  - `2019-02-08 00:00:00`: 6
   - 2385 other distinct value(s) suppressed, covering 4571 row(s) (count below 5 and/or ranked beyond top 20)
 
 ## encounters_dischargeDate
@@ -190,23 +190,23 @@ Total columns: 528
   - `2024-01-12 00:00:00`: 9
   - `2022-10-28 00:00:00`: 8
   - `2022-12-21 00:00:00`: 8
-  - `2019-02-01 00:00:00`: 7
   - `2022-06-28 00:00:00`: 7
-  - `2023-06-20 00:00:00`: 7
   - `2024-04-03 00:00:00`: 7
+  - `2019-02-01 00:00:00`: 7
+  - `2023-06-20 00:00:00`: 7
   - `2024-02-28 00:00:00`: 7
+  - `2023-02-21 00:00:00`: 6
+  - `2016-04-13 00:00:00`: 6
+  - `2023-06-21 00:00:00`: 6
+  - `2020-02-14 00:00:00`: 6
   - `2024-03-15 00:00:00`: 6
-  - `2017-12-30 00:00:00`: 6
+  - `2016-11-24 00:00:00`: 6
+  - `2019-10-01 00:00:00`: 6
   - `2023-01-04 00:00:00`: 6
-  - `2024-01-23 00:00:00`: 6
-  - `2017-04-07 00:00:00`: 6
+  - `2019-01-15 00:00:00`: 6
+  - `2024-04-26 00:00:00`: 6
   - `2022-08-09 00:00:00`: 6
   - `2020-11-20 00:00:00`: 6
-  - `2019-10-01 00:00:00`: 6
-  - `2024-04-26 00:00:00`: 6
-  - `2023-12-22 00:00:00`: 6
-  - `2020-02-14 00:00:00`: 6
-  - `2023-02-21 00:00:00`: 6
   - 2285 other distinct value(s) suppressed, covering 4562 row(s) (count below 5 and/or ranked beyond top 20)
 
 ## encounters_numOfPreviousHFStays_count
@@ -219,15 +219,15 @@ Total columns: 528
 
 ## vital_signs_weight_value_p6mo_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 391 (8.33%)
 - min/max: 32.000000000000000000 / 208.600000000000000000
-- mean/std: 77.4701 / 19.891801706805644
+- mean/std: 77.4701 / 19.891801706805648
 - quantiles: {'0.05': 50.2, '0.25': 63.7, '0.5': 74.7, '0.75': 88.0, '0.95': 113.0}
 
 ## vital_signs_weight_value_p6mo_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 391 (8.33%)
 - min/max: 33.900000000000000000 / 241.000000000000000000
 - mean/std: 79.7398 / 20.35581927996009
@@ -243,7 +243,7 @@ Total columns: 528
 
 ## vital_signs_weight_value_p6mo_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 391 (8.33%)
 - min/max: 32.7437500000000000000000 / 217.5909090909090909090909
 - mean/std: 78.7295 / 20.037352411998086
@@ -251,7 +251,7 @@ Total columns: 528
 
 ## vital_signs_weight_value_p6mo_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 391 (8.33%)
 - min/max: 30.700000000000000000 / 207.000000000000000000
 - mean/std: 75.7514 / 19.58073138919137
@@ -259,15 +259,15 @@ Total columns: 528
 
 ## vital_signs_weight_value_p6mo_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 391 (8.33%)
 - min/max: 37.300000000000000000 / 243.000000000000000000
-- mean/std: 82.3197 / 21.031821404631152
+- mean/std: 82.3197 / 21.031821404631156
 - quantiles: {'0.05': 53.8, '0.25': 68.1, '0.5': 79.7, '0.75': 93.4, '0.95': 120.0}
 
 ## vital_signs_height_value_p1a_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 959 (20.43%)
 - min/max: 96.9500000000000000000000 / 207.0000000000000000000000
 - mean/std: 171.1463 / 10.564507476394946
@@ -275,15 +275,15 @@ Total columns: 528
 
 ## vital_signs_weight_value_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 718 (15.30%)
 - min/max: 32.000000000000000000 / 208.600000000000000000
-- mean/std: 77.4630 / 19.93447436002713
+- mean/std: 77.4630 / 19.934474360027135
 - quantiles: {'0.05': 50.2, '0.25': 63.6, '0.5': 74.5, '0.75': 88.0, '0.95': 113.0}
 
 ## vital_signs_height_value_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2057 (43.82%)
 - min/max: 110.000000000000000000 / 207.000000000000000000
 - mean/std: 171.5322 / 10.536873619306387
@@ -291,7 +291,7 @@ Total columns: 528
 
 ## vital_signs_bmi_value_last
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2195 (46.76%)
 - min/max: 13.211784912141630000 / 79.584775086505190000
 - mean/std: 26.9088 / 6.501705996666915
@@ -299,7 +299,7 @@ Total columns: 528
 
 ## vital_signs_systolicBp_value_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 46.000000000000000000 / 257.000000000000000000
 - mean/std: 130.3548 / 28.65976557628576
@@ -307,7 +307,7 @@ Total columns: 528
 
 ## vital_signs_systolicBp_value_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 29.000000000000000000 / 221.000000000000000000
 - mean/std: 99.7355 / 22.263806557542733
@@ -315,7 +315,7 @@ Total columns: 528
 
 ## vital_signs_systolicBp_value_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 51.000000000000000000 / 268.000000000000000000
 - mean/std: 151.0278 / 28.623883692915065
@@ -323,7 +323,7 @@ Total columns: 528
 
 ## vital_signs_systolicBp_value_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 42.6666666666666666666667 / 223.5000000000000000000000
 - mean/std: 123.4138 / 20.816340589811556
@@ -331,10 +331,10 @@ Total columns: 528
 
 ## vital_signs_systolicBp_value_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 50.000000000000000000 / 221.000000000000000000
-- mean/std: 121.1428 / 22.499910967482442
+- mean/std: 121.1428 / 22.499910967482446
 - quantiles: {'0.05': 90.0, '0.25': 105.0, '0.5': 118.0, '0.75': 135.0, '0.95': 161.0}
 
 ## vital_signs_systolicBp_value_stddev
@@ -347,7 +347,7 @@ Total columns: 528
 
 ## vital_signs_diastolicBp_value_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 8.000000000000000000 / 201.000000000000000000
 - mean/std: 75.5448 / 18.257211354164095
@@ -355,34 +355,34 @@ Total columns: 528
 
 ## vital_signs_diastolicBp_value_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 0E-18 / 158.000000000000000000
-- mean/std: 54.1109 / 14.99006257674015
+- mean/std: 54.1109 / 14.990062576740147
 - quantiles: {'0.05': 32.0, '0.25': 45.0, '0.5': 53.0, '0.75': 62.0, '0.95': 80.0}
 
 ## vital_signs_diastolicBp_value_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 33.000000000000000000 / 201.000000000000000000
-- mean/std: 90.4725 / 18.37518224589409
+- mean/std: 90.4725 / 18.375182245894088
 - quantiles: {'0.05': 65.0, '0.25': 79.0, '0.5': 88.0, '0.75': 99.0, '0.95': 124.0}
 
 ## vital_signs_diastolicBp_value_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 30.6666666666666666666667 / 158.0000000000000000000000
-- mean/std: 70.6418 / 11.927868260739412
+- mean/std: 70.6418 / 11.927868260739414
 - quantiles: {'0.05': 53.65384615384615, '0.25': 63.11538461538461, '0.5': 69.5, '0.75': 76.7764705882353, '0.95': 91.0}
 
 ## vital_signs_diastolicBp_value_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 6.000000000000000000 / 158.000000000000000000
-- mean/std: 69.1552 / 13.491285107484801
+- mean/std: 69.1552 / 13.491285107484797
 - quantiles: {'0.05': 49.0, '0.25': 60.0, '0.5': 68.0, '0.75': 77.0, '0.95': 92.0}
 
 ## vital_signs_diastolicBp_value_stddev
@@ -390,12 +390,12 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 241 (5.13%)
 - min/max: 0.0 / 55.5
-- mean/std: 9.0744 / 4.500029084843471
+- mean/std: 9.0744 / 4.500029084843472
 - quantiles: {'0.05': 1.4142135623730963, '0.25': 6.433179810104473, '0.5': 8.795000899165762, '0.75': 11.479427220309432, '0.95': 16.65747650962291}
 
 ## vital_signs_heartRate_value_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2258 (48.10%)
 - min/max: 1.000000000000000000 / 223.000000000000000000
 - mean/std: 112.5550 / 16.589272267753316
@@ -403,23 +403,23 @@ Total columns: 528
 
 ## vital_signs_heartRate_value_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2258 (48.10%)
 - min/max: 0E-18 / 187.000000000000000000
-- mean/std: 102.8391 / 14.92600392738595
+- mean/std: 102.8391 / 14.926003927385949
 - quantiles: {'0.05': 100.0, '0.25': 100.0, '0.5': 101.0, '0.75': 104.0, '0.95': 122.0}
 
 ## vital_signs_heartRate_value_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2258 (48.10%)
 - min/max: 25.000000000000000000 / 278.000000000000000000
-- mean/std: 124.1917 / 22.35501746707302
+- mean/std: 124.1917 / 22.35501746707301
 - quantiles: {'0.05': 101.0, '0.25': 108.0, '0.5': 119.0, '0.75': 135.0, '0.95': 165.0}
 
 ## vital_signs_heartRate_value_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 2258 (48.10%)
 - min/max: 25.0000000000000000000000 / 193.0000000000000000000000
 - mean/std: 111.3833 / 11.691222172817726
@@ -427,7 +427,7 @@ Total columns: 528
 
 ## vital_signs_heartRate_value_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2258 (48.10%)
 - min/max: 0E-18 / 254.000000000000000000
 - mean/std: 109.6174 / 14.82948145856391
@@ -438,53 +438,38 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 2258 (48.10%)
 - min/max: 0.0 / 57.0
-- mean/std: 6.6134 / 7.2746626514344275
+- mean/std: 6.6134 / 7.274662651434427
 - quantiles: {'0.05': 0.0, '0.25': 0.9428090415820634, '0.5': 4.921607686744467, '0.75': 9.637888196533972, '0.95': 19.719210782551723}
 
 ## vital_signs_oxygenSaturation_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## vital_signs_oxygenSaturation_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## vital_signs_oxygenSaturation_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## vital_signs_oxygenSaturation_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## vital_signs_oxygenSaturation_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## vital_signs_oxygenSaturation_value_stddev
 
@@ -494,7 +479,7 @@ Total columns: 528
 
 ## lab_results_hemoglobin_value_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 147 (3.13%)
 - min/max: 32.228000000000000000 / 233.653000000000000000
 - mean/std: 126.6981 / 21.910820622038607
@@ -502,26 +487,26 @@ Total columns: 528
 
 ## lab_results_hemoglobin_value_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 147 (3.13%)
 - min/max: 32.2280000000000000000000 / 223.9846000000000000000000
-- mean/std: 119.3422 / 22.794383192156452
+- mean/std: 119.3422 / 22.794383192156445
 - quantiles: {'0.05': 85.72648, '0.25': 101.8635, '0.5': 119.2436, '0.75': 135.35760000000002, '0.95': 157.9172}
 
 ## lab_results_hemoglobin_value_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 147 (3.13%)
 - min/max: 32.228000000000000000 / 233.653000000000000000
-- mean/std: 119.7794 / 22.968109485019255
+- mean/std: 119.7794 / 22.96810948501926
 - quantiles: {'0.05': 85.4042, '0.25': 103.1296, '0.5': 119.2436, '0.75': 135.3576, '0.95': 159.5286}
 
 ## lab_results_hemoglobin_value_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 147 (3.13%)
 - min/max: 0.161140000000000000 / 219.150400000000000000
-- mean/std: 121.5671 / 24.257382149600662
+- mean/std: 121.5671 / 24.25738214960066
 - quantiles: {'0.05': 82.1814, '0.25': 104.741, '0.5': 122.4664, '0.75': 138.5804, '0.95': 159.5286}
 
 ## lab_results_hemoglobin_value_stddev
@@ -534,15 +519,15 @@ Total columns: 528
 
 ## lab_results_hemoglobin_value_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 147 (3.13%)
 - min/max: 0.161140000000000000 / 219.150400000000000000
-- mean/std: 112.6459 / 27.018040137210328
+- mean/std: 112.6459 / 27.018040137210324
 - quantiles: {'0.05': 70.9016, '0.25': 93.4612, '0.5': 114.4094, '0.75': 132.1348, '0.95': 154.6944}
 
 ## lab_results_ferritin_value_max
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 3765 (80.21%)
 - min/max: 4.000000000000000000 / 42076.000000000000000000
 - mean/std: 593.8822 / 2358.4891423872195
@@ -550,15 +535,15 @@ Total columns: 528
 
 ## lab_results_ferritin_value_avg
 
-- dtype: `Decimal(precision=27, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 3765 (80.21%)
 - min/max: 4.0000000000000000000000 / 42076.0000000000000000000000
-- mean/std: 519.9720 / 1864.6142051221543
+- mean/std: 519.9720 / 1864.6142051221545
 - quantiles: {'0.05': 20.52, '0.25': 74.39999999999999, '0.5': 189.0, '0.75': 433.0, '0.95': 1472.0}
 
 ## lab_results_ferritin_value_last
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 3765 (80.21%)
 - min/max: 4.000000000000000000 / 42076.000000000000000000
 - mean/std: 493.6046 / 1729.432504046212
@@ -566,7 +551,7 @@ Total columns: 528
 
 ## lab_results_ferritin_value_first
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 3765 (80.21%)
 - min/max: 4.000000000000000000 / 42076.000000000000000000
 - mean/std: 522.5048 / 1940.3623285129136
@@ -582,7 +567,7 @@ Total columns: 528
 
 ## lab_results_ferritin_value_min
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 3765 (80.21%)
 - min/max: 4.000000000000000000 / 42076.000000000000000000
 - mean/std: 465.9709 / 1684.0723188941884
@@ -590,39 +575,27 @@ Total columns: 528
 
 ## lab_results_tfs_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tfs_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tfs_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tfs_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tfs_value_stddev
 
@@ -632,16 +605,13 @@ Total columns: 528
 
 ## lab_results_tfs_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_ntProBnp_value_max
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 907 (19.32%)
 - min/max: 34.500000000000000000 / 70000.000000000000000000
 - mean/std: 11411.2959 / 14927.317049774834
@@ -649,7 +619,7 @@ Total columns: 528
 
 ## lab_results_ntProBnp_value_avg
 
-- dtype: `Decimal(precision=27, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 907 (19.32%)
 - min/max: 34.5000000000000000000000 / 70000.0000000000000000000000
 - mean/std: 10107.2686 / 13395.926849266145
@@ -657,7 +627,7 @@ Total columns: 528
 
 ## lab_results_ntProBnp_value_last
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 907 (19.32%)
 - min/max: 33.000000000000000000 / 70000.000000000000000000
 - mean/std: 10016.8143 / 13948.820397145624
@@ -665,10 +635,10 @@ Total columns: 528
 
 ## lab_results_ntProBnp_value_first
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 907 (19.32%)
 - min/max: 34.500000000000000000 / 70000.000000000000000000
-- mean/std: 10102.9581 / 13502.563228676105
+- mean/std: 10102.9581 / 13502.563228676107
 - quantiles: {'0.05': 492.0, '0.25': 2064.0, '0.5': 4902.000000000001, '0.75': 12255.0, '0.95': 36088.0}
 
 ## lab_results_ntProBnp_value_stddev
@@ -676,52 +646,40 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 907 (19.32%)
 - min/max: 0.0 / 30540.0
-- mean/std: 1083.2444 / 3098.4446253133397
+- mean/std: 1083.2444 / 3098.444625313339
 - quantiles: {'0.05': 0.0, '0.25': 0.0, '0.5': 0.0, '0.75': 444.5, '0.95': 6899.0}
 
 ## lab_results_ntProBnp_value_min
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 907 (19.32%)
 - min/max: 33.000000000000000000 / 70000.000000000000000000
-- mean/std: 8950.7671 / 12694.512008538753
+- mean/std: 8950.7671 / 12694.512008538757
 - quantiles: {'0.05': 398.0, '0.25': 1720.0, '0.5': 4177.0, '0.75': 10319.0, '0.95': 33580.0}
 
 ## lab_results_bnp_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_bnp_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_bnp_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_bnp_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_bnp_value_stddev
 
@@ -731,32 +689,29 @@ Total columns: 528
 
 ## lab_results_bnp_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_crpNonHs_value_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 542 (11.55%)
 - min/max: 0.300000000000000000 / 629.700000000000000000
-- mean/std: 76.8086 / 97.85143159055036
+- mean/std: 76.8086 / 97.85143159055035
 - quantiles: {'0.05': 1.7, '0.25': 8.3, '0.5': 33.0, '0.75': 110.0, '0.95': 299.0}
 
 ## lab_results_crpNonHs_value_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 542 (11.55%)
 - min/max: 0.3000000000000000000000 / 542.0000000000000000000000
-- mean/std: 49.7168 / 59.95621726609205
+- mean/std: 49.7168 / 59.95621726609204
 - quantiles: {'0.05': 1.7, '0.25': 8.0, '0.5': 26.5, '0.75': 69.33333333333333, '0.95': 174.78333333333333}
 
 ## lab_results_crpNonHs_value_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 542 (11.55%)
 - min/max: 0.300000000000000000 / 629.700000000000000000
 - mean/std: 43.9728 / 61.29632821668263
@@ -764,10 +719,10 @@ Total columns: 528
 
 ## lab_results_crpNonHs_value_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 542 (11.55%)
 - min/max: 0.300000000000000000 / 578.100000000000000000
-- mean/std: 45.4252 / 70.79185027067481
+- mean/std: 45.4252 / 70.7918502706748
 - quantiles: {'0.05': 1.3, '0.25': 5.1, '0.5': 16.0, '0.75': 52.0, '0.95': 204.0}
 
 ## lab_results_crpNonHs_value_stddev
@@ -780,47 +735,35 @@ Total columns: 528
 
 ## lab_results_crpNonHs_value_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 542 (11.55%)
 - min/max: 0.300000000000000000 / 542.000000000000000000
-- mean/std: 28.5297 / 43.877174783261275
+- mean/std: 28.5297 / 43.87717478326128
 - quantiles: {'0.05': 1.2, '0.25': 4.4, '0.5': 12.1, '0.75': 33.0, '0.95': 113.9}
 
 ## lab_results_crpHs_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_crpHs_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_crpHs_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_crpHs_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_crpHs_value_stddev
 
@@ -830,48 +773,33 @@ Total columns: 528
 
 ## lab_results_crpHs_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropIHs_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropIHs_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropIHs_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropIHs_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropIHs_value_stddev
 
@@ -881,48 +809,33 @@ Total columns: 528
 
 ## lab_results_tropIHs_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropInHs_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropInHs_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropInHs_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropInHs_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropInHs_value_stddev
 
@@ -932,16 +845,13 @@ Total columns: 528
 
 ## lab_results_tropInHs_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_tropTHs_value_max
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2969 (63.25%)
 - min/max: 0.004000000000000000 / 65.650000000000000000
 - mean/std: 0.5651 / 2.708222479643324
@@ -949,7 +859,7 @@ Total columns: 528
 
 ## lab_results_tropTHs_value_avg
 
-- dtype: `Decimal(precision=24, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 2969 (63.25%)
 - min/max: 0.0040000000000000000000 / 34.7536666666666666666667
 - mean/std: 0.3859 / 1.6400391536619272
@@ -957,15 +867,15 @@ Total columns: 528
 
 ## lab_results_tropTHs_value_last
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2969 (63.25%)
 - min/max: 0.004000000000000000 / 65.650000000000000000
-- mean/std: 0.4651 / 2.332237282583493
+- mean/std: 0.4651 / 2.3322372825834936
 - quantiles: {'0.05': 0.015, '0.25': 0.033, '0.5': 0.063, '0.75': 0.175, '0.95': 1.491}
 
 ## lab_results_tropTHs_value_first
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2969 (63.25%)
 - min/max: 0.004000000000000000 / 17.389000000000000000
 - mean/std: 0.2243 / 0.8972156798728447
@@ -981,15 +891,15 @@ Total columns: 528
 
 ## lab_results_tropTHs_value_min
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2969 (63.25%)
 - min/max: 0.004000000000000000 / 16.200000000000000000
-- mean/std: 0.2009 / 0.7723463040143266
+- mean/std: 0.2009 / 0.7723463040143267
 - quantiles: {'0.05': 0.013, '0.25': 0.028, '0.5': 0.049, '0.75': 0.108, '0.95': 0.684}
 
 ## lab_results_tropTnHs_value_max
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4125 (87.88%)
 - min/max: 3.000000000000000000 / 53000.000000000000000000
 - mean/std: 498.7118 / 2467.242178951434
@@ -997,7 +907,7 @@ Total columns: 528
 
 ## lab_results_tropTnHs_value_avg
 
-- dtype: `Decimal(precision=27, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4125 (87.88%)
 - min/max: 3.0000000000000000000000 / 17838.3000000000000000000000
 - mean/std: 308.1034 / 992.8175469470535
@@ -1005,15 +915,15 @@ Total columns: 528
 
 ## lab_results_tropTnHs_value_last
 
-- dtype: `Decimal(precision=23, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4125 (87.88%)
 - min/max: 3.000000000000000000 / 15400.000000000000000000
-- mean/std: 295.3304 / 869.717000965037
+- mean/std: 295.3304 / 869.7170009650368
 - quantiles: {'0.05': 16.0, '0.25': 37.0, '0.5': 78.0, '0.75': 208.0, '0.95': 1330.0}
 
 ## lab_results_tropTnHs_value_first
 
-- dtype: `Decimal(precision=22, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4125 (87.88%)
 - min/max: 3.000000000000000000 / 6140.000000000000000000
 - mean/std: 211.6467 / 542.0780730833478
@@ -1029,15 +939,15 @@ Total columns: 528
 
 ## lab_results_tropTnHs_value_min
 
-- dtype: `Decimal(precision=22, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4125 (87.88%)
 - min/max: 3.000000000000000000 / 3780.000000000000000000
-- mean/std: 156.5641 / 323.62045210740854
+- mean/std: 156.5641 / 323.6204521074086
 - quantiles: {'0.05': 14.0, '0.25': 30.0, '0.5': 56.0, '0.75': 118.0, '0.95': 675.0}
 
 ## lab_results_triGly_value_max
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4251 (90.56%)
 - min/max: 0.200000000000000000 / 16.500000000000000000
 - mean/std: 1.5664 / 1.2968990375515894
@@ -1045,7 +955,7 @@ Total columns: 528
 
 ## lab_results_triGly_value_avg
 
-- dtype: `Decimal(precision=24, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4251 (90.56%)
 - min/max: 0.2000000000000000000000 / 11.3500000000000000000000
 - mean/std: 1.5090 / 1.0412406853786027
@@ -1053,7 +963,7 @@ Total columns: 528
 
 ## lab_results_triGly_value_last
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4251 (90.56%)
 - min/max: 0.200000000000000000 / 11.350000000000000000
 - mean/std: 1.5056 / 1.0434075099995372
@@ -1061,7 +971,7 @@ Total columns: 528
 
 ## lab_results_triGly_value_first
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4251 (90.56%)
 - min/max: 0.200000000000000000 / 16.500000000000000000
 - mean/std: 1.5481 / 1.2932419099185732
@@ -1072,20 +982,20 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 4251 (90.56%)
 - min/max: 0.0 / 2.954220261824074
-- mean/std: 0.0274 / 0.18598836744930408
+- mean/std: 0.0274 / 0.18598836744930405
 - quantiles: {'0.05': 0.0, '0.25': 0.0, '0.5': 0.0, '0.75': 0.0, '0.95': 0.050000000000000044}
 
 ## lab_results_triGly_value_min
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4251 (90.56%)
 - min/max: 0.200000000000000000 / 11.350000000000000000
-- mean/std: 1.4827 / 1.0350765856274866
+- mean/std: 1.4827 / 1.0350765856274868
 - quantiles: {'0.05': 0.6, '0.25': 0.865, '0.5': 1.16, '0.75': 1.81, '0.95': 3.24}
 
 ## lab_results_cholTot_value_max
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4180 (89.05%)
 - min/max: 1.170000000000000000 / 8.710000000000000000
 - mean/std: 3.9391 / 1.1372637284999014
@@ -1093,7 +1003,7 @@ Total columns: 528
 
 ## lab_results_cholTot_value_avg
 
-- dtype: `Decimal(precision=23, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4180 (89.05%)
 - min/max: 1.1700000000000000000000 / 8.7100000000000000000000
 - mean/std: 3.9239 / 1.1343476049324888
@@ -1101,7 +1011,7 @@ Total columns: 528
 
 ## lab_results_cholTot_value_last
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4180 (89.05%)
 - min/max: 1.170000000000000000 / 8.710000000000000000
 - mean/std: 3.9187 / 1.141203069222535
@@ -1109,7 +1019,7 @@ Total columns: 528
 
 ## lab_results_cholTot_value_first
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4180 (89.05%)
 - min/max: 1.170000000000000000 / 8.710000000000000000
 - mean/std: 3.9290 / 1.1337102173644222
@@ -1120,12 +1030,12 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 4180 (89.05%)
 - min/max: 0.0 / 1.0350000000000001
-- mean/std: 0.0153 / 0.08289083829554589
+- mean/std: 0.0153 / 0.0828908382955459
 - quantiles: {'0.05': 0.0, '0.25': 0.0, '0.5': 0.0, '0.75': 0.0, '0.95': 0.0}
 
 ## lab_results_cholTot_value_min
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4180 (89.05%)
 - min/max: 1.170000000000000000 / 8.710000000000000000
 - mean/std: 3.9086 / 1.1374805368081367
@@ -1133,7 +1043,7 @@ Total columns: 528
 
 ## lab_results_hdl_value_max
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4276 (91.10%)
 - min/max: 0.220000000000000000 / 3.850000000000000000
 - mean/std: 1.1923 / 0.4471165147306521
@@ -1141,26 +1051,26 @@ Total columns: 528
 
 ## lab_results_hdl_value_avg
 
-- dtype: `Decimal(precision=23, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4276 (91.10%)
 - min/max: 0.2100000000000000000000 / 3.8050000000000000000000
-- mean/std: 1.1878 / 0.4444807002880193
+- mean/std: 1.1878 / 0.4444807002880192
 - quantiles: {'0.05': 0.62, '0.25': 0.9, '0.5': 1.11, '0.75': 1.3900000000000001, '0.95': 2.0300000000000002}
 
 ## lab_results_hdl_value_last
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4276 (91.10%)
 - min/max: 0.220000000000000000 / 3.760000000000000000
-- mean/std: 1.1871 / 0.44105598403605006
+- mean/std: 1.1871 / 0.4410559840360501
 - quantiles: {'0.05': 0.62, '0.25': 0.9, '0.5': 1.11, '0.75': 1.39, '0.95': 2.03}
 
 ## lab_results_hdl_value_first
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4276 (91.10%)
 - min/max: 0.160000000000000000 / 3.850000000000000000
-- mean/std: 1.1884 / 0.44948676686313527
+- mean/std: 1.1884 / 0.4494867668631352
 - quantiles: {'0.05': 0.62, '0.25': 0.89, '0.5': 1.11, '0.75': 1.39, '0.95': 2.03}
 
 ## lab_results_hdl_value_stddev
@@ -1173,7 +1083,7 @@ Total columns: 528
 
 ## lab_results_hdl_value_min
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4276 (91.10%)
 - min/max: 0.160000000000000000 / 3.760000000000000000
 - mean/std: 1.1833 / 0.44341419726179476
@@ -1181,7 +1091,7 @@ Total columns: 528
 
 ## lab_results_ldl_value_max
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4280 (91.18%)
 - min/max: 0.040000000000000000 / 6.447500000000000000
 - mean/std: 2.1210 / 0.965222966029471
@@ -1189,7 +1099,7 @@ Total columns: 528
 
 ## lab_results_ldl_value_avg
 
-- dtype: `Decimal(precision=23, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4280 (91.18%)
 - min/max: 0.0400000000000000000000 / 6.4475000000000000000000
 - mean/std: 2.1108 / 0.961460724648126
@@ -1197,7 +1107,7 @@ Total columns: 528
 
 ## lab_results_ldl_value_last
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4280 (91.18%)
 - min/max: 0.040000000000000000 / 6.447500000000000000
 - mean/std: 2.1058 / 0.9676466740582497
@@ -1205,7 +1115,7 @@ Total columns: 528
 
 ## lab_results_ldl_value_first
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4280 (91.18%)
 - min/max: 0.040000000000000000 / 6.447500000000000000
 - mean/std: 2.1159 / 0.9606058870196238
@@ -1221,15 +1131,15 @@ Total columns: 528
 
 ## lab_results_ldl_value_min
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4280 (91.18%)
 - min/max: 0.040000000000000000 / 6.447500000000000000
-- mean/std: 2.1007 / 0.9629600969811639
+- mean/std: 2.1007 / 0.9629600969811638
 - quantiles: {'0.05': 0.858, '0.25': 1.4, '0.5': 1.97, '0.75': 2.64, '0.95': 3.94}
 
 ## lab_results_potassium_value_max
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 197 (4.20%)
 - min/max: 1.850000000000000000 / 15.000000000000000000
 - mean/std: 4.6703 / 0.7608369393690874
@@ -1237,7 +1147,7 @@ Total columns: 528
 
 ## lab_results_potassium_value_avg
 
-- dtype: `Decimal(precision=23, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 197 (4.20%)
 - min/max: 1.8500000000000000000000 / 7.1400000000000000000000
 - mean/std: 4.1642 / 0.5010728198101922
@@ -1245,7 +1155,7 @@ Total columns: 528
 
 ## lab_results_potassium_value_last
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 197 (4.20%)
 - min/max: 1.850000000000000000 / 7.500000000000000000
 - mean/std: 4.1779 / 0.5797846536410085
@@ -1253,10 +1163,10 @@ Total columns: 528
 
 ## lab_results_potassium_value_first
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 197 (4.20%)
 - min/max: 1.850000000000000000 / 8.800000000000000000
-- mean/std: 4.2895 / 0.6851665387935433
+- mean/std: 4.2895 / 0.6851665387935434
 - quantiles: {'0.05': 3.3, '0.25': 3.88, '0.5': 4.22, '0.75': 4.65, '0.95': 5.5}
 
 ## lab_results_potassium_value_stddev
@@ -1264,12 +1174,12 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 197 (4.20%)
 - min/max: 0.0 / 1.6859715300087363
-- mean/std: 0.2973 / 0.24957133903158812
+- mean/std: 0.2973 / 0.24957133903158818
 - quantiles: {'0.05': 0.0, '0.25': 0.06000000000000005, '0.5': 0.2861380785564896, '0.75': 0.4511603998260388, '0.95': 0.7332803821909217}
 
 ## lab_results_potassium_value_min
 
-- dtype: `Decimal(precision=19, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 197 (4.20%)
 - min/max: 1.200000000000000000 / 7.140000000000000000
 - mean/std: 3.7423 / 0.6191938995285665
@@ -1277,7 +1187,7 @@ Total columns: 528
 
 ## lab_results_sodium_value_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 200 (4.26%)
 - min/max: 112.000000000000000000 / 178.000000000000000000
 - mean/std: 140.0905 / 4.809373872875048
@@ -1285,7 +1195,7 @@ Total columns: 528
 
 ## lab_results_sodium_value_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 200 (4.26%)
 - min/max: 109.4285714285714285714286 / 156.0588235294117647058824
 - mean/std: 137.7918 / 4.295934427449911
@@ -1293,7 +1203,7 @@ Total columns: 528
 
 ## lab_results_sodium_value_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 200 (4.26%)
 - min/max: 109.000000000000000000 / 160.000000000000000000
 - mean/std: 137.8828 / 4.598077293549263
@@ -1301,7 +1211,7 @@ Total columns: 528
 
 ## lab_results_sodium_value_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 200 (4.26%)
 - min/max: 109.000000000000000000 / 165.000000000000000000
 - mean/std: 137.1365 / 4.9837856933268085
@@ -1317,7 +1227,7 @@ Total columns: 528
 
 ## lab_results_sodium_value_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 200 (4.26%)
 - min/max: 98.700000000000000000 / 154.000000000000000000
 - mean/std: 135.3712 / 5.291324484965851
@@ -1325,15 +1235,15 @@ Total columns: 528
 
 ## lab_results_creatUS_value_max
 
-- dtype: `Decimal(precision=22, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4217 (89.84%)
 - min/max: 44.569280000000000000 / 2839.312000000000000000
-- mean/std: 809.5133 / 504.5875251413786
+- mean/std: 809.5133 / 504.58752514137865
 - quantiles: {'0.05': 214.928, '0.25': 429.856, '0.5': 691.1632, '0.75': 1108.576, '0.95': 1742.048}
 
 ## lab_results_creatUS_value_avg
 
-- dtype: `Decimal(precision=26, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4217 (89.84%)
 - min/max: 44.5692800000000000000000 / 2706.9616000000000000000000
 - mean/std: 698.3797 / 454.21371332787317
@@ -1341,18 +1251,18 @@ Total columns: 528
 
 ## lab_results_creatUS_value_last
 
-- dtype: `Decimal(precision=22, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4217 (89.84%)
 - min/max: 44.569280000000000000 / 2706.961600000000000000
-- mean/std: 678.5222 / 480.33117514522013
+- mean/std: 678.5222 / 480.3311751452201
 - quantiles: {'0.05': 175.336, '0.25': 339.36, '0.5': 531.664, '0.75': 871.024, '0.95': 1640.24}
 
 ## lab_results_creatUS_value_first
 
-- dtype: `Decimal(precision=22, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4217 (89.84%)
 - min/max: 44.569280000000000000 / 2839.312000000000000000
-- mean/std: 733.2064 / 498.2166021135511
+- mean/std: 733.2064 / 498.21660211355106
 - quantiles: {'0.05': 170.8112, '0.25': 373.296, '0.5': 619.8976, '0.75': 961.52, '0.95': 1708.112}
 
 ## lab_results_creatUS_value_stddev
@@ -1365,7 +1275,7 @@ Total columns: 528
 
 ## lab_results_creatUS_value_min
 
-- dtype: `Decimal(precision=22, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4217 (89.84%)
 - min/max: 22.624000000000000000 / 2706.961600000000000000
 - mean/std: 602.2082 / 471.0506910407817
@@ -1373,15 +1283,15 @@ Total columns: 528
 
 ## lab_results_albuminBS_value_max
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2699 (57.50%)
 - min/max: 10.000000000000000000 / 50.000000000000000000
-- mean/std: 32.0052 / 6.3575540809894555
+- mean/std: 32.0052 / 6.357554080989456
 - quantiles: {'0.05': 21.2, '0.25': 27.8, '0.5': 32.0, '0.75': 36.5, '0.95': 42.0}
 
 ## lab_results_albuminBS_value_avg
 
-- dtype: `Decimal(precision=24, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 2699 (57.50%)
 - min/max: 10.0000000000000000000000 / 50.0000000000000000000000
 - mean/std: 30.2063 / 6.720534775131895
@@ -1389,7 +1299,7 @@ Total columns: 528
 
 ## lab_results_albuminBS_value_last
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2699 (57.50%)
 - min/max: 9.000000000000000000 / 50.000000000000000000
 - mean/std: 29.9850 / 6.8939229002763796
@@ -1397,7 +1307,7 @@ Total columns: 528
 
 ## lab_results_albuminBS_value_first
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2699 (57.50%)
 - min/max: 10.000000000000000000 / 50.000000000000000000
 - mean/std: 31.2029 / 6.787683663627433
@@ -1413,47 +1323,35 @@ Total columns: 528
 
 ## lab_results_albuminBS_value_min
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2699 (57.50%)
 - min/max: 6.800000000000000000 / 50.000000000000000000
-- mean/std: 28.7629 / 7.612524449626759
+- mean/std: 28.7629 / 7.6125244496267594
 - quantiles: {'0.05': 15.8, '0.25': 23.3, '0.5': 29.3, '0.75': 34.2, '0.95': 40.6}
 
 ## lab_results_albuminUS_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_albuminUS_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_albuminUS_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_albuminUS_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_albuminUS_value_stddev
 
@@ -1463,48 +1361,33 @@ Total columns: 528
 
 ## lab_results_albuminUS_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_bun_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_bun_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_bun_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_bun_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_bun_value_stddev
 
@@ -1514,48 +1397,33 @@ Total columns: 528
 
 ## lab_results_bun_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_acr_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_acr_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_acr_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_acr_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_acr_value_stddev
 
@@ -1565,48 +1433,33 @@ Total columns: 528
 
 ## lab_results_acr_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c%_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c%_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c%_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c%_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c%_value_stddev
 
@@ -1616,48 +1469,33 @@ Total columns: 528
 
 ## lab_results_hba1c%_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c_value_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c_value_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c_value_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c_value_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_hba1c_value_stddev
 
@@ -1667,16 +1505,13 @@ Total columns: 528
 
 ## lab_results_hba1c_value_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## lab_results_validSerumCreatinine_value_min
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 504 (10.74%)
 - min/max: 0.791700000000000000 / 22.574760000000000000
 - mean/std: 10.9171 / 4.178173452821933
@@ -1684,7 +1519,7 @@ Total columns: 528
 
 ## lab_results_validSerumCreatinine_value_last
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 504 (10.74%)
 - min/max: 0.791700000000000000 / 22.574760000000000000
 - mean/std: 12.2156 / 4.558635632865651
@@ -1692,7 +1527,7 @@ Total columns: 528
 
 ## lab_results_validSerumCreatinine_value_max
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 504 (10.74%)
 - min/max: 1.131000000000000000 / 22.586070000000000000
 - mean/std: 13.9855 / 4.868100177293147
@@ -1700,7 +1535,7 @@ Total columns: 528
 
 ## lab_results_validSerumCreatinine_value_first
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 504 (10.74%)
 - min/max: 0.904800000000000000 / 22.574760000000000000
 - mean/std: 12.3629 / 4.485629260545433
@@ -1711,12 +1546,12 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 504 (10.74%)
 - min/max: 0.0 / 6.671409256272382
-- mean/std: 1.0349 / 1.083152655133333
+- mean/std: 1.0349 / 1.0831526551333328
 - quantiles: {'0.05': 0.0, '0.25': 0.0, '0.5': 0.7579950412106932, '0.75': 1.5534961924639532, '0.95': 3.2571117882586633}
 
 ## lab_results_validSerumCreatinine_value_avg
 
-- dtype: `Decimal(precision=24, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 504 (10.74%)
 - min/max: 1.0179000000000000000000 / 22.5747600000000000000000
 - mean/std: 12.2847 / 4.234156731888546
@@ -1727,20 +1562,20 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 280 (5.97%)
 - min/max: 0.0 / 31.015466845970085
-- mean/std: 4.4131 / 5.335248197891009
+- mean/std: 4.4131 / 5.3352481978910085
 - quantiles: {'0.05': 0.0, '0.25': 0.0, '0.5': 2.7688746209726913, '0.75': 6.771955035290768, '0.95': 15.442503492873943}
 
 ## lab_results_valideGFR_value_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 280 (5.97%)
 - min/max: 3.000000000000000000 / 107.000000000000000000
-- mean/std: 59.2556 / 24.74623410139053
+- mean/std: 59.2556 / 24.746234101390524
 - quantiles: {'0.05': 16.0, '0.25': 39.0, '0.5': 60.0, '0.75': 84.0, '0.95': 90.0}
 
 ## lab_results_valideGFR_value_avg
 
-- dtype: `Decimal(precision=24, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 280 (5.97%)
 - min/max: 3.0000000000000000000000 / 90.0000000000000000000000
 - mean/std: 53.0258 / 23.977911507419673
@@ -1748,7 +1583,7 @@ Total columns: 528
 
 ## lab_results_valideGFR_value_min
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 280 (5.97%)
 - min/max: 3.000000000000000000 / 90.000000000000000000
 - mean/std: 46.4280 / 24.60282551614999
@@ -1756,15 +1591,15 @@ Total columns: 528
 
 ## lab_results_valideGFR_value_first
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 280 (5.97%)
 - min/max: 3.000000000000000000 / 90.000000000000000000
-- mean/std: 53.1445 / 24.62854237153648
+- mean/std: 53.1445 / 24.628542371536476
 - quantiles: {'0.05': 13.0, '0.25': 33.0, '0.5': 54.0, '0.75': 74.0, '0.95': 90.0}
 
 ## lab_results_valideGFR_value_last
 
-- dtype: `Decimal(precision=20, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 280 (5.97%)
 - min/max: 3.000000000000000000 / 90.000000000000000000
 - mean/std: 53.6656 / 25.045041860648634
@@ -2042,15 +1877,15 @@ Total columns: 528
 
 ## echocardiographs_lvef_pET_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 3902 (83.13%)
 - min/max: -179.000000000000000000 / 96.000000000000000000
-- mean/std: 41.0664 / 19.219311972664233
+- mean/std: 41.0664 / 19.219311972664237
 - quantiles: {'0.05': 16.02, '0.25': 27.56, '0.5': 39.39, '0.75': 53.0, '0.95': 74.0}
 
 ## echocardiographs_lvef_pET_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 3688 (78.57%)
 - min/max: -200.000000000000000000 / 100.000000000000000000
 - mean/std: 39.8488 / 20.84178618080498
@@ -2061,20 +1896,20 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 3688 (78.57%)
 - min/max: 0.0 / 110.50188535344846
-- mean/std: 1.7850 / 6.120509193808231
+- mean/std: 1.7850 / 6.12050919380823
 - quantiles: {'0.05': 0.0, '0.25': 0.0, '0.5': 0.0, '0.75': 0.0, '0.95': 10.285}
 
 ## echocardiographs_lvef_pET_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 3688 (78.57%)
 - min/max: 2.000000000000000000 / 100.000000000000000000
-- mean/std: 43.6233 / 17.82925997403217
+- mean/std: 43.6233 / 17.829259974032166
 - quantiles: {'0.05': 17.33, '0.25': 30.13, '0.5': 41.86, '0.75': 55.3, '0.95': 76.0}
 
 ## echocardiographs_lvef_pET_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 3853 (82.08%)
 - min/max: -44.000000000000000000 / 100.000000000000000000
 - mean/std: 41.5354 / 18.206220434216768
@@ -2082,7 +1917,7 @@ Total columns: 528
 
 ## echocardiographs_lvef_pET_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 3688 (78.57%)
 - min/max: -72.5050000000000000000000 / 100.0000000000000000000000
 - mean/std: 41.7702 / 18.09138701145769
@@ -2090,15 +1925,15 @@ Total columns: 528
 
 ## electrocardiographs_ecg_qrs_duration_pET_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2309 (49.19%)
 - min/max: 20.000000000000000000 / 252.000000000000000000
-- mean/std: 119.2583 / 34.37443653566127
+- mean/std: 119.2583 / 34.37443653566126
 - quantiles: {'0.05': 80.0, '0.25': 93.0, '0.5': 108.0, '0.75': 142.0, '0.95': 184.0}
 
 ## electrocardiographs_ecg_qrs_duration_pET_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2310 (49.21%)
 - min/max: 56.000000000000000000 / 250.000000000000000000
 - mean/std: 118.5734 / 34.6719725336154
@@ -2106,7 +1941,7 @@ Total columns: 528
 
 ## electrocardiographs_ecg_qrs_duration_pET_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 2309 (49.19%)
 - min/max: 56.3333333333333333333333 / 249.0000000000000000000000
 - mean/std: 118.8736 / 32.76161216472422
@@ -2114,18 +1949,18 @@ Total columns: 528
 
 ## electrocardiographs_ecg_qrs_duration_pET_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2309 (49.19%)
 - min/max: 57.000000000000000000 / 292.000000000000000000
-- mean/std: 131.1736 / 39.25509273082682
+- mean/std: 131.1736 / 39.25509273082681
 - quantiles: {'0.05': 85.0, '0.25': 100.0, '0.5': 120.0, '0.75': 158.0, '0.95': 205.0}
 
 ## electrocardiographs_ecg_qrs_duration_pET_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2309 (49.19%)
 - min/max: 4.000000000000000000 / 249.000000000000000000
-- mean/std: 108.7652 / 31.669794532157287
+- mean/std: 108.7652 / 31.66979453215729
 - quantiles: {'0.05': 71.0, '0.25': 86.0, '0.5': 100.0, '0.75': 128.0, '0.95': 169.0}
 
 ## electrocardiographs_ecg_qrs_duration_pET_stddev
@@ -2133,35 +1968,26 @@ Total columns: 528
 - dtype: `Float64` (numeric)
 - nulls: 2309 (49.19%)
 - min/max: 0.0 / 78.99841770567306
-- mean/std: 7.3279 / 8.88414034034695
+- mean/std: 7.3279 / 8.884140340346951
 - quantiles: {'0.05': 0.0, '0.25': 1.632993161855452, '0.5': 4.716990566028299, '0.75': 9.178235124467012, '0.95': 25.30810146968752}
 
 ## electrocardiographs_ecg_qrs_axis_pET_avg
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## electrocardiographs_ecg_qrs_axis_pET_min
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## electrocardiographs_ecg_qrs_axis_pET_max
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## electrocardiographs_ecg_qrs_axis_pET_stddev
 
@@ -2171,25 +1997,19 @@ Total columns: 528
 
 ## electrocardiographs_ecg_qrs_axis_pET_last
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## electrocardiographs_ecg_qrs_axis_pET_first
 
-- dtype: `Null` (categorical)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 4694 (100.00%)
-- unique values: 1
-- ⚠️ constant column (single value)
-- top values (shown only where count ≥ 5):
-  - `null`: 4694
+- All values are null.
 
 ## electrocardiographs_ecg_qt_duration_corrected_pET_first
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2310 (49.21%)
 - min/max: 186.000000000000000000 / 767.000000000000000000
 - mean/std: 472.4841 / 50.75901195975169
@@ -2197,7 +2017,7 @@ Total columns: 528
 
 ## electrocardiographs_ecg_qt_duration_corrected_pET_last
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2311 (49.23%)
 - min/max: 168.000000000000000000 / 733.000000000000000000
 - mean/std: 468.7990 / 52.86126638146394
@@ -2205,7 +2025,7 @@ Total columns: 528
 
 ## electrocardiographs_ecg_qt_duration_corrected_pET_avg
 
-- dtype: `Decimal(precision=25, scale=22)` (numeric)
+- dtype: `Decimal(precision=38, scale=22)` (numeric)
 - nulls: 2309 (49.19%)
 - min/max: 260.0000000000000000000000 / 639.0000000000000000000000
 - mean/std: 471.7589 / 41.83064302383089
@@ -2221,23 +2041,23 @@ Total columns: 528
 
 ## electrocardiographs_ecg_qt_duration_corrected_pET_min
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2309 (49.19%)
 - min/max: 161.000000000000000000 / 639.000000000000000000
-- mean/std: 436.0415 / 52.67523045759669
+- mean/std: 436.0415 / 52.6752304575967
 - quantiles: {'0.05': 356.0, '0.25': 406.0, '0.5': 436.0, '0.75': 467.0, '0.95': 520.0}
 
 ## electrocardiographs_ecg_qt_duration_corrected_pET_max
 
-- dtype: `Decimal(precision=21, scale=18)` (numeric)
+- dtype: `Decimal(precision=38, scale=18)` (numeric)
 - nulls: 2309 (49.19%)
 - min/max: 260.000000000000000000 / 880.000000000000000000
-- mean/std: 510.8901 / 63.196412753571146
+- mean/std: 510.8901 / 63.19641275357115
 - quantiles: {'0.05': 425.0, '0.25': 466.0, '0.5': 501.0, '0.75': 544.0, '0.95': 629.0}
 
 ## electrocardiographs_ecg_st_pET
 
-- dtype: `Null` (categorical)
+- dtype: `Boolean` (boolean)
 - nulls: 4694 (100.00%)
 - unique values: 1
 - ⚠️ constant column (single value)
@@ -2246,7 +2066,7 @@ Total columns: 528
 
 ## electrocardiographs_ecg_ischemia_without_st_pET
 
-- dtype: `Null` (categorical)
+- dtype: `Boolean` (boolean)
 - nulls: 4694 (100.00%)
 - unique values: 1
 - ⚠️ constant column (single value)
@@ -2255,7 +2075,7 @@ Total columns: 528
 
 ## electrocardiographs_ecg_type_of_rhythms_pET_first
 
-- dtype: `List(Null)` (categorical)
+- dtype: `List(String)` (categorical)
 - nulls: 2308 (49.17%)
 - unique values: 2
 - ⚠️ constant column (single value)
@@ -2265,7 +2085,7 @@ Total columns: 528
 
 ## electrocardiographs_ecg_type_of_rhythms_pET_last
 
-- dtype: `List(Null)` (categorical)
+- dtype: `List(String)` (categorical)
 - nulls: 2308 (49.17%)
 - unique values: 2
 - ⚠️ constant column (single value)
@@ -2295,9 +2115,9 @@ Total columns: 528
 
 ## smoking_status_smoker_totalSmokingDuration_sum
 
-- dtype: `Float64` (numeric)
+- dtype: `Int64` (numeric)
 - nulls: 4611 (98.23%)
-- min/max: 889.0 / 339891.0
+- min/max: 889 / 339891
 - mean/std: 71901.8434 / 77199.41307442787
 - quantiles: {'0.05': 3600.0, '0.25': 17046.0, '0.5': 41118.0, '0.75': 99402.0, '0.95': 233189.0}
 
@@ -2349,9 +2169,9 @@ Total columns: 528
 
 ## conditions_heartFailure_timeFromEarliest_first
 
-- dtype: `Float64` (numeric)
+- dtype: `Int64` (numeric)
 - nulls: 11 (0.23%)
-- min/max: 0.0 / 123.0
+- min/max: 0 / 123
 - mean/std: 11.3756 / 22.004825958539346
 - quantiles: {'0.05': 0.0, '0.25': 0.0, '0.5': 0.0, '0.75': 11.0, '0.95': 65.0}
 
@@ -4124,9 +3944,9 @@ Total columns: 528
 
 ## encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first
 
-- dtype: `Float64` (numeric)
+- dtype: `Int32` (numeric)
 - nulls: 4452 (94.84%)
-- min/max: 1.0 / 1805.0
+- min/max: 1 / 1805
 - mean/std: 90.6777 / 196.5233809271927
 - quantiles: {'0.05': 1.0, '0.25': 12.0, '0.5': 33.0, '0.75': 78.0, '0.95': 392.0}
 
@@ -4202,9 +4022,9 @@ Total columns: 528
 
 ## encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first
 
-- dtype: `Float64` (numeric)
+- dtype: `Int32` (numeric)
 - nulls: 3765 (80.21%)
-- min/max: 0.0 / 1805.0
+- min/max: 0 / 1805
 - mean/std: 119.1399 / 226.069455036338
 - quantiles: {'0.05': 1.0, '0.25': 11.0, '0.5': 37.0, '0.75': 111.0, '0.95': 581.0}
 
@@ -4280,9 +4100,9 @@ Total columns: 528
 
 ## encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first
 
-- dtype: `Float64` (numeric)
+- dtype: `Int32` (numeric)
 - nulls: 2968 (63.23%)
-- min/max: 0.0 / 1694.0
+- min/max: 0 / 1694
 - mean/std: 131.5829 / 239.49924528927158
 - quantiles: {'0.05': 2.0, '0.25': 13.0, '0.5': 43.0, '0.75': 117.0, '0.95': 648.0}
 
@@ -4358,10 +4178,10 @@ Total columns: 528
 
 ## encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first
 
-- dtype: `Float64` (numeric)
+- dtype: `Int32` (numeric)
 - nulls: 4633 (98.70%)
-- min/max: 3.0 / 815.0
-- mean/std: 120.1967 / 174.35966847029457
+- min/max: 3 / 815
+- mean/std: 120.1967 / 174.3596684702946
 - quantiles: {'0.05': 5.0, '0.25': 19.0, '0.5': 56.0, '0.75': 135.0, '0.95': 476.0}
 
 ## cause_of_death_isCV_f5a_w7d_first
@@ -4436,9 +4256,9 @@ Total columns: 528
 
 ## cause_of_death_number_of_days_to_death_for_CV_f5a_first
 
-- dtype: `Float64` (numeric)
+- dtype: `Int32` (numeric)
 - nulls: 4584 (97.66%)
-- min/max: 1.0 / 1499.0
+- min/max: 1 / 1499
 - mean/std: 351.9091 / 363.03616584957797
 - quantiles: {'0.05': 1.0, '0.25': 70.0, '0.5': 247.0, '0.75': 519.0, '0.95': 1099.0}
 
@@ -4514,7 +4334,7 @@ Total columns: 528
 
 ## cause_of_death_number_of_days_to_death_for_renal_f5a_first
 
-- dtype: `Float64` (numeric)
+- dtype: `Int32` (numeric)
 - nulls: 4694 (100.00%)
 - All values are null.
 
@@ -4590,7 +4410,7 @@ Total columns: 528
 
 ## cause_of_death_number_of_days_to_death_for_non_renal_and_non_CV_f5a_first
 
-- dtype: `Float64` (numeric)
+- dtype: `Int32` (numeric)
 - nulls: 4694 (100.00%)
 - All values are null.
 
@@ -4666,18 +4486,18 @@ Total columns: 528
 
 ## cause_of_death_number_of_days_to_death_for_all_cause_f5a_first
 
-- dtype: `Float64` (numeric)
+- dtype: `Int32` (numeric)
 - nulls: 2789 (59.42%)
-- min/max: 1.0 / 1826.0
+- min/max: 1 / 1826
 - mean/std: 453.8136 / 489.80095578123826
 - quantiles: {'0.05': 5.0, '0.25': 53.0, '0.5': 250.0, '0.75': 735.0, '0.95': 1494.0}
 
 ## eGFR_2021_ckd_epi_creatinine
 
-- dtype: `Decimal(precision=9, scale=6)` (numeric)
+- dtype: `Decimal(precision=38, scale=6)` (numeric)
 - nulls: 504 (10.74%)
 - min/max: 20.091671 / 231.686837
-- mean/std: 64.0062 / 25.913588770866085
+- mean/std: 64.0062 / 25.91358877086608
 - quantiles: {'0.05': 29.301166, '0.25': 42.009739, '0.5': 60.691967, '0.75': 84.461524, '0.95': 106.609219}
 
 ## ckd_severity_from_calculated_egfr
@@ -4727,8 +4547,8 @@ Total columns: 528
 
 ## maggic_total_score
 
-- dtype: `Float64` (numeric)
+- dtype: `Int32` (numeric)
 - nulls: 4688 (99.87%)
-- min/max: 14.0 / 29.0
+- min/max: 14 / 29
 - mean/std: 22.3333 / 7.061633427661525
 - quantiles: {'0.05': 14.0, '0.25': 16.0, '0.5': 28.0, '0.75': 29.0, '0.95': 29.0}

@@ -48,25 +48,25 @@
       "high_cardinality": true,
       "top_values": {
         "2024-01-12 00:00:00": 9,
-        "2022-10-28 00:00:00": 8,
         "2022-12-21 00:00:00": 8,
+        "2022-10-28 00:00:00": 8,
+        "2024-04-03 00:00:00": 7,
+        "2019-02-01 00:00:00": 7,
         "2024-02-28 00:00:00": 7,
         "2023-06-20 00:00:00": 7,
         "2022-06-28 00:00:00": 7,
-        "2024-04-03 00:00:00": 7,
-        "2019-02-01 00:00:00": 7,
-        "2019-10-01 00:00:00": 6,
-        "2019-01-15 00:00:00": 6,
-        "2024-01-23 00:00:00": 6,
-        "2023-03-21 00:00:00": 6,
-        "2021-07-02 00:00:00": 6,
-        "2024-03-15 00:00:00": 6,
+        "2023-12-22 00:00:00": 6,
         "2023-09-01 00:00:00": 6,
+        "2023-03-21 00:00:00": 6,
+        "2017-03-03 00:00:00": 6,
+        "2016-04-13 00:00:00": 6,
+        "2023-02-21 00:00:00": 6,
         "2017-04-07 00:00:00": 6,
-        "2023-01-04 00:00:00": 6,
-        "2016-11-24 00:00:00": 6,
+        "2024-03-05 00:00:00": 6,
         "2022-08-09 00:00:00": 6,
-        "2020-11-20 00:00:00": 6
+        "2024-04-26 00:00:00": 6,
+        "2024-01-23 00:00:00": 6,
+        "2019-01-15 00:00:00": 6
       },
       "suppressed": {
         "distinct_values_suppressed": 2285,
@@ -87,24 +87,24 @@
       "top_values": {
         "2023-12-18 00:00:00": 8,
         "2024-01-16 00:00:00": 7,
-        "2021-06-24 00:00:00": 6,
-        "2023-09-26 00:00:00": 6,
         "2022-12-22 00:00:00": 6,
         "2022-12-20 00:00:00": 6,
-        "2023-11-28 00:00:00": 6,
-        "2024-04-01 00:00:00": 6,
-        "2019-02-08 00:00:00": 6,
         "2019-03-07 00:00:00": 6,
-        "2024-02-15 00:00:00": 6,
-        "2019-01-17 00:00:00": 6,
-        "2019-09-16 00:00:00": 6,
-        "2021-10-15 00:00:00": 6,
-        "2018-04-09 00:00:00": 6,
         "2021-02-01 00:00:00": 6,
+        "2019-02-08 00:00:00": 6,
+        "2024-04-01 00:00:00": 6,
+        "2024-02-15 00:00:00": 6,
         "2021-07-09 00:00:00": 6,
+        "2023-11-28 00:00:00": 6,
         "2016-10-11 00:00:00": 6,
-        "2024-05-03 00:00:00": 6,
-        "2023-06-12 00:00:00": 6
+        "2018-04-09 00:00:00": 6,
+        "2023-09-26 00:00:00": 6,
+        "2021-06-24 00:00:00": 6,
+        "2019-09-16 00:00:00": 6,
+        "2019-01-17 00:00:00": 6,
+        "2021-10-15 00:00:00": 6,
+        "2023-06-12 00:00:00": 6,
+        "2024-05-03 00:00:00": 6
       },
       "suppressed": {
         "distinct_values_suppressed": 2385,
@@ -248,24 +248,24 @@
       "top_values": {
         "2023-12-18 00:00:00": 8,
         "2024-01-16 00:00:00": 7,
-        "2024-02-15 00:00:00": 6,
-        "2022-12-20 00:00:00": 6,
-        "2023-11-28 00:00:00": 6,
-        "2023-09-26 00:00:00": 6,
-        "2016-10-11 00:00:00": 6,
-        "2024-05-03 00:00:00": 6,
-        "2019-02-08 00:00:00": 6,
         "2022-12-22 00:00:00": 6,
-        "2023-06-12 00:00:00": 6,
         "2018-04-09 00:00:00": 6,
-        "2021-06-24 00:00:00": 6,
-        "2019-09-16 00:00:00": 6,
-        "2021-02-01 00:00:00": 6,
-        "2019-01-17 00:00:00": 6,
-        "2021-10-15 00:00:00": 6,
-        "2021-07-09 00:00:00": 6,
         "2019-03-07 00:00:00": 6,
-        "2024-04-01 00:00:00": 6
+        "2019-01-17 00:00:00": 6,
+        "2023-11-28 00:00:00": 6,
+        "2021-07-09 00:00:00": 6,
+        "2021-06-24 00:00:00": 6,
+        "2016-10-11 00:00:00": 6,
+        "2023-09-26 00:00:00": 6,
+        "2019-09-16 00:00:00": 6,
+        "2024-04-01 00:00:00": 6,
+        "2021-10-15 00:00:00": 6,
+        "2022-12-20 00:00:00": 6,
+        "2024-02-15 00:00:00": 6,
+        "2024-05-03 00:00:00": 6,
+        "2023-06-12 00:00:00": 6,
+        "2021-02-01 00:00:00": 6,
+        "2019-02-08 00:00:00": 6
       },
       "suppressed": {
         "distinct_values_suppressed": 2385,
@@ -287,23 +287,23 @@
         "2024-01-12 00:00:00": 9,
         "2022-10-28 00:00:00": 8,
         "2022-12-21 00:00:00": 8,
-        "2019-02-01 00:00:00": 7,
         "2022-06-28 00:00:00": 7,
-        "2023-06-20 00:00:00": 7,
         "2024-04-03 00:00:00": 7,
+        "2019-02-01 00:00:00": 7,
+        "2023-06-20 00:00:00": 7,
         "2024-02-28 00:00:00": 7,
-        "2024-03-15 00:00:00": 6,
-        "2017-12-30 00:00:00": 6,
-        "2023-01-04 00:00:00": 6,
-        "2024-01-23 00:00:00": 6,
-        "2017-04-07 00:00:00": 6,
-        "2022-08-09 00:00:00": 6,
-        "2020-11-20 00:00:00": 6,
-        "2019-10-01 00:00:00": 6,
-        "2024-04-26 00:00:00": 6,
-        "2023-12-22 00:00:00": 6,
+        "2023-02-21 00:00:00": 6,
+        "2016-04-13 00:00:00": 6,
+        "2023-06-21 00:00:00": 6,
         "2020-02-14 00:00:00": 6,
-        "2023-02-21 00:00:00": 6
+        "2024-03-15 00:00:00": 6,
+        "2016-11-24 00:00:00": 6,
+        "2019-10-01 00:00:00": 6,
+        "2023-01-04 00:00:00": 6,
+        "2019-01-15 00:00:00": 6,
+        "2024-04-26 00:00:00": 6,
+        "2022-08-09 00:00:00": 6,
+        "2020-11-20 00:00:00": 6
       },
       "suppressed": {
         "distinct_values_suppressed": 2285,
@@ -332,7 +332,7 @@
       "is_constant": false
     },
     "vital_signs_weight_value_p6mo_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 391,
@@ -341,7 +341,7 @@
       "min": "32.000000000000000000",
       "max": "208.600000000000000000",
       "mean": 77.47009063444109,
-      "std": 19.891801706805644,
+      "std": 19.891801706805648,
       "quantiles": {
         "0.05": 50.2,
         "0.25": 63.7,
@@ -352,7 +352,7 @@
       "is_constant": false
     },
     "vital_signs_weight_value_p6mo_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 391,
@@ -392,7 +392,7 @@
       "is_constant": false
     },
     "vital_signs_weight_value_p6mo_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 391,
@@ -412,7 +412,7 @@
       "is_constant": false
     },
     "vital_signs_weight_value_p6mo_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 391,
@@ -432,7 +432,7 @@
       "is_constant": false
     },
     "vital_signs_weight_value_p6mo_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 391,
@@ -441,7 +441,7 @@
       "min": "37.300000000000000000",
       "max": "243.000000000000000000",
       "mean": 82.31973042063676,
-      "std": 21.031821404631152,
+      "std": 21.031821404631156,
       "quantiles": {
         "0.05": 53.8,
         "0.25": 68.1,
@@ -452,7 +452,7 @@
       "is_constant": false
     },
     "vital_signs_height_value_p1a_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 959,
@@ -472,7 +472,7 @@
       "is_constant": false
     },
     "vital_signs_weight_value_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 718,
@@ -481,7 +481,7 @@
       "min": "32.000000000000000000",
       "max": "208.600000000000000000",
       "mean": 77.46297786720322,
-      "std": 19.93447436002713,
+      "std": 19.934474360027135,
       "quantiles": {
         "0.05": 50.2,
         "0.25": 63.6,
@@ -492,7 +492,7 @@
       "is_constant": false
     },
     "vital_signs_height_value_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2057,
@@ -500,7 +500,7 @@
       "looks_like_id": false,
       "min": "110.000000000000000000",
       "max": "207.000000000000000000",
-      "mean": 171.53223359878646,
+      "mean": 171.5322335987865,
       "std": 10.536873619306387,
       "quantiles": {
         "0.05": 155.0,
@@ -512,7 +512,7 @@
       "is_constant": false
     },
     "vital_signs_bmi_value_last": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2195,
@@ -532,7 +532,7 @@
       "is_constant": false
     },
     "vital_signs_systolicBp_value_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -552,7 +552,7 @@
       "is_constant": false
     },
     "vital_signs_systolicBp_value_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -560,7 +560,7 @@
       "looks_like_id": false,
       "min": "29.000000000000000000",
       "max": "221.000000000000000000",
-      "mean": 99.73545924096115,
+      "mean": 99.73545924096113,
       "std": 22.263806557542733,
       "quantiles": {
         "0.05": 68.0,
@@ -572,7 +572,7 @@
       "is_constant": false
     },
     "vital_signs_systolicBp_value_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -580,7 +580,7 @@
       "looks_like_id": false,
       "min": "51.000000000000000000",
       "max": "268.000000000000000000",
-      "mean": 151.0278463956883,
+      "mean": 151.02784639568833,
       "std": 28.623883692915065,
       "quantiles": {
         "0.05": 110.0,
@@ -592,7 +592,7 @@
       "is_constant": false
     },
     "vital_signs_systolicBp_value_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -612,7 +612,7 @@
       "is_constant": false
     },
     "vital_signs_systolicBp_value_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -621,7 +621,7 @@
       "min": "50.000000000000000000",
       "max": "221.000000000000000000",
       "mean": 121.14282506175611,
-      "std": 22.499910967482442,
+      "std": 22.499910967482446,
       "quantiles": {
         "0.05": 90.0,
         "0.25": 105.0,
@@ -640,7 +640,7 @@
       "looks_like_id": false,
       "min": 0.0,
       "max": 49.5,
-      "mean": 13.259557311368994,
+      "mean": 13.259557311368992,
       "std": 6.647470837566314,
       "quantiles": {
         "0.05": 2.0000000000000013,
@@ -652,7 +652,7 @@
       "is_constant": false
     },
     "vital_signs_diastolicBp_value_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -660,7 +660,7 @@
       "looks_like_id": false,
       "min": "8.000000000000000000",
       "max": "201.000000000000000000",
-      "mean": 75.54480125757918,
+      "mean": 75.54480125757917,
       "std": 18.257211354164095,
       "quantiles": {
         "0.05": 50.0,
@@ -672,7 +672,7 @@
       "is_constant": false
     },
     "vital_signs_diastolicBp_value_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -680,8 +680,8 @@
       "looks_like_id": false,
       "min": "0E-18",
       "max": "158.000000000000000000",
-      "mean": 54.11093644733887,
-      "std": 14.99006257674015,
+      "mean": 54.11093644733886,
+      "std": 14.990062576740147,
       "quantiles": {
         "0.05": 32.0,
         "0.25": 45.0,
@@ -692,7 +692,7 @@
       "is_constant": false
     },
     "vital_signs_diastolicBp_value_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -700,8 +700,8 @@
       "looks_like_id": false,
       "min": "33.000000000000000000",
       "max": "201.000000000000000000",
-      "mean": 90.47249045587246,
-      "std": 18.37518224589409,
+      "mean": 90.47249045587243,
+      "std": 18.375182245894088,
       "quantiles": {
         "0.05": 65.0,
         "0.25": 79.0,
@@ -712,7 +712,7 @@
       "is_constant": false
     },
     "vital_signs_diastolicBp_value_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -720,8 +720,8 @@
       "looks_like_id": false,
       "min": "30.6666666666666666666667",
       "max": "158.0000000000000000000000",
-      "mean": 70.6417810245356,
-      "std": 11.927868260739412,
+      "mean": 70.64178102453562,
+      "std": 11.927868260739414,
       "quantiles": {
         "0.05": 53.65384615384615,
         "0.25": 63.11538461538461,
@@ -732,7 +732,7 @@
       "is_constant": false
     },
     "vital_signs_diastolicBp_value_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 241,
@@ -740,8 +740,8 @@
       "looks_like_id": false,
       "min": "6.000000000000000000",
       "max": "158.000000000000000000",
-      "mean": 69.15517628565014,
-      "std": 13.491285107484801,
+      "mean": 69.15517628565013,
+      "std": 13.491285107484797,
       "quantiles": {
         "0.05": 49.0,
         "0.25": 60.0,
@@ -761,7 +761,7 @@
       "min": 0.0,
       "max": 55.5,
       "mean": 9.074425542408425,
-      "std": 4.500029084843471,
+      "std": 4.500029084843472,
       "quantiles": {
         "0.05": 1.4142135623730963,
         "0.25": 6.433179810104473,
@@ -772,7 +772,7 @@
       "is_constant": false
     },
     "vital_signs_heartRate_value_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2258,
@@ -792,7 +792,7 @@
       "is_constant": false
     },
     "vital_signs_heartRate_value_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2258,
@@ -801,7 +801,7 @@
       "min": "0E-18",
       "max": "187.000000000000000000",
       "mean": 102.83908045977007,
-      "std": 14.92600392738595,
+      "std": 14.926003927385949,
       "quantiles": {
         "0.05": 100.0,
         "0.25": 100.0,
@@ -812,7 +812,7 @@
       "is_constant": false
     },
     "vital_signs_heartRate_value_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2258,
@@ -820,8 +820,8 @@
       "looks_like_id": false,
       "min": "25.000000000000000000",
       "max": "278.000000000000000000",
-      "mean": 124.19170771756981,
-      "std": 22.35501746707302,
+      "mean": 124.19170771756977,
+      "std": 22.35501746707301,
       "quantiles": {
         "0.05": 101.0,
         "0.25": 108.0,
@@ -832,7 +832,7 @@
       "is_constant": false
     },
     "vital_signs_heartRate_value_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2258,
@@ -852,7 +852,7 @@
       "is_constant": false
     },
     "vital_signs_heartRate_value_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2258,
@@ -860,7 +860,7 @@
       "looks_like_id": false,
       "min": "0E-18",
       "max": "254.000000000000000000",
-      "mean": 109.61740558292284,
+      "mean": 109.61740558292283,
       "std": 14.82948145856391,
       "quantiles": {
         "0.05": 100.0,
@@ -880,8 +880,8 @@
       "looks_like_id": false,
       "min": 0.0,
       "max": 57.0,
-      "mean": 6.613425759824293,
-      "std": 7.2746626514344275,
+      "mean": 6.613425759824294,
+      "std": 7.274662651434427,
       "quantiles": {
         "0.05": 0.0,
         "0.25": 0.9428090415820634,
@@ -892,74 +892,49 @@
       "is_constant": false
     },
     "vital_signs_oxygenSaturation_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "vital_signs_oxygenSaturation_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "vital_signs_oxygenSaturation_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "vital_signs_oxygenSaturation_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "vital_signs_oxygenSaturation_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "vital_signs_oxygenSaturation_value_stddev": {
       "dtype": "Float64",
@@ -971,7 +946,7 @@
       "note": "All values are null."
     },
     "lab_results_hemoglobin_value_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 147,
@@ -979,7 +954,7 @@
       "looks_like_id": false,
       "min": "32.228000000000000000",
       "max": "233.653000000000000000",
-      "mean": 126.69814123597978,
+      "mean": 126.69814123597976,
       "std": 21.910820622038607,
       "quantiles": {
         "0.05": 93.4612,
@@ -991,7 +966,7 @@
       "is_constant": false
     },
     "lab_results_hemoglobin_value_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 147,
@@ -1000,7 +975,7 @@
       "min": "32.2280000000000000000000",
       "max": "223.9846000000000000000000",
       "mean": 119.3422241326254,
-      "std": 22.794383192156452,
+      "std": 22.794383192156445,
       "quantiles": {
         "0.05": 85.72648,
         "0.25": 101.8635,
@@ -1011,7 +986,7 @@
       "is_constant": false
     },
     "lab_results_hemoglobin_value_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 147,
@@ -1019,8 +994,8 @@
       "looks_like_id": false,
       "min": "32.228000000000000000",
       "max": "233.653000000000000000",
-      "mean": 119.77943391246977,
-      "std": 22.968109485019255,
+      "mean": 119.77943391246976,
+      "std": 22.96810948501926,
       "quantiles": {
         "0.05": 85.4042,
         "0.25": 103.1296,
@@ -1031,7 +1006,7 @@
       "is_constant": false
     },
     "lab_results_hemoglobin_value_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 147,
@@ -1040,7 +1015,7 @@
       "min": "0.161140000000000000",
       "max": "219.150400000000000000",
       "mean": 121.56714169782273,
-      "std": 24.257382149600662,
+      "std": 24.25738214960066,
       "quantiles": {
         "0.05": 82.1814,
         "0.25": 104.741,
@@ -1071,7 +1046,7 @@
       "is_constant": false
     },
     "lab_results_hemoglobin_value_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 147,
@@ -1079,8 +1054,8 @@
       "looks_like_id": false,
       "min": "0.161140000000000000",
       "max": "219.150400000000000000",
-      "mean": 112.64586144270949,
-      "std": 27.018040137210328,
+      "mean": 112.64586144270946,
+      "std": 27.018040137210324,
       "quantiles": {
         "0.05": 70.9016,
         "0.25": 93.4612,
@@ -1091,7 +1066,7 @@
       "is_constant": false
     },
     "lab_results_ferritin_value_max": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3765,
@@ -1111,7 +1086,7 @@
       "is_constant": false
     },
     "lab_results_ferritin_value_avg": {
-      "dtype": "Decimal(precision=27, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3765,
@@ -1119,8 +1094,8 @@
       "looks_like_id": false,
       "min": "4.0000000000000000000000",
       "max": "42076.0000000000000000000000",
-      "mean": 519.9720311138449,
-      "std": 1864.6142051221543,
+      "mean": 519.972031113845,
+      "std": 1864.6142051221545,
       "quantiles": {
         "0.05": 20.52,
         "0.25": 74.39999999999999,
@@ -1131,7 +1106,7 @@
       "is_constant": false
     },
     "lab_results_ferritin_value_last": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3765,
@@ -1139,7 +1114,7 @@
       "looks_like_id": false,
       "min": "4.000000000000000000",
       "max": "42076.000000000000000000",
-      "mean": 493.6045532831001,
+      "mean": 493.60455328310013,
       "std": 1729.432504046212,
       "quantiles": {
         "0.05": 20.9,
@@ -1151,7 +1126,7 @@
       "is_constant": false
     },
     "lab_results_ferritin_value_first": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3765,
@@ -1191,7 +1166,7 @@
       "is_constant": false
     },
     "lab_results_ferritin_value_min": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3765,
@@ -1211,60 +1186,40 @@
       "is_constant": false
     },
     "lab_results_tfs_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tfs_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tfs_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tfs_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tfs_value_stddev": {
       "dtype": "Float64",
@@ -1276,21 +1231,16 @@
       "note": "All values are null."
     },
     "lab_results_tfs_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_ntProBnp_value_max": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 907,
@@ -1310,7 +1260,7 @@
       "is_constant": false
     },
     "lab_results_ntProBnp_value_avg": {
-      "dtype": "Decimal(precision=27, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 907,
@@ -1330,7 +1280,7 @@
       "is_constant": false
     },
     "lab_results_ntProBnp_value_last": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 907,
@@ -1350,7 +1300,7 @@
       "is_constant": false
     },
     "lab_results_ntProBnp_value_first": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 907,
@@ -1359,7 +1309,7 @@
       "min": "34.500000000000000000",
       "max": "70000.000000000000000000",
       "mean": 10102.958119883813,
-      "std": 13502.563228676105,
+      "std": 13502.563228676107,
       "quantiles": {
         "0.05": 492.0,
         "0.25": 2064.0,
@@ -1379,7 +1329,7 @@
       "min": 0.0,
       "max": 30540.0,
       "mean": 1083.2444025758828,
-      "std": 3098.4446253133397,
+      "std": 3098.444625313339,
       "quantiles": {
         "0.05": 0.0,
         "0.25": 0.0,
@@ -1390,7 +1340,7 @@
       "is_constant": false
     },
     "lab_results_ntProBnp_value_min": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 907,
@@ -1399,7 +1349,7 @@
       "min": "33.000000000000000000",
       "max": "70000.000000000000000000",
       "mean": 8950.767124372855,
-      "std": 12694.512008538753,
+      "std": 12694.512008538757,
       "quantiles": {
         "0.05": 398.0,
         "0.25": 1720.0,
@@ -1410,60 +1360,40 @@
       "is_constant": false
     },
     "lab_results_bnp_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_bnp_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_bnp_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_bnp_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_bnp_value_stddev": {
       "dtype": "Float64",
@@ -1475,21 +1405,16 @@
       "note": "All values are null."
     },
     "lab_results_bnp_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_crpNonHs_value_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 542,
@@ -1498,7 +1423,7 @@
       "min": "0.300000000000000000",
       "max": "629.700000000000000000",
       "mean": 76.8086464354528,
-      "std": 97.85143159055036,
+      "std": 97.85143159055035,
       "quantiles": {
         "0.05": 1.7,
         "0.25": 8.3,
@@ -1509,7 +1434,7 @@
       "is_constant": false
     },
     "lab_results_crpNonHs_value_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 542,
@@ -1518,7 +1443,7 @@
       "min": "0.3000000000000000000000",
       "max": "542.0000000000000000000000",
       "mean": 49.716841055058175,
-      "std": 59.95621726609205,
+      "std": 59.95621726609204,
       "quantiles": {
         "0.05": 1.7,
         "0.25": 8.0,
@@ -1529,7 +1454,7 @@
       "is_constant": false
     },
     "lab_results_crpNonHs_value_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 542,
@@ -1537,7 +1462,7 @@
       "looks_like_id": false,
       "min": "0.300000000000000000",
       "max": "629.700000000000000000",
-      "mean": 43.97276011560694,
+      "mean": 43.97276011560693,
       "std": 61.29632821668263,
       "quantiles": {
         "0.05": 1.6,
@@ -1549,7 +1474,7 @@
       "is_constant": false
     },
     "lab_results_crpNonHs_value_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 542,
@@ -1557,8 +1482,8 @@
       "looks_like_id": false,
       "min": "0.300000000000000000",
       "max": "578.100000000000000000",
-      "mean": 45.425240847784195,
-      "std": 70.79185027067481,
+      "mean": 45.42524084778421,
+      "std": 70.7918502706748,
       "quantiles": {
         "0.05": 1.3,
         "0.25": 5.1,
@@ -1577,7 +1502,7 @@
       "looks_like_id": false,
       "min": 0.0,
       "max": 216.48727445279548,
-      "mean": 17.575617492732956,
+      "mean": 17.57561749273296,
       "std": 29.37345108930267,
       "quantiles": {
         "0.05": 0.0,
@@ -1589,7 +1514,7 @@
       "is_constant": false
     },
     "lab_results_crpNonHs_value_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 542,
@@ -1598,7 +1523,7 @@
       "min": "0.300000000000000000",
       "max": "542.000000000000000000",
       "mean": 28.529672447013485,
-      "std": 43.877174783261275,
+      "std": 43.87717478326128,
       "quantiles": {
         "0.05": 1.2,
         "0.25": 4.4,
@@ -1609,60 +1534,40 @@
       "is_constant": false
     },
     "lab_results_crpHs_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_crpHs_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_crpHs_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_crpHs_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_crpHs_value_stddev": {
       "dtype": "Float64",
@@ -1674,74 +1579,49 @@
       "note": "All values are null."
     },
     "lab_results_crpHs_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropIHs_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropIHs_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropIHs_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropIHs_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropIHs_value_stddev": {
       "dtype": "Float64",
@@ -1753,74 +1633,49 @@
       "note": "All values are null."
     },
     "lab_results_tropIHs_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropInHs_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropInHs_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropInHs_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropInHs_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropInHs_value_stddev": {
       "dtype": "Float64",
@@ -1832,21 +1687,16 @@
       "note": "All values are null."
     },
     "lab_results_tropInHs_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_tropTHs_value_max": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2969,
@@ -1854,7 +1704,7 @@
       "looks_like_id": false,
       "min": "0.004000000000000000",
       "max": "65.650000000000000000",
-      "mean": 0.5651234782608695,
+      "mean": 0.5651234782608696,
       "std": 2.708222479643324,
       "quantiles": {
         "0.05": 0.016,
@@ -1866,7 +1716,7 @@
       "is_constant": false
     },
     "lab_results_tropTHs_value_avg": {
-      "dtype": "Decimal(precision=24, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2969,
@@ -1874,7 +1724,7 @@
       "looks_like_id": false,
       "min": "0.0040000000000000000000",
       "max": "34.7536666666666666666667",
-      "mean": 0.38585196941345623,
+      "mean": 0.3858519694134563,
       "std": 1.6400391536619272,
       "quantiles": {
         "0.05": 0.0155,
@@ -1886,7 +1736,7 @@
       "is_constant": false
     },
     "lab_results_tropTHs_value_last": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2969,
@@ -1895,7 +1745,7 @@
       "min": "0.004000000000000000",
       "max": "65.650000000000000000",
       "mean": 0.4651211594202898,
-      "std": 2.332237282583493,
+      "std": 2.3322372825834936,
       "quantiles": {
         "0.05": 0.015,
         "0.25": 0.033,
@@ -1906,7 +1756,7 @@
       "is_constant": false
     },
     "lab_results_tropTHs_value_first": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2969,
@@ -1946,7 +1796,7 @@
       "is_constant": false
     },
     "lab_results_tropTHs_value_min": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2969,
@@ -1954,8 +1804,8 @@
       "looks_like_id": false,
       "min": "0.004000000000000000",
       "max": "16.200000000000000000",
-      "mean": 0.20087072463768116,
-      "std": 0.7723463040143266,
+      "mean": 0.2008707246376812,
+      "std": 0.7723463040143267,
       "quantiles": {
         "0.05": 0.013,
         "0.25": 0.028,
@@ -1966,7 +1816,7 @@
       "is_constant": false
     },
     "lab_results_tropTnHs_value_max": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4125,
@@ -1974,7 +1824,7 @@
       "looks_like_id": false,
       "min": "3.000000000000000000",
       "max": "53000.000000000000000000",
-      "mean": 498.71177504393665,
+      "mean": 498.7117750439367,
       "std": 2467.242178951434,
       "quantiles": {
         "0.05": 17.0,
@@ -1986,7 +1836,7 @@
       "is_constant": false
     },
     "lab_results_tropTnHs_value_avg": {
-      "dtype": "Decimal(precision=27, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4125,
@@ -1994,7 +1844,7 @@
       "looks_like_id": false,
       "min": "3.0000000000000000000000",
       "max": "17838.3000000000000000000000",
-      "mean": 308.10338827838825,
+      "mean": 308.10338827838814,
       "std": 992.8175469470535,
       "quantiles": {
         "0.05": 16.5,
@@ -2006,7 +1856,7 @@
       "is_constant": false
     },
     "lab_results_tropTnHs_value_last": {
-      "dtype": "Decimal(precision=23, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4125,
@@ -2015,7 +1865,7 @@
       "min": "3.000000000000000000",
       "max": "15400.000000000000000000",
       "mean": 295.3304042179262,
-      "std": 869.717000965037,
+      "std": 869.7170009650368,
       "quantiles": {
         "0.05": 16.0,
         "0.25": 37.0,
@@ -2026,7 +1876,7 @@
       "is_constant": false
     },
     "lab_results_tropTnHs_value_first": {
-      "dtype": "Decimal(precision=22, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4125,
@@ -2034,7 +1884,7 @@
       "looks_like_id": false,
       "min": "3.000000000000000000",
       "max": "6140.000000000000000000",
-      "mean": 211.64674868189806,
+      "mean": 211.6467486818981,
       "std": 542.0780730833478,
       "quantiles": {
         "0.05": 15.0,
@@ -2066,7 +1916,7 @@
       "is_constant": false
     },
     "lab_results_tropTnHs_value_min": {
-      "dtype": "Decimal(precision=22, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4125,
@@ -2074,8 +1924,8 @@
       "looks_like_id": false,
       "min": "3.000000000000000000",
       "max": "3780.000000000000000000",
-      "mean": 156.5641476274166,
-      "std": 323.62045210740854,
+      "mean": 156.56414762741656,
+      "std": 323.6204521074086,
       "quantiles": {
         "0.05": 14.0,
         "0.25": 30.0,
@@ -2086,7 +1936,7 @@
       "is_constant": false
     },
     "lab_results_triGly_value_max": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4251,
@@ -2094,7 +1944,7 @@
       "looks_like_id": false,
       "min": "0.200000000000000000",
       "max": "16.500000000000000000",
-      "mean": 1.5663611738148986,
+      "mean": 1.5663611738148981,
       "std": 1.2968990375515894,
       "quantiles": {
         "0.05": 0.6,
@@ -2106,7 +1956,7 @@
       "is_constant": false
     },
     "lab_results_triGly_value_avg": {
-      "dtype": "Decimal(precision=24, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4251,
@@ -2126,7 +1976,7 @@
       "is_constant": false
     },
     "lab_results_triGly_value_last": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4251,
@@ -2146,7 +1996,7 @@
       "is_constant": false
     },
     "lab_results_triGly_value_first": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4251,
@@ -2154,7 +2004,7 @@
       "looks_like_id": false,
       "min": "0.200000000000000000",
       "max": "16.500000000000000000",
-      "mean": 1.5480519187358914,
+      "mean": 1.5480519187358917,
       "std": 1.2932419099185732,
       "quantiles": {
         "0.05": 0.6,
@@ -2174,8 +2024,8 @@
       "looks_like_id": false,
       "min": 0.0,
       "max": 2.954220261824074,
-      "mean": 0.027359390332336198,
-      "std": 0.18598836744930408,
+      "mean": 0.0273593903323362,
+      "std": 0.18598836744930405,
       "quantiles": {
         "0.05": 0.0,
         "0.25": 0.0,
@@ -2186,7 +2036,7 @@
       "is_constant": false
     },
     "lab_results_triGly_value_min": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4251,
@@ -2195,7 +2045,7 @@
       "min": "0.200000000000000000",
       "max": "11.350000000000000000",
       "mean": 1.4826568848758466,
-      "std": 1.0350765856274866,
+      "std": 1.0350765856274868,
       "quantiles": {
         "0.05": 0.6,
         "0.25": 0.865,
@@ -2206,7 +2056,7 @@
       "is_constant": false
     },
     "lab_results_cholTot_value_max": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4180,
@@ -2214,7 +2064,7 @@
       "looks_like_id": false,
       "min": "1.170000000000000000",
       "max": "8.710000000000000000",
-      "mean": 3.9391050583657585,
+      "mean": 3.939105058365759,
       "std": 1.1372637284999014,
       "quantiles": {
         "0.05": 2.28,
@@ -2226,7 +2076,7 @@
       "is_constant": false
     },
     "lab_results_cholTot_value_avg": {
-      "dtype": "Decimal(precision=23, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4180,
@@ -2234,7 +2084,7 @@
       "looks_like_id": false,
       "min": "1.1700000000000000000000",
       "max": "8.7100000000000000000000",
-      "mean": 3.9238521400778206,
+      "mean": 3.9238521400778197,
       "std": 1.1343476049324888,
       "quantiles": {
         "0.05": 2.28,
@@ -2246,7 +2096,7 @@
       "is_constant": false
     },
     "lab_results_cholTot_value_last": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4180,
@@ -2266,7 +2116,7 @@
       "is_constant": false
     },
     "lab_results_cholTot_value_first": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4180,
@@ -2274,7 +2124,7 @@
       "looks_like_id": false,
       "min": "1.170000000000000000",
       "max": "8.710000000000000000",
-      "mean": 3.9290272373540858,
+      "mean": 3.9290272373540853,
       "std": 1.1337102173644222,
       "quantiles": {
         "0.05": 2.28,
@@ -2294,8 +2144,8 @@
       "looks_like_id": false,
       "min": 0.0,
       "max": 1.0350000000000001,
-      "mean": 0.015252918287937739,
-      "std": 0.08289083829554589,
+      "mean": 0.01525291828793774,
+      "std": 0.0828908382955459,
       "quantiles": {
         "0.05": 0.0,
         "0.25": 0.0,
@@ -2306,7 +2156,7 @@
       "is_constant": false
     },
     "lab_results_cholTot_value_min": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4180,
@@ -2326,7 +2176,7 @@
       "is_constant": false
     },
     "lab_results_hdl_value_max": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4276,
@@ -2346,7 +2196,7 @@
       "is_constant": false
     },
     "lab_results_hdl_value_avg": {
-      "dtype": "Decimal(precision=23, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4276,
@@ -2354,8 +2204,8 @@
       "looks_like_id": false,
       "min": "0.2100000000000000000000",
       "max": "3.8050000000000000000000",
-      "mean": 1.1877799043062205,
-      "std": 0.4444807002880193,
+      "mean": 1.1877799043062203,
+      "std": 0.4444807002880192,
       "quantiles": {
         "0.05": 0.62,
         "0.25": 0.9,
@@ -2366,7 +2216,7 @@
       "is_constant": false
     },
     "lab_results_hdl_value_last": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4276,
@@ -2374,8 +2224,8 @@
       "looks_like_id": false,
       "min": "0.220000000000000000",
       "max": "3.760000000000000000",
-      "mean": 1.1870861244019135,
-      "std": 0.44105598403605006,
+      "mean": 1.187086124401914,
+      "std": 0.4410559840360501,
       "quantiles": {
         "0.05": 0.62,
         "0.25": 0.9,
@@ -2386,7 +2236,7 @@
       "is_constant": false
     },
     "lab_results_hdl_value_first": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4276,
@@ -2394,8 +2244,8 @@
       "looks_like_id": false,
       "min": "0.160000000000000000",
       "max": "3.850000000000000000",
-      "mean": 1.18844976076555,
-      "std": 0.44948676686313527,
+      "mean": 1.1884497607655504,
+      "std": 0.4494867668631352,
       "quantiles": {
         "0.05": 0.62,
         "0.25": 0.89,
@@ -2426,7 +2276,7 @@
       "is_constant": false
     },
     "lab_results_hdl_value_min": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4276,
@@ -2434,7 +2284,7 @@
       "looks_like_id": false,
       "min": "0.160000000000000000",
       "max": "3.760000000000000000",
-      "mean": 1.183282296650718,
+      "mean": 1.1832822966507177,
       "std": 0.44341419726179476,
       "quantiles": {
         "0.05": 0.62,
@@ -2446,7 +2296,7 @@
       "is_constant": false
     },
     "lab_results_ldl_value_max": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4280,
@@ -2454,7 +2304,7 @@
       "looks_like_id": false,
       "min": "0.040000000000000000",
       "max": "6.447500000000000000",
-      "mean": 2.121019082125603,
+      "mean": 2.1210190821256036,
       "std": 0.965222966029471,
       "quantiles": {
         "0.05": 0.86,
@@ -2466,7 +2316,7 @@
       "is_constant": false
     },
     "lab_results_ldl_value_avg": {
-      "dtype": "Decimal(precision=23, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4280,
@@ -2474,7 +2324,7 @@
       "looks_like_id": false,
       "min": "0.0400000000000000000000",
       "max": "6.4475000000000000000000",
-      "mean": 2.1108366545893715,
+      "mean": 2.110836654589372,
       "std": 0.961460724648126,
       "quantiles": {
         "0.05": 0.86,
@@ -2486,7 +2336,7 @@
       "is_constant": false
     },
     "lab_results_ldl_value_last": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4280,
@@ -2506,7 +2356,7 @@
       "is_constant": false
     },
     "lab_results_ldl_value_first": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4280,
@@ -2546,7 +2396,7 @@
       "is_constant": false
     },
     "lab_results_ldl_value_min": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4280,
@@ -2555,7 +2405,7 @@
       "min": "0.040000000000000000",
       "max": "6.447500000000000000",
       "mean": 2.10065422705314,
-      "std": 0.9629600969811639,
+      "std": 0.9629600969811638,
       "quantiles": {
         "0.05": 0.858,
         "0.25": 1.4,
@@ -2566,7 +2416,7 @@
       "is_constant": false
     },
     "lab_results_potassium_value_max": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 197,
@@ -2586,7 +2436,7 @@
       "is_constant": false
     },
     "lab_results_potassium_value_avg": {
-      "dtype": "Decimal(precision=23, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 197,
@@ -2594,7 +2444,7 @@
       "looks_like_id": false,
       "min": "1.8500000000000000000000",
       "max": "7.1400000000000000000000",
-      "mean": 4.1641654969511315,
+      "mean": 4.164165496951132,
       "std": 0.5010728198101922,
       "quantiles": {
         "0.05": 3.4725,
@@ -2606,7 +2456,7 @@
       "is_constant": false
     },
     "lab_results_potassium_value_last": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 197,
@@ -2626,7 +2476,7 @@
       "is_constant": false
     },
     "lab_results_potassium_value_first": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 197,
@@ -2635,7 +2485,7 @@
       "min": "1.850000000000000000",
       "max": "8.800000000000000000",
       "mean": 4.2895107849677565,
-      "std": 0.6851665387935433,
+      "std": 0.6851665387935434,
       "quantiles": {
         "0.05": 3.3,
         "0.25": 3.88,
@@ -2654,8 +2504,8 @@
       "looks_like_id": false,
       "min": 0.0,
       "max": 1.6859715300087363,
-      "mean": 0.2972582911836137,
-      "std": 0.24957133903158812,
+      "mean": 0.29725829118361363,
+      "std": 0.24957133903158818,
       "quantiles": {
         "0.05": 0.0,
         "0.25": 0.06000000000000005,
@@ -2666,7 +2516,7 @@
       "is_constant": false
     },
     "lab_results_potassium_value_min": {
-      "dtype": "Decimal(precision=19, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 197,
@@ -2686,7 +2536,7 @@
       "is_constant": false
     },
     "lab_results_sodium_value_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 200,
@@ -2706,7 +2556,7 @@
       "is_constant": false
     },
     "lab_results_sodium_value_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 200,
@@ -2714,7 +2564,7 @@
       "looks_like_id": false,
       "min": "109.4285714285714285714286",
       "max": "156.0588235294117647058824",
-      "mean": 137.79176053678947,
+      "mean": 137.7917605367895,
       "std": 4.295934427449911,
       "quantiles": {
         "0.05": 130.0,
@@ -2726,7 +2576,7 @@
       "is_constant": false
     },
     "lab_results_sodium_value_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 200,
@@ -2734,7 +2584,7 @@
       "looks_like_id": false,
       "min": "109.000000000000000000",
       "max": "160.000000000000000000",
-      "mean": 137.8827992879395,
+      "mean": 137.88279928793946,
       "std": 4.598077293549263,
       "quantiles": {
         "0.05": 130.0,
@@ -2746,7 +2596,7 @@
       "is_constant": false
     },
     "lab_results_sodium_value_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 200,
@@ -2754,7 +2604,7 @@
       "looks_like_id": false,
       "min": "109.000000000000000000",
       "max": "165.000000000000000000",
-      "mean": 137.13647085002222,
+      "mean": 137.13647085002228,
       "std": 4.9837856933268085,
       "quantiles": {
         "0.05": 128.0,
@@ -2786,7 +2636,7 @@
       "is_constant": false
     },
     "lab_results_sodium_value_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 200,
@@ -2806,7 +2656,7 @@
       "is_constant": false
     },
     "lab_results_creatUS_value_max": {
-      "dtype": "Decimal(precision=22, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4217,
@@ -2815,7 +2665,7 @@
       "min": "44.569280000000000000",
       "max": "2839.312000000000000000",
       "mean": 809.5132806708594,
-      "std": 504.5875251413786,
+      "std": 504.58752514137865,
       "quantiles": {
         "0.05": 214.928,
         "0.25": 429.856,
@@ -2826,7 +2676,7 @@
       "is_constant": false
     },
     "lab_results_creatUS_value_avg": {
-      "dtype": "Decimal(precision=26, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4217,
@@ -2834,7 +2684,7 @@
       "looks_like_id": false,
       "min": "44.5692800000000000000000",
       "max": "2706.9616000000000000000000",
-      "mean": 698.3797306008662,
+      "mean": 698.3797306008661,
       "std": 454.21371332787317,
       "quantiles": {
         "0.05": 205.3128,
@@ -2846,7 +2696,7 @@
       "is_constant": false
     },
     "lab_results_creatUS_value_last": {
-      "dtype": "Decimal(precision=22, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4217,
@@ -2854,8 +2704,8 @@
       "looks_like_id": false,
       "min": "44.569280000000000000",
       "max": "2706.961600000000000000",
-      "mean": 678.5222178616353,
-      "std": 480.33117514522013,
+      "mean": 678.5222178616352,
+      "std": 480.3311751452201,
       "quantiles": {
         "0.05": 175.336,
         "0.25": 339.36,
@@ -2866,7 +2716,7 @@
       "is_constant": false
     },
     "lab_results_creatUS_value_first": {
-      "dtype": "Decimal(precision=22, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4217,
@@ -2874,8 +2724,8 @@
       "looks_like_id": false,
       "min": "44.569280000000000000",
       "max": "2839.312000000000000000",
-      "mean": 733.20637048218,
-      "std": 498.2166021135511,
+      "mean": 733.2063704821803,
+      "std": 498.21660211355106,
       "quantiles": {
         "0.05": 170.8112,
         "0.25": 373.296,
@@ -2894,7 +2744,7 @@
       "looks_like_id": false,
       "min": 0.0,
       "max": 1317.848,
-      "mean": 87.18801070599257,
+      "mean": 87.18801070599255,
       "std": 150.94078189541275,
       "quantiles": {
         "0.05": 0.0,
@@ -2906,7 +2756,7 @@
       "is_constant": false
     },
     "lab_results_creatUS_value_min": {
-      "dtype": "Decimal(precision=22, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4217,
@@ -2914,7 +2764,7 @@
       "looks_like_id": false,
       "min": "22.624000000000000000",
       "max": "2706.961600000000000000",
-      "mean": 602.2081932075473,
+      "mean": 602.2081932075472,
       "std": 471.0506910407817,
       "quantiles": {
         "0.05": 135.744,
@@ -2926,7 +2776,7 @@
       "is_constant": false
     },
     "lab_results_albuminBS_value_max": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2699,
@@ -2935,7 +2785,7 @@
       "min": "10.000000000000000000",
       "max": "50.000000000000000000",
       "mean": 32.00516290726817,
-      "std": 6.3575540809894555,
+      "std": 6.357554080989456,
       "quantiles": {
         "0.05": 21.2,
         "0.25": 27.8,
@@ -2946,7 +2796,7 @@
       "is_constant": false
     },
     "lab_results_albuminBS_value_avg": {
-      "dtype": "Decimal(precision=24, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2699,
@@ -2966,7 +2816,7 @@
       "is_constant": false
     },
     "lab_results_albuminBS_value_last": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2699,
@@ -2974,7 +2824,7 @@
       "looks_like_id": false,
       "min": "9.000000000000000000",
       "max": "50.000000000000000000",
-      "mean": 29.984962406015043,
+      "mean": 29.984962406015036,
       "std": 6.8939229002763796,
       "quantiles": {
         "0.05": 18.0,
@@ -2986,7 +2836,7 @@
       "is_constant": false
     },
     "lab_results_albuminBS_value_first": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2699,
@@ -3014,7 +2864,7 @@
       "looks_like_id": false,
       "min": 0.0,
       "max": 9.752027523357722,
-      "mean": 1.1591645457614181,
+      "mean": 1.159164545761418,
       "std": 1.6010470842484323,
       "quantiles": {
         "0.05": 0.0,
@@ -3026,7 +2876,7 @@
       "is_constant": false
     },
     "lab_results_albuminBS_value_min": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2699,
@@ -3035,7 +2885,7 @@
       "min": "6.800000000000000000",
       "max": "50.000000000000000000",
       "mean": 28.762917293233084,
-      "std": 7.612524449626759,
+      "std": 7.6125244496267594,
       "quantiles": {
         "0.05": 15.8,
         "0.25": 23.3,
@@ -3046,60 +2896,40 @@
       "is_constant": false
     },
     "lab_results_albuminUS_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_albuminUS_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_albuminUS_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_albuminUS_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_albuminUS_value_stddev": {
       "dtype": "Float64",
@@ -3111,74 +2941,49 @@
       "note": "All values are null."
     },
     "lab_results_albuminUS_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_bun_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_bun_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_bun_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_bun_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_bun_value_stddev": {
       "dtype": "Float64",
@@ -3190,74 +2995,49 @@
       "note": "All values are null."
     },
     "lab_results_bun_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_acr_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_acr_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_acr_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_acr_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_acr_value_stddev": {
       "dtype": "Float64",
@@ -3269,74 +3049,49 @@
       "note": "All values are null."
     },
     "lab_results_acr_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c%_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c%_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c%_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c%_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c%_value_stddev": {
       "dtype": "Float64",
@@ -3348,74 +3103,49 @@
       "note": "All values are null."
     },
     "lab_results_hba1c%_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c_value_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c_value_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c_value_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c_value_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_hba1c_value_stddev": {
       "dtype": "Float64",
@@ -3427,21 +3157,16 @@
       "note": "All values are null."
     },
     "lab_results_hba1c_value_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "lab_results_validSerumCreatinine_value_min": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 504,
@@ -3449,7 +3174,7 @@
       "looks_like_id": false,
       "min": "0.791700000000000000",
       "max": "22.574760000000000000",
-      "mean": 10.91706792601432,
+      "mean": 10.917067926014319,
       "std": 4.178173452821933,
       "quantiles": {
         "0.05": 5.11212,
@@ -3461,7 +3186,7 @@
       "is_constant": false
     },
     "lab_results_validSerumCreatinine_value_last": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 504,
@@ -3469,7 +3194,7 @@
       "looks_like_id": false,
       "min": "0.791700000000000000",
       "max": "22.574760000000000000",
-      "mean": 12.215593589498805,
+      "mean": 12.215593589498809,
       "std": 4.558635632865651,
       "quantiles": {
         "0.05": 5.92644,
@@ -3481,7 +3206,7 @@
       "is_constant": false
     },
     "lab_results_validSerumCreatinine_value_max": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 504,
@@ -3489,7 +3214,7 @@
       "looks_like_id": false,
       "min": "1.131000000000000000",
       "max": "22.586070000000000000",
-      "mean": 13.985535708830547,
+      "mean": 13.985535708830549,
       "std": 4.868100177293147,
       "quantiles": {
         "0.05": 7.0122,
@@ -3501,7 +3226,7 @@
       "is_constant": false
     },
     "lab_results_validSerumCreatinine_value_first": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 504,
@@ -3530,7 +3255,7 @@
       "min": 0.0,
       "max": 6.671409256272382,
       "mean": 1.0349153128498019,
-      "std": 1.083152655133333,
+      "std": 1.0831526551333328,
       "quantiles": {
         "0.05": 0.0,
         "0.25": 0.0,
@@ -3541,7 +3266,7 @@
       "is_constant": false
     },
     "lab_results_validSerumCreatinine_value_avg": {
-      "dtype": "Decimal(precision=24, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 504,
@@ -3570,7 +3295,7 @@
       "min": 0.0,
       "max": 31.015466845970085,
       "mean": 4.413136748974846,
-      "std": 5.335248197891009,
+      "std": 5.3352481978910085,
       "quantiles": {
         "0.05": 0.0,
         "0.25": 0.0,
@@ -3581,7 +3306,7 @@
       "is_constant": false
     },
     "lab_results_valideGFR_value_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 280,
@@ -3589,8 +3314,8 @@
       "looks_like_id": false,
       "min": "3.000000000000000000",
       "max": "107.000000000000000000",
-      "mean": 59.2555505210693,
-      "std": 24.74623410139053,
+      "mean": 59.25555052106932,
+      "std": 24.746234101390524,
       "quantiles": {
         "0.05": 16.0,
         "0.25": 39.0,
@@ -3601,7 +3326,7 @@
       "is_constant": false
     },
     "lab_results_valideGFR_value_avg": {
-      "dtype": "Decimal(precision=24, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 280,
@@ -3621,7 +3346,7 @@
       "is_constant": false
     },
     "lab_results_valideGFR_value_min": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 280,
@@ -3629,7 +3354,7 @@
       "looks_like_id": false,
       "min": "3.000000000000000000",
       "max": "90.000000000000000000",
-      "mean": 46.42795650203896,
+      "mean": 46.42795650203895,
       "std": 24.60282551614999,
       "quantiles": {
         "0.05": 10.0,
@@ -3641,7 +3366,7 @@
       "is_constant": false
     },
     "lab_results_valideGFR_value_first": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 280,
@@ -3650,7 +3375,7 @@
       "min": "3.000000000000000000",
       "max": "90.000000000000000000",
       "mean": 53.14454009968283,
-      "std": 24.62854237153648,
+      "std": 24.628542371536476,
       "quantiles": {
         "0.05": 13.0,
         "0.25": 33.0,
@@ -3661,7 +3386,7 @@
       "is_constant": false
     },
     "lab_results_valideGFR_value_last": {
-      "dtype": "Decimal(precision=20, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 280,
@@ -3669,7 +3394,7 @@
       "looks_like_id": false,
       "min": "3.000000000000000000",
       "max": "90.000000000000000000",
-      "mean": 53.66560942455822,
+      "mean": 53.66560942455821,
       "std": 25.045041860648634,
       "quantiles": {
         "0.05": 13.0,
@@ -4071,7 +3796,7 @@
       }
     },
     "echocardiographs_lvef_pET_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3902,
@@ -4080,7 +3805,7 @@
       "min": "-179.000000000000000000",
       "max": "96.000000000000000000",
       "mean": 41.06642676767676,
-      "std": 19.219311972664233,
+      "std": 19.219311972664237,
       "quantiles": {
         "0.05": 16.02,
         "0.25": 27.56,
@@ -4091,7 +3816,7 @@
       "is_constant": false
     },
     "echocardiographs_lvef_pET_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3688,
@@ -4120,7 +3845,7 @@
       "min": 0.0,
       "max": 110.50188535344846,
       "mean": 1.784970921809872,
-      "std": 6.120509193808231,
+      "std": 6.12050919380823,
       "quantiles": {
         "0.05": 0.0,
         "0.25": 0.0,
@@ -4131,7 +3856,7 @@
       "is_constant": false
     },
     "echocardiographs_lvef_pET_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3688,
@@ -4140,7 +3865,7 @@
       "min": "2.000000000000000000",
       "max": "100.000000000000000000",
       "mean": 43.623339960238575,
-      "std": 17.82925997403217,
+      "std": 17.829259974032166,
       "quantiles": {
         "0.05": 17.33,
         "0.25": 30.13,
@@ -4151,7 +3876,7 @@
       "is_constant": false
     },
     "echocardiographs_lvef_pET_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3853,
@@ -4159,7 +3884,7 @@
       "looks_like_id": false,
       "min": "-44.000000000000000000",
       "max": "100.000000000000000000",
-      "mean": 41.535386444708685,
+      "mean": 41.53538644470868,
       "std": 18.206220434216768,
       "quantiles": {
         "0.05": 15.0,
@@ -4171,7 +3896,7 @@
       "is_constant": false
     },
     "echocardiographs_lvef_pET_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3688,
@@ -4179,7 +3904,7 @@
       "looks_like_id": false,
       "min": "-72.5050000000000000000000",
       "max": "100.0000000000000000000000",
-      "mean": 41.77018836978132,
+      "mean": 41.77018836978131,
       "std": 18.09138701145769,
       "quantiles": {
         "0.05": 16.0,
@@ -4191,7 +3916,7 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qrs_duration_pET_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2309,
@@ -4199,8 +3924,8 @@
       "looks_like_id": false,
       "min": "20.000000000000000000",
       "max": "252.000000000000000000",
-      "mean": 119.25828092243185,
-      "std": 34.37443653566127,
+      "mean": 119.25828092243187,
+      "std": 34.37443653566126,
       "quantiles": {
         "0.05": 80.0,
         "0.25": 93.0,
@@ -4211,7 +3936,7 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qrs_duration_pET_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2310,
@@ -4219,7 +3944,7 @@
       "looks_like_id": false,
       "min": "56.000000000000000000",
       "max": "250.000000000000000000",
-      "mean": 118.57340604026847,
+      "mean": 118.57340604026845,
       "std": 34.6719725336154,
       "quantiles": {
         "0.05": 78.0,
@@ -4231,7 +3956,7 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qrs_duration_pET_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2309,
@@ -4251,7 +3976,7 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qrs_duration_pET_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2309,
@@ -4260,7 +3985,7 @@
       "min": "57.000000000000000000",
       "max": "292.000000000000000000",
       "mean": 131.17358490566036,
-      "std": 39.25509273082682,
+      "std": 39.25509273082681,
       "quantiles": {
         "0.05": 85.0,
         "0.25": 100.0,
@@ -4271,7 +3996,7 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qrs_duration_pET_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2309,
@@ -4280,7 +4005,7 @@
       "min": "4.000000000000000000",
       "max": "249.000000000000000000",
       "mean": 108.76519916142557,
-      "std": 31.669794532157287,
+      "std": 31.66979453215729,
       "quantiles": {
         "0.05": 71.0,
         "0.25": 86.0,
@@ -4300,7 +4025,7 @@
       "min": 0.0,
       "max": 78.99841770567306,
       "mean": 7.327852696455422,
-      "std": 8.88414034034695,
+      "std": 8.884140340346951,
       "quantiles": {
         "0.05": 0.0,
         "0.25": 1.632993161855452,
@@ -4311,46 +4036,31 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qrs_axis_pET_avg": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=22)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "electrocardiographs_ecg_qrs_axis_pET_min": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "electrocardiographs_ecg_qrs_axis_pET_max": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "electrocardiographs_ecg_qrs_axis_pET_stddev": {
       "dtype": "Float64",
@@ -4362,35 +4072,25 @@
       "note": "All values are null."
     },
     "electrocardiographs_ecg_qrs_axis_pET_last": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "electrocardiographs_ecg_qrs_axis_pET_first": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Decimal(precision=38, scale=18)",
+      "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
-      "unique_count": 1,
-      "is_constant": true,
-      "high_cardinality": false,
-      "top_values": {
-        "null": 4694
-      }
+      "note": "All values are null."
     },
     "electrocardiographs_ecg_qt_duration_corrected_pET_first": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2310,
@@ -4398,7 +4098,7 @@
       "looks_like_id": false,
       "min": "186.000000000000000000",
       "max": "767.000000000000000000",
-      "mean": 472.4840604026845,
+      "mean": 472.4840604026846,
       "std": 50.75901195975169,
       "quantiles": {
         "0.05": 398.0,
@@ -4410,7 +4110,7 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qt_duration_corrected_pET_last": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2311,
@@ -4430,7 +4130,7 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qt_duration_corrected_pET_avg": {
-      "dtype": "Decimal(precision=25, scale=22)",
+      "dtype": "Decimal(precision=38, scale=22)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2309,
@@ -4470,7 +4170,7 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qt_duration_corrected_pET_min": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2309,
@@ -4478,8 +4178,8 @@
       "looks_like_id": false,
       "min": "161.000000000000000000",
       "max": "639.000000000000000000",
-      "mean": 436.0415094339623,
-      "std": 52.67523045759669,
+      "mean": 436.04150943396235,
+      "std": 52.6752304575967,
       "quantiles": {
         "0.05": 356.0,
         "0.25": 406.0,
@@ -4490,7 +4190,7 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_qt_duration_corrected_pET_max": {
-      "dtype": "Decimal(precision=21, scale=18)",
+      "dtype": "Decimal(precision=38, scale=18)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2309,
@@ -4499,7 +4199,7 @@
       "min": "260.000000000000000000",
       "max": "880.000000000000000000",
       "mean": 510.89014675052414,
-      "std": 63.196412753571146,
+      "std": 63.19641275357115,
       "quantiles": {
         "0.05": 425.0,
         "0.25": 466.0,
@@ -4510,35 +4210,33 @@
       "is_constant": false
     },
     "electrocardiographs_ecg_st_pET": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Boolean",
+      "inferred_type": "boolean",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
       "unique_count": 1,
       "is_constant": true,
-      "high_cardinality": false,
       "top_values": {
         "null": 4694
       }
     },
     "electrocardiographs_ecg_ischemia_without_st_pET": {
-      "dtype": "Null",
-      "inferred_type": "categorical",
+      "dtype": "Boolean",
+      "inferred_type": "boolean",
       "row_count": 4694,
       "null_count": 4694,
       "null_pct": 1.0,
       "looks_like_id": false,
       "unique_count": 1,
       "is_constant": true,
-      "high_cardinality": false,
       "top_values": {
         "null": 4694
       }
     },
     "electrocardiographs_ecg_type_of_rhythms_pET_first": {
-      "dtype": "List(Null)",
+      "dtype": "List(String)",
       "inferred_type": "categorical",
       "row_count": 4694,
       "null_count": 2308,
@@ -4553,7 +4251,7 @@
       }
     },
     "electrocardiographs_ecg_type_of_rhythms_pET_last": {
-      "dtype": "List(Null)",
+      "dtype": "List(String)",
       "inferred_type": "categorical",
       "row_count": 4694,
       "null_count": 2308,
@@ -4598,14 +4296,14 @@
       }
     },
     "smoking_status_smoker_totalSmokingDuration_sum": {
-      "dtype": "Float64",
+      "dtype": "Int64",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4611,
       "null_pct": 0.9823,
       "looks_like_id": false,
-      "min": 889.0,
-      "max": 339891.0,
+      "min": 889,
+      "max": 339891,
       "mean": 71901.84337349398,
       "std": 77199.41307442787,
       "quantiles": {
@@ -4694,14 +4392,14 @@
       }
     },
     "conditions_heartFailure_timeFromEarliest_first": {
-      "dtype": "Float64",
+      "dtype": "Int64",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 11,
       "null_pct": 0.0023,
       "looks_like_id": false,
-      "min": 0.0,
-      "max": 123.0,
+      "min": 0,
+      "max": 123,
       "mean": 11.375613922699124,
       "std": 22.004825958539346,
       "quantiles": {
@@ -7411,14 +7109,14 @@
       }
     },
     "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first": {
-      "dtype": "Float64",
+      "dtype": "Int32",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4452,
       "null_pct": 0.9484,
       "looks_like_id": false,
-      "min": 1.0,
-      "max": 1805.0,
+      "min": 1,
+      "max": 1805,
       "mean": 90.67768595041322,
       "std": 196.5233809271927,
       "quantiles": {
@@ -7536,14 +7234,14 @@
       }
     },
     "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first": {
-      "dtype": "Float64",
+      "dtype": "Int32",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 3765,
       "null_pct": 0.8021,
       "looks_like_id": false,
-      "min": 0.0,
-      "max": 1805.0,
+      "min": 0,
+      "max": 1805,
       "mean": 119.13993541442412,
       "std": 226.069455036338,
       "quantiles": {
@@ -7661,14 +7359,14 @@
       }
     },
     "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first": {
-      "dtype": "Float64",
+      "dtype": "Int32",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2968,
       "null_pct": 0.6323,
       "looks_like_id": false,
-      "min": 0.0,
-      "max": 1694.0,
+      "min": 0,
+      "max": 1694,
       "mean": 131.58285052143685,
       "std": 239.49924528927158,
       "quantiles": {
@@ -7786,16 +7484,16 @@
       }
     },
     "encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first": {
-      "dtype": "Float64",
+      "dtype": "Int32",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4633,
       "null_pct": 0.987,
       "looks_like_id": false,
-      "min": 3.0,
-      "max": 815.0,
+      "min": 3,
+      "max": 815,
       "mean": 120.19672131147541,
-      "std": 174.35966847029457,
+      "std": 174.3596684702946,
       "quantiles": {
         "0.05": 5.0,
         "0.25": 19.0,
@@ -7911,14 +7609,14 @@
       }
     },
     "cause_of_death_number_of_days_to_death_for_CV_f5a_first": {
-      "dtype": "Float64",
+      "dtype": "Int32",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4584,
       "null_pct": 0.9766,
       "looks_like_id": false,
-      "min": 1.0,
-      "max": 1499.0,
+      "min": 1,
+      "max": 1499,
       "mean": 351.90909090909093,
       "std": 363.03616584957797,
       "quantiles": {
@@ -8029,7 +7727,7 @@
       }
     },
     "cause_of_death_number_of_days_to_death_for_renal_f5a_first": {
-      "dtype": "Float64",
+      "dtype": "Int32",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
@@ -8136,7 +7834,7 @@
       }
     },
     "cause_of_death_number_of_days_to_death_for_non_renal_and_non_CV_f5a_first": {
-      "dtype": "Float64",
+      "dtype": "Int32",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4694,
@@ -8250,14 +7948,14 @@
       }
     },
     "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first": {
-      "dtype": "Float64",
+      "dtype": "Int32",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 2789,
       "null_pct": 0.5942,
       "looks_like_id": false,
-      "min": 1.0,
-      "max": 1826.0,
+      "min": 1,
+      "max": 1826,
       "mean": 453.81364829396324,
       "std": 489.80095578123826,
       "quantiles": {
@@ -8270,7 +7968,7 @@
       "is_constant": false
     },
     "eGFR_2021_ckd_epi_creatinine": {
-      "dtype": "Decimal(precision=9, scale=6)",
+      "dtype": "Decimal(precision=38, scale=6)",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 504,
@@ -8279,7 +7977,7 @@
       "min": "20.091671",
       "max": "231.686837",
       "mean": 64.0062175928401,
-      "std": 25.913588770866085,
+      "std": 25.91358877086608,
       "quantiles": {
         "0.05": 29.301166,
         "0.25": 42.009739,
@@ -8357,14 +8055,14 @@
       }
     },
     "maggic_total_score": {
-      "dtype": "Float64",
+      "dtype": "Int32",
       "inferred_type": "numeric",
       "row_count": 4694,
       "null_count": 4688,
       "null_pct": 0.9987,
       "looks_like_id": false,
-      "min": 14.0,
-      "max": 29.0,
+      "min": 14,
+      "max": 29,
       "mean": 22.333333333333332,
       "std": 7.061633427661525,
       "quantiles": {
