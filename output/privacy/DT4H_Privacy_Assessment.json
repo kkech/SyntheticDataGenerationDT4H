@@ -1,0 +1,83 @@
+{
+  "distance_space": {
+    "numeric_columns": 61,
+    "categorical_columns": 150
+  },
+  "real_baseline": {
+    "records": 4694,
+    "dcr_min": 0.021737,
+    "dcr_p5": 0.05968,
+    "dcr_median": 0.099393,
+    "dcr_mean": 0.100144,
+    "exact_matches": 0,
+    "nndr_median": 0.9427,
+    "nndr_p5": 0.7823
+  },
+  "synthesizers": [
+    {
+      "records": 4694,
+      "dcr_min": 0.428468,
+      "dcr_p5": 0.451765,
+      "dcr_median": 0.484035,
+      "dcr_mean": 0.484186,
+      "exact_matches": 0,
+      "nndr_median": 0.997,
+      "nndr_p5": 0.9883,
+      "synthesizer": "ctgan",
+      "share_closer_than_real_p5": 0.0,
+      "duration_seconds": 10.0
+    },
+    {
+      "records": 4694,
+      "dcr_min": 0.532562,
+      "dcr_p5": 0.544072,
+      "dcr_median": 0.552738,
+      "dcr_mean": 0.552244,
+      "exact_matches": 0,
+      "nndr_median": 0.9969,
+      "nndr_p5": 0.9959,
+      "synthesizer": "dpctgan",
+      "share_closer_than_real_p5": 0.0,
+      "duration_seconds": 10.0
+    },
+    {
+      "records": 4694,
+      "dcr_min": 0.450915,
+      "dcr_p5": 0.475548,
+      "dcr_median": 0.50598,
+      "dcr_mean": 0.506444,
+      "exact_matches": 0,
+      "nndr_median": 0.9965,
+      "nndr_p5": 0.9861,
+      "synthesizer": "gaussian_copula",
+      "share_closer_than_real_p5": 0.0,
+      "duration_seconds": 10.0
+    },
+    {
+      "records": 4694,
+      "dcr_min": 0.414992,
+      "dcr_p5": 0.422327,
+      "dcr_median": 0.435109,
+      "dcr_mean": 0.442184,
+      "exact_matches": 0,
+      "nndr_median": 0.9942,
+      "nndr_p5": 0.9768,
+      "synthesizer": "mst",
+      "share_closer_than_real_p5": 0.0,
+      "duration_seconds": 10.0
+    },
+    {
+      "records": 4694,
+      "dcr_min": 0.412759,
+      "dcr_p5": 0.423046,
+      "dcr_median": 0.437167,
+      "dcr_mean": 0.439673,
+      "exact_matches": 0,
+      "nndr_median": 0.9937,
+      "nndr_p5": 0.973,
+      "synthesizer": "tvae",
+      "share_closer_than_real_p5": 0.0,
+      "duration_seconds": 10.1
+    }
+  ]
+}

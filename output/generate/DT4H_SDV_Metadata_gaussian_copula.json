@@ -54,12 +54,6 @@
                 "vital_signs_heartRate_value_last": {
                     "sdtype": "numerical"
                 },
-                "vital_signs_oxygenSaturation_value_first": {
-                    "sdtype": "numerical"
-                },
-                "vital_signs_oxygenSaturation_value_last": {
-                    "sdtype": "numerical"
-                },
                 "lab_results_hemoglobin_value_last": {
                     "sdtype": "numerical"
                 },
@@ -144,18 +138,6 @@
                 "lab_results_albuminBS_value_first": {
                     "sdtype": "numerical"
                 },
-                "lab_results_hba1c%_value_last": {
-                    "sdtype": "numerical"
-                },
-                "lab_results_hba1c%_value_first": {
-                    "sdtype": "numerical"
-                },
-                "lab_results_hba1c_value_last": {
-                    "sdtype": "numerical"
-                },
-                "lab_results_hba1c_value_first": {
-                    "sdtype": "numerical"
-                },
                 "lab_results_validSerumCreatinine_value_last": {
                     "sdtype": "numerical"
                 },
@@ -180,12 +162,6 @@
                 "electrocardiographs_ecg_qrs_duration_pET_last": {
                     "sdtype": "numerical"
                 },
-                "electrocardiographs_ecg_qrs_axis_pET_last": {
-                    "sdtype": "numerical"
-                },
-                "electrocardiographs_ecg_qrs_axis_pET_first": {
-                    "sdtype": "numerical"
-                },
                 "electrocardiographs_ecg_qt_duration_corrected_pET_first": {
                     "sdtype": "numerical"
                 },
@@ -197,9 +173,6 @@
                 },
                 "smoking_status_formerSmoker_last": {
                     "sdtype": "categorical"
-                },
-                "smoking_status_smoker_totalSmokingDuration_sum": {
-                    "sdtype": "numerical"
                 },
                 "smoking_status_smoker_startTime_count": {
                     "sdtype": "numerical"
@@ -315,9 +288,6 @@
                 "encounter_primary_reason_renal_complications_f5a_w5a_first": {
                     "sdtype": "categorical"
                 },
-                "encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first": {
-                    "sdtype": "numerical"
-                },
                 "cause_of_death_isCV_f5a_w7d_first": {
                     "sdtype": "categorical"
                 },
@@ -338,9 +308,6 @@
                 },
                 "cause_of_death_isCV_f5a_w5a_first": {
                     "sdtype": "categorical"
-                },
-                "cause_of_death_number_of_days_to_death_for_CV_f5a_first": {
-                    "sdtype": "numerical"
                 },
                 "cause_of_death_isRenal_f5a_w7d_first": {
                     "sdtype": "categorical"
@@ -421,9 +388,6 @@
                     "sdtype": "categorical"
                 },
                 "ace_inhibitors_arb_use_pre_dc": {
-                    "sdtype": "categorical"
-                },
-                "maggic_total_score": {
                     "sdtype": "categorical"
                 },
                 "med_acei": {
@@ -670,210 +634,6 @@
                     "sdtype": "categorical"
                 },
                 "conditions_vd": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_weight_value_p6mo_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_weight_value_p6mo_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_height_value_p1a_avg_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_weight_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_height_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_bmi_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_systolicBp_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_systolicBp_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_diastolicBp_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_diastolicBp_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_heartRate_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_heartRate_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_oxygenSaturation_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "vital_signs_oxygenSaturation_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_hemoglobin_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_hemoglobin_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_ferritin_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_ferritin_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_ntProBnp_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_ntProBnp_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_crpNonHs_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_crpNonHs_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_tropTHs_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_tropTHs_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_tropTnHs_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_tropTnHs_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_triGly_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_triGly_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_cholTot_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_cholTot_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_hdl_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_hdl_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_ldl_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_ldl_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_potassium_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_potassium_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_sodium_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_sodium_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_creatUS_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_creatUS_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_albuminBS_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_albuminBS_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_hba1c%_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_hba1c%_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_hba1c_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_hba1c_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_validSerumCreatinine_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_validSerumCreatinine_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_valideGFR_value_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "lab_results_valideGFR_value_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "echocardiographs_lvef_pET_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "echocardiographs_lvef_pET_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "electrocardiographs_ecg_qrs_duration_pET_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "electrocardiographs_ecg_qrs_duration_pET_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "electrocardiographs_ecg_qrs_axis_pET_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "electrocardiographs_ecg_qrs_axis_pET_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "electrocardiographs_ecg_qt_duration_corrected_pET_last_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "electrocardiographs_ecg_qt_duration_corrected_pET_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "smoking_status_smoker_totalSmokingDuration_sum_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "conditions_heartFailure_timeFromEarliest_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "eGFR_2021_ckd_epi_creatinine_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "maggic_total_score_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "cause_of_death_number_of_days_to_death_for_CV_f5a_first_was_missing": {
-                    "sdtype": "categorical"
-                },
-                "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first_was_missing": {
                     "sdtype": "categorical"
                 }
             }

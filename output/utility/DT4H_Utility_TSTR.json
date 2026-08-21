@@ -1,0 +1,178 @@
+{
+  "test_fraction": 0.25,
+  "seed": 0,
+  "targets": [
+    {
+      "target": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "n_real": 1117,
+      "positives": 699,
+      "baseline_auc": 0.6713,
+      "tstr": [
+        {
+          "synthesizer": "ctgan",
+          "auc": 0.6624,
+          "auc_gap": 0.0089
+        },
+        {
+          "synthesizer": "dpctgan",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "synthesizer": "gaussian_copula",
+          "auc": 0.5747,
+          "auc_gap": 0.0966
+        },
+        {
+          "synthesizer": "mst",
+          "auc": 0.415,
+          "auc_gap": 0.2563
+        },
+        {
+          "synthesizer": "tvae",
+          "auc": 0.602,
+          "auc_gap": 0.0693
+        }
+      ]
+    },
+    {
+      "target": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "n_real": 1117,
+      "positives": 418,
+      "baseline_auc": 0.6422,
+      "tstr": [
+        {
+          "synthesizer": "ctgan",
+          "auc": 0.5358,
+          "auc_gap": 0.1064
+        },
+        {
+          "synthesizer": "dpctgan",
+          "auc": 0.5877,
+          "auc_gap": 0.0545
+        },
+        {
+          "synthesizer": "gaussian_copula",
+          "auc": 0.5322,
+          "auc_gap": 0.11
+        },
+        {
+          "synthesizer": "mst",
+          "auc": 0.5666,
+          "auc_gap": 0.0756
+        },
+        {
+          "synthesizer": "tvae",
+          "auc": 0.5759,
+          "auc_gap": 0.0663
+        }
+      ]
+    },
+    {
+      "target": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "n_real": 472,
+      "positives": 296,
+      "baseline_auc": 0.6732,
+      "tstr": [
+        {
+          "synthesizer": "ctgan",
+          "auc": 0.5402,
+          "auc_gap": 0.133
+        },
+        {
+          "synthesizer": "dpctgan",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "synthesizer": "gaussian_copula",
+          "auc": 0.492,
+          "auc_gap": 0.1812
+        },
+        {
+          "synthesizer": "mst",
+          "auc": 0.4183,
+          "auc_gap": 0.2549
+        },
+        {
+          "synthesizer": "tvae",
+          "auc": 0.5283,
+          "auc_gap": 0.1449
+        }
+      ]
+    },
+    {
+      "target": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "n_real": 472,
+      "positives": 176,
+      "baseline_auc": 0.7343,
+      "tstr": [
+        {
+          "synthesizer": "ctgan",
+          "auc": 0.4579,
+          "auc_gap": 0.2764
+        },
+        {
+          "synthesizer": "dpctgan",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "synthesizer": "gaussian_copula",
+          "auc": 0.5313,
+          "auc_gap": 0.203
+        },
+        {
+          "synthesizer": "mst",
+          "auc": 0.5034,
+          "auc_gap": 0.2309
+        },
+        {
+          "synthesizer": "tvae",
+          "auc": 0.6413,
+          "auc_gap": 0.093
+        }
+      ]
+    },
+    {
+      "target": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "n_real": 2186,
+      "positives": 1403,
+      "baseline_auc": 0.6397,
+      "tstr": [
+        {
+          "synthesizer": "ctgan",
+          "auc": 0.5594,
+          "auc_gap": 0.0803
+        },
+        {
+          "synthesizer": "dpctgan",
+          "auc": 0.453,
+          "auc_gap": 0.1867
+        },
+        {
+          "synthesizer": "gaussian_copula",
+          "auc": 0.5445,
+          "auc_gap": 0.0952
+        },
+        {
+          "synthesizer": "mst",
+          "auc": 0.4738,
+          "auc_gap": 0.1659
+        },
+        {
+          "synthesizer": "tvae",
+          "auc": 0.6022,
+          "auc_gap": 0.0375
+        }
+      ]
+    }
+  ],
+  "aggregate_auc_gap": {
+    "ctgan": 0.121,
+    "dpctgan": 0.1206,
+    "gaussian_copula": 0.1372,
+    "mst": 0.1967,
+    "tvae": 0.0822
+  }
+}
