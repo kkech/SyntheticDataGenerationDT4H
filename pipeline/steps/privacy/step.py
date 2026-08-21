@@ -108,8 +108,10 @@ class PrivacyStep(PipelineStep):
             if missing_cols:
                 print(f"  ⚠️  {len(missing_cols)} training column(s) absent from this synthetic "
                       f"file (width-limited run); distances computed over the common columns only.")
-                for c in missing_cols:
-                    synthetic[c] = pd.NA
+                # One concat, not a column-at-a-time loop: inserting ~160
+                # columns individually fragments the frame.
+                pad = pd.DataFrame(pd.NA, index=synthetic.index, columns=missing_cols)
+                synthetic = pd.concat([synthetic, pad], axis=1)
 
             synth_num, synth_cat = encode(synthetic)
             d1, d2 = nearest_two_distances(synth_num, synth_cat, train_num, train_cat)

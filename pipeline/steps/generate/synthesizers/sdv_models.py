@@ -51,6 +51,26 @@ def _gpu_kwarg(model_cls) -> dict:
     return {}
 
 
+def _seeded_sample(model, n_rows: int, seed) -> pd.DataFrame:
+    """Sample with the RUN's seed instead of SDV's pinned one.
+
+    SDV deliberately fixes its sampling RNG (single_table/base.py sets a
+    FIXED_RNG_SEED at sample time unless a random state was explicitly
+    set), so without this, every seed of the same fitted model produces
+    byte-identical output and the seed-variance measurement is fiction.
+    _set_random_state is private but stable across the SDV 1.x line; if
+    a future version removes it, fall back to the pinned behaviour
+    loudly rather than silently."""
+    if seed is not None:
+        try:
+            model._set_random_state(int(seed))
+        except Exception as e:
+            print(f"⚠️  Could not set SDV sampling seed ({type(e).__name__}: {e}) -- "
+                  f"sampling falls back to SDV's fixed internal seed, so outputs "
+                  f"will NOT vary across seeds.")
+    return model.sample(num_rows=n_rows)
+
+
 def save_metadata(model, path: str) -> bool:
     """
     Persist the detected SDV metadata alongside the run.
@@ -93,7 +113,7 @@ class SDVCTGANSynthesizer(Synthesizer):
         self._model.fit(df)
 
     def sample(self, n_rows: int) -> pd.DataFrame:
-        return self._model.sample(num_rows=n_rows)
+        return _seeded_sample(self._model, n_rows, self.params.get("seed"))
 
 
 class SDVTVAESynthesizer(Synthesizer):
@@ -117,7 +137,7 @@ class SDVTVAESynthesizer(Synthesizer):
         self._model.fit(df)
 
     def sample(self, n_rows: int) -> pd.DataFrame:
-        return self._model.sample(num_rows=n_rows)
+        return _seeded_sample(self._model, n_rows, self.params.get("seed"))
 
 
 class SDVGaussianCopulaSynthesizer(Synthesizer):
@@ -136,4 +156,4 @@ class SDVGaussianCopulaSynthesizer(Synthesizer):
         self._model.fit(df)
 
     def sample(self, n_rows: int) -> pd.DataFrame:
-        return self._model.sample(num_rows=n_rows)
+        return _seeded_sample(self._model, n_rows, self.params.get("seed"))
