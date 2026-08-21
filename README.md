@@ -73,7 +73,7 @@ or timeout costs only the tail of a run — 31 runs by default:
 | `gaussian_copula` | SDV | no | 3 seeds | statistical baseline, seconds |
 | `tvae` | SDV | no | 3 seeds | the strongest non-DP model here |
 | `ctgan` | SDV | no | 3 seeds | the long-standing GAN baseline |
-| `dpctgan` | smartnoise-synth | ε | ε ∈ {1,3,5,8,10,15} + 2 extra seeds at ε=15 | DP-GAN comparison point |
+| `dpctgan` | smartnoise-synth | ε | ε ∈ {1,5,8,10,15,20} + 2 extra seeds at ε=15 | DP-GAN comparison point |
 | `aim` | smartnoise-synth | ε | ε sweep on the **top-50 outcome-relevant columns** | Private-PGM cannot handle full width (timed out at 6 h on 211 columns); column selection is data-driven and committed (`DT4H_AIM_Column_Selection.json`), with its own 2 h/run timeout |
 | `mst` | smartnoise-synth | ε | ε sweep + 2 extra seeds at ε=15 | marginal-based; excellent categorical fidelity; ~2.8 h/run, runs last |
 

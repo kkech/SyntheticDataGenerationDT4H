@@ -61,7 +61,12 @@ class PipelineConfig:
     # override the generated plan entirely.
     non_dp_synthesizers: tuple = ("gaussian_copula", "tvae", "ctgan")
     dp_synthesizers: tuple = ("dpctgan", "aim", "mst")
-    dp_epsilons: tuple = (1.0, 3.0, 5.0, 8.0, 10.0, 15.0)
+    # The sweep spans strong privacy (1) to a generous upper anchor (20,
+    # included to test whether utility saturates above the headline
+    # point). Variance seeds run at headline_epsilon: epsilon=15 is the
+    # paper's DP operating point -- 20 is a curve anchor, not a release
+    # candidate.
+    dp_epsilons: tuple = (1.0, 5.0, 8.0, 10.0, 15.0, 20.0)
     headline_epsilon: float = 15.0
     variance_seeds: tuple = (0, 1, 2)
     aim_max_columns: int = 50
