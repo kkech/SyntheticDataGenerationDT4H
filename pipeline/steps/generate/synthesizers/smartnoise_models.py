@@ -64,6 +64,9 @@ class _SmartNoiseBase(Synthesizer):
               f"column(s) (released in the sentinel encoding map) -- the full "
               f"ε={create_kwargs['epsilon']:g} budget goes to synthesis.")
 
+        create_kwargs.update(
+            self._algorithm_kwargs(len(categorical_columns) + len(continuous_columns)))
+
         self._model = SNSynthesizer.create(self.algorithm, **create_kwargs)
         self._model.fit(
             df,
@@ -73,6 +76,10 @@ class _SmartNoiseBase(Synthesizer):
             preprocessor_eps=0.0,
             nullable=False,  # preprocessing guarantees no nulls/NaN remain
         )
+
+    def _algorithm_kwargs(self, n_columns: int) -> dict:
+        """Extra constructor kwargs for the underlying algorithm."""
+        return {}
 
     def _bound_constraints(self, df, continuous_columns) -> dict:
         from snsynth.transform import BinTransformer, MinMaxTransformer
@@ -99,6 +106,20 @@ class AIMSynthesizer(_SmartNoiseBase):
     name = "aim"
     algorithm = "aim"
     uses_gpu = False
+
+    def _algorithm_kwargs(self, n_columns: int) -> dict:
+        """Cap AIM's measurement rounds. The library default is 16 x
+        columns (800 at 50 columns), and runtime scales with rounds --
+        measured: the default timed out even at 15 columns at high
+        epsilon, because unlike low-epsilon runs the budget never runs
+        out early. Capping rounds keeps the epsilon guarantee fully
+        intact (the budget is split across fewer, less-noisy
+        measurements); it is an accuracy/runtime hyperparameter, and the
+        value used is recorded in the run summary. Override with
+        synthesizer_params['aim']['rounds']."""
+        rounds = int(self.params.get("rounds") or max(3 * n_columns, 30))
+        print(f"  AIM rounds capped at {rounds} (library default would be {16 * n_columns}).")
+        return {"rounds": rounds}
 
 
 class MSTSynthesizer(_SmartNoiseBase):
