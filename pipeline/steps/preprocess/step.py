@@ -115,7 +115,49 @@ class PreprocessStep(PipelineStep):
         df.write_parquet(config.preprocessed_output_path)
         print(f"Saved {df.height} rows x {df.width} columns -> {config.preprocessed_output_path}")
 
+        summary["holdout_split"] = self._split_train_holdout(df, config)
+
         self._write_summary(summary, config)
+
+    def _split_train_holdout(self, df: pl.DataFrame, config: PipelineConfig) -> dict:
+        """Seeded row split BEFORE generation. The generators train only
+        on the train file; the holdout rows are real patients the models
+        never see, which is what makes TSTR testing, the privacy
+        baseline, and the evaluation noise floor honest. The manifest
+        (row positions only -- no patient data) is committed so the
+        exact split is auditable and reproducible."""
+        import numpy as np
+
+        rng = np.random.default_rng(config.seed)
+        n = df.height
+        n_holdout = int(round(n * config.holdout_fraction))
+        perm = rng.permutation(n)
+        holdout_idx = np.sort(perm[:n_holdout])
+        train_idx = np.sort(perm[n_holdout:])
+
+        indexed = df.with_row_index("__rid")
+        train_df = indexed.filter(pl.col("__rid").is_in(train_idx.tolist())).drop("__rid")
+        holdout_df = indexed.filter(pl.col("__rid").is_in(holdout_idx.tolist())).drop("__rid")
+
+        train_df.write_parquet(config.train_output_path)
+        holdout_df.write_parquet(config.holdout_output_path)
+        print(f"Holdout split (seed {config.seed}): {train_df.height} train rows -> "
+              f"{config.train_output_path}, {holdout_df.height} holdout rows -> "
+              f"{config.holdout_output_path}")
+
+        manifest = {
+            "seed": config.seed,
+            "holdout_fraction": config.holdout_fraction,
+            "n_total": n,
+            "n_train": train_df.height,
+            "n_holdout": holdout_df.height,
+            "holdout_row_positions": holdout_idx.tolist(),
+        }
+        manifest_path = os.path.join(config.step_dir(self.name), "DT4H_Holdout_Split.json")
+        with open(manifest_path, "w") as f:
+            json.dump(manifest, f, indent=2)
+        print(f"Saved holdout split manifest -> {manifest_path}")
+        return {k: v for k, v in manifest.items() if k != "holdout_row_positions"}
 
     def _write_summary(self, summary: dict, config: PipelineConfig) -> None:
         out_dir = config.step_dir(self.name)
@@ -141,6 +183,10 @@ class PreprocessStep(PipelineStep):
             f"- Output: {s['output_rows']} rows x {s['output_columns']} columns",
             f"- Remaining missing cells: {s['remaining_null_cells']} null, "
             f"{s.get('remaining_nan_cells', 'n/a')} NaN",
+            (f"- Holdout split (seed {s['holdout_split']['seed']}): "
+             f"{s['holdout_split']['n_train']} train / {s['holdout_split']['n_holdout']} holdout rows "
+             f"({s['holdout_split']['holdout_fraction']:.0%} held out, never seen by any generator)"
+             if s.get("holdout_split") else "- Holdout split: (not performed)"),
             "",
             "## Metadata validation",
             f"- {s['metadata_validation']['matched']} / {s['metadata_validation']['declared_in_metadata']} "

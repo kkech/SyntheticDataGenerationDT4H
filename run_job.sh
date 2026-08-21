@@ -121,7 +121,7 @@ case "${1:-}" in
   *)
     echo "Usage: $0 {start [main.py args...] | status | follow | stop}"
     echo ""
-    echo "  start --force        full 12-hour paper run (reruns every step)"
+    echo "  start --force        full paper run (reruns every step; ~30-40h for the 31-run plan)"
     echo "  start                resume: runs only steps not yet completed"
     echo "  status               is it running + per-step status + log tail"
     echo "  follow               stream the timestamped log live"

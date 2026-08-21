@@ -88,9 +88,17 @@ def _is_numeric(series: pd.Series) -> bool:
     return pd.api.types.is_numeric_dtype(series) and not pd.api.types.is_bool_dtype(series)
 
 
-def compare_frames(df_a: pd.DataFrame, df_b: pd.DataFrame, label_a: str, label_b: str) -> dict:
-    """Per-column comparison over the columns common to both frames."""
-    common = [c for c in df_a.columns if c in df_b.columns]
+def compare_frames(df_a: pd.DataFrame, df_b: pd.DataFrame, label_a: str, label_b: str,
+                   exclude_columns: set | None = None) -> dict:
+    """Per-column comparison over the columns common to both frames.
+
+    `exclude_columns` removes columns from the comparison entirely --
+    used to keep the 38 constant columns (re-attached verbatim by the
+    generate step, trivially perfect in every metric) from flattering
+    the aggregates: they are copies, not modelling successes.
+    """
+    exclude_columns = exclude_columns or set()
+    common = [c for c in df_a.columns if c in df_b.columns and c not in exclude_columns]
     numeric_rows, categorical_rows = [], []
 
     for col in common:

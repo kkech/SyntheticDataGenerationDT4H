@@ -5,8 +5,9 @@ Runs load_data -> profile_data -> preprocess -> profile_preprocessed_data
 -> generate -> evaluate -> utility -> privacy in order, skipping any step already marked completed
 (tracked in pipeline_status.json) unless explicitly forced.
 
-Which synthesizers the generate step runs is config-driven
-(config.synthesizers), so comparing models is a config change.
+What the generate step runs is a config-driven RUN PLAN (seeds x
+epsilons x models -- see PipelineConfig.resolved_run_plan), so changing
+the experiment is a config change.
 
 Usage:
     python main.py                          # run everything not yet done
@@ -160,12 +161,28 @@ def preflight(config: PipelineConfig | None = None) -> bool:
 
     from pipeline.steps.generate.synthesizers import REGISTRY
 
-    unknown = [n for n in config.synthesizers if n not in REGISTRY]
-    check("synthesizers registered", not unknown, ", ".join(config.synthesizers))
-    print(f"\n  Plan: {' -> '.join(config.synthesizers)}")
-    print(f"  Per-model timeout: fit {config.synthesizer_timeout_seconds/3600:.1f}h, "
-          f"sample {config.synthesizer_timeout_seconds/3600:.1f}h | seed {config.seed} | "
-          f"DP epsilon {config.epsilon}")
+    plan = config.resolved_run_plan()
+    unknown = sorted({s["synthesizer"] for s in plan} - set(REGISTRY))
+    check("synthesizers registered", not unknown,
+          ", ".join(sorted({s["synthesizer"] for s in plan})))
+
+    # Rough per-run durations measured on this project's own full-scale
+    # runs (T4, 211 columns), for a total-duration expectation only.
+    est_minutes = {"gaussian_copula": 1, "tvae": 7, "ctgan": 14,
+                   "dpctgan": 42, "mst": 170, "aim": 60}
+    total_min = sum(est_minutes.get(s["synthesizer"], 60) for s in plan)
+    by_model: dict[str, int] = {}
+    for s in plan:
+        by_model[s["synthesizer"]] = by_model.get(s["synthesizer"], 0) + 1
+    print(f"\n  Run plan: {len(plan)} run(s) -- "
+          + ", ".join(f"{m} x{n}" for m, n in by_model.items()))
+    print(f"  DP epsilon sweep: {', '.join(f'{e:g}' for e in config.dp_epsilons)} | "
+          f"seeds {config.variance_seeds} | AIM on top {config.aim_max_columns} columns")
+    print(f"  Rough duration estimate: ~{total_min/60:.0f}h "
+          f"(measured per-model costs; AIM is the unknown, bounded at "
+          f"{config.aim_timeout_seconds/3600:.0f}h/run)")
+    print(f"  Default per-run timeout: {config.synthesizer_timeout_seconds/3600:.1f}h | "
+          f"base seed {config.seed} | holdout fraction {config.holdout_fraction:.0%}")
     print(f"  Ordering is cheapest/most-reliable first, so a late timeout costs only the tail of the run.")
     print("\n" + ("Preflight PASSED -- ready for a long run." if ok else "Preflight FAILED -- fix the items above first."))
     return ok

@@ -32,6 +32,9 @@ class _SmartNoiseBase(Synthesizer):
 
     algorithm: str
     is_dp = True
+    #: Which TableTransformer style the algorithm consumes: 'cube'
+    #: (binned, for the marginal methods) or 'gan' (min-max scaled).
+    transform_style = "cube"
 
     def fit(self, df, categorical_columns, continuous_columns) -> None:
         from snsynth import Synthesizer as SNSynthesizer
@@ -43,39 +46,47 @@ class _SmartNoiseBase(Synthesizer):
             create_kwargs["epochs"] = self.params.get("epochs", 300)
             create_kwargs["batch_size"] = self.params.get("batch_size", 50)
 
-        # smartnoise splits preprocessor_eps EVENLY across the continuous
-        # columns, and each column's bound discovery needs some histogram
-        # bin to exceed K = 22.57 / eps_per_column. With 73 continuous
-        # columns and the old default of 1.0, each got 0.0139 eps and
-        # K ~= 1624: any column not piling >1624 of the 4694 rows into a
-        # single log-scale bin failed with "BinTransformer could not find
-        # bounds", which is what killed both AIM and MST here. Budget must
-        # therefore scale with the number of continuous columns.
-        preprocessor_eps = self.params.get("preprocessor_eps")
-        if preprocessor_eps is None:
-            per_column = self.params.get("preprocessor_eps_per_column", 0.08)
-            preprocessor_eps = round(per_column * max(len(continuous_columns), 1), 3)
-
-        epsilon = self.params.get("epsilon", 15.0)
-        if preprocessor_eps >= epsilon:
-            raise ValueError(
-                f"preprocessor_eps ({preprocessor_eps}) must be less than the total epsilon "
-                f"({epsilon}); nothing would be left to train on. Either raise epsilon or "
-                f"lower preprocessor_eps_per_column."
-            )
-        print(f"  Bound discovery will spend {preprocessor_eps} of the {epsilon} epsilon "
-              f"budget across {len(continuous_columns)} continuous column(s) "
-              f"({preprocessor_eps / max(len(continuous_columns), 1):.4f} each), "
-              f"leaving {round(epsilon - preprocessor_eps, 3)} for training.")
+        # PUBLIC-BOUNDS preprocessing. Each continuous column's domain is
+        # passed as an explicit constraint, so preprocessing spends ZERO
+        # epsilon and the entire budget goes to synthesis. This is sound
+        # under this project's own disclosure model: the per-column
+        # observed min/max are already released as public metadata (the
+        # committed sentinel encoding map contains them for every numeric
+        # column), and treating the domain as public is the standard
+        # assumption in the DP-synthesis literature. It also replaces the
+        # earlier DP bound-discovery spend, which (a) burned up to a
+        # third of the budget rediscovering numbers we publish anyway and
+        # (b) made low-epsilon runs impossible: bound discovery alone
+        # needed ~4.9 epsilon at this column count, more than the entire
+        # budget of an eps=1 run.
+        constraints = self._bound_constraints(df, continuous_columns)
+        print(f"  Column domains passed as public bounds for {len(constraints)} continuous "
+              f"column(s) (released in the sentinel encoding map) -- the full "
+              f"ε={create_kwargs['epsilon']:g} budget goes to synthesis.")
 
         self._model = SNSynthesizer.create(self.algorithm, **create_kwargs)
         self._model.fit(
             df,
+            transformer=constraints,
             categorical_columns=categorical_columns,
             continuous_columns=continuous_columns,
-            preprocessor_eps=preprocessor_eps,
+            preprocessor_eps=0.0,
             nullable=False,  # preprocessing guarantees no nulls/NaN remain
         )
+
+    def _bound_constraints(self, df, continuous_columns) -> dict:
+        from snsynth.transform import BinTransformer, MinMaxTransformer
+
+        out = {}
+        for c in continuous_columns:
+            lo, hi = float(df[c].min()), float(df[c].max())
+            if hi <= lo:  # degenerate; constants are normally held out upstream
+                hi = lo + 1.0
+            if self.transform_style == "cube":
+                out[c] = BinTransformer(lower=lo, upper=hi)
+            else:
+                out[c] = MinMaxTransformer(lower=lo, upper=hi)
+        return out
 
     def sample(self, n_rows: int) -> pd.DataFrame:
         return self._model.sample(n_rows)
@@ -105,6 +116,7 @@ class PATECTGANSynthesizer(_SmartNoiseBase):
     name = "patectgan"
     algorithm = "patectgan"
     uses_gpu = True
+    transform_style = "gan"
 
     def __init__(self, **params):
         params.setdefault("pass_training_params", True)
@@ -121,6 +133,7 @@ class DPCTGANSynthesizer(_SmartNoiseBase):
     name = "dpctgan"
     algorithm = "dpctgan"
     uses_gpu = True
+    transform_style = "gan"
 
     def __init__(self, **params):
         params.setdefault("pass_training_params", True)

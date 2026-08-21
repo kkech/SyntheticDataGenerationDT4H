@@ -5,19 +5,21 @@ Train-Synthetic-Test-Real (TSTR): the standard machine-learning utility
 check for a released synthetic dataset. For each clinical outcome target,
 a gradient-boosting classifier is trained twice --
 
-  * baseline: on a real training split;
-  * TSTR:     on each synthetic dataset (full);
+  * baseline: on the real TRAINING split;
+  * TSTR:     on each synthetic dataset;
 
--- and both are scored on the SAME held-out real test split. A synthetic
-dataset with good utility yields nearly the baseline AUC: models trained
-on it transfer to real patients. Distribution metrics (evaluate step) say
-the data LOOKS right; this says the data WORKS.
+-- and both are scored on the HOLDOUT split: real patients that neither
+the generators nor either classifier ever saw during training. A
+synthetic dataset with good utility yields nearly the baseline AUC:
+models trained on it transfer to real patients. Distribution metrics
+(evaluate step) say the data LOOKS right; this says the data WORKS.
 
-Targets are selected from the feature-set metadata's declared outcome
-variables (BOOLEAN ones with enough of both classes), and every declared
-outcome column is excluded from the feature set -- outcomes correlate
-with each other, and leaking one outcome into the features of another
-would inflate every AUC.
+Targets are selected from the metadata's declared outcome variables,
+diversified by outcome family (five time-windows of one endpoint are not
+five results) with a mortality endpoint force-included -- see
+targets.py. Every declared outcome column is excluded from the feature
+set: outcomes correlate with each other, and leaking one outcome into
+the features of another would inflate every AUC.
 
 Everything runs in the decoded (released) representation: nulls are
 nulls, exactly as a user of the published dataset would see them.
@@ -30,13 +32,17 @@ Aggregate statistics only are written -- safe to commit.
 import glob
 import json
 import os
+import statistics
 
 from pipeline.config import PipelineConfig
 from pipeline.steps.base import PipelineStep
-
-MIN_CLASS_TRAIN = 10   # each class must appear at least this often in training data
-MIN_CLASS_TEST = 5     # and this often in the real test split
-TEST_FRACTION = 0.25
+from pipeline.steps.utility.targets import (
+    MIN_CLASS_TEST,
+    MIN_CLASS_TRAIN,
+    declared_outcomes,
+    select_targets,
+    to_binary,
+)
 
 
 class UtilityStep(PipelineStep):
@@ -44,9 +50,6 @@ class UtilityStep(PipelineStep):
 
     def run(self, config: PipelineConfig) -> None:
         import pandas as pd
-
-        from pipeline.steps.generate.step import GenerateStep
-        from pipeline.steps.preprocess.transforms import load_variable_metadata
 
         synthetic_files = sorted(
             glob.glob(os.path.join(config.step_dir("generate"), "DT4H_Synthetic_*.csv"))
@@ -56,14 +59,14 @@ class UtilityStep(PipelineStep):
                 f"No DT4H_Synthetic_*.csv in {config.step_dir('generate')} -- run the generate step first."
             )
 
-        import polars as pl
+        train = self._load_decoded(config.train_output_path, config)
+        holdout = self._load_decoded(config.holdout_output_path, config)
+        print(f"Real train: {train.shape[0]} rows | holdout (test set, unseen by "
+              f"generators AND classifiers): {holdout.shape[0]} rows")
 
-        real = pl.read_parquet(config.preprocessed_output_path).to_pandas()
-        real, _ = GenerateStep._decode_numeric_missing(real, config)
-
-        var_meta = load_variable_metadata(config.metadata_path)
-        outcome_cols = self._declared_outcomes(config)
-        targets = self._select_targets(real, outcome_cols, config)
+        outcome_cols = declared_outcomes(config.metadata_path)
+        targets = select_targets(train, outcome_cols, config.utility_max_targets,
+                                 explicit=config.utility_targets)
 
         out_dir = config.step_dir(self.name)
         os.makedirs(out_dir, exist_ok=True)
@@ -71,133 +74,131 @@ class UtilityStep(PipelineStep):
         if not targets:
             print("⚠️  No eligible outcome targets (need a BOOLEAN outcome with at least "
                   f"{MIN_CLASS_TRAIN} records of each class). Writing an empty report.")
-            results = {"targets": [], "note": "no eligible targets"}
-            self._write(results, out_dir)
+            self._write({"targets": [], "note": "no eligible targets"}, out_dir)
             return
 
-        feature_cols = [c for c in real.columns if c not in outcome_cols]
-        print(f"Targets: {[t for t in targets]}")
-        print(f"Features: {len(feature_cols)} columns (all {len([c for c in outcome_cols if c in real.columns])} "
-              f"declared outcome columns excluded to prevent cross-outcome leakage)")
+        feature_cols = [c for c in train.columns if c not in outcome_cols]
+        print(f"Targets ({len(targets)}, family-diversified): {targets}")
+        print(f"Features: {len(feature_cols)} columns (all declared outcome columns "
+              f"excluded to prevent cross-outcome leakage)")
 
-        results = {"test_fraction": TEST_FRACTION, "seed": config.seed, "targets": []}
+        run_meta = self._load_run_metadata(config)
+        results = {"seed": config.seed, "targets": [],
+                   "n_train": int(train.shape[0]), "n_holdout": int(holdout.shape[0])}
 
         for target in targets:
             print(f"\nTarget: {target}")
-            entry = self._evaluate_target(real, synthetic_files, target, feature_cols, config)
+            entry = self._evaluate_target(train, holdout, synthetic_files, target,
+                                          feature_cols, config)
             results["targets"].append(entry)
 
-        # per-synthesizer aggregate across targets
-        by_synth: dict[str, list] = {}
+        # Per-run aggregate across targets, then grouped per (model, eps).
+        by_run: dict[str, list] = {}
         for t in results["targets"]:
             for r in t["tstr"]:
                 if r.get("auc") is not None and t.get("baseline_auc") is not None:
-                    by_synth.setdefault(r["synthesizer"], []).append(t["baseline_auc"] - r["auc"])
+                    by_run.setdefault(r["run_id"], []).append(t["baseline_auc"] - r["auc"])
         results["aggregate_auc_gap"] = {
-            name: round(sum(v) / len(v), 4) for name, v in sorted(by_synth.items())
+            run_id: round(sum(v) / len(v), 4) for run_id, v in sorted(by_run.items())
         }
-        print("\nMean AUC gap vs baseline (lower is better):")
-        for name, gap in results["aggregate_auc_gap"].items():
-            print(f"  {name}: {gap:+.4f}")
+
+        groups: dict[tuple, list] = {}
+        for run_id, gap in results["aggregate_auc_gap"].items():
+            meta = run_meta.get(run_id, {})
+            key = (meta.get("synthesizer") or run_id, meta.get("epsilon"))
+            groups.setdefault(key, []).append(gap)
+        results["grouped_auc_gap"] = [
+            {"synthesizer": model, "epsilon": eps, "n_runs": len(gaps),
+             "mean_gap": round(statistics.mean(gaps), 4),
+             "sd_gap": round(statistics.stdev(gaps), 4) if len(gaps) > 1 else None}
+            for (model, eps), gaps in sorted(groups.items(),
+                                             key=lambda kv: (kv[0][0], kv[0][1] or 0))
+        ]
+
+        print("\nMean AUC gap vs baseline per (model, ε), lower is better:")
+        for g in results["grouped_auc_gap"]:
+            eps = f" ε={g['epsilon']:g}" if g.get("epsilon") is not None else ""
+            sd = f" ± {g['sd_gap']}" if g.get("sd_gap") is not None else ""
+            print(f"  {g['synthesizer']}{eps}: {g['mean_gap']:+.4f}{sd} ({g['n_runs']} run(s))")
 
         self._write(results, out_dir)
 
-    # --- target selection ---
+    # --- data loading ---
 
-    def _declared_outcomes(self, config: PipelineConfig) -> set[str]:
-        with open(config.metadata_path) as f:
-            raw = json.load(f)
-        return {v["name"] for v in raw["entries"][0]["outcomes"]}
+    def _load_decoded(self, path: str, config: PipelineConfig):
+        import polars as pl
 
-    def _select_targets(self, real, outcome_cols: set[str], config: PipelineConfig) -> list[str]:
-        import pandas as pd
+        from pipeline.steps.generate.step import GenerateStep
 
-        if config.utility_targets:
-            picked = []
-            for t in config.utility_targets:
-                if t in real.columns and self._to_binary(real[t]) is not None:
-                    picked.append(t)
-                else:
-                    print(f"⚠️  Requested utility target '{t}' is absent or not a "
-                          "two-class boolean column; skipped.")
-            return picked
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"{path} not found -- run the preprocess step first.")
+        df = pl.read_parquet(path).to_pandas()
+        df, _ = GenerateStep._decode_numeric_missing(df, config)
+        return df
 
-        candidates = []
-        for col in outcome_cols:
-            if col not in real.columns:
-                continue
-            y = self._to_binary(real[col])
-            if y is None:
-                continue
-            pos, neg = int(y.sum()), int((1 - y).sum())
-            if min(pos, neg) < MIN_CLASS_TRAIN + MIN_CLASS_TEST:
-                continue
-            balance = min(pos, neg) / max(pos, neg)
-            candidates.append((balance, col))
-        candidates.sort(reverse=True)
-        return [col for _, col in candidates[: config.utility_max_targets]]
-
-    @staticmethod
-    def _to_binary(series):
-        """Boolean-ish column -> 0/1 with Missing rows dropped; None if it
-        is not a two-class column."""
-        import pandas as pd
-
-        s = series.astype("object").where(series.notna(), "missing").astype(str).str.lower()
-        s = s[s != "missing"]
-        values = set(s.unique())
-        if not values or not values <= {"true", "false"}:
-            return None
-        return (s == "true").astype(int)
+    def _load_run_metadata(self, config: PipelineConfig) -> dict:
+        path = os.path.join(config.step_dir("generate"), "DT4H_Generation_Summary.json")
+        if not os.path.exists(path):
+            return {}
+        with open(path) as f:
+            summary = json.load(f)
+        return {
+            r.get("run_id", r.get("synthesizer")): {
+                "synthesizer": r.get("synthesizer"),
+                "epsilon": r.get("epsilon"),
+                "seed": r.get("seed"),
+            }
+            for r in summary.get("runs", [])
+        }
 
     # --- model fitting ---
 
-    def _evaluate_target(self, real, synthetic_files, target, feature_cols, config) -> dict:
+    def _evaluate_target(self, train, holdout, synthetic_files, target, feature_cols,
+                         config) -> dict:
         import pandas as pd
-        from sklearn.metrics import roc_auc_score
-        from sklearn.model_selection import train_test_split
 
-        y_real = self._to_binary(real[target])
-        real_rows = real.loc[y_real.index]
-
-        train_idx, test_idx = train_test_split(
-            y_real.index, test_size=TEST_FRACTION, random_state=config.seed,
-            stratify=y_real,
-        )
-        categories = self._fit_categories(real_rows, feature_cols)
-        x_train = self._encode(real_rows.loc[train_idx], feature_cols, categories)
-        x_test = self._encode(real_rows.loc[test_idx], feature_cols, categories)
-        y_train, y_test = y_real.loc[train_idx], y_real.loc[test_idx]
+        y_train_all = to_binary(train[target])
+        y_test_all = to_binary(holdout[target])
 
         entry = {
             "target": target,
-            "n_real": int(len(y_real)),
-            "positives": int(y_real.sum()),
+            "n_train_labelled": int(len(y_train_all)) if y_train_all is not None else 0,
+            "n_holdout_labelled": int(len(y_test_all)) if y_test_all is not None else 0,
             "baseline_auc": None,
             "tstr": [],
         }
-        if min(y_test.sum(), (1 - y_test).sum()) < MIN_CLASS_TEST:
-            entry["note"] = "test split too imbalanced; skipped"
-            print("  (skipped: test split too imbalanced)")
+        if y_train_all is None or y_test_all is None:
+            entry["note"] = "target not two-class in train or holdout; skipped"
+            print(f"  (skipped: {entry['note']})")
+            return entry
+        if min(int(y_test_all.sum()), int((1 - y_test_all).sum())) < MIN_CLASS_TEST:
+            entry["note"] = "holdout too imbalanced for this target; skipped"
+            print(f"  (skipped: {entry['note']})")
             return entry
 
-        baseline = self._fit_score(x_train, y_train, x_test, y_test, config.seed)
+        categories = self._fit_categories(train, feature_cols)
+        x_train = self._encode(train.loc[y_train_all.index], feature_cols, categories)
+        x_test = self._encode(holdout.loc[y_test_all.index], feature_cols, categories)
+
+        baseline = self._fit_score(x_train, y_train_all, x_test, y_test_all, config.seed)
         entry["baseline_auc"] = baseline
-        print(f"  baseline (train real -> test real): AUC={baseline}")
+        entry["positives_train"] = int(y_train_all.sum())
+        entry["positives_holdout"] = int(y_test_all.sum())
+        print(f"  baseline (train real -> test holdout): AUC={baseline}")
 
         for path in synthetic_files:
-            name = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
+            run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synth = pd.read_csv(path, low_memory=False)
-            record = {"synthesizer": name, "auc": None}
-            y_s = self._to_binary(synth[target]) if target in synth.columns else None
+            record = {"run_id": run_id, "auc": None}
+            y_s = to_binary(synth[target]) if target in synth.columns else None
             if y_s is None or min(int(y_s.sum()), int((1 - y_s).sum())) < MIN_CLASS_TRAIN:
                 record["note"] = "target missing or single-class in synthetic data"
-                print(f"  {name}: not evaluable ({record['note']}) -- itself a utility finding")
+                print(f"  {run_id}: not evaluable ({record['note']}) -- itself a utility finding")
             else:
                 x_s = self._encode(synth.loc[y_s.index], feature_cols, categories)
-                record["auc"] = self._fit_score(x_s, y_s, x_test, y_test, config.seed)
+                record["auc"] = self._fit_score(x_s, y_s, x_test, y_test_all, config.seed)
                 record["auc_gap"] = round(baseline - record["auc"], 4)
-                print(f"  {name}: TSTR AUC={record['auc']} (gap {record['auc_gap']:+.4f})")
+                print(f"  {run_id}: TSTR AUC={record['auc']} (gap {record['auc_gap']:+.4f})")
             entry["tstr"].append(record)
         return entry
 
@@ -216,7 +217,9 @@ class UtilityStep(PipelineStep):
     def _encode(df, feature_cols, categories):
         """Numeric passthrough (NaN preserved -- the trees handle it),
         categoricals as integer codes from the REAL data's category list;
-        unseen synthetic categories become NaN."""
+        unseen synthetic categories become NaN. Columns absent from a
+        frame (width-limited runs) become all-NaN, which the trees treat
+        as uninformative rather than crashing."""
         import numpy as np
         import pandas as pd
 
@@ -242,8 +245,8 @@ class UtilityStep(PipelineStep):
         # training matrix carries nothing to split on -- and sklearn's
         # histogram binning crashes outright on it (sliding_window_view
         # of size 2 over <2 distinct values). Columns can be degenerate
-        # in a subset (a train split, or one synthesizer's output) while
-        # varying in the full data, so this is decided per training
+        # in a subset (one synthesizer's output, a width-limited run)
+        # while varying in the full data, so this is decided per training
         # matrix, and the test matrix is subset to the same columns.
         usable = [c for c in x_train.columns if x_train[c].nunique(dropna=True) >= 2]
         model = HistGradientBoostingClassifier(random_state=seed)
@@ -268,30 +271,42 @@ class UtilityStep(PipelineStep):
         lines = [
             "# Utility: Train-Synthetic, Test-Real (TSTR)",
             "",
-            "A gradient-boosting classifier is trained on real data (baseline) and on each "
-            "synthetic dataset, then both are scored on the same held-out real test split. "
-            "The closer the TSTR AUC is to the baseline, the more useful the synthetic data "
-            "is for actual modelling work.",
+            "A gradient-boosting classifier is trained on the real TRAINING split "
+            "(baseline) and on each synthetic dataset, then both are scored on the "
+            "HOLDOUT split -- real patients that neither the generators nor either "
+            "classifier ever saw. The closer the TSTR AUC is to the baseline, the more "
+            "useful the synthetic data is for actual modelling work.",
             "",
         ]
         if not r.get("targets"):
             lines.append(f"_No eligible targets: {r.get('note', '')}_")
             return "\n".join(lines) + "\n"
 
+        lines.append(f"Real train: {r.get('n_train')} rows | holdout test: "
+                     f"{r.get('n_holdout')} rows")
+
         for t in r["targets"]:
-            lines += ["", f"## `{t['target']}`",
-                      f"{t['n_real']} labelled real records ({t['positives']} positive) | "
-                      f"baseline AUC **{t['baseline_auc']}**", "",
-                      "| synthesizer | TSTR AUC | gap vs baseline |", "|---|---|---|"]
+            lines += ["", f"## `{t['target']}`"]
+            if t.get("note"):
+                lines.append(f"_{t['note']}_")
+                continue
+            lines += [
+                f"train {t['n_train_labelled']} labelled ({t.get('positives_train')} positive), "
+                f"holdout {t['n_holdout_labelled']} labelled ({t.get('positives_holdout')} positive) | "
+                f"baseline AUC **{t['baseline_auc']}**", "",
+                "| run | TSTR AUC | gap vs baseline |", "|---|---|---|"]
             for s in t["tstr"]:
                 if s.get("auc") is None:
-                    lines.append(f"| {s['synthesizer']} | - | {s.get('note', '')} |")
+                    lines.append(f"| {s['run_id']} | - | {s.get('note', '')} |")
                 else:
-                    lines.append(f"| {s['synthesizer']} | {s['auc']} | {s['auc_gap']:+.4f} |")
+                    lines.append(f"| {s['run_id']} | {s['auc']} | {s['auc_gap']:+.4f} |")
 
-        if r.get("aggregate_auc_gap"):
-            lines += ["", "## Mean AUC gap across targets (lower is better)", "",
-                      "| synthesizer | mean gap |", "|---|---|"]
-            for name, gap in r["aggregate_auc_gap"].items():
-                lines.append(f"| {name} | {gap:+.4f} |")
+        if r.get("grouped_auc_gap"):
+            lines += ["", "## Mean AUC gap per (model, ε) across seeds and targets (lower is better)",
+                      "", "| model | ε | runs | mean gap ± sd |", "|---|---|---|---|"]
+            for g in r["grouped_auc_gap"]:
+                eps = f"{g['epsilon']:g}" if g.get("epsilon") is not None else "-"
+                sd = f" ± {g['sd_gap']}" if g.get("sd_gap") is not None else ""
+                lines.append(f"| {g['synthesizer']} | {eps} | {g['n_runs']} "
+                             f"| {g['mean_gap']:+.4f}{sd} |")
         return "\n".join(lines) + "\n"

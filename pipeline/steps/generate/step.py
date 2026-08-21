@@ -1,10 +1,10 @@
 """
 Step: generate
 
-Trains one or more synthesizers on the preprocessed data and writes
-synthetic datasets. Which synthesizers run is config-driven
-(config.synthesizers), so comparing CTGAN vs TVAE vs AIM vs MST is a
-config change rather than a code change.
+Executes the configured RUN PLAN (seeds x epsilons x models -- see
+PipelineConfig.resolved_run_plan) on the TRAINING split only, and writes
+one synthetic dataset per run. Changing the experiment is a config
+change rather than a code change.
 
 Built for a dataset intended for publication, which imposes three
 requirements beyond "produce some rows":
@@ -38,26 +38,35 @@ class GenerateStep(PipelineStep):
     name = "generate"
 
     def run(self, config: PipelineConfig) -> None:
-        if not os.path.exists(config.preprocessed_output_path):
+        if not os.path.exists(config.train_output_path):
             raise FileNotFoundError(
-                f"{config.preprocessed_output_path} not found -- run the preprocess step first."
+                f"{config.train_output_path} not found -- run the preprocess step "
+                f"(which writes the train/holdout split) first."
             )
 
-        df_pl = pl.read_parquet(config.preprocessed_output_path)
+        df_pl = pl.read_parquet(config.train_output_path)
         real = df_pl.to_pandas()
-        print(f"Loaded preprocessed data: {real.shape[0]} rows x {real.shape[1]} columns")
+        print(f"Loaded TRAINING split: {real.shape[0]} rows x {real.shape[1]} columns "
+              f"(the {config.holdout_fraction:.0%} holdout is never shown to any generator)")
 
-        prov = provenance(config.preprocessed_output_path, config.seed)
+        prov = provenance(config.train_output_path, config.seed)
         self._report_environment(prov)
 
         train, constants = self._split_constant_columns(real, config)
-        train, dropped_for_width = self._limit_columns(train, config)
 
         categorical, continuous = self._split_column_types(train)
         print(f"Training columns: {len(continuous)} continuous, {len(categorical)} categorical")
 
         out_dir = config.step_dir(self.name)
         os.makedirs(out_dir, exist_ok=True)
+
+        plan = config.resolved_run_plan()
+        print(f"\nRun plan: {len(plan)} run(s) -- "
+              + ", ".join(spec["run_id"] for spec in plan))
+
+        top_columns = None
+        if any(spec.get("columns") == "top" for spec in plan):
+            top_columns = self._select_top_columns(train, config, out_dir)
 
         n_rows = config.n_synthetic_rows or real.shape[0]
         summary = {
@@ -66,21 +75,24 @@ class GenerateStep(PipelineStep):
             "input_columns": int(df_pl.width),
             "training_columns": int(train.shape[1]),
             "constant_columns_held_out": constants,
-            "columns_dropped_by_max_columns": dropped_for_width,
             "n_synthetic_rows": n_rows,
             "continuous_columns": len(continuous),
             "categorical_columns": len(categorical),
+            "run_plan_size": len(plan),
+            "top_columns_for_width_limited_runs": top_columns,
             "runs": [],
         }
 
-        for name in config.synthesizers:
+        for i, spec in enumerate(plan, 1):
+            print(f"\n[run {i}/{len(plan)}]", end="")
             summary["runs"].append(
-                self._run_one(name, train, real, categorical, continuous, constants, config, out_dir, n_rows)
+                self._run_one(spec, train, real, constants, config, out_dir, n_rows,
+                              top_columns)
             )
-            # Rewrite the summary after every synthesizer rather than once
-            # at the end: a long run (CTGAN at 500 epochs takes ~20 min on
-            # a T4) should not lose the results already obtained if a
-            # later model hangs or the process is interrupted.
+            # Rewrite the summary after every run rather than once at the
+            # end: a plan this long must not lose the results already
+            # obtained if a later model hangs or the process is
+            # interrupted.
             self._write_summary(summary, out_dir, quiet=True)
 
         self._write_summary(summary, out_dir)
@@ -89,13 +101,13 @@ class GenerateStep(PipelineStep):
         failed = [r for r in summary["runs"] if r["status"] == "failed"]
         leaky = [r for r in ok if r.get("leakage", {}).get("exact_duplicates_of_training_rows", 0) > 0]
 
-        print(f"\n{len(ok)} synthesizer(s) succeeded, {len(failed)} failed.")
+        print(f"\n{len(ok)} run(s) succeeded, {len(failed)} failed.")
         if leaky:
             print(f"🚨 {len(leaky)} output(s) contain verbatim training records: "
-                  f"{[r['synthesizer'] for r in leaky]} -- these must not be published as-is.")
+                  f"{[r['run_id'] for r in leaky]} -- these must not be published as-is.")
         if not ok:
             raise RuntimeError(
-                "Every synthesizer failed -- see "
+                "Every run failed -- see "
                 f"{os.path.join(out_dir, 'DT4H_Generation_Summary.json')} for the errors."
             )
 
@@ -133,18 +145,42 @@ class GenerateStep(PipelineStep):
             df = df.drop(columns=list(constants))
         return df, {k: str(v) for k, v in constants.items()}
 
-    def _limit_columns(self, df, config: PipelineConfig):
-        """
-        Optional width cap, for trialling Private-PGM-based synthesizers
-        (aim/mst) before committing to a full-width run.
-        """
-        if not config.max_columns or df.shape[1] <= config.max_columns:
-            return df, []
-        keep = list(df.columns[: config.max_columns])
-        dropped = [c for c in df.columns if c not in keep]
-        print(f"⚠️  max_columns={config.max_columns}: training on {len(keep)} of {df.shape[1]} "
-              f"columns. TRIAL configuration -- not a publishable full-width result.")
-        return df[keep], dropped
+    def _select_top_columns(self, train, config: PipelineConfig, out_dir: str) -> list[str]:
+        """The outcome-relevance column subset for width-limited (AIM)
+        runs, computed once on the train split and written to a committed
+        JSON so the selection is auditable."""
+        from pipeline.steps.generate.column_selection import (
+            FORCED_CLINICAL_COLUMNS,
+            select_important_columns,
+        )
+        from pipeline.steps.utility.targets import declared_outcomes, select_targets
+
+        outcomes = declared_outcomes(config.metadata_path)
+        targets = select_targets(train, outcomes, config.utility_max_targets,
+                                 explicit=config.utility_targets)
+        forced = list(targets) + list(FORCED_CLINICAL_COLUMNS)
+        print(f"\nSelecting top {config.aim_max_columns} outcome-relevant columns for "
+              f"width-limited runs ({len(forced)} force-included: "
+              f"{len(targets)} TSTR targets + demographics/NYHA)...")
+        selected, scores = select_important_columns(
+            train, outcomes, forced, config.aim_max_columns)
+        print(f"  Selected {len(selected)} columns "
+              f"(top scored: {sorted(scores, key=lambda c: -scores[c])[:5]})")
+
+        path = os.path.join(out_dir, "DT4H_AIM_Column_Selection.json")
+        with open(path, "w") as f:
+            json.dump({
+                "method": "mean absolute association (Spearman / Cramer's V / correlation "
+                          "ratio) with the metadata-declared outcome variables, computed "
+                          "on the training split; TSTR targets, age, gender and NYHA "
+                          "force-included; other outcome columns excluded from the ranked pool",
+                "k": config.aim_max_columns,
+                "force_included": [c for c in forced if c in train.columns],
+                "selected_columns": selected,
+                "scores": dict(sorted(scores.items(), key=lambda kv: -kv[1])),
+            }, f, indent=2)
+        print(f"  Saved column selection (auditable) -> {path}")
+        return selected
 
     @staticmethod
     def _split_column_types(df):
@@ -180,17 +216,42 @@ class GenerateStep(PipelineStep):
             signal.alarm(0)
             signal.signal(signal.SIGALRM, old)
 
-    def _run_one(self, name, train, real, categorical, continuous, constants, config, out_dir, n_rows) -> dict:
-        print(f"\n{'=' * 70}\n▶️  SYNTHESIZER: {name}\n{'=' * 70}")
+    def _run_one(self, spec, train, real, constants, config, out_dir, n_rows,
+                 top_columns) -> dict:
+        from pipeline.steps.generate.reproducibility import set_global_seeds
+
+        name = spec["synthesizer"]
+        run_id = spec["run_id"]
+        run_seed = spec.get("seed", config.seed)
+        print(f"\n{'=' * 70}\n▶️  RUN: {run_id} (model {name}, seed {run_seed}"
+              + (f", ε={spec['epsilon']}" if spec.get("epsilon") is not None else "")
+              + f")\n{'=' * 70}")
+
         params = dict(config.synthesizer_params.get(name, {}))
         params.setdefault("epochs", config.epochs)
         params.setdefault("batch_size", config.batch_size)
-        params.setdefault("epsilon", config.epsilon)
-        params.setdefault("preprocessor_eps_per_column", config.preprocessor_eps_per_column)
+        params["epsilon"] = spec["epsilon"] if spec.get("epsilon") is not None else config.epsilon
 
-        record = {"synthesizer": name, "params": params}
+        # The width-limited (AIM) runs train on the importance subset;
+        # everything else on the full training width.
+        run_train = train
+        if spec.get("columns") == "top" and top_columns:
+            run_train = train[[c for c in train.columns if c in top_columns]]
+            print(f"Width-limited run: {run_train.shape[1]} of {train.shape[1]} training "
+                  f"columns (see DT4H_AIM_Column_Selection.json).")
+        categorical, continuous = self._split_column_types(run_train)
+
+        record = {"run_id": run_id, "synthesizer": name, "seed": run_seed,
+                  "epsilon": spec.get("epsilon"), "params": params,
+                  "trained_columns": int(run_train.shape[1]),
+                  "width_limited": spec.get("columns") == "top"}
         started = time.time()
         try:
+            # Per-run seeding: every run is independently reproducible
+            # from its recorded seed, not from its position in the plan.
+            record["seed_state"] = set_global_seeds(run_seed)
+            params["seed"] = run_seed
+
             synth = build_synthesizer(name, **params)
             record.update(synth.describe())
 
@@ -201,13 +262,13 @@ class GenerateStep(PipelineStep):
             if not synth.uses_gpu:
                 print("CPU-only synthesizer (no GPU acceleration available for this method).")
 
-            timeout = config.synthesizer_timeout_seconds
+            timeout = spec.get("timeout_seconds") or config.synthesizer_timeout_seconds
             if timeout:
                 print(f"Training... (time limit: {timeout}s for fit, {timeout}s for sampling)")
             else:
                 print("Training... (no time limit)")
-            with self._time_limit(timeout, f"'{name}' fit"):
-                synth.fit(train, categorical_columns=categorical, continuous_columns=continuous)
+            with self._time_limit(timeout, f"'{run_id}' fit"):
+                synth.fit(run_train, categorical_columns=categorical, continuous_columns=continuous)
 
             # Persist the fitted generator so more synthetic records can
             # be produced later without retraining (see regenerate.py).
@@ -215,7 +276,7 @@ class GenerateStep(PipelineStep):
             # since a fitted generator has memorized aspects of the real
             # patient data and must be treated as sensitively as the
             # data itself.
-            model_path = os.path.join(out_dir, "models", f"{name}.pkl")
+            model_path = os.path.join(out_dir, "models", f"{run_id}.pkl")
             try:
                 self._save_generator(synth, model_path)
                 record["model_path"] = model_path
@@ -226,13 +287,13 @@ class GenerateStep(PipelineStep):
 
             from pipeline.steps.generate.synthesizers.sdv_models import save_metadata
 
-            meta_path = os.path.join(out_dir, f"DT4H_SDV_Metadata_{name}.json")
+            meta_path = os.path.join(out_dir, f"DT4H_SDV_Metadata_{run_id}.json")
             if save_metadata(getattr(synth, "_model", None), meta_path):
                 record["sdv_metadata_path"] = meta_path
                 print(f"Saved SDV metadata (for replicability) -> {meta_path}")
 
             print(f"Sampling {n_rows} rows...")
-            with self._time_limit(timeout, f"'{name}' sampling"):
+            with self._time_limit(timeout, f"'{run_id}' sampling"):
                 synthetic = synth.sample(n_rows)
 
             # Re-attach the held-out constants in one concat rather than a
@@ -266,7 +327,7 @@ class GenerateStep(PipelineStep):
                       f"('no event' / 'not measured').")
                 record["numeric_missing_decoded"] = decoded
 
-            path = os.path.join(out_dir, f"DT4H_Synthetic_{name}.csv")
+            path = os.path.join(out_dir, f"DT4H_Synthetic_{run_id}.csv")
             synthetic.to_csv(path, index=False)
 
             record.update({
@@ -277,7 +338,7 @@ class GenerateStep(PipelineStep):
                 "leakage": leak,
                 "duration_seconds": round(time.time() - started, 1),
             })
-            print(f"✅ {name}: {synthetic.shape[0]} x {synthetic.shape[1]} -> {path} "
+            print(f"✅ {run_id}: {synthetic.shape[0]} x {synthetic.shape[1]} -> {path} "
                   f"({record['duration_seconds']}s)")
 
         except Exception as e:  # keep going so one failure does not lose the whole run
@@ -291,7 +352,7 @@ class GenerateStep(PipelineStep):
                 "traceback": traceback.format_exc()[-4000:],
                 "duration_seconds": round(time.time() - started, 1),
             })
-            print(f"❌ {name} failed after {record['duration_seconds']}s: {type(e).__name__}: {e}")
+            print(f"❌ {run_id} failed after {record['duration_seconds']}s: {type(e).__name__}: {e}")
             print(traceback.format_exc())
 
         return record
@@ -409,20 +470,27 @@ class GenerateStep(PipelineStep):
         lines += [
             "",
             "## Data",
-            f"- Input: {s['input_rows']} rows x {s['input_columns']} columns",
+            f"- Training split: {s['input_rows']} rows x {s['input_columns']} columns "
+            f"(the holdout split is never shown to any generator)",
             f"- Trained on: {s['training_columns']} columns "
             f"({s['continuous_columns']} continuous, {s['categorical_columns']} categorical)",
             f"- Constant columns held out and re-attached verbatim: "
             f"{len(s['constant_columns_held_out'])}",
-            f"- Synthetic rows generated: {s['n_synthetic_rows']}",
+            f"- Synthetic rows generated per run: {s['n_synthetic_rows']}",
+        ]
+        if s.get("top_columns_for_width_limited_runs"):
+            lines.append(
+                f"- Width-limited (AIM) runs train on {len(s['top_columns_for_width_limited_runs'])} "
+                f"outcome-relevant columns (selection: `DT4H_AIM_Column_Selection.json`)")
+        lines += [
             "",
             "## Runs",
             "",
-            "| synthesizer | DP | status | rows x cols | duration | verbatim training rows | notes |",
-            "|---|---|---|---|---|---|---|",
+            "| run | model | ε | seed | status | rows x cols | duration | verbatim training rows | notes |",
+            "|---|---|---|---|---|---|---|---|---|",
         ]
         for r in s["runs"]:
-            dp = f"ε={r['params'].get('epsilon')}" if r.get("is_dp") else "no"
+            dp = f"{r['epsilon']:g}" if r.get("epsilon") is not None else "-"
             if r["status"] == "ok":
                 shape = f"{r['output_rows']} x {r['output_columns']}"
                 lk = r.get("leakage", {})
@@ -435,8 +503,11 @@ class GenerateStep(PipelineStep):
             else:
                 shape, leak_cell = "-", "-"
                 notes = f"{r.get('error_type')}: {str(r.get('error'))[:80]}"
+            if r.get("width_limited"):
+                notes = (notes + "; " if notes else "") + f"width-limited ({r['trained_columns']} cols)"
             lines.append(
-                f"| {r['synthesizer']} | {dp} | {r['status']} | {shape} | "
+                f"| {r.get('run_id', r['synthesizer'])} | {r['synthesizer']} | {dp} "
+                f"| {r.get('seed', '-')} | {r['status']} | {shape} | "
                 f"{r.get('duration_seconds')}s | {leak_cell} | {notes} |"
             )
 
@@ -444,12 +515,10 @@ class GenerateStep(PipelineStep):
             "",
             "## Caveats",
             "- The leakage column counts EXACT reproductions of training rows only. It does "
-            "not detect near-duplicates and does not bound membership-inference risk; a full "
-            "privacy assessment (distance-to-closest-record, membership inference) is still "
-            "required before release.",
+            "not detect near-duplicates; the privacy step's distance-to-closest-record "
+            "analysis against the holdout baseline covers the rest.",
             "- Non-DP models carry no formal privacy guarantee regardless of this check.",
+            "- Width-limited runs synthesize a column subset by design; their files have "
+            "fewer columns and are evaluated over those columns only.",
         ]
-        if s["columns_dropped_by_max_columns"]:
-            lines.append(f"- ⚠️ TRIAL RUN: {len(s['columns_dropped_by_max_columns'])} column(s) "
-                         f"excluded via max_columns -- not a full-width result.")
         return "\n".join(lines) + "\n"

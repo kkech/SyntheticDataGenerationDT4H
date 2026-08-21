@@ -5,6 +5,8 @@ __pycache__/
 # output/ (stats, samples, summaries, metadata) is safe to commit.
 output/load_data/UC1_Resolved_Full.parquet
 output/preprocess/UC1_Preprocessed.parquet
+output/preprocess/UC1_Train.parquet
+output/preprocess/UC1_Holdout.parquet
 
 # Synthetic outputs are derived from real patient data and non-DP models
 # carry no formal privacy guarantee -- do not auto-commit them. Publish a

@@ -22,12 +22,12 @@ sits next to fresh results:
 |---|------|--------------|--------|
 | 1 | `load_data` | concatenates the transfer's Spark `part-*.parquet` files into the full dataset | `output/load_data/` (local only) |
 | 2 | `profile_data` | privacy-safe per-column statistics of the raw data (rare values suppressed), metadata copy, seeded row sample | `output/profile_data/` |
-| 3 | `preprocess` | metadata-driven feature engineering; **no imputation anywhere** (see Principles); hard-fails if any null/NaN survives | `output/preprocess/` |
-| 4 | `profile_preprocessed_data` | same profiler over the training frame | `output/profile_preprocessed_data/` |
-| 5 | `generate` | trains every configured synthesizer, writes synthetic CSVs, saves fitted generators, checks for verbatim training records | `output/generate/` |
-| 6 | `evaluate` | marginal fidelity (KS, Wasserstein, TVD, missingness) **and** pairwise association structure (Spearman, Cramer's V, correlation ratio) across original / preprocessed / synthetic | `output/evaluate/` |
-| 7 | `utility` | Train-Synthetic-Test-Real: gradient boosting on real vs each synthetic dataset for metadata-declared clinical outcomes, scored on the same held-out real test split (AUC gap vs baseline) | `output/utility/` |
-| 8 | `privacy` | distance-to-closest-record and nearest-neighbor-distance-ratio per synthesizer against a real-to-real baseline | `output/privacy/` |
+| 3 | `preprocess` | metadata-driven feature engineering; **no imputation anywhere** (see Principles); hard-fails if any null/NaN survives; splits the result 75/25 into **train/holdout** (seeded, manifest committed) | `output/preprocess/` |
+| 4 | `profile_preprocessed_data` | same profiler over the preprocessed frame | `output/profile_preprocessed_data/` |
+| 5 | `generate` | executes the run plan (seeds × ε × models) on the **train split only**, writes one synthetic CSV per run, saves fitted generators, checks for verbatim training records | `output/generate/` |
+| 6 | `evaluate` | marginal fidelity (KS, Wasserstein, TVD, missingness) and association structure (Spearman, Cramer's V, correlation ratio), read against the **train-vs-holdout sampling-noise floor**; constants excluded from aggregates; mean ± sd across seeds and the ε-sweep view | `output/evaluate/` |
+| 7 | `utility` | Train-Synthetic-Test-Real: gradient boosting trained on real-train vs each synthetic dataset, both scored on the **holdout** (patients no generator or classifier ever saw); family-diversified outcome targets incl. mortality | `output/utility/` |
+| 8 | `privacy` | distance-to-closest-training-record per run against the **holdout-to-train baseline** (how close unseen real patients sit to the training data) | `output/privacy/` |
 
 ### Long runs (survives SSH disconnect)
 
@@ -62,23 +62,31 @@ python regenerate.py --model output/generate/models/<name>.pkl --rows N --out fi
 All console output (stdout, stderr, warnings) is teed to `logs.txt` with
 per-line timestamps.
 
-## Synthesizers
+## The run plan
 
-Configured in `pipeline/config.py` (`synthesizers`), executed
-cheapest/most-reliable first so a late failure or timeout costs only the
-tail of a run:
+The generate step executes a plan built in `pipeline/config.py`
+(`resolved_run_plan()`), cheapest/most-reliable first so a late failure
+or timeout costs only the tail of a run — 31 runs by default:
 
-| name | library | DP | notes |
-|------|---------|----|-------|
-| `gaussian_copula` | SDV | no | statistical baseline, seconds |
-| `tvae` | SDV | no | usually the strongest non-DP model here |
-| `ctgan` | SDV | no | the long-standing GAN baseline |
-| `mst` | smartnoise-synth | ε | marginal-based; excellent categorical fidelity |
-| `dpctgan` | smartnoise-synth | ε | DP-GAN comparison point |
-| `aim` | smartnoise-synth | ε | strongest DP method in the literature, but Private-PGM scales poorly with column count — runs last, bounded by a per-model timeout |
+| model | library | DP | runs | notes |
+|------|---------|----|------|-------|
+| `gaussian_copula` | SDV | no | 3 seeds | statistical baseline, seconds |
+| `tvae` | SDV | no | 3 seeds | the strongest non-DP model here |
+| `ctgan` | SDV | no | 3 seeds | the long-standing GAN baseline |
+| `dpctgan` | smartnoise-synth | ε | ε ∈ {1,3,5,8,10,15} + 2 extra seeds at ε=15 | DP-GAN comparison point |
+| `aim` | smartnoise-synth | ε | ε sweep on the **top-50 outcome-relevant columns** | Private-PGM cannot handle full width (timed out at 6 h on 211 columns); column selection is data-driven and committed (`DT4H_AIM_Column_Selection.json`), with its own 2 h/run timeout |
+| `mst` | smartnoise-synth | ε | ε sweep + 2 extra seeds at ε=15 | marginal-based; excellent categorical fidelity; ~2.8 h/run, runs last |
 
-Every model run records full provenance: seed, library versions, git
-commit, hardware, and the SHA-256 of the exact training file.
+DP preprocessing spends **zero ε**: per-column domains are passed as
+public bounds (they are released in the committed sentinel encoding
+map), so the entire budget goes to synthesis at every ε — which is also
+what makes the ε=1 runs possible at all.
+
+Every run records full provenance: its own seed, library versions, git
+commit, hardware, and the SHA-256 of the exact training file. Expect
+the full plan to take **roughly 30–40 hours**; partial results are
+written after every run, so an interrupted plan keeps everything
+already finished.
 
 ## Principles
 
@@ -92,6 +100,11 @@ commit, hardware, and the SHA-256 of the exact training file.
 - **Nothing is fabricated.** No placeholder values, no bootstrap fills.
   The evaluation proves preprocessing is distribution-preserving
   (original vs preprocessed: KS = 0, TVD = 0 on every common column).
+- **Every claim is calibrated.** Generators only ever see the train
+  split; fidelity is read against the train-vs-holdout sampling-noise
+  floor, utility is tested on the holdout, privacy against the
+  holdout's own distance distribution, and headline numbers carry
+  mean ± sd across seeds instead of a single draw.
 - **The pipeline is the only path that produces files.** Reports verify
   files as they are on disk and flag stale ones loudly; nothing is ever
   silently repaired.
@@ -108,10 +121,12 @@ review, and fitted generator pickles (a trained generator memorizes
 aspects of the real data and is treated as sensitively as the data
 itself).
 
-The privacy step's DCR/NNDR analysis bounds record-copying; it is not a
-membership-inference evaluation (that requires a training holdout — see
-the limitations section of `output/privacy/DT4H_Privacy_Assessment.md`).
-DP synthesizers carry their ε guarantee by construction.
+The privacy step's DCR/NNDR analysis bounds record-copying against a
+genuine unseen-data baseline (the holdout split, which no generator ever
+saw). A full adversarial membership-inference attack remains future work
+— see the limitations section of
+`output/privacy/DT4H_Privacy_Assessment.md`. DP synthesizers carry
+their ε guarantee by construction.
 
 ## Setup
 

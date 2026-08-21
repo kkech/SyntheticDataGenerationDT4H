@@ -1,30 +1,43 @@
 """
 Step: evaluate
 
-Measures distribution distance between the three stages of the pipeline:
+Measures distribution distance between the stages of the pipeline:
 
   * original      -- the raw loaded dataset (output/load_data/);
-  * preprocessed  -- the training frame, with numeric sentinels decoded
-                     back to null so its OBSERVED distributions are the
-                     thing compared;
+  * preprocessed  -- the full training frame, sentinels decoded;
+  * train/holdout -- the 75/25 split of the preprocessed frame; the
+                     generators only ever saw the train side;
   * synthetic     -- every DT4H_Synthetic_*.csv the generate step wrote.
 
-Three families of comparison, each answering a different question:
+Comparisons, each answering a different question:
 
-  original vs preprocessed   did preprocessing distort the data it kept?
-                             (should be ~zero on every untouched column)
-  preprocessed vs synthetic  how faithful is each generator to what it
-                             was trained on? (the headline fidelity result)
-  original vs synthetic      end-to-end: how far is the released file
-                             from the source data?
+  original vs preprocessed  did preprocessing distort the data it kept?
+                            (should be ~zero on every untouched column)
+  train vs holdout          the SAMPLING-NOISE FLOOR: two disjoint
+                            samples of real patients differ by this much
+                            purely by chance. No synthesizer can honestly
+                            beat this; how close each gets to it is the
+                            calibrated fidelity result.
+  train vs synthetic        fidelity to what the generator was trained on
+                            (the headline number, read against the floor)
+  holdout vs synthetic      generalization: distance to real data the
+                            generator never saw.
 
-Writes per-synthesizer JSON detail plus one Markdown overview to
-output/evaluate/. Aggregate statistics only -- safe to commit.
+The 38 constant columns the generate step re-attaches verbatim are
+EXCLUDED from all aggregates: they are copies, not modelling successes,
+and would flatter every model equally.
+
+Runs sharing a (model, epsilon) are aggregated across seeds as
+mean +/- sd, and DP models get an epsilon-sweep view.
+
+Writes JSON detail plus one Markdown overview to output/evaluate/.
+Aggregate statistics only -- safe to commit.
 """
 
 import glob
 import json
 import os
+import statistics
 
 from pipeline.config import PipelineConfig
 from pipeline.steps.base import PipelineStep
@@ -47,61 +60,58 @@ class EvaluateStep(PipelineStep):
                 f"No DT4H_Synthetic_*.csv in {config.step_dir('generate')} -- run the generate step first."
             )
 
-        preprocessed = self._load_preprocessed_decoded(config)
-        print(f"Preprocessed (sentinels decoded to null): {preprocessed.shape[0]} x {preprocessed.shape[1]}")
+        train = self._load_decoded(config.train_output_path, config)
+        holdout = self._load_decoded(config.holdout_output_path, config)
+        print(f"Train (decoded): {train.shape[0]} x {train.shape[1]} | "
+              f"Holdout (decoded): {holdout.shape[0]} x {holdout.shape[1]}")
 
-        original = None
-        if os.path.exists(config.local_full_dataset_path):
-            orig_pl = pl.read_parquet(config.local_full_dataset_path)
-            # Flatten List-typed ARRAY[NOMINAL] columns the same way
-            # preprocessing does, so their cells are scalars rather than
-            # arrays (which the categorical metrics cannot hash).
-            if os.path.exists(config.metadata_path):
-                from pipeline.steps.preprocess.transforms import (
-                    flatten_array_columns,
-                    load_variable_metadata,
-                    normalize_numeric_dtypes,
-                )
+        # Constants match the generate step's definition (computed on the
+        # train frame): re-attached verbatim, so trivially perfect in
+        # every metric -- excluded from all aggregates.
+        constants = {c for c in train.columns if train[c].nunique(dropna=False) <= 1}
+        print(f"Excluding {len(constants)} constant column(s) from all aggregates "
+              f"(re-attached verbatim by generate -- copies, not modelling successes).")
 
-                orig_pl, _ = flatten_array_columns(orig_pl, load_variable_metadata(config.metadata_path))
-            # Same dtype normalization preprocess applies (Decimal ->
-            # Float64), otherwise Decimal labs arrive as pandas object
-            # columns, fall into the categorical branch, and score a
-            # spurious TVD of 1.0 on string formatting differences.
-            orig_pl, _ = normalize_numeric_dtypes(orig_pl)
-            original = self._prepare_original(orig_pl.to_pandas(), config)
-            print(f"Original: {original.shape[0]} x {original.shape[1]}")
-        else:
-            print(f"⚠️  Original dataset not found at {config.local_full_dataset_path} -- "
-                  f"original-based comparisons skipped this run.")
+        run_meta = self._load_run_metadata(config)
 
         out_dir = config.step_dir(self.name)
         os.makedirs(out_dir, exist_ok=True)
 
-        # Association structure of the real (preprocessed, decoded) frame,
-        # computed once and compared against each synthetic frame. The
-        # original frame needs no separate profile: its observed values
-        # are identical to the decoded preprocessed frame on every common
-        # column (the marginal comparison proves this at KS=0), so its
-        # associations are identical by construction.
-        print("\nProfiling association structure of the real data...")
-        real_assoc = association_profile(preprocessed)
+        results = {"constant_columns_excluded": sorted(constants), "comparisons": []}
+
+        # Lossless-preprocessing proof (full frames, nothing excluded).
+        if os.path.exists(config.local_full_dataset_path):
+            original = self._prepare_original(config)
+            preprocessed = self._load_decoded(config.preprocessed_output_path, config)
+            print(f"\nComparing original vs preprocessed (lossless-preprocessing proof)...")
+            results["comparisons"].append(
+                compare_frames(original, preprocessed, "original", "preprocessed")
+            )
+        else:
+            print(f"⚠️  Original dataset not found at {config.local_full_dataset_path} -- "
+                  f"lossless-preprocessing proof skipped this run.")
+
+        print("\nComputing the sampling-noise floor (train vs holdout)...")
+        noise_floor = compare_frames(train, holdout, "train", "holdout",
+                                     exclude_columns=constants)
+        results["comparisons"].append(noise_floor)
+        nf = noise_floor["aggregates"]
+        print(f"  Noise floor: KS mean={nf['ks'].get('mean')}, TVD mean={nf['tvd'].get('mean')}, "
+              f"missing-rate MAD={nf['missing_rate_mean_abs_diff']} -- no synthesizer can "
+              f"honestly do better than this.")
+
+        print("\nProfiling association structure of the training data...")
+        real_assoc = association_profile(train)
         print(f"  {sum(len(v) for v in real_assoc.values())} measurable column pairs "
               f"(numeric-numeric {len(real_assoc['num_num'])}, "
               f"categorical-categorical {len(real_assoc['cat_cat'])}, "
               f"numeric-categorical {len(real_assoc['num_cat'])})")
 
-        results = {"comparisons": []}
-        if original is not None:
-            print("\nComparing original vs preprocessed...")
-            results["comparisons"].append(
-                compare_frames(original, preprocessed, "original", "preprocessed")
-            )
-
         for path in synthetic_files:
-            synth_name = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
+            run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synthetic = pd.read_csv(path, low_memory=False)
-            print(f"\nComparing against synthetic '{synth_name}' ({synthetic.shape[0]} rows)...")
+            print(f"\nComparing against '{run_id}' ({synthetic.shape[0]} rows x "
+                  f"{synthetic.shape[1]} cols)...")
 
             # Files are scored EXACTLY as they are on disk -- never
             # silently repaired. This check only detects staleness: a
@@ -121,35 +131,31 @@ class EvaluateStep(PipelineStep):
                       f"stale file. Re-run the generate step to refresh it.")
 
             entry = {
-                "synthesizer": synth_name,
+                "run_id": run_id,
+                **run_meta.get(run_id, {}),
                 "stale_file": bool(stale_cells),
                 "stale_cells": stale_cells,
-                "preprocessed_vs_synthetic": compare_frames(
-                    preprocessed, synthetic, "preprocessed", f"synthetic[{synth_name}]"
-                ),
+                "train_vs_synthetic": compare_frames(
+                    train, synthetic, "train", f"synthetic[{run_id}]",
+                    exclude_columns=constants),
+                "holdout_vs_synthetic": compare_frames(
+                    holdout, synthetic, "holdout", f"synthetic[{run_id}]",
+                    exclude_columns=constants),
             }
-            if original is not None:
-                entry["original_vs_synthetic"] = compare_frames(
-                    original, synthetic, "original", f"synthetic[{synth_name}]"
-                )
 
-            print(f"  Profiling association structure of '{synth_name}'...")
+            print(f"  Profiling association structure of '{run_id}'...")
             entry["associations"] = compare_association_profiles(
                 real_assoc, association_profile(synthetic)
             )
             results["comparisons"].append(entry)
 
-            agg = entry["preprocessed_vs_synthetic"]["aggregates"]
-            print(f"  preprocessed vs {synth_name}: "
-                  f"KS mean={agg['ks'].get('mean')} (frac<0.1: {agg['ks_frac_below_0.1']}), "
-                  f"TVD mean={agg['tvd'].get('mean')} (frac<0.05: {agg['tvd_frac_below_0.05']}), "
+            agg = entry["train_vs_synthetic"]["aggregates"]
+            print(f"  train vs {run_id}: "
+                  f"KS mean={agg['ks'].get('mean')} (floor {nf['ks'].get('mean')}), "
+                  f"TVD mean={agg['tvd'].get('mean')} (floor {nf['tvd'].get('mean')}), "
                   f"missing-rate MAD={agg['missing_rate_mean_abs_diff']}")
-            for kind, label in (("num_num", "num-num Spearman"), ("cat_cat", "Cramer's V"),
-                                ("num_cat", "corr-ratio")):
-                a = entry["associations"].get(kind, {})
-                if a.get("pairs"):
-                    print(f"    assoc {label}: mean |Δ|={a['mean_abs_delta']} over {a['pairs']} pairs "
-                          f"(frac<0.1: {a['frac_below_0.1']})")
+
+        results["groups"] = self._group_runs(results["comparisons"])
 
         json_path = os.path.join(out_dir, "DT4H_Evaluation.json")
         with open(json_path, "w") as f:
@@ -163,49 +169,110 @@ class EvaluateStep(PipelineStep):
 
     # --- frame preparation ---
 
-    def _load_preprocessed_decoded(self, config: PipelineConfig):
-        """The training frame with sentinels decoded back to null, so the
-        comparison sees observed distributions, not sentinel spikes."""
-        import pandas as pd
+    def _load_decoded(self, path: str, config: PipelineConfig):
+        """A sentinel-space parquet with sentinels decoded back to null,
+        so comparisons see observed distributions, not sentinel spikes."""
         import polars as pl
-
-        from pipeline.steps.preprocess.transforms import NUMERIC_ENCODING_FILENAME
 
         from pipeline.steps.generate.step import GenerateStep
 
-        df = pl.read_parquet(config.preprocessed_output_path).to_pandas()
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"{path} not found -- run the preprocess step first.")
+        df = pl.read_parquet(path).to_pandas()
         df, _ = GenerateStep._decode_numeric_missing(df, config)
         return df
 
-    def _prepare_original(self, df, config: PipelineConfig):
-        """Light alignment so original-side comparisons measure real drift
-        rather than encoding artifacts: NYHA LOINC codes are mapped to the
-        same 1-4 ordinals the pipeline uses. Everything else is compared
-        as-is (booleans/strings are normalized inside the metrics)."""
+    def _prepare_original(self, config: PipelineConfig):
+        """The raw frame aligned only enough that comparisons measure real
+        drift rather than encoding artifacts: ARRAY columns flattened,
+        Decimals cast, NYHA LOINC codes mapped to the same 1-4 ordinals."""
+        import polars as pl
+
         from pipeline.steps.preprocess.transforms import (
             NYHA_COLUMN,
             build_nyha_map,
+            flatten_array_columns,
             load_variable_metadata,
+            normalize_numeric_dtypes,
         )
 
+        orig_pl = pl.read_parquet(config.local_full_dataset_path)
+        if os.path.exists(config.metadata_path):
+            orig_pl, _ = flatten_array_columns(orig_pl, load_variable_metadata(config.metadata_path))
+        orig_pl, _ = normalize_numeric_dtypes(orig_pl)
+        df = orig_pl.to_pandas()
         if NYHA_COLUMN in df.columns and os.path.exists(config.metadata_path):
-            var_meta = load_variable_metadata(config.metadata_path)
-            nyha_map = build_nyha_map(var_meta)
+            nyha_map = build_nyha_map(load_variable_metadata(config.metadata_path))
             df = df.copy()
             df[NYHA_COLUMN] = df[NYHA_COLUMN].map(nyha_map)
         return df
+
+    def _load_run_metadata(self, config: PipelineConfig) -> dict:
+        """run_id -> {synthesizer, epsilon, seed} from the generation
+        summary, so results can be grouped across seeds and epsilons."""
+        path = os.path.join(config.step_dir("generate"), "DT4H_Generation_Summary.json")
+        if not os.path.exists(path):
+            return {}
+        with open(path) as f:
+            summary = json.load(f)
+        return {
+            r.get("run_id", r.get("synthesizer")): {
+                "synthesizer": r.get("synthesizer"),
+                "epsilon": r.get("epsilon"),
+                "seed": r.get("seed"),
+            }
+            for r in summary.get("runs", [])
+        }
+
+    # --- cross-run aggregation ---
+
+    @staticmethod
+    def _group_runs(comparisons: list) -> list:
+        """Mean +/- sd of the headline aggregates per (model, epsilon)
+        group, across seeds."""
+        groups: dict[tuple, list] = {}
+        for c in comparisons:
+            if "train_vs_synthetic" not in c:
+                continue
+            key = (c.get("synthesizer") or c["run_id"], c.get("epsilon"))
+            groups.setdefault(key, []).append(c["train_vs_synthetic"]["aggregates"])
+
+        def _mean_sd(values):
+            values = [v for v in values if v is not None]
+            if not values:
+                return None
+            return {"mean": round(statistics.mean(values), 4),
+                    "sd": round(statistics.stdev(values), 4) if len(values) > 1 else None,
+                    "n": len(values)}
+
+        out = []
+        for (model, eps), aggs in sorted(groups.items(),
+                                         key=lambda kv: (kv[0][0], kv[0][1] or 0)):
+            out.append({
+                "synthesizer": model,
+                "epsilon": eps,
+                "n_runs": len(aggs),
+                "ks_mean": _mean_sd([a["ks"].get("mean") for a in aggs]),
+                "tvd_mean": _mean_sd([a["tvd"].get("mean") for a in aggs]),
+                "missing_rate_mad": _mean_sd([a["missing_rate_mean_abs_diff"] for a in aggs]),
+            })
+        return out
 
     # --- reporting ---
 
     @staticmethod
     def _render_markdown(results: dict) -> str:
         lines = [
-            "# Evaluation: original vs preprocessed vs synthetic",
+            "# Evaluation: fidelity against the sampling-noise floor",
             "",
             "Metrics are computed per column over observed values (nulls excluded); "
             "missingness rates are compared separately. KS and TVD are in [0,1], "
             "lower is closer; `W/std` is the Wasserstein distance in units of the "
-            "reference standard deviation.",
+            "reference standard deviation. The `train vs holdout` row is the "
+            "sampling-noise floor: two disjoint samples of real patients differ by "
+            "this much purely by chance, so read every synthetic row against it. "
+            f"{len(results.get('constant_columns_excluded', []))} constant columns "
+            "(re-attached verbatim, trivially perfect) are excluded from all aggregates.",
             "",
             "| comparison | cols | KS mean | KS median | KS<0.1 | W/std mean | TVD mean | TVD<0.05 | missing-rate MAD |",
             "|---|---|---|---|---|---|---|---|---|",
@@ -221,44 +288,79 @@ class EvaluateStep(PipelineStep):
                     f"| {a['tvd_frac_below_0.05'] if a['tvd_frac_below_0.05'] is not None else '-'} "
                     f"| {a['missing_rate_mean_abs_diff']} |")
 
+        detail_sections = []
+        for c in results["comparisons"]:
+            if "pair" in c:  # original-vs-preprocessed or train-vs-holdout
+                lines.append(_row(c))
+                detail_sections.append(c)
+            else:
+                if c.get("stale_file"):
+                    lines.append(f"| 🚨 synthetic[{c['run_id']}] IS STALE "
+                                 f"({c['stale_cells']} undecoded cells) -- rerun generate | | | | | | | | |")
+                lines.append(_row(c["train_vs_synthetic"]))
+                detail_sections.append(c["train_vs_synthetic"])
+
+        if results.get("groups"):
+            lines += [
+                "",
+                "## Per (model, ε) across seeds (train vs synthetic)",
+                "",
+                "| model | ε | runs | KS mean ± sd | TVD mean ± sd | missing-MAD ± sd |",
+                "|---|---|---|---|---|---|",
+            ]
+
+            def _pm(m):
+                if not m:
+                    return "-"
+                return f"{m['mean']}" + (f" ± {m['sd']}" if m.get("sd") is not None else "")
+
+            for g in results["groups"]:
+                eps = f"{g['epsilon']:g}" if g.get("epsilon") is not None else "-"
+                lines.append(f"| {g['synthesizer']} | {eps} | {g['n_runs']} "
+                             f"| {_pm(g['ks_mean'])} | {_pm(g['tvd_mean'])} "
+                             f"| {_pm(g['missing_rate_mad'])} |")
+
         lines += [
             "",
-            "## Association structure (preprocessed vs synthetic)",
+            "## Generalization (holdout vs synthetic)",
+            "",
+            "Distance to real records the generator NEVER saw. A model that is much "
+            "closer to train than to holdout is fitting its training sample, not the "
+            "population.",
+            "",
+            "| run | KS mean (train) | KS mean (holdout) | TVD mean (train) | TVD mean (holdout) |",
+            "|---|---|---|---|---|",
+        ]
+        for c in results["comparisons"]:
+            if "train_vs_synthetic" not in c:
+                continue
+            t, h = c["train_vs_synthetic"]["aggregates"], c["holdout_vs_synthetic"]["aggregates"]
+            lines.append(f"| {c['run_id']} | {t['ks'].get('mean', '-')} | {h['ks'].get('mean', '-')} "
+                         f"| {t['tvd'].get('mean', '-')} | {h['tvd'].get('mean', '-')} |")
+
+        lines += [
+            "",
+            "## Association structure (train vs synthetic)",
             "",
             "Absolute change in pairwise association; 0 = relationship perfectly preserved.",
             "",
-            "| synthesizer | pair type | pairs | mean \|Δ\| | median \|Δ\| | \|Δ\|<0.1 | worst pair |",
+            "| run | pair type | pairs | mean \\|Δ\\| | median \\|Δ\\| | \\|Δ\\|<0.1 | worst pair |",
             "|---|---|---|---|---|---|---|",
         ]
         for c in results["comparisons"]:
-            if "pair" in c or "associations" not in c:
+            if "associations" not in c:
                 continue
             for kind, label in (("num_num", "Spearman (num-num)"), ("cat_cat", "Cramer's V (cat-cat)"),
                                 ("num_cat", "corr-ratio (num-cat)")):
                 a = c["associations"].get(kind, {})
                 if not a.get("pairs"):
-                    lines.append(f"| {c['synthesizer']} | {label} | 0 | - | - | - | - |")
+                    lines.append(f"| {c['run_id']} | {label} | 0 | - | - | - | - |")
                     continue
                 w = a["worst"][0]
                 lines.append(
-                    f"| {c['synthesizer']} | {label} | {a['pairs']} | {a['mean_abs_delta']} "
+                    f"| {c['run_id']} | {label} | {a['pairs']} | {a['mean_abs_delta']} "
                     f"| {a['median_abs_delta']} | {a['frac_below_0.1']} "
                     f"| `{w['pair']}` ({w['real']} -> {w['synthetic']}) |")
-
-        detail_sections = []
-        for c in results["comparisons"]:
-            if "pair" in c:  # original vs preprocessed
-                lines.append(_row(c))
-                detail_sections.append(c)
-            else:
-                if c.get("stale_file"):
-                    lines.append(f"| 🚨 synthetic[{c['synthesizer']}] IS STALE "
-                                 f"({c['stale_cells']} undecoded cells) -- rerun generate | | | | | | | | |")
-                lines.append(_row(c["preprocessed_vs_synthetic"]))
-                detail_sections.append(c["preprocessed_vs_synthetic"])
-                if "original_vs_synthetic" in c:
-                    lines.append(_row(c["original_vs_synthetic"]))
-                    detail_sections.append(c["original_vs_synthetic"])
 
         for c in detail_sections:
             lines += ["", f"## {c['pair']}", ""]

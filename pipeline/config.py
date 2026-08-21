@@ -29,33 +29,50 @@ class PipelineConfig:
 
     metadata_path: str = None  # defaults to <output_dir>/profile_data/metadata.json
 
-    # --- generate step ---
-    # Which synthesizers to run, by registry name. Non-DP: ctgan, tvae,
-    # gaussian_copula. DP: aim, mst, patectgan, dpctgan.
+    # --- holdout split ---
+    # Fraction of preprocessed rows held out BEFORE generation. The
+    # generators never see these rows, which is what makes the
+    # evaluation honest: TSTR tests on them, the privacy step uses their
+    # distance-to-training distribution as the memorization null, and
+    # the evaluate step uses train-vs-holdout distances as the
+    # sampling-noise floor that says what "as close as real data gets"
+    # looks like at this sample size. Split is seeded and recorded in a
+    # committed manifest (row indices only -- no patient data).
+    holdout_fraction: float = 0.25
+
+    # --- generate step: the run plan ---
+    # The generate step executes a PLAN of runs, each a (synthesizer,
+    # epsilon, seed, column set) combination, built by run_plan() below:
     #
-    # Ordered cheapest-first, so a misconfiguration surfaces in seconds
-    # rather than after a ~20-minute CTGAN run. Each model's output and
-    # the run summary are written as it finishes, so partial results
-    # survive an interrupted or failed later model.
+    #   * non-DP models (gaussian_copula, tvae, ctgan): one run per seed
+    #     in variance_seeds, so every headline number carries a mean and
+    #     a standard deviation instead of a single lucky draw;
+    #   * DP models (mst, dpctgan): a full epsilon sweep at the first
+    #     seed -- the privacy-utility trade-off curve -- plus the
+    #     remaining variance seeds at the headline epsilon;
+    #   * aim: the epsilon sweep on the top `aim_max_columns` most
+    #     outcome-relevant columns (Private-PGM cannot handle the full
+    #     width -- it timed out at 6h on 211 columns), with its own
+    #     shorter timeout so six runs cannot eat 36 hours.
     #
-    #   gaussian_copula  seconds   no training, statistical baseline
-    #   tvae             minutes   usually stronger than CTGAN
-    #   ctgan            ~20 min   the long-standing baseline
-    #   mst              varies    DP, cheaper than AIM
-    #   aim              varies    DP, best utility but heaviest
-    #
-    # AIM is preferred over the project's original dpctgan because
-    # utility benchmarks consistently favour marginal-based methods over
-    # DP-GANs on tabular data. It is listed last because AIM builds on
-    # Private-PGM, which is documented to struggle as column count grows,
-    # and this dataset is ~329 columns wide: if it exhausts memory, set
-    # max_columns to trial a subset, or stop at mst.
-    synthesizers: tuple = ("gaussian_copula", "tvae", "ctgan", "mst", "dpctgan", "aim")
+    # Ordered cheapest/most-reliable first, so a late failure costs only
+    # the tail of the run. Set run_plan explicitly (tuple of dicts with
+    # keys: synthesizer, seed, epsilon, columns, timeout_seconds) to
+    # override the generated plan entirely.
+    non_dp_synthesizers: tuple = ("gaussian_copula", "tvae", "ctgan")
+    dp_synthesizers: tuple = ("dpctgan", "aim", "mst")
+    dp_epsilons: tuple = (1.0, 3.0, 5.0, 8.0, 10.0, 15.0)
+    headline_epsilon: float = 15.0
+    variance_seeds: tuple = (0, 1, 2)
+    aim_max_columns: int = 50
+    aim_timeout_seconds: int = 7200
+    run_plan: tuple = None  # explicit override; None = build from the fields above
     synthesizer_params: dict = None  # per-synthesizer overrides, keyed by name
 
-    # None = generate as many rows as the real dataset. Matching the real
-    # row count is the usual convention for a released synthetic twin;
-    # set an explicit number to over- or under-sample deliberately.
+    # None = generate as many rows as the TRAINING split. Matching the
+    # training row count keeps TSTR comparable (baseline and synthetic
+    # classifiers see equally sized training sets); set an explicit
+    # number to over- or under-sample deliberately.
     n_synthetic_rows: int = None
     epochs: int = 500
     # Sized for a 16 GB T4 with the whole card free. SDV requires this to
@@ -63,15 +80,11 @@ class PipelineConfig:
     # CUDA OOM -- ~250 categorical columns make the conditional vector
     # wide, so memory scales with column count as well as batch size.
     batch_size: int = 500
+    # Fallback epsilon for a run spec without one. DP preprocessing
+    # spends NOTHING: per-column domains are passed as public bounds
+    # (they are released in the committed sentinel encoding map), so the
+    # entire budget goes to synthesis at every epsilon in the sweep.
     epsilon: float = 15.0
-    # DP bound discovery: smartnoise splits this budget evenly across the
-    # continuous columns, and too little per column makes bound discovery
-    # fail outright ("BinTransformer could not find bounds"). Specified
-    # per-column so it scales with the feature count instead of silently
-    # thinning out; total spend is this times the number of continuous
-    # columns. Set synthesizer_params[name]["preprocessor_eps"] to pin an
-    # absolute value instead.
-    preprocessor_eps_per_column: float = 0.08
 
     # Seeds every RNG the synthesizers use, and is recorded in the run
     # provenance. Required for a reproducible published dataset.
@@ -105,14 +118,16 @@ class PipelineConfig:
     # DP synthesizers, privacy budget. Held out during training and
     # re-attached verbatim afterwards, so the output schema is unchanged.
     drop_constant_columns: bool = True
-    # Cap training width, for trialling Private-PGM-based synthesizers
-    # (aim/mst) before a full-width run. None = use every column.
-    max_columns: int = None
 
     # Defaults to <output_dir>/load_data/UC1_Resolved_Full.parquet (gitignored)
     local_full_dataset_path: str = None
     # Defaults to <output_dir>/preprocess/UC1_Preprocessed.parquet (gitignored)
     preprocessed_output_path: str = None
+    # The 75/25 split of the preprocessed frame (both gitignored):
+    # generators train ONLY on the train file; the holdout file is the
+    # unseen-data reference for TSTR, privacy and the noise floor.
+    train_output_path: str = None
+    holdout_output_path: str = None
 
     # Tracks which steps have completed. Not patient data -- safe to
     # commit if you want step-completion visible in git history, or leave
@@ -133,7 +148,54 @@ class PipelineConfig:
             self.local_full_dataset_path = os.path.join(self.output_dir, "load_data", "UC1_Resolved_Full.parquet")
         if self.preprocessed_output_path is None:
             self.preprocessed_output_path = os.path.join(self.output_dir, "preprocess", "UC1_Preprocessed.parquet")
+        if self.train_output_path is None:
+            self.train_output_path = os.path.join(self.output_dir, "preprocess", "UC1_Train.parquet")
+        if self.holdout_output_path is None:
+            self.holdout_output_path = os.path.join(self.output_dir, "preprocess", "UC1_Holdout.parquet")
 
     def step_dir(self, step_name: str) -> str:
         """The dedicated output subfolder for a given step: output_dir/<step_name>/."""
         return os.path.join(self.output_dir, step_name)
+
+    def resolved_run_plan(self) -> list[dict]:
+        """The full list of generation runs, in execution order.
+
+        Each entry: {run_id, synthesizer, seed, epsilon (DP only),
+        columns ("top" = the AIM importance subset, None = full width),
+        timeout_seconds (None = the global default)}.
+        """
+        if self.run_plan is not None:
+            return [dict(spec) for spec in self.run_plan]
+
+        def _eps_tag(eps: float) -> str:
+            return f"eps{eps:g}".replace(".", "p")
+
+        plan: list[dict] = []
+        # 1. Non-DP models, every variance seed (cheap, reliable, first).
+        for name in self.non_dp_synthesizers:
+            for seed in self.variance_seeds:
+                plan.append({"run_id": f"{name}_seed{seed}", "synthesizer": name,
+                             "seed": seed, "epsilon": None, "columns": None,
+                             "timeout_seconds": None})
+        # 2. DP models in configured order (dpctgan ~40 min/run, then the
+        #    unknown-cost aim, then the reliable-but-slow mst last so its
+        #    near-certain results are the only thing a late crash risks).
+        for name in self.dp_synthesizers:
+            is_aim = name == "aim"
+            for eps in self.dp_epsilons:
+                plan.append({
+                    "run_id": (f"aim{self.aim_max_columns}_" if is_aim else f"{name}_")
+                              + f"{_eps_tag(eps)}_seed{self.variance_seeds[0]}",
+                    "synthesizer": name, "seed": self.variance_seeds[0], "epsilon": eps,
+                    "columns": "top" if is_aim else None,
+                    "timeout_seconds": self.aim_timeout_seconds if is_aim else None,
+                })
+            if not is_aim:  # variance seeds at the headline epsilon
+                for seed in self.variance_seeds[1:]:
+                    plan.append({
+                        "run_id": f"{name}_{_eps_tag(self.headline_epsilon)}_seed{seed}",
+                        "synthesizer": name, "seed": seed,
+                        "epsilon": self.headline_epsilon, "columns": None,
+                        "timeout_seconds": None,
+                    })
+        return plan

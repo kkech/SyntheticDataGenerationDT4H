@@ -47,7 +47,11 @@ def main() -> None:
         summary = json.load(f)
     constants = summary.get("constant_columns_held_out", {})
 
-    real = pl.read_parquet(config.preprocessed_output_path).to_pandas()
+    # Leakage reference is the TRAIN split -- the rows the generator
+    # actually saw (falls back to the full frame for pre-holdout models).
+    ref_path = (config.train_output_path if os.path.exists(config.train_output_path)
+                else config.preprocessed_output_path)
+    real = pl.read_parquet(ref_path).to_pandas()
 
     print(f"Sampling {args.rows} rows...")
     synthetic = synth.sample(args.rows)
