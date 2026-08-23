@@ -11,9 +11,12 @@ Checks, each mandatory:
   3. leakage       -- zero verbatim reproductions of training records;
   4. coherence     -- rule-violation rate within tolerance of the real
                       holdout baseline (rules from the committed rule set);
-  5. distance      -- no sampled record closer to a training record than
-                      the holdout p5 threshold from the committed privacy
-                      assessment (spot check on a sample for speed).
+  5. distance      -- the share of sampled records closer to a training
+                      record than the holdout p5 threshold must not exceed
+                      twice the natural rate (5% of real unseen patients
+                      fall below their own p5 by construction, so zero
+                      tolerance would fail real data too). Spot check on
+                      a sample for speed.
 
 Writes DT4H_Release_Gate_<name>.md next to the file and exits non-zero
 on FAIL, so it can gate a scripted publishing flow.
@@ -43,6 +46,12 @@ from pipeline.steps.privacy.distance import build_encoder, nearest_two_distances
 COHERENCE_MULTIPLIER = 10.0
 COHERENCE_ABSOLUTE = 0.01
 DCR_SAMPLE = 500
+# Distance policy: 5% of real unseen patients fall below the holdout p5
+# threshold BY CONSTRUCTION, so a perfect generator would land at ~5% too
+# and zero tolerance would reject real data itself. A candidate passes if
+# its share below the threshold is at most this multiple of the natural 5%.
+DISTANCE_NATURAL_SHARE = 0.05
+DISTANCE_SHARE_MULTIPLIER = 2.0
 
 
 def main() -> int:
@@ -125,9 +134,12 @@ def main() -> int:
         s_num, s_cat = encode(sample)
         d1, _ = nearest_two_distances(s_num, s_cat, t_num, t_cat)
         too_close = int((d1 < p5).sum())
-        check("distance", too_close == 0,
-              f"{too_close}/{len(sample)} sampled record(s) closer than the holdout "
-              f"p5 threshold ({p5})")
+        share = too_close / len(sample)
+        limit = DISTANCE_SHARE_MULTIPLIER * DISTANCE_NATURAL_SHARE
+        check("distance", share <= limit,
+              f"{too_close}/{len(sample)} sampled record(s) ({share:.1%}) closer than "
+              f"the holdout p5 threshold ({p5}); policy limit {limit:.0%} = "
+              f"{DISTANCE_SHARE_MULTIPLIER:g}x the natural 5% share")
     else:
         check("distance", False, "no committed privacy assessment -- run the privacy step first")
 

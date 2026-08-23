@@ -56,16 +56,19 @@ total. Uniquely, every generator was trained on a 75\% split, with the remaining
 sampling-noise floor between two real samples, utility is tested on unseen patients,
 and privacy is assessed with a four-attack suite (membership inference, attribute
 inference, singling-out, linkability) whose null is the holdout itself. All attacks
-performed at chance level for every dataset (mean membership-inference AUC $= 0.500$),
-with zero verbatim records and zero records closer to the training data than unseen
-real patients. Fidelity, however, dissociates by capability: marginal-based DP
+performed at or near chance for every dataset (mean membership-inference AUC
+$= 0.507$, worst $0.525$), with zero verbatim records in any file; the calibrated
+distance profile separates the models, with the two closest-fitting families placing
+11--25\% of their records nearer the training data than the natural 5\% of real
+unseen patients that fall below the same threshold. Fidelity dissociates by capability: marginal-based DP
 synthesis reproduces categorical distributions and Kaplan--Meier survival curves
 indistinguishably from real unseen patients but fabricates cross-column associations
 and violates row-level clinical logic, while neural non-DP synthesis shows the
 opposite profile. We quantify this dissociation with a novel row-coherence audit (363
 rules mined from the real data), and release the complete pipeline---every number,
 figure, and document regenerates from one command---together with an automated
-release gate that all published files passed. The missingness of clinical data, which
+release gate whose holdout-calibrated criteria currently block both of our own
+flagship candidates rather than rubber-stamping them. The missingness of clinical data, which
 carries meaning, is preserved end-to-end by a sentinel encoding decoded back to null
 in the released files.
 \end{abstract}
@@ -120,10 +123,14 @@ floor and produces five-year Kaplan--Meier curves statistically indistinguishabl
 from unseen real patients, yet fabricates thousands of cross-column associations and
 fails a row-coherence release gate; the neural non-DP method (TVAE) shows the
 near-opposite profile. No evaluated model delivers marginal fidelity, joint
-structure, and row coherence simultaneously---under DP or otherwise. Second, privacy
-and fidelity did not trade off in the attack results: the best-fitting models were
-exactly as unattackable as the worst, empirically supporting the premise that
-population-level learning does not require individual-level memorization.
+structure, and row coherence simultaneously---under DP or otherwise. Second, the
+privacy--fidelity trade-off is real but small and concentrated exactly where theory
+predicts: the single best-fitting non-DP family (TVAE) is the only one whose
+records sit measurably closer to the training data than real unseen patients do and
+the only one with a (marginal, AUC $\leq 0.525$) membership-inference signal, while
+every DP model attacks at exactly chance---empirical support both for
+population-level learning without individual-level memorization and for what the
+formal guarantee buys.
 
 All results in this paper regenerate from a single command in the released pipeline,
 which also produced every figure, the per-column codebook, and the datasheet's
@@ -239,8 +246,26 @@ change (a stale file is scored as-is, never silently fixed); per-run summaries a
 rewritten after every model so an interrupted campaign keeps everything already
 finished; and per-run timeouts are calibrated from measured runtimes (a 6-hour cap
 chosen so that MST's legitimate 2.9-hour fits survive while a wedged fit cannot
-consume a night). The release gate that later blocked one of our own candidate
+consume a night). The release gate that blocks our own candidate
 files (Section~\ref{sec:gate}) is this philosophy applied at the boundary.
+\item \textbf{An impossible metric value is a bug report, not a result.} An early
+campaign returned C2ST AUC $= 1.0$ with per-feature diagnostics showing
+\emph{perfect} single-column separability on boolean columns shared by both
+frames---mathematically impossible for genuinely shared categories. The cause was a
+representation mismatch: generators emitted language-level booleans
+(\texttt{True}) where the source data spelled lowercase strings (\texttt{true}),
+rendering ${\sim}150$ categorical columns disjoint on disk. The artifact biased
+fidelity metrics pessimistically but privacy metrics \emph{optimistically}:
+cross-representation distances carried a constant mismatch term, and the corrected
+rerun moved TSTR toward parity (TVAE logistic-regression gap $0.018 \to 0.007$)
+while shrinking distance margins (TVAE share below the unseen-patient p5
+threshold: $0\% \to 12\%$), flipping one gate verdict from pass to fail. The fix
+is structural: categorical spellings are aligned to the source schema at
+generation time and at every read site, and a representation audit (zero
+cross-representation category mismatches) is now a mandatory release-gate check.
+Every number in this paper post-dates that audit. We suspect this failure mode is
+widespread wherever synthetic CSVs are compared against source extracts by
+independent code paths.
 \end{enumerate}
 
 \subsection{Generative models and the run plan}
@@ -358,9 +383,10 @@ singling-out and linkability risks via Anonymeter \citep{giomi2023unified}.
 \item \textbf{Subgroup fidelity.} All marginal aggregates recomputed within sex and
 age strata, each against its own stratum noise floor.
 \item \textbf{Release gate.} An automated go/no-go check per candidate file: schema
-conformity, decode freshness, zero verbatim training rows, coherence within a stated
-policy ($\leq \max(10\times$ the holdout's own violation rate, $+1$ percentage
-point$)$), and a distance spot-check against the holdout threshold.
+conformity, representation audit, decode freshness, zero verbatim training rows,
+coherence within a stated policy ($\leq \max(10\times$ the holdout's own violation
+rate, $+1$ percentage point$)$), and a calibrated distance criterion (share of
+records below the unseen-patient p5 threshold $\leq 2\times$ the natural 5\%).
 \end{itemize}
 
 \section{Data Records}
@@ -481,10 +507,10 @@ structure best (mean $|\Delta|$ 0.086 numeric--numeric---near the floor---with
 Table~\ref{tab:assoc}). MST, despite near-perfect marginals, preserves only
 ${\sim}22$--$30\%$ of pairs and \textbf{fabricates thousands of strong associations
 that do not exist in the real data} (real $|$association$| < 0.1$ rendered $> 0.5$;
-2{,}576--3{,}547 pairs across its runs)---its association error is flat across the
+2{,}582--3{,}565 pairs across its runs)---its association error is flat across the
 entire \eps{} sweep, demonstrating a model-class ceiling that privacy budget cannot
 buy back: MST measures only a spanning tree of pairwise marginals. CTGAN, notably,
-fabricates none.
+fabricates essentially none (0--1 across seeds).
 
 \begin{table}[htbp]
 \centering
@@ -497,24 +523,29 @@ $|$assoc$| < 0.1$ rendered $> 0.5$).}
 model & num--num & cat--cat & num--cat & fabricated pairs \\
 \midrule
 \emph{noise floor} & \emph{0.065} & \emph{0.022} & \emph{0.028} & --- \\
-TVAE & 0.086 & 0.059 & 0.041 & 11 \\
+TVAE & 0.086 & 0.059 & 0.041 & 12 \\
 CTGAN & 0.126 & 0.074 & 0.042 & 0 \\
 Gaussian copula & 0.107 & 0.067 & 0.038 & 1 \\
-MST ($\eps{=}15$) & 0.283 & 0.243 & 0.167 & 2{,}576 \\
-AIM ($\eps{=}5$, 50 cols) & 0.325 & 0.150 & 0.077 & 86 \\
-DP-CTGAN ($\eps{=}15$) & 0.397 & 0.105 & 0.044 & 78 \\
+MST ($\eps{=}15$) & 0.283 & 0.243 & 0.167 & 2{,}582 \\
+AIM ($\eps{=}5$, 50 cols) & 0.325 & 0.161 & 0.081 & 102 \\
+DP-CTGAN ($\eps{=}15$) & 0.397 & 0.104 & 0.044 & 78 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The C2ST is $\approx 1.0$ for every model (floor 0.457; Figure~\ref{fig:c2st}): a
 classifier shown whole rows distinguishes synthetic from real essentially
-perfectly. Part of this reflects genuine joint imperfection; part reflects trivial
-tells such as value granularity (real ages and blood pressures are integer-valued;
-neural samplers emit continuous values), which with 211 features suffice for
-perfect separation. We report it as an honest bound---no current model's rows
-survive forensic inspection---while noting that single-row distinguishability is
-independent of, and in our results orthogonal to, privacy risk.
+perfectly. A per-feature diagnosis shows how, and rules out artifacts: no single
+column is strongly discriminative (the strongest single-feature AUC is 0.72, the
+admission-year distribution under TVAE; most tells sit below 0.62), and snapping
+synthetic numerics to each column's empirical granularity leaves the AUC unchanged
+(0.998 $\to$ 0.999). The separation is therefore genuine, \emph{distributed} joint
+imperfection: a few dozen individually-weak marginal deviations compound
+multiplicatively for a multivariate classifier over 211 features. We report it as
+an honest bound---no current model's rows survive forensic inspection---while
+noting that this row-level distinguishability, shared at $\approx 1.0$ by all six
+model families, does not rank their privacy risk (Technical Validation, privacy
+subsection).
 
 \begin{figure}[htbp]
 \centering
@@ -623,12 +654,15 @@ rehospitalization (nulls = administrative censoring at five years).}
 Real-data baselines on the five outcome targets range AUC 0.54--0.69 (intrinsically
 hard targets at this cohort size; the CV/non-CV rehospitalization-reason targets are
 near-complements, so effectively three independent problems). TSTR gaps vs baseline
-(Figure~\ref{fig:tstr}): TVAE $+0.062 \pm 0.021$ (gradient boosting) and $+0.018$
-(logistic regression---near parity); MST $\eps \geq 15 \approx +0.10/+0.05$; the
-smaller gaps under the simpler model class indicate that part of the tree-model gap
-reflects fine joint structure rather than unusable signal. Augmenting real training
-data with synthetic records neither helps nor hurts (deltas $-0.03$ to
-$+0.015$)---synthetic data substitutes, it does not add.
+(Figure~\ref{fig:tstr}): TVAE $+0.049 \pm 0.028$ (gradient boosting) and $+0.007$
+(logistic regression---parity); MST $\eps{=}15$: $+0.097 \pm 0.023$ and $+0.001$
+(parity under the simpler model class, \emph{with} the formal DP guarantee). The
+much smaller gaps under logistic regression indicate that most of the tree-model
+gap reflects fine joint structure rather than unusable signal: models of the
+complexity clinicians actually deploy at this cohort size transfer at par.
+Augmenting real training data with synthetic records neither helps nor hurts
+(group-mean deltas $-0.03$ to $+0.02$)---synthetic data substitutes, it does not
+add.
 
 \begin{figure}[htbp]
 \centering
@@ -642,22 +676,34 @@ seeds).}
 \subsection{Privacy: distances and the four-attack suite}
 
 An unseen real patient's nearest-training-record distance has 5th percentile 0.063
-and median 0.103 (Gower-style, in sentinel space). Across all 27 synthetic datasets:
-zero exact matches; the closest any synthetic record comes to any training record is
-0.414---four times the innocent-record median---and \textbf{0.0\% of synthetic
-records fall below the holdout's 5th-percentile threshold in every run}
-(${\sim}5\%$ would be expected even for a perfectly innocent generator;
-Figure~\ref{fig:dcr}). Nearest-neighbor distance ratios $\approx 0.99$ show
-synthetic records sitting between real records, not locked onto individuals.
+and median 0.103 (Gower-style, in sentinel space); by construction, 5\% of real
+unseen patients fall below the p5 threshold, which is therefore the calibrated
+yardstick, not zero. Across all 27 synthetic datasets there are zero exact matches,
+and the closest any synthetic record comes to a training record is 0.017
+(TVAE)---slightly \emph{inside} the closest real unseen patient's 0.022, but of the
+same magnitude, not a memorization signature. The bulk of the distance
+distributions separates the model families (Figure~\ref{fig:dcr}): CTGAN, the
+Gaussian copula, DP-CTGAN, and AIM place \textbf{no} records below the p5 threshold
+(0\% vs.\ the natural 5\%), while the two closest-fitting families concentrate mass
+nearer the training data than a fresh real sample would---TVAE places 11--13\% of
+its records below the threshold and MST 11--25\% (median distances 0.089 and 0.085
+vs.\ the holdout's 0.103). Nearest-neighbor distance ratios of 0.94--0.99 show
+synthetic records sitting between training records rather than locked onto
+individuals.
 
-The attack suite (Table~\ref{tab:privacy}; Figure~\ref{fig:mia}): mean
-membership-inference AUC across the 27 datasets is 0.5000, with no bootstrap 95\% CI
-excluding 0.5 (maximum single AUC 0.520, CI $[0.499, 0.538]$). Worst
+The attack suite (Table~\ref{tab:privacy}; Figure~\ref{fig:mia}) reads the same
+picture at the individual level. Mean membership-inference AUC across the 27
+datasets is 0.507; the only bootstrap 95\% CIs excluding 0.5 belong to two TVAE
+seeds, and marginally (worst AUC 0.525, CI $[0.504, 0.545]$)---a faint,
+internally-consistent echo of the distance concentration, far below actionable
+individual inference, while every DP model attacks at chance. Worst
 attribute-inference membership advantage: $+3.6$ percentage points (near noise).
 Singling-out risk: mean 0.006, max 0.036; linkability risk: mean 0.0006, max 0.010
-(0--1 scales). Notably, attack performance is unrelated to fidelity rank---the
-best-fitting models are exactly as unattackable as the worst---and the DP models
-additionally carry their formal $(\eps, \delta)$ guarantee.
+(0--1 scales). The fidelity--privacy relationship is thus not flat but nearly so,
+and lands exactly where theory puts it: the best-fitting non-DP family carries the
+only measurable (and still marginal) membership signal, and the formal
+$(\eps, \delta)$ guarantee of the DP models is corroborated, not merely asserted,
+by their chance-level attack results.
 
 \begin{table}[htbp]
 \centering
@@ -668,8 +714,11 @@ additionally carry their formal $(\eps, \delta)$ guarantee.
 evidence & result \\
 \midrule
 verbatim training rows & 0 in every dataset \\
-records closer than an unseen patient's p5 distance & 0.0\% in every dataset \\
-membership-inference AUC & mean 0.5000; 0/27 CIs exclude 0.5 \\
+minimum distance to a training record & 0.017 (closest unseen patient: 0.022) \\
+records below the unseen-patient p5 threshold & 0\% CTGAN/copula/DP-CTGAN/AIM; \\
+\quad (natural rate: 5\%) & 11--13\% TVAE; 11--25\% MST \\
+membership-inference AUC & mean 0.507; 25/27 CIs include 0.5; \\
+ & worst 0.525 (TVAE) \\
 attribute-inference membership advantage & $\leq +0.036$ \\
 singling-out risk & mean 0.006 (max 0.036) \\
 linkability risk & mean 0.0006 (max 0.010) \\
@@ -696,11 +745,21 @@ datasets; 0.5 = no membership leakage.}
 \subsection{Release gating}
 \label{sec:gate}
 
-The automated gate cleared \texttt{tvae\_seed0} on all five checks (coherence 2.25\%
-vs threshold 2.32\%) and \textbf{blocked \texttt{mst\_eps15\_seed0} on row coherence
-alone} (3.63\%) despite its superior marginals and survival curves---the
-marginal-vs-coherence dissociation enforced as governance. Both gate reports are
-released.
+The automated gate runs six mandatory checks---schema, representation, freshness,
+verbatim leakage, row coherence, and distance---each calibrated against the holdout
+where a real baseline exists. The distance criterion is itself calibrated: because
+5\% of real unseen patients fall below the p5 threshold by construction, zero
+tolerance would reject real data, so a candidate passes if at most twice the
+natural share does ($\leq 10\%$). Under these criteria \textbf{neither flagship
+candidate currently clears the gate}: \texttt{tvae\_seed0} passes five of six
+checks but fails distance (12.2\% of records below the threshold), and
+\texttt{mst\_eps15\_seed0} fails both coherence (3.63\% vs.\ threshold 2.32\%,
+despite its superior marginals and survival curves---the marginal-vs-coherence
+dissociation enforced as governance) and distance (22.0\%). We regard a gate that
+blocks its own authors' preferred files as evidence that it works; both gate
+reports are released, and the Future Work section names the tested remedies (a
+nearest-record rejection filter for the distance tail; constraint-aware sampling
+for coherence).
 
 \subsection{Capability scorecard}
 
@@ -713,8 +772,8 @@ contributes.
 \centering
 \small
 \caption{Capability scorecard (representative runs). ``floor'' = at or below the
-corresponding real-vs-real noise floor; privacy attacks were at chance for
-\emph{all} models.}
+corresponding real-vs-real noise floor; membership inference was at or near chance
+for all models (worst AUC 0.525).}
 \label{tab:scorecard}
 \begin{tabular}{lcccccc}
 \toprule
@@ -723,13 +782,14 @@ capability & TVAE & CTGAN & copula & MST$_{\eps 15}$ & AIM$_{\eps 5}$\textsupers
 numeric marginals (KS) & \textbf{0.20} & 0.31 & 0.43 & 0.41 & 0.32 & 0.84 \\
 categorical marginals (TVD) & 0.059 & 0.087 & 0.009 & \textbf{floor} & 0.005 & 0.32 \\
 missingness patterns & 0.037 & 0.079 & 0.124 & \textbf{floor} & 0.002 & 0.27 \\
-association error (cat--cat) & \textbf{0.059} & 0.074 & 0.067 & 0.243 & 0.150 & 0.105 \\
-fabricated associations & 11 & \textbf{0} & 1 & 2{,}576 & 86 & 78 \\
+association error (cat--cat) & \textbf{0.059} & 0.074 & 0.067 & 0.243 & 0.161 & 0.104 \\
+fabricated associations & 12 & \textbf{0} & 1 & 2{,}582 & 102 & 78 \\
 row coherence (violation \%) & 2.3 & 30.5 & 27.8 & 3.6 & \textbf{0.9} & 68.9 \\
 KM curves $\approx$ holdout & rehosp & no & no & \textbf{both} & --- & no \\
-TSTR gap (LogReg) & \textbf{+0.02} & +0.08 & +0.09 & +0.05 & +0.10 & +0.22 \\
+TSTR gap (LogReg) & +0.01 & +0.07 & +0.08 & \textbf{0.00} & +0.11 & +0.22 \\
+share below p5 distance (nat. 5\%) & 12\% & \textbf{0\%} & \textbf{0\%} & 22\% & \textbf{0\%} & \textbf{0\%} \\
 formal DP guarantee & no & no & no & \textbf{yes} & \textbf{yes} & \textbf{yes} \\
-release gate & \textbf{pass} & --- & --- & fail & --- & --- \\
+release gate & fail (dist.) & --- & --- & fail (coh.+dist.) & --- & --- \\
 \bottomrule
 \end{tabular}
 
@@ -741,12 +801,17 @@ subset; survival endpoints lie outside it.
 
 \begin{itemize}
 \item \textbf{Which file for which purpose.} For general modelling,
-feature-importance work, and teaching: the TVAE datasets (gate-cleared; best joints
-and utility). For categorical epidemiology, missingness-pattern research, and
-survival-curve work under a formal privacy guarantee: MST $\eps = 15$---but
-\emph{never} trust its cross-column correlations, and note it did not pass the
-row-coherence gate. AIM $\eps = 5$ offers the most internally coherent rows over its
-50-column subset. DP-CTGAN files are included for benchmark completeness only.
+feature-importance work, and teaching: the TVAE datasets (best joints and utility;
+note they carry the closest distance profile---12\% of records sit nearer the
+training data than the unseen-patient p5 threshold, vs.\ a natural 5\%---and the
+only, though marginal, membership-inference signal). For categorical epidemiology,
+missingness-pattern research, and survival-curve work under a formal privacy
+guarantee: MST $\eps = 15$---but \emph{never} trust its cross-column correlations,
+and note it failed the row-coherence and distance gates. Where the distance margin
+matters most, prefer CTGAN, the copula, or the DP-CTGAN/AIM files, all of which
+place 0\% of records below the threshold. AIM $\eps = 5$ offers the most internally
+coherent rows over its 50-column subset. DP-CTGAN files are included for benchmark
+completeness only.
 \item \textbf{Rows are population members, not case studies.} Even the best datasets
 show ${\sim}10\times$ the real data's rate of logical inconsistency per row, and
 whole rows are machine-distinguishable from real ones. Do not present individual
@@ -809,11 +874,12 @@ Single clinical site and a modest cohort (4{,}694 patients): absolute
 fidelity---particularly for laboratory values observed in few patients---is
 sample-size-limited, and the pipeline is designed to rerun unchanged on the
 forthcoming larger extract. AIM's privacy-budget sweep is incomplete above
-$\eps = 5$ (a Private-PGM scaling result we report rather than hide). The C2ST
-result conflates genuine joint imperfection with value-granularity artifacts; a
-granularity-snapping decoder is future work, as is constraint-aware sampling using
-the released rule set, which would address the residual row-coherence gap without
-retraining. Cram\'er's V is reported without small-sample bias correction
+$\eps = 5$ (a Private-PGM scaling result we report rather than hide). The C2ST of
+$\approx 1.0$ is measured to be genuine, distributed joint imperfection (the
+granularity-snapping ablation leaves it unchanged), so closing it requires better
+joint modelling, not decoding cosmetics; constraint-aware sampling using the
+released rule set would address the residual row-coherence gap without retraining,
+and a nearest-record rejection filter the distance-tail gate failures. Cram\'er's V is reported without small-sample bias correction
 (identically for real and synthetic, so comparisons are unaffected). The
 membership-inference evaluation uses a distance attack; stronger learned attacks are
 possible in principle, though the DP models' formal guarantee bounds all of them.
@@ -839,8 +905,13 @@ verdict. This is the remedy for the model-class component of the coherence gap;
 more data addresses only the sample-size component.
 \item \textbf{Granularity-snapping decode.} Rounding synthetic numerics to each
 column's empirical granularity (integer ages and blood pressures, two-decimal
-assays) removes the trivial component of C2ST separability and makes the residual
-AUC a genuine joint-structure measure.
+assays) is now known to be cosmetic for C2ST---the measured ablation leaves the
+AUC unchanged---but remains worthwhile for the face validity of released records.
+\item \textbf{Nearest-record rejection filter.} Dropping the ${\sim}12\%$
+(TVAE) / ${\sim}22\%$ (MST) of sampled records that fall below the unseen-patient
+p5 distance threshold, then re-sampling to size, would bring both flagship
+candidates under the calibrated distance policy at a measurable (and reportable)
+cost in marginal fidelity; the release gate re-run then decides, not us.
 \item \textbf{Completing the AIM curve} at $\eps \geq 8$ via a tighter measurement-
 rounds cap or a 40-column subset, resolving the ${\eps = 5}$ association anomaly and
 finishing the strongest-DP-contender comparison.
