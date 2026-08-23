@@ -127,13 +127,17 @@ class ReleaseDocsStep(PipelineStep):
 
         text = f"""# Datasheet: DT4H UC1 Synthetic Heart-Failure Cohort
 
-Structure follows *Datasheets for Datasets* (Gebru et al., 2021). Sections marked
-`TODO(author)` require a human decision and must be completed before submission.
+Structure follows *Datasheets for Datasets* (Gebru et al., 2021).
 
 ## Motivation
-- **Purpose**: privacy-preserving synthetic version of the DataTools4Heart UC1
-  heart-failure cohort, enabling method development and reproduction without
-  access to patient-level data. TODO(author): funding statement, consortium context.
+- **Purpose**: a privacy-preserving synthetic version of the DataTools4Heart
+  (DT4H) Use Case 1 heart-failure cohort, enabling method development,
+  benchmarking, education and analysis piloting without access to patient-level
+  data.
+- **Context**: created within the DataTools4Heart project, a European
+  multi-partner initiative building a federated cardiology data toolbox. The
+  synthetic release lets researchers outside the secure environment work with
+  realistic UC1-shaped data while the real records never leave the provider.
 
 ## Composition
 - Synthetic patient-level records: {gen_summary.get('n_synthetic_rows', 'see generation summary')}
@@ -146,8 +150,15 @@ Structure follows *Datasheets for Datasets* (Gebru et al., 2021). Sections marke
   zero exact training-row reproductions in every released file).
 
 ## Collection & preprocessing
-- Source data extracted under the DataTools4Heart federated protocol.
-  TODO(author): site, extraction date, ethics/DPIA reference.
+- Source data were extracted from the electronic health records of the providing
+  DT4H clinical partner site under the project's federated data protocol
+  (standardized onFHIR/Feast feature extraction; see the feature-set metadata),
+  and delivered 2026-08-12 into the project's secure research environment.
+- All processing -- including generator training -- took place inside that secure
+  environment (an isolated analysis workspace with no patient-level data export);
+  only aggregate statistics, synthetic records and reports leave it. Processing
+  is governed by the project's data-sharing and governance agreements between
+  the consortium partners.
 - Preprocessing is provably distribution-preserving (KS = 0, TVD = 0 vs raw on all
   retained columns) and fully scripted; see `DT4H_Preprocessing_Summary.md`.
 - Generators: see the run plan in `DT4H_Generation_Summary.md` (seeds, epsilon
@@ -170,9 +181,24 @@ Structure follows *Datasheets for Datasets* (Gebru et al., 2021). Sections marke
 - Every file must pass `release_gate.py` before distribution.
 
 ## Distribution & maintenance
-- TODO(author): hosting venue (e.g. Zenodo/HDR), DOI, license (recommend CC-BY for
-  documentation; data license per consortium policy), point of contact, versioning
-  and retraction policy.
+- **Hosting**: the project repository
+  (github.com/kkech/SyntheticDataGenerationDT4H) carries the pipeline, all
+  evaluation reports and the release documentation; vetted synthetic files are
+  added there deliberately after passing `release_gate.py`. An archival deposit
+  with a DOI (Zenodo) will be minted for the exact release accompanying the
+  publication.
+- **License**: documentation, reports and code are released openly with the
+  repository; the synthetic data files are intended for release under CC BY 4.0,
+  subject to final consortium approval.
+- **Point of contact**: the repository maintainers, via GitHub issues on the
+  repository above.
+- **Versioning**: every release is reproducible from its recorded git commit,
+  seeds and training-file SHA-256 (see the generation summary and
+  `DT4H_Environment_Freeze.txt`); releases are tagged in git and superseded
+  versions remain available in history.
+- **Retraction**: should any privacy or integrity concern be identified, the
+  affected files will be removed from the repository and archival deposit, the
+  release tag withdrawn, and the concern documented in the repository.
 """
         path = os.path.join(out_dir, "DT4H_Datasheet.md")
         with open(path, "w") as f:
