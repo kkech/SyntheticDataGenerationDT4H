@@ -184,13 +184,13 @@ Absolute change in pairwise association; 0 = relationship perfectly preserved. `
 | ctgan_seed2 | Cramer's V (cat-cat) | 11175 | 0.0731 | 0.0351 | 0.7586 | 0 | `smoking_status_smoker_last|smoking_status_formerSmoker_last` (1.0 -> 0.0327) |
 | ctgan_seed2 | corr-ratio (num-cat) | 11280 | 0.0425 | 0.0227 | 0.8942 | 1 | `lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured` (0.9616 -> 0.1461) |
 | dpctgan_eps10_seed0 | Spearman (num-num) | 325 | 0.2953 | 0.2154 | 0.2646 | 31 | `vital_signs_weight_value_p6mo_last|vital_signs_weight_value_last` (1.0 -> -0.344) |
-| dpctgan_eps10_seed0 | Cramer's V (cat-cat) | 8911 | 0.0931 | 0.041 | 0.8056 | 1 | `cause_of_death_isCV_f5a_w1a_first|cause_of_death_isRenal_f5a_w1a_first` (1.0 -> 0.0006) |
+| dpctgan_eps10_seed0 | Cramer's V (cat-cat) | 8911 | 0.0931 | 0.041 | 0.8056 | 1 | `cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first` (1.0 -> 0.0006) |
 | dpctgan_eps10_seed0 | corr-ratio (num-cat) | 4888 | 0.0444 | 0.0228 | 0.8777 | 0 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.0) |
 | dpctgan_eps15_seed0 | Spearman (num-num) | 405 | 0.3973 | 0.3559 | 0.2198 | 76 | `lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_first` (-0.9057 -> 0.8801) |
-| dpctgan_eps15_seed0 | Cramer's V (cat-cat) | 7750 | 0.1042 | 0.0484 | 0.7711 | 2 | `cause_of_death_isCV_f5a_w3a_first|cause_of_death_isNonRenalAndNonCV_f5a_w3a_first` (1.0 -> 0.0003) |
+| dpctgan_eps15_seed0 | Cramer's V (cat-cat) | 7750 | 0.1042 | 0.0484 | 0.7711 | 2 | `cause_of_death_isNonRenalAndNonCV_f5a_w6mo_first|cause_of_death_isAllCause_f5a_w6mo_first` (1.0 -> 0.0003) |
 | dpctgan_eps15_seed0 | corr-ratio (num-cat) | 5452 | 0.0439 | 0.025 | 0.8793 | 0 | `lab_results_valideGFR_value_last|ckd_severity_categorizedValue` (0.9716 -> 0.0269) |
 | dpctgan_eps15_seed1 | Spearman (num-num) | 375 | 0.314 | 0.1909 | 0.2747 | 58 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> 0.9028) |
-| dpctgan_eps15_seed1 | Cramer's V (cat-cat) | 8001 | 0.0955 | 0.0418 | 0.7945 | 0 | `cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first` (1.0 -> 0.0003) |
+| dpctgan_eps15_seed1 | Cramer's V (cat-cat) | 8001 | 0.0955 | 0.0418 | 0.7945 | 0 | `encounter_primary_reason_CV_Disease_f5a_w1mo_first|encounter_primary_reason_non_CV_Disease_f5a_w1mo_first` (1.0 -> 0.0003) |
 | dpctgan_eps15_seed1 | corr-ratio (num-cat) | 5264 | 0.0485 | 0.0263 | 0.8659 | 0 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.0178) |
 | dpctgan_eps15_seed2 | Spearman (num-num) | 252 | 0.2577 | 0.1608 | 0.3175 | 31 | `lab_results_validSerumCreatinine_value_last|lab_results_valideGFR_value_last` (-0.9109 -> 0.1003) |
 | dpctgan_eps15_seed2 | Cramer's V (cat-cat) | 8256 | 0.0909 | 0.0409 | 0.8029 | 2 | `cause_of_death_isCV_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first` (1.0 -> 0.0003) |
@@ -245,7 +245,7 @@ Absolute change in pairwise association; 0 = relationship perfectly preserved. `
 | tvae_seed0 | corr-ratio (num-cat) | 11092 | 0.0414 | 0.0227 | 0.8881 | 10 | `lab_results_creatUS_value_last|encounter_primary_reason_HF_Disease_f5a_w5a_first` (0.1061 -> 0.8403) |
 | tvae_seed1 | Spearman (num-num) | 1610 | 0.0817 | 0.0569 | 0.7093 | 1 | `vital_signs_height_value_p1a_avg|vital_signs_height_value_last` (0.989 -> 0.1661) |
 | tvae_seed1 | Cramer's V (cat-cat) | 8515 | 0.0624 | 0.0373 | 0.8078 | 4 | `med_acei_history|med_arb_history` (0.007 -> 0.6323) |
-| tvae_seed1 | corr-ratio (num-cat) | 11092 | 0.041 | 0.0225 | 0.8945 | 13 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first` (0.8082 -> 0.0) |
+| tvae_seed1 | corr-ratio (num-cat) | 11092 | 0.041 | 0.0225 | 0.8945 | 13 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first` (0.8082 -> 0.0) |
 | tvae_seed2 | Spearman (num-num) | 1549 | 0.0827 | 0.0588 | 0.7069 | 0 | `echocardiographs_lvef_pET_last|echocardiographs_lvef_pET_first` (0.8998 -> 0.0484) |
 | tvae_seed2 | Cramer's V (cat-cat) | 8256 | 0.0565 | 0.031 | 0.831 | 1 | `conditions_ap|conditions_dysl` (0.1435 -> 0.7761) |
 | tvae_seed2 | corr-ratio (num-cat) | 10904 | 0.0396 | 0.0213 | 0.8993 | 8 | `nyha_nyha_pET|med_arb` (0.0696 -> 0.7599) |

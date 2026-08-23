@@ -21,34 +21,39 @@
   },
   "evaluate": {
     "completed": true,
-    "completed_at": "2026-08-23T13:31:02.034208+00:00"
+    "completed_at": "2026-08-23T14:47:49.417496+00:00"
   },
   "utility": {
-    "completed": true,
-    "completed_at": "2026-08-23T13:38:02.005575+00:00"
+    "completed": false,
+    "running": true,
+    "started_at": "2026-08-23T14:50:09.375476+00:00"
   },
   "privacy": {
-    "completed": true,
-    "completed_at": "2026-08-23T13:41:02.664304+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-23T14:41:50.596267+00:00"
   },
   "coherence": {
     "completed": true,
-    "completed_at": "2026-08-23T13:31:57.406331+00:00"
+    "completed_at": "2026-08-23T14:48:44.290195+00:00"
   },
   "survival": {
     "completed": true,
-    "completed_at": "2026-08-23T13:33:22.390380+00:00"
+    "completed_at": "2026-08-23T14:50:09.374767+00:00"
   },
   "attacks": {
-    "completed": true,
-    "completed_at": "2026-08-23T13:47:40.639854+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-23T14:41:50.596483+00:00"
   },
   "figures": {
-    "completed": true,
-    "completed_at": "2026-08-23T13:47:44.402196+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-23T14:41:50.596707+00:00"
   },
   "release_docs": {
-    "completed": true,
-    "completed_at": "2026-08-23T13:47:44.813531+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-23T14:41:50.596920+00:00"
   }
 }
