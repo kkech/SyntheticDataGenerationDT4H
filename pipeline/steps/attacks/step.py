@@ -144,6 +144,9 @@ class AttacksStep(PipelineStep):
                 print("  who is at risk: "
                       + " | ".join(f"{q['quartile'].split()[0]} AUC {q['attack_auc']}"
                                    for q in qs))
+            print(f"  empirical ε lower bound (DP audit): "
+                  f"{m['empirical_epsilon_lower_bound']} "
+                  f"(a DP run's claimed budget must exceed this)")
 
             entry["attribute_inference"] = self._aia(train, holdout, synth, sensitive)
             for a in entry["attribute_inference"]:
@@ -216,6 +219,16 @@ class AttacksStep(PipelineStep):
         learned_auc = float(roc_auc_score(labels, oof))
         learned_ci = _boot_ci(oof)
 
+        # EMPIRICAL DP AUDIT: an attack-derived lower bound on the
+        # effective epsilon (Jagielski/Steinke-style): over score
+        # thresholds, the largest log-ratio of Clopper-Pearson-bounded
+        # accept/reject rates between members and non-members. A
+        # chance-level attack yields ~0; a bound approaching a DP run's
+        # CLAIMED budget would falsify the accounting. Both attacks'
+        # scores are audited and the larger bound is reported.
+        emp_eps = max(self._empirical_epsilon(-d_mem, -d_non),
+                      self._empirical_epsilon(oof[:len(d_mem)], oof[len(d_mem):]))
+
         out = {"attack": "nearest-synthetic-distance",
                "attack_auc": round(auc, 4),
                "attack_auc_ci95": ci,
@@ -223,7 +236,11 @@ class AttacksStep(PipelineStep):
                "learned_attack_auc": round(learned_auc, 4),
                "learned_attack_auc_ci95": learned_ci,
                "member_median_distance": round(float(np.median(d_mem)), 6),
-               "nonmember_median_distance": round(float(np.median(d_non)), 6)}
+               "nonmember_median_distance": round(float(np.median(d_non)), 6),
+               "empirical_epsilon_lower_bound": emp_eps,
+               "empirical_epsilon_method": "max log(CP05(TPR)/CP95(FPR)) over "
+                                           "thresholds, both attack score sets, "
+                                           "both accept/reject directions"}
 
         # WHO is at risk: attack success per member-atypicality quartile
         # (each quartile's members scored against all non-members).
@@ -244,6 +261,36 @@ class AttacksStep(PipelineStep):
                 })
             out["mia_by_atypicality"] = by_q
         return out
+
+    @staticmethod
+    def _empirical_epsilon(scores_pos, scores_neg) -> float:
+        """Attack-derived lower bound on effective epsilon. For each
+        threshold, epsilon >= ln(TPR/FPR) must hold for any
+        (epsilon, ~0)-DP mechanism; using the 95% Clopper-Pearson lower
+        bound of the accept rate on members against the upper bound on
+        non-members (and the reject-direction complement) yields a
+        conservative empirical bound. ~0 at chance."""
+        from scipy.stats import beta
+
+        pos = np.asarray(scores_pos, dtype=float)
+        neg = np.asarray(scores_neg, dtype=float)
+        n_p, n_n = len(pos), len(neg)
+        thresholds = np.unique(np.quantile(np.concatenate([pos, neg]),
+                                           np.linspace(0.02, 0.98, 49)))
+        best = 0.0
+        for thr in thresholds:
+            tp = int((pos >= thr).sum())
+            fp = int((neg >= thr).sum())
+            tpr_lo = float(beta.ppf(0.05, tp, n_p - tp + 1)) if tp > 0 else 0.0
+            fpr_hi = float(beta.ppf(0.95, fp + 1, n_n - fp)) if fp < n_n else 1.0
+            if tpr_lo > 0 and fpr_hi > 0:
+                best = max(best, np.log(tpr_lo / fpr_hi))
+            tn, fn = n_n - fp, n_p - tp
+            tnr_lo = float(beta.ppf(0.05, tn, n_n - tn + 1)) if tn > 0 else 0.0
+            fnr_hi = float(beta.ppf(0.95, fn + 1, n_p - fn)) if fn < n_p else 1.0
+            if tnr_lo > 0 and fnr_hi > 0:
+                best = max(best, np.log(tnr_lo / fnr_hi))
+        return round(float(max(best, 0.0)), 4)
 
     # --- attribute inference ---
 
@@ -373,8 +420,8 @@ class AttacksStep(PipelineStep):
             "on non-members; population-level inference (both above baseline, equally) is the "
             "intended use of released data, only member-specific advantage is leakage.",
             "",
-            "| run | MIA AUC (95% CI) | learned MIA AUC (95% CI) | worst AIA membership advantage | anonymeter |",
-            "|---|---|---|---|---|",
+            "| run | MIA AUC (95% CI) | learned MIA AUC (95% CI) | empirical ε̂ lower bound | worst AIA membership advantage | anonymeter |",
+            "|---|---|---|---|---|---|",
         ]
         for run in r["runs"]:
             m = run["membership_inference"]
@@ -392,6 +439,7 @@ class AttacksStep(PipelineStep):
             lines.append(f"| {run['run_id']}{flag} | {m['attack_auc']} "
                          f"({m['attack_auc_ci95'][0]}-{m['attack_auc_ci95'][1]}) "
                          f"| {learned_cell} "
+                         f"| {m.get('empirical_epsilon_lower_bound', '-')} "
                          f"| {adv if adv is not None else '-'} | {anon_cell} |")
         lines += [
             "", "## Who is at risk: membership inference by patient atypicality", "",

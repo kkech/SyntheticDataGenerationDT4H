@@ -262,6 +262,14 @@ class PipelineConfig:
                          "seed": seed, "epsilon": None, "columns": None,
                          "timeout_seconds": None,
                          "params": {"epochs": 2000}})
+        # Logic-GUIDED diffusion: identical model, plus the mined
+        # implication rules as a sampling-time prior (the paper's own
+        # coherence instrument closed into the generator). One run;
+        # the ddpm seeds above are its exact unguided control.
+        plan.append({"run_id": "ddpm_g_seed0", "synthesizer": "ddpm",
+                     "record_as": "ddpm_g", "seed": self.variance_seeds[0],
+                     "epsilon": None, "columns": None, "timeout_seconds": None,
+                     "params": {"epochs": 2000, "guidance_scale": 5.0}})
         # PATE-CTGAN: the second DP-GAN framework, at three sweep points
         # (a full sweep would only replicate dpctgan's budget-independent
         # failure mode if it fails, and three points suffice if it does

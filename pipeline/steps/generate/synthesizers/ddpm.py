@@ -64,6 +64,50 @@ class DDPMSynthesizer(Synthesizer):
         x0 = np.concatenate(parts, axis=1).astype(np.float32)
         self._dim = x0.shape[1]
 
+        # LOGIC-GUIDED SAMPLING (optional): mine boolean implications
+        # from the training frame with the SAME code the coherence audit
+        # uses, and store the one-hot index pairs needed to penalize
+        # rule violations during sampling. The audit's instrument
+        # becomes a generation-time prior; the fair evaluation bar
+        # remains the holdout's own violation rate. Implication rules
+        # only (the bulk of the rule set); numeric-typed rules are not
+        # differentiable through one-hot blocks and are left to the
+        # audit. Disclosed wherever results are reported: the guided
+        # model is optimized toward rules mined from its training data.
+        self._guidance = None
+        g_scale = float(self.params.get("guidance_scale", 0) or 0)
+        if g_scale > 0:
+            from pipeline.steps.coherence.rules import mine_boolean_implications
+
+            offsets = {}
+            off = len(self._num_cols)
+            for c in self._cat_cols:
+                offsets[c] = (off, len(self._categories[c]))
+                off += len(self._categories[c])
+
+            def _cat_idx(col, wanted):
+                for i, v in enumerate(self._categories[col]):
+                    if v.strip().lower() == wanted:
+                        return i
+                return None
+
+            pairs = []
+            for r in mine_boolean_implications(df):
+                a, b = r["if_true"], r["then_true"]
+                if a in offsets and b in offsets:
+                    ai = _cat_idx(a, "true")
+                    bi = _cat_idx(b, "false")
+                    if ai is not None and bi is not None:
+                        pairs.append((offsets[a][0], offsets[a][1], ai,
+                                      offsets[b][0], offsets[b][1], bi))
+            if pairs:
+                self._guidance = {"scale": g_scale, "pairs": pairs}
+                print(f"  logic guidance ON: {len(pairs)} implication rules as a "
+                      f"sampling-time prior (scale {g_scale}).")
+            else:
+                print("  logic guidance requested but no applicable implication "
+                      "rules were mined -- sampling unguided.")
+
         # cosine noise schedule
         self._T = int(self.params.get("timesteps", 1000))
         s = 0.008
@@ -134,6 +178,26 @@ class DDPMSynthesizer(Synthesizer):
         alphas = torch.from_numpy(self._alphas).to(device)
         ab = torch.from_numpy(self._alpha_bar).to(device)
 
+        def _rule_loss(xg):
+            # expected joint probability of (antecedent true AND
+            # consequent explicitly false), summed over rules -- a
+            # differentiable relaxation of the audit's violation count.
+            import torch as _t
+
+            loss = xg.new_zeros(())
+            soft = {}
+            for a_start, a_len, ai, b_start, b_len, bi in self._guidance["pairs"]:
+                if (a_start, a_len) not in soft:
+                    soft[(a_start, a_len)] = _t.softmax(
+                        xg[:, a_start:a_start + a_len], dim=1)
+                if (b_start, b_len) not in soft:
+                    soft[(b_start, b_len)] = _t.softmax(
+                        xg[:, b_start:b_start + b_len], dim=1)
+                pa = soft[(a_start, a_len)][:, ai]
+                pb = soft[(b_start, b_len)][:, bi]
+                loss = loss + (pa * pb).sum()
+            return loss
+
         x = torch.randn(n_rows, self._dim, generator=gen, device=device)
         with torch.no_grad():
             for t in range(self._T - 1, -1, -1):
@@ -141,6 +205,11 @@ class DDPMSynthesizer(Synthesizer):
                 eps = self._model(x, tt / self._T)
                 coef = betas[t] / (1 - ab[t]).sqrt()
                 x = (x - coef * eps) / alphas[t].sqrt()
+                if self._guidance is not None:
+                    with torch.enable_grad():
+                        xg = x.detach().requires_grad_(True)
+                        grad = torch.autograd.grad(_rule_loss(xg), xg)[0]
+                    x = x - self._guidance["scale"] * grad
                 if t > 0:
                     x = x + betas[t].sqrt() * torch.randn(
                         n_rows, self._dim, generator=gen, device=device)
@@ -165,5 +234,8 @@ class DDPMSynthesizer(Synthesizer):
         d = super().describe()
         d.update({"model_class": "native Gaussian DDPM (quantile-normalized numerics "
                                  "+ one-hot categoricals, MLP denoiser)",
-                  "timesteps": getattr(self, "_T", None)})
+                  "timesteps": getattr(self, "_T", None),
+                  "logic_guided": bool(getattr(self, "_guidance", None)),
+                  "guidance_rules": len(self._guidance["pairs"]) if getattr(
+                      self, "_guidance", None) else 0})
         return d

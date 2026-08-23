@@ -83,6 +83,7 @@ class ReleaseDocsStep(PipelineStep):
         priv = _load("privacy", "DT4H_Privacy_Assessment.json") or {}
         att = _load("attacks", "DT4H_Privacy_Attacks.json") or {}
         coh = _load("coherence", "DT4H_Coherence_Audit.json") or {}
+        surv = _load("survival", "DT4H_Survival_Fidelity.json") or {}
 
         ev_by_run = {c.get("run_id"): c for c in ev.get("comparisons", [])
                      if isinstance(c, dict) and c.get("run_id")}
@@ -139,6 +140,11 @@ class ReleaseDocsStep(PipelineStep):
                 "row_coherence": {
                     "violation_rate": coh_by_run.get(rid, {}).get("overall_violation_rate"),
                 },
+                "survival": {
+                    ep: (((e.get("equivalence_vs_holdout") or {}).get(rid) or {})
+                         .get("equivalent_all_horizons"))
+                    for ep, e in (surv.get("endpoints") or {}).items()
+                },
                 "distances": {
                     "verbatim_training_rows": (run.get("leakage") or {}).get(
                         "exact_duplicates_of_training_rows"),
@@ -149,6 +155,8 @@ class ReleaseDocsStep(PipelineStep):
                 "attacks": {
                     "mia_auc": mia.get("attack_auc"),
                     "mia_learned_auc": mia.get("learned_attack_auc"),
+                    "empirical_epsilon_lower_bound":
+                        mia.get("empirical_epsilon_lower_bound"),
                     "mia_auc_most_atypical_quartile":
                         atyp[-1]["attack_auc"] if atyp else None,
                     "aia_worst_membership_advantage":

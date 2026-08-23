@@ -81,6 +81,55 @@ def km_curve(time: np.ndarray, event: np.ndarray, grid_days: int = 30):
     return grid.tolist(), np.round(grid_probs, 5).tolist()
 
 
+def km_at(time: np.ndarray, event: np.ndarray, horizon: float):
+    """Kaplan-Meier survival at a horizon with its Greenwood standard
+    error. Row-wise accumulation: with d tied events at n at risk the
+    per-row terms telescope to the grouped d/(n(n-d)), so ties are
+    handled exactly."""
+    order = np.argsort(time)
+    t, e = time[order], event[order]
+    n = len(t)
+    at_risk = n - np.arange(n)
+    surv = 1.0
+    var_sum = 0.0
+    for i in range(n):
+        if t[i] > horizon:
+            break
+        if e[i]:
+            surv *= 1.0 - 1.0 / at_risk[i]
+            if at_risk[i] > 1:
+                var_sum += 1.0 / (at_risk[i] * (at_risk[i] - 1.0))
+    return float(surv), float(surv * np.sqrt(var_sum))
+
+
+# Equivalence margin for survival probabilities: a synthetic curve is
+# declared EQUIVALENT to the holdout at a horizon when the 90% CI of the
+# survival difference lies entirely within +/- this margin (TOST logic).
+# Non-significance of a log-rank test is NOT evidence of equivalence --
+# this is.
+EQUIVALENCE_MARGIN = 0.05
+EQUIVALENCE_HORIZONS = {"1y": 365.0, "3y": 1095.0, "5y": 1825.0}
+
+
+def survival_equivalence(time_a, event_a, time_b, event_b) -> dict:
+    """TOST-style equivalence of two KM curves at fixed horizons."""
+    out = {"margin": EQUIVALENCE_MARGIN, "horizons": {}}
+    for name, h in EQUIVALENCE_HORIZONS.items():
+        sa, sea = km_at(time_a, event_a, h)
+        sb, seb = km_at(time_b, event_b, h)
+        diff = sa - sb
+        se = float(np.sqrt(sea ** 2 + seb ** 2))
+        lo, hi = diff - 1.645 * se, diff + 1.645 * se
+        out["horizons"][name] = {
+            "difference": round(diff, 4),
+            "ci90": [round(lo, 4), round(hi, 4)],
+            "equivalent": bool(-EQUIVALENCE_MARGIN < lo and hi < EQUIVALENCE_MARGIN),
+        }
+    out["equivalent_all_horizons"] = all(
+        v["equivalent"] for v in out["horizons"].values())
+    return out
+
+
 def logrank(time_a, event_a, time_b, event_b) -> float:
     """Two-sample log-rank test p-value (chi-square, 1 df)."""
     from scipy import stats
@@ -139,6 +188,11 @@ class SurvivalStep(PipelineStep):
             entry["curves"]["holdout"] = self._curve_record(t_ho, e_ho)
             p_floor = logrank(t_tr, e_tr, t_ho, e_ho)
             entry["logrank_train_vs_holdout_p"] = round(p_floor, 4)
+            # Real-vs-real equivalence calibrates what the margin means
+            # at this sample size.
+            entry["equivalence_train_vs_holdout"] = survival_equivalence(
+                t_tr, e_tr, t_ho, e_ho)
+            entry["equivalence_vs_holdout"] = {}
             print(f"  events: train {int(e_tr.sum())}/{len(e_tr)}, holdout {int(e_ho.sum())}/{len(e_ho)} | "
                   f"log-rank train-vs-holdout p={p_floor:.3f} (the sampling-noise calibration)")
 
@@ -153,10 +207,17 @@ class SurvivalStep(PipelineStep):
                 entry["curves"][run_id] = self._curve_record(t_s, e_s)
                 p = logrank(t_s, e_s, t_ho, e_ho)
                 entry["logrank_vs_holdout"][run_id] = round(p, 4)
+                entry["equivalence_vs_holdout"][run_id] = survival_equivalence(
+                    t_s, e_s, t_ho, e_ho)
             close = [rid for rid, p in entry["logrank_vs_holdout"].items()
                      if p is not None and p > 0.05]
+            equiv = [rid for rid, q in entry["equivalence_vs_holdout"].items()
+                     if q["equivalent_all_horizons"]]
             print(f"  runs indistinguishable from holdout at p>0.05: {len(close)}/"
                   f"{len(entry['logrank_vs_holdout'])}")
+            print(f"  runs EQUIVALENT to holdout (TOST, ±{EQUIVALENCE_MARGIN:.0%} at "
+                  f"1y/3y/5y): {len(equiv)}/{len(entry['equivalence_vs_holdout'])} "
+                  f"-- equivalence is the claim non-significance cannot make")
             results["endpoints"][name] = entry
 
         print("\nEffect-estimate replication (1-year all-cause mortality)...")
@@ -303,16 +364,26 @@ class SurvivalStep(PipelineStep):
                       f"train events {e['curves']['train']['events']}/{e['curves']['train']['n']} | "
                       f"holdout {e['curves']['holdout']['events']}/{e['curves']['holdout']['n']} | "
                       f"log-rank train-vs-holdout p = {e['logrank_train_vs_holdout_p']}", "",
-                      "| run | 1y survival | 5y survival | log-rank vs holdout (p) |",
-                      "|---|---|---|---|"]
+                      "| run | 1y survival | 5y survival | log-rank vs holdout (p) | equivalent (TOST ±5pp, 1y/3y/5y) |",
+                      "|---|---|---|---|---|"]
+            tv_eq = (e.get("equivalence_train_vs_holdout") or {}).get(
+                "equivalent_all_horizons")
             for rid, curve in e["curves"].items():
                 if rid in ("train", "holdout"):
+                    eq_cell = ("yes ✅" if tv_eq else "no") if rid == "train" else ""
                     lines.append(f"| **{rid}** | {curve['survival_1y']} | {curve['survival_5y']} | "
-                                 f"{'-' if rid == 'train' else ''} |")
+                                 f"{'-' if rid == 'train' else ''} | {eq_cell} |")
             for rid, p in e["logrank_vs_holdout"].items():
                 c = e["curves"].get(rid, {})
+                q = (e.get("equivalence_vs_holdout") or {}).get(rid) or {}
+                eq_cell = ("yes ✅" if q.get("equivalent_all_horizons")
+                           else "no" if q else "-")
                 lines.append(f"| {rid} | {c.get('survival_1y', '-')} | {c.get('survival_5y', '-')} "
-                             f"| {p} |")
+                             f"| {p} | {eq_cell} |")
+            lines.append("")
+            lines.append("Equivalence is a POSITIVE claim (90% CI of the survival "
+                         "difference within ±5pp at every horizon) -- unlike a "
+                         "non-significant log-rank, which is only absence of evidence.")
             lines.append("")
         eff = r.get("effects", {})
         if eff.get("real_train"):

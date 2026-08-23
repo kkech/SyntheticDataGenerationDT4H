@@ -39,6 +39,7 @@ MODEL_COLORS = {
     "ctgan_qt": "#f3a983",         # light orange
     "aim40": "#66b032",            # light green
     "ddpm": "#7a4a21",             # brown (in-house diffusion baseline)
+    "ddpm_g": "#b8860b",           # dark gold (logic-guided diffusion)
     "patectgan": "#c05fbe",        # violet (second DP-GAN framework)
 }
 REAL_COLOR = "#444444"
