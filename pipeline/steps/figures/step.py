@@ -88,6 +88,21 @@ class FiguresStep(PipelineStep):
                 return m
         return run_id
 
+    @classmethod
+    def _display_label(cls, run_id: str) -> str:
+        """Compact legend label: model name plus epsilon where present.
+        One representative run per model is plotted, so the seed suffix
+        is noise in a legend ('gaussian_copula_seed0' -> 'copula')."""
+        import re
+
+        model = cls._model_of(run_id)
+        short = {"gaussian_copula": "copula"}.get(model, model)
+        m = re.search(r"_eps(\d+)(?:p(\d+))?_", run_id + "_")
+        if m:
+            eps = m.group(1) + ("." + m.group(2) if m.group(2) else "")
+            return f"{short} (ε={eps})"
+        return short
+
     # --- figures ---
 
     def _fig_epsilon_curves(self, plt):
@@ -147,13 +162,13 @@ class FiguresStep(PipelineStep):
         ev = self._load("evaluate", "DT4H_Evaluation.json")
         floor_cmp = next(c for c in ev["comparisons"] if c.get("pair") == "train vs holdout")
         reps = self._representative_runs(ev)
-        fig, ax = plt.subplots(figsize=(5.5, 3.5))
+        fig, ax = plt.subplots(figsize=(6.2, 3.5))
         floor_ks = sorted(r["ks_statistic"] for r in floor_cmp["numeric"])
         import numpy as np
 
         q = np.linspace(0, 1, len(floor_ks))
         ax.plot(floor_ks, q, color=FLOOR_COLOR, linestyle="--", linewidth=1.5,
-                label="noise floor (train vs holdout)")
+                label="noise floor\n(train vs holdout)")
         for run_id in reps:
             c = next((x for x in ev["comparisons"] if x.get("run_id") == run_id), None)
             if not c:
@@ -161,11 +176,12 @@ class FiguresStep(PipelineStep):
             ks = sorted(r["ks_statistic"] for r in c["train_vs_synthetic"]["numeric"])
             m = self._model_of(run_id)
             ax.plot(ks, np.linspace(0, 1, len(ks)), color=MODEL_COLORS.get(m, "#999"),
-                    linewidth=2, label=run_id)
+                    linewidth=2, label=self._display_label(run_id))
         ax.set_xlabel("per-column KS statistic")
         ax.set_ylabel("fraction of numeric columns ≤ x")
         ax.set_title("Numeric fidelity profile vs the sampling-noise floor")
-        ax.legend(fontsize=7)
+        # Legend outside the axes: every in-plot position collides with a curve.
+        ax.legend(fontsize=7.5, loc="center left", bbox_to_anchor=(1.02, 0.5))
         self._save(plt, fig, "fig_ks_profiles")
 
     def _fig_dcr(self, plt):
@@ -175,12 +191,12 @@ class FiguresStep(PipelineStep):
             raise FileNotFoundError("privacy JSON has no histogram data (rerun privacy step)")
         import numpy as np
 
-        fig, ax = plt.subplots(figsize=(6, 3.2))
+        fig, ax = plt.subplots(figsize=(6.6, 3.2))
         edges = np.asarray(base["bin_edges"])
         centers = (edges[:-1] + edges[1:]) / 2
         b = np.asarray(base["counts"], float)
         ax.fill_between(centers, b / b.sum(), step="mid", alpha=0.35, color=REAL_COLOR,
-                        label="holdout→train (real unseen patients)")
+                        label="real unseen patients\n(holdout→train)")
         reps = [r["run_id"] for r in pv["runs"]
                 if r["run_id"] in self._representative_ids({r2["run_id"] for r2 in pv["runs"]})]
         for r in pv["runs"]:
@@ -189,13 +205,16 @@ class FiguresStep(PipelineStep):
             h = np.asarray(r["dcr_histogram"]["counts"], float)
             m = self._model_of(r["run_id"])
             ax.plot(centers, h / h.sum(), color=MODEL_COLORS.get(m, "#999"),
-                    linewidth=2, label=r["run_id"], drawstyle="steps-mid")
+                    linewidth=2, label=self._display_label(r["run_id"]),
+                    drawstyle="steps-mid")
         ax.axvline(pv["holdout_baseline"]["dcr_p5"], color=FLOOR_COLOR, linestyle="--",
-                   linewidth=1, label="holdout p5 (risk threshold)")
+                   linewidth=1, label="holdout p5\n(risk threshold)")
+        ax.set_xlim(0, 0.75)  # nothing lives beyond; free the space for the data
         ax.set_xlabel("distance to closest training record (DCR)")
         ax.set_ylabel("share of records")
         ax.set_title("Privacy: synthetic records vs the unseen-patient baseline")
-        ax.legend(fontsize=7)
+        # Legend outside the axes: the in-plot box overlapped the histograms.
+        ax.legend(fontsize=7.5, loc="center left", bbox_to_anchor=(1.02, 0.5))
         self._save(plt, fig, "fig_dcr")
 
     def _fig_km(self, plt):
@@ -219,7 +238,8 @@ class FiguresStep(PipelineStep):
                     continue
                 m = self._model_of(rid)
                 ax.plot([g / 365 for g in c["grid_days"]], c["survival"],
-                        color=MODEL_COLORS.get(m, "#999"), linewidth=1.8, label=rid)
+                        color=MODEL_COLORS.get(m, "#999"), linewidth=1.8,
+                        label=self._display_label(rid))
             ax.set_xlabel("years since index admission")
             ax.set_ylabel("event-free probability")
             ax.set_ylim(0, 1.02)
@@ -268,7 +288,7 @@ class FiguresStep(PipelineStep):
             ax.axvline(floor, color=FLOOR_COLOR, linestyle="--", linewidth=1,
                        label=f"real-vs-real floor ({floor})")
         ax.set_yticks(list(y))
-        ax.set_yticklabels([r for r, _ in runs], fontsize=8)
+        ax.set_yticklabels([self._display_label(r) for r, _ in runs], fontsize=8)
         ax.set_xlim(0.4, 1.0)
         ax.set_xlabel("C2ST AUC (full-joint distinguishability)")
         ax.set_title("Can a classifier tell synthetic rows from real ones?")
