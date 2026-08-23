@@ -1,178 +1,848 @@
 {
-  "test_fraction": 0.25,
   "seed": 0,
   "targets": [
     {
       "target": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
-      "n_real": 1117,
-      "positives": 699,
-      "baseline_auc": 0.6713,
+      "n_train_labelled": 853,
+      "n_holdout_labelled": 264,
+      "baseline_auc": 0.6861,
       "tstr": [
         {
-          "synthesizer": "ctgan",
-          "auc": 0.6624,
-          "auc_gap": 0.0089
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.5146,
+          "auc_gap": 0.1715
         },
         {
-          "synthesizer": "dpctgan",
+          "run_id": "aim50_eps5_seed0",
+          "auc": 0.4906,
+          "auc_gap": 0.1955
+        },
+        {
+          "run_id": "ctgan_seed0",
+          "auc": 0.3633,
+          "auc_gap": 0.3228
+        },
+        {
+          "run_id": "ctgan_seed1",
+          "auc": 0.4407,
+          "auc_gap": 0.2454
+        },
+        {
+          "run_id": "ctgan_seed2",
+          "auc": 0.6207,
+          "auc_gap": 0.0654
+        },
+        {
+          "run_id": "dpctgan_eps10_seed0",
           "auc": null,
           "note": "target missing or single-class in synthetic data"
         },
         {
-          "synthesizer": "gaussian_copula",
-          "auc": 0.5747,
-          "auc_gap": 0.0966
+          "run_id": "dpctgan_eps15_seed0",
+          "auc": 0.5114,
+          "auc_gap": 0.1747
         },
         {
-          "synthesizer": "mst",
-          "auc": 0.415,
-          "auc_gap": 0.2563
+          "run_id": "dpctgan_eps15_seed1",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
         },
         {
-          "synthesizer": "tvae",
-          "auc": 0.602,
-          "auc_gap": 0.0693
+          "run_id": "dpctgan_eps15_seed2",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps1_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps20_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps8_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "gaussian_copula_seed0",
+          "auc": 0.5195,
+          "auc_gap": 0.1666
+        },
+        {
+          "run_id": "gaussian_copula_seed1",
+          "auc": 0.5101,
+          "auc_gap": 0.176
+        },
+        {
+          "run_id": "gaussian_copula_seed2",
+          "auc": 0.5385,
+          "auc_gap": 0.1476
+        },
+        {
+          "run_id": "mst_eps10_seed0",
+          "auc": 0.5595,
+          "auc_gap": 0.1266
+        },
+        {
+          "run_id": "mst_eps15_seed0",
+          "auc": 0.5097,
+          "auc_gap": 0.1764
+        },
+        {
+          "run_id": "mst_eps15_seed1",
+          "auc": 0.522,
+          "auc_gap": 0.1641
+        },
+        {
+          "run_id": "mst_eps15_seed2",
+          "auc": 0.5321,
+          "auc_gap": 0.154
+        },
+        {
+          "run_id": "mst_eps1_seed0",
+          "auc": 0.5767,
+          "auc_gap": 0.1094
+        },
+        {
+          "run_id": "mst_eps20_seed0",
+          "auc": 0.5172,
+          "auc_gap": 0.1689
+        },
+        {
+          "run_id": "mst_eps5_seed0",
+          "auc": 0.4684,
+          "auc_gap": 0.2177
+        },
+        {
+          "run_id": "mst_eps8_seed0",
+          "auc": 0.4669,
+          "auc_gap": 0.2192
+        },
+        {
+          "run_id": "tvae_seed0",
+          "auc": 0.5811,
+          "auc_gap": 0.105
+        },
+        {
+          "run_id": "tvae_seed1",
+          "auc": 0.5763,
+          "auc_gap": 0.1098
+        },
+        {
+          "run_id": "tvae_seed2",
+          "auc": 0.5937,
+          "auc_gap": 0.0924
         }
-      ]
+      ],
+      "positives_train": 531,
+      "positives_holdout": 168
     },
     {
       "target": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
-      "n_real": 1117,
-      "positives": 418,
-      "baseline_auc": 0.6422,
+      "n_train_labelled": 853,
+      "n_holdout_labelled": 264,
+      "baseline_auc": 0.6861,
       "tstr": [
         {
-          "synthesizer": "ctgan",
-          "auc": 0.5358,
-          "auc_gap": 0.1064
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.5347,
+          "auc_gap": 0.1514
         },
         {
-          "synthesizer": "dpctgan",
-          "auc": 0.5877,
-          "auc_gap": 0.0545
+          "run_id": "aim50_eps5_seed0",
+          "auc": 0.4905,
+          "auc_gap": 0.1956
         },
         {
-          "synthesizer": "gaussian_copula",
-          "auc": 0.5322,
-          "auc_gap": 0.11
+          "run_id": "ctgan_seed0",
+          "auc": 0.427,
+          "auc_gap": 0.2591
         },
         {
-          "synthesizer": "mst",
-          "auc": 0.5666,
-          "auc_gap": 0.0756
+          "run_id": "ctgan_seed1",
+          "auc": 0.5111,
+          "auc_gap": 0.175
         },
         {
-          "synthesizer": "tvae",
-          "auc": 0.5759,
-          "auc_gap": 0.0663
-        }
-      ]
-    },
-    {
-      "target": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
-      "n_real": 472,
-      "positives": 296,
-      "baseline_auc": 0.6732,
-      "tstr": [
-        {
-          "synthesizer": "ctgan",
-          "auc": 0.5402,
-          "auc_gap": 0.133
+          "run_id": "ctgan_seed2",
+          "auc": 0.5861,
+          "auc_gap": 0.1
         },
         {
-          "synthesizer": "dpctgan",
+          "run_id": "dpctgan_eps10_seed0",
           "auc": null,
           "note": "target missing or single-class in synthetic data"
         },
         {
-          "synthesizer": "gaussian_copula",
-          "auc": 0.492,
-          "auc_gap": 0.1812
-        },
-        {
-          "synthesizer": "mst",
-          "auc": 0.4183,
-          "auc_gap": 0.2549
-        },
-        {
-          "synthesizer": "tvae",
-          "auc": 0.5283,
-          "auc_gap": 0.1449
-        }
-      ]
-    },
-    {
-      "target": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
-      "n_real": 472,
-      "positives": 176,
-      "baseline_auc": 0.7343,
-      "tstr": [
-        {
-          "synthesizer": "ctgan",
-          "auc": 0.4579,
-          "auc_gap": 0.2764
-        },
-        {
-          "synthesizer": "dpctgan",
+          "run_id": "dpctgan_eps15_seed0",
           "auc": null,
           "note": "target missing or single-class in synthetic data"
         },
         {
-          "synthesizer": "gaussian_copula",
-          "auc": 0.5313,
-          "auc_gap": 0.203
+          "run_id": "dpctgan_eps15_seed1",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
         },
         {
-          "synthesizer": "mst",
-          "auc": 0.5034,
-          "auc_gap": 0.2309
+          "run_id": "dpctgan_eps15_seed2",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
         },
         {
-          "synthesizer": "tvae",
-          "auc": 0.6413,
-          "auc_gap": 0.093
+          "run_id": "dpctgan_eps1_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps20_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps8_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "gaussian_copula_seed0",
+          "auc": 0.5154,
+          "auc_gap": 0.1707
+        },
+        {
+          "run_id": "gaussian_copula_seed1",
+          "auc": 0.5429,
+          "auc_gap": 0.1432
+        },
+        {
+          "run_id": "gaussian_copula_seed2",
+          "auc": 0.4956,
+          "auc_gap": 0.1905
+        },
+        {
+          "run_id": "mst_eps10_seed0",
+          "auc": 0.508,
+          "auc_gap": 0.1781
+        },
+        {
+          "run_id": "mst_eps15_seed0",
+          "auc": 0.523,
+          "auc_gap": 0.1631
+        },
+        {
+          "run_id": "mst_eps15_seed1",
+          "auc": 0.537,
+          "auc_gap": 0.1491
+        },
+        {
+          "run_id": "mst_eps15_seed2",
+          "auc": 0.4581,
+          "auc_gap": 0.228
+        },
+        {
+          "run_id": "mst_eps1_seed0",
+          "auc": 0.5146,
+          "auc_gap": 0.1715
+        },
+        {
+          "run_id": "mst_eps20_seed0",
+          "auc": 0.5085,
+          "auc_gap": 0.1776
+        },
+        {
+          "run_id": "mst_eps5_seed0",
+          "auc": 0.5391,
+          "auc_gap": 0.147
+        },
+        {
+          "run_id": "mst_eps8_seed0",
+          "auc": 0.4537,
+          "auc_gap": 0.2324
+        },
+        {
+          "run_id": "tvae_seed0",
+          "auc": 0.5823,
+          "auc_gap": 0.1038
+        },
+        {
+          "run_id": "tvae_seed1",
+          "auc": 0.6001,
+          "auc_gap": 0.086
+        },
+        {
+          "run_id": "tvae_seed2",
+          "auc": 0.557,
+          "auc_gap": 0.1291
         }
-      ]
+      ],
+      "positives_train": 322,
+      "positives_holdout": 96
     },
     {
-      "target": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
-      "n_real": 2186,
-      "positives": 1403,
-      "baseline_auc": 0.6397,
+      "target": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "n_train_labelled": 853,
+      "n_holdout_labelled": 264,
+      "baseline_auc": 0.5729,
       "tstr": [
         {
-          "synthesizer": "ctgan",
-          "auc": 0.5594,
-          "auc_gap": 0.0803
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.5411,
+          "auc_gap": 0.0318
         },
         {
-          "synthesizer": "dpctgan",
-          "auc": 0.453,
-          "auc_gap": 0.1867
+          "run_id": "aim50_eps5_seed0",
+          "auc": 0.5312,
+          "auc_gap": 0.0417
         },
         {
-          "synthesizer": "gaussian_copula",
-          "auc": 0.5445,
-          "auc_gap": 0.0952
+          "run_id": "ctgan_seed0",
+          "auc": 0.5479,
+          "auc_gap": 0.025
         },
         {
-          "synthesizer": "mst",
-          "auc": 0.4738,
-          "auc_gap": 0.1659
+          "run_id": "ctgan_seed1",
+          "auc": 0.5176,
+          "auc_gap": 0.0553
         },
         {
-          "synthesizer": "tvae",
-          "auc": 0.6022,
-          "auc_gap": 0.0375
+          "run_id": "ctgan_seed2",
+          "auc": 0.568,
+          "auc_gap": 0.0049
+        },
+        {
+          "run_id": "dpctgan_eps10_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps15_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps15_seed1",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps15_seed2",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps1_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps20_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps5_seed0",
+          "auc": 0.6383,
+          "auc_gap": -0.0654
+        },
+        {
+          "run_id": "dpctgan_eps8_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "gaussian_copula_seed0",
+          "auc": 0.371,
+          "auc_gap": 0.2019
+        },
+        {
+          "run_id": "gaussian_copula_seed1",
+          "auc": 0.516,
+          "auc_gap": 0.0569
+        },
+        {
+          "run_id": "gaussian_copula_seed2",
+          "auc": 0.3835,
+          "auc_gap": 0.1894
+        },
+        {
+          "run_id": "mst_eps10_seed0",
+          "auc": 0.5589,
+          "auc_gap": 0.014
+        },
+        {
+          "run_id": "mst_eps15_seed0",
+          "auc": 0.5567,
+          "auc_gap": 0.0162
+        },
+        {
+          "run_id": "mst_eps15_seed1",
+          "auc": 0.4713,
+          "auc_gap": 0.1016
+        },
+        {
+          "run_id": "mst_eps15_seed2",
+          "auc": 0.6716,
+          "auc_gap": -0.0987
+        },
+        {
+          "run_id": "mst_eps1_seed0",
+          "auc": 0.5637,
+          "auc_gap": 0.0092
+        },
+        {
+          "run_id": "mst_eps20_seed0",
+          "auc": 0.6493,
+          "auc_gap": -0.0764
+        },
+        {
+          "run_id": "mst_eps5_seed0",
+          "auc": 0.6064,
+          "auc_gap": -0.0335
+        },
+        {
+          "run_id": "mst_eps8_seed0",
+          "auc": 0.5906,
+          "auc_gap": -0.0177
+        },
+        {
+          "run_id": "tvae_seed0",
+          "auc": 0.4756,
+          "auc_gap": 0.0973
+        },
+        {
+          "run_id": "tvae_seed1",
+          "auc": 0.3568,
+          "auc_gap": 0.2161
+        },
+        {
+          "run_id": "tvae_seed2",
+          "auc": 0.4636,
+          "auc_gap": 0.1093
         }
-      ]
+      ],
+      "positives_train": 98,
+      "positives_holdout": 18
+    },
+    {
+      "target": "cause_of_death_isAllCause_f5a_w3a_first",
+      "n_train_labelled": 1291,
+      "n_holdout_labelled": 438,
+      "baseline_auc": 0.5435,
+      "tstr": [
+        {
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.5025,
+          "auc_gap": 0.041
+        },
+        {
+          "run_id": "aim50_eps5_seed0",
+          "auc": 0.5108,
+          "auc_gap": 0.0327
+        },
+        {
+          "run_id": "ctgan_seed0",
+          "auc": 0.5657,
+          "auc_gap": -0.0222
+        },
+        {
+          "run_id": "ctgan_seed1",
+          "auc": 0.5244,
+          "auc_gap": 0.0191
+        },
+        {
+          "run_id": "ctgan_seed2",
+          "auc": 0.444,
+          "auc_gap": 0.0995
+        },
+        {
+          "run_id": "dpctgan_eps10_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps15_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps15_seed1",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps15_seed2",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps1_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps20_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps8_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "gaussian_copula_seed0",
+          "auc": 0.6282,
+          "auc_gap": -0.0847
+        },
+        {
+          "run_id": "gaussian_copula_seed1",
+          "auc": 0.4716,
+          "auc_gap": 0.0719
+        },
+        {
+          "run_id": "gaussian_copula_seed2",
+          "auc": 0.5487,
+          "auc_gap": -0.0052
+        },
+        {
+          "run_id": "mst_eps10_seed0",
+          "auc": 0.4969,
+          "auc_gap": 0.0466
+        },
+        {
+          "run_id": "mst_eps15_seed0",
+          "auc": 0.4704,
+          "auc_gap": 0.0731
+        },
+        {
+          "run_id": "mst_eps15_seed1",
+          "auc": 0.4172,
+          "auc_gap": 0.1263
+        },
+        {
+          "run_id": "mst_eps15_seed2",
+          "auc": 0.3669,
+          "auc_gap": 0.1766
+        },
+        {
+          "run_id": "mst_eps1_seed0",
+          "auc": 0.4836,
+          "auc_gap": 0.0599
+        },
+        {
+          "run_id": "mst_eps20_seed0",
+          "auc": 0.5035,
+          "auc_gap": 0.04
+        },
+        {
+          "run_id": "mst_eps5_seed0",
+          "auc": 0.5067,
+          "auc_gap": 0.0368
+        },
+        {
+          "run_id": "mst_eps8_seed0",
+          "auc": 0.4259,
+          "auc_gap": 0.1176
+        },
+        {
+          "run_id": "tvae_seed0",
+          "auc": 0.5567,
+          "auc_gap": -0.0132
+        },
+        {
+          "run_id": "tvae_seed1",
+          "auc": 0.5372,
+          "auc_gap": 0.0063
+        },
+        {
+          "run_id": "tvae_seed2",
+          "auc": 0.6072,
+          "auc_gap": -0.0637
+        }
+      ],
+      "positives_train": 1208,
+      "positives_holdout": 417
+    },
+    {
+      "target": "cause_of_death_isCV_f5a_w3a_first",
+      "n_train_labelled": 1291,
+      "n_holdout_labelled": 438,
+      "baseline_auc": 0.5435,
+      "tstr": [
+        {
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.4587,
+          "auc_gap": 0.0848
+        },
+        {
+          "run_id": "aim50_eps5_seed0",
+          "auc": 0.5761,
+          "auc_gap": -0.0326
+        },
+        {
+          "run_id": "ctgan_seed0",
+          "auc": 0.5369,
+          "auc_gap": 0.0066
+        },
+        {
+          "run_id": "ctgan_seed1",
+          "auc": 0.4502,
+          "auc_gap": 0.0933
+        },
+        {
+          "run_id": "ctgan_seed2",
+          "auc": 0.4056,
+          "auc_gap": 0.1379
+        },
+        {
+          "run_id": "dpctgan_eps10_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps15_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps15_seed1",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps15_seed2",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps1_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps20_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "dpctgan_eps8_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "gaussian_copula_seed0",
+          "auc": 0.523,
+          "auc_gap": 0.0205
+        },
+        {
+          "run_id": "gaussian_copula_seed1",
+          "auc": 0.4837,
+          "auc_gap": 0.0598
+        },
+        {
+          "run_id": "gaussian_copula_seed2",
+          "auc": 0.5255,
+          "auc_gap": 0.018
+        },
+        {
+          "run_id": "mst_eps10_seed0",
+          "auc": 0.4361,
+          "auc_gap": 0.1074
+        },
+        {
+          "run_id": "mst_eps15_seed0",
+          "auc": 0.4985,
+          "auc_gap": 0.045
+        },
+        {
+          "run_id": "mst_eps15_seed1",
+          "auc": 0.6033,
+          "auc_gap": -0.0598
+        },
+        {
+          "run_id": "mst_eps15_seed2",
+          "auc": 0.5009,
+          "auc_gap": 0.0426
+        },
+        {
+          "run_id": "mst_eps1_seed0",
+          "auc": 0.4428,
+          "auc_gap": 0.1007
+        },
+        {
+          "run_id": "mst_eps20_seed0",
+          "auc": 0.4636,
+          "auc_gap": 0.0799
+        },
+        {
+          "run_id": "mst_eps5_seed0",
+          "auc": 0.5063,
+          "auc_gap": 0.0372
+        },
+        {
+          "run_id": "mst_eps8_seed0",
+          "auc": 0.5087,
+          "auc_gap": 0.0348
+        },
+        {
+          "run_id": "tvae_seed0",
+          "auc": 0.5487,
+          "auc_gap": -0.0052
+        },
+        {
+          "run_id": "tvae_seed1",
+          "auc": 0.543,
+          "auc_gap": 0.0005
+        },
+        {
+          "run_id": "tvae_seed2",
+          "auc": 0.5942,
+          "auc_gap": -0.0507
+        }
+      ],
+      "positives_train": 83,
+      "positives_holdout": 21
     }
   ],
+  "n_train": 3520,
+  "n_holdout": 1174,
   "aggregate_auc_gap": {
-    "ctgan": 0.121,
-    "dpctgan": 0.1206,
-    "gaussian_copula": 0.1372,
-    "mst": 0.1967,
-    "tvae": 0.0822
-  }
+    "aim50_eps1_seed0": 0.0961,
+    "aim50_eps5_seed0": 0.0866,
+    "ctgan_seed0": 0.1183,
+    "ctgan_seed1": 0.1176,
+    "ctgan_seed2": 0.0815,
+    "dpctgan_eps15_seed0": 0.1747,
+    "dpctgan_eps5_seed0": -0.0654,
+    "gaussian_copula_seed0": 0.095,
+    "gaussian_copula_seed1": 0.1016,
+    "gaussian_copula_seed2": 0.1081,
+    "mst_eps10_seed0": 0.0945,
+    "mst_eps15_seed0": 0.0948,
+    "mst_eps15_seed1": 0.0963,
+    "mst_eps15_seed2": 0.1005,
+    "mst_eps1_seed0": 0.0901,
+    "mst_eps20_seed0": 0.078,
+    "mst_eps5_seed0": 0.081,
+    "mst_eps8_seed0": 0.1173,
+    "tvae_seed0": 0.0575,
+    "tvae_seed1": 0.0837,
+    "tvae_seed2": 0.0433
+  },
+  "grouped_auc_gap": [
+    {
+      "synthesizer": "aim",
+      "epsilon": 1.0,
+      "n_runs": 1,
+      "mean_gap": 0.0961,
+      "sd_gap": null
+    },
+    {
+      "synthesizer": "aim",
+      "epsilon": 5.0,
+      "n_runs": 1,
+      "mean_gap": 0.0866,
+      "sd_gap": null
+    },
+    {
+      "synthesizer": "ctgan",
+      "epsilon": null,
+      "n_runs": 3,
+      "mean_gap": 0.1058,
+      "sd_gap": 0.021
+    },
+    {
+      "synthesizer": "dpctgan",
+      "epsilon": 5.0,
+      "n_runs": 1,
+      "mean_gap": -0.0654,
+      "sd_gap": null
+    },
+    {
+      "synthesizer": "dpctgan",
+      "epsilon": 15.0,
+      "n_runs": 1,
+      "mean_gap": 0.1747,
+      "sd_gap": null
+    },
+    {
+      "synthesizer": "gaussian_copula",
+      "epsilon": null,
+      "n_runs": 3,
+      "mean_gap": 0.1016,
+      "sd_gap": 0.0066
+    },
+    {
+      "synthesizer": "mst",
+      "epsilon": 1.0,
+      "n_runs": 1,
+      "mean_gap": 0.0901,
+      "sd_gap": null
+    },
+    {
+      "synthesizer": "mst",
+      "epsilon": 5.0,
+      "n_runs": 1,
+      "mean_gap": 0.081,
+      "sd_gap": null
+    },
+    {
+      "synthesizer": "mst",
+      "epsilon": 8.0,
+      "n_runs": 1,
+      "mean_gap": 0.1173,
+      "sd_gap": null
+    },
+    {
+      "synthesizer": "mst",
+      "epsilon": 10.0,
+      "n_runs": 1,
+      "mean_gap": 0.0945,
+      "sd_gap": null
+    },
+    {
+      "synthesizer": "mst",
+      "epsilon": 15.0,
+      "n_runs": 3,
+      "mean_gap": 0.0972,
+      "sd_gap": 0.003
+    },
+    {
+      "synthesizer": "mst",
+      "epsilon": 20.0,
+      "n_runs": 1,
+      "mean_gap": 0.078,
+      "sd_gap": null
+    },
+    {
+      "synthesizer": "tvae",
+      "epsilon": null,
+      "n_runs": 3,
+      "mean_gap": 0.0615,
+      "sd_gap": 0.0205
+    }
+  ]
 }

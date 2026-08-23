@@ -3,6 +3,7 @@
 - Input: 4694 rows x 528 columns (4694 unique patients)
 - Output: 4694 rows x 249 columns
 - Remaining missing cells: 0 null, 0 NaN
+- Holdout split (seed 0): 3520 train / 1174 holdout rows (25% held out, never seen by any generator)
 
 ## Metadata validation
 - 528 / 528 declared columns matched in data
