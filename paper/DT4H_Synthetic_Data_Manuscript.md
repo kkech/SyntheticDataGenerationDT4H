@@ -1,3 +1,5 @@
+> **Note:** `main.tex` is now the canonical manuscript (edited in Overleaf); this Markdown version is the initial draft and is not kept in sync.
+
 # A privacy-validated synthetic version of the DataTools4Heart heart-failure cohort, with a calibrated evaluation and gated-release pipeline
 
 **Target venue:** Scientific Data (Data Descriptor). Citations in APA author–date style for drafting; convert to the journal's numbered style at submission.
