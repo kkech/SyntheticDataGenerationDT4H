@@ -306,6 +306,10 @@ class GenerateStep(PipelineStep):
                 print("Training... (no time limit)")
             with self._time_limit(timeout, f"'{run_id}' fit"):
                 synth.fit(run_train, categorical_columns=categorical, continuous_columns=continuous)
+            # Refresh the description AFTER fitting: some models only
+            # know fit-dependent facts then (e.g. ddpm's guidance-rule
+            # count), and the summary must record the truth.
+            record.update(synth.describe())
 
             # Persist the fitted generator so more synthetic records can
             # be produced later without retraining (see regenerate.py).
