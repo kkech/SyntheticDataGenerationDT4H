@@ -4,33 +4,33 @@ Members: 3520 training records; non-members: 1174 holdout records (real, unseen 
 
 | run | MIA AUC (95% CI) | worst AIA membership advantage | anonymeter |
 |---|---|---|---|
-| aim50_eps1_seed0 | 0.4995 (0.4809-0.5182) | 0.0037 | SO 0.0071, link - |
-| aim50_eps5_seed0 | 0.499 (0.4802-0.5199) | 0.0037 | SO 0.0, link - |
-| ctgan_seed0 | 0.4786 (0.4609-0.4976) | 0.0227 | SO 0.0, link - |
-| ctgan_seed1 | 0.4973 (0.4784-0.5147) | 0.0 | skipped |
-| ctgan_seed2 | 0.5149 (0.4957-0.531) | 0.0264 | SO 0.0, link - |
-| dpctgan_eps10_seed0 | 0.497 (0.4784-0.5166) | 0.0 | skipped |
-| dpctgan_eps15_seed0 | 0.5003 (0.4815-0.5191) | 0.0066 | SO 0.0, link - |
-| dpctgan_eps15_seed1 | 0.5004 (0.4812-0.5214) | 0.0 | skipped |
-| dpctgan_eps15_seed2 | 0.5007 (0.4811-0.5196) | 0.0319 | skipped |
-| dpctgan_eps1_seed0 | 0.4997 (0.4817-0.5189) | 0.0 | skipped |
-| dpctgan_eps20_seed0 | 0.4983 (0.4802-0.5166) | 0.0319 | SO 0.0, link - |
-| dpctgan_eps5_seed0 | 0.5001 (0.483-0.5202) | 0.0037 | SO 0.0, link - |
-| dpctgan_eps8_seed0 | 0.4985 (0.4803-0.5184) | 0.0037 | SO 0.0, link - |
-| gaussian_copula_seed0 | 0.4934 (0.4772-0.5113) | 0.0 | skipped |
-| gaussian_copula_seed1 | 0.5 (0.4801-0.5178) | 0.0153 | skipped |
-| gaussian_copula_seed2 | 0.498 (0.4791-0.5174) | 0.0333 | SO 0.0, link - |
-| mst_eps10_seed0 | 0.5011 (0.4816-0.5214) | 0.0 | SO 0.0066, link - |
-| mst_eps15_seed0 | 0.4924 (0.4711-0.5112) | 0.0043 | skipped |
-| mst_eps15_seed1 | 0.4997 (0.4823-0.5192) | 0.0105 | SO 0.0364, link - |
-| mst_eps15_seed2 | 0.5055 (0.4868-0.525) | 0.0071 | SO 0.0132, link - |
-| mst_eps1_seed0 | 0.5047 (0.4839-0.5228) | 0.0234 | SO 0.005, link - |
-| mst_eps20_seed0 | 0.498 (0.4792-0.5164) | 0.0034 | SO 0.0281, link - |
-| mst_eps5_seed0 | 0.4893 (0.4703-0.5082) | 0.0 | SO 0.0198, link - |
-| mst_eps8_seed0 | 0.4967 (0.4755-0.5158) | 0.0068 | skipped |
-| tvae_seed0 | 0.5195 (0.4994-0.5384) | 0.0362 | skipped |
-| tvae_seed1 | 0.5137 (0.4949-0.5316) | 0.0208 | SO 0.0033, link - |
-| tvae_seed2 | 0.5041 (0.4841-0.5207) | 0.0244 | skipped |
+| aim50_eps1_seed0 | 0.4995 (0.4809-0.5182) | 0.0037 | SO 0.0071, link 0.0 |
+| aim50_eps5_seed0 | 0.499 (0.4802-0.5199) | 0.0037 | SO 0.0, link 0.0 |
+| ctgan_seed0 | 0.4786 (0.4609-0.4976) | 0.0227 | SO 0.0, link 0.0 |
+| ctgan_seed1 | 0.4973 (0.4784-0.5147) | 0.0 | SO 0.0, link 0.005 |
+| ctgan_seed2 | 0.5149 (0.4957-0.531) | 0.0264 | SO 0.005, link 0.0 |
+| dpctgan_eps10_seed0 | 0.497 (0.4784-0.5166) | 0.0 | SO 0.0, link 0.0 |
+| dpctgan_eps15_seed0 | 0.5003 (0.4815-0.5191) | 0.0066 | SO 0.0, link 0.0 |
+| dpctgan_eps15_seed1 | 0.5004 (0.4812-0.5214) | 0.0 | SO 0.0, link 0.0 |
+| dpctgan_eps15_seed2 | 0.5007 (0.4811-0.5196) | 0.0319 | SO 0.0, link 0.0 |
+| dpctgan_eps1_seed0 | 0.4997 (0.4817-0.5189) | 0.0 | SO 0.0, link 0.0 |
+| dpctgan_eps20_seed0 | 0.4983 (0.4802-0.5166) | 0.0319 | SO 0.0, link 0.0 |
+| dpctgan_eps5_seed0 | 0.5001 (0.483-0.5202) | 0.0037 | SO 0.0, link 0.0 |
+| dpctgan_eps8_seed0 | 0.4985 (0.4803-0.5184) | 0.0037 | SO 0.0, link 0.0 |
+| gaussian_copula_seed0 | 0.4934 (0.4772-0.5113) | 0.0 | SO 0.0, link 0.0 |
+| gaussian_copula_seed1 | 0.5 (0.4801-0.5178) | 0.0153 | SO 0.0, link 0.0 |
+| gaussian_copula_seed2 | 0.498 (0.4791-0.5174) | 0.0333 | SO 0.0099, link 0.0 |
+| mst_eps10_seed0 | 0.5011 (0.4816-0.5214) | 0.0 | SO 0.0066, link 0.0 |
+| mst_eps15_seed0 | 0.4924 (0.4711-0.5112) | 0.0043 | SO 0.0099, link 0.0 |
+| mst_eps15_seed1 | 0.4997 (0.4823-0.5192) | 0.0105 | SO 0.0364, link 0.0 |
+| mst_eps15_seed2 | 0.5055 (0.4868-0.525) | 0.0071 | SO 0.0132, link 0.0 |
+| mst_eps1_seed0 | 0.5047 (0.4839-0.5228) | 0.0234 | SO 0.005, link 0.0 |
+| mst_eps20_seed0 | 0.498 (0.4792-0.5164) | 0.0034 | SO 0.0281, link 0.0 |
+| mst_eps5_seed0 | 0.4893 (0.4703-0.5082) | 0.0 | SO 0.0198, link 0.0 |
+| mst_eps8_seed0 | 0.4967 (0.4755-0.5158) | 0.0068 | SO 0.0231, link 0.0 |
+| tvae_seed0 | 0.5195 (0.4994-0.5384) | 0.0362 | SO 0.005, link 0.0 |
+| tvae_seed1 | 0.5137 (0.4949-0.5316) | 0.0208 | SO 0.0, link 0.0099 |
+| tvae_seed2 | 0.5041 (0.4841-0.5207) | 0.0244 | SO 0.0, link 0.0 |
 
 ## Attribute inference detail
 

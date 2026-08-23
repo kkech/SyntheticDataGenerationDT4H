@@ -44,9 +44,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0071,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 17.3
+      "duration_seconds": 18.0
     },
     {
       "run_id": "aim50_eps5_seed0",
@@ -85,9 +85,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 11.8
+      "duration_seconds": 11.9
     },
     {
       "run_id": "ctgan_seed0",
@@ -126,9 +126,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.1
+      "duration_seconds": 14.5
     },
     {
       "run_id": "ctgan_seed1",
@@ -166,10 +166,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) < (2024.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) < (2024.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.005
       },
-      "duration_seconds": 14.1
+      "duration_seconds": 14.7
     },
     {
       "run_id": "ctgan_seed2",
@@ -207,10 +207,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.0,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.005,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.4
+      "duration_seconds": 14.8
     },
     {
       "run_id": "dpctgan_eps10_seed0",
@@ -248,10 +248,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) > (2015.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) > (2015.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 13.8
+      "duration_seconds": 14.4
     },
     {
       "run_id": "dpctgan_eps15_seed0",
@@ -290,9 +290,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 13.8
+      "duration_seconds": 14.2
     },
     {
       "run_id": "dpctgan_eps15_seed1",
@@ -330,10 +330,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) == (2023.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) == (2023.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 13.5
+      "duration_seconds": 14.1
     },
     {
       "run_id": "dpctgan_eps15_seed2",
@@ -371,10 +371,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) > (2016.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) > (2016.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 13.5
+      "duration_seconds": 14.1
     },
     {
       "run_id": "dpctgan_eps1_seed0",
@@ -412,10 +412,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) == (2023.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) == (2023.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.2
+      "duration_seconds": 14.8
     },
     {
       "run_id": "dpctgan_eps20_seed0",
@@ -454,9 +454,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 13.6
+      "duration_seconds": 13.9
     },
     {
       "run_id": "dpctgan_eps5_seed0",
@@ -495,9 +495,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 13.7
+      "duration_seconds": 14.2
     },
     {
       "run_id": "dpctgan_eps8_seed0",
@@ -536,9 +536,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.2
+      "duration_seconds": 14.6
     },
     {
       "run_id": "gaussian_copula_seed0",
@@ -576,10 +576,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) == (2015.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) == (2015.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.0
+      "duration_seconds": 14.5
     },
     {
       "run_id": "gaussian_copula_seed1",
@@ -617,10 +617,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) < (2020.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) < (2020.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.0
+      "duration_seconds": 14.6
     },
     {
       "run_id": "gaussian_copula_seed2",
@@ -658,10 +658,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.0,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0099,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.2
+      "duration_seconds": 14.7
     },
     {
       "run_id": "mst_eps10_seed0",
@@ -700,9 +700,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0066,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 12.0
+      "duration_seconds": 12.5
     },
     {
       "run_id": "mst_eps15_seed0",
@@ -740,10 +740,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) < (2015.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) < (2015.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0099,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 12.0
+      "duration_seconds": 12.4
     },
     {
       "run_id": "mst_eps15_seed1",
@@ -782,9 +782,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0364,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 12.0
+      "duration_seconds": 12.4
     },
     {
       "run_id": "mst_eps15_seed2",
@@ -823,9 +823,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0132,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 12.0
+      "duration_seconds": 12.5
     },
     {
       "run_id": "mst_eps1_seed0",
@@ -864,9 +864,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.005,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 12.1
+      "duration_seconds": 12.4
     },
     {
       "run_id": "mst_eps20_seed0",
@@ -905,9 +905,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0281,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 12.0
+      "duration_seconds": 12.4
     },
     {
       "run_id": "mst_eps5_seed0",
@@ -946,9 +946,9 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0198,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 12.0
+      "duration_seconds": 12.4
     },
     {
       "run_id": "mst_eps8_seed0",
@@ -986,10 +986,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) < (2017.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) < (2017.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0231,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 12.0
+      "duration_seconds": 12.5
     },
     {
       "run_id": "tvae_seed0",
@@ -1027,10 +1027,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) > (2020.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) > (2020.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.005,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.2
+      "duration_seconds": 14.8
     },
     {
       "run_id": "tvae_seed1",
@@ -1068,10 +1068,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.0033,
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0099
       },
-      "duration_seconds": 14.4
+      "duration_seconds": 14.8
     },
     {
       "run_id": "tvae_seed2",
@@ -1109,10 +1109,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_note": "failed: ComputeError: cannot compare string with numeric type (f64)\n\nThis error occurred in the following expression:\n\t[(col(\"encounters_admissionYear\")) == (2019.0)]\nwhile evaluating this larger expression:\n\t[(col(\"encounters_admissionYear\")) == (2019.0)].strict_cast(Int64).sum()\n",
-        "linkability_note": "failed: RuntimeError: Input dataframes have different column names/types."
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.1
+      "duration_seconds": 14.7
     }
   ]
 }
