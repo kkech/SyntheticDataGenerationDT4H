@@ -142,17 +142,25 @@ class FiguresStep(PipelineStep):
             raise FileNotFoundError("no grouped utility results")
         labels, gaps, sds, colors = [], [], [], []
         for g in sorted(groups, key=lambda g: g["mean_gap"]):
+            short = {"gaussian_copula": "copula"}.get(g["synthesizer"], g["synthesizer"])
             eps = f" (ε={g['epsilon']:g})" if g.get("epsilon") is not None else ""
-            labels.append(f"{g['synthesizer']}{eps}")
+            labels.append(f"{short}{eps}")
             gaps.append(g["mean_gap"])
             sds.append(g.get("sd_gap") or 0.0)
             colors.append(MODEL_COLORS.get(g["synthesizer"], "#999"))
         fig, ax = plt.subplots(figsize=(6, 0.36 * len(labels) + 1.2))
         y = range(len(labels))
         ax.barh(y, gaps, xerr=sds, color=colors, height=0.62, error_kw={"linewidth": 1})
+        for yi, gap, sd in zip(y, gaps, sds):
+            # value label beyond the bar end (and its error whisker)
+            x = gap + sd + 0.004 if gap >= 0 else gap - sd - 0.004
+            ax.text(x, yi, f"{gap:+.3f}", va="center",
+                    ha="left" if gap >= 0 else "right", fontsize=7, color="#444444")
         ax.set_yticks(list(y))
         ax.set_yticklabels(labels, fontsize=8)
         ax.axvline(0, color=REAL_COLOR, linewidth=1)
+        lo, hi = min(gaps), max(g + s for g, s in zip(gaps, sds))
+        ax.set_xlim(lo - 0.03, hi + 0.03)
         ax.set_xlabel("TSTR AUC gap vs real-data baseline (lower is better)")
         ax.set_title("Downstream utility: train-synthetic, test-real (holdout)")
         ax.invert_yaxis()
@@ -287,12 +295,18 @@ class FiguresStep(PipelineStep):
         if floor:
             ax.axvline(floor, color=FLOOR_COLOR, linestyle="--", linewidth=1,
                        label=f"real-vs-real floor ({floor})")
+        for yi, (_, v) in zip(y, runs):
+            ax.text(v - 0.008, yi, f"{v:.2f}", va="center", ha="right",
+                    fontsize=7.5, color="white", fontweight="bold")
         ax.set_yticks(list(y))
         ax.set_yticklabels([self._display_label(r) for r, _ in runs], fontsize=8)
-        ax.set_xlim(0.4, 1.0)
+        ax.set_xlim(0.4, 1.02)
         ax.set_xlabel("C2ST AUC (full-joint distinguishability)")
         ax.set_title("Can a classifier tell synthetic rows from real ones?")
-        ax.legend(fontsize=7)
+        # Bars reach the right edge, so any in-axes legend overlaps a bar:
+        # place it below the axes instead.
+        ax.legend(fontsize=7.5, loc="upper center", bbox_to_anchor=(0.5, -0.22),
+                  ncol=2)
         ax.invert_yaxis()
         self._save(plt, fig, "fig_c2st")
 

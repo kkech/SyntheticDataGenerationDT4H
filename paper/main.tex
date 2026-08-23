@@ -292,6 +292,12 @@ verbatim training-row reproduction \emph{before} sentinel decoding (zero found i
 all runs), and was then decoded to the released representation in which nulls are
 nulls.
 
+The full generation campaign consumed 38.1 hours of wall time on a single
+16\,GB NVIDIA T4 node (per-run costs in Appendix Table~\ref{tab:runs}: seconds for
+the copula, 6/11 minutes for TVAE/CTGAN, ${\sim}33$ minutes per DP-CTGAN run, and
+${\sim}2.9$ hours per MST run, which dominates); the analysis stages add
+${\sim}2$ hours and rerun independently.
+
 Of 31 planned runs, 27 completed. AIM at $\eps \geq 8$ exceeded a 2-hour per-run
 compute cap even at 50 columns: AIM's measurement effort grows with the privacy
 budget (low-\eps{} runs terminate early on budget exhaustion), which we report as a
@@ -417,7 +423,25 @@ concentrates in sparsely observed laboratory values (columns observed in $\geq 9
 of patients reach KS $\approx 0.05$, at the floor; columns observed in ${\sim}10\%$
 are the worst), indicating a sample-size-driven rather than model-driven limit.
 Subgroup analysis shows uniform fidelity across sex and age strata for all models
-(no stratum deviates disproportionately from its own floor).
+(no stratum deviates disproportionately from its own floor;
+Table~\ref{tab:subgroup}).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Subgroup fidelity (KS mean per stratum, train vs synthetic), each column
+read against its own stratum noise floor.}
+\label{tab:subgroup}
+\begin{tabular}{lccccc}
+\toprule
+ & female & male & age $<$65 & age 65--79 & age 80+ \\
+\midrule
+\emph{stratum noise floor} & \emph{0.075} & \emph{0.068} & \emph{0.100} & \emph{0.075} & \emph{0.096} \\
+TVAE & 0.242 & 0.206 & 0.216 & 0.208 & 0.224 \\
+MST ($\eps{=}15$) & 0.430 & 0.424 & 0.496 & 0.473 & 0.474 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
@@ -858,6 +882,56 @@ with the consortium.]
 
 \section*{Competing interests}
 The authors declare no competing interests.
+
+\appendix
+\section{Complete run inventory}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{All 31 planned generation runs: privacy budget, seed, training width,
+outcome, and wall time. Every completed run's dataset passed the verbatim-record
+check; full per-run provenance (library versions, git commit, training-file
+SHA-256) is in the released generation summary.}
+\label{tab:runs}
+\begin{tabular}{lccccc}
+\toprule
+run & \eps & seed & columns & status & wall time \\
+\midrule
+gaussian\_copula\_seed0 & --- & 0 & 211 & ok & 1 min \\
+gaussian\_copula\_seed1 & --- & 1 & 211 & ok & 1 min \\
+gaussian\_copula\_seed2 & --- & 2 & 211 & ok & 1 min \\
+tvae\_seed0 & --- & 0 & 211 & ok & 6 min \\
+tvae\_seed1 & --- & 1 & 211 & ok & 6 min \\
+tvae\_seed2 & --- & 2 & 211 & ok & 6 min \\
+ctgan\_seed0 & --- & 0 & 211 & ok & 11 min \\
+ctgan\_seed1 & --- & 1 & 211 & ok & 11 min \\
+ctgan\_seed2 & --- & 2 & 211 & ok & 11 min \\
+dpctgan\_eps1\_seed0 & 1 & 0 & 211 & ok & 5 min \\
+dpctgan\_eps5\_seed0 & 5 & 0 & 211 & ok & 33 min \\
+dpctgan\_eps8\_seed0 & 8 & 0 & 211 & ok & 33 min \\
+dpctgan\_eps10\_seed0 & 10 & 0 & 211 & ok & 33 min \\
+dpctgan\_eps15\_seed0 & 15 & 0 & 211 & ok & 33 min \\
+dpctgan\_eps20\_seed0 & 20 & 0 & 211 & ok & 33 min \\
+dpctgan\_eps15\_seed1 & 15 & 1 & 211 & ok & 33 min \\
+dpctgan\_eps15\_seed2 & 15 & 2 & 211 & ok & 33 min \\
+aim50\_eps1\_seed0 & 1 & 0 & 50 & ok & 31 min \\
+aim50\_eps5\_seed0 & 5 & 0 & 50 & ok & 88 min \\
+aim50\_eps8\_seed0 & 8 & 0 & 50 & timeout & 2.0 h \\
+aim50\_eps10\_seed0 & 10 & 0 & 50 & timeout & 2.0 h \\
+aim50\_eps15\_seed0 & 15 & 0 & 50 & timeout & 2.0 h \\
+aim50\_eps20\_seed0 & 20 & 0 & 50 & timeout & 2.0 h \\
+mst\_eps1\_seed0 & 1 & 0 & 211 & ok & 3.0 h \\
+mst\_eps5\_seed0 & 5 & 0 & 211 & ok & 2.9 h \\
+mst\_eps8\_seed0 & 8 & 0 & 211 & ok & 2.9 h \\
+mst\_eps10\_seed0 & 10 & 0 & 211 & ok & 2.9 h \\
+mst\_eps15\_seed0 & 15 & 0 & 211 & ok & 2.9 h \\
+mst\_eps20\_seed0 & 20 & 0 & 211 & ok & 2.9 h \\
+mst\_eps15\_seed1 & 15 & 1 & 211 & ok & 2.9 h \\
+mst\_eps15\_seed2 & 15 & 2 & 211 & ok & 2.9 h \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \bibliographystyle{apalike}
 \bibliography{references}
