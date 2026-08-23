@@ -10,8 +10,11 @@ differential privacy, intended to support a public dataset release.
 python main.py
 ```
 
-Eight steps, run in order, each skipped once completed (tracked in
-`pipeline_status.json`) unless forced. The status file reflects the
+Thirteen steps, run in order, each skipped once completed (tracked in
+`pipeline_status.json`) unless forced. Steps 6-13 are ANALYSIS steps —
+they read the generated files and never regenerate anything, so
+`python main.py --analysis` reruns all of them cheaply over existing
+outputs. The status file reflects the
 true lifecycle at all times — every step a run will execute is marked
 ⏳ pending up front (replacing any stale entry from a previous run),
 then 🔄 running, then ✅ completed or ❌ failed — and a step's previous
@@ -25,9 +28,14 @@ sits next to fresh results:
 | 3 | `preprocess` | metadata-driven feature engineering; **no imputation anywhere** (see Principles); hard-fails if any null/NaN survives; splits the result 75/25 into **train/holdout** (seeded, manifest committed) | `output/preprocess/` |
 | 4 | `profile_preprocessed_data` | same profiler over the preprocessed frame | `output/profile_preprocessed_data/` |
 | 5 | `generate` | executes the run plan (seeds × ε × models) on the **train split only**, writes one synthetic CSV per run, saves fitted generators, checks for verbatim training records | `output/generate/` |
-| 6 | `evaluate` | marginal fidelity (KS, Wasserstein, TVD, missingness) and association structure (Spearman, Cramer's V, correlation ratio), read against the **train-vs-holdout sampling-noise floor**; constants excluded from aggregates; mean ± sd across seeds and the ε-sweep view | `output/evaluate/` |
-| 7 | `utility` | Train-Synthetic-Test-Real: gradient boosting trained on real-train vs each synthetic dataset, both scored on the **holdout** (patients no generator or classifier ever saw); family-diversified outcome targets incl. mortality | `output/utility/` |
-| 8 | `privacy` | distance-to-closest-training-record per run against the **holdout-to-train baseline** (how close unseen real patients sit to the training data) | `output/privacy/` |
+| 6 | `evaluate` | marginal fidelity (KS, Wasserstein, TVD, missingness), association structure incl. **fabricated-association counts**, **C2ST full-joint distinguishability**, and **subgroup fidelity** (gender/age strata) — every number read against its own train-vs-holdout noise floor; mean ± sd across seeds and the ε-sweep view | `output/evaluate/` |
+| 7 | `coherence` | **row-level clinical coherence audit**: implications mined from the train split, learned category-range consistency (CKD stage vs eGFR, …), survival logic — synthetic violation rates vs the real holdout's own rate; rule set committed | `output/coherence/` |
+| 8 | `survival` | **Kaplan-Meier fidelity** for death and HF rehospitalization (nulls = censoring at 5y), log-rank vs holdout, and **effect-estimate replication** (Cox via lifelines, or native logistic fallback) | `output/survival/` |
+| 9 | `utility` | Train-Synthetic-Test-Real on the **holdout**, with two model classes (HistGB + logistic) and an **augmentation** arm (real+synthetic vs real alone); family-diversified targets incl. mortality | `output/utility/` |
+| 10 | `privacy` | distance-to-closest-training-record per run against the **holdout-to-train baseline**, with committed DCR histograms | `output/privacy/` |
+| 11 | `attacks` | **adversarial attacks**: membership inference (distance attack, AUC + bootstrap CI) and attribute inference (membership advantage), both calibrated by the holdout; optional anonymeter singling-out/linkability | `output/attacks/` |
+| 12 | `figures` | publication-quality figures (ε-curves, TSTR gaps, KS profiles vs floor, DCR histograms, KM overlays, coherence, C2ST, MIA) as PNG+PDF, regenerated from the committed step results | `output/figures/` |
+| 13 | `release_docs` | **codebook** (per-column semantics incl. what a null means), **Datasheet for the Dataset**, and the exact `pip freeze` of the producing environment | `output/release_docs/` |
 
 ### Long runs (survives SSH disconnect)
 
@@ -56,7 +64,11 @@ python main.py --status             # step completion status
 python main.py --force              # rerun everything
 python main.py --force-step generate --force-step evaluate --force-step privacy
 python main.py --only evaluate --force-step evaluate
+python main.py --analysis          # rerun ALL analysis steps (6-13) on existing outputs
 python regenerate.py --model output/generate/models/<name>.pkl --rows N --out file.csv
+python conditional_demo.py --model output/generate/models/tvae_seed0.pkl \
+    --rows 500 --condition patient_demographics_gender=female --out sample.csv
+python release_gate.py --file output/generate/DT4H_Synthetic_<run>.csv   # go/no-go before distributing
 ```
 
 All console output (stdout, stderr, warnings) is teed to `logs.txt` with

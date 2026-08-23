@@ -36,8 +36,13 @@ from pipeline.steps.preprocess import PreprocessStep
 from pipeline.steps.profile_preprocessed_data import ProfilePreprocessedDataStep
 from pipeline.steps.generate import GenerateStep
 from pipeline.steps.evaluate import EvaluateStep
+from pipeline.steps.coherence import CoherenceStep
+from pipeline.steps.survival import SurvivalStep
 from pipeline.steps.privacy import PrivacyStep
 from pipeline.steps.utility import UtilityStep
+from pipeline.steps.attacks import AttacksStep
+from pipeline.steps.figures import FiguresStep
+from pipeline.steps.release_docs import ReleaseDocsStep
 
 STEPS = [
     LoadDataStep(),
@@ -46,9 +51,20 @@ STEPS = [
     ProfilePreprocessedDataStep(),
     GenerateStep(),
     EvaluateStep(),
+    CoherenceStep(),
+    SurvivalStep(),
     UtilityStep(),
     PrivacyStep(),
+    AttacksStep(),
+    FiguresStep(),
+    ReleaseDocsStep(),
 ]
+
+# All steps after 'generate' are ANALYSIS steps: they read the generated
+# CSVs and the train/holdout split but never regenerate anything -- so
+# they can be rerun cheaply on existing outputs.
+ANALYSIS_STEPS = ["evaluate", "coherence", "survival", "utility", "privacy",
+                  "attacks", "figures", "release_docs"]
 
 
 def run_pipeline(
@@ -214,6 +230,9 @@ def main() -> None:
                          help="Rerun this step even if already completed (repeatable).")
     parser.add_argument("--only", action="append", default=None,
                          help="Run only these step(s) (repeatable).")
+    parser.add_argument("--analysis", action="store_true",
+                         help="Rerun ALL analysis steps (evaluate through release_docs) over the "
+                              "existing generated outputs. No regeneration -- cheap and safe.")
     parser.add_argument("--status", action="store_true", help="Print step-completion status and exit.")
     parser.add_argument("--preflight", action="store_true",
                          help="Verify libraries, GPU, inputs, disk and config, then exit. "
@@ -226,6 +245,10 @@ def main() -> None:
     if args.status:
         print_status()
         return
+
+    if args.analysis:
+        args.only = list(ANALYSIS_STEPS)
+        args.force = True
 
     if args.preflight:
         raise SystemExit(0 if preflight() else 1)

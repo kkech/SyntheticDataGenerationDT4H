@@ -107,6 +107,40 @@ class EvaluateStep(PipelineStep):
               f"categorical-categorical {len(real_assoc['cat_cat'])}, "
               f"numeric-categorical {len(real_assoc['num_cat'])})")
 
+        # Association noise floor: how much associations differ between
+        # two real samples -- calibrates every synthetic |delta| below.
+        print("Computing the association noise floor (train vs holdout profiles)...")
+        assoc_floor = compare_association_profiles(real_assoc, association_profile(holdout))
+        results["association_noise_floor"] = assoc_floor
+        for kind in ("num_num", "cat_cat", "num_cat"):
+            a = assoc_floor.get(kind, {})
+            if a.get("pairs"):
+                print(f"  {kind}: mean |Δ| floor = {a['mean_abs_delta']} over {a['pairs']} pairs")
+
+        # C2ST floor: a classifier separating two real samples should
+        # land at ~0.5; synthetic AUCs are read against this.
+        from pipeline.steps.evaluate.c2st import c2st_auc
+
+        modelled_cols = [c for c in train.columns if c not in constants]
+        print("Computing the C2ST floor (train vs holdout)...")
+        c2st_floor = c2st_auc(train, holdout, modelled_cols, seed=config.seed)
+        results["c2st_floor_train_vs_holdout"] = c2st_floor
+        print(f"  C2ST floor AUC = {c2st_floor} (0.5 = indistinguishable)")
+
+        strata = self._strata(train)
+        subgroup_floor = {}
+        for sname, mask in strata.items():
+            h_mask = self._strata(holdout).get(sname)
+            if mask.sum() < 150 or h_mask is None or h_mask.sum() < 50:
+                continue
+            agg = compare_frames(train[mask], holdout[h_mask], f"train[{sname}]",
+                                 f"holdout[{sname}]", exclude_columns=constants)["aggregates"]
+            subgroup_floor[sname] = {"n_train": int(mask.sum()), "n_holdout": int(h_mask.sum()),
+                                     "ks_mean": agg["ks"].get("mean"),
+                                     "tvd_mean": agg["tvd"].get("mean")}
+        results["subgroup_noise_floor"] = subgroup_floor
+        print(f"Subgroup strata with sufficient support: {list(subgroup_floor)}")
+
         for path in synthetic_files:
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synthetic = pd.read_csv(path, low_memory=False)
@@ -141,12 +175,40 @@ class EvaluateStep(PipelineStep):
                 "holdout_vs_synthetic": compare_frames(
                     holdout, synthetic, "holdout", f"synthetic[{run_id}]",
                     exclude_columns=constants),
+                # Full-schema view (constants included) for transparency;
+                # aggregates only -- the modelled-columns view stays the
+                # headline because constants are copies, not modelling.
+                "train_vs_synthetic_full_schema_aggregates": compare_frames(
+                    train, synthetic, "train", f"synthetic[{run_id}] (full schema)"
+                )["aggregates"],
             }
+
+            entry["c2st_auc"] = c2st_auc(train, synthetic, modelled_cols, seed=config.seed)
+            print(f"  C2ST AUC = {entry['c2st_auc']} (floor {c2st_floor})")
+
+            entry["subgroup_fidelity"] = {}
+            s_strata = self._strata(synthetic)
+            for sname, floor in subgroup_floor.items():
+                sm = s_strata.get(sname)
+                if sm is None or sm.sum() < 50:
+                    continue
+                agg = compare_frames(train[strata[sname]], synthetic[sm],
+                                     f"train[{sname}]", f"synthetic[{sname}]",
+                                     exclude_columns=constants)["aggregates"]
+                entry["subgroup_fidelity"][sname] = {
+                    "n_synthetic": int(sm.sum()),
+                    "ks_mean": agg["ks"].get("mean"),
+                    "tvd_mean": agg["tvd"].get("mean"),
+                }
 
             print(f"  Profiling association structure of '{run_id}'...")
             entry["associations"] = compare_association_profiles(
                 real_assoc, association_profile(synthetic)
             )
+            fab = sum(entry["associations"].get(k, {}).get("fabricated_pairs", 0)
+                      for k in ("num_num", "cat_cat", "num_cat"))
+            if fab:
+                print(f"  ⚠️  {fab} fabricated association(s) (near-zero real, strong synthetic)")
             results["comparisons"].append(entry)
 
             agg = entry["train_vs_synthetic"]["aggregates"]
@@ -206,6 +268,27 @@ class EvaluateStep(PipelineStep):
             df = df.copy()
             df[NYHA_COLUMN] = df[NYHA_COLUMN].map(nyha_map)
         return df
+
+    @staticmethod
+    def _strata(df):
+        """Clinically meaningful subgroups for per-stratum fidelity.
+        Returns {name: boolean mask}; missing stratifier columns simply
+        produce no stratum."""
+        import pandas as pd
+
+        strata = {}
+        g = "patient_demographics_gender"
+        if g in df.columns:
+            low = df[g].astype("object").where(df[g].notna(), "").astype(str).str.lower()
+            strata["female"] = (low == "female").to_numpy()
+            strata["male"] = (low == "male").to_numpy()
+        a = "patient_demographics_age"
+        if a in df.columns:
+            age = pd.to_numeric(df[a], errors="coerce")
+            strata["age_under_65"] = (age < 65).fillna(False).to_numpy()
+            strata["age_65_79"] = ((age >= 65) & (age < 80)).fillna(False).to_numpy()
+            strata["age_80_plus"] = (age >= 80).fillna(False).to_numpy()
+        return strata
 
     def _load_run_metadata(self, config: PipelineConfig) -> dict:
         """run_id -> {synthesizer, epsilon, seed} from the generation
@@ -322,6 +405,36 @@ class EvaluateStep(PipelineStep):
 
         lines += [
             "",
+            "## Full-joint distinguishability (C2ST)",
+            "",
+            "AUC of a classifier separating real from synthetic rows; 0.5 = joints "
+            f"indistinguishable. Floor (train vs holdout): **{results.get('c2st_floor_train_vs_holdout', '-')}**.",
+            "",
+            "| run | C2ST AUC |", "|---|---|",
+        ]
+        for c in results["comparisons"]:
+            if "c2st_auc" in c:
+                lines.append(f"| {c['run_id']} | {c['c2st_auc']} |")
+
+        if results.get("subgroup_noise_floor"):
+            floor = results["subgroup_noise_floor"]
+            names = list(floor)
+            lines += ["", "## Subgroup fidelity (KS mean per stratum, train vs synthetic)",
+                      "",
+                      "Does the synthetic cohort represent every subgroup as faithfully as the "
+                      "majority? Each cell is read against its stratum's own noise floor.",
+                      "",
+                      "| run | " + " | ".join(names) + " |",
+                      "|---|" + "|".join(["---"] * len(names)) + "|",
+                      "| *noise floor* | " + " | ".join(str(floor[n]["ks_mean"]) for n in names) + " |"]
+            for c in results["comparisons"]:
+                if "subgroup_fidelity" not in c:
+                    continue
+                cells = [str(c["subgroup_fidelity"].get(n, {}).get("ks_mean", "-")) for n in names]
+                lines.append(f"| {c['run_id']} | " + " | ".join(cells) + " |")
+
+        lines += [
+            "",
             "## Generalization (holdout vs synthetic)",
             "",
             "Distance to real records the generator NEVER saw. A model that is much "
@@ -342,11 +455,22 @@ class EvaluateStep(PipelineStep):
             "",
             "## Association structure (train vs synthetic)",
             "",
-            "Absolute change in pairwise association; 0 = relationship perfectly preserved.",
+            "Absolute change in pairwise association; 0 = relationship perfectly preserved. "
+            "`fabricated` counts pairs nearly independent in real data (|assoc|<0.1) rendered "
+            "strongly associated (>0.5) in the synthetic data. Noise floor rows show how much "
+            "two real samples differ.",
             "",
-            "| run | pair type | pairs | mean \\|Δ\\| | median \\|Δ\\| | \\|Δ\\|<0.1 | worst pair |",
-            "|---|---|---|---|---|---|---|",
+            "| run | pair type | pairs | mean \\|Δ\\| | median \\|Δ\\| | \\|Δ\\|<0.1 | fabricated | worst pair |",
+            "|---|---|---|---|---|---|---|---|",
         ]
+        floor_assoc = results.get("association_noise_floor", {})
+        for kind, label in (("num_num", "Spearman (num-num)"), ("cat_cat", "Cramer's V (cat-cat)"),
+                            ("num_cat", "corr-ratio (num-cat)")):
+            a = floor_assoc.get(kind, {})
+            if a.get("pairs"):
+                lines.append(f"| *noise floor* | {label} | {a['pairs']} | {a['mean_abs_delta']} "
+                             f"| {a['median_abs_delta']} | {a['frac_below_0.1']} "
+                             f"| {a.get('fabricated_pairs', 0)} | - |")
         for c in results["comparisons"]:
             if "associations" not in c:
                 continue
@@ -354,12 +478,13 @@ class EvaluateStep(PipelineStep):
                                 ("num_cat", "corr-ratio (num-cat)")):
                 a = c["associations"].get(kind, {})
                 if not a.get("pairs"):
-                    lines.append(f"| {c['run_id']} | {label} | 0 | - | - | - | - |")
+                    lines.append(f"| {c['run_id']} | {label} | 0 | - | - | - | - | - |")
                     continue
                 w = a["worst"][0]
                 lines.append(
                     f"| {c['run_id']} | {label} | {a['pairs']} | {a['mean_abs_delta']} "
                     f"| {a['median_abs_delta']} | {a['frac_below_0.1']} "
+                    f"| {a.get('fabricated_pairs', 0)} "
                     f"| `{w['pair']}` ({w['real']} -> {w['synthetic']}) |")
 
         for c in detail_sections:

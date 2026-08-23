@@ -59,3 +59,14 @@ torch>=2.0,<3
 # or distro-patched setuptools that fails with:
 #     AttributeError: install_layout
 # Upgrading pip/setuptools/wheel in the virtualenv first resolves it.
+
+# --- analysis & figures ---
+# The figures step renders the paper's plots.
+matplotlib>=3.7
+
+# Optional, both degrade gracefully if absent:
+#   lifelines  -> Cox proportional-hazards effect replication in the survival
+#                 step (falls back to a native logistic model without it)
+#   anonymeter -> singling-out/linkability evaluators in the attacks step
+#                 (the native MIA/AIA attacks always run)
+# pip install lifelines anonymeter

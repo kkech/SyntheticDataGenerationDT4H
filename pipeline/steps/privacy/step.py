@@ -83,10 +83,18 @@ class PrivacyStep(PipelineStep):
         train_num, train_cat = encode(train)
         hold_num, hold_cat = encode(holdout)
 
+        import numpy as np
+
+        def _dcr_hist(d1):
+            counts, edges = np.histogram(d1, bins=50, range=(0.0, 1.0))
+            return {"bin_edges": [round(float(e), 3) for e in edges],
+                    "counts": [int(c) for c in counts]}
+
         print("Computing holdout-to-train baseline (unseen real patients vs training records)...")
         t0 = time.time()
         base_d1, base_d2 = nearest_two_distances(hold_num, hold_cat, train_num, train_cat)
         baseline = summarize_dcr(base_d1, base_d2)
+        baseline["dcr_histogram"] = _dcr_hist(base_d1)
         print(f"  holdout baseline DCR: p5={baseline['dcr_p5']}, median={baseline['dcr_median']} "
               f"({time.time() - t0:.0f}s)")
 
@@ -116,6 +124,7 @@ class PrivacyStep(PipelineStep):
             synth_num, synth_cat = encode(synthetic)
             d1, d2 = nearest_two_distances(synth_num, synth_cat, train_num, train_cat)
             stats = summarize_dcr(d1, d2)
+            stats["dcr_histogram"] = _dcr_hist(d1)
 
             share_too_close = float((d1 < baseline["dcr_p5"]).mean())
             stats.update({

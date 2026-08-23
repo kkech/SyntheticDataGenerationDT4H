@@ -110,12 +110,26 @@ def association_profile(df: pd.DataFrame) -> dict:
     return {"num_num": num_num, "cat_cat": cat_cat, "num_cat": num_cat}
 
 
+FABRICATED_REAL_MAX = 0.1   # essentially no real association ...
+FABRICATED_SYNTH_MIN = 0.5  # ... rendered as a strong synthetic one
+
+
 def compare_association_profiles(real: dict, synth: dict) -> dict:
-    """Absolute association difference per pair, aggregated per pair type."""
+    """Absolute association difference per pair, aggregated per pair type.
+
+    Also counts FABRICATED associations -- pairs nearly independent in
+    the real data (|assoc| < 0.1) but strongly associated in the
+    synthetic data (|assoc| > 0.5). Fabrication is worse than
+    attenuation: a user of the released data would 'discover' a
+    relationship that does not exist.
+    """
     result = {}
     for kind in ("num_num", "cat_cat", "num_cat"):
         common = set(real[kind]) & set(synth[kind])
         deltas = {k: abs(real[kind][k] - synth[kind][k]) for k in common}
+        fabricated = [k for k in common
+                      if abs(real[kind][k]) < FABRICATED_REAL_MAX
+                      and abs(synth[kind][k]) > FABRICATED_SYNTH_MIN]
         if deltas:
             s = pd.Series(deltas)
             worst = [
@@ -129,6 +143,10 @@ def compare_association_profiles(real: dict, synth: dict) -> dict:
                 "median_abs_delta": round(float(s.median()), 4),
                 "max_abs_delta": round(float(s.max()), 4),
                 "frac_below_0.1": round(float((s < 0.1).mean()), 4),
+                "fabricated_pairs": len(fabricated),
+                "fabricated_rate": round(len(fabricated) / len(deltas), 4),
+                "fabricated_examples": sorted(
+                    fabricated, key=lambda k: -abs(synth[kind][k]))[:3],
                 "worst": worst,
             }
         else:
