@@ -75,6 +75,11 @@ def main() -> int:
     check("schema", not extra and len(candidate) > 0,
           f"{len(candidate.columns)} columns, {len(extra)} not in released schema")
 
+    from pipeline.common.representation_audit import audit_representation, summarize as rep_summary
+
+    rep = audit_representation(candidate, train_decoded)
+    check("representation", rep["clean"] and not rep["categorical_nulls"], rep_summary(rep))
+
     _, would_change = GenerateStep._decode_numeric_missing(candidate.copy(), config)
     stale = sum(would_change.values())
     check("freshness", stale == 0,

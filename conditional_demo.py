@@ -115,6 +115,11 @@ def main() -> None:
     real = pl.read_parquet(ref_path).to_pandas()
     synthetic = synthetic[[c for c in real.columns if c in synthetic.columns]].copy()
 
+    from pipeline.common.alignment import align_categorical_case, report as align_report
+
+    synthetic, respelled = align_categorical_case(synthetic, real)
+    print(align_report(respelled))
+
     print(leakage.summarize(leakage.check_exact_duplicates(synthetic, real)))
     synthetic, decoded = GenerateStep._decode_numeric_missing(synthetic, config)
     if decoded:

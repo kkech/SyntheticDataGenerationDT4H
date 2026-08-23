@@ -27,6 +27,18 @@ regeneration.
 import pandas as pd
 
 
+def canonical_str(v) -> str | None:
+    """Canonical text form of a category value: integral floats render
+    without the trailing '.0' (a numeric-parsed year 2017.0 must match
+    the reference category '2017'), and surrounding whitespace is
+    stripped. None/NaN stay None."""
+    if v is None or (isinstance(v, float) and v != v):
+        return None
+    if isinstance(v, float) and v.is_integer():
+        return str(int(v))
+    return str(v).strip()
+
+
 def align_categorical_case(synthetic: pd.DataFrame, reference: pd.DataFrame):
     """Return (aligned copy of synthetic, {column: cells changed})."""
     out = synthetic.copy()
@@ -37,21 +49,28 @@ def align_categorical_case(synthetic: pd.DataFrame, reference: pd.DataFrame):
         ref = reference[c]
         if pd.api.types.is_numeric_dtype(ref) and not pd.api.types.is_bool_dtype(ref):
             continue  # numeric columns have no spelling
-        spellings = {str(v).lower(): str(v)
-                     for v in pd.unique(ref.dropna().astype("object").astype(str))}
+        spellings = {}
+        for v in pd.unique(ref.dropna().astype("object").astype(str)):
+            spellings[str(v).strip().lower()] = str(v)
 
         original = out[c]
         col = original
         if pd.api.types.is_bool_dtype(col):
             col = col.map({True: "true", False: "false"})
         s = col.astype("object").where(col.notna(), None)
-        aligned = s.map(lambda v: spellings.get(str(v).lower(), str(v))
-                        if v is not None else None)
+
+        def _align_value(v):
+            cs = canonical_str(v)
+            if cs is None:
+                return None
+            return spellings.get(cs.lower(), cs)
+
+        aligned = s.map(_align_value)
         # Count changes against the ORIGINAL representation (a bool False
         # becoming the string 'false' is a change even though its
         # post-conversion string compares equal).
         orig_str = original.astype("object").map(
-            lambda v: str(v) if v is not None and v == v else "\x00")
+            lambda v: "\x00" if pd.isna(v) else str(v))
         n = int((aligned.fillna("\x00") != orig_str).sum())
         if n:
             changed[c] = n

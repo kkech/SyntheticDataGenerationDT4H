@@ -146,6 +146,13 @@ class EvaluateStep(PipelineStep):
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synthetic = pd.read_csv(path, low_memory=False)
             synthetic, _ = align_categorical_case(synthetic, train)
+
+            # Tripwire for the representation-mismatch bug class: any
+            # residual case/format divergence after alignment corrupts
+            # every exact-string comparison downstream -- fail loudly.
+            from pipeline.common.representation_audit import audit_representation, summarize as rep_summary
+            rep = audit_representation(synthetic, train)
+            print("  " + rep_summary(rep))
             print(f"\nComparing against '{run_id}' ({synthetic.shape[0]} rows x "
                   f"{synthetic.shape[1]} cols)...")
 
@@ -169,6 +176,7 @@ class EvaluateStep(PipelineStep):
             entry = {
                 "run_id": run_id,
                 **run_meta.get(run_id, {}),
+                "representation_audit": rep,
                 "stale_file": bool(stale_cells),
                 "stale_cells": stale_cells,
                 "train_vs_synthetic": compare_frames(

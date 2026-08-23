@@ -56,6 +56,10 @@ def main() -> None:
     print(f"Sampling {args.rows} rows...")
     synthetic = synth.sample(args.rows)
 
+    from pipeline.common.alignment import align_categorical_case, report as align_report
+    synthetic, respelled = align_categorical_case(synthetic, real)
+    print(align_report(respelled))
+
     if constants:
         held_out = pd.DataFrame(
             {col: [value] * len(synthetic) for col, value in constants.items()},
