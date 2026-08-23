@@ -71,10 +71,18 @@ matplotlib>=3.7
 #                 (the native MIA/AIA attacks always run)
 # pip install lifelines anonymeter
 #
-# CAUTION: anonymeter's numba dependency forces numpy<2, DOWNGRADING the
-# environment below the numpy that trains/pickles the generators. The
-# analysis steps all work under either numpy, but LOADING a saved
-# generator (regenerate.py / conditional_demo.py) requires the same
-# numpy major it was pickled under -- reinstall the pinned numpy first
-# (e.g. `pip install numpy==2.2.6`); the attacks step then skips
-# anonymeter gracefully.
+# CAUTION -- one numpy for the whole pipeline: anonymeter 1.1.0 DECLARES
+# numpy<1.27, and installing it lets pip downgrade numpy to 1.26 -- which
+# BREAKS GENERATION: snsynth's MST/AIM import mbi -> jax, and jax
+# requires numpy>=2 (verified failure: "numpy.dtypes has no attribute
+# StringDType"). anonymeter's pin is conservative packaging only: its
+# evaluators run correctly under numpy 2.2.6 with a current numba
+# (verified end to end). The supported environment is therefore:
+#
+#     pip install lifelines anonymeter
+#     pip install numpy==2.2.6     # AFTER anonymeter, restoring numpy 2
+#
+# pip prints a resolver warning about anonymeter's pin -- expected,
+# tested, ignore it. Run `python main.py --preflight` before any long
+# campaign; loading generators pickled under a different numpy major
+# raises a clear error naming this fix.

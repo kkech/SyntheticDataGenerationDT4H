@@ -84,3 +84,23 @@ def report(changed: dict) -> str:
     total = sum(changed.values())
     return (f"Aligned categorical representation to the real schema: {total} cells "
             f"in {len(changed)} column(s) re-spelled (e.g. True -> 'true').")
+
+
+def harmonize_dtypes(frame, reference):
+    """Coerce columns that are numeric (non-bool) in `reference` but
+    landed as object in `frame` back to numeric. In-memory decode sets
+    pd.NA into float columns, which pandas upcasts to object; files
+    written to CSV re-read numeric so the pipeline never sees it, but
+    frames concatenated in memory (top-up sampling, constraint-aware
+    sampling) do. Returns (frame, [coerced column names])."""
+    out = frame.copy()
+    coerced = []
+    for c in reference.columns:
+        if c not in out.columns:
+            continue
+        ref_numeric = (pd.api.types.is_numeric_dtype(reference[c])
+                       and not pd.api.types.is_bool_dtype(reference[c]))
+        if ref_numeric and not pd.api.types.is_numeric_dtype(out[c]):
+            out[c] = pd.to_numeric(out[c], errors="coerce")
+            coerced.append(c)
+    return out, coerced

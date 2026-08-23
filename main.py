@@ -147,12 +147,25 @@ def preflight(config: PipelineConfig | None = None) -> bool:
         ok = ok and passed
 
     print("Preflight checks:")
-    for mod in ("polars", "pandas", "numpy", "scipy", "sdv", "snsynth", "torch", "cloudpickle"):
+    for mod in ("polars", "pandas", "numpy", "scipy", "sdv", "snsynth", "torch",
+                "cloudpickle", "sklearn"):
         try:
             m = importlib.import_module(mod)
             check(f"import {mod}", True, getattr(m, "__version__", ""))
         except Exception as e:
             check(f"import {mod}", False, f"{type(e).__name__}: {e}")
+
+    # MST/AIM generation imports mbi -> jax, and jax requires numpy>=2;
+    # anonymeter's install can silently downgrade numpy to 1.26 and this
+    # is the check that catches it BEFORE a multi-day campaign rather
+    # than 10 hours in (see requirements.txt, numpy note).
+    try:
+        importlib.import_module("mbi")
+        check("import mbi (MST/AIM backend)", True)
+    except Exception as e:
+        check("import mbi (MST/AIM backend)", False,
+              f"{type(e).__name__}: {e} -- every MST/AIM run would fail; "
+              f"fix: `pip install numpy==2.2.6` (see requirements.txt)")
 
     try:
         import torch
@@ -233,6 +246,11 @@ def main() -> None:
     parser.add_argument("--analysis", action="store_true",
                          help="Rerun ALL analysis steps (evaluate through release_docs) over the "
                               "existing generated outputs. No regeneration -- cheap and safe.")
+    parser.add_argument("--extended", action="store_true",
+                         help="Append the roadmap runs to the generation plan (quantile-"
+                              "transform variants, TVAE capacity sweep, indicator-encoding "
+                              "ablation, AIM 40-column sweep, MST epsilon=0.5 anchor). "
+                              "The base plan is unchanged; see PipelineConfig.extended_plan.")
     parser.add_argument("--status", action="store_true", help="Print step-completion status and exit.")
     parser.add_argument("--preflight", action="store_true",
                          help="Verify libraries, GPU, inputs, disk and config, then exit. "
@@ -269,7 +287,9 @@ def main() -> None:
     # rather than only the stdout half that shell redirection captures.
     handle = start_logging(args.log) if args.log else None
     try:
-        run_pipeline(force=args.force, force_steps=args.force_step, only=args.only)
+        cfg = PipelineConfig(extended_plan=True) if args.extended else None
+        run_pipeline(config=cfg, force=args.force, force_steps=args.force_step,
+                     only=args.only)
     finally:
         if handle:
             stop_logging(handle)

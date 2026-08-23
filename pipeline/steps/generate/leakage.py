@@ -38,6 +38,11 @@ def check_exact_duplicates(synthetic: pd.DataFrame, real: pd.DataFrame) -> dict:
     common = [c for c in real.columns if c in synthetic.columns]
     if not common:
         return {"checked": False, "reason": "no overlapping columns"}
+    if synthetic.empty:  # .agg("\x1f".join, axis=1) degenerates on 0 rows
+        return {"checked": True, "columns_compared": len(common),
+                "synthetic_rows": 0, "exact_duplicates_of_training_rows": 0,
+                "exact_duplicate_rate": 0.0, "distinct_training_rows_reproduced": 0,
+                "synthetic_duplicate_rows_within_output": 0}
 
     real_hashes = set(_row_hashes(real, common))
     synth_hashes = _row_hashes(synthetic, common)

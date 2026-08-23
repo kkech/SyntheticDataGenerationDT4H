@@ -213,3 +213,41 @@ def summarize_rule_results(results: list[dict]) -> dict:
         "overall_violation_rate": round(violations / applicable, 5) if applicable else None,
         "rules_violated": sum(1 for r in results if r["violations"] > 0),
     }
+
+
+def row_violation_mask(df: pd.DataFrame, rules: list[dict]) -> pd.Series:
+    """Boolean Series over df.index: True where the row violates at
+    least one rule. Mirrors evaluate_rules() rule-for-rule -- the total
+    True count can be LOWER than evaluate_rules' violation sum because a
+    row violating several rules is flagged once."""
+    bad = pd.Series(False, index=df.index)
+    for r in rules:
+        if r["type"] == "implication":
+            if r["if_true"] not in df.columns or r["then_true"] not in df.columns:
+                continue
+            a = _lower(df[r["if_true"]]) == "true"
+            b = _lower(df[r["then_true"]])
+            bad |= a & (b == "false")
+        elif r["type"] == "category_range":
+            if r["categorical"] not in df.columns or r["numeric"] not in df.columns:
+                continue
+            cat = df[r["categorical"]].astype("object").where(
+                df[r["categorical"]].notna(), "Missing").astype(str)
+            num = pd.to_numeric(df[r["numeric"]], errors="coerce")
+            for c, (lo, hi) in r["ranges"].items():
+                mask = (cat == c) & num.notna()
+                bad |= mask & ((num < lo) | (num > hi))
+        elif r["type"] == "days_bounds":
+            if r["days"] not in df.columns:
+                continue
+            days = pd.to_numeric(df[r["days"]], errors="coerce")
+            bad |= days.notna() & ((days < 0) | (days > r["max_days"]))
+        elif r["type"] == "flag_days_consistency":
+            if r["days"] not in df.columns or r["flag"] not in df.columns:
+                continue
+            days = pd.to_numeric(df[r["days"]], errors="coerce")
+            flag = _lower(df[r["flag"]])
+            bad |= (flag == "true") & (days.isna() | (days > r["window_days"]))
+            bad |= (days.notna() & (days <= r["window_days"])
+                    & (flag != "missing") & (flag == "false"))
+    return bad

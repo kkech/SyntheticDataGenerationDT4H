@@ -73,6 +73,17 @@ class PipelineConfig:
     aim_timeout_seconds: int = 7200
     run_plan: tuple = None  # explicit override; None = build from the fields above
     synthesizer_params: dict = None  # per-synthesizer overrides, keyed by name
+    # Opt-in roadmap runs appended after the frozen base plan (main.py
+    # --extended). Each answers one Future Work question; variants record
+    # a qualified synthesizer name (record_as) so downstream grouping
+    # never averages them into the base models:
+    #   * tvae_qt / ctgan_qt  -- rank/quantile numeric transform;
+    #   * tvae_cap256 / tvae_ep1000 -- TVAE capacity/epochs sweep;
+    #   * tvae_ind            -- missingness-indicator encoding ablation;
+    #   * aim40               -- AIM's full epsilon sweep at 40 columns
+    #                            with a tighter measurement-rounds cap;
+    #   * mst at epsilon=0.5  -- the low-budget anchor.
+    extended_plan: bool = False
 
     # None = generate as many rows as the TRAINING split. Matching the
     # training row count keeps TSTR comparable (baseline and synthetic
@@ -203,4 +214,49 @@ class PipelineConfig:
                         "epsilon": self.headline_epsilon, "columns": None,
                         "timeout_seconds": None,
                     })
+        if not self.extended_plan:
+            return plan
+
+        # 3. Extended (roadmap) runs, cheapest first. See the field's
+        #    comment for what each answers.
+        for seed in self.variance_seeds:
+            plan.append({"run_id": f"tvae_qt_seed{seed}", "synthesizer": "tvae",
+                         "record_as": "tvae_qt", "numeric_transform": "quantile",
+                         "seed": seed, "epsilon": None, "columns": None,
+                         "timeout_seconds": None})
+        plan.append({"run_id": "tvae_cap256_seed0", "synthesizer": "tvae",
+                     "record_as": "tvae_cap256", "seed": self.variance_seeds[0],
+                     "epsilon": None, "columns": None, "timeout_seconds": None,
+                     "params": {"embedding_dim": 256, "compress_dims": (256, 256),
+                                "decompress_dims": (256, 256)}})
+        plan.append({"run_id": "tvae_ep1000_seed0", "synthesizer": "tvae",
+                     "record_as": "tvae_ep1000", "seed": self.variance_seeds[0],
+                     "epsilon": None, "columns": None, "timeout_seconds": None,
+                     "params": {"epochs": 1000}})
+        plan.append({"run_id": "tvae_ind_seed0", "synthesizer": "tvae",
+                     "record_as": "tvae_ind", "encoding": "indicator",
+                     "seed": self.variance_seeds[0], "epsilon": None,
+                     "columns": None, "timeout_seconds": None})
+        plan.append({"run_id": "ctgan_qt_seed0", "synthesizer": "ctgan",
+                     "record_as": "ctgan_qt", "numeric_transform": "quantile",
+                     "seed": self.variance_seeds[0], "epsilon": None,
+                     "columns": None, "timeout_seconds": None})
+        # aim40 keeps the DEFAULT rounds cap (3 x columns): overriding it
+        # lower was measured to destabilize snsynth's exponential
+        # mechanism (per-round epsilon grows as rounds shrink; softmax
+        # overflows to NaN). The width reduction alone cuts the cost.
+        for eps in self.dp_epsilons:
+            plan.append({"run_id": f"aim40_{_eps_tag(eps)}_seed{self.variance_seeds[0]}",
+                         "synthesizer": "aim", "record_as": "aim40",
+                         "seed": self.variance_seeds[0], "epsilon": eps,
+                         "columns": 40,
+                         "timeout_seconds": self.aim_timeout_seconds})
+        # The low-budget anchor gets its own bound: at very small epsilon
+        # snsynth/MST's domain compression admits far larger domains and
+        # Private-PGM estimation slows nonlinearly (measured), so this
+        # run must not be able to eat the campaign. A timeout here is a
+        # reportable scaling result, like AIM's.
+        plan.append({"run_id": f"mst_{_eps_tag(0.5)}_seed{self.variance_seeds[0]}",
+                     "synthesizer": "mst", "seed": self.variance_seeds[0],
+                     "epsilon": 0.5, "columns": None, "timeout_seconds": 14400})
         return plan

@@ -102,6 +102,7 @@ def load_generator(path: str):
             f"the pickled RNG state format differs between numpy 1.x and 2.x. "
             f"Fix: match the generation-time numpy (see the generation "
             f"summary's library_versions), e.g. `pip install numpy==2.2.6`. "
-            f"Note: anonymeter/numba forces numpy<2 -- it is only needed by "
-            f"the attacks step, which skips it gracefully when absent."
+            f"Note: anonymeter declares numpy<1.27 but runs fine under "
+            f"numpy 2.2.6 (verified) -- reinstalling numpy 2.2.6 after "
+            f"anonymeter is the supported environment; see requirements.txt."
         ) from e

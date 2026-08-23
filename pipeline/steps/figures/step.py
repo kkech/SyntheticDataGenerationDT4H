@@ -29,6 +29,15 @@ MODEL_COLORS = {
     "mst": "#eda100",              # yellow
     "dpctgan": "#e87ba4",          # magenta
     "aim": "#008300",              # green
+    # extended-plan variants (see PipelineConfig.extended_plan); absent
+    # runs simply produce no series. Prefix matching in _model_of is
+    # longest-first, so these win over their base names.
+    "tvae_qt": "#7fb3e8",          # light blue
+    "tvae_cap256": "#8e6bc8",      # purple
+    "tvae_ep1000": "#17becf",      # cyan
+    "tvae_ind": "#1d4f8c",         # dark blue
+    "ctgan_qt": "#f3a983",         # light orange
+    "aim40": "#66b032",            # light green
 }
 REAL_COLOR = "#444444"
 FLOOR_COLOR = "#888888"
@@ -121,7 +130,8 @@ class FiguresStep(PipelineStep):
                               if g["synthesizer"] == m and g.get("epsilon") is not None
                               and g.get(key)], key=lambda p: p[0])
                 if pts:
-                    display = "aim (50-col subset)" if m == "aim" else m
+                    display = {"aim": "aim (50-col subset)",
+                               "aim40": "aim (40-col subset)"}.get(m, m)
                     ax.errorbar([p[0] for p in pts], [p[1] for p in pts],
                                 yerr=[(p[2] or 0.0) for p in pts],
                                 fmt="o-", color=MODEL_COLORS.get(m, "#999"),
@@ -133,8 +143,11 @@ class FiguresStep(PipelineStep):
             ax.set_xlabel("ε (privacy budget)")
             ax.set_title(label, fontsize=9)
             ax.set_xscale("log")
-            ax.set_xticks([1, 5, 10, 20])
-            ax.set_xticklabels(["1", "5", "10", "20"])
+            eps_values = sorted({g["epsilon"] for g in groups
+                                 if g.get("epsilon") is not None})
+            ticks = ([0.5] if 0.5 in eps_values else []) + [1, 5, 10, 20]
+            ax.set_xticks(ticks)
+            ax.set_xticklabels([f"{t:g}" for t in ticks])
         # One shared legend below the panels: an in-panel box collides with
         # the curves in every panel.
         handles, labels = axes[0].get_legend_handles_labels()

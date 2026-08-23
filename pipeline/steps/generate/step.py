@@ -64,9 +64,15 @@ class GenerateStep(PipelineStep):
         print(f"\nRun plan: {len(plan)} run(s) -- "
               + ", ".join(spec["run_id"] for spec in plan))
 
-        top_columns = None
-        if any(spec.get("columns") == "top" for spec in plan):
-            top_columns = self._select_top_columns(train, config, out_dir)
+        # Width-limited runs: "top" = the standard AIM subset
+        # (config.aim_max_columns); an integer k = the top-k subset by the
+        # same auditable selection. Selections are computed once per
+        # distinct width.
+        widths = {config.aim_max_columns if spec.get("columns") == "top" else spec["columns"]
+                  for spec in plan if spec.get("columns")}
+        column_subsets = {k: self._select_top_columns(train, config, out_dir, k=k)
+                          for k in sorted(widths)}
+        top_columns = column_subsets.get(config.aim_max_columns)
 
         n_rows = config.n_synthetic_rows or real.shape[0]
         summary = {
@@ -87,7 +93,7 @@ class GenerateStep(PipelineStep):
             print(f"\n[run {i}/{len(plan)}]", end="")
             summary["runs"].append(
                 self._run_one(spec, train, real, constants, config, out_dir, n_rows,
-                              top_columns)
+                              column_subsets)
             )
             # Rewrite the summary after every run rather than once at the
             # end: a plan this long must not lose the results already
@@ -145,36 +151,41 @@ class GenerateStep(PipelineStep):
             df = df.drop(columns=list(constants))
         return df, {k: str(v) for k, v in constants.items()}
 
-    def _select_top_columns(self, train, config: PipelineConfig, out_dir: str) -> list[str]:
+    def _select_top_columns(self, train, config: PipelineConfig, out_dir: str,
+                            k: int = None) -> list[str]:
         """The outcome-relevance column subset for width-limited (AIM)
         runs, computed once on the train split and written to a committed
-        JSON so the selection is auditable."""
+        JSON so the selection is auditable. `k` defaults to
+        config.aim_max_columns; other widths get their own JSON."""
         from pipeline.steps.generate.column_selection import (
             FORCED_CLINICAL_COLUMNS,
             select_important_columns,
         )
         from pipeline.steps.utility.targets import declared_outcomes, select_targets
 
+        k = k or config.aim_max_columns
         outcomes = declared_outcomes(config.metadata_path)
         targets = select_targets(train, outcomes, config.utility_max_targets,
                                  explicit=config.utility_targets)
         forced = list(targets) + list(FORCED_CLINICAL_COLUMNS)
-        print(f"\nSelecting top {config.aim_max_columns} outcome-relevant columns for "
+        print(f"\nSelecting top {k} outcome-relevant columns for "
               f"width-limited runs ({len(forced)} force-included: "
               f"{len(targets)} TSTR targets + demographics/NYHA)...")
         selected, scores = select_important_columns(
-            train, outcomes, forced, config.aim_max_columns)
+            train, outcomes, forced, k)
         print(f"  Selected {len(selected)} columns "
               f"(top scored: {sorted(scores, key=lambda c: -scores[c])[:5]})")
 
-        path = os.path.join(out_dir, "DT4H_AIM_Column_Selection.json")
+        path = os.path.join(out_dir,
+                            "DT4H_AIM_Column_Selection.json" if k == config.aim_max_columns
+                            else f"DT4H_Column_Selection_top{k}.json")
         with open(path, "w") as f:
             json.dump({
                 "method": "mean absolute association (Spearman / Cramer's V / correlation "
                           "ratio) with the metadata-declared outcome variables, computed "
                           "on the training split; TSTR targets, age, gender and NYHA "
                           "force-included; other outcome columns excluded from the ranked pool",
-                "k": config.aim_max_columns,
+                "k": k,
                 "force_included": [c for c in forced if c in train.columns],
                 "selected_columns": selected,
                 "scores": dict(sorted(scores.items(), key=lambda kv: -kv[1])),
@@ -217,34 +228,60 @@ class GenerateStep(PipelineStep):
             signal.signal(signal.SIGALRM, old)
 
     def _run_one(self, spec, train, real, constants, config, out_dir, n_rows,
-                 top_columns) -> dict:
+                 column_subsets) -> dict:
         from pipeline.steps.generate.reproducibility import set_global_seeds
 
         name = spec["synthesizer"]
         run_id = spec["run_id"]
         run_seed = spec.get("seed", config.seed)
+        # Variant runs (quantile transform, indicator ablation, capacity
+        # sweep) record a qualified name so downstream grouping never
+        # averages them into the base model's seeds.
+        recorded_name = spec.get("record_as", name)
         print(f"\n{'=' * 70}\n▶️  RUN: {run_id} (model {name}, seed {run_seed}"
               + (f", ε={spec['epsilon']}" if spec.get("epsilon") is not None else "")
               + f")\n{'=' * 70}")
 
         params = dict(config.synthesizer_params.get(name, {}))
+        params.update(spec.get("params") or {})
         params.setdefault("epochs", config.epochs)
         params.setdefault("batch_size", config.batch_size)
         params["epsilon"] = spec["epsilon"] if spec.get("epsilon") is not None else config.epsilon
 
-        # The width-limited (AIM) runs train on the importance subset;
-        # everything else on the full training width.
+        # Width-limited runs train on an importance subset: "top" is the
+        # standard AIM width, an integer selects that top-k.
         run_train = train
-        if spec.get("columns") == "top" and top_columns:
-            run_train = train[[c for c in train.columns if c in top_columns]]
+        width = spec.get("columns")
+        width_k = config.aim_max_columns if width == "top" else width
+        if width_k:
+            subset = column_subsets[width_k]
+            run_train = train[[c for c in train.columns if c in subset]]
             print(f"Width-limited run: {run_train.shape[1]} of {train.shape[1]} training "
-                  f"columns (see DT4H_AIM_Column_Selection.json).")
+                  f"columns (top-{width_k} selection, committed JSON).")
+
+        # Optional invertible model-side transform (quantile / indicator).
+        transform = None
+        if spec.get("numeric_transform") or spec.get("encoding"):
+            from pipeline.steps.generate.run_transforms import build_run_transform
+
+            enc_path = os.path.join(config.step_dir("preprocess"),
+                                    "DT4H_Numeric_Missing_Encoding.json")
+            encoding = json.load(open(enc_path)) if os.path.exists(enc_path) else {}
+            transform = build_run_transform(
+                spec.get("numeric_transform") or spec.get("encoding"), encoding,
+                seed=run_seed)
+            run_train = transform.forward(run_train)
+            print(f"Run transform '{transform.name}' applied "
+                  f"(training frame now {run_train.shape[1]} columns; samples are "
+                  f"inverse-transformed before all checks).")
         categorical, continuous = self._split_column_types(run_train)
 
-        record = {"run_id": run_id, "synthesizer": name, "seed": run_seed,
+        record = {"run_id": run_id, "synthesizer": recorded_name, "seed": run_seed,
                   "epsilon": spec.get("epsilon"), "params": params,
+                  "base_synthesizer": name,
+                  "run_transform": transform.name if transform else None,
                   "trained_columns": int(run_train.shape[1]),
-                  "width_limited": spec.get("columns") == "top"}
+                  "width_limited": bool(width_k)}
         started = time.time()
         try:
             # Per-run seeding: every run is independently reproducible
@@ -278,7 +315,15 @@ class GenerateStep(PipelineStep):
             # data itself.
             model_path = os.path.join(out_dir, "models", f"{run_id}.pkl")
             try:
-                self._save_generator(synth, model_path)
+                # Transformed runs are saved WRAPPED, so a later load
+                # samples ordinary sentinel-space rows -- never the
+                # transformed space the model itself was shown.
+                to_save = synth
+                if transform is not None:
+                    from pipeline.steps.generate.run_transforms import TransformedSynthesizer
+
+                    to_save = TransformedSynthesizer(synth, transform)
+                self._save_generator(to_save, model_path)
                 from pipeline.common.model_io import save_environment_sidecar
 
                 save_environment_sidecar(model_path)
@@ -298,6 +343,9 @@ class GenerateStep(PipelineStep):
             print(f"Sampling {n_rows} rows...")
             with self._time_limit(timeout, f"'{run_id}' sampling"):
                 synthetic = synth.sample(n_rows)
+            if transform is not None:
+                synthetic = transform.inverse(synthetic)
+                print(f"  Inverse '{transform.name}' transform applied to samples.")
 
             # Generators emit boolean-like columns as actual booleans
             # ("True") while the real schema stores lowercase strings

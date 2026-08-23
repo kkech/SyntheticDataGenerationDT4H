@@ -105,9 +105,14 @@ class AttacksStep(PipelineStep):
             entry["membership_inference"] = self._mia(
                 train_num, train_cat, hold_num, hold_cat, synth_num, synth_cat, rng)
             m = entry["membership_inference"]
-            verdict = "✅" if m["attack_auc_ci95"][0] <= 0.5 <= m["attack_auc_ci95"][1] or m["attack_auc"] < 0.55 else "🚨"
-            print(f"  {verdict} MIA attack AUC = {m['attack_auc']} "
-                  f"(95% CI {m['attack_auc_ci95']}; 0.5 = no membership leakage)")
+            worst = max(m["attack_auc"], m["learned_attack_auc"])
+            worst_ci = (m["attack_auc_ci95"] if m["attack_auc"] >= m["learned_attack_auc"]
+                        else m["learned_attack_auc_ci95"])
+            verdict = "✅" if worst_ci[0] <= 0.5 <= worst_ci[1] or worst < 0.55 else "🚨"
+            print(f"  {verdict} MIA distance attack AUC = {m['attack_auc']} "
+                  f"(95% CI {m['attack_auc_ci95']}); learned attack AUC = "
+                  f"{m['learned_attack_auc']} (95% CI {m['learned_attack_auc_ci95']}; "
+                  f"0.5 = no membership leakage)")
 
             entry["attribute_inference"] = self._aia(train, holdout, synth, sensitive)
             for a in entry["attribute_inference"]:
@@ -134,23 +139,57 @@ class AttacksStep(PipelineStep):
     def _mia(self, train_num, train_cat, hold_num, hold_cat, synth_num, synth_cat, rng) -> dict:
         from sklearn.metrics import roc_auc_score
 
-        d_mem, _ = nearest_two_distances(train_num, train_cat, synth_num, synth_cat)
-        d_non, _ = nearest_two_distances(hold_num, hold_cat, synth_num, synth_cat)
+        d_mem, d2_mem = nearest_two_distances(train_num, train_cat, synth_num, synth_cat)
+        d_non, d2_non = nearest_two_distances(hold_num, hold_cat, synth_num, synth_cat)
         scores = np.concatenate([-d_mem, -d_non])  # closer = "more likely member"
         labels = np.concatenate([np.ones(len(d_mem)), np.zeros(len(d_non))])
         auc = float(roc_auc_score(labels, scores))
 
-        boot = []
-        n = len(labels)
-        for _ in range(N_BOOTSTRAP):
-            idx = rng.integers(0, n, n)
-            if labels[idx].min() == labels[idx].max():
-                continue
-            boot.append(roc_auc_score(labels[idx], scores[idx]))
-        lo, hi = np.percentile(boot, [2.5, 97.5])
+        def _boot_ci(sc):
+            boot = []
+            n = len(labels)
+            for _ in range(N_BOOTSTRAP):
+                idx = rng.integers(0, n, n)
+                if labels[idx].min() == labels[idx].max():
+                    continue
+                boot.append(roc_auc_score(labels[idx], sc[idx]))
+            lo, hi = np.percentile(boot, [2.5, 97.5])
+            return [round(float(lo), 4), round(float(hi), 4)]
+
+        ci = _boot_ci(scores)
+
+        # LEARNED attack: a cross-validated classifier over the distance
+        # profile (nearest, second-nearest, their ratio) -- strictly more
+        # powerful than thresholding the nearest distance alone, so a
+        # chance-level result here is stronger evidence than the
+        # single-feature attack's. Scored out-of-fold: the attack model
+        # never sees the records it scores.
+        eps = 1e-12
+        feats = np.column_stack([
+            np.concatenate([d_mem, d_non]),
+            np.concatenate([d2_mem, d2_non]),
+            np.concatenate([d_mem / (d2_mem + eps), d_non / (d2_non + eps)]),
+        ])
+        from sklearn.linear_model import LogisticRegression
+        from sklearn.model_selection import StratifiedKFold
+        from sklearn.preprocessing import StandardScaler
+
+        oof = np.zeros(len(labels))
+        skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=0)
+        for tr_idx, te_idx in skf.split(feats, labels):
+            scaler = StandardScaler().fit(feats[tr_idx])
+            clf = LogisticRegression(max_iter=1000).fit(
+                scaler.transform(feats[tr_idx]), labels[tr_idx])
+            oof[te_idx] = clf.decision_function(scaler.transform(feats[te_idx]))
+        learned_auc = float(roc_auc_score(labels, oof))
+        learned_ci = _boot_ci(oof)
+
         return {"attack": "nearest-synthetic-distance",
                 "attack_auc": round(auc, 4),
-                "attack_auc_ci95": [round(float(lo), 4), round(float(hi), 4)],
+                "attack_auc_ci95": ci,
+                "learned_attack": "cv-logreg over (d1, d2, d1/d2)",
+                "learned_attack_auc": round(learned_auc, 4),
+                "learned_attack_auc_ci95": learned_ci,
                 "member_median_distance": round(float(np.median(d_mem)), 6),
                 "nonmember_median_distance": round(float(np.median(d_non)), 6)}
 
@@ -242,8 +281,11 @@ class AttacksStep(PipelineStep):
     def _anonymeter(self, train, holdout, synth):
         try:
             from anonymeter.evaluators import LinkabilityEvaluator, SinglingOutEvaluator
-        except ImportError:
-            return {"note": "anonymeter not installed; singling-out/linkability skipped "
+        except Exception as e:  # not just ImportError: a numpy-version
+            # mismatch can surface as AttributeError/TypeError deep in
+            # numba's import chain, and the attacks step must survive it.
+            return {"note": f"anonymeter unavailable ({type(e).__name__}: {e}); "
+                            "singling-out/linkability skipped "
                             "(native MIA and AIA above are the primary evidence)"}
         train, holdout, synth = self._harmonized_frames(train, holdout, synth)
         out = {}
@@ -279,8 +321,8 @@ class AttacksStep(PipelineStep):
             "on non-members; population-level inference (both above baseline, equally) is the "
             "intended use of released data, only member-specific advantage is leakage.",
             "",
-            "| run | MIA AUC (95% CI) | worst AIA membership advantage | anonymeter |",
-            "|---|---|---|---|",
+            "| run | MIA AUC (95% CI) | learned MIA AUC (95% CI) | worst AIA membership advantage | anonymeter |",
+            "|---|---|---|---|---|",
         ]
         for run in r["runs"]:
             m = run["membership_inference"]
@@ -291,9 +333,13 @@ class AttacksStep(PipelineStep):
             lk = anon.get("linkability_risk")
             anon_cell = (f"SO {so if so is not None else '-'}, link {lk if lk is not None else '-'}"
                          if (so is not None or lk is not None) else "skipped")
-            flag = "" if m["attack_auc"] < 0.55 else " 🚨"
+            l_auc = m.get("learned_attack_auc")
+            l_ci = m.get("learned_attack_auc_ci95") or ["-", "-"]
+            learned_cell = (f"{l_auc} ({l_ci[0]}-{l_ci[1]})" if l_auc is not None else "-")
+            flag = "" if max(m["attack_auc"], l_auc or 0) < 0.55 else " 🚨"
             lines.append(f"| {run['run_id']}{flag} | {m['attack_auc']} "
                          f"({m['attack_auc_ci95'][0]}-{m['attack_auc_ci95'][1]}) "
+                         f"| {learned_cell} "
                          f"| {adv if adv is not None else '-'} | {anon_cell} |")
         lines += ["", "## Attribute inference detail", "",
                   "| run | sensitive attribute | baseline | member acc | non-member acc | advantage |",

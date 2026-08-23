@@ -128,10 +128,16 @@ class SDVTVAESynthesizer(Synthesizer):
         from sdv.single_table import TVAESynthesizer
 
         metadata = _build_metadata(df)
+        # Optional capacity overrides for the architecture sweep; SDV
+        # defaults apply when unset (embedding 128, (128,128) nets).
+        capacity = {k: tuple(v) if isinstance(v, list) else v
+                    for k in ("embedding_dim", "compress_dims", "decompress_dims")
+                    if (v := self.params.get(k)) is not None}
         self._model = TVAESynthesizer(
             metadata,
             epochs=self.params.get("epochs", 500),
             batch_size=self.params.get("batch_size", 500),
+            **capacity,
             **_gpu_kwarg(TVAESynthesizer),
         )
         self._model.fit(df)
