@@ -11,13 +11,13 @@
       "run_id": "aim50_eps1_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4995,
+        "attack_auc": 0.4991,
         "attack_auc_ci95": [
-          0.4809,
-          0.5182
+          0.4802,
+          0.518
         ],
-        "member_median_distance": 0.546611,
-        "nonmember_median_distance": 0.544547
+        "member_median_distance": 0.476829,
+        "nonmember_median_distance": 0.473782
       },
       "attribute_inference": [
         {
@@ -46,19 +46,19 @@
         "singling_out_risk": 0.0071,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 18.0
+      "duration_seconds": 17.6
     },
     {
       "run_id": "aim50_eps5_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.499,
+        "attack_auc": 0.5011,
         "attack_auc_ci95": [
-          0.4802,
-          0.5199
+          0.4829,
+          0.5214
         ],
-        "member_median_distance": 0.54586,
-        "nonmember_median_distance": 0.54302
+        "member_median_distance": 0.474782,
+        "nonmember_median_distance": 0.472957
       },
       "attribute_inference": [
         {
@@ -87,19 +87,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 11.9
+      "duration_seconds": 12.0
     },
     {
       "run_id": "ctgan_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4786,
+        "attack_auc": 0.496,
         "attack_auc_ci95": [
-          0.4609,
-          0.4976
+          0.4765,
+          0.5147
         ],
-        "member_median_distance": 0.495894,
-        "nonmember_median_distance": 0.494819
+        "member_median_distance": 0.176417,
+        "nonmember_median_distance": 0.175515
       },
       "attribute_inference": [
         {
@@ -128,19 +128,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.5
+      "duration_seconds": 14.4
     },
     {
       "run_id": "ctgan_seed1",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4973,
+        "attack_auc": 0.4991,
         "attack_auc_ci95": [
-          0.4784,
-          0.5147
+          0.4807,
+          0.5178
         ],
-        "member_median_distance": 0.48869,
-        "nonmember_median_distance": 0.48833
+        "member_median_distance": 0.170523,
+        "nonmember_median_distance": 0.170254
       },
       "attribute_inference": [
         {
@@ -167,21 +167,21 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0,
-        "linkability_risk": 0.005
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.7
+      "duration_seconds": 14.6
     },
     {
       "run_id": "ctgan_seed2",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5149,
+        "attack_auc": 0.518,
         "attack_auc_ci95": [
-          0.4957,
-          0.531
+          0.4983,
+          0.537
         ],
-        "member_median_distance": 0.486232,
-        "nonmember_median_distance": 0.487762
+        "member_median_distance": 0.165819,
+        "nonmember_median_distance": 0.16878
       },
       "attribute_inference": [
         {
@@ -207,22 +207,22 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.005,
+        "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.8
+      "duration_seconds": 14.5
     },
     {
       "run_id": "dpctgan_eps10_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.497,
+        "attack_auc": 0.5022,
         "attack_auc_ci95": [
-          0.4784,
-          0.5166
+          0.4821,
+          0.521
         ],
-        "member_median_distance": 0.584227,
-        "nonmember_median_distance": 0.583831
+        "member_median_distance": 0.28709,
+        "nonmember_median_distance": 0.286719
       },
       "attribute_inference": [
         {
@@ -251,19 +251,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.4
+      "duration_seconds": 14.3
     },
     {
       "run_id": "dpctgan_eps15_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5003,
+        "attack_auc": 0.5094,
         "attack_auc_ci95": [
-          0.4815,
-          0.5191
+          0.4907,
+          0.529
         ],
-        "member_median_distance": 0.610278,
-        "nonmember_median_distance": 0.609417
+        "member_median_distance": 0.288113,
+        "nonmember_median_distance": 0.291612
       },
       "attribute_inference": [
         {
@@ -292,19 +292,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.2
+      "duration_seconds": 14.0
     },
     {
       "run_id": "dpctgan_eps15_seed1",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5004,
+        "attack_auc": 0.5048,
         "attack_auc_ci95": [
-          0.4812,
-          0.5214
+          0.4855,
+          0.5238
         ],
-        "member_median_distance": 0.563819,
-        "nonmember_median_distance": 0.563829
+        "member_median_distance": 0.272446,
+        "nonmember_median_distance": 0.273953
       },
       "attribute_inference": [
         {
@@ -333,27 +333,27 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.1
+      "duration_seconds": 13.9
     },
     {
       "run_id": "dpctgan_eps15_seed2",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5007,
+        "attack_auc": 0.5054,
         "attack_auc_ci95": [
-          0.4811,
-          0.5196
+          0.4862,
+          0.524
         ],
-        "member_median_distance": 0.581207,
-        "nonmember_median_distance": 0.582701
+        "member_median_distance": 0.285407,
+        "nonmember_median_distance": 0.288056
       },
       "attribute_inference": [
         {
           "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
           "baseline_accuracy": 0.9994,
-          "accuracy_members": 0.0,
-          "accuracy_nonmembers": 0.0,
-          "membership_advantage": 0.0
+          "accuracy_members": 0.4037,
+          "accuracy_nonmembers": 0.4114,
+          "membership_advantage": -0.0077
         },
         {
           "sensitive": "ckd_severity_from_calculated_egfr",
@@ -374,19 +374,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.1
+      "duration_seconds": 13.8
     },
     {
       "run_id": "dpctgan_eps1_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4997,
+        "attack_auc": 0.5108,
         "attack_auc_ci95": [
-          0.4817,
-          0.5189
+          0.4908,
+          0.5308
         ],
-        "member_median_distance": 0.578588,
-        "nonmember_median_distance": 0.578324
+        "member_median_distance": 0.273545,
+        "nonmember_median_distance": 0.274754
       },
       "attribute_inference": [
         {
@@ -415,19 +415,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.8
+      "duration_seconds": 14.6
     },
     {
       "run_id": "dpctgan_eps20_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4983,
+        "attack_auc": 0.5017,
         "attack_auc_ci95": [
-          0.4802,
-          0.5166
+          0.4838,
+          0.5205
         ],
-        "member_median_distance": 0.614112,
-        "nonmember_median_distance": 0.613261
+        "member_median_distance": 0.313131,
+        "nonmember_median_distance": 0.312256
       },
       "attribute_inference": [
         {
@@ -456,19 +456,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 13.9
+      "duration_seconds": 13.7
     },
     {
       "run_id": "dpctgan_eps5_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5001,
+        "attack_auc": 0.5003,
         "attack_auc_ci95": [
-          0.483,
-          0.5202
+          0.482,
+          0.5203
         ],
-        "member_median_distance": 0.593768,
-        "nonmember_median_distance": 0.59445
+        "member_median_distance": 0.296786,
+        "nonmember_median_distance": 0.298333
       },
       "attribute_inference": [
         {
@@ -497,19 +497,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.2
+      "duration_seconds": 13.9
     },
     {
       "run_id": "dpctgan_eps8_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4985,
+        "attack_auc": 0.5014,
         "attack_auc_ci95": [
-          0.4803,
-          0.5184
+          0.4807,
+          0.52
         ],
-        "member_median_distance": 0.601246,
-        "nonmember_median_distance": 0.60159
+        "member_median_distance": 0.300217,
+        "nonmember_median_distance": 0.301245
       },
       "attribute_inference": [
         {
@@ -538,19 +538,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.6
+      "duration_seconds": 14.4
     },
     {
       "run_id": "gaussian_copula_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4934,
+        "attack_auc": 0.5076,
         "attack_auc_ci95": [
-          0.4772,
-          0.5113
+          0.4896,
+          0.5252
         ],
-        "member_median_distance": 0.485428,
-        "nonmember_median_distance": 0.484749
+        "member_median_distance": 0.162638,
+        "nonmember_median_distance": 0.163545
       },
       "attribute_inference": [
         {
@@ -579,19 +579,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.5
+      "duration_seconds": 14.3
     },
     {
       "run_id": "gaussian_copula_seed1",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5,
+        "attack_auc": 0.5092,
         "attack_auc_ci95": [
-          0.4801,
-          0.5178
+          0.4911,
+          0.5276
         ],
-        "member_median_distance": 0.485968,
-        "nonmember_median_distance": 0.486069
+        "member_median_distance": 0.162636,
+        "nonmember_median_distance": 0.163758
       },
       "attribute_inference": [
         {
@@ -620,19 +620,19 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.6
+      "duration_seconds": 14.2
     },
     {
       "run_id": "gaussian_copula_seed2",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.498,
+        "attack_auc": 0.5082,
         "attack_auc_ci95": [
-          0.4791,
-          0.5174
+          0.4891,
+          0.5269
         ],
-        "member_median_distance": 0.483977,
-        "nonmember_median_distance": 0.483645
+        "member_median_distance": 0.163203,
+        "nonmember_median_distance": 0.163991
       },
       "attribute_inference": [
         {
@@ -661,19 +661,19 @@
         "singling_out_risk": 0.0099,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.7
+      "duration_seconds": 14.3
     },
     {
       "run_id": "mst_eps10_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5011,
+        "attack_auc": 0.5021,
         "attack_auc_ci95": [
-          0.4816,
-          0.5214
+          0.4818,
+          0.5227
         ],
-        "member_median_distance": 0.460426,
-        "nonmember_median_distance": 0.460735
+        "member_median_distance": 0.140156,
+        "nonmember_median_distance": 0.139439
       },
       "attribute_inference": [
         {
@@ -702,19 +702,19 @@
         "singling_out_risk": 0.0066,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.5
+      "duration_seconds": 12.2
     },
     {
       "run_id": "mst_eps15_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4924,
+        "attack_auc": 0.5052,
         "attack_auc_ci95": [
-          0.4711,
-          0.5112
+          0.4856,
+          0.5235
         ],
-        "member_median_distance": 0.461105,
-        "nonmember_median_distance": 0.460206
+        "member_median_distance": 0.140683,
+        "nonmember_median_distance": 0.139374
       },
       "attribute_inference": [
         {
@@ -743,19 +743,19 @@
         "singling_out_risk": 0.0099,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.4
+      "duration_seconds": 12.1
     },
     {
       "run_id": "mst_eps15_seed1",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4997,
+        "attack_auc": 0.5063,
         "attack_auc_ci95": [
-          0.4823,
-          0.5192
+          0.4872,
+          0.5262
         ],
-        "member_median_distance": 0.460634,
-        "nonmember_median_distance": 0.460123
+        "member_median_distance": 0.142028,
+        "nonmember_median_distance": 0.144396
       },
       "attribute_inference": [
         {
@@ -784,19 +784,19 @@
         "singling_out_risk": 0.0364,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.4
+      "duration_seconds": 12.3
     },
     {
       "run_id": "mst_eps15_seed2",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5055,
+        "attack_auc": 0.5051,
         "attack_auc_ci95": [
-          0.4868,
-          0.525
+          0.4847,
+          0.5238
         ],
-        "member_median_distance": 0.459092,
-        "nonmember_median_distance": 0.459658
+        "member_median_distance": 0.140626,
+        "nonmember_median_distance": 0.141779
       },
       "attribute_inference": [
         {
@@ -825,19 +825,19 @@
         "singling_out_risk": 0.0132,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.5
+      "duration_seconds": 12.2
     },
     {
       "run_id": "mst_eps1_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5047,
+        "attack_auc": 0.5157,
         "attack_auc_ci95": [
-          0.4839,
-          0.5228
+          0.498,
+          0.5325
         ],
-        "member_median_distance": 0.479833,
-        "nonmember_median_distance": 0.480045
+        "member_median_distance": 0.153096,
+        "nonmember_median_distance": 0.157135
       },
       "attribute_inference": [
         {
@@ -866,19 +866,19 @@
         "singling_out_risk": 0.005,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.4
+      "duration_seconds": 12.1
     },
     {
       "run_id": "mst_eps20_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.498,
+        "attack_auc": 0.5028,
         "attack_auc_ci95": [
-          0.4792,
-          0.5164
+          0.4848,
+          0.5216
         ],
-        "member_median_distance": 0.458252,
-        "nonmember_median_distance": 0.457864
+        "member_median_distance": 0.139556,
+        "nonmember_median_distance": 0.139597
       },
       "attribute_inference": [
         {
@@ -905,21 +905,21 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0281,
-        "linkability_risk": 0.0
+        "linkability_risk": 0.0099
       },
-      "duration_seconds": 12.4
+      "duration_seconds": 12.1
     },
     {
       "run_id": "mst_eps5_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4893,
+        "attack_auc": 0.501,
         "attack_auc_ci95": [
-          0.4703,
-          0.5082
+          0.4819,
+          0.5189
         ],
-        "member_median_distance": 0.462123,
-        "nonmember_median_distance": 0.460795
+        "member_median_distance": 0.144076,
+        "nonmember_median_distance": 0.14469
       },
       "attribute_inference": [
         {
@@ -948,19 +948,19 @@
         "singling_out_risk": 0.0198,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.4
+      "duration_seconds": 12.2
     },
     {
       "run_id": "mst_eps8_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.4967,
+        "attack_auc": 0.5029,
         "attack_auc_ci95": [
-          0.4755,
-          0.5158
+          0.4844,
+          0.5219
         ],
-        "member_median_distance": 0.458487,
-        "nonmember_median_distance": 0.457489
+        "member_median_distance": 0.139724,
+        "nonmember_median_distance": 0.138752
       },
       "attribute_inference": [
         {
@@ -986,22 +986,22 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.0231,
+        "singling_out_risk": 0.0215,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.5
+      "duration_seconds": 12.1
     },
     {
       "run_id": "tvae_seed0",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5195,
+        "attack_auc": 0.5205,
         "attack_auc_ci95": [
-          0.4994,
-          0.5384
+          0.5001,
+          0.5404
         ],
-        "member_median_distance": 0.439235,
-        "nonmember_median_distance": 0.440315
+        "member_median_distance": 0.096124,
+        "nonmember_median_distance": 0.099069
       },
       "attribute_inference": [
         {
@@ -1027,22 +1027,22 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.005,
+        "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.8
+      "duration_seconds": 14.7
     },
     {
       "run_id": "tvae_seed1",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5137,
+        "attack_auc": 0.5252,
         "attack_auc_ci95": [
-          0.4949,
-          0.5316
+          0.5042,
+          0.5453
         ],
-        "member_median_distance": 0.439112,
-        "nonmember_median_distance": 0.439758
+        "member_median_distance": 0.096348,
+        "nonmember_median_distance": 0.099035
       },
       "attribute_inference": [
         {
@@ -1069,21 +1069,21 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0,
-        "linkability_risk": 0.0099
+        "linkability_risk": 0.0
       },
-      "duration_seconds": 14.8
+      "duration_seconds": 14.6
     },
     {
       "run_id": "tvae_seed2",
       "membership_inference": {
         "attack": "nearest-synthetic-distance",
-        "attack_auc": 0.5041,
+        "attack_auc": 0.5157,
         "attack_auc_ci95": [
-          0.4841,
-          0.5207
+          0.4965,
+          0.5363
         ],
-        "member_median_distance": 0.439129,
-        "nonmember_median_distance": 0.439275
+        "member_median_distance": 0.095962,
+        "nonmember_median_distance": 0.097921
       },
       "attribute_inference": [
         {
@@ -1109,10 +1109,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.0,
+        "singling_out_risk": 0.005,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.7
+      "duration_seconds": 14.5
     }
   ]
 }

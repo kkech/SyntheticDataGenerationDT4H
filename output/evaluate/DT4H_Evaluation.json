@@ -4201,6 +4201,13 @@
       "synthesizer": "aim",
       "epsilon": 1.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -5694,13 +5701,13 @@
           "pairs_only_in_real": 1563
         },
         "cat_cat": {
-          "pairs": 378,
-          "mean_abs_delta": 0.0997,
-          "median_abs_delta": 0.054,
+          "pairs": 406,
+          "mean_abs_delta": 0.0964,
+          "median_abs_delta": 0.0521,
           "max_abs_delta": 0.7361,
-          "frac_below_0.1": 0.7196,
+          "frac_below_0.1": 0.7241,
           "fabricated_pairs": 8,
-          "fabricated_rate": 0.0212,
+          "fabricated_rate": 0.0197,
           "fabricated_examples": [
             "med_rasi|med_anti_coag_history",
             "med_acei|med_ll_history",
@@ -5738,16 +5745,16 @@
               "synthetic": 0.8834
             }
           ],
-          "pairs_only_in_real": 10797
+          "pairs_only_in_real": 10769
         },
         "num_cat": {
-          "pairs": 1386,
+          "pairs": 1407,
           "mean_abs_delta": 0.0394,
           "median_abs_delta": 0.0,
           "max_abs_delta": 0.5592,
-          "frac_below_0.1": 0.8629,
+          "frac_below_0.1": 0.8635,
           "fabricated_pairs": 3,
-          "fabricated_rate": 0.0022,
+          "fabricated_rate": 0.0021,
           "fabricated_examples": [
             "vital_signs_weight_value_p6mo_last|med_ll_history",
             "vital_signs_weight_value_p6mo_last|med_acei",
@@ -5785,7 +5792,7 @@
               "synthetic": 0.0535
             }
           ],
-          "pairs_only_in_real": 10082
+          "pairs_only_in_real": 10061
         }
       }
     },
@@ -5794,6 +5801,13 @@
       "synthesizer": "aim",
       "epsilon": 5.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -7291,13 +7305,13 @@
           "pairs_only_in_real": 1563
         },
         "cat_cat": {
-          "pairs": 378,
-          "mean_abs_delta": 0.1496,
-          "median_abs_delta": 0.0844,
+          "pairs": 406,
+          "mean_abs_delta": 0.1611,
+          "median_abs_delta": 0.091,
           "max_abs_delta": 0.9101,
-          "frac_below_0.1": 0.5476,
-          "fabricated_pairs": 22,
-          "fabricated_rate": 0.0582,
+          "frac_below_0.1": 0.5296,
+          "fabricated_pairs": 30,
+          "fabricated_rate": 0.0739,
           "fabricated_examples": [
             "conditions_mc|conditions_pad",
             "cause_of_death_isAllCause_f5a_w3a_first|conditions_vd",
@@ -7317,6 +7331,12 @@
               "synthetic": 0.7274
             },
             {
+              "pair": "encounters_admissionYear|conditions_vd",
+              "delta": 0.6996,
+              "real": 0.0694,
+              "synthetic": 0.769
+            },
+            {
               "pair": "cause_of_death_isAllCause_f5a_w3a_first|conditions_vd",
               "delta": 0.6946,
               "real": 0.0962,
@@ -7327,28 +7347,22 @@
               "delta": 0.6882,
               "real": 0.0962,
               "synthetic": 0.7844
-            },
-            {
-              "pair": "med_rasi|conditions_vd",
-              "delta": 0.6546,
-              "real": 0.0226,
-              "synthetic": 0.6772
             }
           ],
-          "pairs_only_in_real": 10797
+          "pairs_only_in_real": 10769
         },
         "num_cat": {
-          "pairs": 1386,
-          "mean_abs_delta": 0.0765,
+          "pairs": 1407,
+          "mean_abs_delta": 0.0806,
           "median_abs_delta": 0.0,
           "max_abs_delta": 0.6805,
-          "frac_below_0.1": 0.7605,
-          "fabricated_pairs": 42,
-          "fabricated_rate": 0.0303,
+          "frac_below_0.1": 0.7534,
+          "fabricated_pairs": 50,
+          "fabricated_rate": 0.0355,
           "fabricated_examples": [
-            "lab_results_ntProBnp_value_first|conditions_mc",
-            "vital_signs_diastolicBp_value_first|cause_of_death_isCV_f5a_w3a_first",
-            "vital_signs_diastolicBp_value_first|cause_of_death_isAllCause_f5a_w3a_first"
+            "lab_results_ntProBnp_value_first|encounters_admissionYear",
+            "lab_results_hemoglobin_value_first|encounters_admissionYear",
+            "lab_results_ntProBnp_value_first|conditions_mc"
           ],
           "worst": [
             {
@@ -7358,31 +7372,31 @@
               "synthetic": 0.694
             },
             {
+              "pair": "lab_results_ntProBnp_value_first|encounters_admissionYear",
+              "delta": 0.6683,
+              "real": 0.0358,
+              "synthetic": 0.7041
+            },
+            {
               "pair": "lab_results_ntProBnp_value_first|cause_of_death_isCV_f5a_w3a_first",
               "delta": 0.6603,
               "real": 0.1393,
               "synthetic": 0.7996
             },
             {
+              "pair": "lab_results_hemoglobin_value_first|encounters_admissionYear",
+              "delta": 0.6441,
+              "real": 0.0565,
+              "synthetic": 0.7005
+            },
+            {
               "pair": "lab_results_ntProBnp_value_last|conditions_mc",
               "delta": 0.6378,
               "real": 0.0119,
               "synthetic": 0.6497
-            },
-            {
-              "pair": "lab_results_hemoglobin_value_first|ace_inhibitors_arb_use_pre_dc",
-              "delta": 0.6266,
-              "real": 0.0386,
-              "synthetic": 0.6652
-            },
-            {
-              "pair": "lab_results_ntProBnp_value_last|cause_of_death_isCV_f5a_w3a_first",
-              "delta": 0.6253,
-              "real": 0.108,
-              "synthetic": 0.7333
             }
           ],
-          "pairs_only_in_real": 10082
+          "pairs_only_in_real": 10061
         }
       }
     },
@@ -7391,6 +7405,13 @@
       "synthesizer": "ctgan",
       "epsilon": null,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -12020,11 +12041,11 @@
           "pairs_only_in_real": 172
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.0743,
+          "pairs": 11175,
+          "mean_abs_delta": 0.0739,
           "median_abs_delta": 0.0309,
           "max_abs_delta": 0.9904,
-          "frac_below_0.1": 0.7734,
+          "frac_below_0.1": 0.7749,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -12060,14 +12081,14 @@
               "synthetic": 0.0539
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11220,
+          "pairs": 11280,
           "mean_abs_delta": 0.0424,
           "median_abs_delta": 0.0222,
           "max_abs_delta": 0.8439,
-          "frac_below_0.1": 0.8953,
+          "frac_below_0.1": 0.8952,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -12103,7 +12124,7 @@
               "synthetic": 0.1149
             }
           ],
-          "pairs_only_in_real": 248
+          "pairs_only_in_real": 188
         }
       }
     },
@@ -12112,6 +12133,13 @@
       "synthesizer": "ctgan",
       "epsilon": null,
       "seed": 1,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -16741,11 +16769,11 @@
           "pairs_only_in_real": 136
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.0666,
-          "median_abs_delta": 0.0248,
+          "pairs": 11175,
+          "mean_abs_delta": 0.0663,
+          "median_abs_delta": 0.025,
           "max_abs_delta": 0.988,
-          "frac_below_0.1": 0.8262,
+          "frac_below_0.1": 0.827,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -16781,14 +16809,14 @@
               "synthetic": 0.0386
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11407,
-          "mean_abs_delta": 0.0402,
+          "pairs": 11468,
+          "mean_abs_delta": 0.0403,
           "median_abs_delta": 0.0199,
           "max_abs_delta": 0.8956,
-          "frac_below_0.1": 0.9077,
+          "frac_below_0.1": 0.9071,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -16824,7 +16852,7 @@
               "synthetic": 0.1145
             }
           ],
-          "pairs_only_in_real": 61
+          "pairs_only_in_real": 0
         }
       }
     },
@@ -16833,6 +16861,13 @@
       "synthesizer": "ctgan",
       "epsilon": null,
       "seed": 2,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -21462,11 +21497,11 @@
           "pairs_only_in_real": 170
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.0734,
-          "median_abs_delta": 0.0352,
+          "pairs": 11175,
+          "mean_abs_delta": 0.0731,
+          "median_abs_delta": 0.0351,
           "max_abs_delta": 0.9673,
-          "frac_below_0.1": 0.7568,
+          "frac_below_0.1": 0.7586,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -21502,14 +21537,14 @@
               "synthetic": 0.1025
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11220,
-          "mean_abs_delta": 0.0424,
-          "median_abs_delta": 0.0226,
+          "pairs": 11280,
+          "mean_abs_delta": 0.0425,
+          "median_abs_delta": 0.0227,
           "max_abs_delta": 0.8156,
-          "frac_below_0.1": 0.8946,
+          "frac_below_0.1": 0.8942,
           "fabricated_pairs": 1,
           "fabricated_rate": 0.0001,
           "fabricated_examples": [
@@ -21547,7 +21582,7 @@
               "synthetic": 0.0654
             }
           ],
-          "pairs_only_in_real": 248
+          "pairs_only_in_real": 188
         }
       }
     },
@@ -21556,6 +21591,13 @@
       "synthesizer": "dpctgan",
       "epsilon": 10.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -25124,11 +25166,11 @@
           "pairs_only_in_real": 1448
         },
         "cat_cat": {
-          "pairs": 8778,
-          "mean_abs_delta": 0.0934,
-          "median_abs_delta": 0.0406,
+          "pairs": 8911,
+          "mean_abs_delta": 0.0931,
+          "median_abs_delta": 0.041,
           "max_abs_delta": 0.9994,
-          "frac_below_0.1": 0.8058,
+          "frac_below_0.1": 0.8056,
           "fabricated_pairs": 1,
           "fabricated_rate": 0.0001,
           "fabricated_examples": [
@@ -25136,13 +25178,13 @@
           ],
           "worst": [
             {
-              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
+              "pair": "cause_of_death_isCV_f5a_w1a_first|cause_of_death_isRenal_f5a_w1a_first",
               "delta": 0.9994,
               "real": 1.0,
               "synthetic": 0.0006
             },
             {
-              "pair": "cause_of_death_isCV_f5a_w1a_first|cause_of_death_isRenal_f5a_w1a_first",
+              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
               "delta": 0.9994,
               "real": 1.0,
               "synthetic": 0.0006
@@ -25166,14 +25208,14 @@
               "synthetic": 0.0007
             }
           ],
-          "pairs_only_in_real": 2397
+          "pairs_only_in_real": 2264
         },
         "num_cat": {
-          "pairs": 4862,
+          "pairs": 4888,
           "mean_abs_delta": 0.0444,
           "median_abs_delta": 0.0228,
           "max_abs_delta": 0.958,
-          "frac_below_0.1": 0.8778,
+          "frac_below_0.1": 0.8777,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -25209,7 +25251,7 @@
               "synthetic": 0.0774
             }
           ],
-          "pairs_only_in_real": 6606
+          "pairs_only_in_real": 6580
         }
       }
     },
@@ -25218,6 +25260,13 @@
       "synthesizer": "dpctgan",
       "epsilon": 15.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -28906,11 +28955,11 @@
           "pairs_only_in_real": 1368
         },
         "cat_cat": {
-          "pairs": 7626,
-          "mean_abs_delta": 0.1046,
-          "median_abs_delta": 0.0481,
+          "pairs": 7750,
+          "mean_abs_delta": 0.1042,
+          "median_abs_delta": 0.0484,
           "max_abs_delta": 0.9997,
-          "frac_below_0.1": 0.7714,
+          "frac_below_0.1": 0.7711,
           "fabricated_pairs": 2,
           "fabricated_rate": 0.0003,
           "fabricated_examples": [
@@ -28949,14 +28998,14 @@
               "synthetic": 0.0005
             }
           ],
-          "pairs_only_in_real": 3549
+          "pairs_only_in_real": 3425
         },
         "num_cat": {
-          "pairs": 5423,
-          "mean_abs_delta": 0.0438,
-          "median_abs_delta": 0.0249,
+          "pairs": 5452,
+          "mean_abs_delta": 0.0439,
+          "median_abs_delta": 0.025,
           "max_abs_delta": 0.9447,
-          "frac_below_0.1": 0.88,
+          "frac_below_0.1": 0.8793,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -28992,7 +29041,7 @@
               "synthetic": 0.0553
             }
           ],
-          "pairs_only_in_real": 6045
+          "pairs_only_in_real": 6016
         }
       }
     },
@@ -29001,6 +29050,13 @@
       "synthesizer": "dpctgan",
       "epsilon": 15.0,
       "seed": 1,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -32719,11 +32775,11 @@
           "pairs_only_in_real": 1398
         },
         "cat_cat": {
-          "pairs": 7875,
-          "mean_abs_delta": 0.0958,
-          "median_abs_delta": 0.0412,
+          "pairs": 8001,
+          "mean_abs_delta": 0.0955,
+          "median_abs_delta": 0.0418,
           "max_abs_delta": 0.9997,
-          "frac_below_0.1": 0.7947,
+          "frac_below_0.1": 0.7945,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -32759,14 +32815,14 @@
               "synthetic": 0.0005
             }
           ],
-          "pairs_only_in_real": 3300
+          "pairs_only_in_real": 3174
         },
         "num_cat": {
-          "pairs": 5236,
-          "mean_abs_delta": 0.0483,
-          "median_abs_delta": 0.0261,
+          "pairs": 5264,
+          "mean_abs_delta": 0.0485,
+          "median_abs_delta": 0.0263,
           "max_abs_delta": 0.9402,
-          "frac_below_0.1": 0.8665,
+          "frac_below_0.1": 0.8659,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -32802,7 +32858,7 @@
               "synthetic": 0.0664
             }
           ],
-          "pairs_only_in_real": 6232
+          "pairs_only_in_real": 6204
         }
       }
     },
@@ -32811,6 +32867,13 @@
       "synthesizer": "dpctgan",
       "epsilon": 15.0,
       "seed": 2,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -36319,11 +36382,11 @@
           "pairs_only_in_real": 1521
         },
         "cat_cat": {
-          "pairs": 8128,
-          "mean_abs_delta": 0.0911,
-          "median_abs_delta": 0.0402,
+          "pairs": 8256,
+          "mean_abs_delta": 0.0909,
+          "median_abs_delta": 0.0409,
           "max_abs_delta": 0.9997,
-          "frac_below_0.1": 0.8031,
+          "frac_below_0.1": 0.8029,
           "fabricated_pairs": 2,
           "fabricated_rate": 0.0002,
           "fabricated_examples": [
@@ -36350,7 +36413,7 @@
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1mo_first|cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first",
+              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -36362,14 +36425,14 @@
               "synthetic": 0.0004
             }
           ],
-          "pairs_only_in_real": 3047
+          "pairs_only_in_real": 2919
         },
         "num_cat": {
-          "pairs": 4301,
-          "mean_abs_delta": 0.0454,
+          "pairs": 4324,
+          "mean_abs_delta": 0.0456,
           "median_abs_delta": 0.022,
           "max_abs_delta": 0.9616,
-          "frac_below_0.1": 0.8761,
+          "frac_below_0.1": 0.8756,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -36405,7 +36468,7 @@
               "synthetic": 0.0119
             }
           ],
-          "pairs_only_in_real": 7167
+          "pairs_only_in_real": 7144
         }
       }
     },
@@ -36414,6 +36477,13 @@
       "synthesizer": "dpctgan",
       "epsilon": 1.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -40052,11 +40122,11 @@
           "pairs_only_in_real": 1395
         },
         "cat_cat": {
-          "pairs": 9730,
-          "mean_abs_delta": 0.0935,
-          "median_abs_delta": 0.0384,
+          "pairs": 9870,
+          "mean_abs_delta": 0.0931,
+          "median_abs_delta": 0.0387,
           "max_abs_delta": 0.9997,
-          "frac_below_0.1": 0.8051,
+          "frac_below_0.1": 0.8054,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -40074,13 +40144,13 @@
               "synthetic": 0.0005
             },
             {
-              "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
+              "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isRenal_f5a_w7d_first",
               "delta": 0.9994,
               "real": 1.0,
               "synthetic": 0.0006
             },
             {
-              "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isRenal_f5a_w7d_first",
+              "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
               "delta": 0.9994,
               "real": 1.0,
               "synthetic": 0.0006
@@ -40092,14 +40162,14 @@
               "synthetic": 0.0007
             }
           ],
-          "pairs_only_in_real": 1445
+          "pairs_only_in_real": 1305
         },
         "num_cat": {
-          "pairs": 5236,
+          "pairs": 5264,
           "mean_abs_delta": 0.0391,
           "median_abs_delta": 0.0205,
           "max_abs_delta": 0.9366,
-          "frac_below_0.1": 0.9089,
+          "frac_below_0.1": 0.909,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -40135,7 +40205,7 @@
               "synthetic": 0.0295
             }
           ],
-          "pairs_only_in_real": 6232
+          "pairs_only_in_real": 6204
         }
       }
     },
@@ -40144,6 +40214,13 @@
       "synthesizer": "dpctgan",
       "epsilon": 20.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -43627,11 +43704,11 @@
           "pairs_only_in_real": 1521
         },
         "cat_cat": {
-          "pairs": 8385,
-          "mean_abs_delta": 0.089,
-          "median_abs_delta": 0.0401,
+          "pairs": 8515,
+          "mean_abs_delta": 0.0889,
+          "median_abs_delta": 0.0408,
           "max_abs_delta": 0.9997,
-          "frac_below_0.1": 0.8038,
+          "frac_below_0.1": 0.8036,
           "fabricated_pairs": 1,
           "fabricated_rate": 0.0001,
           "fabricated_examples": [
@@ -43645,13 +43722,13 @@
               "synthetic": 0.0003
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isAllCause_f5a_w1a_first",
+              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
+              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isAllCause_f5a_w1a_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -43669,14 +43746,14 @@
               "synthetic": 0.0006
             }
           ],
-          "pairs_only_in_real": 2790
+          "pairs_only_in_real": 2660
         },
         "num_cat": {
-          "pairs": 4301,
-          "mean_abs_delta": 0.0454,
-          "median_abs_delta": 0.0235,
+          "pairs": 4324,
+          "mean_abs_delta": 0.0456,
+          "median_abs_delta": 0.0237,
           "max_abs_delta": 0.9529,
-          "frac_below_0.1": 0.8675,
+          "frac_below_0.1": 0.8668,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -43712,7 +43789,7 @@
               "synthetic": 0.063
             }
           ],
-          "pairs_only_in_real": 7167
+          "pairs_only_in_real": 7144
         }
       }
     },
@@ -43721,6 +43798,13 @@
       "synthesizer": "dpctgan",
       "epsilon": 5.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -47319,11 +47403,11 @@
           "pairs_only_in_real": 1427
         },
         "cat_cat": {
-          "pairs": 6903,
-          "mean_abs_delta": 0.103,
-          "median_abs_delta": 0.0441,
+          "pairs": 7021,
+          "mean_abs_delta": 0.1025,
+          "median_abs_delta": 0.0442,
           "max_abs_delta": 0.9997,
-          "frac_below_0.1": 0.7821,
+          "frac_below_0.1": 0.7825,
           "fabricated_pairs": 2,
           "fabricated_rate": 0.0003,
           "fabricated_examples": [
@@ -47344,13 +47428,13 @@
               "synthetic": 0.0003
             },
             {
-              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first|cause_of_death_isAllCause_f5a_w5a_first",
+              "pair": "cause_of_death_isRenal_f5a_w5a_first|cause_of_death_isAllCause_f5a_w5a_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w5a_first|cause_of_death_isAllCause_f5a_w5a_first",
+              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first|cause_of_death_isAllCause_f5a_w5a_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -47362,14 +47446,14 @@
               "synthetic": 0.0005
             }
           ],
-          "pairs_only_in_real": 4272
+          "pairs_only_in_real": 4154
         },
         "num_cat": {
-          "pairs": 5049,
+          "pairs": 5076,
           "mean_abs_delta": 0.0462,
           "median_abs_delta": 0.0249,
           "max_abs_delta": 0.9616,
-          "frac_below_0.1": 0.879,
+          "frac_below_0.1": 0.8788,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -47405,7 +47489,7 @@
               "synthetic": 0.0417
             }
           ],
-          "pairs_only_in_real": 6419
+          "pairs_only_in_real": 6392
         }
       }
     },
@@ -47414,6 +47498,13 @@
       "synthesizer": "dpctgan",
       "epsilon": 8.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -51082,9 +51173,9 @@
           "pairs_only_in_real": 1395
         },
         "cat_cat": {
-          "pairs": 7626,
-          "mean_abs_delta": 0.1004,
-          "median_abs_delta": 0.0436,
+          "pairs": 7750,
+          "mean_abs_delta": 0.0999,
+          "median_abs_delta": 0.0437,
           "max_abs_delta": 0.9996,
           "frac_below_0.1": 0.7857,
           "fabricated_pairs": 0,
@@ -51092,19 +51183,19 @@
           "fabricated_examples": [],
           "worst": [
             {
+              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first|cause_of_death_isAllCause_f5a_w5a_first",
+              "delta": 0.9996,
+              "real": 1.0,
+              "synthetic": 0.0004
+            },
+            {
               "pair": "cause_of_death_isCV_f5a_w6mo_first|cause_of_death_isAllCause_f5a_w6mo_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
-              "delta": 0.9996,
-              "real": 1.0,
-              "synthetic": 0.0004
-            },
-            {
-              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first|cause_of_death_isAllCause_f5a_w5a_first",
+              "pair": "cause_of_death_isRenal_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -51116,20 +51207,20 @@
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
+              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
             }
           ],
-          "pairs_only_in_real": 3549
+          "pairs_only_in_real": 3425
         },
         "num_cat": {
-          "pairs": 5236,
+          "pairs": 5264,
           "mean_abs_delta": 0.0454,
           "median_abs_delta": 0.0241,
           "max_abs_delta": 0.9163,
-          "frac_below_0.1": 0.8673,
+          "frac_below_0.1": 0.8672,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -51165,7 +51256,7 @@
               "synthetic": 0.0693
             }
           ],
-          "pairs_only_in_real": 6232
+          "pairs_only_in_real": 6204
         }
       }
     },
@@ -51174,6 +51265,13 @@
       "synthesizer": "gaussian_copula",
       "epsilon": null,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -55535,11 +55633,11 @@
           "pairs_only_in_real": 800
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.0671,
-          "median_abs_delta": 0.0253,
+          "pairs": 11175,
+          "mean_abs_delta": 0.0667,
+          "median_abs_delta": 0.025,
           "max_abs_delta": 0.9885,
-          "frac_below_0.1": 0.8507,
+          "frac_below_0.1": 0.8514,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -55575,14 +55673,14 @@
               "synthetic": 0.0427
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 8415,
+          "pairs": 8460,
           "mean_abs_delta": 0.0376,
           "median_abs_delta": 0.0194,
           "max_abs_delta": 0.7146,
-          "frac_below_0.1": 0.9181,
+          "frac_below_0.1": 0.9176,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -55618,7 +55716,7 @@
               "synthetic": 0.1814
             }
           ],
-          "pairs_only_in_real": 3053
+          "pairs_only_in_real": 3008
         }
       }
     },
@@ -55627,6 +55725,13 @@
       "synthesizer": "gaussian_copula",
       "epsilon": null,
       "seed": 1,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -60048,11 +60153,11 @@
           "pairs_only_in_real": 777
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.0671,
-          "median_abs_delta": 0.0251,
+          "pairs": 11175,
+          "mean_abs_delta": 0.0666,
+          "median_abs_delta": 0.025,
           "max_abs_delta": 0.9572,
-          "frac_below_0.1": 0.8531,
+          "frac_below_0.1": 0.854,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -60088,14 +60193,14 @@
               "synthetic": 0.0563
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 8602,
+          "pairs": 8648,
           "mean_abs_delta": 0.0385,
-          "median_abs_delta": 0.0196,
+          "median_abs_delta": 0.0197,
           "max_abs_delta": 0.7309,
-          "frac_below_0.1": 0.9129,
+          "frac_below_0.1": 0.9127,
           "fabricated_pairs": 1,
           "fabricated_rate": 0.0001,
           "fabricated_examples": [
@@ -60133,7 +60238,7 @@
               "synthetic": 0.1589
             }
           ],
-          "pairs_only_in_real": 2866
+          "pairs_only_in_real": 2820
         }
       }
     },
@@ -60142,6 +60247,13 @@
       "synthesizer": "gaussian_copula",
       "epsilon": null,
       "seed": 2,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -64503,11 +64615,11 @@
           "pairs_only_in_real": 797
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.067,
-          "median_abs_delta": 0.0249,
+          "pairs": 11175,
+          "mean_abs_delta": 0.0665,
+          "median_abs_delta": 0.0248,
           "max_abs_delta": 0.9798,
-          "frac_below_0.1": 0.8534,
+          "frac_below_0.1": 0.8545,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -64543,14 +64655,14 @@
               "synthetic": 0.0032
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 8415,
+          "pairs": 8460,
           "mean_abs_delta": 0.0381,
           "median_abs_delta": 0.02,
           "max_abs_delta": 0.8022,
-          "frac_below_0.1": 0.9155,
+          "frac_below_0.1": 0.915,
           "fabricated_pairs": 0,
           "fabricated_rate": 0.0,
           "fabricated_examples": [],
@@ -64586,7 +64698,7 @@
               "synthetic": 0.1435
             }
           ],
-          "pairs_only_in_real": 3053
+          "pairs_only_in_real": 3008
         }
       }
     },
@@ -64595,6 +64707,13 @@
       "synthesizer": "mst",
       "epsilon": 10.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -69228,13 +69347,13 @@
           "pairs_only_in_real": 46
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.2437,
-          "median_abs_delta": 0.1985,
+          "pairs": 11175,
+          "mean_abs_delta": 0.2454,
+          "median_abs_delta": 0.2013,
           "max_abs_delta": 0.9478,
-          "frac_below_0.1": 0.3026,
-          "fabricated_pairs": 1639,
-          "fabricated_rate": 0.1486,
+          "frac_below_0.1": 0.2991,
+          "fabricated_pairs": 1667,
+          "fabricated_rate": 0.1492,
           "fabricated_examples": [
             "med_arni|med_antiarrhytmic_history",
             "med_arb|med_inotropes_history",
@@ -69272,16 +69391,16 @@
               "synthetic": 0.9423
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11220,
-          "mean_abs_delta": 0.1659,
-          "median_abs_delta": 0.1007,
+          "pairs": 11280,
+          "mean_abs_delta": 0.1667,
+          "median_abs_delta": 0.1012,
           "max_abs_delta": 0.813,
-          "frac_below_0.1": 0.4988,
-          "fabricated_pairs": 960,
-          "fabricated_rate": 0.0856,
+          "frac_below_0.1": 0.4971,
+          "fabricated_pairs": 975,
+          "fabricated_rate": 0.0864,
           "fabricated_examples": [
             "electrocardiographs_ecg_qrs_duration_pET_last|conditions_mi",
             "electrocardiographs_ecg_qrs_duration_pET_last|conditions_ap",
@@ -69319,7 +69438,7 @@
               "synthetic": 0.0725
             }
           ],
-          "pairs_only_in_real": 248
+          "pairs_only_in_real": 188
         }
       }
     },
@@ -69328,6 +69447,13 @@
       "synthesizer": "mst",
       "epsilon": 15.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -73961,13 +74087,13 @@
           "pairs_only_in_real": 20
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.2431,
-          "median_abs_delta": 0.209,
+          "pairs": 11175,
+          "mean_abs_delta": 0.2428,
+          "median_abs_delta": 0.2094,
           "max_abs_delta": 0.9503,
-          "frac_below_0.1": 0.2889,
+          "frac_below_0.1": 0.2862,
           "fabricated_pairs": 1413,
-          "fabricated_rate": 0.1282,
+          "fabricated_rate": 0.1264,
           "fabricated_examples": [
             "med_arni|med_antiarrhytmic_history",
             "med_arb|med_inotropes_history",
@@ -74005,20 +74131,20 @@
               "synthetic": 0.9371
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11407,
-          "mean_abs_delta": 0.1669,
-          "median_abs_delta": 0.1063,
+          "pairs": 11468,
+          "mean_abs_delta": 0.1674,
+          "median_abs_delta": 0.107,
           "max_abs_delta": 0.8394,
-          "frac_below_0.1": 0.4886,
-          "fabricated_pairs": 988,
-          "fabricated_rate": 0.0866,
+          "frac_below_0.1": 0.4868,
+          "fabricated_pairs": 994,
+          "fabricated_rate": 0.0867,
           "fabricated_examples": [
-            "electrocardiographs_ecg_qrs_duration_pET_first|med_arb_history",
-            "electrocardiographs_ecg_qrs_duration_pET_first|med_arb",
-            "encounters_numOfPreviousHFStays_count|encounter_primary_reason_non_CV_Disease_f5a_w7d_first"
+            "lab_results_ntProBnp_value_last|encounters_admissionYear",
+            "lab_results_tropTnHs_value_first|encounters_admissionYear",
+            "electrocardiographs_ecg_qrs_duration_pET_first|med_arb_history"
           ],
           "worst": [
             {
@@ -74040,19 +74166,19 @@
               "synthetic": 0.0438
             },
             {
+              "pair": "lab_results_ntProBnp_value_last|encounters_admissionYear",
+              "delta": 0.7643,
+              "real": 0.0465,
+              "synthetic": 0.8108
+            },
+            {
               "pair": "encounters_numOfPreviousHFStays_count|med_arni",
               "delta": 0.7642,
               "real": 0.0068,
               "synthetic": 0.771
-            },
-            {
-              "pair": "electrocardiographs_ecg_qrs_duration_pET_first|med_cortico_syst_history",
-              "delta": 0.759,
-              "real": 0.0048,
-              "synthetic": 0.7638
             }
           ],
-          "pairs_only_in_real": 61
+          "pairs_only_in_real": 0
         }
       }
     },
@@ -74061,6 +74187,13 @@
       "synthesizer": "mst",
       "epsilon": 15.0,
       "seed": 1,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -78694,13 +78827,13 @@
           "pairs_only_in_real": 36
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.2477,
-          "median_abs_delta": 0.2098,
+          "pairs": 11175,
+          "mean_abs_delta": 0.2486,
+          "median_abs_delta": 0.2114,
           "max_abs_delta": 0.9507,
-          "frac_below_0.1": 0.2784,
-          "fabricated_pairs": 1557,
-          "fabricated_rate": 0.1412,
+          "frac_below_0.1": 0.2762,
+          "fabricated_pairs": 1582,
+          "fabricated_rate": 0.1416,
           "fabricated_examples": [
             "med_arb|med_inotropes_history",
             "med_arni_history|conditions_tia",
@@ -78738,16 +78871,16 @@
               "synthetic": 0.9112
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11407,
-          "mean_abs_delta": 0.175,
-          "median_abs_delta": 0.1119,
+          "pairs": 11468,
+          "mean_abs_delta": 0.1757,
+          "median_abs_delta": 0.1129,
           "max_abs_delta": 0.8268,
-          "frac_below_0.1": 0.4767,
-          "fabricated_pairs": 1088,
-          "fabricated_rate": 0.0954,
+          "frac_below_0.1": 0.4746,
+          "fabricated_pairs": 1096,
+          "fabricated_rate": 0.0956,
           "fabricated_examples": [
             "smoking_status_smoker_startTime_count|encounter_primary_reason_renal_complications_f5a_w1a_first",
             "smoking_status_smoker_startTime_count|encounter_primary_reason_renal_complications_f5a_w6mo_first",
@@ -78785,7 +78918,7 @@
               "synthetic": 0.0227
             }
           ],
-          "pairs_only_in_real": 61
+          "pairs_only_in_real": 0
         }
       }
     },
@@ -78794,6 +78927,13 @@
       "synthesizer": "mst",
       "epsilon": 15.0,
       "seed": 2,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -83427,13 +83567,13 @@
           "pairs_only_in_real": 65
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.2536,
-          "median_abs_delta": 0.2059,
+          "pairs": 11175,
+          "mean_abs_delta": 0.2546,
+          "median_abs_delta": 0.2079,
           "max_abs_delta": 0.9599,
-          "frac_below_0.1": 0.2774,
-          "fabricated_pairs": 1837,
-          "fabricated_rate": 0.1666,
+          "frac_below_0.1": 0.2745,
+          "fabricated_pairs": 1857,
+          "fabricated_rate": 0.1662,
           "fabricated_examples": [
             "med_arni|med_antiarrhytmic_history",
             "med_arb|med_inotropes_history",
@@ -83471,16 +83611,16 @@
               "synthetic": 0.877
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11220,
-          "mean_abs_delta": 0.1748,
-          "median_abs_delta": 0.112,
+          "pairs": 11280,
+          "mean_abs_delta": 0.1755,
+          "median_abs_delta": 0.1129,
           "max_abs_delta": 0.8083,
-          "frac_below_0.1": 0.4784,
-          "fabricated_pairs": 1078,
-          "fabricated_rate": 0.0961,
+          "frac_below_0.1": 0.4765,
+          "fabricated_pairs": 1086,
+          "fabricated_rate": 0.0963,
           "fabricated_examples": [
             "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|med_digitalis_history",
             "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|conditions_ap",
@@ -83518,7 +83658,7 @@
               "synthetic": 0.8018
             }
           ],
-          "pairs_only_in_real": 248
+          "pairs_only_in_real": 188
         }
       }
     },
@@ -83527,6 +83667,13 @@
       "synthesizer": "mst",
       "epsilon": 1.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -88160,13 +88307,13 @@
           "pairs_only_in_real": 273
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.2911,
-          "median_abs_delta": 0.2661,
+          "pairs": 11175,
+          "mean_abs_delta": 0.2901,
+          "median_abs_delta": 0.2636,
           "max_abs_delta": 0.9931,
           "frac_below_0.1": 0.2479,
-          "fabricated_pairs": 2387,
-          "fabricated_rate": 0.2165,
+          "fabricated_pairs": 2398,
+          "fabricated_rate": 0.2146,
           "fabricated_examples": [
             "cause_of_death_isCV_f5a_w6mo_first|conditions_rd",
             "med_rdoad_syst_history|conditions_aidshiv",
@@ -88204,16 +88351,16 @@
               "synthetic": 0.0378
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11033,
-          "mean_abs_delta": 0.1874,
-          "median_abs_delta": 0.1048,
+          "pairs": 11092,
+          "mean_abs_delta": 0.1878,
+          "median_abs_delta": 0.1052,
           "max_abs_delta": 1.9188,
-          "frac_below_0.1": 0.4913,
-          "fabricated_pairs": 1074,
-          "fabricated_rate": 0.0973,
+          "frac_below_0.1": 0.4904,
+          "fabricated_pairs": 1081,
+          "fabricated_rate": 0.0975,
           "fabricated_examples": [
             "lab_results_tropTHs_value_last|conditions_stroke",
             "lab_results_tropTHs_value_first|smoking_status_formerSmoker_last",
@@ -88251,7 +88398,7 @@
               "synthetic": 1.8809
             }
           ],
-          "pairs_only_in_real": 435
+          "pairs_only_in_real": 376
         }
       }
     },
@@ -88260,6 +88407,13 @@
       "synthesizer": "mst",
       "epsilon": 20.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -92893,13 +93047,13 @@
           "pairs_only_in_real": 14
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.2411,
-          "median_abs_delta": 0.1839,
+          "pairs": 11175,
+          "mean_abs_delta": 0.2414,
+          "median_abs_delta": 0.1858,
           "max_abs_delta": 0.9537,
-          "frac_below_0.1": 0.3209,
-          "fabricated_pairs": 1712,
-          "fabricated_rate": 0.1553,
+          "frac_below_0.1": 0.3181,
+          "fabricated_pairs": 1725,
+          "fabricated_rate": 0.1544,
           "fabricated_examples": [
             "med_arni|med_antiarrhytmic_history",
             "med_arb|med_inotropes_history",
@@ -92937,16 +93091,16 @@
               "synthetic": 0.9378
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11407,
-          "mean_abs_delta": 0.1792,
-          "median_abs_delta": 0.113,
+          "pairs": 11468,
+          "mean_abs_delta": 0.1797,
+          "median_abs_delta": 0.1137,
           "max_abs_delta": 0.8517,
-          "frac_below_0.1": 0.474,
-          "fabricated_pairs": 1126,
-          "fabricated_rate": 0.0987,
+          "frac_below_0.1": 0.4722,
+          "fabricated_pairs": 1134,
+          "fabricated_rate": 0.0989,
           "fabricated_examples": [
             "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|ckd_severity_calculated_or_measured",
             "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|ckd_severity_from_calculated_egfr",
@@ -92984,7 +93138,7 @@
               "synthetic": 0.8637
             }
           ],
-          "pairs_only_in_real": 61
+          "pairs_only_in_real": 0
         }
       }
     },
@@ -92993,6 +93147,13 @@
       "synthesizer": "mst",
       "epsilon": 5.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -97626,13 +97787,13 @@
           "pairs_only_in_real": 15
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.2615,
-          "median_abs_delta": 0.2266,
+          "pairs": 11175,
+          "mean_abs_delta": 0.2625,
+          "median_abs_delta": 0.2283,
           "max_abs_delta": 0.9433,
-          "frac_below_0.1": 0.2724,
-          "fabricated_pairs": 1784,
-          "fabricated_rate": 0.1618,
+          "frac_below_0.1": 0.2695,
+          "fabricated_pairs": 1822,
+          "fabricated_rate": 0.163,
           "fabricated_examples": [
             "med_arb|med_inotropes_history",
             "med_arb|med_insulins",
@@ -97670,16 +97831,16 @@
               "synthetic": 0.944
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11407,
-          "mean_abs_delta": 0.1552,
-          "median_abs_delta": 0.0947,
+          "pairs": 11468,
+          "mean_abs_delta": 0.1558,
+          "median_abs_delta": 0.0958,
           "max_abs_delta": 0.9426,
-          "frac_below_0.1": 0.5111,
-          "fabricated_pairs": 745,
-          "fabricated_rate": 0.0653,
+          "frac_below_0.1": 0.5092,
+          "fabricated_pairs": 754,
+          "fabricated_rate": 0.0657,
           "fabricated_examples": [
             "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_HF_Disease_f5a_w5a_first",
             "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first|med_vasodil",
@@ -97717,7 +97878,7 @@
               "synthetic": 0.8056
             }
           ],
-          "pairs_only_in_real": 61
+          "pairs_only_in_real": 0
         }
       }
     },
@@ -97726,6 +97887,13 @@
       "synthesizer": "mst",
       "epsilon": 8.0,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -102359,13 +102527,13 @@
           "pairs_only_in_real": 5
         },
         "cat_cat": {
-          "pairs": 11026,
-          "mean_abs_delta": 0.2534,
-          "median_abs_delta": 0.2034,
+          "pairs": 11175,
+          "mean_abs_delta": 0.2546,
+          "median_abs_delta": 0.2068,
           "max_abs_delta": 0.9518,
-          "frac_below_0.1": 0.2897,
-          "fabricated_pairs": 1821,
-          "fabricated_rate": 0.1652,
+          "frac_below_0.1": 0.2864,
+          "fabricated_pairs": 1844,
+          "fabricated_rate": 0.165,
           "fabricated_examples": [
             "med_arb|med_inotropes_history",
             "med_digitalis|med_vasodil",
@@ -102403,20 +102571,20 @@
               "synthetic": 0.9196
             }
           ],
-          "pairs_only_in_real": 149
+          "pairs_only_in_real": 0
         },
         "num_cat": {
-          "pairs": 11407,
-          "mean_abs_delta": 0.1691,
-          "median_abs_delta": 0.0984,
+          "pairs": 11468,
+          "mean_abs_delta": 0.1698,
+          "median_abs_delta": 0.0994,
           "max_abs_delta": 0.8397,
-          "frac_below_0.1": 0.5026,
-          "fabricated_pairs": 1038,
-          "fabricated_rate": 0.091,
+          "frac_below_0.1": 0.5007,
+          "fabricated_pairs": 1046,
+          "fabricated_rate": 0.0912,
           "fabricated_examples": [
-            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|med_antiarrhytmic",
-            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_af",
-            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|med_antiarrhytmic_history"
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_dysl",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_revasc",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|med_digitalis_history"
           ],
           "worst": [
             {
@@ -102450,7 +102618,7 @@
               "synthetic": 0.8517
             }
           ],
-          "pairs_only_in_real": 61
+          "pairs_only_in_real": 0
         }
       }
     },
@@ -102459,6 +102627,13 @@
       "synthesizer": "tvae",
       "epsilon": null,
       "seed": 0,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -107015,7 +107190,7 @@
         "tvd_frac_below_0.05": 0.6862,
         "missing_rate_mean_abs_diff": 0.0402
       },
-      "c2st_auc": 1.0,
+      "c2st_auc": 0.9982,
       "subgroup_fidelity": {
         "female": {
           "n_synthetic": 885,
@@ -107088,14 +107263,15 @@
           "pairs_only_in_real": 181
         },
         "cat_cat": {
-          "pairs": 8001,
-          "mean_abs_delta": 0.0585,
-          "median_abs_delta": 0.0343,
+          "pairs": 8128,
+          "mean_abs_delta": 0.0595,
+          "median_abs_delta": 0.0352,
           "max_abs_delta": 0.5292,
-          "frac_below_0.1": 0.8245,
-          "fabricated_pairs": 1,
-          "fabricated_rate": 0.0001,
+          "frac_below_0.1": 0.8204,
+          "fabricated_pairs": 2,
+          "fabricated_rate": 0.0002,
           "fabricated_examples": [
+            "encounters_admissionYear|ace_inhibitors_arb_use_pre_dc",
             "conditions_mi|conditions_pad"
           ],
           "worst": [
@@ -107130,14 +107306,14 @@
               "synthetic": 0.7527
             }
           ],
-          "pairs_only_in_real": 3174
+          "pairs_only_in_real": 3047
         },
         "num_cat": {
-          "pairs": 11033,
-          "mean_abs_delta": 0.0412,
-          "median_abs_delta": 0.0226,
+          "pairs": 11092,
+          "mean_abs_delta": 0.0414,
+          "median_abs_delta": 0.0227,
           "max_abs_delta": 0.7341,
-          "frac_below_0.1": 0.8892,
+          "frac_below_0.1": 0.8881,
           "fabricated_pairs": 10,
           "fabricated_rate": 0.0009,
           "fabricated_examples": [
@@ -107177,7 +107353,7 @@
               "synthetic": 0.2661
             }
           ],
-          "pairs_only_in_real": 435
+          "pairs_only_in_real": 376
         }
       }
     },
@@ -107186,6 +107362,13 @@
       "synthesizer": "tvae",
       "epsilon": null,
       "seed": 1,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -111742,7 +111925,7 @@
         "tvd_frac_below_0.05": 0.6064,
         "missing_rate_mean_abs_diff": 0.0356
       },
-      "c2st_auc": 1.0,
+      "c2st_auc": 0.9991,
       "subgroup_fidelity": {
         "female": {
           "n_synthetic": 1213,
@@ -111817,13 +112000,13 @@
           "pairs_only_in_real": 163
         },
         "cat_cat": {
-          "pairs": 8385,
-          "mean_abs_delta": 0.0617,
-          "median_abs_delta": 0.0369,
+          "pairs": 8515,
+          "mean_abs_delta": 0.0624,
+          "median_abs_delta": 0.0373,
           "max_abs_delta": 0.6252,
-          "frac_below_0.1": 0.8109,
-          "fabricated_pairs": 3,
-          "fabricated_rate": 0.0004,
+          "frac_below_0.1": 0.8078,
+          "fabricated_pairs": 4,
+          "fabricated_rate": 0.0005,
           "fabricated_examples": [
             "med_acei_history|med_arb_history",
             "med_ivabradine_history|conditions_osa",
@@ -111861,14 +112044,14 @@
               "synthetic": 0.7825
             }
           ],
-          "pairs_only_in_real": 2790
+          "pairs_only_in_real": 2660
         },
         "num_cat": {
-          "pairs": 11033,
-          "mean_abs_delta": 0.0408,
-          "median_abs_delta": 0.0224,
+          "pairs": 11092,
+          "mean_abs_delta": 0.041,
+          "median_abs_delta": 0.0225,
           "max_abs_delta": 0.8082,
-          "frac_below_0.1": 0.8966,
+          "frac_below_0.1": 0.8945,
           "fabricated_pairs": 13,
           "fabricated_rate": 0.0012,
           "fabricated_examples": [
@@ -111878,13 +112061,13 @@
           ],
           "worst": [
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
               "delta": 0.8082,
               "real": 0.8082,
               "synthetic": 0.0
             },
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
               "delta": 0.8082,
               "real": 0.8082,
               "synthetic": 0.0
@@ -111908,7 +112091,7 @@
               "synthetic": 0.7467
             }
           ],
-          "pairs_only_in_real": 435
+          "pairs_only_in_real": 376
         }
       }
     },
@@ -111917,6 +112100,13 @@
       "synthesizer": "tvae",
       "epsilon": null,
       "seed": 2,
+      "representation_audit": {
+        "case_or_format_mismatches": {},
+        "dtype_branch_divergences": [],
+        "categorical_nulls": {},
+        "unseen_categories": {},
+        "clean": true
+      },
       "stale_file": false,
       "stale_cells": 0,
       "train_vs_synthetic": {
@@ -116473,7 +116663,7 @@
         "tvd_frac_below_0.05": 0.617,
         "missing_rate_mean_abs_diff": 0.0352
       },
-      "c2st_auc": 1.0,
+      "c2st_auc": 0.9994,
       "subgroup_fidelity": {
         "female": {
           "n_synthetic": 870,
@@ -116546,11 +116736,11 @@
           "pairs_only_in_real": 224
         },
         "cat_cat": {
-          "pairs": 8128,
-          "mean_abs_delta": 0.0556,
-          "median_abs_delta": 0.0304,
+          "pairs": 8256,
+          "mean_abs_delta": 0.0565,
+          "median_abs_delta": 0.031,
           "max_abs_delta": 0.6325,
-          "frac_below_0.1": 0.8343,
+          "frac_below_0.1": 0.831,
           "fabricated_pairs": 1,
           "fabricated_rate": 0.0001,
           "fabricated_examples": [
@@ -116588,14 +116778,14 @@
               "synthetic": 0.6558
             }
           ],
-          "pairs_only_in_real": 3047
+          "pairs_only_in_real": 2919
         },
         "num_cat": {
-          "pairs": 10846,
-          "mean_abs_delta": 0.0392,
-          "median_abs_delta": 0.0211,
+          "pairs": 10904,
+          "mean_abs_delta": 0.0396,
+          "median_abs_delta": 0.0213,
           "max_abs_delta": 0.6903,
-          "frac_below_0.1": 0.9015,
+          "frac_below_0.1": 0.8993,
           "fabricated_pairs": 8,
           "fabricated_rate": 0.0007,
           "fabricated_examples": [
@@ -116629,13 +116819,13 @@
               "synthetic": 0.6682
             },
             {
-              "pair": "nyha_nyha_pET|cause_of_death_isCV_f5a_w5a_first",
+              "pair": "nyha_nyha_pET|cause_of_death_isAllCause_f5a_w5a_first",
               "delta": 0.6144,
               "real": 0.1042,
               "synthetic": 0.7185
             }
           ],
-          "pairs_only_in_real": 622
+          "pairs_only_in_real": 564
         }
       }
     }
@@ -116738,19 +116928,13 @@
       "fabricated_examples": [],
       "worst": [
         {
-          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_renal_complications_f5a_w3a_first",
-          "delta": 0.8082,
-          "real": 0.8082,
-          "synthetic": 0.0
-        },
-        {
           "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
           "delta": 0.8082,
           "real": 0.8082,
           "synthetic": 0.0
         },
         {
-          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_renal_complications_f5a_w3a_first",
           "delta": 0.8082,
           "real": 0.8082,
           "synthetic": 0.0
@@ -116762,7 +116946,13 @@
           "synthetic": 0.0
         },
         {
-          "pair": "lab_results_ldl_value_last|encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+          "delta": 0.8082,
+          "real": 0.8082,
+          "synthetic": 0.0
+        },
+        {
+          "pair": "lab_results_ldl_value_last|encounter_primary_reason_CV_Disease_f5a_w7d_first",
           "delta": 0.3896,
           "real": 0.0102,
           "synthetic": 0.3998

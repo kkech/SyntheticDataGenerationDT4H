@@ -1,207 +1,207 @@
 {
   "file": "output/generate/DT4H_Synthetic_tvae_seed0.csv",
-  "c2st_raw": 1.0,
-  "c2st_granularity_snapped": 1.0,
+  "c2st_raw": 0.9982,
+  "c2st_granularity_snapped": 0.999,
   "single_feature_tells": [
     [
-      "conditions_heart_failure_hf_within_18mo_any",
-      1.0
+      "encounters_admissionYear",
+      0.7172
     ],
     [
-      "conditions_heart_failure_occurred_prior_to_18_months_any",
-      1.0
+      "lab_results_crpNonHs_value_first",
+      0.6143
     ],
     [
-      "beta_blocker_use_pre_dc",
-      1.0
-    ],
-    [
-      "ace_inhibitors_arb_use_pre_dc",
-      1.0
-    ],
-    [
-      "med_acei",
-      1.0
-    ],
-    [
-      "med_anti_coag",
-      1.0
-    ],
-    [
-      "med_anti_plat",
-      1.0
-    ],
-    [
-      "med_antiarrhytmic",
-      1.0
-    ],
-    [
-      "med_antiinfl",
-      1.0
-    ],
-    [
-      "med_arb",
-      1.0
-    ],
-    [
-      "med_arni",
-      1.0
+      "nyha_nyha_pET",
+      0.6009
     ],
     [
       "med_bb",
-      1.0
+      0.5963
     ],
     [
-      "med_ccb",
-      1.0
-    ],
-    [
-      "med_cortico_syst",
-      1.0
+      "conditions_heartFailure_timeFromEarliest_first",
+      0.5937
     ],
     [
       "med_digitalis",
-      1.0
+      0.5901
     ],
     [
-      "med_diuretics",
-      1.0
+      "vital_signs_diastolicBp_value_first",
+      0.5895
     ],
     [
-      "med_diuretics_loop",
-      1.0
+      "vital_signs_systolicBp_value_first",
+      0.5886
     ],
     [
-      "med_inotropes",
-      1.0
+      "conditions_copd",
+      0.5866
     ],
     [
-      "med_insulins",
-      1.0
+      "patient_demographics_gender",
+      0.5858
     ],
     [
-      "med_ivabradine",
-      1.0
+      "lab_results_ntProBnp_value_first",
+      0.5857
+    ],
+    [
+      "med_anti_coag",
+      0.5857
+    ],
+    [
+      "lab_results_hemoglobin_value_first",
+      0.5831
+    ],
+    [
+      "lab_results_ntProBnp_value_last",
+      0.5817
+    ],
+    [
+      "med_arb",
+      0.5804
+    ],
+    [
+      "lab_results_crpNonHs_value_last",
+      0.5775
+    ],
+    [
+      "conditions_mc",
+      0.5767
     ],
     [
       "med_ll",
-      1.0
+      0.5764
     ],
     [
-      "med_mra",
-      1.0
-    ],
-    [
-      "med_oral_antidiabetic",
-      1.0
-    ],
-    [
-      "med_platelet",
-      1.0
-    ],
-    [
-      "med_potassium_binders",
-      1.0
+      "lab_results_hemoglobin_value_last",
+      0.5756
     ],
     [
       "med_rasi",
-      1.0
+      0.5746
     ],
     [
-      "med_rdoad",
-      1.0
+      "beta_blocker_use_pre_dc",
+      0.5744
     ],
     [
-      "med_rdoad_syst",
-      1.0
+      "conditions_cm",
+      0.5737
     ],
     [
-      "med_thrombolytic",
-      1.0
+      "vital_signs_height_value_p1a_avg",
+      0.5726
     ],
     [
-      "med_vasodil",
-      1.0
+      "conditions_substance_abuse",
+      0.5722
     ],
     [
-      "med_acei_history",
-      1.0
+      "conditions_dysl",
+      0.5695
     ],
     [
-      "med_anti_coag_history",
-      1.0
+      "ckd_severity_calculated_or_measured",
+      0.5679
     ],
     [
-      "med_anti_plat_history",
-      1.0
+      "ace_inhibitors_arb_use_pre_dc",
+      0.5646
     ],
     [
-      "med_antiarrhytmic_history",
-      1.0
+      "med_platelet",
+      0.5631
     ],
     [
-      "med_antiinfl_history",
-      1.0
+      "med_anti_plat",
+      0.5604
+    ],
+    [
+      "lab_results_sodium_value_last",
+      0.5588
+    ],
+    [
+      "conditions_ihd",
+      0.5574
+    ],
+    [
+      "vital_signs_height_value_last",
+      0.5573
+    ],
+    [
+      "conditions_ap",
+      0.5547
+    ],
+    [
+      "encounter_primary_reason_renal_complications_f5a_w5a_first",
+      0.5499
+    ],
+    [
+      "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      0.5485
+    ],
+    [
+      "vital_signs_systolicBp_value_last",
+      0.5478
+    ],
+    [
+      "med_ccb",
+      0.5476
+    ],
+    [
+      "ckd_severity_from_calculated_egfr",
+      0.5472
+    ],
+    [
+      "med_mra",
+      0.5469
+    ],
+    [
+      "conditions_pad",
+      0.5459
+    ],
+    [
+      "lab_results_creatUS_value_first",
+      0.5457
+    ],
+    [
+      "ckd_severity_categorizedValue",
+      0.5457
+    ],
+    [
+      "hyperkalemia_severity_categorizedValue",
+      0.5447
+    ],
+    [
+      "conditions_stroke",
+      0.5442
+    ],
+    [
+      "lab_results_ferritin_value_last",
+      0.5437
     ],
     [
       "med_arb_history",
-      1.0
+      0.5433
     ],
     [
-      "med_arni_history",
-      1.0
+      "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      0.5432
     ],
     [
-      "med_bb_history",
-      1.0
+      "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      0.543
     ],
     [
-      "med_ccb_history",
-      1.0
+      "med_acei",
+      0.5429
     ],
     [
-      "med_cortico_syst_history",
-      1.0
-    ],
-    [
-      "med_digitalis_history",
-      1.0
-    ],
-    [
-      "med_diuretics_history",
-      1.0
-    ],
-    [
-      "med_diuretics_loop_history",
-      1.0
-    ],
-    [
-      "med_inotropes_history",
-      1.0
-    ],
-    [
-      "med_insulins_history",
-      1.0
-    ],
-    [
-      "med_ivabradine_history",
-      1.0
-    ],
-    [
-      "med_ll_history",
-      1.0
-    ],
-    [
-      "med_mra_history",
-      1.0
-    ],
-    [
-      "med_oral_antidiabetic_history",
-      1.0
-    ],
-    [
-      "med_platelet_history",
-      1.0
+      "encounters_lengthOfStay",
+      0.5424
     ]
   ]
 }
