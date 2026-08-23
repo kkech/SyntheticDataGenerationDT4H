@@ -203,20 +203,39 @@ class AttacksStep(PipelineStep):
     # --- optional anonymeter ---
 
     @staticmethod
-    def _plain_pandas(df):
-        """anonymeter chokes on arrow/polars-backed extension dtypes
-        ('dtype String not supported'); coerce to plain numpy-backed
-        float64/object columns."""
+    def _harmonized_frames(train, *others):
+        """anonymeter requires IDENTICAL schemas across ori/syn/control and
+        chokes on arrow-backed extension dtypes. The column type is decided
+        ONCE from the train frame and every frame is coerced to it: train-
+        numeric columns become float64 everywhere; train-categorical columns
+        become plain strings everywhere -- with integer-safe formatting, so
+        a synthetic '2017' parsed as a number by read_csv round-trips to
+        '2017', never '2017.0'."""
         import pandas as pd
 
-        out = {}
-        for c in df.columns:
-            if pd.api.types.is_numeric_dtype(df[c]) and not pd.api.types.is_bool_dtype(df[c]):
-                out[c] = pd.to_numeric(df[c], errors="coerce").astype("float64")
-            else:
-                s = df[c].astype("object").where(df[c].notna(), None)
-                out[c] = s.map(lambda v: str(v) if v is not None else None)
-        return pd.DataFrame(out, index=df.index)
+        numeric_cols = {c for c in train.columns
+                        if pd.api.types.is_numeric_dtype(train[c])
+                        and not pd.api.types.is_bool_dtype(train[c])}
+
+        def _as_cat_str(v):
+            if v is None or (isinstance(v, float) and v != v):
+                return None
+            if isinstance(v, (int, float)):
+                f = float(v)
+                return str(int(f)) if f.is_integer() else str(v)
+            return str(v)
+
+        def convert(df):
+            out = {}
+            for c in train.columns:
+                col = df[c] if c in df.columns else pd.Series([None] * len(df), index=df.index)
+                if c in numeric_cols:
+                    out[c] = pd.to_numeric(col, errors="coerce").astype("float64")
+                else:
+                    out[c] = col.astype("object").where(col.notna(), None).map(_as_cat_str)
+            return pd.DataFrame(out, index=df.index)
+
+        return [convert(f) for f in (train, *others)]
 
     def _anonymeter(self, train, holdout, synth):
         try:
@@ -224,9 +243,7 @@ class AttacksStep(PipelineStep):
         except ImportError:
             return {"note": "anonymeter not installed; singling-out/linkability skipped "
                             "(native MIA and AIA above are the primary evidence)"}
-        train = self._plain_pandas(train)
-        holdout = self._plain_pandas(holdout)
-        synth = self._plain_pandas(synth)
+        train, holdout, synth = self._harmonized_frames(train, holdout, synth)
         out = {}
         try:
             so = SinglingOutEvaluator(ori=train, syn=synth, control=holdout, n_attacks=200)
