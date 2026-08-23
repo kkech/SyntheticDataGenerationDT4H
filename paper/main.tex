@@ -16,6 +16,19 @@
 \usepackage{setspace}
 \onehalfspacing
 
+% Float management: with six figures and three tables in a dense results
+% section, LaTeX's default placement rules strand unplaced floats at the
+% end of the document. Relax the thresholds and keep floats inside their
+% own section.
+\usepackage[section]{placeins}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
+
 \graphicspath{{figures/}{../output/figures/}}
 
 \newcommand{\eps}{\ensuremath{\varepsilon}}
@@ -176,7 +189,7 @@ columns (selection by mean absolute association with the declared outcome variab
 with the utility-evaluation targets, age, sex, and NYHA class force-included; the
 ranked selection is released).
 
-\begin{table}[ht]
+\begin{table}[htbp]
 \centering
 \caption{Generative model families and the run plan.}
 \label{tab:runplan}
@@ -314,7 +327,7 @@ Two disjoint real samples of this cohort differ by KS 0.049 (numeric), TVD 0.010
 (categorical), and 0.008 missingness MAD---the floor no synthesizer can honestly
 beat (Table~\ref{tab:fidelity}; Figure~\ref{fig:ks}).
 
-\begin{table}[ht]
+\begin{table}[htbp]
 \centering
 \caption{Marginal fidelity vs the training data over 211 modelled columns
 (mean $\pm$ SD across seeds).}
@@ -342,7 +355,7 @@ are the worst), indicating a sample-size-driven rather than model-driven limit.
 Subgroup analysis shows uniform fidelity across sex and age strata for all models
 (no stratum deviates disproportionately from its own floor).
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\linewidth]{fig_ks_profiles.pdf}
 \caption{Per-column numeric fidelity profiles against the sampling-noise floor
@@ -361,7 +374,7 @@ instability, not privacy noise---a budget-independent negative result for DP-GAN
 this width. AIM outperforms MST on its column subset at equal \eps{} (KS 0.326 vs
 0.486 at $\eps = 1$) but could not complete above $\eps = 5$ within a 2-hour cap.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{fig_epsilon_curves.pdf}
 \caption{Privacy--utility trade-off: fidelity vs \eps{} for the DP models, with the
@@ -403,7 +416,7 @@ Gaussian dependence structure cannot represent hard implications. AIM's
 workload-aware joint modelling yields the most internally consistent synthetic
 patients---a distinct capability from marginal fidelity, where MST dominates.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\linewidth]{fig_coherence.pdf}
 \caption{Row-level clinical coherence: rule-violation rates against the real
@@ -430,7 +443,7 @@ of 0.086 and 0.144 respectively; TVAE matches 5/6 signs but with an unstable
 magnitude on one covariate. Research conclusions at the direction-of-effect level are
 largely recoverable from the better synthetic datasets.
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{fig_km_curves.pdf}
 \caption{Kaplan--Meier fidelity for all-cause death and heart-failure
@@ -470,7 +483,7 @@ Singling-out risk: mean 0.006, max 0.036; linkability risk: mean 0.0006, max 0.0
 best-fitting models are exactly as unattackable as the worst---and the DP models
 additionally carry their formal $(\eps, \delta)$ guarantee.
 
-\begin{table}[ht]
+\begin{table}[htbp]
 \centering
 \caption{Privacy evidence across all 27 released datasets.}
 \label{tab:privacy}
@@ -488,7 +501,7 @@ linkability risk & mean 0.0006 (max 0.010) \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\linewidth]{fig_dcr.pdf}
 \caption{Distance-to-closest-training-record distributions vs the unseen-patient
@@ -496,7 +509,7 @@ baseline; the dashed line is the holdout 5th-percentile risk threshold.}
 \label{fig:dcr}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\linewidth]{fig_mia.pdf}
 \caption{Membership-inference attack AUC with bootstrap 95\% CIs for all 27
