@@ -24,14 +24,12 @@
     "completed_at": "2026-08-23T14:47:49.417496+00:00"
   },
   "utility": {
-    "completed": false,
-    "running": true,
-    "started_at": "2026-08-23T14:50:09.375476+00:00"
+    "completed": true,
+    "completed_at": "2026-08-23T14:54:57.696419+00:00"
   },
   "privacy": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-23T14:41:50.596267+00:00"
+    "completed": true,
+    "completed_at": "2026-08-23T14:58:00.605803+00:00"
   },
   "coherence": {
     "completed": true,
@@ -42,18 +40,15 @@
     "completed_at": "2026-08-23T14:50:09.374767+00:00"
   },
   "attacks": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-23T14:41:50.596483+00:00"
+    "completed": true,
+    "completed_at": "2026-08-23T15:04:42.381941+00:00"
   },
   "figures": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-23T14:41:50.596707+00:00"
+    "completed": true,
+    "completed_at": "2026-08-23T15:04:46.105822+00:00"
   },
   "release_docs": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-23T14:41:50.596920+00:00"
+    "completed": true,
+    "completed_at": "2026-08-23T15:04:46.508940+00:00"
   }
 }

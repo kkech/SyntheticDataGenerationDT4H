@@ -46,7 +46,7 @@
         "singling_out_risk": 0.0071,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 17.6
+      "duration_seconds": 17.9
     },
     {
       "run_id": "aim50_eps5_seed0",
@@ -87,7 +87,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.0
+      "duration_seconds": 12.1
     },
     {
       "run_id": "ctgan_seed0",
@@ -125,10 +125,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.0,
+        "singling_out_risk": 0.0033,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.4
+      "duration_seconds": 14.5
     },
     {
       "run_id": "ctgan_seed1",
@@ -166,10 +166,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.0,
-        "linkability_risk": 0.0
+        "singling_out_risk": 0.005,
+        "linkability_risk": 0.005
       },
-      "duration_seconds": 14.6
+      "duration_seconds": 14.7
     },
     {
       "run_id": "ctgan_seed2",
@@ -210,7 +210,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.5
+      "duration_seconds": 14.6
     },
     {
       "run_id": "dpctgan_eps10_seed0",
@@ -251,7 +251,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.3
+      "duration_seconds": 14.2
     },
     {
       "run_id": "dpctgan_eps15_seed0",
@@ -292,7 +292,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.0
+      "duration_seconds": 14.1
     },
     {
       "run_id": "dpctgan_eps15_seed1",
@@ -374,7 +374,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 13.8
+      "duration_seconds": 13.9
     },
     {
       "run_id": "dpctgan_eps1_seed0",
@@ -415,7 +415,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.6
+      "duration_seconds": 14.5
     },
     {
       "run_id": "dpctgan_eps20_seed0",
@@ -456,7 +456,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 13.7
+      "duration_seconds": 13.6
     },
     {
       "run_id": "dpctgan_eps5_seed0",
@@ -497,7 +497,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 13.9
+      "duration_seconds": 13.8
     },
     {
       "run_id": "dpctgan_eps8_seed0",
@@ -538,7 +538,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.4
+      "duration_seconds": 14.3
     },
     {
       "run_id": "gaussian_copula_seed0",
@@ -579,7 +579,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.3
+      "duration_seconds": 14.2
     },
     {
       "run_id": "gaussian_copula_seed1",
@@ -620,7 +620,7 @@
         "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.2
+      "duration_seconds": 14.3
     },
     {
       "run_id": "gaussian_copula_seed2",
@@ -658,10 +658,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.0099,
+        "singling_out_risk": 0.0149,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.3
+      "duration_seconds": 14.5
     },
     {
       "run_id": "mst_eps10_seed0",
@@ -743,7 +743,7 @@
         "singling_out_risk": 0.0099,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.1
+      "duration_seconds": 12.2
     },
     {
       "run_id": "mst_eps15_seed1",
@@ -784,7 +784,7 @@
         "singling_out_risk": 0.0364,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.3
+      "duration_seconds": 12.2
     },
     {
       "run_id": "mst_eps15_seed2",
@@ -866,7 +866,7 @@
         "singling_out_risk": 0.005,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.1
+      "duration_seconds": 14.5
     },
     {
       "run_id": "mst_eps20_seed0",
@@ -905,7 +905,7 @@
       ],
       "anonymeter": {
         "singling_out_risk": 0.0281,
-        "linkability_risk": 0.0099
+        "linkability_risk": 0.005
       },
       "duration_seconds": 12.1
     },
@@ -948,7 +948,7 @@
         "singling_out_risk": 0.0198,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.2
+      "duration_seconds": 13.2
     },
     {
       "run_id": "mst_eps8_seed0",
@@ -989,7 +989,7 @@
         "singling_out_risk": 0.0215,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 12.1
+      "duration_seconds": 12.0
     },
     {
       "run_id": "tvae_seed0",
@@ -1027,10 +1027,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.0,
+        "singling_out_risk": 0.0033,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.7
+      "duration_seconds": 14.6
     },
     {
       "run_id": "tvae_seed1",
@@ -1109,10 +1109,10 @@
         }
       ],
       "anonymeter": {
-        "singling_out_risk": 0.005,
+        "singling_out_risk": 0.0,
         "linkability_risk": 0.0
       },
-      "duration_seconds": 14.5
+      "duration_seconds": 14.6
     }
   ]
 }
