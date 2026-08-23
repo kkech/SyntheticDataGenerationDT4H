@@ -70,3 +70,11 @@ matplotlib>=3.7
 #   anonymeter -> singling-out/linkability evaluators in the attacks step
 #                 (the native MIA/AIA attacks always run)
 # pip install lifelines anonymeter
+#
+# CAUTION: anonymeter's numba dependency forces numpy<2, DOWNGRADING the
+# environment below the numpy that trains/pickles the generators. The
+# analysis steps all work under either numpy, but LOADING a saved
+# generator (regenerate.py / conditional_demo.py) requires the same
+# numpy major it was pickled under -- reinstall the pinned numpy first
+# (e.g. `pip install numpy==2.2.6`); the attacks step then skips
+# anonymeter gracefully.

@@ -279,6 +279,9 @@ class GenerateStep(PipelineStep):
             model_path = os.path.join(out_dir, "models", f"{run_id}.pkl")
             try:
                 self._save_generator(synth, model_path)
+                from pipeline.common.model_io import save_environment_sidecar
+
+                save_environment_sidecar(model_path)
                 record["model_path"] = model_path
                 print(f"Saved fitted generator (local only, gitignored) -> {model_path}")
             except Exception as save_err:

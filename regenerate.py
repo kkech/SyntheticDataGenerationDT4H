@@ -38,8 +38,9 @@ def main() -> None:
     import pandas as pd
     import polars as pl
 
-    with open(args.model, "rb") as f:
-        synth = pickle.load(f)
+    from pipeline.common.model_io import load_generator
+
+    synth = load_generator(args.model)
     print(f"Loaded generator: {getattr(synth, 'name', type(synth).__name__)} (params: {getattr(synth, 'params', {})})")
 
     summary_path = os.path.join(config.step_dir("generate"), "DT4H_Generation_Summary.json")

@@ -68,8 +68,9 @@ def main() -> None:
     config = PipelineConfig()
 
     conditions = [parse_condition(c) for c in args.condition]
-    with open(args.model, "rb") as f:
-        synth = pickle.load(f)
+    from pipeline.common.model_io import load_generator
+
+    synth = load_generator(args.model)
     print(f"Loaded generator {getattr(synth, 'name', '?')} from {args.model}")
     print(f"Conditions: {conditions}")
 
