@@ -112,17 +112,21 @@ class FiguresStep(PipelineStep):
         metrics = [("tvd_mean", "TVD mean (categorical)", floor["tvd"].get("mean")),
                    ("ks_mean", "KS mean (numeric)", floor["ks"].get("mean")),
                    ("missing_rate_mad", "missingness MAD", floor["missing_rate_mean_abs_diff"])]
-        fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.2))
+        fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.4))
         dp_models = sorted({g["synthesizer"] for g in groups if g.get("epsilon") is not None})
         for ax, (key, label, floor_v) in zip(axes, metrics):
             for m in dp_models:
-                pts = sorted([(g["epsilon"], g[key]["mean"]) for g in groups
+                pts = sorted([(g["epsilon"], g[key]["mean"], g[key].get("sd"))
+                              for g in groups
                               if g["synthesizer"] == m and g.get("epsilon") is not None
                               and g.get(key)], key=lambda p: p[0])
                 if pts:
-                    ax.plot([p[0] for p in pts], [p[1] for p in pts], "o-",
-                            color=MODEL_COLORS.get(m, "#999"), label=m, linewidth=2,
-                            markersize=4)
+                    display = "aim (50-col subset)" if m == "aim" else m
+                    ax.errorbar([p[0] for p in pts], [p[1] for p in pts],
+                                yerr=[(p[2] or 0.0) for p in pts],
+                                fmt="o-", color=MODEL_COLORS.get(m, "#999"),
+                                label=display, linewidth=2, markersize=4,
+                                capsize=2, elinewidth=1)
             if floor_v is not None:
                 ax.axhline(floor_v, color=FLOOR_COLOR, linestyle="--", linewidth=1,
                            label="sampling-noise floor")
@@ -131,7 +135,11 @@ class FiguresStep(PipelineStep):
             ax.set_xscale("log")
             ax.set_xticks([1, 5, 10, 20])
             ax.set_xticklabels(["1", "5", "10", "20"])
-        axes[0].legend(fontsize=7, loc="upper right")
+        # One shared legend below the panels: an in-panel box collides with
+        # the curves in every panel.
+        handles, labels = axes[0].get_legend_handles_labels()
+        fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=8,
+                   bbox_to_anchor=(0.5, -0.08))
         fig.suptitle("Privacy-utility trade-off: fidelity vs ε (lower is better)", y=1.03)
         self._save(plt, fig, "fig_epsilon_curves")
 
@@ -174,17 +182,28 @@ class FiguresStep(PipelineStep):
         floor_ks = sorted(r["ks_statistic"] for r in floor_cmp["numeric"])
         import numpy as np
 
-        q = np.linspace(0, 1, len(floor_ks))
-        ax.plot(floor_ks, q, color=FLOOR_COLOR, linestyle="--", linewidth=1.5,
-                label="noise floor\n(train vs holdout)")
+        def _ecdf(values):
+            """Proper ECDF: steps, anchored at (0, 0) and extended to the
+            right edge at 1.0 -- a curve that stops mid-plot reads as
+            clipped data."""
+            xs = np.concatenate([[0.0], np.sort(values), [1.0]])
+            ys = np.concatenate([[0.0], np.arange(1, len(values) + 1) / len(values), [1.0]])
+            return xs, ys
+
+        xs, ys = _ecdf(np.asarray(floor_ks))
+        ax.plot(xs, ys, color=FLOOR_COLOR, linestyle="--", linewidth=1.5,
+                drawstyle="steps-post", label="noise floor\n(train vs holdout)")
         for run_id in reps:
             c = next((x for x in ev["comparisons"] if x.get("run_id") == run_id), None)
             if not c:
                 continue
-            ks = sorted(r["ks_statistic"] for r in c["train_vs_synthetic"]["numeric"])
+            ks = [r["ks_statistic"] for r in c["train_vs_synthetic"]["numeric"]]
             m = self._model_of(run_id)
-            ax.plot(ks, np.linspace(0, 1, len(ks)), color=MODEL_COLORS.get(m, "#999"),
-                    linewidth=2, label=self._display_label(run_id))
+            xs, ys = _ecdf(np.asarray(ks))
+            ax.plot(xs, ys, color=MODEL_COLORS.get(m, "#999"), linewidth=2,
+                    drawstyle="steps-post", label=self._display_label(run_id))
+        ax.set_xlim(0, 1.0)
+        ax.set_ylim(0, 1.02)
         ax.set_xlabel("per-column KS statistic")
         ax.set_ylabel("fraction of numeric columns ≤ x")
         ax.set_title("Numeric fidelity profile vs the sampling-noise floor")
