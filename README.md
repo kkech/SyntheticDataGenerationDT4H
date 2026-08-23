@@ -67,7 +67,8 @@ python main.py --only evaluate --force-step evaluate
 python main.py --analysis          # rerun ALL analysis steps (6-13) on existing outputs
 python main.py --extended --force  # full campaign PLUS the roadmap runs (quantile-transform
                                    #   variants, TVAE capacity sweep, indicator ablation,
-                                   #   AIM 40-column sweep, MST eps=0.5 anchor)
+                                   #   AIM 40-column sweep, MST eps=0.5 anchor, the native
+                                   #   diffusion baseline `ddpm` x3 seeds, PATE-CTGAN x3 eps)
 python regenerate.py --model output/generate/models/<name>.pkl --rows N --out file.csv
 python conditional_demo.py --model output/generate/models/tvae_seed0.pkl \
     --rows 500 --condition patient_demographics_gender=female --out sample.csv

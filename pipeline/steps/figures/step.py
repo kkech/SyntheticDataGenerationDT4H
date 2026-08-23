@@ -38,6 +38,8 @@ MODEL_COLORS = {
     "tvae_ind": "#1d4f8c",         # dark blue
     "ctgan_qt": "#f3a983",         # light orange
     "aim40": "#66b032",            # light green
+    "ddpm": "#7a4a21",             # brown (in-house diffusion baseline)
+    "patectgan": "#c05fbe",        # violet (second DP-GAN framework)
 }
 REAL_COLOR = "#444444"
 FLOOR_COLOR = "#888888"

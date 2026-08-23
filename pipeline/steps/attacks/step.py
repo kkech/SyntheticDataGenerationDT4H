@@ -40,7 +40,11 @@ import numpy as np
 from pipeline.config import PipelineConfig
 from pipeline.common.alignment import align_categorical_case
 from pipeline.steps.base import PipelineStep
-from pipeline.steps.privacy.distance import build_encoder, nearest_two_distances
+from pipeline.steps.privacy.distance import (
+    build_encoder,
+    nearest_k_distances,
+    nearest_two_distances,
+)
 
 QUASI_IDENTIFIERS = ("patient_demographics_age", "patient_demographics_gender",
                      "encounters_admissionYear")
@@ -82,8 +86,29 @@ class AttacksStep(PipelineStep):
         sensitive = [c for c in SENSITIVE_CANDIDATES if c in train.columns]
         print(f"Attribute-inference sensitive targets: {sensitive}")
 
+        # Per-record vulnerability axis, computed once: how ATYPICAL each
+        # member is (distance to their 5th-nearest fellow member, self
+        # excluded). Attack success stratified by this answers the
+        # governance question aggregates cannot -- WHO is at risk: is any
+        # residual membership signal concentrated on outlier patients?
+        print("Computing member atypicality (distance to 5th-nearest member)...")
+        d5 = nearest_k_distances(train_num, train_cat, train_num, train_cat,
+                                 k=5, exclude_self=True)[:, -1]
+        cuts = np.quantile(d5, [0.25, 0.5, 0.75])
+        # Rank-based quartiles, not value cuts: heavily tied distances
+        # (many near-duplicate records) would otherwise collapse the
+        # bins into one. Ranks always yield four equal groups,
+        # deterministically.
+        order = np.argsort(d5, kind="stable")
+        member_quartile = np.empty(len(d5), dtype=int)
+        member_quartile[order] = (np.arange(len(d5)) * 4) // len(d5)
+        print(f"  atypicality quartile cuts (informational): "
+              f"{[round(float(c), 4) for c in cuts]}")
+
         results = {"n_members": int(train.shape[0]), "n_nonmembers": int(holdout.shape[0]),
                    "quasi_identifiers": [q for q in QUASI_IDENTIFIERS if q in train.columns],
+                   "member_atypicality": {"k": 5,
+                                          "quartile_cuts": [round(float(c), 6) for c in cuts]},
                    "runs": []}
 
         rng = np.random.default_rng(config.seed)
@@ -103,7 +128,8 @@ class AttacksStep(PipelineStep):
 
             entry = {"run_id": run_id}
             entry["membership_inference"] = self._mia(
-                train_num, train_cat, hold_num, hold_cat, synth_num, synth_cat, rng)
+                train_num, train_cat, hold_num, hold_cat, synth_num, synth_cat, rng,
+                member_quartile=member_quartile)
             m = entry["membership_inference"]
             worst = max(m["attack_auc"], m["learned_attack_auc"])
             worst_ci = (m["attack_auc_ci95"] if m["attack_auc"] >= m["learned_attack_auc"]
@@ -113,6 +139,11 @@ class AttacksStep(PipelineStep):
                   f"(95% CI {m['attack_auc_ci95']}); learned attack AUC = "
                   f"{m['learned_attack_auc']} (95% CI {m['learned_attack_auc_ci95']}; "
                   f"0.5 = no membership leakage)")
+            if m.get("mia_by_atypicality"):
+                qs = m["mia_by_atypicality"]
+                print("  who is at risk: "
+                      + " | ".join(f"{q['quartile'].split()[0]} AUC {q['attack_auc']}"
+                                   for q in qs))
 
             entry["attribute_inference"] = self._aia(train, holdout, synth, sensitive)
             for a in entry["attribute_inference"]:
@@ -136,7 +167,8 @@ class AttacksStep(PipelineStep):
 
     # --- membership inference ---
 
-    def _mia(self, train_num, train_cat, hold_num, hold_cat, synth_num, synth_cat, rng) -> dict:
+    def _mia(self, train_num, train_cat, hold_num, hold_cat, synth_num, synth_cat, rng,
+             member_quartile=None) -> dict:
         from sklearn.metrics import roc_auc_score
 
         d_mem, d2_mem = nearest_two_distances(train_num, train_cat, synth_num, synth_cat)
@@ -184,14 +216,34 @@ class AttacksStep(PipelineStep):
         learned_auc = float(roc_auc_score(labels, oof))
         learned_ci = _boot_ci(oof)
 
-        return {"attack": "nearest-synthetic-distance",
-                "attack_auc": round(auc, 4),
-                "attack_auc_ci95": ci,
-                "learned_attack": "cv-logreg over (d1, d2, d1/d2)",
-                "learned_attack_auc": round(learned_auc, 4),
-                "learned_attack_auc_ci95": learned_ci,
-                "member_median_distance": round(float(np.median(d_mem)), 6),
-                "nonmember_median_distance": round(float(np.median(d_non)), 6)}
+        out = {"attack": "nearest-synthetic-distance",
+               "attack_auc": round(auc, 4),
+               "attack_auc_ci95": ci,
+               "learned_attack": "cv-logreg over (d1, d2, d1/d2)",
+               "learned_attack_auc": round(learned_auc, 4),
+               "learned_attack_auc_ci95": learned_ci,
+               "member_median_distance": round(float(np.median(d_mem)), 6),
+               "nonmember_median_distance": round(float(np.median(d_non)), 6)}
+
+        # WHO is at risk: attack success per member-atypicality quartile
+        # (each quartile's members scored against all non-members).
+        if member_quartile is not None:
+            names = ["Q1 (most typical)", "Q2", "Q3", "Q4 (most atypical)"]
+            by_q = []
+            for qi in range(4):
+                mask = member_quartile == qi
+                if not mask.any():
+                    continue
+                sc = np.concatenate([-d_mem[mask], -d_non])
+                lb = np.concatenate([np.ones(int(mask.sum())), np.zeros(len(d_non))])
+                by_q.append({
+                    "quartile": names[qi],
+                    "n_members": int(mask.sum()),
+                    "attack_auc": round(float(roc_auc_score(lb, sc)), 4),
+                    "member_median_distance": round(float(np.median(d_mem[mask])), 6),
+                })
+            out["mia_by_atypicality"] = by_q
+        return out
 
     # --- attribute inference ---
 
@@ -341,6 +393,22 @@ class AttacksStep(PipelineStep):
                          f"({m['attack_auc_ci95'][0]}-{m['attack_auc_ci95'][1]}) "
                          f"| {learned_cell} "
                          f"| {adv if adv is not None else '-'} | {anon_cell} |")
+        lines += [
+            "", "## Who is at risk: membership inference by patient atypicality", "",
+            "Members are split into quartiles of atypicality (distance to their "
+            "5th-nearest fellow member); each quartile is attacked against all "
+            "non-members. A model that leaks selectively on unusual patients shows "
+            "an elevated Q4 AUC even when the overall AUC is at chance.",
+            "",
+            "| run | Q1 typical | Q2 | Q3 | Q4 atypical |",
+            "|---|---|---|---|---|",
+        ]
+        for run in r["runs"]:
+            qs = run["membership_inference"].get("mia_by_atypicality") or []
+            if len(qs) == 4:
+                flag = " 🚨" if qs[3]["attack_auc"] >= 0.6 else ""
+                lines.append(f"| {run['run_id']}{flag} | "
+                             + " | ".join(str(q["attack_auc"]) for q in qs) + " |")
         lines += ["", "## Attribute inference detail", "",
                   "| run | sensitive attribute | baseline | member acc | non-member acc | advantage |",
                   "|---|---|---|---|---|---|"]

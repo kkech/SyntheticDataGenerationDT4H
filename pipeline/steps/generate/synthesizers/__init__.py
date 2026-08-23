@@ -5,6 +5,7 @@ changes.
 """
 
 from pipeline.steps.generate.synthesizers.base import Synthesizer
+from pipeline.steps.generate.synthesizers.ddpm import DDPMSynthesizer
 from pipeline.steps.generate.synthesizers.sdv_models import (
     SDVCTGANSynthesizer,
     SDVGaussianCopulaSynthesizer,
@@ -24,6 +25,7 @@ REGISTRY: dict[str, type[Synthesizer]] = {
         SDVCTGANSynthesizer,
         SDVTVAESynthesizer,
         SDVGaussianCopulaSynthesizer,
+        DDPMSynthesizer,
         # DP
         AIMSynthesizer,
         MSTSynthesizer,

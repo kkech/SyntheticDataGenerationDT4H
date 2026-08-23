@@ -249,8 +249,10 @@ def main() -> None:
     parser.add_argument("--extended", action="store_true",
                          help="Append the roadmap runs to the generation plan (quantile-"
                               "transform variants, TVAE capacity sweep, indicator-encoding "
-                              "ablation, AIM 40-column sweep, MST epsilon=0.5 anchor). "
-                              "The base plan is unchanged; see PipelineConfig.extended_plan.")
+                              "ablation, AIM 40-column sweep, MST epsilon=0.5 anchor, the "
+                              "native diffusion baseline ddpm x3 seeds, PATE-CTGAN x3 "
+                              "epsilons). The base plan is unchanged; see "
+                              "PipelineConfig.extended_plan.")
     parser.add_argument("--status", action="store_true", help="Print step-completion status and exit.")
     parser.add_argument("--preflight", action="store_true",
                          help="Verify libraries, GPU, inputs, disk and config, then exit. "

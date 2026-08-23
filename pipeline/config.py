@@ -158,6 +158,8 @@ class PipelineConfig:
         # 16 GB T4. These are the settings the project's original script
         # ran successfully on this exact GPU.
         self.synthesizer_params.setdefault("dpctgan", {"epochs": 300, "batch_size": 50})
+        # Same memory-stable configuration as dpctgan (same GAN machinery).
+        self.synthesizer_params.setdefault("patectgan", {"epochs": 300, "batch_size": 50})
         if self.metadata_path is None:
             self.metadata_path = os.path.join(self.output_dir, "profile_data", "metadata.json")
         if self.local_full_dataset_path is None:
@@ -251,6 +253,23 @@ class PipelineConfig:
                          "seed": self.variance_seeds[0], "epsilon": eps,
                          "columns": 40,
                          "timeout_seconds": self.aim_timeout_seconds})
+        # The in-house diffusion baseline (see synthesizers/ddpm.py):
+        # three seeds like every non-DP family. More training updates
+        # than the GAN defaults -- diffusion converges slower and the
+        # model is a small MLP, so this stays cheap on the GPU.
+        for seed in self.variance_seeds:
+            plan.append({"run_id": f"ddpm_seed{seed}", "synthesizer": "ddpm",
+                         "seed": seed, "epsilon": None, "columns": None,
+                         "timeout_seconds": None,
+                         "params": {"epochs": 2000}})
+        # PATE-CTGAN: the second DP-GAN framework, at three sweep points
+        # (a full sweep would only replicate dpctgan's budget-independent
+        # failure mode if it fails, and three points suffice if it does
+        # not).
+        for eps in (1.0, 5.0, self.headline_epsilon):
+            plan.append({"run_id": f"patectgan_{_eps_tag(eps)}_seed{self.variance_seeds[0]}",
+                         "synthesizer": "patectgan", "seed": self.variance_seeds[0],
+                         "epsilon": eps, "columns": None, "timeout_seconds": None})
         # The low-budget anchor gets its own bound: at very small epsilon
         # snsynth/MST's domain compression admits far larger domains and
         # Private-PGM estimation slows nonlinearly (measured), so this

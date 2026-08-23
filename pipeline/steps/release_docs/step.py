@@ -60,6 +60,113 @@ class ReleaseDocsStep(PipelineStep):
         self._write_codebook(train, encoding, var_meta, out_dir, config)
         self._write_datasheet(train, out_dir, config)
         self._write_env_freeze(out_dir)
+        self._write_capability_labels(out_dir, config)
+
+    # --- capability labels ---
+
+    def _write_capability_labels(self, out_dir: str, config: PipelineConfig) -> None:
+        """One machine-readable label per released file -- a compact
+        summary of every line of evidence the pipeline holds about it
+        (fidelity, joint structure, coherence, distances, attacks, gate
+        verdict), so a downstream user or reviewer reads one JSON instead
+        of six reports. Absent evidence is null, never guessed."""
+
+        def _load(step, name):
+            p = os.path.join(config.step_dir(step), name)
+            if os.path.exists(p):
+                with open(p) as f:
+                    return json.load(f)
+            return None
+
+        gen = _load("generate", "DT4H_Generation_Summary.json") or {"runs": []}
+        ev = _load("evaluate", "DT4H_Evaluation.json") or {}
+        priv = _load("privacy", "DT4H_Privacy_Assessment.json") or {}
+        att = _load("attacks", "DT4H_Privacy_Attacks.json") or {}
+        coh = _load("coherence", "DT4H_Coherence_Audit.json") or {}
+
+        ev_by_run = {c.get("run_id"): c for c in ev.get("comparisons", [])
+                     if isinstance(c, dict) and c.get("run_id")}
+        priv_by_run = {r.get("run_id"): r for r in priv.get("runs", [])}
+        att_by_run = {r.get("run_id"): r for r in att.get("runs", [])}
+        coh_by_run = {}
+        for fr in coh.get("frames", []):
+            label = fr.get("frame", "")
+            if label.startswith("synthetic[") and label.endswith("]"):
+                coh_by_run[label[len("synthetic["):-1]] = fr
+
+        labels_dir = os.path.join(out_dir, "labels")
+        os.makedirs(labels_dir, exist_ok=True)
+        index = []
+        for run in gen.get("runs", []):
+            if run.get("status") != "ok":
+                continue
+            rid = run["run_id"]
+            e = ev_by_run.get(rid, {})
+            agg = (e.get("train_vs_synthetic") or {}).get("aggregates", {})
+            assoc = e.get("associations") or {}
+            fabricated = sum((assoc.get(k) or {}).get("fabricated_pairs", 0) or 0
+                             for k in ("num_num", "cat_cat", "num_cat"))
+            p = priv_by_run.get(rid, {})
+            a = att_by_run.get(rid, {})
+            mia = a.get("membership_inference", {})
+            atyp = mia.get("mia_by_atypicality") or []
+            aia = a.get("attribute_inference") or []
+            gate_path = os.path.join(config.step_dir("generate"),
+                                     f"DT4H_Release_Gate_DT4H_Synthetic_{rid}.md")
+            gate = None
+            if os.path.exists(gate_path):
+                text = open(gate_path).read()
+                gate = "PASS" if "PASS -- cleared for release" in text else "FAIL"
+
+            label = {
+                "run_id": rid,
+                "file": f"DT4H_Synthetic_{rid}.csv",
+                "synthesizer": run.get("synthesizer"),
+                "base_synthesizer": run.get("base_synthesizer", run.get("synthesizer")),
+                "run_transform": run.get("run_transform"),
+                "differential_privacy": {"formal_guarantee": bool(run.get("is_dp")),
+                                         "epsilon": run.get("epsilon")},
+                "seed": run.get("seed"),
+                "rows": run.get("output_rows"),
+                "columns": run.get("output_columns"),
+                "fidelity": {
+                    "ks_mean_numeric": (agg.get("ks") or {}).get("mean"),
+                    "tvd_mean_categorical": (agg.get("tvd") or {}).get("mean"),
+                    "missing_rate_mad": agg.get("missing_rate_mean_abs_diff"),
+                    "c2st_auc": e.get("c2st_auc"),
+                },
+                "joint_structure": {"fabricated_association_pairs": fabricated or None},
+                "row_coherence": {
+                    "violation_rate": coh_by_run.get(rid, {}).get("overall_violation_rate"),
+                },
+                "distances": {
+                    "verbatim_training_rows": (run.get("leakage") or {}).get(
+                        "exact_duplicates_of_training_rows"),
+                    "dcr_median": p.get("dcr_median"),
+                    "share_closer_than_holdout_p5": p.get("share_closer_than_holdout_p5"),
+                    "nndr_median": p.get("nndr_median"),
+                },
+                "attacks": {
+                    "mia_auc": mia.get("attack_auc"),
+                    "mia_learned_auc": mia.get("learned_attack_auc"),
+                    "mia_auc_most_atypical_quartile":
+                        atyp[-1]["attack_auc"] if atyp else None,
+                    "aia_worst_membership_advantage":
+                        max((x.get("membership_advantage") for x in aia
+                             if x.get("membership_advantage") is not None), default=None),
+                    "singling_out_risk": (a.get("anonymeter") or {}).get("singling_out_risk"),
+                    "linkability_risk": (a.get("anonymeter") or {}).get("linkability_risk"),
+                },
+                "release_gate": gate or "not gated",
+            }
+            with open(os.path.join(labels_dir, f"DT4H_Label_{rid}.json"), "w") as f:
+                json.dump(label, f, indent=2, default=str)
+            index.append({"run_id": rid, "synthesizer": label["synthesizer"],
+                          "epsilon": run.get("epsilon"), "release_gate": label["release_gate"]})
+
+        with open(os.path.join(out_dir, "DT4H_Capability_Labels_Index.json"), "w") as f:
+            json.dump({"labels": index, "directory": "labels/"}, f, indent=2, default=str)
+        print(f"Saved capability labels for {len(index)} released file(s) -> {labels_dir}")
 
     # --- codebook ---
 

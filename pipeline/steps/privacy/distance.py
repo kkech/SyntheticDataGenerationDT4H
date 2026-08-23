@@ -114,3 +114,28 @@ def summarize_dcr(d1: np.ndarray, d2: np.ndarray) -> dict:
         "nndr_median": round(float(np.median(nndr)), 4),
         "nndr_p5": round(float(np.percentile(nndr, 5)), 4),
     }
+
+
+def nearest_k_distances(query_num, query_cat, ref_num, ref_cat, k: int = 5,
+                        exclude_self=False, chunk_rows: int = 128):
+    """For each query record: sorted distances to its k nearest reference
+    records (same metric and chunking as nearest_two_distances)."""
+    n_cols = query_num.shape[1] + query_cat.shape[1]
+    n_query = query_num.shape[0]
+    out = np.empty((n_query, k))
+
+    for start in range(0, n_query, chunk_rows):
+        end = min(start + chunk_rows, n_query)
+        num_d = np.abs(query_num[start:end, None, :] - ref_num[None, :, :])
+        np.minimum(num_d, 1.0, out=num_d)
+        dist = num_d.sum(axis=2)
+        dist += (query_cat[start:end, None, :] != ref_cat[None, :, :]).sum(axis=2)
+        dist /= n_cols
+        if exclude_self:
+            idx = np.arange(start, end)
+            dist[np.arange(end - start), idx] = np.inf
+        part = np.partition(dist, k - 1, axis=1)[:, :k]
+        part.sort(axis=1)
+        out[start:end] = part
+
+    return out

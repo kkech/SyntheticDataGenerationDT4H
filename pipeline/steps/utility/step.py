@@ -94,7 +94,8 @@ class UtilityStep(PipelineStep):
             results["targets"].append(entry)
 
         # Per-run aggregates across targets, then grouped per (model, eps).
-        metrics = {"auc_gap": {}, "auc_gap_logreg": {}, "augmentation_delta": {}}
+        metrics = {"auc_gap": {}, "auc_gap_logreg": {}, "augmentation_delta": {},
+                   "brier_gap": {}, "worst_subgroup_gap": {}}
         for t in results["targets"]:
             for r in t["tstr"]:
                 if r.get("auc") is not None and t.get("baseline_auc") is not None:
@@ -106,6 +107,14 @@ class UtilityStep(PipelineStep):
                 if r.get("augmentation_delta") is not None:
                     metrics["augmentation_delta"].setdefault(r["run_id"], []).append(
                         r["augmentation_delta"])
+                if r.get("brier_gap") is not None:
+                    metrics["brier_gap"].setdefault(r["run_id"], []).append(
+                        r["brier_gap"])
+                sub_gaps = [v for v in (r.get("subgroup_auc_gap") or {}).values()
+                            if v is not None]
+                if sub_gaps:
+                    metrics["worst_subgroup_gap"].setdefault(r["run_id"], []).append(
+                        max(sub_gaps))
         results["aggregate_auc_gap"] = {
             run_id: round(sum(v) / len(v), 4)
             for run_id, v in sorted(metrics["auc_gap"].items())
@@ -131,6 +140,10 @@ class UtilityStep(PipelineStep):
                     if m.get("auc_gap_logreg") else None,
                 "mean_augmentation_delta": round(statistics.mean(m["augmentation_delta"]), 4)
                     if m.get("augmentation_delta") else None,
+                "mean_brier_gap": round(statistics.mean(m["brier_gap"]), 4)
+                    if m.get("brier_gap") else None,
+                "mean_worst_subgroup_gap": round(statistics.mean(m["worst_subgroup_gap"]), 4)
+                    if m.get("worst_subgroup_gap") else None,
             })
 
         print("\nMean AUC gap vs baseline per (model, ε), lower is better "
@@ -140,6 +153,8 @@ class UtilityStep(PipelineStep):
             sd = f" ± {g['sd_gap']}" if g.get("sd_gap") is not None else ""
             print(f"  {g['synthesizer']}{eps}: HistGB {g['mean_gap']:+.4f}{sd} | "
                   f"LogReg {g.get('mean_gap_logreg')} | augment {g.get('mean_augmentation_delta')} "
+                  f"| Brier gap {g.get('mean_brier_gap')} "
+                  f"| worst-stratum gap {g.get('mean_worst_subgroup_gap')} "
                   f"({g['n_runs']} run(s))")
 
         self._write(results, out_dir)
@@ -201,13 +216,26 @@ class UtilityStep(PipelineStep):
         x_train = self._encode(train.loc[y_train_all.index], feature_cols, categories)
         x_test = self._encode(holdout.loc[y_test_all.index], feature_cols, categories)
 
-        baseline = self._fit_score(x_train, y_train_all, x_test, y_test_all, config.seed)
+        # Sex/age strata over the LABELLED holdout rows, for subgroup
+        # utility (same stratification as subgroup fidelity).
+        from sklearn.metrics import brier_score_loss, roc_auc_score
+
+        from pipeline.steps.evaluate.step import EvaluateStep
+
+        hold_labelled = holdout.loc[y_test_all.index]
+        strata_masks = EvaluateStep._strata(hold_labelled)
+
+        base_proba = self._fit_predict(x_train, y_train_all, x_test, config.seed)
+        baseline = round(float(roc_auc_score(y_test_all, base_proba)), 4)
         baseline_lr = self._fit_score_logreg(x_train, y_train_all, x_test, y_test_all, config.seed)
         entry["baseline_auc"] = baseline
         entry["baseline_auc_logreg"] = baseline_lr
+        entry["baseline_brier"] = round(float(brier_score_loss(y_test_all, base_proba)), 4)
+        entry["baseline_subgroup_auc"] = self._subgroup_aucs(base_proba, y_test_all, strata_masks)
         entry["positives_train"] = int(y_train_all.sum())
         entry["positives_holdout"] = int(y_test_all.sum())
-        print(f"  baseline (train real -> test holdout): AUC={baseline} (HistGB) / {baseline_lr} (LogReg)")
+        print(f"  baseline (train real -> test holdout): AUC={baseline} (HistGB) / {baseline_lr} (LogReg) "
+              f"| Brier {entry['baseline_brier']}")
 
         for path in synthetic_files:
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
@@ -220,8 +248,22 @@ class UtilityStep(PipelineStep):
                 print(f"  {run_id}: not evaluable ({record['note']}) -- itself a utility finding")
             else:
                 x_s = self._encode(synth.loc[y_s.index], feature_cols, categories)
-                record["auc"] = self._fit_score(x_s, y_s, x_test, y_test_all, config.seed)
+                proba = self._fit_predict(x_s, y_s, x_test, config.seed)
+                record["auc"] = round(float(roc_auc_score(y_test_all, proba)), 4)
                 record["auc_gap"] = round(baseline - record["auc"], 4)
+                # Calibration: AUC parity with broken probabilities is
+                # not clinical utility.
+                record["brier"] = round(float(brier_score_loss(y_test_all, proba)), 4)
+                record["brier_gap"] = round(record["brier"] - entry["baseline_brier"], 4)
+                # Subgroup utility: does the transfer gap concentrate in
+                # any sex/age stratum?
+                sub = self._subgroup_aucs(proba, y_test_all, strata_masks)
+                record["subgroup_auc"] = sub
+                record["subgroup_auc_gap"] = {
+                    k: (round(entry["baseline_subgroup_auc"][k] - v, 4)
+                        if v is not None and entry["baseline_subgroup_auc"].get(k) is not None
+                        else None)
+                    for k, v in sub.items()}
                 # Second learner: the utility claim should not be an
                 # artifact of one model class.
                 record["auc_logreg"] = self._fit_score_logreg(x_s, y_s, x_test, y_test_all, config.seed)
@@ -290,6 +332,36 @@ class UtilityStep(PipelineStep):
         model = HistGradientBoostingClassifier(random_state=seed)
         model.fit(x_train[usable], y_train)
         return round(float(roc_auc_score(y_test, model.predict_proba(x_test[usable])[:, 1])), 4)
+
+    @staticmethod
+    def _fit_predict(x_train, y_train, x_test, seed):
+        """Same HistGB model and column policy as _fit_score, returning
+        holdout probabilities so calibration and subgroup metrics come
+        from one fit."""
+        from sklearn.ensemble import HistGradientBoostingClassifier
+
+        usable = [c for c in x_train.columns if x_train[c].nunique(dropna=True) >= 2]
+        model = HistGradientBoostingClassifier(random_state=seed)
+        model.fit(x_train[usable], y_train)
+        return model.predict_proba(x_test[usable])[:, 1]
+
+    @staticmethod
+    def _subgroup_aucs(proba, y_test, strata_masks) -> dict:
+        """Holdout AUC within each stratum; None where the stratum is too
+        small or single-class (n >= 30 with >= 5 of each class)."""
+        import numpy as np
+        from sklearn.metrics import roc_auc_score
+
+        out = {}
+        y = np.asarray(y_test, dtype=float)
+        for name, mask in strata_masks.items():
+            m = np.asarray(mask, dtype=bool)
+            pos, neg = int(y[m].sum()), int((1 - y[m]).sum())
+            if m.sum() >= 30 and pos >= 5 and neg >= 5:
+                out[name] = round(float(roc_auc_score(y[m], proba[m])), 4)
+            else:
+                out[name] = None
+        return out
 
     @staticmethod
     def _fit_score_logreg(x_train, y_train, x_test, y_test, seed) -> float:
@@ -362,12 +434,14 @@ class UtilityStep(PipelineStep):
                       "",
                       "Gaps vs baseline, lower is better; augmentation Δ is the AUC change from "
                       "training on real+synthetic vs real alone (positive = synthetic data adds value).",
-                      "", "| model | ε | runs | HistGB gap ± sd | LogReg gap | augmentation Δ |",
-                      "|---|---|---|---|---|---|"]
+                      "", "| model | ε | runs | HistGB gap ± sd | LogReg gap | augmentation Δ | Brier gap | worst-stratum gap |",
+                      "|---|---|---|---|---|---|---|---|"]
             for g in r["grouped_auc_gap"]:
                 eps = f"{g['epsilon']:g}" if g.get("epsilon") is not None else "-"
                 sd = f" ± {g['sd_gap']}" if g.get("sd_gap") is not None else ""
                 lines.append(f"| {g['synthesizer']} | {eps} | {g['n_runs']} "
                              f"| {g['mean_gap']:+.4f}{sd} | {g.get('mean_gap_logreg')} "
-                             f"| {g.get('mean_augmentation_delta')} |")
+                             f"| {g.get('mean_augmentation_delta')} "
+                             f"| {g.get('mean_brier_gap')} "
+                             f"| {g.get('mean_worst_subgroup_gap')} |")
         return "\n".join(lines) + "\n"
