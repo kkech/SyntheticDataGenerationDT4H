@@ -81,7 +81,7 @@ research on heart-failure cohorts is constrained by legitimate privacy protectio
 patient-level electronic health record (EHR) data. Synthetic data---artificial
 records drawn from a generative model of the real cohort---has been proposed as a
 release mechanism that preserves statistical utility without exposing individuals
-\citep{chen2021synthetic, gonzales2023synthetic}. Yet published synthetic-data
+\citep{chen2021synthetic, hernandez2022synthetic, gonzales2023synthetic}. Yet published synthetic-data
 releases often share three weaknesses: fidelity is reported without a reference for
 how much two \emph{real} samples differ; privacy is asserted from the generation
 mechanism rather than tested by attack; and evaluation stops at column distributions
@@ -97,10 +97,12 @@ fidelity metric is read against the \emph{sampling-noise floor}---the same metri
 computed between the training and holdout samples---every utility result is tested on
 the holdout, and every privacy attack uses the holdout as its population of real
 non-members.
-\item \textbf{Privacy is attacked, not asserted.} Beyond distance-to-closest-record
-analysis, we run the four standard adversarial evaluations---membership inference,
-attribute inference, singling-out, and linkability \citep{giomi2023unified}---on all
-27 released datasets.
+\item \textbf{Privacy is attacked, not asserted.} Empirical attacks are the
+standard synthetic-data claims are increasingly held to
+\citep{stadler2022synthetic}: beyond distance-to-closest-record analysis, we run
+the four standard adversarial evaluations---membership inference
+\citep{shokri2017membership}, attribute inference, singling-out, and linkability
+\citep{giomi2023unified}---on all 27 released datasets.
 \item \textbf{Evaluation extends to row-level clinical coherence.} We mine 363
 logical rules from the real data (e.g., cause-specific death implies all-cause death;
 CKD stage must match the patient's own eGFR value) and report each dataset's
@@ -342,7 +344,7 @@ columns (the 38 verbatim constants are excluded from aggregates as copies, not
 modelling successes; full-schema aggregates are also reported). \emph{Floor:} train
 vs holdout.
 \item \textbf{Association structure.} Absolute change in Spearman correlation
-(numeric--numeric), Cram\'er's V (categorical--categorical), and correlation ratio
+(numeric--numeric), Cram\'er's V \citep[categorical--categorical;][]{cramer1946mathematical}, and correlation ratio
 (numeric--categorical) over ${\sim}24{,}000$ measurable pairs, plus a
 \emph{fabricated-association} count: pairs with real $|$association$| < 0.1$ rendered
 $> 0.5$ synthetically. \emph{Floor:} train-profile vs holdout-profile deltas.
@@ -358,9 +360,10 @@ follow-up bounds)---evaluated per row. \emph{Floor:} the holdout's own violation
 rate.
 \item \textbf{Survival fidelity.} For all-cause death and heart-failure
 rehospitalization: a recorded days-to-event is an event; a null is administrative
-censoring at 1{,}825 days. Kaplan--Meier curves; log-rank tests vs the holdout
+censoring at 1{,}825 days. Kaplan--Meier curves \citep{kaplan1958nonparametric};
+log-rank tests \citep{mantel1966evaluation} vs the holdout
 (\emph{floor:} train vs holdout log-rank); and effect-estimate replication---the same
-Cox proportional-hazards model (age, sex, NYHA, eGFR, sodium, systolic blood
+Cox proportional-hazards model \citep{cox1972regression} (age, sex, NYHA, eGFR, sodium, systolic blood
 pressure; standardized; complete-case) fitted on real and synthetic data
 \citep{davidsonpilon2019lifelines}, compared by coefficient sign agreement and
 magnitude error.
@@ -371,10 +374,12 @@ family-diversified outcome targets including all-cause mortality; two model clas
 (histogram gradient boosting; regularized logistic regression;
 \citealp{pedregosa2011scikit}) and an augmentation arm (real + synthetic vs real
 alone).
-\item \textbf{Privacy.} (i) Distance to closest training record (Gower-style mixed
-distance in sentinel space, so proximity requires matching values \emph{and}
-missingness pattern), referenced to the holdout-to-train distance distribution---the
-empirical profile of an innocent unseen patient; (ii) membership inference:
+\item \textbf{Privacy.} (i) Distance to closest training record
+\citep[Gower-style mixed distance;][]{gower1971general} in sentinel space, so
+proximity requires matching values \emph{and}
+missingness pattern, referenced to the holdout-to-train distance distribution---the
+empirical profile of an innocent unseen patient; (ii) membership inference
+\citep{shokri2017membership}:
 nearest-synthetic-record distance attack scored as AUC over training members vs
 holdout non-members with bootstrap 95\% CIs; (iii) attribute inference from
 quasi-identifiers (age, sex, admission year), reported as \emph{membership
