@@ -67,8 +67,9 @@ and violates row-level clinical logic, while neural non-DP synthesis shows the
 opposite profile. We quantify this dissociation with a novel row-coherence audit (363
 rules mined from the real data), and release the complete pipeline---every number,
 figure, and document regenerates from one command---together with an automated
-release gate whose holdout-calibrated criteria currently block both of our own
-flagship candidates rather than rubber-stamping them. The missingness of clinical data, which
+release gate whose holdout-calibrated criteria clear exactly one released file
+(the workload-aware DP model AIM at $\eps = 5$) while blocking both of our own
+higher-fidelity flagship candidates. The missingness of clinical data, which
 carries meaning, is preserved end-to-end by a sentinel encoding decoded back to null
 in the released files.
 \end{abstract}
@@ -750,16 +751,19 @@ verbatim leakage, row coherence, and distance---each calibrated against the hold
 where a real baseline exists. The distance criterion is itself calibrated: because
 5\% of real unseen patients fall below the p5 threshold by construction, zero
 tolerance would reject real data, so a candidate passes if at most twice the
-natural share does ($\leq 10\%$). Under these criteria \textbf{neither flagship
-candidate currently clears the gate}: \texttt{tvae\_seed0} passes five of six
-checks but fails distance (12.2\% of records below the threshold), and
+natural share does ($\leq 10\%$). Under these criteria \textbf{exactly one
+released file clears the gate---and it is not either flagship}:
+\texttt{aim50\_eps5\_seed0} passes all six checks (coherence 0.91\%, 0\% of
+records below the distance threshold), so the single release-grade file is the
+workload-aware DP model on its 50-column subset. \texttt{tvae\_seed0} passes five
+of six checks but fails distance (12.2\% of records below the threshold), and
 \texttt{mst\_eps15\_seed0} fails both coherence (3.63\% vs.\ threshold 2.32\%,
 despite its superior marginals and survival curves---the marginal-vs-coherence
 dissociation enforced as governance) and distance (22.0\%). We regard a gate that
-blocks its own authors' preferred files as evidence that it works; both gate
-reports are released, and the Future Work section names the tested remedies (a
-nearest-record rejection filter for the distance tail; constraint-aware sampling
-for coherence).
+blocks its own authors' preferred files while clearing a third as evidence that it
+measures rather than rubber-stamps; all three gate reports are released, and the
+Future Work section names the tested remedies (a nearest-record rejection filter
+for the distance tail; constraint-aware sampling for coherence).
 
 \subsection{Capability scorecard}
 
@@ -789,7 +793,7 @@ KM curves $\approx$ holdout & rehosp & no & no & \textbf{both} & --- & no \\
 TSTR gap (LogReg) & +0.01 & +0.07 & +0.08 & \textbf{0.00} & +0.11 & +0.22 \\
 share below p5 distance (nat. 5\%) & 12\% & \textbf{0\%} & \textbf{0\%} & 22\% & \textbf{0\%} & \textbf{0\%} \\
 formal DP guarantee & no & no & no & \textbf{yes} & \textbf{yes} & \textbf{yes} \\
-release gate & fail (dist.) & --- & --- & fail (coh.+dist.) & --- & --- \\
+release gate & fail (dist.) & --- & --- & fail (coh.+dist.) & \textbf{pass} & --- \\
 \bottomrule
 \end{tabular}
 
@@ -809,9 +813,9 @@ missingness-pattern research, and survival-curve work under a formal privacy
 guarantee: MST $\eps = 15$---but \emph{never} trust its cross-column correlations,
 and note it failed the row-coherence and distance gates. Where the distance margin
 matters most, prefer CTGAN, the copula, or the DP-CTGAN/AIM files, all of which
-place 0\% of records below the threshold. AIM $\eps = 5$ offers the most internally
-coherent rows over its 50-column subset. DP-CTGAN files are included for benchmark
-completeness only.
+place 0\% of records below the threshold. AIM $\eps = 5$---the only file that
+clears the full release gate---offers the most internally coherent rows over its
+50-column subset. DP-CTGAN files are included for benchmark completeness only.
 \item \textbf{Rows are population members, not case studies.} Even the best datasets
 show ${\sim}10\times$ the real data's rate of logical inconsistency per row, and
 whole rows are machine-distinguishable from real ones. Do not present individual
