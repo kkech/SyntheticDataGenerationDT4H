@@ -56,6 +56,75 @@ Metrics are computed per column over observed values (nulls excluded); missingne
 | mst | 20 | 1 | 0.407 | 0.0014 | 0.0019 |
 | tvae | - | 3 | 0.2016 ± 0.0034 | 0.0588 ± 0.0038 | 0.037 ± 0.0028 |
 
+## Full-joint distinguishability (C2ST)
+
+AUC of a classifier separating real from synthetic rows; 0.5 = joints indistinguishable. Floor (train vs holdout): **0.4572**.
+
+| run | C2ST AUC |
+|---|---|
+| aim50_eps1_seed0 | 1.0 |
+| aim50_eps5_seed0 | 1.0 |
+| ctgan_seed0 | 1.0 |
+| ctgan_seed1 | 1.0 |
+| ctgan_seed2 | 1.0 |
+| dpctgan_eps10_seed0 | 1.0 |
+| dpctgan_eps15_seed0 | 1.0 |
+| dpctgan_eps15_seed1 | 0.9995 |
+| dpctgan_eps15_seed2 | 1.0 |
+| dpctgan_eps1_seed0 | 1.0 |
+| dpctgan_eps20_seed0 | 1.0 |
+| dpctgan_eps5_seed0 | 1.0 |
+| dpctgan_eps8_seed0 | 1.0 |
+| gaussian_copula_seed0 | 1.0 |
+| gaussian_copula_seed1 | 1.0 |
+| gaussian_copula_seed2 | 1.0 |
+| mst_eps10_seed0 | 1.0 |
+| mst_eps15_seed0 | 1.0 |
+| mst_eps15_seed1 | 1.0 |
+| mst_eps15_seed2 | 1.0 |
+| mst_eps1_seed0 | 1.0 |
+| mst_eps20_seed0 | 1.0 |
+| mst_eps5_seed0 | 1.0 |
+| mst_eps8_seed0 | 1.0 |
+| tvae_seed0 | 1.0 |
+| tvae_seed1 | 1.0 |
+| tvae_seed2 | 1.0 |
+
+## Subgroup fidelity (KS mean per stratum, train vs synthetic)
+
+Does the synthetic cohort represent every subgroup as faithfully as the majority? Each cell is read against its stratum's own noise floor.
+
+| run | female | male | age_under_65 | age_65_79 | age_80_plus |
+|---|---|---|---|---|---|
+| *noise floor* | 0.0745 | 0.0684 | 0.0997 | 0.0754 | 0.0961 |
+| aim50_eps1_seed0 | 0.3449 | 0.3395 | 0.3915 | 0.3374 | 0.3724 |
+| aim50_eps5_seed0 | 0.336 | 0.3252 | 0.5021 | 0.3473 | 0.4246 |
+| ctgan_seed0 | 0.3192 | 0.2976 | 0.3149 | 0.3018 | 0.3294 |
+| ctgan_seed1 | 0.3421 | 0.339 | 0.3396 | 0.3439 | 0.3507 |
+| ctgan_seed2 | 0.3016 | 0.325 | 0.3131 | 0.3191 | 0.3178 |
+| dpctgan_eps10_seed0 | - | 0.8246 | - | - | 0.8341 |
+| dpctgan_eps15_seed0 | 0.8492 | - | - | - | 0.8451 |
+| dpctgan_eps15_seed1 | 0.8629 | - | - | - | 0.8673 |
+| dpctgan_eps15_seed2 | 0.8324 | - | 0.8231 | - | - |
+| dpctgan_eps1_seed0 | 0.7355 | - | 0.7274 | 0.7219 | 0.7358 |
+| dpctgan_eps20_seed0 | 0.9025 | 0.8968 | - | - | 0.9048 |
+| dpctgan_eps5_seed0 | - | 0.8899 | 0.8773 | - | - |
+| dpctgan_eps8_seed0 | - | 0.8293 | 0.8296 | 0.8393 | 0.8477 |
+| gaussian_copula_seed0 | 0.4419 | 0.4376 | 0.4462 | 0.4391 | 0.4285 |
+| gaussian_copula_seed1 | 0.4396 | 0.4476 | 0.4497 | 0.4458 | 0.438 |
+| gaussian_copula_seed2 | 0.4346 | 0.4248 | 0.432 | 0.4212 | 0.4436 |
+| mst_eps10_seed0 | 0.4353 | 0.4272 | 0.4906 | 0.511 | 0.4893 |
+| mst_eps15_seed0 | 0.4295 | 0.4237 | 0.4958 | 0.473 | 0.4744 |
+| mst_eps15_seed1 | 0.4328 | 0.4263 | 0.567 | 0.4918 | 0.4821 |
+| mst_eps15_seed2 | 0.4281 | 0.4272 | 0.5194 | 0.4634 | 0.4787 |
+| mst_eps1_seed0 | 0.4995 | 0.4951 | 0.5703 | 0.5555 | 0.5737 |
+| mst_eps20_seed0 | 0.4332 | 0.4242 | 0.5989 | 0.4754 | 0.4784 |
+| mst_eps5_seed0 | 0.4518 | 0.4417 | 0.4896 | 0.4633 | 0.4851 |
+| mst_eps8_seed0 | 0.4461 | 0.4294 | 0.5291 | 0.4634 | 0.4759 |
+| tvae_seed0 | 0.2423 | 0.2058 | 0.2162 | 0.2083 | 0.2239 |
+| tvae_seed1 | 0.232 | 0.2186 | 0.2184 | 0.2187 | 0.2235 |
+| tvae_seed2 | 0.2481 | 0.2108 | 0.2202 | 0.2113 | 0.2211 |
+
 ## Generalization (holdout vs synthetic)
 
 Distance to real records the generator NEVER saw. A model that is much closer to train than to holdout is fitting its training sample, not the population.
@@ -92,91 +161,94 @@ Distance to real records the generator NEVER saw. A model that is much closer to
 
 ## Association structure (train vs synthetic)
 
-Absolute change in pairwise association; 0 = relationship perfectly preserved.
+Absolute change in pairwise association; 0 = relationship perfectly preserved. `fabricated` counts pairs nearly independent in real data (|assoc|<0.1) rendered strongly associated (>0.5) in the synthetic data. Noise floor rows show how much two real samples differ.
 
-| run | pair type | pairs | mean \|Δ\| | median \|Δ\| | \|Δ\|<0.1 | worst pair |
-|---|---|---|---|---|---|---|
-| aim50_eps1_seed0 | Spearman (num-num) | 210 | 0.1498 | 0.1062 | 0.4667 | `vital_signs_weight_value_p6mo_first|vital_signs_bmi_value_last` (0.8066 -> -0.0314) |
-| aim50_eps1_seed0 | Cramer's V (cat-cat) | 378 | 0.0997 | 0.054 | 0.7196 | `med_rasi|med_anti_coag_history` (0.0759 -> 0.812) |
-| aim50_eps1_seed0 | corr-ratio (num-cat) | 1386 | 0.0394 | 0.0 | 0.8629 | `vital_signs_weight_value_p6mo_last|med_ll_history` (0.0114 -> 0.5705) |
-| aim50_eps5_seed0 | Spearman (num-num) | 210 | 0.3247 | 0.2695 | 0.181 | `lab_results_crpNonHs_value_last|lab_results_albuminBS_value_last` (-0.441 -> 0.4541) |
-| aim50_eps5_seed0 | Cramer's V (cat-cat) | 378 | 0.1496 | 0.0844 | 0.5476 | `conditions_mc|conditions_pad` (0.0197 -> 0.9298) |
-| aim50_eps5_seed0 | corr-ratio (num-cat) | 1386 | 0.0765 | 0.0 | 0.7605 | `lab_results_ntProBnp_value_first|conditions_mc` (0.0135 -> 0.694) |
-| ctgan_seed0 | Spearman (num-num) | 1601 | 0.1261 | 0.0905 | 0.5465 | `lab_results_ldl_value_last|lab_results_ldl_value_first` (0.9836 -> -0.1046) |
-| ctgan_seed0 | Cramer's V (cat-cat) | 11026 | 0.0743 | 0.0309 | 0.7734 | `med_anti_plat_history|med_platelet_history` (0.9936 -> 0.0032) |
-| ctgan_seed0 | corr-ratio (num-cat) | 11220 | 0.0424 | 0.0222 | 0.8953 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.1141) |
-| ctgan_seed1 | Spearman (num-num) | 1637 | 0.1266 | 0.0917 | 0.5357 | `lab_results_tropTHs_value_last|lab_results_tropTnHs_value_last` (0.9994 -> -0.0712) |
-| ctgan_seed1 | Cramer's V (cat-cat) | 11026 | 0.0666 | 0.0248 | 0.8262 | `smoking_status_smoker_last|smoking_status_formerSmoker_last` (1.0 -> 0.012) |
-| ctgan_seed1 | corr-ratio (num-cat) | 11407 | 0.0402 | 0.0199 | 0.9077 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.0625) |
-| ctgan_seed2 | Spearman (num-num) | 1603 | 0.1196 | 0.082 | 0.582 | `lab_results_tropTHs_value_first|lab_results_tropTnHs_value_first` (1.0 -> -0.1228) |
-| ctgan_seed2 | Cramer's V (cat-cat) | 11026 | 0.0734 | 0.0352 | 0.7568 | `smoking_status_smoker_last|smoking_status_formerSmoker_last` (1.0 -> 0.0327) |
-| ctgan_seed2 | corr-ratio (num-cat) | 11220 | 0.0424 | 0.0226 | 0.8946 | `lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured` (0.9616 -> 0.1461) |
-| dpctgan_eps10_seed0 | Spearman (num-num) | 325 | 0.2953 | 0.2154 | 0.2646 | `vital_signs_weight_value_p6mo_last|vital_signs_weight_value_last` (1.0 -> -0.344) |
-| dpctgan_eps10_seed0 | Cramer's V (cat-cat) | 8778 | 0.0934 | 0.0406 | 0.8058 | `cause_of_death_isCV_f5a_w1a_first|cause_of_death_isRenal_f5a_w1a_first` (1.0 -> 0.0006) |
-| dpctgan_eps10_seed0 | corr-ratio (num-cat) | 4862 | 0.0444 | 0.0228 | 0.8778 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.0) |
-| dpctgan_eps15_seed0 | Spearman (num-num) | 405 | 0.3973 | 0.3559 | 0.2198 | `lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_first` (-0.9057 -> 0.8801) |
-| dpctgan_eps15_seed0 | Cramer's V (cat-cat) | 7626 | 0.1046 | 0.0481 | 0.7714 | `cause_of_death_isCV_f5a_w3a_first|cause_of_death_isNonRenalAndNonCV_f5a_w3a_first` (1.0 -> 0.0003) |
-| dpctgan_eps15_seed0 | corr-ratio (num-cat) | 5423 | 0.0438 | 0.0249 | 0.88 | `lab_results_valideGFR_value_last|ckd_severity_categorizedValue` (0.9716 -> 0.0269) |
-| dpctgan_eps15_seed1 | Spearman (num-num) | 375 | 0.314 | 0.1909 | 0.2747 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> 0.9028) |
-| dpctgan_eps15_seed1 | Cramer's V (cat-cat) | 7875 | 0.0958 | 0.0412 | 0.7947 | `encounter_primary_reason_CV_Disease_f5a_w1mo_first|encounter_primary_reason_non_CV_Disease_f5a_w1mo_first` (1.0 -> 0.0003) |
-| dpctgan_eps15_seed1 | corr-ratio (num-cat) | 5236 | 0.0483 | 0.0261 | 0.8665 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.0178) |
-| dpctgan_eps15_seed2 | Spearman (num-num) | 252 | 0.2577 | 0.1608 | 0.3175 | `lab_results_validSerumCreatinine_value_last|lab_results_valideGFR_value_last` (-0.9109 -> 0.1003) |
-| dpctgan_eps15_seed2 | Cramer's V (cat-cat) | 8128 | 0.0911 | 0.0402 | 0.8031 | `cause_of_death_isCV_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first` (1.0 -> 0.0003) |
-| dpctgan_eps15_seed2 | corr-ratio (num-cat) | 4301 | 0.0454 | 0.022 | 0.8761 | `lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured` (0.9616 -> 0.0) |
-| dpctgan_eps1_seed0 | Spearman (num-num) | 378 | 0.2462 | 0.1586 | 0.3439 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> 0.0928) |
-| dpctgan_eps1_seed0 | Cramer's V (cat-cat) | 9730 | 0.0935 | 0.0384 | 0.8051 | `cause_of_death_isRenal_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first` (1.0 -> 0.0003) |
-| dpctgan_eps1_seed0 | corr-ratio (num-cat) | 5236 | 0.0391 | 0.0205 | 0.9089 | `lab_results_valideGFR_value_last|ckd_severity_categorizedValue` (0.9716 -> 0.035) |
-| dpctgan_eps20_seed0 | Spearman (num-num) | 252 | 0.3793 | 0.3098 | 0.2183 | `lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_last` (-0.7136 -> 0.7629) |
-| dpctgan_eps20_seed0 | Cramer's V (cat-cat) | 8385 | 0.089 | 0.0401 | 0.8038 | `cause_of_death_isCV_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first` (1.0 -> 0.0003) |
-| dpctgan_eps20_seed0 | corr-ratio (num-cat) | 4301 | 0.0454 | 0.0235 | 0.8675 | `lab_results_valideGFR_value_last|ckd_severity_categorizedValue` (0.9716 -> 0.0187) |
-| dpctgan_eps5_seed0 | Spearman (num-num) | 346 | 0.2891 | 0.1888 | 0.2977 | `lab_results_validSerumCreatinine_value_last|lab_results_valideGFR_value_first` (-0.7271 -> 0.7637) |
-| dpctgan_eps5_seed0 | Cramer's V (cat-cat) | 6903 | 0.103 | 0.0441 | 0.7821 | `cause_of_death_isCV_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first` (1.0 -> 0.0003) |
-| dpctgan_eps5_seed0 | corr-ratio (num-cat) | 5049 | 0.0462 | 0.0249 | 0.879 | `lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured` (0.9616 -> 0.0) |
-| dpctgan_eps8_seed0 | Spearman (num-num) | 378 | 0.3812 | 0.3452 | 0.1746 | `lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_first` (-0.9057 -> 0.703) |
-| dpctgan_eps8_seed0 | Cramer's V (cat-cat) | 7626 | 0.1004 | 0.0436 | 0.7857 | `cause_of_death_isCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first` (1.0 -> 0.0004) |
-| dpctgan_eps8_seed0 | corr-ratio (num-cat) | 5236 | 0.0454 | 0.0241 | 0.8673 | `eGFR_2021_ckd_epi_creatinine|ckd_severity_from_calculated_egfr` (0.9497 -> 0.0333) |
-| gaussian_copula_seed0 | Spearman (num-num) | 973 | 0.1068 | 0.0745 | 0.6177 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> -0.0004) |
-| gaussian_copula_seed0 | Cramer's V (cat-cat) | 11026 | 0.0671 | 0.0253 | 0.8507 | `cause_of_death_isCV_f5a_w7d_first|cause_of_death_isRenal_f5a_w7d_first` (1.0 -> 0.0115) |
-| gaussian_copula_seed0 | corr-ratio (num-cat) | 8415 | 0.0376 | 0.0194 | 0.9181 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.2435) |
-| gaussian_copula_seed1 | Spearman (num-num) | 996 | 0.1109 | 0.0724 | 0.6235 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> 0.0078) |
-| gaussian_copula_seed1 | Cramer's V (cat-cat) | 11026 | 0.0671 | 0.0251 | 0.8531 | `cause_of_death_isRenal_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first` (1.0 -> 0.0428) |
-| gaussian_copula_seed1 | corr-ratio (num-cat) | 8602 | 0.0385 | 0.0196 | 0.9129 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.2272) |
-| gaussian_copula_seed2 | Spearman (num-num) | 976 | 0.1106 | 0.0733 | 0.6291 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> 0.0042) |
-| gaussian_copula_seed2 | Cramer's V (cat-cat) | 11026 | 0.067 | 0.0249 | 0.8534 | `cause_of_death_isCV_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first` (1.0 -> 0.0202) |
-| gaussian_copula_seed2 | corr-ratio (num-cat) | 8415 | 0.0381 | 0.02 | 0.9155 | `encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|encounter_primary_reason_HF_Disease_f5a_w1a_first` (0.8476 -> 0.0454) |
-| mst_eps10_seed0 | Spearman (num-num) | 1727 | 0.2803 | 0.2438 | 0.2003 | `vital_signs_weight_value_p6mo_first|lab_results_ntProBnp_value_first` (-0.2346 -> 0.8241) |
-| mst_eps10_seed0 | Cramer's V (cat-cat) | 11026 | 0.2437 | 0.1985 | 0.3026 | `conditions_heart_failure_hf_within_18mo_any|conditions_hf` (0.9533 -> 0.0055) |
-| mst_eps10_seed0 | corr-ratio (num-cat) | 11220 | 0.1659 | 0.1007 | 0.4988 | `electrocardiographs_ecg_qrs_duration_pET_last|conditions_mi` (0.0328 -> 0.8458) |
-| mst_eps15_seed0 | Spearman (num-num) | 1753 | 0.2829 | 0.2473 | 0.2196 | `lab_results_tropTHs_value_last|lab_results_tropTnHs_value_last` (0.9994 -> -0.0041) |
-| mst_eps15_seed0 | Cramer's V (cat-cat) | 11026 | 0.2431 | 0.209 | 0.2889 | `med_arni|med_antiarrhytmic_history` (0.033 -> 0.9833) |
-| mst_eps15_seed0 | corr-ratio (num-cat) | 11407 | 0.1669 | 0.1063 | 0.4886 | `encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w1a_first` (0.8476 -> 0.0082) |
-| mst_eps15_seed1 | Spearman (num-num) | 1737 | 0.2943 | 0.2579 | 0.1865 | `lab_results_tropTnHs_value_first|encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first` (-0.0518 -> 0.9998) |
-| mst_eps15_seed1 | Cramer's V (cat-cat) | 11026 | 0.2477 | 0.2098 | 0.2784 | `conditions_heart_failure_hf_within_18mo_any|conditions_hf` (0.9533 -> 0.0027) |
-| mst_eps15_seed1 | corr-ratio (num-cat) | 11407 | 0.175 | 0.1119 | 0.4767 | `smoking_status_smoker_startTime_count|encounter_primary_reason_renal_complications_f5a_w1a_first` (0.0343 -> 0.8611) |
-| mst_eps15_seed2 | Spearman (num-num) | 1708 | 0.2961 | 0.2667 | 0.1915 | `vital_signs_weight_value_p6mo_first|lab_results_hdl_value_first` (-0.2677 -> 0.6839) |
-| mst_eps15_seed2 | Cramer's V (cat-cat) | 11026 | 0.2536 | 0.2059 | 0.2774 | `med_arb|med_inotropes_history` (0.0077 -> 0.9676) |
-| mst_eps15_seed2 | corr-ratio (num-cat) | 11220 | 0.1748 | 0.112 | 0.4784 | `encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|med_digitalis_history` (0.0335 -> 0.8418) |
-| mst_eps1_seed0 | Spearman (num-num) | 1500 | 0.2581 | 0.2032 | 0.298 | `lab_results_cholTot_value_first|lab_results_ldl_value_last` (0.8631 -> -0.457) |
-| mst_eps1_seed0 | Cramer's V (cat-cat) | 11026 | 0.2911 | 0.2661 | 0.2479 | `med_rdoad_syst_history|conditions_aidshiv` (0.0069 -> 1.0) |
-| mst_eps1_seed0 | corr-ratio (num-cat) | 11033 | 0.1874 | 0.1048 | 0.4913 | `lab_results_tropTHs_value_last|conditions_stroke` (0.0001 -> 1.9189) |
-| mst_eps20_seed0 | Spearman (num-num) | 1759 | 0.3016 | 0.2707 | 0.1956 | `lab_results_potassium_value_last|lab_results_valideGFR_value_first` (-0.1994 -> 0.792) |
-| mst_eps20_seed0 | Cramer's V (cat-cat) | 11026 | 0.2411 | 0.1839 | 0.3209 | `med_arb|med_inotropes_history` (0.0077 -> 0.9613) |
-| mst_eps20_seed0 | corr-ratio (num-cat) | 11407 | 0.1792 | 0.113 | 0.474 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_mi` (0.012 -> 0.8637) |
-| mst_eps5_seed0 | Spearman (num-num) | 1758 | 0.2517 | 0.2043 | 0.2435 | `lab_results_hdl_value_last|lab_results_hdl_value_first` (0.9946 -> -0.0559) |
-| mst_eps5_seed0 | Cramer's V (cat-cat) | 11026 | 0.2615 | 0.2266 | 0.2724 | `conditions_heart_failure_hf_within_18mo_any|conditions_hf` (0.9533 -> 0.01) |
-| mst_eps5_seed0 | corr-ratio (num-cat) | 11407 | 0.1552 | 0.0947 | 0.5111 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_HF_Disease_f5a_w5a_first` (0.0 -> 0.9426) |
-| mst_eps8_seed0 | Spearman (num-num) | 1768 | 0.2692 | 0.2214 | 0.2364 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first` (1.0 -> -0.1765) |
-| mst_eps8_seed0 | Cramer's V (cat-cat) | 11026 | 0.2534 | 0.2034 | 0.2897 | `conditions_heart_failure_hf_within_18mo_any|conditions_hf` (0.9533 -> 0.0015) |
-| mst_eps8_seed0 | corr-ratio (num-cat) | 11407 | 0.1691 | 0.0984 | 0.5026 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_mi` (0.012 -> 0.8517) |
-| tvae_seed0 | Spearman (num-num) | 1592 | 0.0861 | 0.0607 | 0.7067 | `echocardiographs_lvef_pET_last|echocardiographs_lvef_pET_first` (0.8998 -> -0.0174) |
-| tvae_seed0 | Cramer's V (cat-cat) | 8001 | 0.0585 | 0.0343 | 0.8245 | `conditions_ap|conditions_dysl` (0.1435 -> 0.6727) |
-| tvae_seed0 | corr-ratio (num-cat) | 11033 | 0.0412 | 0.0226 | 0.8892 | `lab_results_creatUS_value_last|encounter_primary_reason_HF_Disease_f5a_w5a_first` (0.1061 -> 0.8403) |
-| tvae_seed1 | Spearman (num-num) | 1610 | 0.0817 | 0.0569 | 0.7093 | `vital_signs_height_value_p1a_avg|vital_signs_height_value_last` (0.989 -> 0.1661) |
-| tvae_seed1 | Cramer's V (cat-cat) | 8385 | 0.0617 | 0.0369 | 0.8109 | `med_acei_history|med_arb_history` (0.007 -> 0.6323) |
-| tvae_seed1 | corr-ratio (num-cat) | 11033 | 0.0408 | 0.0224 | 0.8966 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first` (0.8082 -> 0.0) |
-| tvae_seed2 | Spearman (num-num) | 1549 | 0.0827 | 0.0588 | 0.7069 | `echocardiographs_lvef_pET_last|echocardiographs_lvef_pET_first` (0.8998 -> 0.0484) |
-| tvae_seed2 | Cramer's V (cat-cat) | 8128 | 0.0556 | 0.0304 | 0.8343 | `conditions_ap|conditions_dysl` (0.1435 -> 0.7761) |
-| tvae_seed2 | corr-ratio (num-cat) | 10846 | 0.0392 | 0.0211 | 0.9015 | `nyha_nyha_pET|med_arb` (0.0696 -> 0.7599) |
+| run | pair type | pairs | mean \|Δ\| | median \|Δ\| | \|Δ\|<0.1 | fabricated | worst pair |
+|---|---|---|---|---|---|---|---|
+| *noise floor* | Spearman (num-num) | 1621 | 0.0649 | 0.0453 | 0.7964 | 0 | - |
+| *noise floor* | Cramer's V (cat-cat) | 11175 | 0.0222 | 0.0177 | 0.9975 | 0 | - |
+| *noise floor* | corr-ratio (num-cat) | 11468 | 0.0278 | 0.0169 | 0.9613 | 0 | - |
+| aim50_eps1_seed0 | Spearman (num-num) | 210 | 0.1498 | 0.1062 | 0.4667 | 0 | `vital_signs_weight_value_p6mo_first|vital_signs_bmi_value_last` (0.8066 -> -0.0314) |
+| aim50_eps1_seed0 | Cramer's V (cat-cat) | 378 | 0.0997 | 0.054 | 0.7196 | 8 | `med_rasi|med_anti_coag_history` (0.0759 -> 0.812) |
+| aim50_eps1_seed0 | corr-ratio (num-cat) | 1386 | 0.0394 | 0.0 | 0.8629 | 3 | `vital_signs_weight_value_p6mo_last|med_ll_history` (0.0114 -> 0.5705) |
+| aim50_eps5_seed0 | Spearman (num-num) | 210 | 0.3247 | 0.2695 | 0.181 | 22 | `lab_results_crpNonHs_value_last|lab_results_albuminBS_value_last` (-0.441 -> 0.4541) |
+| aim50_eps5_seed0 | Cramer's V (cat-cat) | 378 | 0.1496 | 0.0844 | 0.5476 | 22 | `conditions_mc|conditions_pad` (0.0197 -> 0.9298) |
+| aim50_eps5_seed0 | corr-ratio (num-cat) | 1386 | 0.0765 | 0.0 | 0.7605 | 42 | `lab_results_ntProBnp_value_first|conditions_mc` (0.0135 -> 0.694) |
+| ctgan_seed0 | Spearman (num-num) | 1601 | 0.1261 | 0.0905 | 0.5465 | 0 | `lab_results_ldl_value_last|lab_results_ldl_value_first` (0.9836 -> -0.1046) |
+| ctgan_seed0 | Cramer's V (cat-cat) | 11026 | 0.0743 | 0.0309 | 0.7734 | 0 | `med_anti_plat_history|med_platelet_history` (0.9936 -> 0.0032) |
+| ctgan_seed0 | corr-ratio (num-cat) | 11220 | 0.0424 | 0.0222 | 0.8953 | 0 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.1141) |
+| ctgan_seed1 | Spearman (num-num) | 1637 | 0.1266 | 0.0917 | 0.5357 | 0 | `lab_results_tropTHs_value_last|lab_results_tropTnHs_value_last` (0.9994 -> -0.0712) |
+| ctgan_seed1 | Cramer's V (cat-cat) | 11026 | 0.0666 | 0.0248 | 0.8262 | 0 | `smoking_status_smoker_last|smoking_status_formerSmoker_last` (1.0 -> 0.012) |
+| ctgan_seed1 | corr-ratio (num-cat) | 11407 | 0.0402 | 0.0199 | 0.9077 | 0 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.0625) |
+| ctgan_seed2 | Spearman (num-num) | 1603 | 0.1196 | 0.082 | 0.582 | 0 | `lab_results_tropTHs_value_first|lab_results_tropTnHs_value_first` (1.0 -> -0.1228) |
+| ctgan_seed2 | Cramer's V (cat-cat) | 11026 | 0.0734 | 0.0352 | 0.7568 | 0 | `smoking_status_smoker_last|smoking_status_formerSmoker_last` (1.0 -> 0.0327) |
+| ctgan_seed2 | corr-ratio (num-cat) | 11220 | 0.0424 | 0.0226 | 0.8946 | 1 | `lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured` (0.9616 -> 0.1461) |
+| dpctgan_eps10_seed0 | Spearman (num-num) | 325 | 0.2953 | 0.2154 | 0.2646 | 31 | `vital_signs_weight_value_p6mo_last|vital_signs_weight_value_last` (1.0 -> -0.344) |
+| dpctgan_eps10_seed0 | Cramer's V (cat-cat) | 8778 | 0.0934 | 0.0406 | 0.8058 | 1 | `cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first` (1.0 -> 0.0006) |
+| dpctgan_eps10_seed0 | corr-ratio (num-cat) | 4862 | 0.0444 | 0.0228 | 0.8778 | 0 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.0) |
+| dpctgan_eps15_seed0 | Spearman (num-num) | 405 | 0.3973 | 0.3559 | 0.2198 | 76 | `lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_first` (-0.9057 -> 0.8801) |
+| dpctgan_eps15_seed0 | Cramer's V (cat-cat) | 7626 | 0.1046 | 0.0481 | 0.7714 | 2 | `cause_of_death_isCV_f5a_w3a_first|cause_of_death_isNonRenalAndNonCV_f5a_w3a_first` (1.0 -> 0.0003) |
+| dpctgan_eps15_seed0 | corr-ratio (num-cat) | 5423 | 0.0438 | 0.0249 | 0.88 | 0 | `lab_results_valideGFR_value_last|ckd_severity_categorizedValue` (0.9716 -> 0.0269) |
+| dpctgan_eps15_seed1 | Spearman (num-num) | 375 | 0.314 | 0.1909 | 0.2747 | 58 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> 0.9028) |
+| dpctgan_eps15_seed1 | Cramer's V (cat-cat) | 7875 | 0.0958 | 0.0412 | 0.7947 | 0 | `cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first` (1.0 -> 0.0003) |
+| dpctgan_eps15_seed1 | corr-ratio (num-cat) | 5236 | 0.0483 | 0.0261 | 0.8665 | 0 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.0178) |
+| dpctgan_eps15_seed2 | Spearman (num-num) | 252 | 0.2577 | 0.1608 | 0.3175 | 31 | `lab_results_validSerumCreatinine_value_last|lab_results_valideGFR_value_last` (-0.9109 -> 0.1003) |
+| dpctgan_eps15_seed2 | Cramer's V (cat-cat) | 8128 | 0.0911 | 0.0402 | 0.8031 | 2 | `cause_of_death_isCV_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first` (1.0 -> 0.0003) |
+| dpctgan_eps15_seed2 | corr-ratio (num-cat) | 4301 | 0.0454 | 0.022 | 0.8761 | 0 | `lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured` (0.9616 -> 0.0) |
+| dpctgan_eps1_seed0 | Spearman (num-num) | 378 | 0.2462 | 0.1586 | 0.3439 | 38 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> 0.0928) |
+| dpctgan_eps1_seed0 | Cramer's V (cat-cat) | 9730 | 0.0935 | 0.0384 | 0.8051 | 0 | `cause_of_death_isRenal_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first` (1.0 -> 0.0003) |
+| dpctgan_eps1_seed0 | corr-ratio (num-cat) | 5236 | 0.0391 | 0.0205 | 0.9089 | 0 | `lab_results_valideGFR_value_last|ckd_severity_categorizedValue` (0.9716 -> 0.035) |
+| dpctgan_eps20_seed0 | Spearman (num-num) | 252 | 0.3793 | 0.3098 | 0.2183 | 57 | `lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_last` (-0.7136 -> 0.7629) |
+| dpctgan_eps20_seed0 | Cramer's V (cat-cat) | 8385 | 0.089 | 0.0401 | 0.8038 | 1 | `cause_of_death_isCV_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first` (1.0 -> 0.0003) |
+| dpctgan_eps20_seed0 | corr-ratio (num-cat) | 4301 | 0.0454 | 0.0235 | 0.8675 | 0 | `lab_results_valideGFR_value_last|ckd_severity_categorizedValue` (0.9716 -> 0.0187) |
+| dpctgan_eps5_seed0 | Spearman (num-num) | 346 | 0.2891 | 0.1888 | 0.2977 | 46 | `lab_results_validSerumCreatinine_value_last|lab_results_valideGFR_value_first` (-0.7271 -> 0.7637) |
+| dpctgan_eps5_seed0 | Cramer's V (cat-cat) | 6903 | 0.103 | 0.0441 | 0.7821 | 2 | `cause_of_death_isCV_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first` (1.0 -> 0.0003) |
+| dpctgan_eps5_seed0 | corr-ratio (num-cat) | 5049 | 0.0462 | 0.0249 | 0.879 | 0 | `lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured` (0.9616 -> 0.0) |
+| dpctgan_eps8_seed0 | Spearman (num-num) | 378 | 0.3812 | 0.3452 | 0.1746 | 71 | `lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_first` (-0.9057 -> 0.703) |
+| dpctgan_eps8_seed0 | Cramer's V (cat-cat) | 7626 | 0.1004 | 0.0436 | 0.7857 | 0 | `cause_of_death_isCV_f5a_w6mo_first|cause_of_death_isAllCause_f5a_w6mo_first` (1.0 -> 0.0004) |
+| dpctgan_eps8_seed0 | corr-ratio (num-cat) | 5236 | 0.0454 | 0.0241 | 0.8673 | 0 | `eGFR_2021_ckd_epi_creatinine|ckd_severity_from_calculated_egfr` (0.9497 -> 0.0333) |
+| gaussian_copula_seed0 | Spearman (num-num) | 973 | 0.1068 | 0.0745 | 0.6177 | 1 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> -0.0004) |
+| gaussian_copula_seed0 | Cramer's V (cat-cat) | 11026 | 0.0671 | 0.0253 | 0.8507 | 0 | `cause_of_death_isCV_f5a_w7d_first|cause_of_death_isRenal_f5a_w7d_first` (1.0 -> 0.0115) |
+| gaussian_copula_seed0 | corr-ratio (num-cat) | 8415 | 0.0376 | 0.0194 | 0.9181 | 0 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.2435) |
+| gaussian_copula_seed1 | Spearman (num-num) | 996 | 0.1109 | 0.0724 | 0.6235 | 1 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> 0.0078) |
+| gaussian_copula_seed1 | Cramer's V (cat-cat) | 11026 | 0.0671 | 0.0251 | 0.8531 | 0 | `cause_of_death_isRenal_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first` (1.0 -> 0.0428) |
+| gaussian_copula_seed1 | corr-ratio (num-cat) | 8602 | 0.0385 | 0.0196 | 0.9129 | 1 | `lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr` (0.958 -> 0.2272) |
+| gaussian_copula_seed2 | Spearman (num-num) | 976 | 0.1106 | 0.0733 | 0.6291 | 1 | `lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine` (-0.9249 -> 0.0042) |
+| gaussian_copula_seed2 | Cramer's V (cat-cat) | 11026 | 0.067 | 0.0249 | 0.8534 | 0 | `cause_of_death_isCV_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first` (1.0 -> 0.0202) |
+| gaussian_copula_seed2 | corr-ratio (num-cat) | 8415 | 0.0381 | 0.02 | 0.9155 | 0 | `encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|encounter_primary_reason_HF_Disease_f5a_w1a_first` (0.8476 -> 0.0454) |
+| mst_eps10_seed0 | Spearman (num-num) | 1727 | 0.2803 | 0.2438 | 0.2003 | 138 | `vital_signs_weight_value_p6mo_first|lab_results_ntProBnp_value_first` (-0.2346 -> 0.8241) |
+| mst_eps10_seed0 | Cramer's V (cat-cat) | 11026 | 0.2437 | 0.1985 | 0.3026 | 1639 | `conditions_heart_failure_hf_within_18mo_any|conditions_hf` (0.9533 -> 0.0055) |
+| mst_eps10_seed0 | corr-ratio (num-cat) | 11220 | 0.1659 | 0.1007 | 0.4988 | 960 | `electrocardiographs_ecg_qrs_duration_pET_last|conditions_mi` (0.0328 -> 0.8458) |
+| mst_eps15_seed0 | Spearman (num-num) | 1753 | 0.2829 | 0.2473 | 0.2196 | 175 | `lab_results_tropTHs_value_last|lab_results_tropTnHs_value_last` (0.9994 -> -0.0041) |
+| mst_eps15_seed0 | Cramer's V (cat-cat) | 11026 | 0.2431 | 0.209 | 0.2889 | 1413 | `med_arni|med_antiarrhytmic_history` (0.033 -> 0.9833) |
+| mst_eps15_seed0 | corr-ratio (num-cat) | 11407 | 0.1669 | 0.1063 | 0.4886 | 988 | `encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w1a_first` (0.8476 -> 0.0082) |
+| mst_eps15_seed1 | Spearman (num-num) | 1737 | 0.2943 | 0.2579 | 0.1865 | 186 | `lab_results_tropTnHs_value_first|encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first` (-0.0518 -> 0.9998) |
+| mst_eps15_seed1 | Cramer's V (cat-cat) | 11026 | 0.2477 | 0.2098 | 0.2784 | 1557 | `conditions_heart_failure_hf_within_18mo_any|conditions_hf` (0.9533 -> 0.0027) |
+| mst_eps15_seed1 | corr-ratio (num-cat) | 11407 | 0.175 | 0.1119 | 0.4767 | 1088 | `smoking_status_smoker_startTime_count|encounter_primary_reason_renal_complications_f5a_w1a_first` (0.0343 -> 0.8611) |
+| mst_eps15_seed2 | Spearman (num-num) | 1708 | 0.2961 | 0.2667 | 0.1915 | 178 | `vital_signs_weight_value_p6mo_first|lab_results_hdl_value_first` (-0.2677 -> 0.6839) |
+| mst_eps15_seed2 | Cramer's V (cat-cat) | 11026 | 0.2536 | 0.2059 | 0.2774 | 1837 | `med_arb|med_inotropes_history` (0.0077 -> 0.9676) |
+| mst_eps15_seed2 | corr-ratio (num-cat) | 11220 | 0.1748 | 0.112 | 0.4784 | 1078 | `encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|med_digitalis_history` (0.0335 -> 0.8418) |
+| mst_eps1_seed0 | Spearman (num-num) | 1500 | 0.2581 | 0.2032 | 0.298 | 86 | `lab_results_cholTot_value_first|lab_results_ldl_value_last` (0.8631 -> -0.457) |
+| mst_eps1_seed0 | Cramer's V (cat-cat) | 11026 | 0.2911 | 0.2661 | 0.2479 | 2387 | `med_rdoad_syst_history|conditions_aidshiv` (0.0069 -> 1.0) |
+| mst_eps1_seed0 | corr-ratio (num-cat) | 11033 | 0.1874 | 0.1048 | 0.4913 | 1074 | `lab_results_tropTHs_value_last|conditions_stroke` (0.0001 -> 1.9189) |
+| mst_eps20_seed0 | Spearman (num-num) | 1759 | 0.3016 | 0.2707 | 0.1956 | 195 | `lab_results_potassium_value_last|lab_results_valideGFR_value_first` (-0.1994 -> 0.792) |
+| mst_eps20_seed0 | Cramer's V (cat-cat) | 11026 | 0.2411 | 0.1839 | 0.3209 | 1712 | `med_arb|med_inotropes_history` (0.0077 -> 0.9613) |
+| mst_eps20_seed0 | corr-ratio (num-cat) | 11407 | 0.1792 | 0.113 | 0.474 | 1126 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_mi` (0.012 -> 0.8637) |
+| mst_eps5_seed0 | Spearman (num-num) | 1758 | 0.2517 | 0.2043 | 0.2435 | 110 | `lab_results_hdl_value_last|lab_results_hdl_value_first` (0.9946 -> -0.0559) |
+| mst_eps5_seed0 | Cramer's V (cat-cat) | 11026 | 0.2615 | 0.2266 | 0.2724 | 1784 | `conditions_heart_failure_hf_within_18mo_any|conditions_hf` (0.9533 -> 0.01) |
+| mst_eps5_seed0 | corr-ratio (num-cat) | 11407 | 0.1552 | 0.0947 | 0.5111 | 745 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_HF_Disease_f5a_w5a_first` (0.0 -> 0.9426) |
+| mst_eps8_seed0 | Spearman (num-num) | 1768 | 0.2692 | 0.2214 | 0.2364 | 161 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first` (1.0 -> -0.1765) |
+| mst_eps8_seed0 | Cramer's V (cat-cat) | 11026 | 0.2534 | 0.2034 | 0.2897 | 1821 | `conditions_heart_failure_hf_within_18mo_any|conditions_hf` (0.9533 -> 0.0015) |
+| mst_eps8_seed0 | corr-ratio (num-cat) | 11407 | 0.1691 | 0.0984 | 0.5026 | 1038 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_mi` (0.012 -> 0.8517) |
+| tvae_seed0 | Spearman (num-num) | 1592 | 0.0861 | 0.0607 | 0.7067 | 0 | `echocardiographs_lvef_pET_last|echocardiographs_lvef_pET_first` (0.8998 -> -0.0174) |
+| tvae_seed0 | Cramer's V (cat-cat) | 8001 | 0.0585 | 0.0343 | 0.8245 | 1 | `conditions_ap|conditions_dysl` (0.1435 -> 0.6727) |
+| tvae_seed0 | corr-ratio (num-cat) | 11033 | 0.0412 | 0.0226 | 0.8892 | 10 | `lab_results_creatUS_value_last|encounter_primary_reason_HF_Disease_f5a_w5a_first` (0.1061 -> 0.8403) |
+| tvae_seed1 | Spearman (num-num) | 1610 | 0.0817 | 0.0569 | 0.7093 | 1 | `vital_signs_height_value_p1a_avg|vital_signs_height_value_last` (0.989 -> 0.1661) |
+| tvae_seed1 | Cramer's V (cat-cat) | 8385 | 0.0617 | 0.0369 | 0.8109 | 3 | `med_acei_history|med_arb_history` (0.007 -> 0.6323) |
+| tvae_seed1 | corr-ratio (num-cat) | 11033 | 0.0408 | 0.0224 | 0.8966 | 13 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first` (0.8082 -> 0.0) |
+| tvae_seed2 | Spearman (num-num) | 1549 | 0.0827 | 0.0588 | 0.7069 | 0 | `echocardiographs_lvef_pET_last|echocardiographs_lvef_pET_first` (0.8998 -> 0.0484) |
+| tvae_seed2 | Cramer's V (cat-cat) | 8128 | 0.0556 | 0.0304 | 0.8343 | 1 | `conditions_ap|conditions_dysl` (0.1435 -> 0.7761) |
+| tvae_seed2 | corr-ratio (num-cat) | 10846 | 0.0392 | 0.0211 | 0.9015 | 8 | `nyha_nyha_pET|med_arb` (0.0696 -> 0.7599) |
 
 ## original vs preprocessed
 

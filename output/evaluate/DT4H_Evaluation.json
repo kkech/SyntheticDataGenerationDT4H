@@ -5599,6 +5599,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 21,
+        "categorical_columns": 67,
+        "ks": {
+          "mean": 0.3256,
+          "median": 0.2432,
+          "max": 0.7531
+        },
+        "ks_frac_below_0.1": 0.0476,
+        "wasserstein_std": {
+          "mean": 0.3177,
+          "median": 0.2776,
+          "max": 0.9907
+        },
+        "tvd": {
+          "mean": 0.0076,
+          "median": 0.0,
+          "max": 0.1406
+        },
+        "tvd_frac_below_0.05": 0.9701,
+        "missing_rate_mean_abs_diff": 0.016
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1539,
+          "ks_mean": 0.3449,
+          "tvd_mean": 0.033
+        },
+        "male": {
+          "n_synthetic": 1981,
+          "ks_mean": 0.3395,
+          "tvd_mean": 0.0288
+        },
+        "age_under_65": {
+          "n_synthetic": 537,
+          "ks_mean": 0.3915,
+          "tvd_mean": 0.0766
+        },
+        "age_65_79": {
+          "n_synthetic": 1721,
+          "ks_mean": 0.3374,
+          "tvd_mean": 0.0358
+        },
+        "age_80_plus": {
+          "n_synthetic": 1262,
+          "ks_mean": 0.3724,
+          "tvd_mean": 0.0725
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 210,
@@ -5606,6 +5656,9 @@
           "median_abs_delta": 0.1062,
           "max_abs_delta": 0.838,
           "frac_below_0.1": 0.4667,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "vital_signs_weight_value_p6mo_first|vital_signs_bmi_value_last",
@@ -5646,6 +5699,13 @@
           "median_abs_delta": 0.054,
           "max_abs_delta": 0.7361,
           "frac_below_0.1": 0.7196,
+          "fabricated_pairs": 8,
+          "fabricated_rate": 0.0212,
+          "fabricated_examples": [
+            "med_rasi|med_anti_coag_history",
+            "med_acei|med_ll_history",
+            "med_acei|med_cortico_syst_history"
+          ],
           "worst": [
             {
               "pair": "med_rasi|med_anti_coag_history",
@@ -5686,6 +5746,13 @@
           "median_abs_delta": 0.0,
           "max_abs_delta": 0.5592,
           "frac_below_0.1": 0.8629,
+          "fabricated_pairs": 3,
+          "fabricated_rate": 0.0022,
+          "fabricated_examples": [
+            "vital_signs_weight_value_p6mo_last|med_ll_history",
+            "vital_signs_weight_value_p6mo_last|med_acei",
+            "vital_signs_weight_value_p6mo_last|med_cortico_syst_history"
+          ],
           "worst": [
             {
               "pair": "vital_signs_weight_value_p6mo_last|med_ll_history",
@@ -7125,6 +7192,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 21,
+        "categorical_columns": 67,
+        "ks": {
+          "mean": 0.3148,
+          "median": 0.2521,
+          "max": 0.7531
+        },
+        "ks_frac_below_0.1": 0.0476,
+        "wasserstein_std": {
+          "mean": 0.2537,
+          "median": 0.2575,
+          "max": 0.6178
+        },
+        "tvd": {
+          "mean": 0.002,
+          "median": 0.0,
+          "max": 0.0227
+        },
+        "tvd_frac_below_0.05": 1.0,
+        "missing_rate_mean_abs_diff": 0.0024
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1492,
+          "ks_mean": 0.336,
+          "tvd_mean": 0.0229
+        },
+        "male": {
+          "n_synthetic": 2028,
+          "ks_mean": 0.3252,
+          "tvd_mean": 0.0174
+        },
+        "age_under_65": {
+          "n_synthetic": 665,
+          "ks_mean": 0.5021,
+          "tvd_mean": 0.1724
+        },
+        "age_65_79": {
+          "n_synthetic": 1762,
+          "ks_mean": 0.3473,
+          "tvd_mean": 0.0604
+        },
+        "age_80_plus": {
+          "n_synthetic": 1093,
+          "ks_mean": 0.4246,
+          "tvd_mean": 0.1729
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 210,
@@ -7132,6 +7249,13 @@
           "median_abs_delta": 0.2695,
           "max_abs_delta": 0.895,
           "frac_below_0.1": 0.181,
+          "fabricated_pairs": 22,
+          "fabricated_rate": 0.1048,
+          "fabricated_examples": [
+            "vital_signs_systolicBp_value_first|lab_results_hemoglobin_value_first",
+            "vital_signs_diastolicBp_value_first|lab_results_ntProBnp_value_first",
+            "vital_signs_diastolicBp_value_first|lab_results_ntProBnp_value_last"
+          ],
           "worst": [
             {
               "pair": "lab_results_crpNonHs_value_last|lab_results_albuminBS_value_last",
@@ -7172,6 +7296,13 @@
           "median_abs_delta": 0.0844,
           "max_abs_delta": 0.9101,
           "frac_below_0.1": 0.5476,
+          "fabricated_pairs": 22,
+          "fabricated_rate": 0.0582,
+          "fabricated_examples": [
+            "conditions_mc|conditions_pad",
+            "cause_of_death_isAllCause_f5a_w3a_first|conditions_vd",
+            "cause_of_death_isCV_f5a_w3a_first|conditions_vd"
+          ],
           "worst": [
             {
               "pair": "conditions_mc|conditions_pad",
@@ -7212,6 +7343,13 @@
           "median_abs_delta": 0.0,
           "max_abs_delta": 0.6805,
           "frac_below_0.1": 0.7605,
+          "fabricated_pairs": 42,
+          "fabricated_rate": 0.0303,
+          "fabricated_examples": [
+            "lab_results_ntProBnp_value_first|conditions_mc",
+            "vital_signs_diastolicBp_value_first|cause_of_death_isCV_f5a_w3a_first",
+            "vital_signs_diastolicBp_value_first|cause_of_death_isAllCause_f5a_w3a_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_ntProBnp_value_first|conditions_mc",
@@ -11787,6 +11925,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.2957,
+          "median": 0.2678,
+          "max": 0.6847
+        },
+        "ks_frac_below_0.1": 0.0656,
+        "wasserstein_std": {
+          "mean": 0.5578,
+          "median": 0.4547,
+          "max": 1.818
+        },
+        "tvd": {
+          "mean": 0.084,
+          "median": 0.075,
+          "max": 0.3281
+        },
+        "tvd_frac_below_0.05": 0.4415,
+        "missing_rate_mean_abs_diff": 0.0792
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1637,
+          "ks_mean": 0.3192,
+          "tvd_mean": 0.1054
+        },
+        "male": {
+          "n_synthetic": 1883,
+          "ks_mean": 0.2976,
+          "tvd_mean": 0.1081
+        },
+        "age_under_65": {
+          "n_synthetic": 1407,
+          "ks_mean": 0.3149,
+          "tvd_mean": 0.1278
+        },
+        "age_65_79": {
+          "n_synthetic": 1263,
+          "ks_mean": 0.3018,
+          "tvd_mean": 0.1036
+        },
+        "age_80_plus": {
+          "n_synthetic": 850,
+          "ks_mean": 0.3294,
+          "tvd_mean": 0.0949
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1601,
@@ -11794,6 +11982,9 @@
           "median_abs_delta": 0.0905,
           "max_abs_delta": 1.0882,
           "frac_below_0.1": 0.5465,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_ldl_value_last|lab_results_ldl_value_first",
@@ -11834,6 +12025,9 @@
           "median_abs_delta": 0.0309,
           "max_abs_delta": 0.9904,
           "frac_below_0.1": 0.7734,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "med_anti_plat_history|med_platelet_history",
@@ -11874,6 +12068,9 @@
           "median_abs_delta": 0.0222,
           "max_abs_delta": 0.8439,
           "frac_below_0.1": 0.8953,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr",
@@ -16449,6 +16646,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.3318,
+          "median": 0.3409,
+          "max": 0.7126
+        },
+        "ks_frac_below_0.1": 0.0492,
+        "wasserstein_std": {
+          "mean": 0.6602,
+          "median": 0.5188,
+          "max": 1.8271
+        },
+        "tvd": {
+          "mean": 0.0633,
+          "median": 0.0405,
+          "max": 0.2972
+        },
+        "tvd_frac_below_0.05": 0.5479,
+        "missing_rate_mean_abs_diff": 0.0673
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 2533,
+          "ks_mean": 0.3421,
+          "tvd_mean": 0.0791
+        },
+        "male": {
+          "n_synthetic": 987,
+          "ks_mean": 0.339,
+          "tvd_mean": 0.0784
+        },
+        "age_under_65": {
+          "n_synthetic": 907,
+          "ks_mean": 0.3396,
+          "tvd_mean": 0.101
+        },
+        "age_65_79": {
+          "n_synthetic": 1117,
+          "ks_mean": 0.3439,
+          "tvd_mean": 0.0795
+        },
+        "age_80_plus": {
+          "n_synthetic": 1496,
+          "ks_mean": 0.3507,
+          "tvd_mean": 0.0812
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1637,
@@ -16456,6 +16703,9 @@
           "median_abs_delta": 0.0917,
           "max_abs_delta": 1.0707,
           "frac_below_0.1": 0.5357,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_tropTHs_value_last|lab_results_tropTnHs_value_last",
@@ -16496,6 +16746,9 @@
           "median_abs_delta": 0.0248,
           "max_abs_delta": 0.988,
           "frac_below_0.1": 0.8262,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "smoking_status_smoker_last|smoking_status_formerSmoker_last",
@@ -16536,6 +16789,9 @@
           "median_abs_delta": 0.0199,
           "max_abs_delta": 0.8956,
           "frac_below_0.1": 0.9077,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr",
@@ -21111,6 +21367,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.3009,
+          "median": 0.2561,
+          "max": 0.7336
+        },
+        "ks_frac_below_0.1": 0.082,
+        "wasserstein_std": {
+          "mean": 0.5863,
+          "median": 0.5485,
+          "max": 1.5388
+        },
+        "tvd": {
+          "mean": 0.0606,
+          "median": 0.0455,
+          "max": 0.3386
+        },
+        "tvd_frac_below_0.05": 0.5319,
+        "missing_rate_mean_abs_diff": 0.0902
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 2589,
+          "ks_mean": 0.3016,
+          "tvd_mean": 0.0783
+        },
+        "male": {
+          "n_synthetic": 931,
+          "ks_mean": 0.325,
+          "tvd_mean": 0.0683
+        },
+        "age_under_65": {
+          "n_synthetic": 672,
+          "ks_mean": 0.3131,
+          "tvd_mean": 0.071
+        },
+        "age_65_79": {
+          "n_synthetic": 991,
+          "ks_mean": 0.3191,
+          "tvd_mean": 0.0724
+        },
+        "age_80_plus": {
+          "n_synthetic": 1857,
+          "ks_mean": 0.3178,
+          "tvd_mean": 0.0921
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1603,
@@ -21118,6 +21424,9 @@
           "median_abs_delta": 0.082,
           "max_abs_delta": 1.1228,
           "frac_below_0.1": 0.582,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_tropTHs_value_first|lab_results_tropTnHs_value_first",
@@ -21158,6 +21467,9 @@
           "median_abs_delta": 0.0352,
           "max_abs_delta": 0.9673,
           "frac_below_0.1": 0.7568,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "smoking_status_smoker_last|smoking_status_formerSmoker_last",
@@ -21198,6 +21510,11 @@
           "median_abs_delta": 0.0226,
           "max_abs_delta": 0.8156,
           "frac_below_0.1": 0.8946,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.0001,
+          "fabricated_examples": [
+            "lab_results_tropTHs_value_last|cause_of_death_isCV_f5a_w1mo_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured",
@@ -24723,6 +25040,41 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 26,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.8244,
+          "median": 0.8809,
+          "max": 0.9997
+        },
+        "ks_frac_below_0.1": 0.0,
+        "wasserstein_std": {
+          "mean": 3.2231,
+          "median": 2.0602,
+          "max": 16.9695
+        },
+        "tvd": {
+          "mean": 0.2585,
+          "median": 0.1727,
+          "max": 0.9818
+        },
+        "tvd_frac_below_0.05": 0.3245,
+        "missing_rate_mean_abs_diff": 0.162
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "male": {
+          "n_synthetic": 3517,
+          "ks_mean": 0.8246,
+          "tvd_mean": 0.3232
+        },
+        "age_80_plus": {
+          "n_synthetic": 3520,
+          "ks_mean": 0.8341,
+          "tvd_mean": 0.3176
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 325,
@@ -24730,6 +25082,13 @@
           "median_abs_delta": 0.2154,
           "max_abs_delta": 1.344,
           "frac_below_0.1": 0.2646,
+          "fabricated_pairs": 31,
+          "fabricated_rate": 0.0954,
+          "fabricated_examples": [
+            "lab_results_hemoglobin_value_first|smoking_status_smoker_startTime_count",
+            "encounters_lengthOfStay|smoking_status_smoker_startTime_count",
+            "encounters_numOfPreviousHFStays_count|smoking_status_smoker_startTime_count"
+          ],
           "worst": [
             {
               "pair": "vital_signs_weight_value_p6mo_last|vital_signs_weight_value_last",
@@ -24770,15 +25129,20 @@
           "median_abs_delta": 0.0406,
           "max_abs_delta": 0.9994,
           "frac_below_0.1": 0.8058,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.0001,
+          "fabricated_examples": [
+            "conditions_rd|conditions_vd"
+          ],
           "worst": [
             {
-              "pair": "cause_of_death_isCV_f5a_w1a_first|cause_of_death_isRenal_f5a_w1a_first",
+              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
               "delta": 0.9994,
               "real": 1.0,
               "synthetic": 0.0006
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
+              "pair": "cause_of_death_isCV_f5a_w1a_first|cause_of_death_isRenal_f5a_w1a_first",
               "delta": 0.9994,
               "real": 1.0,
               "synthetic": 0.0006
@@ -24810,6 +25174,9 @@
           "median_abs_delta": 0.0228,
           "max_abs_delta": 0.958,
           "frac_below_0.1": 0.8778,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr",
@@ -28455,6 +28822,41 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 30,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.8419,
+          "median": 0.9724,
+          "max": 0.9997
+        },
+        "ks_frac_below_0.1": 0.0,
+        "wasserstein_std": {
+          "mean": 2.8545,
+          "median": 2.4197,
+          "max": 6.795
+        },
+        "tvd": {
+          "mean": 0.2468,
+          "median": 0.1722,
+          "max": 0.9798
+        },
+        "tvd_frac_below_0.05": 0.3245,
+        "missing_rate_mean_abs_diff": 0.3029
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 3507,
+          "ks_mean": 0.8492,
+          "tvd_mean": 0.3013
+        },
+        "age_80_plus": {
+          "n_synthetic": 3516,
+          "ks_mean": 0.8451,
+          "tvd_mean": 0.3051
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 405,
@@ -28462,6 +28864,13 @@
           "median_abs_delta": 0.3559,
           "max_abs_delta": 1.7858,
           "frac_below_0.1": 0.2198,
+          "fabricated_pairs": 76,
+          "fabricated_rate": 0.1877,
+          "fabricated_examples": [
+            "lab_results_validSerumCreatinine_value_first|smoking_status_smoker_startTime_count",
+            "encounters_numOfPreviousHFStays_count|smoking_status_smoker_startTime_count",
+            "encounters_lengthOfStay|lab_results_validSerumCreatinine_value_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_first",
@@ -28502,6 +28911,12 @@
           "median_abs_delta": 0.0481,
           "max_abs_delta": 0.9997,
           "frac_below_0.1": 0.7714,
+          "fabricated_pairs": 2,
+          "fabricated_rate": 0.0003,
+          "fabricated_examples": [
+            "cause_of_death_isRenal_f5a_w1a_first|conditions_stroke",
+            "cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first|med_inotropes_history"
+          ],
           "worst": [
             {
               "pair": "cause_of_death_isCV_f5a_w3a_first|cause_of_death_isNonRenalAndNonCV_f5a_w3a_first",
@@ -28542,6 +28957,9 @@
           "median_abs_delta": 0.0249,
           "max_abs_delta": 0.9447,
           "frac_below_0.1": 0.88,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_categorizedValue",
@@ -32217,6 +32635,41 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 31,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.8623,
+          "median": 0.9529,
+          "max": 0.9997
+        },
+        "ks_frac_below_0.1": 0.0,
+        "wasserstein_std": {
+          "mean": 2.8222,
+          "median": 2.3005,
+          "max": 10.6231
+        },
+        "tvd": {
+          "mean": 0.246,
+          "median": 0.1771,
+          "max": 0.9903
+        },
+        "tvd_frac_below_0.05": 0.3085,
+        "missing_rate_mean_abs_diff": 0.2254
+      },
+      "c2st_auc": 0.9995,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 3519,
+          "ks_mean": 0.8629,
+          "tvd_mean": 0.303
+        },
+        "age_80_plus": {
+          "n_synthetic": 3520,
+          "ks_mean": 0.8673,
+          "tvd_mean": 0.31
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 375,
@@ -32224,6 +32677,13 @@
           "median_abs_delta": 0.1909,
           "max_abs_delta": 1.8277,
           "frac_below_0.1": 0.2747,
+          "fabricated_pairs": 58,
+          "fabricated_rate": 0.1547,
+          "fabricated_examples": [
+            "encounters_numOfPreviousHFStays_count|smoking_status_smoker_startTime_count",
+            "patient_demographics_age|smoking_status_smoker_startTime_count",
+            "patient_demographics_age|encounters_numOfPreviousHFStays_count"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine",
@@ -32264,15 +32724,18 @@
           "median_abs_delta": 0.0412,
           "max_abs_delta": 0.9997,
           "frac_below_0.1": 0.7947,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
-              "pair": "encounter_primary_reason_CV_Disease_f5a_w1mo_first|encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
               "delta": 0.9997,
               "real": 1.0,
               "synthetic": 0.0003
             },
             {
-              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
+              "pair": "encounter_primary_reason_CV_Disease_f5a_w1mo_first|encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
               "delta": 0.9997,
               "real": 1.0,
               "synthetic": 0.0003
@@ -32304,6 +32767,9 @@
           "median_abs_delta": 0.0261,
           "max_abs_delta": 0.9402,
           "frac_below_0.1": 0.8665,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr",
@@ -35769,6 +36235,41 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 24,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.8281,
+          "median": 0.9728,
+          "max": 0.9997
+        },
+        "ks_frac_below_0.1": 0.0,
+        "wasserstein_std": {
+          "mean": 3.1901,
+          "median": 2.7662,
+          "max": 7.3533
+        },
+        "tvd": {
+          "mean": 0.2609,
+          "median": 0.1765,
+          "max": 0.921
+        },
+        "tvd_frac_below_0.05": 0.3191,
+        "missing_rate_mean_abs_diff": 0.2655
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 3504,
+          "ks_mean": 0.8324,
+          "tvd_mean": 0.3217
+        },
+        "age_under_65": {
+          "n_synthetic": 3520,
+          "ks_mean": 0.8231,
+          "tvd_mean": 0.3156
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 252,
@@ -35776,6 +36277,13 @@
           "median_abs_delta": 0.1608,
           "max_abs_delta": 1.0112,
           "frac_below_0.1": 0.3175,
+          "fabricated_pairs": 31,
+          "fabricated_rate": 0.123,
+          "fabricated_examples": [
+            "encounters_lengthOfStay|smoking_status_smoker_startTime_count",
+            "encounters_lengthOfStay|encounters_numOfPreviousHFStays_count",
+            "encounters_numOfPreviousHFStays_count|smoking_status_smoker_startTime_count"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_last|lab_results_valideGFR_value_last",
@@ -35816,6 +36324,12 @@
           "median_abs_delta": 0.0402,
           "max_abs_delta": 0.9997,
           "frac_below_0.1": 0.8031,
+          "fabricated_pairs": 2,
+          "fabricated_rate": 0.0002,
+          "fabricated_examples": [
+            "encounter_primary_reason_HF_Disease_f5a_w7d_first|med_diuretics_history",
+            "med_rdoad_syst|med_rasi_history"
+          ],
           "worst": [
             {
               "pair": "cause_of_death_isCV_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
@@ -35830,19 +36344,19 @@
               "synthetic": 0.0003
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
+              "pair": "cause_of_death_isCV_f5a_w3mo_first|cause_of_death_isRenal_f5a_w3mo_first",
+              "delta": 0.9996,
+              "real": 1.0,
+              "synthetic": 0.0004
+            },
+            {
+              "pair": "cause_of_death_isRenal_f5a_w1mo_first|cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
             },
             {
               "pair": "cause_of_death_isCV_f5a_w1a_first|cause_of_death_isRenal_f5a_w1a_first",
-              "delta": 0.9996,
-              "real": 1.0,
-              "synthetic": 0.0004
-            },
-            {
-              "pair": "cause_of_death_isCV_f5a_w3mo_first|cause_of_death_isRenal_f5a_w3mo_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -35856,6 +36370,9 @@
           "median_abs_delta": 0.022,
           "max_abs_delta": 0.9616,
           "frac_below_0.1": 0.8761,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured",
@@ -39441,6 +39958,51 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 28,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.7261,
+          "median": 0.8325,
+          "max": 0.9997
+        },
+        "ks_frac_below_0.1": 0.0,
+        "wasserstein_std": {
+          "mean": 3.0404,
+          "median": 1.7026,
+          "max": 21.1324
+        },
+        "tvd": {
+          "mean": 0.2436,
+          "median": 0.1551,
+          "max": 0.9517
+        },
+        "tvd_frac_below_0.05": 0.3245,
+        "missing_rate_mean_abs_diff": 0.2129
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 3513,
+          "ks_mean": 0.7355,
+          "tvd_mean": 0.3005
+        },
+        "age_under_65": {
+          "n_synthetic": 458,
+          "ks_mean": 0.7274,
+          "tvd_mean": 0.3081
+        },
+        "age_65_79": {
+          "n_synthetic": 1117,
+          "ks_mean": 0.7219,
+          "tvd_mean": 0.306
+        },
+        "age_80_plus": {
+          "n_synthetic": 1945,
+          "ks_mean": 0.7358,
+          "tvd_mean": 0.2989
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 378,
@@ -39448,6 +40010,13 @@
           "median_abs_delta": 0.1586,
           "max_abs_delta": 1.0176,
           "frac_below_0.1": 0.3439,
+          "fabricated_pairs": 38,
+          "fabricated_rate": 0.1005,
+          "fabricated_examples": [
+            "encounters_lengthOfStay|encounters_numOfPreviousHFStays_count",
+            "lab_results_hemoglobin_value_last|smoking_status_smoker_startTime_count",
+            "encounters_numOfPreviousHFStays_count|smoking_status_smoker_startTime_count"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine",
@@ -39488,6 +40057,9 @@
           "median_abs_delta": 0.0384,
           "max_abs_delta": 0.9997,
           "frac_below_0.1": 0.8051,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "cause_of_death_isRenal_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
@@ -39528,6 +40100,9 @@
           "median_abs_delta": 0.0205,
           "max_abs_delta": 0.9366,
           "frac_below_0.1": 0.9089,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_categorizedValue",
@@ -42963,6 +43538,46 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 23,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.8974,
+          "median": 0.9954,
+          "max": 0.9997
+        },
+        "ks_frac_below_0.1": 0.0,
+        "wasserstein_std": {
+          "mean": 3.018,
+          "median": 2.6691,
+          "max": 7.1531
+        },
+        "tvd": {
+          "mean": 0.2767,
+          "median": 0.1899,
+          "max": 0.9849
+        },
+        "tvd_frac_below_0.05": 0.3298,
+        "missing_rate_mean_abs_diff": 0.2369
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 416,
+          "ks_mean": 0.9025,
+          "tvd_mean": 0.341
+        },
+        "male": {
+          "n_synthetic": 3104,
+          "ks_mean": 0.8968,
+          "tvd_mean": 0.3474
+        },
+        "age_80_plus": {
+          "n_synthetic": 3520,
+          "ks_mean": 0.9048,
+          "tvd_mean": 0.3392
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 252,
@@ -42970,6 +43585,13 @@
           "median_abs_delta": 0.3098,
           "max_abs_delta": 1.4764,
           "frac_below_0.1": 0.2183,
+          "fabricated_pairs": 57,
+          "fabricated_rate": 0.2262,
+          "fabricated_examples": [
+            "encounters_lengthOfStay|smoking_status_smoker_startTime_count",
+            "vital_signs_diastolicBp_value_first|smoking_status_smoker_startTime_count",
+            "encounters_lengthOfStay|vital_signs_diastolicBp_value_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_last",
@@ -43010,6 +43632,11 @@
           "median_abs_delta": 0.0401,
           "max_abs_delta": 0.9997,
           "frac_below_0.1": 0.8038,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.0001,
+          "fabricated_examples": [
+            "cause_of_death_isAllCause_f5a_w1a_first|beta_blocker_use_pre_dc"
+          ],
           "worst": [
             {
               "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
@@ -43018,13 +43645,13 @@
               "synthetic": 0.0003
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
+              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isAllCause_f5a_w1a_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isAllCause_f5a_w1a_first",
+              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -43050,6 +43677,9 @@
           "median_abs_delta": 0.0235,
           "max_abs_delta": 0.9529,
           "frac_below_0.1": 0.8675,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_categorizedValue",
@@ -46605,6 +47235,41 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 27,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.8934,
+          "median": 0.9834,
+          "max": 0.9997
+        },
+        "ks_frac_below_0.1": 0.0,
+        "wasserstein_std": {
+          "mean": 3.028,
+          "median": 2.8712,
+          "max": 6.2427
+        },
+        "tvd": {
+          "mean": 0.2682,
+          "median": 0.1749,
+          "max": 0.9349
+        },
+        "tvd_frac_below_0.05": 0.3298,
+        "missing_rate_mean_abs_diff": 0.2666
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "male": {
+          "n_synthetic": 3520,
+          "ks_mean": 0.8899,
+          "tvd_mean": 0.334
+        },
+        "age_under_65": {
+          "n_synthetic": 3520,
+          "ks_mean": 0.8773,
+          "tvd_mean": 0.3325
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 346,
@@ -46612,6 +47277,13 @@
           "median_abs_delta": 0.1888,
           "max_abs_delta": 1.4908,
           "frac_below_0.1": 0.2977,
+          "fabricated_pairs": 46,
+          "fabricated_rate": 0.1329,
+          "fabricated_examples": [
+            "encounters_lengthOfStay|smoking_status_smoker_startTime_count",
+            "vital_signs_height_value_p1a_avg|smoking_status_smoker_startTime_count",
+            "encounters_lengthOfStay|vital_signs_height_value_p1a_avg"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_last|lab_results_valideGFR_value_first",
@@ -46652,6 +47324,12 @@
           "median_abs_delta": 0.0441,
           "max_abs_delta": 0.9997,
           "frac_below_0.1": 0.7821,
+          "fabricated_pairs": 2,
+          "fabricated_rate": 0.0003,
+          "fabricated_examples": [
+            "med_bb|med_ccb",
+            "smoking_status_smoker_last|med_vasodil_history"
+          ],
           "worst": [
             {
               "pair": "cause_of_death_isCV_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
@@ -46692,6 +47370,9 @@
           "median_abs_delta": 0.0249,
           "max_abs_delta": 0.9616,
           "frac_below_0.1": 0.879,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_calculated_or_measured",
@@ -50307,6 +50988,51 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 29,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.8343,
+          "median": 0.9109,
+          "max": 0.9997
+        },
+        "ks_frac_below_0.1": 0.0,
+        "wasserstein_std": {
+          "mean": 2.7334,
+          "median": 2.4473,
+          "max": 6.5384
+        },
+        "tvd": {
+          "mean": 0.2718,
+          "median": 0.1798,
+          "max": 0.9497
+        },
+        "tvd_frac_below_0.05": 0.3191,
+        "missing_rate_mean_abs_diff": 0.2317
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "male": {
+          "n_synthetic": 3518,
+          "ks_mean": 0.8293,
+          "tvd_mean": 0.3393
+        },
+        "age_under_65": {
+          "n_synthetic": 271,
+          "ks_mean": 0.8296,
+          "tvd_mean": 0.3344
+        },
+        "age_65_79": {
+          "n_synthetic": 1723,
+          "ks_mean": 0.8393,
+          "tvd_mean": 0.3436
+        },
+        "age_80_plus": {
+          "n_synthetic": 1526,
+          "ks_mean": 0.8477,
+          "tvd_mean": 0.3437
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 378,
@@ -50314,6 +51040,13 @@
           "median_abs_delta": 0.3452,
           "max_abs_delta": 1.6087,
           "frac_below_0.1": 0.1746,
+          "fabricated_pairs": 71,
+          "fabricated_rate": 0.1878,
+          "fabricated_examples": [
+            "encounters_lengthOfStay|smoking_status_smoker_startTime_count",
+            "lab_results_hemoglobin_value_last|smoking_status_smoker_startTime_count",
+            "lab_results_validSerumCreatinine_value_first|smoking_status_smoker_startTime_count"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_first|lab_results_valideGFR_value_first",
@@ -50354,21 +51087,12 @@
           "median_abs_delta": 0.0436,
           "max_abs_delta": 0.9996,
           "frac_below_0.1": 0.7857,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
-              "pair": "cause_of_death_isCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
-              "delta": 0.9996,
-              "real": 1.0,
-              "synthetic": 0.0004
-            },
-            {
               "pair": "cause_of_death_isCV_f5a_w6mo_first|cause_of_death_isAllCause_f5a_w6mo_first",
-              "delta": 0.9996,
-              "real": 1.0,
-              "synthetic": 0.0004
-            },
-            {
-              "pair": "cause_of_death_isRenal_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -50384,6 +51108,18 @@
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
+            },
+            {
+              "pair": "cause_of_death_isCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
+              "delta": 0.9996,
+              "real": 1.0,
+              "synthetic": 0.0004
+            },
+            {
+              "pair": "cause_of_death_isRenal_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
+              "delta": 0.9996,
+              "real": 1.0,
+              "synthetic": 0.0004
             }
           ],
           "pairs_only_in_real": 3549
@@ -50394,6 +51130,9 @@
           "median_abs_delta": 0.0241,
           "max_abs_delta": 0.9163,
           "frac_below_0.1": 0.8673,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "eGFR_2021_ckd_epi_creatinine|ckd_severity_from_calculated_egfr",
@@ -54699,6 +55438,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 52,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.424,
+          "median": 0.3641,
+          "max": 0.9906
+        },
+        "ks_frac_below_0.1": 0.0769,
+        "wasserstein_std": {
+          "mean": 1.3393,
+          "median": 0.6722,
+          "max": 6.2771
+        },
+        "tvd": {
+          "mean": 0.0074,
+          "median": 0.0034,
+          "max": 0.4401
+        },
+        "tvd_frac_below_0.05": 0.9947,
+        "missing_rate_mean_abs_diff": 0.1232
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1521,
+          "ks_mean": 0.4419,
+          "tvd_mean": 0.0165
+        },
+        "male": {
+          "n_synthetic": 1999,
+          "ks_mean": 0.4376,
+          "tvd_mean": 0.0164
+        },
+        "age_under_65": {
+          "n_synthetic": 1051,
+          "ks_mean": 0.4462,
+          "tvd_mean": 0.0369
+        },
+        "age_65_79": {
+          "n_synthetic": 1491,
+          "ks_mean": 0.4391,
+          "tvd_mean": 0.0219
+        },
+        "age_80_plus": {
+          "n_synthetic": 978,
+          "ks_mean": 0.4285,
+          "tvd_mean": 0.034
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 973,
@@ -54706,6 +55495,11 @@
           "median_abs_delta": 0.0745,
           "max_abs_delta": 0.9245,
           "frac_below_0.1": 0.6177,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.001,
+          "fabricated_examples": [
+            "vital_signs_height_value_last|vital_signs_bmi_value_last"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine",
@@ -54746,6 +55540,9 @@
           "median_abs_delta": 0.0253,
           "max_abs_delta": 0.9885,
           "frac_below_0.1": 0.8507,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isRenal_f5a_w7d_first",
@@ -54786,6 +55583,9 @@
           "median_abs_delta": 0.0194,
           "max_abs_delta": 0.7146,
           "frac_below_0.1": 0.9181,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr",
@@ -59151,6 +59951,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 54,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.4396,
+          "median": 0.3897,
+          "max": 0.9937
+        },
+        "ks_frac_below_0.1": 0.0741,
+        "wasserstein_std": {
+          "mean": 1.3379,
+          "median": 0.6921,
+          "max": 6.3608
+        },
+        "tvd": {
+          "mean": 0.0071,
+          "median": 0.0037,
+          "max": 0.4435
+        },
+        "tvd_frac_below_0.05": 0.9947,
+        "missing_rate_mean_abs_diff": 0.1229
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1548,
+          "ks_mean": 0.4396,
+          "tvd_mean": 0.0161
+        },
+        "male": {
+          "n_synthetic": 1972,
+          "ks_mean": 0.4476,
+          "tvd_mean": 0.0131
+        },
+        "age_under_65": {
+          "n_synthetic": 989,
+          "ks_mean": 0.4497,
+          "tvd_mean": 0.0357
+        },
+        "age_65_79": {
+          "n_synthetic": 1459,
+          "ks_mean": 0.4458,
+          "tvd_mean": 0.0208
+        },
+        "age_80_plus": {
+          "n_synthetic": 1072,
+          "ks_mean": 0.438,
+          "tvd_mean": 0.0351
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 996,
@@ -59158,6 +60008,11 @@
           "median_abs_delta": 0.0724,
           "max_abs_delta": 0.9326,
           "frac_below_0.1": 0.6235,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.001,
+          "fabricated_examples": [
+            "vital_signs_height_value_last|vital_signs_bmi_value_last"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine",
@@ -59198,6 +60053,9 @@
           "median_abs_delta": 0.0251,
           "max_abs_delta": 0.9572,
           "frac_below_0.1": 0.8531,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "cause_of_death_isRenal_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
@@ -59238,6 +60096,11 @@
           "median_abs_delta": 0.0196,
           "max_abs_delta": 0.7309,
           "frac_below_0.1": 0.9129,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.0001,
+          "fabricated_examples": [
+            "lab_results_cholTot_value_first|encounter_primary_reason_CV_Disease_f5a_w3mo_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_valideGFR_value_last|ckd_severity_from_calculated_egfr",
@@ -63543,6 +64406,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 52,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.4356,
+          "median": 0.3711,
+          "max": 0.9938
+        },
+        "ks_frac_below_0.1": 0.0769,
+        "wasserstein_std": {
+          "mean": 1.3367,
+          "median": 0.6721,
+          "max": 6.3436
+        },
+        "tvd": {
+          "mean": 0.0072,
+          "median": 0.0031,
+          "max": 0.4287
+        },
+        "tvd_frac_below_0.05": 0.9947,
+        "missing_rate_mean_abs_diff": 0.1258
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1566,
+          "ks_mean": 0.4346,
+          "tvd_mean": 0.0179
+        },
+        "male": {
+          "n_synthetic": 1954,
+          "ks_mean": 0.4248,
+          "tvd_mean": 0.0151
+        },
+        "age_under_65": {
+          "n_synthetic": 1000,
+          "ks_mean": 0.432,
+          "tvd_mean": 0.0349
+        },
+        "age_65_79": {
+          "n_synthetic": 1514,
+          "ks_mean": 0.4212,
+          "tvd_mean": 0.0237
+        },
+        "age_80_plus": {
+          "n_synthetic": 1006,
+          "ks_mean": 0.4436,
+          "tvd_mean": 0.0336
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 976,
@@ -63550,6 +64463,11 @@
           "median_abs_delta": 0.0733,
           "max_abs_delta": 0.9291,
           "frac_below_0.1": 0.6291,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.001,
+          "fabricated_examples": [
+            "vital_signs_height_value_last|vital_signs_bmi_value_last"
+          ],
           "worst": [
             {
               "pair": "lab_results_validSerumCreatinine_value_last|eGFR_2021_ckd_epi_creatinine",
@@ -63590,6 +64508,9 @@
           "median_abs_delta": 0.0249,
           "max_abs_delta": 0.9798,
           "frac_below_0.1": 0.8534,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
@@ -63630,6 +64551,9 @@
           "median_abs_delta": 0.02,
           "max_abs_delta": 0.8022,
           "frac_below_0.1": 0.9155,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|encounter_primary_reason_HF_Disease_f5a_w1a_first",
@@ -68205,6 +69129,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.409,
+          "median": 0.284,
+          "max": 0.9815
+        },
+        "ks_frac_below_0.1": 0.0164,
+        "wasserstein_std": {
+          "mean": 0.3914,
+          "median": 0.3086,
+          "max": 1.5874
+        },
+        "tvd": {
+          "mean": 0.0021,
+          "median": 0.0019,
+          "max": 0.0156
+        },
+        "tvd_frac_below_0.05": 1.0,
+        "missing_rate_mean_abs_diff": 0.0046
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1499,
+          "ks_mean": 0.4353,
+          "tvd_mean": 0.0176
+        },
+        "male": {
+          "n_synthetic": 2021,
+          "ks_mean": 0.4272,
+          "tvd_mean": 0.0125
+        },
+        "age_under_65": {
+          "n_synthetic": 696,
+          "ks_mean": 0.4906,
+          "tvd_mean": 0.0815
+        },
+        "age_65_79": {
+          "n_synthetic": 1755,
+          "ks_mean": 0.511,
+          "tvd_mean": 0.0951
+        },
+        "age_80_plus": {
+          "n_synthetic": 1069,
+          "ks_mean": 0.4893,
+          "tvd_mean": 0.165
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1727,
@@ -68212,6 +69186,13 @@
           "median_abs_delta": 0.2438,
           "max_abs_delta": 1.0587,
           "frac_below_0.1": 0.2003,
+          "fabricated_pairs": 138,
+          "fabricated_rate": 0.0799,
+          "fabricated_examples": [
+            "nyha_nyha_pET|conditions_heartFailure_timeFromEarliest_first",
+            "encounters_numOfPreviousHFStays_count|electrocardiographs_ecg_qrs_duration_pET_last",
+            "vital_signs_weight_value_p6mo_first|electrocardiographs_ecg_qrs_duration_pET_last"
+          ],
           "worst": [
             {
               "pair": "vital_signs_weight_value_p6mo_first|lab_results_ntProBnp_value_first",
@@ -68252,6 +69233,13 @@
           "median_abs_delta": 0.1985,
           "max_abs_delta": 0.9478,
           "frac_below_0.1": 0.3026,
+          "fabricated_pairs": 1639,
+          "fabricated_rate": 0.1486,
+          "fabricated_examples": [
+            "med_arni|med_antiarrhytmic_history",
+            "med_arb|med_inotropes_history",
+            "med_mra|med_anti_coag_history"
+          ],
           "worst": [
             {
               "pair": "conditions_heart_failure_hf_within_18mo_any|conditions_hf",
@@ -68292,6 +69280,13 @@
           "median_abs_delta": 0.1007,
           "max_abs_delta": 0.813,
           "frac_below_0.1": 0.4988,
+          "fabricated_pairs": 960,
+          "fabricated_rate": 0.0856,
+          "fabricated_examples": [
+            "electrocardiographs_ecg_qrs_duration_pET_last|conditions_mi",
+            "electrocardiographs_ecg_qrs_duration_pET_last|conditions_ap",
+            "electrocardiographs_ecg_qrs_duration_pET_last|med_oral_antidiabetic_history"
+          ],
           "worst": [
             {
               "pair": "electrocardiographs_ecg_qrs_duration_pET_last|conditions_mi",
@@ -72867,6 +73862,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.4048,
+          "median": 0.2889,
+          "max": 0.9815
+        },
+        "ks_frac_below_0.1": 0.0164,
+        "wasserstein_std": {
+          "mean": 0.3803,
+          "median": 0.2895,
+          "max": 1.554
+        },
+        "tvd": {
+          "mean": 0.0014,
+          "median": 0.0011,
+          "max": 0.006
+        },
+        "tvd_frac_below_0.05": 1.0,
+        "missing_rate_mean_abs_diff": 0.0028
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1493,
+          "ks_mean": 0.4295,
+          "tvd_mean": 0.0166
+        },
+        "male": {
+          "n_synthetic": 2027,
+          "ks_mean": 0.4237,
+          "tvd_mean": 0.0125
+        },
+        "age_under_65": {
+          "n_synthetic": 690,
+          "ks_mean": 0.4958,
+          "tvd_mean": 0.0873
+        },
+        "age_65_79": {
+          "n_synthetic": 1756,
+          "ks_mean": 0.473,
+          "tvd_mean": 0.0784
+        },
+        "age_80_plus": {
+          "n_synthetic": 1074,
+          "ks_mean": 0.4744,
+          "tvd_mean": 0.1131
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1753,
@@ -72874,6 +73919,13 @@
           "median_abs_delta": 0.2473,
           "max_abs_delta": 1.0035,
           "frac_below_0.1": 0.2196,
+          "fabricated_pairs": 175,
+          "fabricated_rate": 0.0998,
+          "fabricated_examples": [
+            "nyha_nyha_pET|conditions_heartFailure_timeFromEarliest_first",
+            "lab_results_sodium_value_first|lab_results_valideGFR_value_first",
+            "encounters_numOfPreviousHFStays_count|lab_results_creatUS_value_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_tropTHs_value_last|lab_results_tropTnHs_value_last",
@@ -72914,6 +73966,13 @@
           "median_abs_delta": 0.209,
           "max_abs_delta": 0.9503,
           "frac_below_0.1": 0.2889,
+          "fabricated_pairs": 1413,
+          "fabricated_rate": 0.1282,
+          "fabricated_examples": [
+            "med_arni|med_antiarrhytmic_history",
+            "med_arb|med_inotropes_history",
+            "med_arni_history|conditions_tia"
+          ],
           "worst": [
             {
               "pair": "med_arni|med_antiarrhytmic_history",
@@ -72954,6 +74013,13 @@
           "median_abs_delta": 0.1063,
           "max_abs_delta": 0.8394,
           "frac_below_0.1": 0.4886,
+          "fabricated_pairs": 988,
+          "fabricated_rate": 0.0866,
+          "fabricated_examples": [
+            "electrocardiographs_ecg_qrs_duration_pET_first|med_arb_history",
+            "electrocardiographs_ecg_qrs_duration_pET_first|med_arb",
+            "encounters_numOfPreviousHFStays_count|encounter_primary_reason_non_CV_Disease_f5a_w7d_first"
+          ],
           "worst": [
             {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
@@ -77529,6 +78595,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.4061,
+          "median": 0.2851,
+          "max": 0.9815
+        },
+        "ks_frac_below_0.1": 0.0164,
+        "wasserstein_std": {
+          "mean": 0.378,
+          "median": 0.293,
+          "max": 1.5953
+        },
+        "tvd": {
+          "mean": 0.0013,
+          "median": 0.0011,
+          "max": 0.008
+        },
+        "tvd_frac_below_0.05": 1.0,
+        "missing_rate_mean_abs_diff": 0.0027
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1485,
+          "ks_mean": 0.4328,
+          "tvd_mean": 0.0197
+        },
+        "male": {
+          "n_synthetic": 2035,
+          "ks_mean": 0.4263,
+          "tvd_mean": 0.0142
+        },
+        "age_under_65": {
+          "n_synthetic": 677,
+          "ks_mean": 0.567,
+          "tvd_mean": 0.1124
+        },
+        "age_65_79": {
+          "n_synthetic": 1751,
+          "ks_mean": 0.4918,
+          "tvd_mean": 0.0719
+        },
+        "age_80_plus": {
+          "n_synthetic": 1092,
+          "ks_mean": 0.4821,
+          "tvd_mean": 0.174
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1737,
@@ -77536,6 +78652,13 @@
           "median_abs_delta": 0.2579,
           "max_abs_delta": 1.0515,
           "frac_below_0.1": 0.1865,
+          "fabricated_pairs": 186,
+          "fabricated_rate": 0.1071,
+          "fabricated_examples": [
+            "lab_results_tropTnHs_value_first|encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first",
+            "nyha_nyha_pET|conditions_heartFailure_timeFromEarliest_first",
+            "lab_results_crpNonHs_value_first|encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_tropTnHs_value_first|encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first",
@@ -77576,6 +78699,13 @@
           "median_abs_delta": 0.2098,
           "max_abs_delta": 0.9507,
           "frac_below_0.1": 0.2784,
+          "fabricated_pairs": 1557,
+          "fabricated_rate": 0.1412,
+          "fabricated_examples": [
+            "med_arb|med_inotropes_history",
+            "med_arni_history|conditions_tia",
+            "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first|conditions_mi"
+          ],
           "worst": [
             {
               "pair": "conditions_heart_failure_hf_within_18mo_any|conditions_hf",
@@ -77616,6 +78746,13 @@
           "median_abs_delta": 0.1119,
           "max_abs_delta": 0.8268,
           "frac_below_0.1": 0.4767,
+          "fabricated_pairs": 1088,
+          "fabricated_rate": 0.0954,
+          "fabricated_examples": [
+            "smoking_status_smoker_startTime_count|encounter_primary_reason_renal_complications_f5a_w1a_first",
+            "smoking_status_smoker_startTime_count|encounter_primary_reason_renal_complications_f5a_w6mo_first",
+            "electrocardiographs_ecg_qrs_duration_pET_last|conditions_mi"
+          ],
           "worst": [
             {
               "pair": "smoking_status_smoker_startTime_count|encounter_primary_reason_renal_complications_f5a_w1a_first",
@@ -82191,6 +83328,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.4074,
+          "median": 0.2863,
+          "max": 0.9815
+        },
+        "ks_frac_below_0.1": 0.0164,
+        "wasserstein_std": {
+          "mean": 0.3791,
+          "median": 0.2919,
+          "max": 1.5769
+        },
+        "tvd": {
+          "mean": 0.0015,
+          "median": 0.0011,
+          "max": 0.0094
+        },
+        "tvd_frac_below_0.05": 1.0,
+        "missing_rate_mean_abs_diff": 0.003
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1497,
+          "ks_mean": 0.4281,
+          "tvd_mean": 0.0206
+        },
+        "male": {
+          "n_synthetic": 2023,
+          "ks_mean": 0.4272,
+          "tvd_mean": 0.0151
+        },
+        "age_under_65": {
+          "n_synthetic": 685,
+          "ks_mean": 0.5194,
+          "tvd_mean": 0.0916
+        },
+        "age_65_79": {
+          "n_synthetic": 1747,
+          "ks_mean": 0.4634,
+          "tvd_mean": 0.0651
+        },
+        "age_80_plus": {
+          "n_synthetic": 1088,
+          "ks_mean": 0.4787,
+          "tvd_mean": 0.1285
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1708,
@@ -82198,6 +83385,13 @@
           "median_abs_delta": 0.2667,
           "max_abs_delta": 0.9516,
           "frac_below_0.1": 0.1915,
+          "fabricated_pairs": 178,
+          "fabricated_rate": 0.1042,
+          "fabricated_examples": [
+            "nyha_nyha_pET|conditions_heartFailure_timeFromEarliest_first",
+            "vital_signs_heartRate_value_first|encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first",
+            "vital_signs_heartRate_value_first|lab_results_potassium_value_last"
+          ],
           "worst": [
             {
               "pair": "vital_signs_weight_value_p6mo_first|lab_results_hdl_value_first",
@@ -82238,6 +83432,13 @@
           "median_abs_delta": 0.2059,
           "max_abs_delta": 0.9599,
           "frac_below_0.1": 0.2774,
+          "fabricated_pairs": 1837,
+          "fabricated_rate": 0.1666,
+          "fabricated_examples": [
+            "med_arni|med_antiarrhytmic_history",
+            "med_arb|med_inotropes_history",
+            "med_mra|med_anti_coag_history"
+          ],
           "worst": [
             {
               "pair": "med_arb|med_inotropes_history",
@@ -82278,6 +83479,13 @@
           "median_abs_delta": 0.112,
           "max_abs_delta": 0.8083,
           "frac_below_0.1": 0.4784,
+          "fabricated_pairs": 1078,
+          "fabricated_rate": 0.0961,
+          "fabricated_examples": [
+            "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|med_digitalis_history",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|conditions_ap",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|conditions_mi"
+          ],
           "worst": [
             {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first|med_digitalis_history",
@@ -86853,6 +88061,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.4863,
+          "median": 0.4338,
+          "max": 0.9815
+        },
+        "ks_frac_below_0.1": 0.0,
+        "wasserstein_std": {
+          "mean": 0.9166,
+          "median": 0.5257,
+          "max": 8.8678
+        },
+        "tvd": {
+          "mean": 0.0193,
+          "median": 0.0144,
+          "max": 0.2406
+        },
+        "tvd_frac_below_0.05": 0.9362,
+        "missing_rate_mean_abs_diff": 0.0316
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1449,
+          "ks_mean": 0.4995,
+          "tvd_mean": 0.0322
+        },
+        "male": {
+          "n_synthetic": 2071,
+          "ks_mean": 0.4951,
+          "tvd_mean": 0.0285
+        },
+        "age_under_65": {
+          "n_synthetic": 468,
+          "ks_mean": 0.5703,
+          "tvd_mean": 0.2662
+        },
+        "age_65_79": {
+          "n_synthetic": 2083,
+          "ks_mean": 0.5555,
+          "tvd_mean": 0.1081
+        },
+        "age_80_plus": {
+          "n_synthetic": 969,
+          "ks_mean": 0.5737,
+          "tvd_mean": 0.1216
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1500,
@@ -86860,6 +88118,13 @@
           "median_abs_delta": 0.2032,
           "max_abs_delta": 1.32,
           "frac_below_0.1": 0.298,
+          "fabricated_pairs": 86,
+          "fabricated_rate": 0.0573,
+          "fabricated_examples": [
+            "lab_results_cholTot_value_last|nyha_nyha_pET",
+            "lab_results_cholTot_value_first|echocardiographs_lvef_pET_last",
+            "vital_signs_height_value_last|lab_results_tropTnHs_value_last"
+          ],
           "worst": [
             {
               "pair": "lab_results_cholTot_value_first|lab_results_ldl_value_last",
@@ -86900,6 +88165,13 @@
           "median_abs_delta": 0.2661,
           "max_abs_delta": 0.9931,
           "frac_below_0.1": 0.2479,
+          "fabricated_pairs": 2387,
+          "fabricated_rate": 0.2165,
+          "fabricated_examples": [
+            "cause_of_death_isCV_f5a_w6mo_first|conditions_rd",
+            "med_rdoad_syst_history|conditions_aidshiv",
+            "smoking_status_smoker_last|conditions_ld"
+          ],
           "worst": [
             {
               "pair": "med_rdoad_syst_history|conditions_aidshiv",
@@ -86940,6 +88212,13 @@
           "median_abs_delta": 0.1048,
           "max_abs_delta": 1.9188,
           "frac_below_0.1": 0.4913,
+          "fabricated_pairs": 1074,
+          "fabricated_rate": 0.0973,
+          "fabricated_examples": [
+            "lab_results_tropTHs_value_last|conditions_stroke",
+            "lab_results_tropTHs_value_first|smoking_status_formerSmoker_last",
+            "lab_results_tropTHs_value_last|encounter_primary_reason_renal_complications_f5a_w1a_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_tropTHs_value_last|conditions_stroke",
@@ -91515,6 +92794,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.407,
+          "median": 0.2871,
+          "max": 0.9815
+        },
+        "ks_frac_below_0.1": 0.0164,
+        "wasserstein_std": {
+          "mean": 0.3748,
+          "median": 0.2868,
+          "max": 1.5633
+        },
+        "tvd": {
+          "mean": 0.0012,
+          "median": 0.0009,
+          "max": 0.0099
+        },
+        "tvd_frac_below_0.05": 1.0,
+        "missing_rate_mean_abs_diff": 0.0019
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1480,
+          "ks_mean": 0.4332,
+          "tvd_mean": 0.0176
+        },
+        "male": {
+          "n_synthetic": 2040,
+          "ks_mean": 0.4242,
+          "tvd_mean": 0.013
+        },
+        "age_under_65": {
+          "n_synthetic": 702,
+          "ks_mean": 0.5989,
+          "tvd_mean": 0.1714
+        },
+        "age_65_79": {
+          "n_synthetic": 1735,
+          "ks_mean": 0.4754,
+          "tvd_mean": 0.0338
+        },
+        "age_80_plus": {
+          "n_synthetic": 1083,
+          "ks_mean": 0.4784,
+          "tvd_mean": 0.1395
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1759,
@@ -91522,6 +92851,13 @@
           "median_abs_delta": 0.2707,
           "max_abs_delta": 0.9914,
           "frac_below_0.1": 0.1956,
+          "fabricated_pairs": 195,
+          "fabricated_rate": 0.1109,
+          "fabricated_examples": [
+            "nyha_nyha_pET|conditions_heartFailure_timeFromEarliest_first",
+            "vital_signs_heartRate_value_first|encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first",
+            "vital_signs_heartRate_value_first|electrocardiographs_ecg_qrs_duration_pET_last"
+          ],
           "worst": [
             {
               "pair": "lab_results_potassium_value_last|lab_results_valideGFR_value_first",
@@ -91562,6 +92898,13 @@
           "median_abs_delta": 0.1839,
           "max_abs_delta": 0.9537,
           "frac_below_0.1": 0.3209,
+          "fabricated_pairs": 1712,
+          "fabricated_rate": 0.1553,
+          "fabricated_examples": [
+            "med_arni|med_antiarrhytmic_history",
+            "med_arb|med_inotropes_history",
+            "med_mra|med_anti_coag_history"
+          ],
           "worst": [
             {
               "pair": "med_arb|med_inotropes_history",
@@ -91602,6 +92945,13 @@
           "median_abs_delta": 0.113,
           "max_abs_delta": 0.8517,
           "frac_below_0.1": 0.474,
+          "fabricated_pairs": 1126,
+          "fabricated_rate": 0.0987,
+          "fabricated_examples": [
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|ckd_severity_calculated_or_measured",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|ckd_severity_from_calculated_egfr",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|med_inotropes_history"
+          ],
           "worst": [
             {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_mi",
@@ -96177,6 +97527,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.4238,
+          "median": 0.2996,
+          "max": 0.9815
+        },
+        "ks_frac_below_0.1": 0.0164,
+        "wasserstein_std": {
+          "mean": 0.4645,
+          "median": 0.3617,
+          "max": 1.5838
+        },
+        "tvd": {
+          "mean": 0.0041,
+          "median": 0.0032,
+          "max": 0.0253
+        },
+        "tvd_frac_below_0.05": 1.0,
+        "missing_rate_mean_abs_diff": 0.0079
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1466,
+          "ks_mean": 0.4518,
+          "tvd_mean": 0.0191
+        },
+        "male": {
+          "n_synthetic": 2054,
+          "ks_mean": 0.4417,
+          "tvd_mean": 0.0135
+        },
+        "age_under_65": {
+          "n_synthetic": 646,
+          "ks_mean": 0.4896,
+          "tvd_mean": 0.0837
+        },
+        "age_65_79": {
+          "n_synthetic": 1774,
+          "ks_mean": 0.4633,
+          "tvd_mean": 0.0439
+        },
+        "age_80_plus": {
+          "n_synthetic": 1100,
+          "ks_mean": 0.4851,
+          "tvd_mean": 0.0962
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1758,
@@ -96184,6 +97584,13 @@
           "median_abs_delta": 0.2043,
           "max_abs_delta": 1.0505,
           "frac_below_0.1": 0.2435,
+          "fabricated_pairs": 110,
+          "fabricated_rate": 0.0626,
+          "fabricated_examples": [
+            "encounters_numOfPreviousHFStays_count|electrocardiographs_ecg_qrs_duration_pET_last",
+            "vital_signs_weight_value_p6mo_first|electrocardiographs_ecg_qrs_duration_pET_last",
+            "nyha_nyha_pET|conditions_heartFailure_timeFromEarliest_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_hdl_value_last|lab_results_hdl_value_first",
@@ -96224,6 +97631,13 @@
           "median_abs_delta": 0.2266,
           "max_abs_delta": 0.9433,
           "frac_below_0.1": 0.2724,
+          "fabricated_pairs": 1784,
+          "fabricated_rate": 0.1618,
+          "fabricated_examples": [
+            "med_arb|med_inotropes_history",
+            "med_arb|med_insulins",
+            "med_arni|conditions_stroke"
+          ],
           "worst": [
             {
               "pair": "conditions_heart_failure_hf_within_18mo_any|conditions_hf",
@@ -96264,6 +97678,13 @@
           "median_abs_delta": 0.0947,
           "max_abs_delta": 0.9426,
           "frac_below_0.1": 0.5111,
+          "fabricated_pairs": 745,
+          "fabricated_rate": 0.0653,
+          "fabricated_examples": [
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_HF_Disease_f5a_w5a_first",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first|med_vasodil",
+            "electrocardiographs_ecg_qrs_duration_pET_last|conditions_mi"
+          ],
           "worst": [
             {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_HF_Disease_f5a_w5a_first",
@@ -100839,6 +102260,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.4189,
+          "median": 0.2968,
+          "max": 0.9815
+        },
+        "ks_frac_below_0.1": 0.0164,
+        "wasserstein_std": {
+          "mean": 0.408,
+          "median": 0.3279,
+          "max": 1.6053
+        },
+        "tvd": {
+          "mean": 0.0026,
+          "median": 0.002,
+          "max": 0.0162
+        },
+        "tvd_frac_below_0.05": 1.0,
+        "missing_rate_mean_abs_diff": 0.0049
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1485,
+          "ks_mean": 0.4461,
+          "tvd_mean": 0.0211
+        },
+        "male": {
+          "n_synthetic": 2035,
+          "ks_mean": 0.4294,
+          "tvd_mean": 0.0149
+        },
+        "age_under_65": {
+          "n_synthetic": 682,
+          "ks_mean": 0.5291,
+          "tvd_mean": 0.0994
+        },
+        "age_65_79": {
+          "n_synthetic": 1769,
+          "ks_mean": 0.4634,
+          "tvd_mean": 0.0409
+        },
+        "age_80_plus": {
+          "n_synthetic": 1069,
+          "ks_mean": 0.4759,
+          "tvd_mean": 0.1095
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1768,
@@ -100846,6 +102317,13 @@
           "median_abs_delta": 0.2214,
           "max_abs_delta": 1.1765,
           "frac_below_0.1": 0.2364,
+          "fabricated_pairs": 161,
+          "fabricated_rate": 0.0911,
+          "fabricated_examples": [
+            "nyha_nyha_pET|conditions_heartFailure_timeFromEarliest_first",
+            "vital_signs_heartRate_value_first|encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first",
+            "lab_results_sodium_value_first|lab_results_valideGFR_value_first"
+          ],
           "worst": [
             {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first",
@@ -100886,6 +102364,13 @@
           "median_abs_delta": 0.2034,
           "max_abs_delta": 0.9518,
           "frac_below_0.1": 0.2897,
+          "fabricated_pairs": 1821,
+          "fabricated_rate": 0.1652,
+          "fabricated_examples": [
+            "med_arb|med_inotropes_history",
+            "med_digitalis|med_vasodil",
+            "med_mra|med_anti_coag_history"
+          ],
           "worst": [
             {
               "pair": "conditions_heart_failure_hf_within_18mo_any|conditions_hf",
@@ -100926,6 +102411,13 @@
           "median_abs_delta": 0.0984,
           "max_abs_delta": 0.8397,
           "frac_below_0.1": 0.5026,
+          "fabricated_pairs": 1038,
+          "fabricated_rate": 0.091,
+          "fabricated_examples": [
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|med_antiarrhytmic",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_af",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|med_antiarrhytmic_history"
+          ],
           "worst": [
             {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|conditions_mi",
@@ -105501,6 +106993,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.1977,
+          "median": 0.163,
+          "max": 0.5485
+        },
+        "ks_frac_below_0.1": 0.1639,
+        "wasserstein_std": {
+          "mean": 0.2678,
+          "median": 0.2656,
+          "max": 0.6229
+        },
+        "tvd": {
+          "mean": 0.0439,
+          "median": 0.0331,
+          "max": 0.306
+        },
+        "tvd_frac_below_0.05": 0.6862,
+        "missing_rate_mean_abs_diff": 0.0402
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 885,
+          "ks_mean": 0.2423,
+          "tvd_mean": 0.0695
+        },
+        "male": {
+          "n_synthetic": 2635,
+          "ks_mean": 0.2058,
+          "tvd_mean": 0.0561
+        },
+        "age_under_65": {
+          "n_synthetic": 1043,
+          "ks_mean": 0.2162,
+          "tvd_mean": 0.0672
+        },
+        "age_65_79": {
+          "n_synthetic": 1283,
+          "ks_mean": 0.2083,
+          "tvd_mean": 0.0588
+        },
+        "age_80_plus": {
+          "n_synthetic": 1194,
+          "ks_mean": 0.2239,
+          "tvd_mean": 0.0575
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1592,
@@ -105508,6 +107050,9 @@
           "median_abs_delta": 0.0607,
           "max_abs_delta": 0.9172,
           "frac_below_0.1": 0.7067,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "echocardiographs_lvef_pET_last|echocardiographs_lvef_pET_first",
@@ -105548,6 +107093,11 @@
           "median_abs_delta": 0.0343,
           "max_abs_delta": 0.5292,
           "frac_below_0.1": 0.8245,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.0001,
+          "fabricated_examples": [
+            "conditions_mi|conditions_pad"
+          ],
           "worst": [
             {
               "pair": "conditions_ap|conditions_dysl",
@@ -105588,6 +107138,13 @@
           "median_abs_delta": 0.0226,
           "max_abs_delta": 0.7341,
           "frac_below_0.1": 0.8892,
+          "fabricated_pairs": 10,
+          "fabricated_rate": 0.0009,
+          "fabricated_examples": [
+            "nyha_nyha_pET|conditions_vd",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first|encounter_primary_reason_renal_complications_f5a_w5a_first",
+            "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first|encounter_primary_reason_HF_Disease_f5a_w5a_first"
+          ],
           "worst": [
             {
               "pair": "lab_results_creatUS_value_last|encounter_primary_reason_HF_Disease_f5a_w5a_first",
@@ -105614,7 +107171,7 @@
               "synthetic": 0.6524
             },
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w1a_first",
               "delta": 0.5532,
               "real": 0.8193,
               "synthetic": 0.2661
@@ -110163,6 +111720,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.2032,
+          "median": 0.1963,
+          "max": 0.5452
+        },
+        "ks_frac_below_0.1": 0.2459,
+        "wasserstein_std": {
+          "mean": 0.2626,
+          "median": 0.2483,
+          "max": 0.6365
+        },
+        "tvd": {
+          "mean": 0.047,
+          "median": 0.0368,
+          "max": 0.269
+        },
+        "tvd_frac_below_0.05": 0.6064,
+        "missing_rate_mean_abs_diff": 0.0356
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 1213,
+          "ks_mean": 0.232,
+          "tvd_mean": 0.0625
+        },
+        "male": {
+          "n_synthetic": 2307,
+          "ks_mean": 0.2186,
+          "tvd_mean": 0.065
+        },
+        "age_under_65": {
+          "n_synthetic": 923,
+          "ks_mean": 0.2184,
+          "tvd_mean": 0.0715
+        },
+        "age_65_79": {
+          "n_synthetic": 944,
+          "ks_mean": 0.2187,
+          "tvd_mean": 0.0618
+        },
+        "age_80_plus": {
+          "n_synthetic": 1653,
+          "ks_mean": 0.2235,
+          "tvd_mean": 0.0591
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1610,
@@ -110170,6 +111777,11 @@
           "median_abs_delta": 0.0569,
           "max_abs_delta": 0.8229,
           "frac_below_0.1": 0.7093,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.0006,
+          "fabricated_examples": [
+            "vital_signs_weight_value_p6mo_first|nyha_nyha_pET"
+          ],
           "worst": [
             {
               "pair": "vital_signs_height_value_p1a_avg|vital_signs_height_value_last",
@@ -110210,6 +111822,13 @@
           "median_abs_delta": 0.0369,
           "max_abs_delta": 0.6252,
           "frac_below_0.1": 0.8109,
+          "fabricated_pairs": 3,
+          "fabricated_rate": 0.0004,
+          "fabricated_examples": [
+            "med_acei_history|med_arb_history",
+            "med_ivabradine_history|conditions_osa",
+            "med_oral_antidiabetic|med_acei_history"
+          ],
           "worst": [
             {
               "pair": "med_acei_history|med_arb_history",
@@ -110250,15 +111869,22 @@
           "median_abs_delta": 0.0224,
           "max_abs_delta": 0.8082,
           "frac_below_0.1": 0.8966,
+          "fabricated_pairs": 13,
+          "fabricated_rate": 0.0012,
+          "fabricated_examples": [
+            "lab_results_creatUS_value_last|med_arb_history",
+            "lab_results_creatUS_value_last|med_antiarrhytmic_history",
+            "lab_results_creatUS_value_last|conditions_revasc"
+          ],
           "worst": [
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
               "delta": 0.8082,
               "real": 0.8082,
               "synthetic": 0.0
             },
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
               "delta": 0.8082,
               "real": 0.8082,
               "synthetic": 0.0
@@ -114825,6 +116451,56 @@
           }
         ]
       },
+      "train_vs_synthetic_full_schema_aggregates": {
+        "numeric_columns": 61,
+        "categorical_columns": 188,
+        "ks": {
+          "mean": 0.204,
+          "median": 0.1699,
+          "max": 0.5457
+        },
+        "ks_frac_below_0.1": 0.2131,
+        "wasserstein_std": {
+          "mean": 0.2673,
+          "median": 0.2566,
+          "max": 0.6796
+        },
+        "tvd": {
+          "mean": 0.0499,
+          "median": 0.0324,
+          "max": 0.2849
+        },
+        "tvd_frac_below_0.05": 0.617,
+        "missing_rate_mean_abs_diff": 0.0352
+      },
+      "c2st_auc": 1.0,
+      "subgroup_fidelity": {
+        "female": {
+          "n_synthetic": 870,
+          "ks_mean": 0.2481,
+          "tvd_mean": 0.0678
+        },
+        "male": {
+          "n_synthetic": 2650,
+          "ks_mean": 0.2108,
+          "tvd_mean": 0.0641
+        },
+        "age_under_65": {
+          "n_synthetic": 982,
+          "ks_mean": 0.2202,
+          "tvd_mean": 0.0718
+        },
+        "age_65_79": {
+          "n_synthetic": 1068,
+          "ks_mean": 0.2113,
+          "tvd_mean": 0.0627
+        },
+        "age_80_plus": {
+          "n_synthetic": 1470,
+          "ks_mean": 0.2211,
+          "tvd_mean": 0.0656
+        }
+      },
       "associations": {
         "num_num": {
           "pairs": 1549,
@@ -114832,6 +116508,9 @@
           "median_abs_delta": 0.0588,
           "max_abs_delta": 0.8514,
           "frac_below_0.1": 0.7069,
+          "fabricated_pairs": 0,
+          "fabricated_rate": 0.0,
+          "fabricated_examples": [],
           "worst": [
             {
               "pair": "echocardiographs_lvef_pET_last|echocardiographs_lvef_pET_first",
@@ -114872,6 +116551,11 @@
           "median_abs_delta": 0.0304,
           "max_abs_delta": 0.6325,
           "frac_below_0.1": 0.8343,
+          "fabricated_pairs": 1,
+          "fabricated_rate": 0.0001,
+          "fabricated_examples": [
+            "med_acei_history|med_arb_history"
+          ],
           "worst": [
             {
               "pair": "conditions_ap|conditions_dysl",
@@ -114912,6 +116596,13 @@
           "median_abs_delta": 0.0211,
           "max_abs_delta": 0.6903,
           "frac_below_0.1": 0.9015,
+          "fabricated_pairs": 8,
+          "fabricated_rate": 0.0007,
+          "fabricated_examples": [
+            "nyha_nyha_pET|med_arb",
+            "nyha_nyha_pET|conditions_vd",
+            "nyha_nyha_pET|med_digitalis_history"
+          ],
           "worst": [
             {
               "pair": "nyha_nyha_pET|med_arb",
@@ -114949,6 +116640,170 @@
       }
     }
   ],
+  "association_noise_floor": {
+    "num_num": {
+      "pairs": 1621,
+      "mean_abs_delta": 0.0649,
+      "median_abs_delta": 0.0453,
+      "max_abs_delta": 0.4304,
+      "frac_below_0.1": 0.7964,
+      "fabricated_pairs": 0,
+      "fabricated_rate": 0.0,
+      "fabricated_examples": [],
+      "worst": [
+        {
+          "pair": "vital_signs_heartRate_value_first|lab_results_ldl_value_first",
+          "delta": 0.4304,
+          "real": -0.0503,
+          "synthetic": 0.38
+        },
+        {
+          "pair": "vital_signs_height_value_last|lab_results_triGly_value_last",
+          "delta": 0.4153,
+          "real": 0.1943,
+          "synthetic": -0.2211
+        },
+        {
+          "pair": "vital_signs_heartRate_value_first|lab_results_ldl_value_last",
+          "delta": 0.4145,
+          "real": -0.0431,
+          "synthetic": 0.3714
+        },
+        {
+          "pair": "vital_signs_heartRate_value_first|lab_results_cholTot_value_first",
+          "delta": 0.4108,
+          "real": -0.079,
+          "synthetic": 0.3318
+        },
+        {
+          "pair": "vital_signs_heartRate_value_first|lab_results_cholTot_value_last",
+          "delta": 0.3784,
+          "real": -0.0742,
+          "synthetic": 0.3042
+        }
+      ],
+      "pairs_only_in_real": 152
+    },
+    "cat_cat": {
+      "pairs": 11175,
+      "mean_abs_delta": 0.0222,
+      "median_abs_delta": 0.0177,
+      "max_abs_delta": 0.4107,
+      "frac_below_0.1": 0.9975,
+      "fabricated_pairs": 0,
+      "fabricated_rate": 0.0,
+      "fabricated_examples": [],
+      "worst": [
+        {
+          "pair": "med_rdoad_syst|med_rdoad_syst_history",
+          "delta": 0.4107,
+          "real": 0.5568,
+          "synthetic": 0.146
+        },
+        {
+          "pair": "cause_of_death_isCV_f5a_w1mo_first|conditions_myocarditis",
+          "delta": 0.251,
+          "real": 0.0049,
+          "synthetic": 0.2559
+        },
+        {
+          "pair": "cause_of_death_isAllCause_f5a_w1mo_first|conditions_myocarditis",
+          "delta": 0.251,
+          "real": 0.0049,
+          "synthetic": 0.2559
+        },
+        {
+          "pair": "med_thrombolytic|conditions_myocarditis",
+          "delta": 0.2102,
+          "real": 0.0051,
+          "synthetic": 0.2152
+        },
+        {
+          "pair": "conditions_aidshiv|conditions_ld",
+          "delta": 0.1612,
+          "real": 0.0465,
+          "synthetic": 0.2078
+        }
+      ],
+      "pairs_only_in_real": 0
+    },
+    "num_cat": {
+      "pairs": 11468,
+      "mean_abs_delta": 0.0278,
+      "median_abs_delta": 0.0169,
+      "max_abs_delta": 0.8082,
+      "frac_below_0.1": 0.9613,
+      "fabricated_pairs": 0,
+      "fabricated_rate": 0.0,
+      "fabricated_examples": [],
+      "worst": [
+        {
+          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_renal_complications_f5a_w3a_first",
+          "delta": 0.8082,
+          "real": 0.8082,
+          "synthetic": 0.0
+        },
+        {
+          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "delta": 0.8082,
+          "real": 0.8082,
+          "synthetic": 0.0
+        },
+        {
+          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+          "delta": 0.8082,
+          "real": 0.8082,
+          "synthetic": 0.0
+        },
+        {
+          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_HF_Disease_f5a_w3a_first",
+          "delta": 0.8082,
+          "real": 0.8082,
+          "synthetic": 0.0
+        },
+        {
+          "pair": "lab_results_ldl_value_last|encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+          "delta": 0.3896,
+          "real": 0.0102,
+          "synthetic": 0.3998
+        }
+      ],
+      "pairs_only_in_real": 0
+    }
+  },
+  "c2st_floor_train_vs_holdout": 0.4572,
+  "subgroup_noise_floor": {
+    "female": {
+      "n_train": 1489,
+      "n_holdout": 494,
+      "ks_mean": 0.0745,
+      "tvd_mean": 0.0149
+    },
+    "male": {
+      "n_train": 2031,
+      "n_holdout": 680,
+      "ks_mean": 0.0684,
+      "tvd_mean": 0.0132
+    },
+    "age_under_65": {
+      "n_train": 962,
+      "n_holdout": 307,
+      "ks_mean": 0.0997,
+      "tvd_mean": 0.0249
+    },
+    "age_65_79": {
+      "n_train": 1564,
+      "n_holdout": 526,
+      "ks_mean": 0.0754,
+      "tvd_mean": 0.0159
+    },
+    "age_80_plus": {
+      "n_train": 994,
+      "n_holdout": 341,
+      "ks_mean": 0.0961,
+      "tvd_mean": 0.0141
+    }
+  },
   "groups": [
     {
       "synthesizer": "aim",

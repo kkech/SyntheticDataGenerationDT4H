@@ -21,14 +21,34 @@
   },
   "evaluate": {
     "completed": true,
-    "completed_at": "2026-08-22T23:03:43.407514+00:00"
+    "completed_at": "2026-08-23T09:12:50.956891+00:00"
   },
   "utility": {
     "completed": true,
-    "completed_at": "2026-08-22T23:04:39.198256+00:00"
+    "completed_at": "2026-08-23T09:15:46.255085+00:00"
   },
   "privacy": {
     "completed": true,
-    "completed_at": "2026-08-22T23:07:17.260086+00:00"
+    "completed_at": "2026-08-23T09:18:24.140082+00:00"
+  },
+  "coherence": {
+    "completed": true,
+    "completed_at": "2026-08-23T09:13:22.445692+00:00"
+  },
+  "survival": {
+    "completed": true,
+    "completed_at": "2026-08-23T09:13:30.624155+00:00"
+  },
+  "attacks": {
+    "completed": true,
+    "completed_at": "2026-08-23T09:23:58.889939+00:00"
+  },
+  "figures": {
+    "completed": true,
+    "completed_at": "2026-08-23T09:24:03.495947+00:00"
+  },
+  "release_docs": {
+    "completed": true,
+    "completed_at": "2026-08-23T09:24:03.903305+00:00"
   }
 }
