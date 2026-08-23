@@ -30,6 +30,7 @@ import pandas as pd
 import polars as pl
 
 from pipeline.config import PipelineConfig
+from pipeline.common.alignment import align_categorical_case
 from pipeline.steps.coherence import rules as R
 from pipeline.steps.generate import leakage
 from pipeline.steps.generate.step import GenerateStep
