@@ -59,6 +59,10 @@ def main() -> int:
     # re-encodes decoded nulls itself.
     train_decoded, _ = GenerateStep._decode_numeric_missing(train.copy(), config)
     holdout_decoded, _ = GenerateStep._decode_numeric_missing(holdout.copy(), config)
+    candidate, respelled = align_categorical_case(candidate, train_decoded)
+    if respelled:
+        print(f"  note: {sum(respelled.values())} categorical cell(s) re-spelled to the "
+              f"real schema before checking (pre-fix generation artifact)")
     checks = []
 
     def check(name, passed, detail):

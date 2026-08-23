@@ -296,6 +296,16 @@ class GenerateStep(PipelineStep):
             with self._time_limit(timeout, f"'{run_id}' sampling"):
                 synthetic = synth.sample(n_rows)
 
+            # Generators emit boolean-like columns as actual booleans
+            # ("True") while the real schema stores lowercase strings
+            # ("true"); align BEFORE the leakage check -- with disjoint
+            # spellings an exact-duplicate comparison can never fire.
+            from pipeline.common.alignment import align_categorical_case, report
+
+            synthetic, respelled = align_categorical_case(synthetic, train)
+            print("  " + report(respelled))
+            record["categorical_cells_respelled"] = sum(respelled.values())
+
             # Re-attach the held-out constants in one concat rather than a
             # column at a time: inserting ~75 columns individually
             # fragments the frame and pandas rightly complains about it.

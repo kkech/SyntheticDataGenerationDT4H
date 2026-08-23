@@ -34,6 +34,7 @@ import os
 import numpy as np
 
 from pipeline.config import PipelineConfig
+from pipeline.common.alignment import align_categorical_case
 from pipeline.steps.base import PipelineStep
 
 FOLLOW_UP_DAYS = 1825
@@ -144,6 +145,7 @@ class SurvivalStep(PipelineStep):
             for path in synthetic_files:
                 run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
                 synth = pd.read_csv(path, low_memory=False)
+                synth, _ = align_categorical_case(synth, train)
                 if col not in synth.columns:
                     entry["logrank_vs_holdout"][run_id] = None
                     continue
@@ -260,6 +262,7 @@ class SurvivalStep(PipelineStep):
         for path in synthetic_files:
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synth = pd.read_csv(path, low_memory=False)
+            synth, _ = align_categorical_case(synth, train)
             fit = self._fit_effects(synth) if ENDPOINTS["all_cause_death"] in synth.columns else None
             if fit is None:
                 out["synthetic"][run_id] = {"note": "not estimable"}

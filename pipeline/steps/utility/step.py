@@ -35,6 +35,7 @@ import os
 import statistics
 
 from pipeline.config import PipelineConfig
+from pipeline.common.alignment import align_categorical_case
 from pipeline.steps.base import PipelineStep
 from pipeline.steps.utility.targets import (
     MIN_CLASS_TEST,
@@ -211,6 +212,7 @@ class UtilityStep(PipelineStep):
         for path in synthetic_files:
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synth = pd.read_csv(path, low_memory=False)
+            synth, _ = align_categorical_case(synth, train)
             record = {"run_id": run_id, "auc": None}
             y_s = to_binary(synth[target]) if target in synth.columns else None
             if y_s is None or min(int(y_s.sum()), int((1 - y_s).sum())) < MIN_CLASS_TRAIN:

@@ -40,6 +40,7 @@ import os
 import statistics
 
 from pipeline.config import PipelineConfig
+from pipeline.common.alignment import align_categorical_case
 from pipeline.steps.base import PipelineStep
 from pipeline.steps.evaluate.associations import association_profile, compare_association_profiles
 from pipeline.steps.evaluate.metrics import compare_frames
@@ -144,6 +145,7 @@ class EvaluateStep(PipelineStep):
         for path in synthetic_files:
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synthetic = pd.read_csv(path, low_memory=False)
+            synthetic, _ = align_categorical_case(synthetic, train)
             print(f"\nComparing against '{run_id}' ({synthetic.shape[0]} rows x "
                   f"{synthetic.shape[1]} cols)...")
 

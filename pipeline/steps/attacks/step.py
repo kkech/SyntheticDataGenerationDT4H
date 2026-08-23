@@ -38,6 +38,7 @@ import time
 import numpy as np
 
 from pipeline.config import PipelineConfig
+from pipeline.common.alignment import align_categorical_case
 from pipeline.steps.base import PipelineStep
 from pipeline.steps.privacy.distance import build_encoder, nearest_two_distances
 
@@ -90,6 +91,7 @@ class AttacksStep(PipelineStep):
         for path in synthetic_files:
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synth = pd.read_csv(path, low_memory=False)
+            synth, _ = align_categorical_case(synth, train)
             print(f"\nAttacking '{run_id}'...")
             t0 = time.time()
 

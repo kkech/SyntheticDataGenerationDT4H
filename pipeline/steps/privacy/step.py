@@ -37,6 +37,7 @@ import os
 import time
 
 from pipeline.config import PipelineConfig
+from pipeline.common.alignment import align_categorical_case
 from pipeline.steps.base import PipelineStep
 from pipeline.steps.privacy.distance import (
     build_encoder,
@@ -109,6 +110,7 @@ class PrivacyStep(PipelineStep):
         for path in synthetic_files:
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synthetic = pd.read_csv(path, low_memory=False)
+            synthetic, _ = align_categorical_case(synthetic, train)
             print(f"\nAssessing '{run_id}' ({synthetic.shape[0]} rows)...")
             t0 = time.time()
 

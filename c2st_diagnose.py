@@ -28,6 +28,7 @@ import pandas as pd
 import polars as pl
 
 from pipeline.config import PipelineConfig
+from pipeline.common.alignment import align_categorical_case
 from pipeline.steps.evaluate.c2st import c2st_auc
 from pipeline.steps.generate.step import GenerateStep
 
@@ -104,6 +105,7 @@ def main() -> None:
     train = pl.read_parquet(config.train_output_path).to_pandas()
     train, _ = GenerateStep._decode_numeric_missing(train, config)
     synth = pd.read_csv(args.file, low_memory=False)
+    synth, _ = align_categorical_case(synth, train)
     columns = [c for c in train.columns
                if c in synth.columns and train[c].nunique(dropna=False) > 1]
 
