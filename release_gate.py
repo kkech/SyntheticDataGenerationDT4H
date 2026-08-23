@@ -71,8 +71,9 @@ def main() -> int:
     holdout_decoded, _ = GenerateStep._decode_numeric_missing(holdout.copy(), config)
     candidate, respelled = align_categorical_case(candidate, train_decoded)
     if respelled:
-        print(f"  note: {sum(respelled.values())} categorical cell(s) re-spelled to the "
-              f"real schema before checking (pre-fix generation artifact)")
+        print(f"  note: {sum(respelled.values())} categorical cell(s) normalized to the "
+              f"real schema's spellings after CSV parsing (expected for boolean "
+              f"columns, which pandas parses to bool dtype)")
     checks = []
 
     def check(name, passed, detail):
