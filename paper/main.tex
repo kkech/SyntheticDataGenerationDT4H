@@ -948,6 +948,58 @@ binning as well), conditional on the model-side transform (item~1 above) proving
 its value.
 \end{enumerate}
 
+% ============================================================================
+% INTERNAL SECTION -- consortium decision checklist. Remove before submission.
+% ============================================================================
+\section*{Decisions required from the consortium (internal)}
+
+Everything technical in this paper is finished and frozen; what remains before any
+submission or data deposit is governance, and none of it is Athena's decision to
+make alone. The open items, each with its owner:
+
+\begin{enumerate}
+\item \textbf{Anonymity ruling on the synthetic files (AUMC, as data
+controller).} Whether the synthetic datasets qualify as anonymous data under GDPR
+is a legal judgment for AUMC's DPO, informed by---but not settled by---the
+technical evidence in this paper. The evidence package for that review already
+exists (datasheet, privacy-attack report, gate reports). The review should
+distinguish two tiers: the DP files (MST, AIM, DP-CTGAN), which carry a formal
+$(\eps, \delta)$ guarantee on top of chance-level attack results and are the
+defensible core of any public deposit; and the non-DP files (TVAE, CTGAN,
+copula), where the case rests on empirical attack results alone and where TVAE's
+distance profile (12\% of records nearer the training data than the unseen-patient
+threshold) may draw a stricter ruling. A DP-only release is an acceptable
+fallback; the paper survives it intact.
+\item \textbf{Scope of the ethics approval and the data-use agreement (AUMC).}
+Confirm that the UC1 approval and DUA cover synthetic derivation and external
+publication of derived files. If the documents are silent, AUMC rules.
+\item \textbf{Consortium approval for public deposit (DT4H data-sharing
+board).} Repository (Zenodo proposed), license for the synthetic files and for
+the code, DOI minting, and whether deposit is public, managed-access, or
+internal-only. Fitted model pickles are treated as sensitively as data and are
+never deposited under any option.
+\item \textbf{Which files to deposit.} Options, in decreasing openness: all 27
+datasets with their capability labels and gate reports; the DP subset only; or
+the single gate-cleared file (\texttt{aim50\_eps5\_seed0}) plus reports. The
+paper's claims are written to hold under any of the three.
+\item \textbf{Authorship and acknowledgements (consortium publication
+procedure).} AUMC provided the cohort; expect co-authorship or a mandated
+acknowledgement per the consortium agreement. Author list, contributions, and the
+partner-site acknowledgement above are placeholders until this is settled.
+\item \textbf{Funding statement (project coordination).} The Horizon Europe /
+DT4H grant acknowledgement text and number, required by the journal at
+submission.
+\item \textbf{Venue, conditional on item 3.} With a public or managed-access
+deposit: Scientific Data as planned (Data Descriptors require data
+availability). Without any deposit: the analysis stands alone as a
+methods-and-validation paper---npj Digital Medicine, JAMIA, or a machine-learning-
+for-health venue---with aggregate results only, which is exactly what the isolated
+enclave already permits to leave.
+\end{enumerate}
+% ============================================================================
+% END INTERNAL SECTION
+% ============================================================================
+
 \section*{Acknowledgements}
 [Data extraction and clinical guidance: DT4H partner-site team---to be confirmed
 with the consortium.]
