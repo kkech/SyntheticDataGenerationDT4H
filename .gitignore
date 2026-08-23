@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+
+# Full patient-level data -- never committed. Everything else under
+# output/ (stats, samples, summaries, metadata) is safe to commit.
+output/load_data/UC1_Resolved_Full.parquet
+output/preprocess/UC1_Preprocessed.parquet
+output/preprocess/UC1_Train.parquet
+output/preprocess/UC1_Holdout.parquet
+
+# Synthetic outputs are derived from real patient data and non-DP models
+# carry no formal privacy guarantee -- do not auto-commit them. Publish a
+# specific vetted file deliberately (git add -f) once its leakage and
+# privacy assessment have been reviewed. Summaries stay tracked.
+output/generate/*.csv
+
+# Fitted generators memorize aspects of the real patient data -- treat
+# them like the data itself. Kept locally for regenerate.py, never pushed.
+output/generate/models/
+
+# run_job.sh working files: PID of the detached job, its raw console
+# capture, and archived logs from previous runs. The current run's
+# logs.txt stays tracked (commit it after a run to share it).
+.pipeline_job.pid
+job_console.log
+logs/

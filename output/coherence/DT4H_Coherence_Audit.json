@@ -1,0 +1,1787 @@
+{
+  "n_rules": 363,
+  "rules_by_type": {
+    "implication": 351,
+    "category_range": 4,
+    "days_bounds": 1,
+    "flag_days_consistency": 7
+  },
+  "frames": [
+    {
+      "rules": 363,
+      "rule_checks_applicable": 117993,
+      "violations": 17,
+      "overall_violation_rate": 0.00014,
+      "rules_violated": 14,
+      "frame": "train (real)"
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 37897,
+      "violations": 88,
+      "overall_violation_rate": 0.00232,
+      "rules_violated": 70,
+      "frame": "holdout (real, unseen)"
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 7845,
+      "violations": 332,
+      "overall_violation_rate": 0.04232,
+      "rules_violated": 3,
+      "frame": "synthetic[aim50_eps1_seed0]",
+      "run_id": "aim50_eps1_seed0",
+      "worst_rules": [
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "ckd_severity_from_calculated_egfr",
+          "numeric": "lab_results_valideGFR_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.09754,
+          "applicable": 2881
+        },
+        {
+          "type": "implication",
+          "if_true": "med_acei",
+          "then_true": "med_rasi",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.02073,
+          "applicable": 1399
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "ckd_severity_from_calculated_egfr",
+          "numeric": "lab_results_valideGFR_value_first",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00705,
+          "applicable": 3122
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 7720,
+      "violations": 70,
+      "overall_violation_rate": 0.00907,
+      "rules_violated": 5,
+      "frame": "synthetic[aim50_eps5_seed0]",
+      "run_id": "aim50_eps5_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.02913,
+          "applicable": 103
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "ckd_severity_from_calculated_egfr",
+          "numeric": "lab_results_valideGFR_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.01785,
+          "applicable": 2970
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "ckd_severity_from_calculated_egfr",
+          "numeric": "lab_results_valideGFR_value_first",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00373,
+          "applicable": 2953
+        },
+        {
+          "type": "implication",
+          "if_true": "med_arni",
+          "then_true": "med_rasi",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00309,
+          "applicable": 324
+        },
+        {
+          "type": "implication",
+          "if_true": "med_acei",
+          "then_true": "med_rasi",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00146,
+          "applicable": 1370
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 130103,
+      "violations": 39728,
+      "overall_violation_rate": 0.30536,
+      "rules_violated": 347,
+      "frame": "synthetic[ctgan_seed0]",
+      "run_id": "ctgan_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w5a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isRenal_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 114041,
+      "violations": 40007,
+      "overall_violation_rate": 0.35081,
+      "rules_violated": 336,
+      "frame": "synthetic[ctgan_seed1]",
+      "run_id": "ctgan_seed1",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isRenal_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "flag_days_consistency",
+          "if_true": null,
+          "then_true": null,
+          "categorical": null,
+          "numeric": null,
+          "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+          "flag": "cause_of_death_isAllCause_f5a_w7d_first",
+          "violation_rate": 0.98913,
+          "applicable": 184
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 114694,
+      "violations": 34297,
+      "overall_violation_rate": 0.29903,
+      "rules_violated": 341,
+      "frame": "synthetic[ctgan_seed2]",
+      "run_id": "ctgan_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 7
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isRenal_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.96,
+          "applicable": 50
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 88175,
+      "violations": 41612,
+      "overall_violation_rate": 0.47193,
+      "rules_violated": 76,
+      "frame": "synthetic[dpctgan_eps10_seed0]",
+      "run_id": "dpctgan_eps10_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 51269,
+      "violations": 35302,
+      "overall_violation_rate": 0.68856,
+      "rules_violated": 77,
+      "frame": "synthetic[dpctgan_eps15_seed0]",
+      "run_id": "dpctgan_eps15_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 55755,
+      "violations": 23597,
+      "overall_violation_rate": 0.42323,
+      "rules_violated": 58,
+      "frame": "synthetic[dpctgan_eps15_seed1]",
+      "run_id": "dpctgan_eps15_seed1",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "smoking_status_smoker_last",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 606
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 610
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 91577,
+      "violations": 33118,
+      "overall_violation_rate": 0.36164,
+      "rules_violated": 73,
+      "frame": "synthetic[dpctgan_eps15_seed2]",
+      "run_id": "dpctgan_eps15_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 64450,
+      "violations": 39847,
+      "overall_violation_rate": 0.61826,
+      "rules_violated": 119,
+      "frame": "synthetic[dpctgan_eps1_seed0]",
+      "run_id": "dpctgan_eps1_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "then_true": "smoking_status_smoker_last",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 61359,
+      "violations": 34811,
+      "overall_violation_rate": 0.56733,
+      "rules_violated": 49,
+      "frame": "synthetic[dpctgan_eps20_seed0]",
+      "run_id": "dpctgan_eps20_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 10
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+          "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 117315,
+      "violations": 60613,
+      "overall_violation_rate": 0.51667,
+      "rules_violated": 91,
+      "frame": "synthetic[dpctgan_eps5_seed0]",
+      "run_id": "dpctgan_eps5_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 44
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 61
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 62
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 61
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2347
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 122731,
+      "violations": 54964,
+      "overall_violation_rate": 0.44784,
+      "rules_violated": 97,
+      "frame": "synthetic[dpctgan_eps8_seed0]",
+      "run_id": "dpctgan_eps8_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 16
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 16
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 16
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 16
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 84735,
+      "violations": 23597,
+      "overall_violation_rate": 0.27848,
+      "rules_violated": 330,
+      "frame": "synthetic[gaussian_copula_seed0]",
+      "run_id": "gaussian_copula_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 6
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 35
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 85871,
+      "violations": 23945,
+      "overall_violation_rate": 0.27885,
+      "rules_violated": 324,
+      "frame": "synthetic[gaussian_copula_seed1]",
+      "run_id": "gaussian_copula_seed1",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 11
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 83734,
+      "violations": 23629,
+      "overall_violation_rate": 0.28219,
+      "rules_violated": 317,
+      "frame": "synthetic[gaussian_copula_seed2]",
+      "run_id": "gaussian_copula_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 6
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 10
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 8
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 121832,
+      "violations": 6037,
+      "overall_violation_rate": 0.04955,
+      "rules_violated": 297,
+      "frame": "synthetic[mst_eps10_seed0]",
+      "run_id": "mst_eps10_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 18
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w5a_first",
+          "then_true": "cause_of_death_isCV_f5a_w1mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w5a_first",
+          "then_true": "cause_of_death_isCV_f5a_w3mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 17
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isRenal_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 122727,
+      "violations": 4458,
+      "overall_violation_rate": 0.03632,
+      "rules_violated": 302,
+      "frame": "synthetic[mst_eps15_seed0]",
+      "run_id": "mst_eps15_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 22
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w1mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 19
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w5a_first",
+          "then_true": "smoking_status_formerSmoker_last",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isRenal_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 6
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 122680,
+      "violations": 5491,
+      "overall_violation_rate": 0.04476,
+      "rules_violated": 312,
+      "frame": "synthetic[mst_eps15_seed1]",
+      "run_id": "mst_eps15_seed1",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "smoking_status_smoker_last",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "smoking_status_smoker_last",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+          "then_true": "smoking_status_smoker_last",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+          "then_true": "smoking_status_smoker_last",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+          "then_true": "smoking_status_smoker_last",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 123656,
+      "violations": 6363,
+      "overall_violation_rate": 0.05146,
+      "rules_violated": 327,
+      "frame": "synthetic[mst_eps15_seed2]",
+      "run_id": "mst_eps15_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 6
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w3a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isRenal_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 11
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 8
+        },
+        {
+          "type": "flag_days_consistency",
+          "if_true": null,
+          "then_true": null,
+          "categorical": null,
+          "numeric": null,
+          "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+          "flag": "cause_of_death_isAllCause_f5a_w7d_first",
+          "violation_rate": 1.0,
+          "applicable": 109
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 115842,
+      "violations": 16729,
+      "overall_violation_rate": 0.14441,
+      "rules_violated": 203,
+      "frame": "synthetic[mst_eps1_seed0]",
+      "run_id": "mst_eps1_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 69
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 69
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 132
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 191
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 148
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 122383,
+      "violations": 6374,
+      "overall_violation_rate": 0.05208,
+      "rules_violated": 312,
+      "frame": "synthetic[mst_eps20_seed0]",
+      "run_id": "mst_eps20_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 95
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 95
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w5a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 7
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w5a_first",
+          "then_true": "cause_of_death_isCV_f5a_w1mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 11
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isRenal_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 123470,
+      "violations": 9236,
+      "overall_violation_rate": 0.0748,
+      "rules_violated": 310,
+      "frame": "synthetic[mst_eps5_seed0]",
+      "run_id": "mst_eps5_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 122
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 126981,
+      "violations": 8181,
+      "overall_violation_rate": 0.06443,
+      "rules_violated": 311,
+      "frame": "synthetic[mst_eps8_seed0]",
+      "run_id": "mst_eps8_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+          "then_true": "encounter_primary_reason_HF_Disease_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 90
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w1mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 15
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w3a_first",
+          "then_true": "cause_of_death_isCV_f5a_w1mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 23
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isCV_f5a_w5a_first",
+          "then_true": "cause_of_death_isCV_f5a_w1mo_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 13
+        },
+        {
+          "type": "implication",
+          "if_true": "med_ivabradine_history",
+          "then_true": "cause_of_death_isRenal_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 56
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 102586,
+      "violations": 2310,
+      "overall_violation_rate": 0.02252,
+      "rules_violated": 200,
+      "frame": "synthetic[tvae_seed0]",
+      "run_id": "tvae_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 5
+        },
+        {
+          "type": "flag_days_consistency",
+          "if_true": null,
+          "then_true": null,
+          "categorical": null,
+          "numeric": null,
+          "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+          "flag": "cause_of_death_isAllCause_f5a_w7d_first",
+          "violation_rate": 0.91304,
+          "applicable": 46
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 99657,
+      "violations": 2332,
+      "overall_violation_rate": 0.0234,
+      "rules_violated": 180,
+      "frame": "synthetic[tvae_seed1]",
+      "run_id": "tvae_seed1",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        }
+      ]
+    },
+    {
+      "rules": 363,
+      "rule_checks_applicable": 99090,
+      "violations": 1966,
+      "overall_violation_rate": 0.01984,
+      "rules_violated": 153,
+      "frame": "synthetic[tvae_seed2]",
+      "run_id": "tvae_seed2",
+      "worst_rules": [
+        {
+          "type": "flag_days_consistency",
+          "if_true": null,
+          "then_true": null,
+          "categorical": null,
+          "numeric": null,
+          "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+          "flag": "cause_of_death_isAllCause_f5a_w7d_first",
+          "violation_rate": 0.92,
+          "applicable": 50
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "cause_of_death_isCV_f5a_w7d_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 4
+        }
+      ]
+    }
+  ]
+}

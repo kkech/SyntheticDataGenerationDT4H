@@ -1,0 +1,80 @@
+# UC1 synthetic data pipeline
+#
+# Targets Python 3.10 (the version on the analysis VM).
+#
+# STRONGLY RECOMMENDED: install into a dedicated virtualenv.
+#
+#     python -m venv .synthenv && source .synthenv/bin/activate
+#     pip install --upgrade pip setuptools wheel
+#     pip install -r requirements.txt
+#
+# Not sharing an environment matters here. Other synthetic-data tooling
+# (e.g. mostlyai-engine) pins torch and pandas tightly, and installing
+# this pipeline alongside it will upgrade shared packages and break
+# whichever library loses. A separate venv costs disk and nothing else.
+#
+# --- pinning policy ---
+# The two libraries that determine the OUTPUT are pinned exactly, because
+# this pipeline produces a dataset intended for publication. The heavy
+# shared dependencies (torch, pandas, numpy) are given ranges instead:
+# nothing here needs a specific version of them, and pinning them exactly
+# forces needless upgrades that break co-installed tools. The exact
+# versions actually used are recorded per run in the generation summary's
+# provenance block, which is what makes a published result reproducible.
+
+# --- synthesis libraries (pinned: these define the output) ---
+# NOTE: SDV is under the Business Source License (not MIT) since 2023.
+# Research use is fine; production use is restricted. Confirm with the
+# consortium before relying on it in a deployed setting.
+sdv==1.38.0
+
+# Provides aim, mst, patectgan, dpctgan. AIM/MST are CPU-only
+# (marginal-based); only the GAN variants use the GPU.
+smartnoise-synth==1.0.8
+
+# --- data handling ---
+polars>=1.0,<2
+pyarrow>=14
+# sdv requires pandas<3; nothing here needs a specific 2.x.
+pandas>=2.0,<3
+# numpy 2.3+ drops Python 3.10 -- keep the upper bound until the whole
+# environment moves to a newer Python.
+numpy>=1.24,<2.3
+
+# --- deep learning backend ---
+# Pulled in by sdv/ctgan and the DP-GAN synthesizers. On Python 3.10
+# ctgan only requires torch>=1.13, so any recent 2.x works: if the
+# environment already has a working torch, this will leave it alone.
+# The pipeline detects CUDA at runtime and falls back to CPU.
+#
+# For a CPU-only machine, install the smaller CPU build as its own
+# command FIRST (never combined with -r, or PyPI packages fail to
+# resolve against the PyTorch index):
+#   pip install "torch>=2.0,<3" --index-url https://download.pytorch.org/whl/cpu
+torch>=2.0,<3
+
+# --- build note ---
+# smartnoise-synth pulls antlr4-python3-runtime 4.9.3, which is published
+# as an sdist only (no wheel) and so must compile locally. Against older
+# or distro-patched setuptools that fails with:
+#     AttributeError: install_layout
+# Upgrading pip/setuptools/wheel in the virtualenv first resolves it.
+
+# --- analysis & figures ---
+# The figures step renders the paper's plots.
+matplotlib>=3.7
+
+# Optional, both degrade gracefully if absent:
+#   lifelines  -> Cox proportional-hazards effect replication in the survival
+#                 step (falls back to a native logistic model without it)
+#   anonymeter -> singling-out/linkability evaluators in the attacks step
+#                 (the native MIA/AIA attacks always run)
+# pip install lifelines anonymeter
+#
+# CAUTION: anonymeter's numba dependency forces numpy<2, DOWNGRADING the
+# environment below the numpy that trains/pickles the generators. The
+# analysis steps all work under either numpy, but LOADING a saved
+# generator (regenerate.py / conditional_demo.py) requires the same
+# numpy major it was pickled under -- reinstall the pinned numpy first
+# (e.g. `pip install numpy==2.2.6`); the attacks step then skips
+# anonymeter gracefully.

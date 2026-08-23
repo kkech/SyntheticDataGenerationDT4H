@@ -1,0 +1,1118 @@
+{
+  "n_members": 3520,
+  "n_nonmembers": 1174,
+  "quasi_identifiers": [
+    "patient_demographics_age",
+    "patient_demographics_gender",
+    "encounters_admissionYear"
+  ],
+  "runs": [
+    {
+      "run_id": "aim50_eps1_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.4991,
+        "attack_auc_ci95": [
+          0.4802,
+          0.518
+        ],
+        "member_median_distance": 0.476829,
+        "nonmember_median_distance": 0.473782
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 1.0,
+          "accuracy_members": 0.5719,
+          "accuracy_nonmembers": 0.5681,
+          "membership_advantage": 0.0037
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.3798,
+          "accuracy_members": 0.225,
+          "accuracy_nonmembers": 0.2462,
+          "membership_advantage": -0.0212
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7653,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0071,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 17.9
+    },
+    {
+      "run_id": "aim50_eps5_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5011,
+        "attack_auc_ci95": [
+          0.4829,
+          0.5214
+        ],
+        "member_median_distance": 0.474782,
+        "nonmember_median_distance": 0.472957
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 1.0,
+          "accuracy_members": 0.5719,
+          "accuracy_nonmembers": 0.5681,
+          "membership_advantage": 0.0037
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2875,
+          "accuracy_members": 0.1688,
+          "accuracy_nonmembers": 0.1823,
+          "membership_advantage": -0.0135
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7639,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 12.1
+    },
+    {
+      "run_id": "ctgan_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.496,
+        "attack_auc_ci95": [
+          0.4765,
+          0.5147
+        ],
+        "member_median_distance": 0.176417,
+        "nonmember_median_distance": 0.175515
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.6179,
+          "accuracy_members": 0.4452,
+          "accuracy_nonmembers": 0.4225,
+          "membership_advantage": 0.0227
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.3199,
+          "accuracy_members": 0.1957,
+          "accuracy_nonmembers": 0.1857,
+          "membership_advantage": 0.01
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.8446,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0033,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.5
+    },
+    {
+      "run_id": "ctgan_seed1",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.4991,
+        "attack_auc_ci95": [
+          0.4807,
+          0.5178
+        ],
+        "member_median_distance": 0.170523,
+        "nonmember_median_distance": 0.170254
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.6395,
+          "accuracy_members": 0.5131,
+          "accuracy_nonmembers": 0.5187,
+          "membership_advantage": -0.0057
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.3989,
+          "accuracy_members": 0.2091,
+          "accuracy_nonmembers": 0.2206,
+          "membership_advantage": -0.0115
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7145,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.005,
+        "linkability_risk": 0.005
+      },
+      "duration_seconds": 14.7
+    },
+    {
+      "run_id": "ctgan_seed2",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.518,
+        "attack_auc_ci95": [
+          0.4983,
+          0.537
+        ],
+        "member_median_distance": 0.165819,
+        "nonmember_median_distance": 0.16878
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5014,
+          "accuracy_members": 0.4966,
+          "accuracy_nonmembers": 0.4702,
+          "membership_advantage": 0.0264
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2994,
+          "accuracy_members": 0.1855,
+          "accuracy_nonmembers": 0.1789,
+          "membership_advantage": 0.0066
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.871,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.6
+    },
+    {
+      "run_id": "dpctgan_eps10_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5022,
+        "attack_auc_ci95": [
+          0.4821,
+          0.521
+        ],
+        "member_median_distance": 0.28709,
+        "nonmember_median_distance": 0.286719
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.9974,
+          "accuracy_members": 0.4037,
+          "accuracy_nonmembers": 0.4114,
+          "membership_advantage": -0.0077
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 1.0,
+          "accuracy_members": 0.2895,
+          "accuracy_nonmembers": 0.2905,
+          "membership_advantage": -0.001
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 1.0,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.2
+    },
+    {
+      "run_id": "dpctgan_eps15_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5094,
+        "attack_auc_ci95": [
+          0.4907,
+          0.529
+        ],
+        "member_median_distance": 0.288113,
+        "nonmember_median_distance": 0.291612
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.9966,
+          "accuracy_members": 0.569,
+          "accuracy_nonmembers": 0.5681,
+          "membership_advantage": 0.0009
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.9795,
+          "accuracy_members": 0.0491,
+          "accuracy_nonmembers": 0.0426,
+          "membership_advantage": 0.0066
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.9142,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.1
+    },
+    {
+      "run_id": "dpctgan_eps15_seed1",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5048,
+        "attack_auc_ci95": [
+          0.4855,
+          0.5238
+        ],
+        "member_median_distance": 0.272446,
+        "nonmember_median_distance": 0.273953
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.9991,
+          "accuracy_members": 0.4037,
+          "accuracy_nonmembers": 0.4114,
+          "membership_advantage": -0.0077
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.9955,
+          "accuracy_members": 0.2895,
+          "accuracy_nonmembers": 0.2905,
+          "membership_advantage": -0.001
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 1.0,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 13.9
+    },
+    {
+      "run_id": "dpctgan_eps15_seed2",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5054,
+        "attack_auc_ci95": [
+          0.4862,
+          0.524
+        ],
+        "member_median_distance": 0.285407,
+        "nonmember_median_distance": 0.288056
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.9994,
+          "accuracy_members": 0.4037,
+          "accuracy_nonmembers": 0.4114,
+          "membership_advantage": -0.0077
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.998,
+          "accuracy_members": 0.1869,
+          "accuracy_nonmembers": 0.155,
+          "membership_advantage": 0.0319
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 1.0,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 13.9
+    },
+    {
+      "run_id": "dpctgan_eps1_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5108,
+        "attack_auc_ci95": [
+          0.4908,
+          0.5308
+        ],
+        "member_median_distance": 0.273545,
+        "nonmember_median_distance": 0.274754
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.6756,
+          "accuracy_members": 0.1838,
+          "accuracy_nonmembers": 0.1882,
+          "membership_advantage": -0.0044
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.9977,
+          "accuracy_members": 0.2895,
+          "accuracy_nonmembers": 0.2905,
+          "membership_advantage": -0.001
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 1.0,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.5
+    },
+    {
+      "run_id": "dpctgan_eps20_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5017,
+        "attack_auc_ci95": [
+          0.4838,
+          0.5205
+        ],
+        "member_median_distance": 0.313131,
+        "nonmember_median_distance": 0.312256
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.9938,
+          "accuracy_members": 0.0472,
+          "accuracy_nonmembers": 0.04,
+          "membership_advantage": 0.0071
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.9974,
+          "accuracy_members": 0.1869,
+          "accuracy_nonmembers": 0.155,
+          "membership_advantage": 0.0319
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 1.0,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 13.6
+    },
+    {
+      "run_id": "dpctgan_eps5_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5003,
+        "attack_auc_ci95": [
+          0.482,
+          0.5203
+        ],
+        "member_median_distance": 0.296786,
+        "nonmember_median_distance": 0.298333
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.9994,
+          "accuracy_members": 0.5719,
+          "accuracy_nonmembers": 0.5681,
+          "membership_advantage": 0.0037
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.9977,
+          "accuracy_members": 0.177,
+          "accuracy_nonmembers": 0.1797,
+          "membership_advantage": -0.0027
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7384,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 13.8
+    },
+    {
+      "run_id": "dpctgan_eps8_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5014,
+        "attack_auc_ci95": [
+          0.4807,
+          0.52
+        ],
+        "member_median_distance": 0.300217,
+        "nonmember_median_distance": 0.301245
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.9994,
+          "accuracy_members": 0.5719,
+          "accuracy_nonmembers": 0.5681,
+          "membership_advantage": 0.0037
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.9858,
+          "accuracy_members": 0.2011,
+          "accuracy_nonmembers": 0.2129,
+          "membership_advantage": -0.0118
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 1.0,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.3
+    },
+    {
+      "run_id": "gaussian_copula_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5076,
+        "attack_auc_ci95": [
+          0.4896,
+          0.5252
+        ],
+        "member_median_distance": 0.162638,
+        "nonmember_median_distance": 0.163545
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.556,
+          "accuracy_members": 0.4991,
+          "accuracy_nonmembers": 0.5,
+          "membership_advantage": -0.0009
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.3082,
+          "accuracy_members": 0.2114,
+          "accuracy_nonmembers": 0.2147,
+          "membership_advantage": -0.0033
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7676,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.2
+    },
+    {
+      "run_id": "gaussian_copula_seed1",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5092,
+        "attack_auc_ci95": [
+          0.4911,
+          0.5276
+        ],
+        "member_median_distance": 0.162636,
+        "nonmember_median_distance": 0.163758
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5824,
+          "accuracy_members": 0.5085,
+          "accuracy_nonmembers": 0.4932,
+          "membership_advantage": 0.0153
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2932,
+          "accuracy_members": 0.2085,
+          "accuracy_nonmembers": 0.2257,
+          "membership_advantage": -0.0172
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7676,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.3
+    },
+    {
+      "run_id": "gaussian_copula_seed2",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5082,
+        "attack_auc_ci95": [
+          0.4891,
+          0.5269
+        ],
+        "member_median_distance": 0.163203,
+        "nonmember_median_distance": 0.163991
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5616,
+          "accuracy_members": 0.5108,
+          "accuracy_nonmembers": 0.4813,
+          "membership_advantage": 0.0295
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.3003,
+          "accuracy_members": 0.2207,
+          "accuracy_nonmembers": 0.1874,
+          "membership_advantage": 0.0333
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7602,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0149,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.5
+    },
+    {
+      "run_id": "mst_eps10_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5021,
+        "attack_auc_ci95": [
+          0.4818,
+          0.5227
+        ],
+        "member_median_distance": 0.140156,
+        "nonmember_median_distance": 0.139439
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5741,
+          "accuracy_members": 0.4719,
+          "accuracy_nonmembers": 0.4855,
+          "membership_advantage": -0.0136
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2929,
+          "accuracy_members": 0.1881,
+          "accuracy_nonmembers": 0.1882,
+          "membership_advantage": -0.0002
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7551,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0066,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 12.2
+    },
+    {
+      "run_id": "mst_eps15_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5052,
+        "attack_auc_ci95": [
+          0.4856,
+          0.5235
+        ],
+        "member_median_distance": 0.140683,
+        "nonmember_median_distance": 0.139374
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5722,
+          "accuracy_members": 0.5307,
+          "accuracy_nonmembers": 0.5264,
+          "membership_advantage": 0.0043
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2872,
+          "accuracy_members": 0.1625,
+          "accuracy_nonmembers": 0.1712,
+          "membership_advantage": -0.0087
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7591,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0099,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 12.2
+    },
+    {
+      "run_id": "mst_eps15_seed1",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5063,
+        "attack_auc_ci95": [
+          0.4872,
+          0.5262
+        ],
+        "member_median_distance": 0.142028,
+        "nonmember_median_distance": 0.144396
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.575,
+          "accuracy_members": 0.4739,
+          "accuracy_nonmembers": 0.4634,
+          "membership_advantage": 0.0105
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2932,
+          "accuracy_members": 0.1787,
+          "accuracy_nonmembers": 0.2078,
+          "membership_advantage": -0.0291
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.754,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0364,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 12.2
+    },
+    {
+      "run_id": "mst_eps15_seed2",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5051,
+        "attack_auc_ci95": [
+          0.4847,
+          0.5238
+        ],
+        "member_median_distance": 0.140626,
+        "nonmember_median_distance": 0.141779
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5739,
+          "accuracy_members": 0.4526,
+          "accuracy_nonmembers": 0.4455,
+          "membership_advantage": 0.0071
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2872,
+          "accuracy_members": 0.1787,
+          "accuracy_nonmembers": 0.1874,
+          "membership_advantage": -0.0087
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7616,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0132,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 12.2
+    },
+    {
+      "run_id": "mst_eps1_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5157,
+        "attack_auc_ci95": [
+          0.498,
+          0.5325
+        ],
+        "member_median_distance": 0.153096,
+        "nonmember_median_distance": 0.157135
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5719,
+          "accuracy_members": 0.5616,
+          "accuracy_nonmembers": 0.5622,
+          "membership_advantage": -0.0005
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2918,
+          "accuracy_members": 0.2824,
+          "accuracy_nonmembers": 0.2589,
+          "membership_advantage": 0.0234
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7156,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.005,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.5
+    },
+    {
+      "run_id": "mst_eps20_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5028,
+        "attack_auc_ci95": [
+          0.4848,
+          0.5216
+        ],
+        "member_median_distance": 0.139556,
+        "nonmember_median_distance": 0.139597
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5744,
+          "accuracy_members": 0.4608,
+          "accuracy_nonmembers": 0.4574,
+          "membership_advantage": 0.0034
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2884,
+          "accuracy_members": 0.177,
+          "accuracy_nonmembers": 0.1831,
+          "membership_advantage": -0.0061
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7577,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0281,
+        "linkability_risk": 0.005
+      },
+      "duration_seconds": 12.1
+    },
+    {
+      "run_id": "mst_eps5_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.501,
+        "attack_auc_ci95": [
+          0.4819,
+          0.5189
+        ],
+        "member_median_distance": 0.144076,
+        "nonmember_median_distance": 0.14469
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5702,
+          "accuracy_members": 0.4889,
+          "accuracy_nonmembers": 0.4915,
+          "membership_advantage": -0.0026
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2972,
+          "accuracy_members": 0.1943,
+          "accuracy_nonmembers": 0.1985,
+          "membership_advantage": -0.0041
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.7537,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0198,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 13.2
+    },
+    {
+      "run_id": "mst_eps8_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5029,
+        "attack_auc_ci95": [
+          0.4844,
+          0.5219
+        ],
+        "member_median_distance": 0.139724,
+        "nonmember_median_distance": 0.138752
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5784,
+          "accuracy_members": 0.4898,
+          "accuracy_nonmembers": 0.483,
+          "membership_advantage": 0.0068
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2906,
+          "accuracy_members": 0.1639,
+          "accuracy_nonmembers": 0.184,
+          "membership_advantage": -0.0201
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.758,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0215,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 12.0
+    },
+    {
+      "run_id": "tvae_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5205,
+        "attack_auc_ci95": [
+          0.5001,
+          0.5404
+        ],
+        "member_median_distance": 0.096124,
+        "nonmember_median_distance": 0.099069
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5259,
+          "accuracy_members": 0.5284,
+          "accuracy_nonmembers": 0.5298,
+          "membership_advantage": -0.0014
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.3392,
+          "accuracy_members": 0.2628,
+          "accuracy_nonmembers": 0.2266,
+          "membership_advantage": 0.0362
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.9631,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0033,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.6
+    },
+    {
+      "run_id": "tvae_seed1",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5252,
+        "attack_auc_ci95": [
+          0.5042,
+          0.5453
+        ],
+        "member_median_distance": 0.096348,
+        "nonmember_median_distance": 0.099035
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5344,
+          "accuracy_members": 0.5574,
+          "accuracy_nonmembers": 0.5366,
+          "membership_advantage": 0.0208
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.3051,
+          "accuracy_members": 0.2537,
+          "accuracy_nonmembers": 0.2368,
+          "membership_advantage": 0.0169
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.9619,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.6
+    },
+    {
+      "run_id": "tvae_seed2",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.5157,
+        "attack_auc_ci95": [
+          0.4965,
+          0.5363
+        ],
+        "member_median_distance": 0.095962,
+        "nonmember_median_distance": 0.097921
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.5165,
+          "accuracy_members": 0.5355,
+          "accuracy_nonmembers": 0.5111,
+          "membership_advantage": 0.0244
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.331,
+          "accuracy_members": 0.2378,
+          "accuracy_nonmembers": 0.2428,
+          "membership_advantage": -0.005
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 0.977,
+          "accuracy_members": 0.0,
+          "accuracy_nonmembers": 0.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 14.6
+    }
+  ]
+}
