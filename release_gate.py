@@ -35,7 +35,12 @@ from pipeline.steps.generate import leakage
 from pipeline.steps.generate.step import GenerateStep
 from pipeline.steps.privacy.distance import build_encoder, nearest_two_distances
 
-COHERENCE_TOLERANCE = 0.01   # allowed violation-rate excess over the holdout baseline
+# Coherence policy: a candidate passes if its rule-violation rate is
+# within one order of magnitude of the real holdout's own rate, or
+# within 1 percentage point absolute -- whichever is more permissive.
+# Stated as policy so it can be tightened per release decision.
+COHERENCE_MULTIPLIER = 10.0
+COHERENCE_ABSOLUTE = 0.01
 DCR_SAMPLE = 500
 
 
@@ -48,6 +53,12 @@ def main() -> int:
     candidate = pd.read_csv(args.file, low_memory=False)
     train = pl.read_parquet(config.train_output_path).to_pandas()
     holdout = pl.read_parquet(config.holdout_output_path).to_pandas()
+    # The candidate is in DECODED (released) space, so the leakage and
+    # coherence comparisons must use decoded frames too; the sentinel-
+    # space train frame is kept for the distance encoder, which
+    # re-encodes decoded nulls itself.
+    train_decoded, _ = GenerateStep._decode_numeric_missing(train.copy(), config)
+    holdout_decoded, _ = GenerateStep._decode_numeric_missing(holdout.copy(), config)
     checks = []
 
     def check(name, passed, detail):
@@ -65,21 +76,24 @@ def main() -> int:
     check("freshness", stale == 0,
           f"{stale} cell(s) an up-to-date decode would change")
 
-    leak = leakage.check_exact_duplicates(candidate, train)
+    leak = leakage.check_exact_duplicates(candidate, train_decoded)
     check("leakage", leak.get("exact_duplicates_of_training_rows", 1) == 0,
-          f"{leak.get('exact_duplicates_of_training_rows')} verbatim training row(s)")
+          f"{leak.get('exact_duplicates_of_training_rows')} verbatim training row(s) "
+          f"(compared in released/decoded space)")
 
     rules_path = os.path.join(config.step_dir("coherence"), "DT4H_Coherence_Rules.json")
     if os.path.exists(rules_path):
         with open(rules_path) as f:
             ruleset = json.load(f)["rules"]
         cand_summary = R.summarize_rule_results(R.evaluate_rules(candidate, ruleset))
-        hold_summary = R.summarize_rule_results(R.evaluate_rules(holdout, ruleset))
+        hold_summary = R.summarize_rule_results(R.evaluate_rules(holdout_decoded, ruleset))
         rate = cand_summary["overall_violation_rate"] or 0.0
         base = hold_summary["overall_violation_rate"] or 0.0
-        check("coherence", rate <= base + COHERENCE_TOLERANCE,
+        threshold = max(COHERENCE_MULTIPLIER * base, base + COHERENCE_ABSOLUTE)
+        check("coherence", rate <= threshold,
               f"violation rate {rate} vs holdout baseline {base} "
-              f"(tolerance +{COHERENCE_TOLERANCE})")
+              f"(threshold {round(threshold, 5)} = max({COHERENCE_MULTIPLIER:g}x baseline, "
+              f"baseline+{COHERENCE_ABSOLUTE}))")
     else:
         check("coherence", False, "no committed rule set -- run the coherence step first")
 

@@ -202,25 +202,51 @@ class AttacksStep(PipelineStep):
 
     # --- optional anonymeter ---
 
+    @staticmethod
+    def _plain_pandas(df):
+        """anonymeter chokes on arrow/polars-backed extension dtypes
+        ('dtype String not supported'); coerce to plain numpy-backed
+        float64/object columns."""
+        import pandas as pd
+
+        out = {}
+        for c in df.columns:
+            if pd.api.types.is_numeric_dtype(df[c]) and not pd.api.types.is_bool_dtype(df[c]):
+                out[c] = pd.to_numeric(df[c], errors="coerce").astype("float64")
+            else:
+                s = df[c].astype("object").where(df[c].notna(), None)
+                out[c] = s.map(lambda v: str(v) if v is not None else None)
+        return pd.DataFrame(out, index=df.index)
+
     def _anonymeter(self, train, holdout, synth):
         try:
             from anonymeter.evaluators import LinkabilityEvaluator, SinglingOutEvaluator
         except ImportError:
             return {"note": "anonymeter not installed; singling-out/linkability skipped "
                             "(native MIA and AIA above are the primary evidence)"}
+        train = self._plain_pandas(train)
+        holdout = self._plain_pandas(holdout)
+        synth = self._plain_pandas(synth)
+        out = {}
         try:
             so = SinglingOutEvaluator(ori=train, syn=synth, control=holdout, n_attacks=200)
             so.evaluate(mode="univariate")
-            so_risk = so.risk()
-            aux = [q for q in QUASI_IDENTIFIERS if q in train.columns]
-            link = LinkabilityEvaluator(ori=train, syn=synth, control=holdout,
-                                        aux_cols=(aux[:2], aux[2:] or aux[:1]), n_attacks=200)
-            link.evaluate()
-            link_risk = link.risk()
-            return {"singling_out_risk": round(float(so_risk.value), 4),
-                    "linkability_risk": round(float(link_risk.value), 4)}
+            out["singling_out_risk"] = round(float(so.risk().value), 4)
         except Exception as e:
-            return {"note": f"anonymeter failed: {type(e).__name__}: {e}"}
+            out["singling_out_note"] = f"failed: {type(e).__name__}: {e}"
+        aux = [q for q in QUASI_IDENTIFIERS if q in train.columns]
+        if len(aux) >= 2:
+            try:
+                link = LinkabilityEvaluator(ori=train, syn=synth, control=holdout,
+                                            aux_cols=(aux[:2], aux[2:] or aux[:1]),
+                                            n_attacks=200)
+                link.evaluate()
+                out["linkability_risk"] = round(float(link.risk().value), 4)
+            except Exception as e:
+                out["linkability_note"] = f"failed: {type(e).__name__}: {e}"
+        else:
+            out["linkability_note"] = "skipped: fewer than 2 quasi-identifier columns"
+        return out
 
     @staticmethod
     def _render_markdown(r: dict) -> str:
@@ -242,8 +268,10 @@ class AttacksStep(PipelineStep):
             adv = max((a["membership_advantage"] for a in run["attribute_inference"]),
                       default=None)
             anon = run.get("anonymeter", {})
-            anon_cell = (f"SO {anon['singling_out_risk']}, link {anon['linkability_risk']}"
-                         if "singling_out_risk" in anon else "skipped")
+            so = anon.get("singling_out_risk")
+            lk = anon.get("linkability_risk")
+            anon_cell = (f"SO {so if so is not None else '-'}, link {lk if lk is not None else '-'}"
+                         if (so is not None or lk is not None) else "skipped")
             flag = "" if m["attack_auc"] < 0.55 else " 🚨"
             lines.append(f"| {run['run_id']}{flag} | {m['attack_auc']} "
                          f"({m['attack_auc_ci95'][0]}-{m['attack_auc_ci95'][1]}) "
