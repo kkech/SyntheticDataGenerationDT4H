@@ -53,7 +53,7 @@ case "${1:-}" in
     fi
     activate_venv
     echo "Running preflight before detaching..."
-    if ! py main.py --preflight; then
+    if ! py main.py --preflight "$@"; then
       echo "❌ Preflight FAILED -- not starting the job. Fix the items above first."
       exit 1
     fi

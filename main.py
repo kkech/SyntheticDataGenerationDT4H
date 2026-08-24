@@ -271,7 +271,10 @@ def main() -> None:
         args.force = True
 
     if args.preflight:
-        raise SystemExit(0 if preflight() else 1)
+        # Preview the plan the flags would actually run: --preflight
+        # --extended shows all 52 runs, not the 31-run base plan.
+        pf_cfg = PipelineConfig(extended_plan=True) if args.extended else None
+        raise SystemExit(0 if preflight(pf_cfg) else 1)
 
     # ./run_job.sh stop (and plain `kill`) send SIGTERM, which by default
     # ends the process without unwinding Python -- leaving the status
