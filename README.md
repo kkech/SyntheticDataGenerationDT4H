@@ -65,6 +65,9 @@ python main.py --force              # rerun everything
 python main.py --force-step generate --force-step evaluate --force-step privacy
 python main.py --only evaluate --force-step evaluate
 python main.py --analysis          # rerun ALL analysis steps (6-13) on existing outputs
+python backup_results.py           # SNAPSHOT results before any --force rerun: the synthetic
+                                   #   CSVs, fitted models and split parquets are gitignored
+                                   #   and exist nowhere else (--list / --restore NAME --yes)
 python main.py --extended --force  # full campaign PLUS the roadmap runs (quantile-transform
                                    #   variants, TVAE capacity sweep, indicator ablation,
                                    #   AIM 40-column sweep, MST eps=0.5 anchor, the native

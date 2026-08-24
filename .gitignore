@@ -24,3 +24,4 @@ output/generate/models/
 .pipeline_job.pid
 job_console.log
 logs/
+backups/
