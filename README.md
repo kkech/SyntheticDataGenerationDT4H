@@ -60,6 +60,11 @@ appearing under `output/`.
 
 ```
 python main.py --preflight          # verify libs, GPU, inputs, disk BEFORE a long run
+python main.py --data-dir /path/to/extract [--metadata /path/to/metadata.json]
+                                   # point the pipeline at a new site's part-*.parquet
+                                   #   extract (Amsterdam and beyond); --metadata only
+                                   #   when the JSON is not inside the data dir.
+                                   #   Combine with --extended/--force/--preflight.
 python main.py --status             # step completion status
 python main.py --force              # rerun everything
 python main.py --force-step generate --force-step evaluate --force-step privacy

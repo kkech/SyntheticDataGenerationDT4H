@@ -27,6 +27,13 @@ class PipelineConfig:
     sample_rows: int = 20
     sample_seed: int = 0
 
+    # Optional explicit path to the feature-set metadata JSON, for
+    # deployments where it does not live inside the transfer folder
+    # (main.py --metadata). None = search transfer_folder for the usual
+    # candidate names. Copied to <output>/profile_data/metadata.json,
+    # where every downstream step reads it.
+    metadata_source: str = None
+
     metadata_path: str = None  # defaults to <output_dir>/profile_data/metadata.json
 
     # --- holdout split ---
