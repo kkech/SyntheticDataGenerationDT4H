@@ -30,12 +30,12 @@ sits next to fresh results:
 | 5 | `generate` | executes the run plan (seeds × ε × models) on the **train split only**, writes one synthetic CSV per run, saves fitted generators, checks for verbatim training records | `output/generate/` |
 | 6 | `evaluate` | marginal fidelity (KS, Wasserstein, TVD, missingness), association structure incl. **fabricated-association counts**, **C2ST full-joint distinguishability**, and **subgroup fidelity** (gender/age strata) — every number read against its own train-vs-holdout noise floor; mean ± sd across seeds and the ε-sweep view | `output/evaluate/` |
 | 7 | `coherence` | **row-level clinical coherence audit**: implications mined from the train split, learned category-range consistency (CKD stage vs eGFR, …), survival logic — synthetic violation rates vs the real holdout's own rate; rule set committed | `output/coherence/` |
-| 8 | `survival` | **Kaplan-Meier fidelity** for death and HF rehospitalization (nulls = censoring at 5y), log-rank vs holdout, and **effect-estimate replication** (Cox via lifelines, or native logistic fallback) | `output/survival/` |
-| 9 | `utility` | Train-Synthetic-Test-Real on the **holdout**, with two model classes (HistGB + logistic) and an **augmentation** arm (real+synthetic vs real alone); family-diversified targets incl. mortality | `output/utility/` |
+| 8 | `survival` | **Kaplan-Meier fidelity** for death and HF rehospitalization (nulls = censoring at 5y), log-rank vs holdout, **TOST equivalence tests** (Greenwood SEs, ±5pp margin at 1y/3y/5y — a positive claim, not non-significance), and **effect-estimate replication** (Cox via lifelines, or native logistic fallback) | `output/survival/` |
+| 9 | `utility` | Train-Synthetic-Test-Real on the **holdout**, with two model classes (HistGB + logistic), **Brier-score calibration**, **subgroup TSTR** per sex/age stratum, and an **augmentation** arm (real+synthetic vs real alone); family-diversified targets incl. mortality | `output/utility/` |
 | 10 | `privacy` | distance-to-closest-training-record per run against the **holdout-to-train baseline**, with committed DCR histograms | `output/privacy/` |
-| 11 | `attacks` | **adversarial attacks**: membership inference (distance attack, AUC + bootstrap CI) and attribute inference (membership advantage), both calibrated by the holdout; optional anonymeter singling-out/linkability | `output/attacks/` |
+| 11 | `attacks` | **adversarial attacks**: membership inference (distance attack + **learned cv-classifier attack**, AUC + bootstrap CI), **who-is-at-risk profile** (MIA per patient-atypicality quartile), an **empirical DP audit** (attack-derived ε lower bound vs the claimed budget), attribute inference (membership advantage), and anonymeter singling-out/linkability — all calibrated by the holdout | `output/attacks/` |
 | 12 | `figures` | publication-quality figures (ε-curves, TSTR gaps, KS profiles vs floor, DCR histograms, KM overlays, coherence, C2ST, MIA) as PNG+PDF, regenerated from the committed step results | `output/figures/` |
-| 13 | `release_docs` | **codebook** (per-column semantics incl. what a null means), **Datasheet for the Dataset**, and the exact `pip freeze` of the producing environment | `output/release_docs/` |
+| 13 | `release_docs` | **codebook** (per-column semantics incl. what a null means), **Datasheet for the Dataset**, **per-file capability labels** (one JSON per released file aggregating fidelity/coherence/distance/attack/gate evidence), and the exact `pip freeze` of the producing environment | `output/release_docs/` |
 
 ### Long runs (survives SSH disconnect)
 
@@ -60,6 +60,11 @@ appearing under `output/`.
 
 ```
 python main.py --preflight          # verify libs, GPU, inputs, disk BEFORE a long run
+python main.py --data-dir /path/to/extract [--metadata /path/to/metadata.json]
+                                   # point the pipeline at a new site's part-*.parquet
+                                   #   extract (Amsterdam and beyond); --metadata only
+                                   #   when the JSON is not inside the data dir.
+                                   #   Combine with --extended/--force/--preflight.
 python main.py --status             # step completion status
 python main.py --force              # rerun everything
 python main.py --force-step generate --force-step evaluate --force-step privacy
@@ -105,6 +110,18 @@ or timeout costs only the tail of a run — 31 runs by default:
 | `dpctgan` | smartnoise-synth | ε | ε ∈ {1,5,8,10,15,20} + 2 extra seeds at ε=15 | DP-GAN comparison point |
 | `aim` | smartnoise-synth | ε | ε sweep on the **top-50 outcome-relevant columns** | Private-PGM cannot handle full width (timed out at 6 h on 211 columns); column selection is data-driven and committed (`DT4H_AIM_Column_Selection.json`), with its own 2 h/run timeout |
 | `mst` | smartnoise-synth | ε | ε sweep + 2 extra seeds at ε=15 | marginal-based; excellent categorical fidelity; ~2.8 h/run, runs last |
+
+`--extended` appends 21 roadmap runs (52 total, ~52 h): quantile-transform
+variants (`tvae_qt` ×3, `ctgan_qt`), a TVAE capacity/epochs sweep
+(`tvae_cap256`, `tvae_ep1000`), the sentinel-vs-indicator encoding
+ablation (`tvae_ind`), AIM's full ε sweep on a 40-column subset
+(`aim40` ×6), an MST ε=0.5 low-budget anchor (own 4 h timeout), the
+**native diffusion baseline** `ddpm` ×3 seeds (in-repo Gaussian DDPM,
+no new dependencies), **logic-guided diffusion** `ddpm_g` (the mined
+coherence rules as a differentiable sampling-time prior, with the
+unguided seeds as its exact control), and `patectgan` at ε ∈ {1,5,15}.
+Variant runs record qualified model names so grouping never averages
+them into the base families.
 
 DP preprocessing spends **zero ε**: per-column domains are passed as
 public bounds (they are released in the committed sentinel encoding
@@ -152,10 +169,12 @@ itself).
 
 The privacy step's DCR/NNDR analysis bounds record-copying against a
 genuine unseen-data baseline (the holdout split, which no generator ever
-saw). A full adversarial membership-inference attack remains future work
-— see the limitations section of
-`output/privacy/DT4H_Privacy_Assessment.md`. DP synthesizers carry
-their ε guarantee by construction.
+saw). The attacks step then attacks rather than asserts: distance and
+learned membership inference, attribute inference, anonymeter
+singling-out/linkability, a per-patient-atypicality risk profile, and
+an empirical ε lower bound that a DP run's claimed budget must exceed —
+the formal guarantee is audited, not merely stated. The release gate
+(`release_gate.py`) is the per-file go/no-go over all of that evidence.
 
 ## Setup
 
@@ -165,5 +184,16 @@ Python 3.10+, a CUDA GPU recommended for the GAN/VAE models.
 python -m venv .synthenv && source .synthenv/bin/activate
 pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
-python main.py --preflight
+pip install lifelines anonymeter    # optional evaluators
+pip install numpy==2.2.6            # AFTER anonymeter -- restores numpy 2
+python main.py --preflight          # must show: ✅ import mbi (MST/AIM backend)
 ```
+
+**One numpy for everything:** anonymeter declares `numpy<1.27` and its
+install downgrades numpy — which silently breaks MST/AIM generation
+(their backend needs numpy ≥ 2 via jax). The pin is conservative
+packaging only: anonymeter runs correctly under numpy 2.2.6 (verified
+end to end; ignore pip's resolver warning). Reinstall numpy 2.2.6 after
+anonymeter, and always preflight before a long run — the `mbi` check
+exists precisely to catch this before hour one instead of hour ten. See
+the caution block in `requirements.txt`.

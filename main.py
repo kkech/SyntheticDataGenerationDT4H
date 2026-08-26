@@ -253,6 +253,15 @@ def main() -> None:
                               "native diffusion baseline ddpm x3 seeds, PATE-CTGAN x3 "
                               "epsilons). The base plan is unchanged; see "
                               "PipelineConfig.extended_plan.")
+    parser.add_argument("--data-dir", metavar="PATH",
+                         help="Directory holding the input part-*.parquet files (and, "
+                              "unless --metadata is given, the metadata file). Overrides "
+                              "the configured transfer folder -- this is how the pipeline "
+                              "points at a new site's extract.")
+    parser.add_argument("--metadata", metavar="PATH",
+                         help="Explicit path to the feature-set metadata JSON, for when "
+                              "it does not live inside --data-dir. Copied to "
+                              "output/profile_data/metadata.json for the downstream steps.")
     parser.add_argument("--status", action="store_true", help="Print step-completion status and exit.")
     parser.add_argument("--preflight", action="store_true",
                          help="Verify libraries, GPU, inputs, disk and config, then exit. "
@@ -270,11 +279,19 @@ def main() -> None:
         args.only = list(ANALYSIS_STEPS)
         args.force = True
 
+    # One config from the flags, used identically by preflight and the
+    # run, so the pre-launch check always previews what would execute.
+    cfg_kwargs = {}
+    if args.extended:
+        cfg_kwargs["extended_plan"] = True
+    if args.data_dir:
+        cfg_kwargs["transfer_folder"] = args.data_dir
+    if args.metadata:
+        cfg_kwargs["metadata_source"] = args.metadata
+    cfg = PipelineConfig(**cfg_kwargs) if cfg_kwargs else None
+
     if args.preflight:
-        # Preview the plan the flags would actually run: --preflight
-        # --extended shows all 52 runs, not the 31-run base plan.
-        pf_cfg = PipelineConfig(extended_plan=True) if args.extended else None
-        raise SystemExit(0 if preflight(pf_cfg) else 1)
+        raise SystemExit(0 if preflight(cfg) else 1)
 
     # ./run_job.sh stop (and plain `kill`) send SIGTERM, which by default
     # ends the process without unwinding Python -- leaving the status
@@ -292,7 +309,6 @@ def main() -> None:
     # rather than only the stdout half that shell redirection captures.
     handle = start_logging(args.log) if args.log else None
     try:
-        cfg = PipelineConfig(extended_plan=True) if args.extended else None
         run_pipeline(config=cfg, force=args.force, force_steps=args.force_step,
                      only=args.only)
     finally:

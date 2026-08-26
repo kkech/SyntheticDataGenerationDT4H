@@ -30,7 +30,8 @@ class ProfileDataStep(PipelineStep):
         out_dir = config.step_dir(self.name)
         os.makedirs(out_dir, exist_ok=True)
 
-        copy_metadata(config.transfer_folder, out_dir)
+        copy_metadata(config.transfer_folder, out_dir,
+                      explicit=config.metadata_source)
         self._write_analysis(df, out_dir)
         write_row_sample(
             df, os.path.join(out_dir, "DT4H_Sample20.parquet"), config.sample_rows, config.sample_seed

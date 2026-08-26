@@ -8,11 +8,24 @@ import polars as pl
 METADATA_CANDIDATES = ["metadata.json", "metadata", "metadata.parquet"]
 
 
-def copy_metadata(source_folder: str, dest_dir: str) -> None:
+def copy_metadata(source_folder: str, dest_dir: str, explicit: str = None) -> None:
     """Copies whatever metadata is in source_folder (file or directory)
     into dest_dir, verbatim -- schema info, not patient data, safe to
     commit. Checks a few likely names/extensions since this has varied
-    between transfers."""
+    between transfers.
+
+    `explicit` (e.g. from main.py --metadata) points at the metadata
+    JSON directly when it does not live inside the transfer folder --
+    the multi-site case. It is normalized to dest_dir/metadata.json, the
+    name every downstream step expects."""
+    if explicit:
+        if not os.path.isfile(explicit):
+            raise FileNotFoundError(
+                f"--metadata points to {explicit}, which is not a file.")
+        dest = os.path.join(dest_dir, "metadata.json")
+        shutil.copy2(explicit, dest)
+        print(f"Copied metadata file (explicit --metadata) -> {dest}")
+        return
     src = next(
         (
             os.path.join(source_folder, c)
