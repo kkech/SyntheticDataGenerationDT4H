@@ -290,15 +290,30 @@ class SurvivalStep(PipelineStep):
                 xs[c] = (xs[c] - xs[c].mean()) / sd
         try:
             from lifelines import CoxPHFitter
-
-            frame = xs.copy()
-            frame["T"] = days.fillna(FOLLOW_UP_DAYS).clip(0, FOLLOW_UP_DAYS)
-            frame["E"] = (pd.to_numeric(days, errors="coerce").notna()).astype(int)
-            cph = CoxPHFitter(penalizer=0.01)
-            cph.fit(frame, duration_col="T", event_col="E")
-            return {"model": "cox_ph (lifelines)", "n": int(len(xs)), "events": int(frame["E"].sum()),
-                    "coefficients": {c: round(float(v), 4) for c, v in cph.params_.items()}}
         except ImportError:
+            CoxPHFitter = None
+
+        if CoxPHFitter is not None:
+            # A degenerate synthetic frame can make the Cox fit diverge
+            # (lifelines ConvergenceError, ill-conditioned matrices).
+            # That is a property of THAT frame, not a reason to kill the
+            # step: fall back to the logistic model for it.
+            try:
+                frame = xs.copy()
+                frame["T"] = days.fillna(FOLLOW_UP_DAYS).clip(0, FOLLOW_UP_DAYS)
+                frame["E"] = (pd.to_numeric(days, errors="coerce").notna()).astype(int)
+                cph = CoxPHFitter(penalizer=0.01)
+                cph.fit(frame, duration_col="T", event_col="E")
+                return {"model": "cox_ph (lifelines)", "n": int(len(xs)),
+                        "events": int(frame["E"].sum()),
+                        "coefficients": {c: round(float(v), 4)
+                                         for c, v in cph.params_.items()}}
+            except Exception as e:
+                print(f"  ⚠️  Cox fit did not converge on this frame "
+                      f"({type(e).__name__}) -- falling back to the native "
+                      f"logistic model for it.")
+
+        try:
             from sklearn.linear_model import LogisticRegression
 
             clf = LogisticRegression(max_iter=2000, C=1.0)
@@ -307,6 +322,13 @@ class SurvivalStep(PipelineStep):
                     "events": int(y.sum()),
                     "coefficients": {c: round(float(b), 4)
                                      for c, b in zip(xs.columns, clf.coef_[0])}}
+        except Exception as e:
+            # Both estimators failed on this frame: report it as not
+            # estimable (the existing degenerate-frame path) rather than
+            # aborting the whole survival step.
+            print(f"  ⚠️  Effects not estimable on this frame "
+                  f"({type(e).__name__}: {e}).")
+            return None
 
     def _effect_replication(self, train, holdout, synthetic_files, config):
         import pandas as pd
