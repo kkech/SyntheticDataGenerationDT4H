@@ -1,0 +1,644 @@
+{
+    "tables": {
+        "table": {
+            "columns": {
+                "patient_demographics_gender": {
+                    "sdtype": "categorical"
+                },
+                "patient_demographics_age": {
+                    "sdtype": "numerical"
+                },
+                "encounters_admissionYear": {
+                    "datetime_format": "%Y",
+                    "sdtype": "datetime"
+                },
+                "encounters_lengthOfStay": {
+                    "sdtype": "numerical"
+                },
+                "encounters_numOfPreviousHFStays_count": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_weight_value_p6mo_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_weight_value_p6mo_first": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_height_value_p1a_avg": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_weight_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_height_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_bmi_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_systolicBp_value_first": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_systolicBp_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_diastolicBp_value_first": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_diastolicBp_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_heartRate_value_first": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_heartRate_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_hemoglobin_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_hemoglobin_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ferritin_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ferritin_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ntProBnp_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ntProBnp_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_crpNonHs_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_crpNonHs_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_tropTHs_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_tropTHs_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_tropTnHs_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_tropTnHs_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_triGly_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_triGly_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_cholTot_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_cholTot_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_hdl_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_hdl_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ldl_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ldl_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_potassium_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_potassium_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_sodium_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_sodium_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_creatUS_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_creatUS_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_albuminBS_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_albuminBS_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_validSerumCreatinine_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_validSerumCreatinine_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_valideGFR_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_valideGFR_value_last": {
+                    "sdtype": "numerical"
+                },
+                "echocardiographs_lvef_pET_last": {
+                    "sdtype": "numerical"
+                },
+                "echocardiographs_lvef_pET_first": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qrs_duration_pET_first": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qrs_duration_pET_last": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qt_duration_corrected_pET_first": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qt_duration_corrected_pET_last": {
+                    "sdtype": "numerical"
+                },
+                "smoking_status_smoker_last": {
+                    "sdtype": "categorical"
+                },
+                "smoking_status_formerSmoker_last": {
+                    "sdtype": "categorical"
+                },
+                "smoking_status_smoker_startTime_count": {
+                    "sdtype": "numerical"
+                },
+                "nyha_nyha_pET": {
+                    "sdtype": "numerical"
+                },
+                "hyperkalemia_severity_categorizedValue": {
+                    "sdtype": "categorical"
+                },
+                "ckd_severity_categorizedValue": {
+                    "sdtype": "categorical"
+                },
+                "conditions_heartFailure_timeFromEarliest_first": {
+                    "sdtype": "numerical"
+                },
+                "conditions_heart_failure_hf_within_18mo_any": {
+                    "sdtype": "categorical"
+                },
+                "conditions_heart_failure_occurred_prior_to_18_months_any": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first": {
+                    "sdtype": "numerical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first": {
+                    "sdtype": "numerical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first": {
+                    "sdtype": "numerical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first": {
+                    "sdtype": "numerical"
+                },
+                "eGFR_2021_ckd_epi_creatinine": {
+                    "sdtype": "numerical"
+                },
+                "ckd_severity_from_calculated_egfr": {
+                    "sdtype": "categorical"
+                },
+                "ckd_severity_calculated_or_measured": {
+                    "sdtype": "categorical"
+                },
+                "beta_blocker_use_pre_dc": {
+                    "sdtype": "categorical"
+                },
+                "ace_inhibitors_arb_use_pre_dc": {
+                    "sdtype": "categorical"
+                },
+                "med_acei": {
+                    "sdtype": "categorical"
+                },
+                "med_anti_coag": {
+                    "sdtype": "categorical"
+                },
+                "med_anti_plat": {
+                    "sdtype": "categorical"
+                },
+                "med_antiarrhytmic": {
+                    "sdtype": "categorical"
+                },
+                "med_antiinfl": {
+                    "sdtype": "categorical"
+                },
+                "med_arb": {
+                    "sdtype": "categorical"
+                },
+                "med_arni": {
+                    "sdtype": "categorical"
+                },
+                "med_bb": {
+                    "sdtype": "categorical"
+                },
+                "med_ccb": {
+                    "sdtype": "categorical"
+                },
+                "med_cortico_syst": {
+                    "sdtype": "categorical"
+                },
+                "med_digitalis": {
+                    "sdtype": "categorical"
+                },
+                "med_diuretics": {
+                    "sdtype": "categorical"
+                },
+                "med_diuretics_loop": {
+                    "sdtype": "categorical"
+                },
+                "med_inotropes": {
+                    "sdtype": "categorical"
+                },
+                "med_insulins": {
+                    "sdtype": "categorical"
+                },
+                "med_ivabradine": {
+                    "sdtype": "categorical"
+                },
+                "med_ll": {
+                    "sdtype": "categorical"
+                },
+                "med_mra": {
+                    "sdtype": "categorical"
+                },
+                "med_oral_antidiabetic": {
+                    "sdtype": "categorical"
+                },
+                "med_platelet": {
+                    "sdtype": "categorical"
+                },
+                "med_potassium_binders": {
+                    "sdtype": "categorical"
+                },
+                "med_rasi": {
+                    "sdtype": "categorical"
+                },
+                "med_rdoad": {
+                    "sdtype": "categorical"
+                },
+                "med_rdoad_syst": {
+                    "sdtype": "categorical"
+                },
+                "med_thrombolytic": {
+                    "sdtype": "categorical"
+                },
+                "med_vasodil": {
+                    "sdtype": "categorical"
+                },
+                "med_acei_history": {
+                    "sdtype": "categorical"
+                },
+                "med_anti_coag_history": {
+                    "sdtype": "categorical"
+                },
+                "med_anti_plat_history": {
+                    "sdtype": "categorical"
+                },
+                "med_antiarrhytmic_history": {
+                    "sdtype": "categorical"
+                },
+                "med_antiinfl_history": {
+                    "sdtype": "categorical"
+                },
+                "med_arb_history": {
+                    "sdtype": "categorical"
+                },
+                "med_arni_history": {
+                    "sdtype": "categorical"
+                },
+                "med_bb_history": {
+                    "sdtype": "categorical"
+                },
+                "med_ccb_history": {
+                    "sdtype": "categorical"
+                },
+                "med_cortico_syst_history": {
+                    "sdtype": "categorical"
+                },
+                "med_digitalis_history": {
+                    "sdtype": "categorical"
+                },
+                "med_diuretics_history": {
+                    "sdtype": "categorical"
+                },
+                "med_diuretics_loop_history": {
+                    "sdtype": "categorical"
+                },
+                "med_inotropes_history": {
+                    "sdtype": "categorical"
+                },
+                "med_insulins_history": {
+                    "sdtype": "categorical"
+                },
+                "med_ivabradine_history": {
+                    "sdtype": "categorical"
+                },
+                "med_ll_history": {
+                    "sdtype": "categorical"
+                },
+                "med_mra_history": {
+                    "sdtype": "categorical"
+                },
+                "med_oral_antidiabetic_history": {
+                    "sdtype": "categorical"
+                },
+                "med_platelet_history": {
+                    "sdtype": "categorical"
+                },
+                "med_potassium_binders_history": {
+                    "sdtype": "categorical"
+                },
+                "med_rasi_history": {
+                    "sdtype": "categorical"
+                },
+                "med_rdoad_history": {
+                    "sdtype": "categorical"
+                },
+                "med_rdoad_syst_history": {
+                    "sdtype": "categorical"
+                },
+                "med_thrombolytic_history": {
+                    "sdtype": "categorical"
+                },
+                "med_vasodil_history": {
+                    "sdtype": "categorical"
+                },
+                "conditions_af": {
+                    "sdtype": "categorical"
+                },
+                "conditions_aidshiv": {
+                    "sdtype": "categorical"
+                },
+                "conditions_ap": {
+                    "sdtype": "categorical"
+                },
+                "conditions_ckd_chronic": {
+                    "sdtype": "categorical"
+                },
+                "conditions_cm": {
+                    "sdtype": "categorical"
+                },
+                "conditions_copd": {
+                    "sdtype": "categorical"
+                },
+                "conditions_dem": {
+                    "sdtype": "categorical"
+                },
+                "conditions_dep": {
+                    "sdtype": "categorical"
+                },
+                "conditions_devices": {
+                    "sdtype": "categorical"
+                },
+                "conditions_diabetes": {
+                    "sdtype": "categorical"
+                },
+                "conditions_dysl": {
+                    "sdtype": "categorical"
+                },
+                "conditions_hf": {
+                    "sdtype": "categorical"
+                },
+                "conditions_hyp": {
+                    "sdtype": "categorical"
+                },
+                "conditions_hyperthyroid": {
+                    "sdtype": "categorical"
+                },
+                "conditions_hypothyroid": {
+                    "sdtype": "categorical"
+                },
+                "conditions_ibd": {
+                    "sdtype": "categorical"
+                },
+                "conditions_ihd": {
+                    "sdtype": "categorical"
+                },
+                "conditions_ld": {
+                    "sdtype": "categorical"
+                },
+                "conditions_mc": {
+                    "sdtype": "categorical"
+                },
+                "conditions_mi": {
+                    "sdtype": "categorical"
+                },
+                "conditions_myocarditis": {
+                    "sdtype": "categorical"
+                },
+                "conditions_osa": {
+                    "sdtype": "categorical"
+                },
+                "conditions_pad": {
+                    "sdtype": "categorical"
+                },
+                "conditions_pericardial": {
+                    "sdtype": "categorical"
+                },
+                "conditions_rd": {
+                    "sdtype": "categorical"
+                },
+                "conditions_revasc": {
+                    "sdtype": "categorical"
+                },
+                "conditions_stroke": {
+                    "sdtype": "categorical"
+                },
+                "conditions_substance_abuse": {
+                    "sdtype": "categorical"
+                },
+                "conditions_tia": {
+                    "sdtype": "categorical"
+                },
+                "conditions_vd": {
+                    "sdtype": "categorical"
+                }
+            }
+        }
+    },
+    "relationships": [],
+    "METADATA_SPEC_VERSION": "V1"
+}

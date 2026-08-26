@@ -1,54 +1,60 @@
 {
   "load_data": {
     "completed": true,
-    "completed_at": "2026-08-21T08:56:27.037680+00:00"
+    "completed_at": "2026-08-24T08:54:21.569562+00:00"
   },
   "profile_data": {
     "completed": true,
-    "completed_at": "2026-08-21T08:56:27.458456+00:00"
+    "completed_at": "2026-08-24T08:54:21.924166+00:00"
   },
   "preprocess": {
     "completed": true,
-    "completed_at": "2026-08-21T08:56:27.691336+00:00"
+    "completed_at": "2026-08-24T08:54:22.150537+00:00"
   },
   "profile_preprocessed_data": {
     "completed": true,
-    "completed_at": "2026-08-21T08:56:27.824138+00:00"
+    "completed_at": "2026-08-24T08:54:22.286152+00:00"
   },
   "generate": {
     "completed": true,
-    "completed_at": "2026-08-22T23:01:27.202509+00:00"
+    "completed_at": "2026-08-26T18:31:55.066472+00:00"
   },
   "evaluate": {
     "completed": true,
-    "completed_at": "2026-08-23T14:47:49.417496+00:00"
+    "completed_at": "2026-08-26T18:45:11.660300+00:00"
   },
   "utility": {
-    "completed": true,
-    "completed_at": "2026-08-23T14:54:57.696419+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-24T08:54:21.240984+00:00"
   },
   "privacy": {
-    "completed": true,
-    "completed_at": "2026-08-23T14:58:00.605803+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-24T08:54:21.241284+00:00"
   },
   "coherence": {
     "completed": true,
-    "completed_at": "2026-08-23T14:48:44.290195+00:00"
+    "completed_at": "2026-08-26T18:46:55.003706+00:00"
   },
   "survival": {
-    "completed": true,
-    "completed_at": "2026-08-23T14:50:09.374767+00:00"
+    "completed": false,
+    "failed_at": "2026-08-26T18:49:29.410022+00:00",
+    "error": "ConvergenceError: delta contains nan value(s). Convergence halted. Please see the following tips in the lifelines documentation: https://lifelines.readthedocs.io/en/latest/Examples.html#problems-with-convergence-in-the-cox-proportional-hazard-model"
   },
   "attacks": {
-    "completed": true,
-    "completed_at": "2026-08-23T15:04:42.381941+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-24T08:54:21.241499+00:00"
   },
   "figures": {
-    "completed": true,
-    "completed_at": "2026-08-23T15:04:46.105822+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-24T08:54:21.241711+00:00"
   },
   "release_docs": {
-    "completed": true,
-    "completed_at": "2026-08-23T15:04:46.508940+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-24T08:54:21.241930+00:00"
   }
 }
