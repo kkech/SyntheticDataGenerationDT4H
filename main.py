@@ -130,7 +130,7 @@ def run_pipeline(
         print(f"✅ '{step.name}' completed in {time.time() - started:.0f}s.")
 
 
-def preflight(config: PipelineConfig | None = None) -> bool:
+def preflight(config: PipelineConfig | None = None, min_free_gb: float = 5.0) -> bool:
     """Everything a long run needs, checked in seconds. Returns True if
     the run can proceed."""
     import importlib
@@ -186,7 +186,8 @@ def preflight(config: PipelineConfig | None = None) -> bool:
     check("metadata.json", os.path.exists(config.metadata_path) or have_transfer, config.metadata_path)
 
     free_gb = shutil.disk_usage(os.path.dirname(config.output_dir) or ".").free / 1e9
-    check("disk space >= 5 GB", free_gb >= 5, f"{free_gb:.1f} GB free")
+    check(f"disk space >= {min_free_gb:g} GB", free_gb >= min_free_gb,
+          f"{free_gb:.1f} GB free")
 
     from pipeline.steps.generate.synthesizers import REGISTRY
 
@@ -290,8 +291,14 @@ def main() -> None:
         cfg_kwargs["metadata_source"] = args.metadata
     cfg = PipelineConfig(**cfg_kwargs) if cfg_kwargs else None
 
+    # Analysis-only runs write reports and figures (tens of MB), not
+    # models and datasets -- a full campaign's 5 GB headroom would block
+    # them pointlessly on a tight disk.
+    analysis_only = bool(args.only) and set(args.only) <= set(ANALYSIS_STEPS)
+    min_free = 1.0 if analysis_only else 5.0
+
     if args.preflight:
-        raise SystemExit(0 if preflight(cfg) else 1)
+        raise SystemExit(0 if preflight(cfg, min_free_gb=min_free) else 1)
 
     # ./run_job.sh stop (and plain `kill`) send SIGTERM, which by default
     # ends the process without unwinding Python -- leaving the status
