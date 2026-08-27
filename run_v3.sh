@@ -56,25 +56,37 @@ stage_running() {
 }
 
 # Re-invoke this stage detached unless we already are the detached child.
+# The CHILD writes its own PID: recording $! here would capture the setsid
+# wrapper, which on systems where setsid must fork exits immediately --
+# making the parent misreport a healthy detached stage as a startup
+# failure (and dump its log to the terminal while the stage kept running).
 maybe_detach() {
   local stage="$1"
-  [ "${V3_DETACHED:-}" = "1" ] && return 0
+  if [ "${V3_DETACHED:-}" = "1" ]; then
+    echo $$ > "$(pid_file "$stage")"
+    return 0
+  fi
   if pid=$(stage_running "$stage"); then
     echo "Stage '$stage' is already running (PID $pid). ./run_v3.sh follow $stage"
     exit 1
   fi
-  local log; log=$(log_file "$stage")
+  local log pf; log=$(log_file "$stage"); pf=$(pid_file "$stage")
+  rm -f "$pf"
   V3_DETACHED=1 setsid nohup bash "$0" "$stage" > "$log" 2>&1 < /dev/null &
-  echo $! > "$(pid_file "$stage")"
-  sleep 2
+  # Wait for the child to record itself (it may be a grandchild of the
+  # launcher when setsid forks, so $! is not authoritative).
+  for _ in 1 2 3 4 5 6 7 8 9 10; do
+    sleep 1
+    [ -f "$pf" ] && break
+  done
   if pid=$(stage_running "$stage"); then
     echo "✅ Stage '$stage' started detached (PID $pid). Safe to disconnect."
     echo "   ./run_v3.sh follow $stage   # live log"
     echo "   ./run_v3.sh status          # all stages"
   else
-    echo "❌ Stage '$stage' exited immediately -- startup failure:"
+    echo "❌ Stage '$stage' really did exit during startup. Last log lines:"
     tail -n 30 "$log"
-    rm -f "$(pid_file "$stage")"
+    rm -f "$pf"
     exit 1
   fi
   exit 0
@@ -269,7 +281,14 @@ stage_pilot() {
   activate_venv
   require_reviewed_domains
   ensure_backup
-  echo "=== DP wiring pilot: dpctgan_eps1_seed0 (~5 min) ==="
+  echo "================================================================"
+  echo "PILOT: this WILL TRAIN one small DP model (dpctgan eps=1) for"
+  echo "about 5 minutes, in this terminal, on purpose: it is the only way"
+  echo "to prove the (epsilon, delta)/public-bounds wiring end-to-end"
+  echo "before any GPU-day is committed. It replaces ONLY the"
+  echo "dpctgan_eps1_seed0 output (slim backup already taken). Nothing"
+  echo "else trains during validation."
+  echo "================================================================"
   py run_one.py --run-id dpctgan_eps1_seed0 --replace
   echo ""
   echo "=== verifying the pilot's recorded DP provenance ==="
@@ -323,7 +342,7 @@ stage_all() {
   echo "########## v3 campaign: full sequence ##########"
   stage_fix_artifacts
   echo ""
-  echo "########## pilot ##########"
+  echo "########## pilot (trains dpctgan eps=1, ~5 min -- expected) ##########"
   py run_one.py --run-id dpctgan_eps1_seed0 --replace
   verify_pilot
   echo ""
