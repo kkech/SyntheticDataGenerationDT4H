@@ -37,28 +37,24 @@ sits next to fresh results:
 | 12 | `figures` | publication-quality figures (ε-curves, TSTR gaps, KS profiles vs floor, DCR histograms, KM overlays, coherence, C2ST, MIA) as PNG+PDF, regenerated from the committed step results | `output/figures/` |
 | 13 | `release_docs` | **codebook** (per-column semantics incl. what a null means), **Datasheet for the Dataset**, **per-file capability labels** (one JSON per released file aggregating fidelity/coherence/distance/attack/gate evidence), and the exact `pip freeze` of the producing environment | `output/release_docs/` |
 
-### The v3 corrected-methods rerun (validate first, long runs last)
+### One runner, one flow
 
-The rerun after the methodology fixes is packaged as staged commands in
-`run_v3.sh`. Running it with **no arguments does only the cheap part** --
-pre-run checks, artifact scrubbing, and a ~5-minute DP wiring pilot with
-automatic verification -- and every long stage refuses to start until that
-validation has passed:
+Everything runs through `run_job.sh` -> `main.py`; there is no separate
+campaign script. The corrected-methods rerun is simply:
 
-```
-./run_v3.sh                # RUN THIS FIRST: validate (~10 min, nothing long)
-./run_v3.sh analysis       # analysis steps over existing outputs + re-gate (detached)
-./run_v3.sh dp-cpu         # MST re-fit lane }  run these two in parallel
-./run_v3.sh dp-gpu         # DP-GAN lane    }  (each detached, ~1 day total)
-./run_v3.sh finalize       # analysis + re-gate over the re-fit outputs
-./run_v3.sh all            # or the whole remaining sequence in one detached job
-./run_v3.sh status | follow <stage> | stop <stage>
-```
-
-DP stages additionally require a human-reviewed `public_domains.json`
-(`reviewed: true`); results are snapshotted via `backup_results.py` before
-the first destructive stage. `FULL=1` widens the DP sweeps to every epsilon
-point; `DRY=1` prints a lane's run list without executing.
+1. **Once, before any DP run**: review `public_domains.json` (each range
+   carries a `basis` naming the public knowledge it rests on; edit anything
+   you would not sign) and set `"reviewed": true`. Preflight and the
+   generate step both refuse DP runs until then, and a DP fit aborts
+   before training if any training value falls outside a declared range.
+2. `python backup_results.py --slim` -- snapshot what a rerun overwrites
+   (generate outputs + DP pickles; fits a tight disk).
+3. `./run_job.sh start --force --extended` -- the full campaign, detached,
+   logging to `logs.txt`, tracked by `./run_job.sh status`. Or
+   `python main.py --analysis` alone to recompute all analysis over
+   existing generated files.
+4. `python release_gate.py --file output/generate/DT4H_Synthetic_<run>.csv`
+   per candidate file, after the analysis steps.
 
 ### Long runs (survives SSH disconnect)
 
@@ -103,8 +99,6 @@ python main.py --extended --force  # full campaign PLUS the roadmap runs (quanti
 python regenerate.py --model output/generate/models/<name>.pkl --rows N --out file.csv
 python conditional_demo.py --model output/generate/models/tvae_seed0.pkl \
     --rows 500 --condition patient_demographics_gender=female --out sample.csv
-python run_one.py --list           # re-run ONE plan entry in place (e.g. after a timeout),
-python run_one.py --run-id aim50_eps5_seed0 --timeout 21600   #   merging it into the summary
                                    #   -- unlike `--only generate`, nothing else is deleted
 python release_gate.py --file output/generate/DT4H_Synthetic_<run>.csv   # go/no-go before distributing
 python release_gate.py --file <...> --policy controlled --note "consortium 2026-08-27"

@@ -127,8 +127,12 @@ case "${1:-}" in
     echo "  follow               stream the timestamped log live"
     echo "  stop                 stop the job without losing completed steps"
     echo ""
-    echo "For the v3 corrected-methods rerun campaign, use ./run_v3.sh (no args ="
-    echo "cheap validation; long stages stay locked until it passes)."
+    echo "  start --force --extended   full campaign INCLUDING the roadmap generators"
+    echo "                             (quantile/capacity TVAE variants, AIM-40, MST eps=0.5,"
+    echo "                             the diffusion baseline, PATE-CTGAN)"
+    echo ""
+    echo "DP runs require the reviewed public_domains.json (make_public_domains.py"
+    echo "writes the template; a human sets reviewed:true). Preflight checks it."
     exit 1
     ;;
 esac

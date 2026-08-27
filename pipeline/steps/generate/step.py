@@ -660,7 +660,7 @@ class GenerateStep(PipelineStep):
                 "",
                 "## Single-run updates",
                 "",
-                "Runs re-executed on their own after the campaign (`run_one.py`), typically "
+                "Runs re-executed on their own after the campaign, typically "
                 "to retry an infrastructural failure such as a time limit. The table above "
                 "shows the latest attempt for each.",
                 "",

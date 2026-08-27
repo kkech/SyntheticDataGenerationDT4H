@@ -223,6 +223,22 @@ def preflight(config: PipelineConfig | None = None, min_free_gb: float = 5.0) ->
     check("synthesizers registered", not unknown,
           ", ".join(sorted({s["synthesizer"] for s in plan})))
 
+    # DP runs are bounded by the reviewed public domain declaration; a
+    # missing or unreviewed file would abort the generate step anyway,
+    # but a long run should be refused HERE, before it detaches.
+    dp_in_plan = any(s.get("epsilon") is not None for s in plan)
+    if dp_in_plan:
+        try:
+            from pipeline.steps.generate.synthesizers.smartnoise_models import load_public_domains
+
+            domains, sha = load_public_domains(config.public_domains_path)
+            check("public domains reviewed (DP runs)", True,
+                  f"{len(domains)} ranges, sha256 {sha[:12]}...")
+        except Exception as e:
+            check("public domains reviewed (DP runs)", False,
+                  f"{e} -- run `python make_public_domains.py`, review every range, "
+                  f"set \"reviewed\": true")
+
     # Rough per-run durations measured on this project's own full-scale
     # runs (T4, 211 columns), for a total-duration expectation only.
     est_minutes = {"gaussian_copula": 1, "tvae": 7, "ctgan": 14,
