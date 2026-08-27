@@ -1,6 +1,6 @@
 {
   "file": "DT4H_Synthetic_aim50_eps1_seed0.csv",
-  "evaluated": "2026-08-27T12:15:14.306911+00:00",
+  "evaluated": "2026-08-27T12:23:55.553845+00:00",
   "policy": "release",
   "policy_thresholds": {
     "coherence_multiplier": 10.0,
@@ -40,7 +40,7 @@
     {
       "check": "distance",
       "passed": true,
-      "detail": "2/500 sampled record(s) (0.4%) closer than the holdout p5 threshold (0.049802, over 88 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share"
+      "detail": "2/500 record(s) (0.4%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.049802, over 88 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share"
     }
   ],
   "measured": {
@@ -53,6 +53,7 @@
     "distance_share": 0.004,
     "distance_sampled": 500,
     "distance_closer": 2,
+    "distance_share_source": "spot check (500 sampled rows)",
     "holdout_p5": 0.049802,
     "holdout_p5_committed": 0.062785,
     "holdout_p5_source": "holdout-vs-train p5 recomputed on the 88-column subset (candidate missing 161 of 249 columns)",

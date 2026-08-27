@@ -1,6 +1,6 @@
 {
   "file": "DT4H_Synthetic_ddpm_seed1.csv",
-  "evaluated": "2026-08-27T12:15:52.259583+00:00",
+  "evaluated": "2026-08-27T12:24:27.244944+00:00",
   "policy": "release",
   "policy_thresholds": {
     "coherence_multiplier": 10.0,
@@ -40,7 +40,7 @@
     {
       "check": "distance",
       "passed": true,
-      "detail": "0/500 sampled record(s) (0.0%) closer than the holdout p5 threshold (0.062785, over 249 column(s)); policy limit 10% = 2x the natural 5% share"
+      "detail": "0/3520 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.062785, over 249 column(s)); policy limit 10% = 2x the natural 5% share"
     }
   ],
   "measured": {
@@ -51,8 +51,9 @@
     "coherence_row_share": 1.0,
     "coherence_row_share_baseline": 0.00767,
     "distance_share": 0.0,
-    "distance_sampled": 500,
+    "distance_sampled": 3520,
     "distance_closer": 0,
+    "distance_share_source": "privacy step (all rows, same encoder)",
     "holdout_p5": 0.062785,
     "holdout_p5_committed": 0.062785,
     "holdout_p5_source": "committed full-width holdout p5 (privacy step)",

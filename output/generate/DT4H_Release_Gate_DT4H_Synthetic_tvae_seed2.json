@@ -1,6 +1,6 @@
 {
   "file": "DT4H_Synthetic_tvae_seed2.csv",
-  "evaluated": "2026-08-27T12:18:51.293396+00:00",
+  "evaluated": "2026-08-27T12:26:56.303250+00:00",
   "policy": "release",
   "policy_thresholds": {
     "coherence_multiplier": 10.0,
@@ -40,7 +40,7 @@
     {
       "check": "distance",
       "passed": false,
-      "detail": "53/500 sampled record(s) (10.6%) closer than the holdout p5 threshold (0.062785, over 249 column(s)); policy limit 10% = 2x the natural 5% share"
+      "detail": "381/3520 record(s) (10.8%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.062785, over 249 column(s)); policy limit 10% = 2x the natural 5% share"
     }
   ],
   "measured": {
@@ -50,9 +50,10 @@
     "coherence_baseline_rules_violated": 6,
     "coherence_row_share": 0.24773,
     "coherence_row_share_baseline": 0.00767,
-    "distance_share": 0.106,
-    "distance_sampled": 500,
-    "distance_closer": 53,
+    "distance_share": 0.1082,
+    "distance_sampled": 3520,
+    "distance_closer": 381,
+    "distance_share_source": "privacy step (all rows, same encoder)",
     "holdout_p5": 0.062785,
     "holdout_p5_committed": 0.062785,
     "holdout_p5_source": "committed full-width holdout p5 (privacy step)",
