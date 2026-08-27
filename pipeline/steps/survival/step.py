@@ -10,6 +10,19 @@ real and synthetic data): the f5a columns record days to the first
 event within a five-year follow-up. A recorded time is an event; a null
 is administrative censoring at 1825 days. This is exactly the
 missingness-carries-meaning semantics the sentinel design preserves.
+A recorded time BEYOND 1825 days is out of horizon: the patient is
+known event-free through the follow-up window, so it is treated as
+CENSORED at 1825 (not an event at the boundary); the count is reported
+per frame as "times_beyond_horizon".
+
+Known, unrepairable asymmetry (disclosed here and in the JSON as
+"decode_note"): the generate step's sentinel decode nulls any synthetic
+numeric value below the column's real observed minimum. For a
+days-to-event column that erases synthetic early events shorter than
+the shortest real event and this step then reads them as censoring at
+1825 days. The original synthetic value is gone from the released CSV,
+so the effect cannot be undone downstream -- synthetic survival can be
+biased upward by exactly those erased early events.
 
 Three comparisons per endpoint:
   * Kaplan-Meier curves for train, holdout, and every synthetic run
@@ -57,10 +70,19 @@ EFFECT_COVARIATES = (
 ONE_YEAR = 365
 
 
+def _km_order(time: np.ndarray, event: np.ndarray) -> np.ndarray:
+    """Stable sort order: time ascending, EVENTS BEFORE CENSORINGS at
+    equal times (the KM convention -- a record censored at t is still at
+    risk for an event at t). np.argsort's default quicksort is unstable
+    and event/censoring order at ties was previously arbitrary, which
+    matters at the 1825-day horizon where censorings pile up."""
+    return np.lexsort((1 - np.asarray(event), np.asarray(time)))
+
+
 def km_curve(time: np.ndarray, event: np.ndarray, grid_days: int = 30):
     """Kaplan-Meier estimate, evaluated on a fixed grid so curves from
     different frames are directly comparable."""
-    order = np.argsort(time)
+    order = _km_order(time, event)
     t, e = time[order], event[order]
     n = len(t)
     at_risk = n - np.arange(n)
@@ -86,7 +108,7 @@ def km_at(time: np.ndarray, event: np.ndarray, horizon: float):
     error. Row-wise accumulation: with d tied events at n at risk the
     per-row terms telescope to the grouped d/(n(n-d)), so ties are
     handled exactly."""
-    order = np.argsort(time)
+    order = _km_order(time, event)
     t, e = time[order], event[order]
     n = len(t)
     at_risk = n - np.arange(n)
@@ -173,17 +195,30 @@ class SurvivalStep(PipelineStep):
         out_dir = config.step_dir(self.name)
         os.makedirs(out_dir, exist_ok=True)
 
-        results = {"follow_up_days": FOLLOW_UP_DAYS, "endpoints": {}, "effects": {}}
+        results = {
+            "follow_up_days": FOLLOW_UP_DAYS,
+            "decode_note": (
+                "Synthetic days-to-event values below the real observed minimum "
+                "were nulled by the generate step's sentinel decode and are read "
+                "here as censoring at 1825 days; erased synthetic early events "
+                "cannot be recovered from the released CSVs, so synthetic "
+                "survival may be biased upward by exactly those events."),
+            "endpoints": {},
+            "effects": {},
+        }
 
         for name, col in ENDPOINTS.items():
             if col not in train.columns:
                 print(f"⚠️  Endpoint column {col} absent; skipping '{name}'.")
                 continue
             print(f"\nEndpoint: {name} ({col})")
-            entry = {"column": col, "curves": {}, "logrank_vs_holdout": {}}
+            entry = {"column": col, "curves": {}, "logrank_vs_holdout": {},
+                     "times_beyond_horizon": {}}
 
-            t_tr, e_tr = self._surv(train, col)
-            t_ho, e_ho = self._surv(holdout, col)
+            t_tr, e_tr, b_tr = self._surv(train, col)
+            t_ho, e_ho, b_ho = self._surv(holdout, col)
+            entry["times_beyond_horizon"]["train"] = b_tr
+            entry["times_beyond_horizon"]["holdout"] = b_ho
             entry["curves"]["train"] = self._curve_record(t_tr, e_tr)
             entry["curves"]["holdout"] = self._curve_record(t_ho, e_ho)
             p_floor = logrank(t_tr, e_tr, t_ho, e_ho)
@@ -203,7 +238,8 @@ class SurvivalStep(PipelineStep):
                 if col not in synth.columns:
                     entry["logrank_vs_holdout"][run_id] = None
                     continue
-                t_s, e_s = self._surv(synth, col)
+                t_s, e_s, b_s = self._surv(synth, col)
+                entry["times_beyond_horizon"][run_id] = b_s
                 entry["curves"][run_id] = self._curve_record(t_s, e_s)
                 p = logrank(t_s, e_s, t_ho, e_ho)
                 entry["logrank_vs_holdout"][run_id] = round(p, 4)
@@ -235,12 +271,19 @@ class SurvivalStep(PipelineStep):
 
     @staticmethod
     def _surv(df, col):
+        """(time, event, times_beyond_horizon). A recorded time beyond
+        the 1825-day follow-up is out of horizon: the patient is known
+        event-free through the window, so it is CENSORED at 1825, not an
+        event at the boundary (the coherence audit flags the same values
+        as violations -- an event at exactly 1825 would double-count
+        them as legitimate deaths)."""
         import pandas as pd
 
         days = pd.to_numeric(df[col], errors="coerce")
-        event = days.notna().to_numpy().astype(int)
+        beyond = days > FOLLOW_UP_DAYS
+        event = (days.notna() & ~beyond).to_numpy().astype(int)
         time = days.fillna(FOLLOW_UP_DAYS).clip(lower=0, upper=FOLLOW_UP_DAYS).to_numpy(dtype=float)
-        return time, event
+        return time, event, int(beyond.sum())
 
     @staticmethod
     def _curve_record(time, event):
@@ -254,7 +297,11 @@ class SurvivalStep(PipelineStep):
 
     def _effect_frame(self, df):
         """Design matrix + 1-year mortality outcome; rows with a missing
-        covariate are dropped (documented complete-case analysis)."""
+        covariate are dropped (documented complete-case analysis).
+        Gender maps male->1, female->0 and ANYTHING else (NaN, 'Missing',
+        unexpected categories) to NaN, so missing gender is dropped by
+        the complete-case filter instead of being silently coded female.
+        Returns (x, y, days, n_dropped_missing_gender)."""
         import pandas as pd
 
         col = ENDPOINTS["all_cause_death"]
@@ -266,28 +313,37 @@ class SurvivalStep(PipelineStep):
             if c not in df.columns:
                 continue
             if c == "patient_demographics_gender":
-                x["male"] = (df[c].astype("object").astype(str).str.lower() == "male").astype(float)
+                g = df[c].astype("object").where(df[c].notna(), "missing").astype(str).str.lower()
+                x["male"] = g.map({"male": 1.0, "female": 0.0})
             else:
                 x[c] = pd.to_numeric(df[c], errors="coerce")
+        dropped_gender = int(x["male"].isna().sum()) if "male" in x.columns else 0
         keep = x.notna().all(axis=1)
-        return x[keep], y[keep], days[keep]
+        return x[keep], y[keep], days[keep], dropped_gender
 
-    def _fit_effects(self, df):
+    def _fit_effects(self, df, scaler: dict | None = None):
         """Standardized effect estimates. Cox (lifelines) if available,
         otherwise logistic regression on 1-year mortality via sklearn.
-        Coefficients are per-SD for numeric covariates, so magnitudes
-        are comparable across frames."""
+        Numeric covariates are standardized by the REAL TRAIN split's
+        mean/SD (`scaler`, from _train_scaler) in EVERY frame, so a
+        synthetic frame with the wrong scale shows up as a coefficient
+        discrepancy instead of being silently re-normalized away; only
+        when no scaler is given (calibration/tests) does the frame
+        standardize by its own moments."""
         import pandas as pd
 
-        x, y, days = self._effect_frame(df)
+        x, y, days, dropped_gender = self._effect_frame(df)
         if len(x) < 100 or y.sum() < 20 or y.sum() == len(y):
             return None
-        # standardize numeric columns (per-SD effects)
+        # standardize numeric columns (per-SD effects on the REAL TRAIN scale)
         xs = x.copy()
         for c in xs.columns:
-            sd = xs[c].std()
-            if c != "male" and sd > 0:
-                xs[c] = (xs[c] - xs[c].mean()) / sd
+            if c == "male":
+                continue
+            mean, sd = (scaler.get(c, (xs[c].mean(), xs[c].std())) if scaler is not None
+                        else (xs[c].mean(), xs[c].std()))
+            if sd and sd > 0:
+                xs[c] = (xs[c] - mean) / sd
         try:
             from lifelines import CoxPHFitter
         except ImportError:
@@ -306,6 +362,7 @@ class SurvivalStep(PipelineStep):
                 cph.fit(frame, duration_col="T", event_col="E")
                 return {"model": "cox_ph (lifelines)", "n": int(len(xs)),
                         "events": int(frame["E"].sum()),
+                        "dropped_missing_gender": dropped_gender,
                         "coefficients": {c: round(float(v), 4)
                                          for c, v in cph.params_.items()}}
             except Exception as e:
@@ -320,6 +377,7 @@ class SurvivalStep(PipelineStep):
             clf.fit(xs, y)
             return {"model": "logistic_1y_mortality (native fallback)", "n": int(len(xs)),
                     "events": int(y.sum()),
+                    "dropped_missing_gender": dropped_gender,
                     "coefficients": {c: round(float(b), 4)
                                      for c, b in zip(xs.columns, clf.coef_[0])}}
         except Exception as e:

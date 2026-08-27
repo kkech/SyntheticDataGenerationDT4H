@@ -103,7 +103,11 @@ def nearest_two_distances(query_num, query_cat, ref_num, ref_cat, exclude_self=F
 
 def summarize_dcr(d1: np.ndarray, d2: np.ndarray) -> dict:
     with np.errstate(divide="ignore", invalid="ignore"):
-        nndr = np.where(d2 > 0, d1 / d2, 1.0)
+        # d2 == 0 means the record coincides EXACTLY with (at least) two
+        # training records -- the most alarming case, not the safest, so
+        # it must score 0 (locked onto real records), never the
+        # "population structure" value 1.
+        nndr = np.where(d2 > 0, d1 / d2, 0.0)
     return {
         "records": int(len(d1)),
         "dcr_min": round(float(d1.min()), 6),

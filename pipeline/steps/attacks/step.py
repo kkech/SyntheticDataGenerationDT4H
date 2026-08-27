@@ -78,6 +78,19 @@ class AttacksStep(PipelineStep):
             with open(encoding_path) as f:
                 encoding = json.load(f)
 
+        # Two representations of the real frames, each for the attacks
+        # that need it. The native MIA/DCR distance paths stay in
+        # SENTINEL space via build_encoder (missing is a concrete
+        # comparable value -- by design, do not decode there). Attribute
+        # inference and anonymeter compare real values against DECODED
+        # synthetic CSVs, so the real frames must be decoded the same way
+        # the generate step decodes its output -- otherwise predicates
+        # systematically miss and risks bias toward 0.
+        from pipeline.steps.generate.step import GenerateStep
+
+        train_decoded, _ = GenerateStep._decode_numeric_missing(train.copy(), config)
+        holdout_decoded, _ = GenerateStep._decode_numeric_missing(holdout.copy(), config)
+
         print(f"Members (train): {train.shape[0]} | non-members (holdout): {holdout.shape[0]}")
         encode, num_cols, cat_cols = build_encoder(train, encoding)
         train_num, train_cat = encode(train)
@@ -104,6 +117,14 @@ class AttacksStep(PipelineStep):
         member_quartile[order] = (np.arange(len(d5)) * 4) // len(d5)
         print(f"  atypicality quartile cuts (informational): "
               f"{[round(float(c), 4) for c in cuts]}")
+        # The SAME atypicality score for non-members (distance to their
+        # 5th-nearest member -- same reference set, same encoder), binned
+        # by the MEMBER quartile cut points. Each stratum is then attacked
+        # within itself (members-in-Qi vs non-members-in-Qi); scoring a
+        # member quartile against ALL non-members would just measure
+        # density (typical members are close to everything), not leakage.
+        d5_non = nearest_k_distances(hold_num, hold_cat, train_num, train_cat, k=5)[:, -1]
+        nonmember_quartile = np.digitize(d5_non, cuts)
 
         results = {"n_members": int(train.shape[0]), "n_nonmembers": int(holdout.shape[0]),
                    "quasi_identifiers": [q for q in QUASI_IDENTIFIERS if q in train.columns],
