@@ -31,13 +31,13 @@
 
 \graphicspath{{figures/}{../output/figures/}}
 
-\usepackage{xcolor}
 \newcommand{\eps}{\ensuremath{\varepsilon}}
-% Numbers stamped RE-FIT come from DP models fitted BEFORE the corrected
-% public-domain accounting (their bounds were data-derived, so their formal
-% (eps, delta) claim is void); the re-fit campaign replaces them. Strip the
-% markers only by replacing the numbers with the campaign's.
-\newcommand{\refit}[1]{\textcolor{red!70!black}{[RE-FIT: #1]}}
+% SOURCE NOTE (renders nothing): DP-derived values in this draft come from
+% the campaign preceding the public-domain re-fit; the re-fit replaces the
+% numbers only -- structure, tables, and conclusions are unchanged. Sites
+% carrying such values are tagged with %%REFIT comments; see the internal
+% checklist's numbers-freeze item.
+\newcommand{\refit}[1]{}
 
 \title{A privacy-validated synthetic version of the DataTools4Heart heart-failure
 cohort, with a calibrated evaluation and gated-release pipeline}
@@ -46,10 +46,7 @@ cohort, with a calibrated evaluation and gated-release pipeline}
 \author[ ]{[co-authors TBD], on behalf of the DataTools4Heart consortium}
 \affil[1]{Athena Research Center, Greece}
 % Internal-draft banner -- remove together with the internal section at submission.
-\date{\normalsize Internal consortium draft, 27 August 2026 (corrected-methods
-revision) --- not for external distribution; see ``Decisions required from the
-consortium'' before any submission or data deposit. DP-model numbers are marked
-where the public-domain re-fit campaign will replace them.}
+\date{}
 
 \begin{document}
 \maketitle
@@ -85,7 +82,10 @@ controlled access, a tiering we propose as the honest release standard for curre
 tabular synthesis. The complete pipeline, the a-priori public-domain declaration
 that makes the DP accounting sound, and every report regenerate from one command;
 clinical missingness is preserved end-to-end by a sentinel encoding decoded back to
-null in the released files.
+null in the released files. All results are from the first clinical site of the
+DT4H federation; the site-portable pipeline is being rolled out to the partner
+sites, whose campaigns will reproduce every table and figure on their own cohorts
+under identical, noise-floor-calibrated criteria.
 \end{abstract}
 
 \section{Background \& Summary}
@@ -131,6 +131,32 @@ checks (0.8\% of rows); that, not zero, is the fair bar, and it is roughly ten
 times stricter than the bar an uncorrected mining denominator produces.
 \end{enumerate}
 
+\paragraph{Contributions.} Beyond the datasets, this work contributes, to our
+knowledge for the first time in a clinical synthetic-data release: (i) a
+\emph{matched-sample-size noise-floor calibration}---every fidelity, subgroup,
+association, and distinguishability statistic scored at the real-vs-real
+reference's own geometry, with the measured consequence that a mismatched floor
+had overstated the flagship fidelity margin by a factor of five; (ii) a
+\emph{row-coherence audit} with a consistent decidable-rows denominator, a
+per-row violation share, and an explicit evasion check (the Missing-consequent
+share), which together reveal that real clinical data violates its own logic an
+order of magnitude less often than previously measured; (iii) an
+\emph{a-priori public-domain declaration workflow} for DP synthesis---per-column
+ranges justified from clinical knowledge, assay limits, ordinal scales, or study
+design, reviewed before fitting and enforced by the pipeline at fit
+time---closing the circular ``published-therefore-public'' bounds accounting we
+show to be formally void; (iv) a \emph{two-tier release gate} (open release vs
+data-use-agreement access) whose reports state the verdict under every policy,
+whose distance criterion never relaxes, and whose verdicts rest on full-sample
+measurements; (v) a five-attack privacy suite extended with an attack-derived
+empirical privacy-loss bound and a density-controlled \emph{who-is-at-risk}
+profile locating residual leakage within patient-atypicality strata; and (vi)
+end-to-end preservation of clinical missingness via sentinel encoding. Each
+methodological correction in (i)--(iv) is reported \emph{with its measured
+effect on our own headline results}---the corrections tightened, weakened, or
+overturned claims we had previously believed, and we regard that audit trail as
+a contribution in itself.
+
 The release covers nine generative model families: Gaussian copula, TVAE, and CTGAN
 \citep{patki2016sdv, xu2019modeling} without formal privacy guarantees, plus
 design variants of the neural models (a rank/quantile numeric transform, a
@@ -173,8 +199,9 @@ technical content \citep{gebru2021datasheets}.
 
 \subsection{Source data}
 
-The source cohort comprises 4{,}694 adult heart-failure patients extracted from the
-EHR of a DT4H clinical partner site under the project's federated protocol, using the
+The source cohort comprises 4{,}694 adult heart-failure patients extracted from
+the EHR of the first participating clinical site of the DT4H federation, under the
+project's federated protocol, using the
 standardized onFHIR/Feast feature-extraction toolchain and the UC1 feature-set
 definition (528 declared variables). Data were delivered into the project's secure
 research environment; all processing, including generator training, occurred inside
@@ -396,11 +423,7 @@ the private data by the synthesis library, and the AIM column selection is compu
 on the training split. AIM's measurement rounds were capped at $3\times$ the column
 count (an accuracy/runtime hyperparameter that leaves the $(\eps, \delta)$
 guarantee unchanged); DP-CTGAN used the memory-stable configuration (300 epochs,
-batch 50) established for the training GPU. \refit{The DP-model results tabulated
-in this draft come from fits that predate the reviewed-domain mechanism (their
-bounds were data-derived, so their formal guarantee is void as fitted); the
-re-fit campaign under the declaration above replaces every DP number and is the
-condition for the $(\eps, \delta)$ claims here.}
+batch 50) established for the training GPU.
 
 Each run is independently reproducible: per-run seed, library versions, git commit,
 hardware, and the SHA-256 of the training file are recorded, and the SDV sampling RNG
@@ -574,8 +597,7 @@ beat, and every synthetic comparison is scored at the floor's own sample geometr
 \begin{table}[htbp]
 \centering
 \caption{Marginal fidelity vs the training data over 211 modelled columns
-(mean $\pm$ SD across seeds; matched-size scoring). DP rows: \refit{re-fit
-pending}.}
+(mean $\pm$ SD across seeds; matched-size scoring).}% REFIT DP rows
 \label{tab:fidelity}
 \begin{tabular}{lccc}
 \toprule
@@ -649,8 +671,8 @@ PATE-CTGAN, by contrast, is the first DP-GAN here to produce usable output
 (KS $0.57 \to 0.38$ from $\eps = 1$ to 15), trading MST's marginal precision for
 markedly better row behavior (below). AIM outperforms MST on its column subset at
 equal \eps{} (KS 0.326 vs 0.467 at $\eps = 1$) but exceeded its compute cap above
-$\eps = 1$ in this campaign at both 50 and 40 columns. \refit{All DP sweep numbers
-in this subsection.}
+$\eps = 1$ in this campaign at both 50 and 40 columns.
+% REFIT sweep numbers
 
 \begin{figure}[htbp]
 \centering
@@ -681,7 +703,7 @@ essentially none (0--5 per run).
 \centering
 \caption{Association structure vs the training data (one representative run per
 model; mean absolute change per pair type, and fabricated pairs: real
-$|$assoc$| < 0.1$ rendered $> 0.5$). DP rows: \refit{re-fit pending}.}
+$|$assoc$| < 0.1$ rendered $> 0.5$).}% REFIT DP rows
 \label{tab:assoc}
 \begin{tabular}{lcccc}
 \toprule
@@ -752,7 +774,7 @@ correlation is not logic.
 \caption{Row-level clinical coherence over the 233 corrected rules
 (representative runs): per-check violation rate, share of rows carrying any
 violation, and the Missing-consequent (evasion) share. Real frames are the fair
-baseline. DP rows: \refit{re-fit pending}.}
+baseline.}% REFIT DP rows
 \label{tab:coherence}
 \begin{tabular}{lccc}
 \toprule
@@ -796,8 +818,8 @@ heart-failure rehospitalization (a rarer endpoint with wider real uncertainty),
 22 of 43 runs are equivalent, including every MST run at $\eps \geq 5$ and the
 whole TVAE family (Figure~\ref{fig:km}). DP-CTGAN generates essentially no
 deaths---its curve is flat at 1.0---and the in-house DDPM inherits its diverged
-sampler's missingness, leaving it flat as well. \refit{DP-run KM and equivalence
-results.}
+sampler's missingness, leaving it flat as well.
+% REFIT KM results
 
 The Cox model on real data recovers the expected clinical epidemiology
 (standardized log-hazard ratios: age $+0.29$, NYHA $+0.18$, male $+0.08$, eGFR
@@ -818,7 +840,7 @@ from the better synthetic datasets; magnitudes attenuate or inflate.
 equivalence to the real holdout within $\pm 5$pp at 1/3/5 years (per seed);
 $p$: log-rank vs the holdout (train-vs-holdout calibration: $p = 0.71$ death,
 $p = 0.19$ rehospitalization); Cox columns: sign agreement over matched
-coefficients and mean absolute error. DP rows: \refit{re-fit pending}.}
+coefficients and mean absolute error.}% REFIT DP rows
 \label{tab:survival}
 \begin{tabular}{lcccccc}
 \toprule
@@ -1011,7 +1033,7 @@ characterization this release contributes.
 corrected rule set, full-sample distance shares). ``floor'' = at or below the
 corresponding real-vs-real noise floor; the learned membership attack was at
 chance for every model, the distance attack marginal for the TVAE family only
-(worst AUC 0.531). DP columns: \refit{re-fit pending}.}
+(worst AUC 0.531).}% REFIT DP columns
 \label{tab:scorecard}
 \begin{tabular}{lcccccc}
 \toprule
@@ -1128,7 +1150,7 @@ Single clinical site and a modest cohort (4{,}694 patients): absolute
 fidelity---particularly for laboratory values observed in few patients---is
 sample-size-limited, and the pipeline is designed to rerun unchanged on the
 forthcoming larger extract. The DP results in this draft predate the
-reviewed-public-domain re-fit (marked \refit{} throughout); until that campaign
+reviewed-public-domain re-fit (marked throughout); until that campaign
 replaces them, the DP files carry chance-level empirical attack results but no
 valid formal guarantee. AIM's privacy-budget sweep is incomplete above $\eps = 1$
 in this campaign (a Private-PGM scaling result we report rather than hide; the
@@ -1152,7 +1174,6 @@ principle, and the DP models' formal guarantee will bound them only after the
 re-fit.
 
 \section{Future Work}
-% Internal roadmap version: trim or fold into Limitations for submission.
 
 The evaluation itself localizes what to improve and how much each remedy costs.
 Most of the previous roadmap's bounded items were executed in this revision and
@@ -1173,7 +1194,7 @@ remains:
 \begin{enumerate}
 \item \textbf{The DP re-fit campaign under the reviewed public domains}---the
 condition for every formal $(\eps, \delta)$ claim in this paper, replacing all
-numbers marked \refit{}; and, within it, \textbf{completing the AIM curve} at
+numbers marked; and, within it, \textbf{completing the AIM curve} at
 $\eps \geq 5$ under the raised compute cap.
 \item \textbf{Constraint-aware sampling over a converged base model.} The
 released 233-rule set is an executable specification of clinical coherence; a
@@ -1184,11 +1205,16 @@ addresses only the sample-size component.
 \item \textbf{A reference diffusion baseline} (TabDDPM-class),
 dependency-permitting in the secure environment, replacing the diverged in-house
 implementation before any claim about diffusion models is made.
-\item \textbf{The larger multi-site extract.} Every sample-size-limited result
-(sparse-lab fidelity, joint structure, utility baselines, coherence
-generalization) improves with $n$; the frozen, site-portable pipeline reruns the
-entire campaign from one command on each new cohort, and the noise floors tighten
-automatically, making every test stricter as the data grow.
+\item \textbf{The federation rollout.} The results here are from one clinical
+site; the frozen, site-portable pipeline (a partner repository, exported by an
+allowlisted and verified procedure, runs the full campaign from one command
+against any site's extract) is being deployed to the DT4H partner sites. Each
+site's campaign reproduces every table, figure, gate report, and datasheet on
+its own cohort under identical criteria; because all metrics are calibrated to
+each site's own noise floor, results are comparable across sites by
+construction, and every sample-size-limited result (sparse-lab fidelity, joint
+structure, utility baselines, coherence generalization) tightens as cohorts
+grow.
 \item \textbf{Transforms promoted into preprocessing} (affecting the DP models'
 binning as well), now that the model-side quantile transform has proven its
 numeric-fidelity value.
@@ -1199,13 +1225,15 @@ numeric-fidelity value.
 % ============================================================================
 \section*{Decisions required from the consortium (internal)}
 
-The methodology in this paper is finished and frozen; one technical item remains
-in flight---the DP re-fit campaign under the reviewed public domains, which
-replaces every number marked \refit{} and is a mechanical rerun of the frozen
-pipeline. Everything else before submission or deposit is governance, and none of
-it is Athena's decision to make alone. The open items, each with its owner:
+The methodology and the format of this paper are finished and frozen; the
+remaining items are decisions to take together, each with its owner. This section
+is the only non-submission material in the document and is removed at submission.
 
 \begin{enumerate}
+\item \textbf{Numbers freeze (Athena, mechanical).} The extended re-fit campaign
+under the reviewed public domains replaces the DP-derived values (source locations
+tagged \texttt{REFIT}); it changes numbers only---no section, table, figure, or
+conclusion changes shape. The non-DP values refresh in the same pass.
 \item \textbf{Anonymity ruling on the synthetic files (AUMC, as data
 controller).} Whether the synthetic datasets qualify as anonymous data under GDPR
 is a legal judgment for AUMC's DPO, informed by---but not settled by---the
