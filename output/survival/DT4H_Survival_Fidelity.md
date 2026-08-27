@@ -1,10 +1,14 @@
 # Survival Fidelity
 
-Endpoints use the five-year follow-up columns: a recorded days-to-event is an event, a null is administrative censoring at 1825 days -- the same rule for real and synthetic data. The train-vs-holdout log-rank p-value calibrates what pure sampling noise looks like.
+Endpoints use the five-year follow-up columns: a recorded days-to-event is an event, a null is administrative censoring at 1825 days -- the same rule for real and synthetic data. A recorded time beyond 1825 days is treated as censoring at 1825 (out of horizon), counted per frame as `times_beyond_horizon`. The train-vs-holdout log-rank p-value calibrates what pure sampling noise looks like.
+
+Disclosure: synthetic days-to-event values below the real observed minimum were nulled by the sentinel decode upstream and are read here as censoring; those erased early events cannot be recovered from the released CSVs (see `decode_note` in the JSON).
+
+Effect-replication covariates are standardized in EVERY frame (real train, real holdout, synthetic) by the REAL TRAIN split's mean/SD, so scale infidelity in a synthetic frame shows up as a coefficient discrepancy instead of being re-normalized away.
 
 ## all_cause_death
 
-train events 1421/3520 | holdout 484/1174 | log-rank train-vs-holdout p = 0.6785
+train events 1421/3520 | holdout 483/1174 | log-rank train-vs-holdout p = 0.7078 | times beyond 1825d censored at horizon: {'holdout': 1}
 
 | run | 1y survival | 5y survival | log-rank vs holdout (p) | equivalent (TOST ±5pp, 1y/3y/5y) |
 |---|---|---|---|---|
@@ -13,7 +17,7 @@ train events 1421/3520 | holdout 484/1174 | log-rank train-vs-holdout p = 0.6785
 | aim40_eps1_seed0 | - | - | None | - |
 | aim50_eps1_seed0 | - | - | None | - |
 | ctgan_qt_seed0 | 0.87102 | 0.70909 | 0.0 | no |
-| ctgan_seed0 | 0.80199 | 0.65455 | 0.0001 | no |
+| ctgan_seed0 | 0.80199 | 0.65455 | 0.0002 | no |
 | ctgan_seed1 | 0.88295 | 0.81847 | 0.0 | no |
 | ctgan_seed2 | 0.8679 | 0.79148 | 0.0 | no |
 | ddpm_g_seed0 | 1.0 | 1.0 | 0.0 | no |
@@ -31,27 +35,27 @@ train events 1421/3520 | holdout 484/1174 | log-rank train-vs-holdout p = 0.6785
 | gaussian_copula_seed0 | 0.86364 | 0.67159 | 0.0 | no |
 | gaussian_copula_seed1 | 0.87216 | 0.69972 | 0.0 | no |
 | gaussian_copula_seed2 | 0.87074 | 0.6983 | 0.0 | no |
-| mst_eps0p5_seed0 | 0.77614 | 0.5429 | 0.6785 | no |
-| mst_eps10_seed0 | 0.74119 | 0.6071 | 0.0164 | no |
-| mst_eps15_seed0 | 0.74574 | 0.59659 | 0.051 | yes ✅ |
-| mst_eps15_seed1 | 0.74261 | 0.59261 | 0.0859 | no |
-| mst_eps15_seed2 | 0.74403 | 0.60142 | 0.0314 | no |
+| mst_eps0p5_seed0 | 0.77614 | 0.5429 | 0.65 | no |
+| mst_eps10_seed0 | 0.74119 | 0.6071 | 0.0184 | no |
+| mst_eps15_seed0 | 0.74574 | 0.59659 | 0.0562 | yes ✅ |
+| mst_eps15_seed1 | 0.74261 | 0.59261 | 0.0938 | no |
+| mst_eps15_seed2 | 0.74403 | 0.60142 | 0.0349 | no |
 | mst_eps1_seed0 | 0.77926 | 0.64545 | 0.0 | no |
-| mst_eps20_seed0 | 0.74318 | 0.59347 | 0.0806 | no |
-| mst_eps5_seed0 | 0.74261 | 0.61307 | 0.0052 | no |
-| mst_eps8_seed0 | 0.74119 | 0.59886 | 0.0468 | no |
+| mst_eps20_seed0 | 0.74318 | 0.59347 | 0.088 | no |
+| mst_eps5_seed0 | 0.74261 | 0.61307 | 0.0059 | no |
+| mst_eps8_seed0 | 0.74119 | 0.59886 | 0.0516 | no |
 | patectgan_eps15_seed0 | 0.99602 | 0.9892 | 0.0 | no |
 | patectgan_eps1_seed0 | 0.96818 | 0.96761 | 0.0 | no |
 | patectgan_eps5_seed0 | 0.99631 | 0.99574 | 0.0 | no |
-| tvae_cap256_seed0 | 0.7875 | 0.59403 | 0.5981 | yes ✅ |
+| tvae_cap256_seed0 | 0.7875 | 0.59403 | 0.626 | yes ✅ |
 | tvae_ep1000_seed0 | 0.82955 | 0.65227 | 0.0 | no |
-| tvae_ind_seed0 | 0.74716 | 0.56989 | 0.3345 | yes ✅ |
-| tvae_qt_seed0 | 0.72727 | 0.62699 | 0.0565 | no |
-| tvae_qt_seed1 | 0.75256 | 0.6358 | 0.0033 | no |
-| tvae_qt_seed2 | 0.77102 | 0.62472 | 0.0098 | no |
+| tvae_ind_seed0 | 0.74716 | 0.56989 | 0.3155 | yes ✅ |
+| tvae_qt_seed0 | 0.72727 | 0.62699 | 0.062 | no |
+| tvae_qt_seed1 | 0.75256 | 0.6358 | 0.0038 | no |
+| tvae_qt_seed2 | 0.77102 | 0.62472 | 0.0111 | no |
 | tvae_seed0 | 0.79659 | 0.64517 | 0.0001 | no |
 | tvae_seed1 | 0.80284 | 0.66875 | 0.0 | no |
-| tvae_seed2 | 0.77273 | 0.61932 | 0.0301 | no |
+| tvae_seed2 | 0.77273 | 0.61932 | 0.0333 | no |
 
 Equivalence is a POSITIVE claim (90% CI of the survival difference within ±5pp at every horizon) -- unlike a non-significant log-rank, which is only absence of evidence.
 
@@ -110,51 +114,51 @@ Equivalence is a POSITIVE claim (90% CI of the survival difference within ±5pp 
 
 ## Effect-estimate replication
 
-Model: cox_ph (lifelines), standardized (per-SD) coefficients.
+Model: cox_ph (lifelines), per-SD coefficients standardized by the real TRAIN split's mean/SD in every frame. The coefficient error is computed only over covariates present in BOTH the real and the synthetic fit (`matched`); runs sharing fewer than 4 covariates are not comparable.
 
-| frame | n | events | sign agreement | mean |coef error| |
-|---|---|---|---|---|
-| real train | 727 | 294 | - | - |
-| real holdout | 281 | 108 | - | - |
-| aim40_eps1_seed0 | - | - | not estimable | - |
-| aim50_eps1_seed0 | - | - | not estimable | - |
-| ctgan_qt_seed0 | 271 | 99 | 6/6 | 0.0425 |
-| ctgan_seed0 | 442 | 187 | 2/6 | 0.1648 |
-| ctgan_seed1 | 774 | 164 | 2/6 | 0.2128 |
-| ctgan_seed2 | 397 | 94 | 5/6 | 0.0981 |
-| ddpm_g_seed0 | - | - | not estimable | - |
-| ddpm_seed0 | - | - | not estimable | - |
-| ddpm_seed1 | - | - | not estimable | - |
-| ddpm_seed2 | - | - | not estimable | - |
-| dpctgan_eps10_seed0 | - | - | not estimable | - |
-| dpctgan_eps15_seed0 | - | - | not estimable | - |
-| dpctgan_eps15_seed1 | - | - | not estimable | - |
-| dpctgan_eps15_seed2 | - | - | not estimable | - |
-| dpctgan_eps1_seed0 | - | - | not estimable | - |
-| dpctgan_eps20_seed0 | - | - | not estimable | - |
-| dpctgan_eps5_seed0 | - | - | not estimable | - |
-| dpctgan_eps8_seed0 | - | - | not estimable | - |
-| gaussian_copula_seed0 | 712 | 220 | 5/6 | 0.086 |
-| gaussian_copula_seed1 | 721 | 215 | 4/6 | 0.0981 |
-| gaussian_copula_seed2 | 736 | 217 | 3/6 | 0.1125 |
-| mst_eps0p5_seed0 | 1122 | 664 | 3/6 | 0.3942 |
-| mst_eps10_seed0 | 810 | 329 | 5/6 | 0.161 |
-| mst_eps15_seed0 | 815 | 506 | 5/6 | 0.2094 |
-| mst_eps15_seed1 | 814 | 402 | 5/6 | 0.2242 |
-| mst_eps15_seed2 | 821 | 444 | 5/6 | 0.1672 |
-| mst_eps1_seed0 | 759 | 546 | 1/6 | 0.4065 |
-| mst_eps20_seed0 | 835 | 439 | 5/6 | 0.1864 |
-| mst_eps5_seed0 | 783 | 304 | 3/6 | 0.2322 |
-| mst_eps8_seed0 | 824 | 622 | 5/6 | 0.098 |
-| patectgan_eps15_seed0 | - | - | not estimable | - |
-| patectgan_eps1_seed0 | 2402 | 81 | 1/6 | 0.3081 |
-| patectgan_eps5_seed0 | - | - | not estimable | - |
-| tvae_cap256_seed0 | 109 | 54 | 3/6 | 0.3297 |
-| tvae_ep1000_seed0 | 127 | 27 | 5/6 | 0.5451 |
-| tvae_ind_seed0 | - | - | not estimable | - |
-| tvae_qt_seed0 | 245 | 71 | 6/6 | 0.3567 |
-| tvae_qt_seed1 | 193 | 36 | 4/6 | 0.67 |
-| tvae_qt_seed2 | 162 | 49 | 4/6 | 0.2152 |
-| tvae_seed0 | 117 | 26 | 5/6 | 0.9705 |
-| tvae_seed1 | 128 | 41 | 2/6 | 0.4664 |
-| tvae_seed2 | - | - | not estimable | - |
+| frame | n | events | sign agreement | coef matched | mean |coef error| |
+|---|---|---|---|---|---|
+| real train | 727 | 294 | - | - | - |
+| real holdout | 281 | 108 | - | - | - |
+| aim40_eps1_seed0 | - | - | - | - | not estimable |
+| aim50_eps1_seed0 | - | - | - | - | not estimable |
+| ctgan_qt_seed0 | 271 | 99 | 6/6 | 6/6 | 0.0442 |
+| ctgan_seed0 | 442 | 187 | 2/6 | 6/6 | 0.1732 |
+| ctgan_seed1 | 774 | 164 | 2/6 | 6/6 | 0.208 |
+| ctgan_seed2 | 397 | 94 | 5/6 | 6/6 | 0.083 |
+| ddpm_g_seed0 | - | - | - | - | not estimable |
+| ddpm_seed0 | - | - | - | - | not estimable |
+| ddpm_seed1 | - | - | - | - | not estimable |
+| ddpm_seed2 | - | - | - | - | not estimable |
+| dpctgan_eps10_seed0 | - | - | - | - | not estimable |
+| dpctgan_eps15_seed0 | - | - | - | - | not estimable |
+| dpctgan_eps15_seed1 | - | - | - | - | not estimable |
+| dpctgan_eps15_seed2 | - | - | - | - | not estimable |
+| dpctgan_eps1_seed0 | - | - | - | - | not estimable |
+| dpctgan_eps20_seed0 | - | - | - | - | not estimable |
+| dpctgan_eps5_seed0 | - | - | - | - | not estimable |
+| dpctgan_eps8_seed0 | - | - | - | - | not estimable |
+| gaussian_copula_seed0 | 712 | 220 | 5/6 | 6/6 | 0.0776 |
+| gaussian_copula_seed1 | 721 | 215 | 4/6 | 6/6 | 0.0919 |
+| gaussian_copula_seed2 | 736 | 217 | 3/6 | 6/6 | 0.1097 |
+| mst_eps0p5_seed0 | 1122 | 664 | 3/6 | 6/6 | 0.398 |
+| mst_eps10_seed0 | 810 | 329 | 5/6 | 6/6 | 0.1767 |
+| mst_eps15_seed0 | 815 | 506 | 5/6 | 6/6 | 0.2392 |
+| mst_eps15_seed1 | 814 | 402 | 5/6 | 6/6 | 0.2898 |
+| mst_eps15_seed2 | 821 | 444 | 5/6 | 6/6 | 0.1834 |
+| mst_eps1_seed0 | 759 | 546 | 1/6 | 6/6 | 0.3704 |
+| mst_eps20_seed0 | 835 | 439 | 5/6 | 6/6 | 0.2184 |
+| mst_eps5_seed0 | 783 | 304 | 3/6 | 6/6 | 0.286 |
+| mst_eps8_seed0 | 824 | 622 | 5/6 | 6/6 | 0.1229 |
+| patectgan_eps15_seed0 | - | - | - | - | not estimable |
+| patectgan_eps1_seed0 | 2402 | 81 | 1/6 | 6/6 | 0.3767 |
+| patectgan_eps5_seed0 | - | - | - | - | not estimable |
+| tvae_cap256_seed0 | 109 | 54 | 3/6 | 6/6 | 0.5218 |
+| tvae_ep1000_seed0 | 127 | 27 | 5/6 | 6/6 | 0.7413 |
+| tvae_ind_seed0 | - | - | - | - | not estimable |
+| tvae_qt_seed0 | 245 | 71 | 6/6 | 6/6 | 0.4001 |
+| tvae_qt_seed1 | 193 | 36 | 4/6 | 6/6 | 0.6953 |
+| tvae_qt_seed2 | 162 | 49 | 4/6 | 6/6 | 0.197 |
+| tvae_seed0 | 117 | 26 | 5/6 | 6/6 | 1.1049 |
+| tvae_seed1 | 128 | 41 | 2/6 | 6/6 | 0.6827 |
+| tvae_seed2 | - | - | - | - | not estimable |

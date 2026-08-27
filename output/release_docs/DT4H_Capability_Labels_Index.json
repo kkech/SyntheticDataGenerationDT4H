@@ -4,253 +4,337 @@
       "run_id": "gaussian_copula_seed0",
       "synthesizer": "gaussian_copula",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "gaussian_copula_seed1",
       "synthesizer": "gaussian_copula",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "gaussian_copula_seed2",
       "synthesizer": "gaussian_copula",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "tvae_seed0",
       "synthesizer": "tvae",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "tvae_seed1",
       "synthesizer": "tvae",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "tvae_seed2",
       "synthesizer": "tvae",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "ctgan_seed0",
       "synthesizer": "ctgan",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "ctgan_seed1",
       "synthesizer": "ctgan",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "ctgan_seed2",
       "synthesizer": "ctgan",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "dpctgan_eps1_seed0",
       "synthesizer": "dpctgan",
       "epsilon": 1.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "dpctgan_eps5_seed0",
       "synthesizer": "dpctgan",
       "epsilon": 5.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "dpctgan_eps8_seed0",
       "synthesizer": "dpctgan",
       "epsilon": 8.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "dpctgan_eps10_seed0",
       "synthesizer": "dpctgan",
       "epsilon": 10.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "dpctgan_eps15_seed0",
       "synthesizer": "dpctgan",
       "epsilon": 15.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "dpctgan_eps20_seed0",
       "synthesizer": "dpctgan",
       "epsilon": 20.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "dpctgan_eps15_seed1",
       "synthesizer": "dpctgan",
       "epsilon": 15.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "dpctgan_eps15_seed2",
       "synthesizer": "dpctgan",
       "epsilon": 15.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "aim50_eps1_seed0",
       "synthesizer": "aim",
       "epsilon": 1.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "mst_eps1_seed0",
       "synthesizer": "mst",
       "epsilon": 1.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "mst_eps5_seed0",
       "synthesizer": "mst",
       "epsilon": 5.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "mst_eps8_seed0",
       "synthesizer": "mst",
       "epsilon": 8.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "mst_eps10_seed0",
       "synthesizer": "mst",
       "epsilon": 10.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "mst_eps15_seed0",
       "synthesizer": "mst",
       "epsilon": 15.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "mst_eps20_seed0",
       "synthesizer": "mst",
       "epsilon": 20.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "mst_eps15_seed1",
       "synthesizer": "mst",
       "epsilon": 15.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "mst_eps15_seed2",
       "synthesizer": "mst",
       "epsilon": 15.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "tvae_qt_seed0",
       "synthesizer": "tvae_qt",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "tvae_qt_seed1",
       "synthesizer": "tvae_qt",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "tvae_qt_seed2",
       "synthesizer": "tvae_qt",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "tvae_cap256_seed0",
       "synthesizer": "tvae_cap256",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "tvae_ep1000_seed0",
       "synthesizer": "tvae_ep1000",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "tvae_ind_seed0",
       "synthesizer": "tvae_ind",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "ctgan_qt_seed0",
       "synthesizer": "ctgan_qt",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "aim40_eps1_seed0",
       "synthesizer": "aim40",
       "epsilon": 1.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "ddpm_seed0",
       "synthesizer": "ddpm",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "ddpm_seed1",
       "synthesizer": "ddpm",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "ddpm_seed2",
       "synthesizer": "ddpm",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "ddpm_g_seed0",
       "synthesizer": "ddpm_g",
       "epsilon": null,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "patectgan_eps1_seed0",
       "synthesizer": "patectgan",
       "epsilon": 1.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "patectgan_eps5_seed0",
       "synthesizer": "patectgan",
       "epsilon": 5.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "patectgan_eps15_seed0",
       "synthesizer": "patectgan",
       "epsilon": 15.0,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     },
     {
       "run_id": "mst_eps0p5_seed0",
       "synthesizer": "mst",
       "epsilon": 0.5,
-      "release_gate": "not gated"
+      "release_gate": "not gated",
+      "release_gate_policy": null,
+      "cleared_for_open_release": null
     }
   ],
   "directory": "labels/"

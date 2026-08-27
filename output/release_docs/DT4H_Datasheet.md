@@ -19,8 +19,8 @@ Structure follows *Datasheets for Datasets* (Gebru et al., 2021).
   cohort held out for evaluation and never shown to any generator).
 - Column semantics: see `DT4H_Codebook.md`. Missingness is preserved by design and
   carries meaning (structural "no event" vs "not measured").
-- No real patient records, identifiers, or verbatim rows are included (verified:
-  zero exact training-row reproductions in every released file).
+- No real patient records or identifiers are included. Verbatim-row check --
+  verified: zero exact training-row reproductions across all 42 assessed released file(s) (DT4H_Privacy_Assessment.json).
 
 ## Collection & preprocessing
 - Source data were extracted from the electronic health records of the providing
@@ -32,8 +32,7 @@ Structure follows *Datasheets for Datasets* (Gebru et al., 2021).
   only aggregate statistics, synthetic records and reports leave it. Processing
   is governed by the project's data-sharing and governance agreements between
   the consortium partners.
-- Preprocessing is provably distribution-preserving (KS = 0, TVD = 0 vs raw on all
-  retained columns) and fully scripted; see `DT4H_Preprocessing_Summary.md`.
+- Preprocessing is fully scripted (see `DT4H_Preprocessing_Summary.md`). NOT VERIFIED IN THIS BUILD: no per-column KS/TVD-vs-raw distribution-preservation check is recorded, so no distribution-preserving guarantee is asserted here.
 - Generators: see the run plan in `DT4H_Generation_Summary.md` (seeds, epsilon
   values, library versions, git commit `8e6809374b5caec2dc52369eb4c1bb5781e123a9`,
   training-file SHA-256).
@@ -49,8 +48,7 @@ Structure follows *Datasheets for Datasets* (Gebru et al., 2021).
 - Record-level distances, membership-inference and attribute-inference attacks are
   reported in `DT4H_Privacy_Assessment.md` and `DT4H_Privacy_Attacks.md`, all
   evaluated against a genuine unseen-patient baseline.
-- DP-labelled files carry a formal (epsilon, delta) guarantee by construction;
-  column domains are treated as public metadata (released in the encoding map).
+- DP-labelled files were fit with a per-run epsilon, but this build did NOT record a delta or a reviewed public-domain source: column bounds were data-derived, so the formal (epsilon, delta) guarantee is void for these files. See Uses/limitations; treat their privacy as empirical (attacks and record-level distances) until a DP re-fit records the (epsilon, delta) and public-domain provenance.
 - Every file must pass `release_gate.py` before distribution.
 
 ## Distribution & maintenance

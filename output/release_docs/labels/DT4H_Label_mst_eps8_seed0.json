@@ -12,16 +12,16 @@
   "rows": 3520,
   "columns": 249,
   "fidelity": {
-    "ks_mean_numeric": 0.4134,
-    "tvd_mean_categorical": 0.003,
-    "missing_rate_mad": 0.0046,
+    "ks_mean_numeric": 0.4186,
+    "tvd_mean_categorical": 0.0087,
+    "missing_rate_mad": 0.0053,
     "c2st_auc": 1.0
   },
   "joint_structure": {
-    "fabricated_association_pairs": 2034
+    "fabricated_association_pairs": 2360
   },
   "row_coherence": {
-    "violation_rate": 0.06099
+    "violation_rate": 0.04516
   },
   "survival": {
     "all_cause_death": false,
@@ -37,10 +37,12 @@
     "mia_auc": 0.5178,
     "mia_learned_auc": 0.5022,
     "empirical_epsilon_lower_bound": 0.0368,
-    "mia_auc_most_atypical_quartile": 0.239,
-    "aia_worst_membership_advantage": 0.004,
-    "singling_out_risk": 0.0132,
+    "mia_auc_most_atypical_quartile": 0.4953,
+    "aia_worst_membership_advantage": 0.0254,
+    "singling_out_risk": 0.0182,
     "linkability_risk": 0.0
   },
-  "release_gate": "not gated"
+  "release_gate": "not gated",
+  "release_gate_policy": null,
+  "cleared_for_open_release": null
 }

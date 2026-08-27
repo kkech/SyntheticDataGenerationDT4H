@@ -20,43 +20,35 @@
     "completed_at": "2026-08-26T18:31:55.066472+00:00"
   },
   "evaluate": {
-    "completed": false,
-    "failed_at": "2026-08-27T10:17:31.207544+00:00",
-    "error": "KeyboardInterrupt: "
+    "completed": true,
+    "completed_at": "2026-08-27T11:20:08.979521+00:00"
   },
   "utility": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-27T10:06:31.592194+00:00"
+    "completed": true,
+    "completed_at": "2026-08-27T11:35:41.580949+00:00"
   },
   "privacy": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-27T10:06:31.592494+00:00"
+    "completed": true,
+    "completed_at": "2026-08-27T11:40:24.658039+00:00"
   },
   "coherence": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-27T10:06:31.591719+00:00"
+    "completed": true,
+    "completed_at": "2026-08-27T11:21:50.827480+00:00"
   },
   "survival": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-27T10:06:31.591944+00:00"
+    "completed": true,
+    "completed_at": "2026-08-27T11:24:11.125984+00:00"
   },
   "attacks": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-27T10:06:31.592720+00:00"
+    "completed": true,
+    "completed_at": "2026-08-27T11:51:28.545837+00:00"
   },
   "figures": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-27T10:06:31.592942+00:00"
+    "completed": true,
+    "completed_at": "2026-08-27T11:51:33.428688+00:00"
   },
   "release_docs": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-27T10:06:31.593195+00:00"
+    "completed": true,
+    "completed_at": "2026-08-27T11:51:33.896663+00:00"
   }
 }
