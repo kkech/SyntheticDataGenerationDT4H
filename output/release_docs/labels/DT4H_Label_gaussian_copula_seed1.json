@@ -1,0 +1,46 @@
+{
+  "run_id": "gaussian_copula_seed1",
+  "file": "DT4H_Synthetic_gaussian_copula_seed1.csv",
+  "synthesizer": "gaussian_copula",
+  "base_synthesizer": "gaussian_copula",
+  "run_transform": null,
+  "differential_privacy": {
+    "formal_guarantee": false,
+    "epsilon": null
+  },
+  "seed": 1,
+  "rows": 3520,
+  "columns": 249,
+  "fidelity": {
+    "ks_mean_numeric": 0.4396,
+    "tvd_mean_categorical": 0.0088,
+    "missing_rate_mad": 0.1229,
+    "c2st_auc": 1.0
+  },
+  "joint_structure": {
+    "fabricated_association_pairs": 2
+  },
+  "row_coherence": {
+    "violation_rate": 0.27885
+  },
+  "survival": {
+    "all_cause_death": false,
+    "hf_rehospitalization": false
+  },
+  "distances": {
+    "verbatim_training_rows": 0,
+    "dcr_median": 0.173972,
+    "share_closer_than_holdout_p5": 0.0,
+    "nndr_median": 0.978
+  },
+  "attacks": {
+    "mia_auc": 0.5092,
+    "mia_learned_auc": 0.4807,
+    "empirical_epsilon_lower_bound": 0.0,
+    "mia_auc_most_atypical_quartile": 0.1858,
+    "aia_worst_membership_advantage": 0.0153,
+    "singling_out_risk": 0.0,
+    "linkability_risk": 0.0
+  },
+  "release_gate": "not gated"
+}

@@ -35,7 +35,7 @@ Structure follows *Datasheets for Datasets* (Gebru et al., 2021).
 - Preprocessing is provably distribution-preserving (KS = 0, TVD = 0 vs raw on all
   retained columns) and fully scripted; see `DT4H_Preprocessing_Summary.md`.
 - Generators: see the run plan in `DT4H_Generation_Summary.md` (seeds, epsilon
-  values, library versions, git commit `442d534d53f38fab51473120ea7a1c3fec6aca28`,
+  values, library versions, git commit `8e6809374b5caec2dc52369eb4c1bb5781e123a9`,
   training-file SHA-256).
 
 ## Uses

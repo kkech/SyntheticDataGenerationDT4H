@@ -1,0 +1,46 @@
+{
+  "run_id": "aim50_eps1_seed0",
+  "file": "DT4H_Synthetic_aim50_eps1_seed0.csv",
+  "synthesizer": "aim",
+  "base_synthesizer": "aim",
+  "run_transform": null,
+  "differential_privacy": {
+    "formal_guarantee": true,
+    "epsilon": 1.0
+  },
+  "seed": 0,
+  "rows": 3520,
+  "columns": 88,
+  "fidelity": {
+    "ks_mean_numeric": 0.3251,
+    "tvd_mean_categorical": 0.0144,
+    "missing_rate_mad": 0.0123,
+    "c2st_auc": 1.0
+  },
+  "joint_structure": {
+    "fabricated_association_pairs": 27
+  },
+  "row_coherence": {
+    "violation_rate": 0.05282
+  },
+  "survival": {
+    "all_cause_death": null,
+    "hf_rehospitalization": null
+  },
+  "distances": {
+    "verbatim_training_rows": 0,
+    "dcr_median": 0.384297,
+    "share_closer_than_holdout_p5": 0.0,
+    "nndr_median": 0.9934
+  },
+  "attacks": {
+    "mia_auc": 0.4988,
+    "mia_learned_auc": 0.4773,
+    "empirical_epsilon_lower_bound": 0.0953,
+    "mia_auc_most_atypical_quartile": 0.2752,
+    "aia_worst_membership_advantage": 0.0234,
+    "singling_out_risk": 0.0099,
+    "linkability_risk": 0.0
+  },
+  "release_gate": "not gated"
+}

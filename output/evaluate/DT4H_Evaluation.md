@@ -346,7 +346,7 @@ Absolute change in pairwise association; 0 = relationship perfectly preserved. `
 | tvae_ep1000_seed0 | corr-ratio (num-cat) | 11092 | 0.039 | 0.0225 | 0.9026 | 9 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w1a_first` (0.8193 -> 0.0) |
 | tvae_ind_seed0 | Spearman (num-num) | 1671 | 0.0895 | 0.0684 | 0.6613 | 4 | `lab_results_tropTHs_value_first|lab_results_tropTnHs_value_first` (1.0 -> -0.2047) |
 | tvae_ind_seed0 | Cramer's V (cat-cat) | 8128 | 0.0499 | 0.0296 | 0.862 | 0 | `conditions_ap|conditions_dysl` (0.1435 -> 0.6703) |
-| tvae_ind_seed0 | corr-ratio (num-cat) | 11280 | 0.042 | 0.0234 | 0.8903 | 6 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first` (0.8082 -> 0.0581) |
+| tvae_ind_seed0 | corr-ratio (num-cat) | 11280 | 0.042 | 0.0234 | 0.8903 | 6 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first` (0.8082 -> 0.0581) |
 | tvae_qt_seed0 | Spearman (num-num) | 1650 | 0.0948 | 0.0765 | 0.6279 | 0 | `echocardiographs_lvef_pET_last|echocardiographs_lvef_pET_first` (0.8998 -> 0.1215) |
 | tvae_qt_seed0 | Cramer's V (cat-cat) | 8001 | 0.0574 | 0.0325 | 0.8476 | 5 | `conditions_ap|conditions_dysl` (0.1435 -> 0.8139) |
 | tvae_qt_seed0 | corr-ratio (num-cat) | 11280 | 0.0431 | 0.0251 | 0.8755 | 2 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first` (0.8082 -> 0.1569) |
@@ -361,7 +361,7 @@ Absolute change in pairwise association; 0 = relationship perfectly preserved. `
 | tvae_seed0 | corr-ratio (num-cat) | 11092 | 0.0414 | 0.0227 | 0.8881 | 10 | `lab_results_creatUS_value_last|encounter_primary_reason_HF_Disease_f5a_w5a_first` (0.1061 -> 0.8403) |
 | tvae_seed1 | Spearman (num-num) | 1610 | 0.0817 | 0.0569 | 0.7093 | 1 | `vital_signs_height_value_p1a_avg|vital_signs_height_value_last` (0.989 -> 0.1661) |
 | tvae_seed1 | Cramer's V (cat-cat) | 8515 | 0.0624 | 0.0373 | 0.8078 | 4 | `med_acei_history|med_arb_history` (0.007 -> 0.6323) |
-| tvae_seed1 | corr-ratio (num-cat) | 11092 | 0.041 | 0.0225 | 0.8945 | 13 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first` (0.8082 -> 0.0) |
+| tvae_seed1 | corr-ratio (num-cat) | 11092 | 0.041 | 0.0225 | 0.8945 | 13 | `encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first` (0.8082 -> 0.0) |
 | tvae_seed2 | Spearman (num-num) | 1549 | 0.0827 | 0.0588 | 0.7069 | 0 | `echocardiographs_lvef_pET_last|echocardiographs_lvef_pET_first` (0.8998 -> 0.0484) |
 | tvae_seed2 | Cramer's V (cat-cat) | 8256 | 0.0565 | 0.031 | 0.831 | 1 | `conditions_ap|conditions_dysl` (0.1435 -> 0.7761) |
 | tvae_seed2 | corr-ratio (num-cat) | 10904 | 0.0396 | 0.0213 | 0.8993 | 8 | `nyha_nyha_pET|med_arb` (0.0696 -> 0.7599) |

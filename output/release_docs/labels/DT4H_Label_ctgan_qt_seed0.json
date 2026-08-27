@@ -1,0 +1,46 @@
+{
+  "run_id": "ctgan_qt_seed0",
+  "file": "DT4H_Synthetic_ctgan_qt_seed0.csv",
+  "synthesizer": "ctgan_qt",
+  "base_synthesizer": "ctgan",
+  "run_transform": "quantile",
+  "differential_privacy": {
+    "formal_guarantee": false,
+    "epsilon": null
+  },
+  "seed": 0,
+  "rows": 3520,
+  "columns": 249,
+  "fidelity": {
+    "ks_mean_numeric": 0.2767,
+    "tvd_mean_categorical": 0.0734,
+    "missing_rate_mad": 0.1221,
+    "c2st_auc": 1.0
+  },
+  "joint_structure": {
+    "fabricated_association_pairs": null
+  },
+  "row_coherence": {
+    "violation_rate": 0.38864
+  },
+  "survival": {
+    "all_cause_death": false,
+    "hf_rehospitalization": true
+  },
+  "distances": {
+    "verbatim_training_rows": 0,
+    "dcr_median": 0.184491,
+    "share_closer_than_holdout_p5": 0.0,
+    "nndr_median": 0.9795
+  },
+  "attacks": {
+    "mia_auc": 0.5141,
+    "mia_learned_auc": 0.5046,
+    "empirical_epsilon_lower_bound": 0.0096,
+    "mia_auc_most_atypical_quartile": 0.1922,
+    "aia_worst_membership_advantage": 0.0072,
+    "singling_out_risk": 0.0,
+    "linkability_risk": 0.0
+  },
+  "release_gate": "not gated"
+}

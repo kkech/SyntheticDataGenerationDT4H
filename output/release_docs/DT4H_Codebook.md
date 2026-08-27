@@ -1,6 +1,6 @@
 # DT4H UC1 Synthetic Dataset -- Codebook
 
-Generated 2026-08-23 by the pipeline. One row per released column. Ranges and category lists are aggregate facts over the training split (also published in the profiling reports). **A null is never 'unknown noise' in this dataset -- its meaning is stated per column.**
+Generated 2026-08-26 by the pipeline. One row per released column. Ranges and category lists are aggregate facts over the training split (also published in the profiling reports). **A null is never 'unknown noise' in this dataset -- its meaning is stated per column.**
 
 | column | type | description | values / range | missing % | null means |
 |---|---|---|---|---|---|

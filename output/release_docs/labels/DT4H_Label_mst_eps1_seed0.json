@@ -1,0 +1,46 @@
+{
+  "run_id": "mst_eps1_seed0",
+  "file": "DT4H_Synthetic_mst_eps1_seed0.csv",
+  "synthesizer": "mst",
+  "base_synthesizer": "mst",
+  "run_transform": null,
+  "differential_privacy": {
+    "formal_guarantee": true,
+    "epsilon": 1.0
+  },
+  "seed": 0,
+  "rows": 3520,
+  "columns": 249,
+  "fidelity": {
+    "ks_mean_numeric": 0.4663,
+    "tvd_mean_categorical": 0.0233,
+    "missing_rate_mad": 0.0327,
+    "c2st_auc": 1.0
+  },
+  "joint_structure": {
+    "fabricated_association_pairs": 3936
+  },
+  "row_coherence": {
+    "violation_rate": 0.24361
+  },
+  "survival": {
+    "all_cause_death": false,
+    "hf_rehospitalization": true
+  },
+  "distances": {
+    "verbatim_training_rows": 0,
+    "dcr_median": 0.100318,
+    "share_closer_than_holdout_p5": 0.2472,
+    "nndr_median": 0.9636
+  },
+  "attacks": {
+    "mia_auc": 0.5138,
+    "mia_learned_auc": 0.4962,
+    "empirical_epsilon_lower_bound": 0.0049,
+    "mia_auc_most_atypical_quartile": 0.2382,
+    "aia_worst_membership_advantage": 0.0,
+    "singling_out_risk": 0.0198,
+    "linkability_risk": 0.0
+  },
+  "release_gate": "not gated"
+}

@@ -21,40 +21,34 @@
   },
   "evaluate": {
     "completed": true,
-    "completed_at": "2026-08-26T18:45:11.660300+00:00"
+    "completed_at": "2026-08-26T20:07:55.090706+00:00"
   },
   "utility": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-24T08:54:21.240984+00:00"
+    "completed": true,
+    "completed_at": "2026-08-26T20:26:26.750923+00:00"
   },
   "privacy": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-24T08:54:21.241284+00:00"
+    "completed": true,
+    "completed_at": "2026-08-26T20:31:08.990979+00:00"
   },
   "coherence": {
     "completed": true,
-    "completed_at": "2026-08-26T18:46:55.003706+00:00"
+    "completed_at": "2026-08-26T20:09:23.365183+00:00"
   },
   "survival": {
-    "completed": false,
-    "failed_at": "2026-08-26T18:49:29.410022+00:00",
-    "error": "ConvergenceError: delta contains nan value(s). Convergence halted. Please see the following tips in the lifelines documentation: https://lifelines.readthedocs.io/en/latest/Examples.html#problems-with-convergence-in-the-cox-proportional-hazard-model"
+    "completed": true,
+    "completed_at": "2026-08-26T20:11:40.675971+00:00"
   },
   "attacks": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-24T08:54:21.241499+00:00"
+    "completed": true,
+    "completed_at": "2026-08-26T20:42:15.963528+00:00"
   },
   "figures": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-24T08:54:21.241711+00:00"
+    "completed": true,
+    "completed_at": "2026-08-26T20:42:20.883574+00:00"
   },
   "release_docs": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-24T08:54:21.241930+00:00"
+    "completed": true,
+    "completed_at": "2026-08-26T20:42:21.458927+00:00"
   }
 }

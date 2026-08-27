@@ -8,27 +8,100 @@
       "baseline_auc": 0.6861,
       "tstr": [
         {
-          "run_id": "aim50_eps1_seed0",
-          "auc": 0.5474,
-          "auc_gap": 0.1387,
-          "auc_logreg": 0.566,
-          "auc_gap_logreg": 0.0898,
-          "auc_augmented": 0.6924,
-          "augmentation_delta": 0.0063
+          "run_id": "aim40_eps1_seed0",
+          "auc": 0.5288,
+          "auc_gap": 0.1573,
+          "brier": 0.2647,
+          "brier_gap": 0.029,
+          "subgroup_auc": {
+            "female": 0.584,
+            "male": 0.4913,
+            "age_under_65": 0.469,
+            "age_65_79": 0.5138,
+            "age_80_plus": 0.5945
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1302,
+            "male": 0.1815,
+            "age_under_65": 0.3793,
+            "age_65_79": 0.1162,
+            "age_80_plus": -0.0214
+          },
+          "auc_logreg": 0.4794,
+          "auc_gap_logreg": 0.1764,
+          "auc_augmented": 0.698,
+          "augmentation_delta": 0.0119
         },
         {
-          "run_id": "aim50_eps5_seed0",
-          "auc": 0.4642,
-          "auc_gap": 0.2219,
-          "auc_logreg": 0.3759,
-          "auc_gap_logreg": 0.2799,
-          "auc_augmented": 0.6523,
-          "augmentation_delta": -0.0338
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.4849,
+          "auc_gap": 0.2012,
+          "brier": 0.3785,
+          "brier_gap": 0.1428,
+          "subgroup_auc": {
+            "female": 0.4981,
+            "male": 0.4779,
+            "age_under_65": 0.4828,
+            "age_65_79": 0.4971,
+            "age_80_plus": 0.4552
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2161,
+            "male": 0.1949,
+            "age_under_65": 0.3655,
+            "age_65_79": 0.1329,
+            "age_80_plus": 0.1179
+          },
+          "auc_logreg": 0.5554,
+          "auc_gap_logreg": 0.1004,
+          "auc_augmented": 0.6621,
+          "augmentation_delta": -0.024
+        },
+        {
+          "run_id": "ctgan_qt_seed0",
+          "auc": 0.5045,
+          "auc_gap": 0.1816,
+          "brier": 0.3626,
+          "brier_gap": 0.1269,
+          "subgroup_auc": {
+            "female": 0.479,
+            "male": 0.5269,
+            "age_under_65": 0.4245,
+            "age_65_79": 0.5056,
+            "age_80_plus": 0.5838
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2352,
+            "male": 0.1459,
+            "age_under_65": 0.4238,
+            "age_65_79": 0.1244,
+            "age_80_plus": -0.0107
+          },
+          "auc_logreg": 0.5104,
+          "auc_gap_logreg": 0.1454,
+          "auc_augmented": 0.6652,
+          "augmentation_delta": -0.0209
         },
         {
           "run_id": "ctgan_seed0",
           "auc": 0.4214,
           "auc_gap": 0.2647,
+          "brier": 0.308,
+          "brier_gap": 0.0723,
+          "subgroup_auc": {
+            "female": 0.3897,
+            "male": 0.4347,
+            "age_under_65": 0.354,
+            "age_65_79": 0.4306,
+            "age_80_plus": 0.4737
+          },
+          "subgroup_auc_gap": {
+            "female": 0.3245,
+            "male": 0.2381,
+            "age_under_65": 0.4943,
+            "age_65_79": 0.1994,
+            "age_80_plus": 0.0994
+          },
           "auc_logreg": 0.4884,
           "auc_gap_logreg": 0.1674,
           "auc_augmented": 0.6377,
@@ -38,6 +111,22 @@
           "run_id": "ctgan_seed1",
           "auc": 0.5133,
           "auc_gap": 0.1728,
+          "brier": 0.2828,
+          "brier_gap": 0.0471,
+          "subgroup_auc": {
+            "female": 0.4786,
+            "male": 0.5347,
+            "age_under_65": 0.5954,
+            "age_65_79": 0.5091,
+            "age_80_plus": 0.4142
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2356,
+            "male": 0.1381,
+            "age_under_65": 0.2529,
+            "age_65_79": 0.1209,
+            "age_80_plus": 0.1589
+          },
           "auc_logreg": 0.4931,
           "auc_gap_logreg": 0.1627,
           "auc_augmented": 0.629,
@@ -47,10 +136,126 @@
           "run_id": "ctgan_seed2",
           "auc": 0.5778,
           "auc_gap": 0.1083,
+          "brier": 0.4243,
+          "brier_gap": 0.1886,
+          "subgroup_auc": {
+            "female": 0.512,
+            "male": 0.605,
+            "age_under_65": 0.5594,
+            "age_65_79": 0.6338,
+            "age_80_plus": 0.5565
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2022,
+            "male": 0.0678,
+            "age_under_65": 0.2889,
+            "age_65_79": -0.0038,
+            "age_80_plus": 0.0166
+          },
           "auc_logreg": 0.5337,
           "auc_gap_logreg": 0.1221,
           "auc_augmented": 0.6859,
           "augmentation_delta": -0.0002
+        },
+        {
+          "run_id": "ddpm_g_seed0",
+          "auc": 0.5086,
+          "auc_gap": 0.1775,
+          "brier": 0.4587,
+          "brier_gap": 0.223,
+          "subgroup_auc": {
+            "female": 0.551,
+            "male": 0.4669,
+            "age_under_65": 0.5563,
+            "age_65_79": 0.4953,
+            "age_80_plus": 0.4522
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1632,
+            "male": 0.2059,
+            "age_under_65": 0.292,
+            "age_65_79": 0.1347,
+            "age_80_plus": 0.1209
+          },
+          "auc_logreg": 0.4851,
+          "auc_gap_logreg": 0.1707,
+          "auc_augmented": 0.6962,
+          "augmentation_delta": 0.0101
+        },
+        {
+          "run_id": "ddpm_seed0",
+          "auc": 0.5712,
+          "auc_gap": 0.1149,
+          "brier": 0.3123,
+          "brier_gap": 0.0766,
+          "subgroup_auc": {
+            "female": 0.5656,
+            "male": 0.5897,
+            "age_under_65": 0.5801,
+            "age_65_79": 0.5641,
+            "age_80_plus": 0.5614
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1486,
+            "male": 0.0831,
+            "age_under_65": 0.2682,
+            "age_65_79": 0.0659,
+            "age_80_plus": 0.0117
+          },
+          "auc_logreg": 0.4926,
+          "auc_gap_logreg": 0.1632,
+          "auc_augmented": 0.6889,
+          "augmentation_delta": 0.0028
+        },
+        {
+          "run_id": "ddpm_seed1",
+          "auc": 0.5754,
+          "auc_gap": 0.1107,
+          "brier": 0.2411,
+          "brier_gap": 0.0054,
+          "subgroup_auc": {
+            "female": 0.638,
+            "male": 0.5328,
+            "age_under_65": 0.5502,
+            "age_65_79": 0.6182,
+            "age_80_plus": 0.5926
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0762,
+            "male": 0.14,
+            "age_under_65": 0.2981,
+            "age_65_79": 0.0118,
+            "age_80_plus": -0.0195
+          },
+          "auc_logreg": 0.5032,
+          "auc_gap_logreg": 0.1526,
+          "auc_augmented": 0.6929,
+          "augmentation_delta": 0.0068
+        },
+        {
+          "run_id": "ddpm_seed2",
+          "auc": 0.5246,
+          "auc_gap": 0.1615,
+          "brier": 0.2541,
+          "brier_gap": 0.0184,
+          "subgroup_auc": {
+            "female": 0.491,
+            "male": 0.5534,
+            "age_under_65": 0.528,
+            "age_65_79": 0.5332,
+            "age_80_plus": 0.5195
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2232,
+            "male": 0.1194,
+            "age_under_65": 0.3203,
+            "age_65_79": 0.0968,
+            "age_80_plus": 0.0536
+          },
+          "auc_logreg": 0.4438,
+          "auc_gap_logreg": 0.212,
+          "auc_augmented": 0.6857,
+          "augmentation_delta": -0.0004
         },
         {
           "run_id": "dpctgan_eps10_seed0",
@@ -64,8 +269,28 @@
         },
         {
           "run_id": "dpctgan_eps15_seed1",
-          "auc": null,
-          "note": "target missing or single-class in synthetic data"
+          "auc": 0.5,
+          "auc_gap": 0.1861,
+          "brier": 0.241,
+          "brier_gap": 0.0053,
+          "subgroup_auc": {
+            "female": 0.5,
+            "male": 0.5,
+            "age_under_65": 0.5,
+            "age_65_79": 0.5,
+            "age_80_plus": 0.5
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2142,
+            "male": 0.1728,
+            "age_under_65": 0.3483,
+            "age_65_79": 0.13,
+            "age_80_plus": 0.0731
+          },
+          "auc_logreg": 0.491,
+          "auc_gap_logreg": 0.1648,
+          "auc_augmented": 0.6727,
+          "augmentation_delta": -0.0134
         },
         {
           "run_id": "dpctgan_eps15_seed2",
@@ -74,8 +299,28 @@
         },
         {
           "run_id": "dpctgan_eps1_seed0",
-          "auc": null,
-          "note": "target missing or single-class in synthetic data"
+          "auc": 0.563,
+          "auc_gap": 0.1231,
+          "brier": 0.2338,
+          "brier_gap": -0.0019,
+          "subgroup_auc": {
+            "female": 0.6005,
+            "male": 0.5306,
+            "age_under_65": 0.5425,
+            "age_65_79": 0.6079,
+            "age_80_plus": 0.5
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1137,
+            "male": 0.1422,
+            "age_under_65": 0.3058,
+            "age_65_79": 0.0221,
+            "age_80_plus": 0.0731
+          },
+          "auc_logreg": 0.5075,
+          "auc_gap_logreg": 0.1483,
+          "auc_augmented": 0.6948,
+          "augmentation_delta": 0.0087
         },
         {
           "run_id": "dpctgan_eps20_seed0",
@@ -96,6 +341,22 @@
           "run_id": "gaussian_copula_seed0",
           "auc": 0.4787,
           "auc_gap": 0.2074,
+          "brier": 0.2898,
+          "brier_gap": 0.0541,
+          "subgroup_auc": {
+            "female": 0.5656,
+            "male": 0.4149,
+            "age_under_65": 0.3211,
+            "age_65_79": 0.5703,
+            "age_80_plus": 0.4503
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1486,
+            "male": 0.2579,
+            "age_under_65": 0.5272,
+            "age_65_79": 0.0597,
+            "age_80_plus": 0.1228
+          },
           "auc_logreg": 0.5361,
           "auc_gap_logreg": 0.1197,
           "auc_augmented": 0.6146,
@@ -105,6 +366,22 @@
           "run_id": "gaussian_copula_seed1",
           "auc": 0.5521,
           "auc_gap": 0.134,
+          "brier": 0.2752,
+          "brier_gap": 0.0395,
+          "subgroup_auc": {
+            "female": 0.5289,
+            "male": 0.5409,
+            "age_under_65": 0.492,
+            "age_65_79": 0.6465,
+            "age_80_plus": 0.461
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1853,
+            "male": 0.1319,
+            "age_under_65": 0.3563,
+            "age_65_79": -0.0165,
+            "age_80_plus": 0.1121
+          },
           "auc_logreg": 0.4927,
           "auc_gap_logreg": 0.1631,
           "auc_augmented": 0.713,
@@ -114,87 +391,457 @@
           "run_id": "gaussian_copula_seed2",
           "auc": 0.5316,
           "auc_gap": 0.1545,
+          "brier": 0.2876,
+          "brier_gap": 0.0519,
+          "subgroup_auc": {
+            "female": 0.599,
+            "male": 0.4939,
+            "age_under_65": 0.5747,
+            "age_65_79": 0.5276,
+            "age_80_plus": 0.5166
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1152,
+            "male": 0.1789,
+            "age_under_65": 0.2736,
+            "age_65_79": 0.1024,
+            "age_80_plus": 0.0565
+          },
           "auc_logreg": 0.6058,
           "auc_gap_logreg": 0.05,
           "auc_augmented": 0.6735,
           "augmentation_delta": -0.0126
         },
         {
+          "run_id": "mst_eps0p5_seed0",
+          "auc": 0.4106,
+          "auc_gap": 0.2755,
+          "brier": 0.3873,
+          "brier_gap": 0.1516,
+          "subgroup_auc": {
+            "female": 0.446,
+            "male": 0.3886,
+            "age_under_65": 0.3739,
+            "age_65_79": 0.3859,
+            "age_80_plus": 0.4922
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2682,
+            "male": 0.2842,
+            "age_under_65": 0.4744,
+            "age_65_79": 0.2441,
+            "age_80_plus": 0.0809
+          },
+          "auc_logreg": 0.4818,
+          "auc_gap_logreg": 0.174,
+          "auc_augmented": 0.6801,
+          "augmentation_delta": -0.006
+        },
+        {
           "run_id": "mst_eps10_seed0",
-          "auc": 0.5257,
-          "auc_gap": 0.1604,
-          "auc_logreg": 0.4384,
-          "auc_gap_logreg": 0.2174,
-          "auc_augmented": 0.6809,
-          "augmentation_delta": -0.0052
+          "auc": 0.4484,
+          "auc_gap": 0.2377,
+          "brier": 0.5888,
+          "brier_gap": 0.3531,
+          "subgroup_auc": {
+            "female": 0.4636,
+            "male": 0.4324,
+            "age_under_65": 0.4605,
+            "age_65_79": 0.4579,
+            "age_80_plus": 0.4259
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2506,
+            "male": 0.2404,
+            "age_under_65": 0.3878,
+            "age_65_79": 0.1721,
+            "age_80_plus": 0.1472
+          },
+          "auc_logreg": 0.4845,
+          "auc_gap_logreg": 0.1713,
+          "auc_augmented": 0.676,
+          "augmentation_delta": -0.0101
         },
         {
           "run_id": "mst_eps15_seed0",
-          "auc": 0.5177,
-          "auc_gap": 0.1684,
-          "auc_logreg": 0.5561,
-          "auc_gap_logreg": 0.0997,
-          "auc_augmented": 0.6844,
-          "augmentation_delta": -0.0017
+          "auc": 0.4913,
+          "auc_gap": 0.1948,
+          "brier": 0.3637,
+          "brier_gap": 0.128,
+          "subgroup_auc": {
+            "female": 0.434,
+            "male": 0.5322,
+            "age_under_65": 0.5119,
+            "age_65_79": 0.5129,
+            "age_80_plus": 0.4493
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2802,
+            "male": 0.1406,
+            "age_under_65": 0.3364,
+            "age_65_79": 0.1171,
+            "age_80_plus": 0.1238
+          },
+          "auc_logreg": 0.5206,
+          "auc_gap_logreg": 0.1352,
+          "auc_augmented": 0.6798,
+          "augmentation_delta": -0.0063
         },
         {
           "run_id": "mst_eps15_seed1",
-          "auc": 0.5133,
-          "auc_gap": 0.1728,
-          "auc_logreg": 0.5963,
-          "auc_gap_logreg": 0.0595,
-          "auc_augmented": 0.6908,
-          "augmentation_delta": 0.0047
+          "auc": 0.5232,
+          "auc_gap": 0.1629,
+          "brier": 0.3546,
+          "brier_gap": 0.1189,
+          "subgroup_auc": {
+            "female": 0.5173,
+            "male": 0.5313,
+            "age_under_65": 0.5464,
+            "age_65_79": 0.5174,
+            "age_80_plus": 0.5039
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1969,
+            "male": 0.1415,
+            "age_under_65": 0.3019,
+            "age_65_79": 0.1126,
+            "age_80_plus": 0.0692
+          },
+          "auc_logreg": 0.5428,
+          "auc_gap_logreg": 0.113,
+          "auc_augmented": 0.6792,
+          "augmentation_delta": -0.0069
         },
         {
           "run_id": "mst_eps15_seed2",
-          "auc": 0.4073,
-          "auc_gap": 0.2788,
-          "auc_logreg": 0.4972,
-          "auc_gap_logreg": 0.1586,
-          "auc_augmented": 0.6725,
-          "augmentation_delta": -0.0136
+          "auc": 0.4303,
+          "auc_gap": 0.2558,
+          "brier": 0.5743,
+          "brier_gap": 0.3386,
+          "subgroup_auc": {
+            "female": 0.4475,
+            "male": 0.4293,
+            "age_under_65": 0.4383,
+            "age_65_79": 0.3838,
+            "age_80_plus": 0.4327
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2667,
+            "male": 0.2435,
+            "age_under_65": 0.41,
+            "age_65_79": 0.2462,
+            "age_80_plus": 0.1404
+          },
+          "auc_logreg": 0.4777,
+          "auc_gap_logreg": 0.1781,
+          "auc_augmented": 0.678,
+          "augmentation_delta": -0.0081
         },
         {
           "run_id": "mst_eps1_seed0",
-          "auc": 0.5187,
-          "auc_gap": 0.1674,
-          "auc_logreg": 0.5004,
-          "auc_gap_logreg": 0.1554,
-          "auc_augmented": 0.6764,
-          "augmentation_delta": -0.0097
+          "auc": 0.4591,
+          "auc_gap": 0.227,
+          "brier": 0.3691,
+          "brier_gap": 0.1334,
+          "subgroup_auc": {
+            "female": 0.4452,
+            "male": 0.4616,
+            "age_under_65": 0.377,
+            "age_65_79": 0.5241,
+            "age_80_plus": 0.4415
+          },
+          "subgroup_auc_gap": {
+            "female": 0.269,
+            "male": 0.2112,
+            "age_under_65": 0.4713,
+            "age_65_79": 0.1059,
+            "age_80_plus": 0.1316
+          },
+          "auc_logreg": 0.4628,
+          "auc_gap_logreg": 0.193,
+          "auc_augmented": 0.7012,
+          "augmentation_delta": 0.0151
         },
         {
           "run_id": "mst_eps20_seed0",
-          "auc": 0.5249,
-          "auc_gap": 0.1612,
-          "auc_logreg": 0.4944,
-          "auc_gap_logreg": 0.1614,
-          "auc_augmented": 0.7021,
-          "augmentation_delta": 0.016
+          "auc": 0.4733,
+          "auc_gap": 0.2128,
+          "brier": 0.5636,
+          "brier_gap": 0.3279,
+          "subgroup_auc": {
+            "female": 0.4137,
+            "male": 0.5119,
+            "age_under_65": 0.4743,
+            "age_65_79": 0.4591,
+            "age_80_plus": 0.4747
+          },
+          "subgroup_auc_gap": {
+            "female": 0.3005,
+            "male": 0.1609,
+            "age_under_65": 0.374,
+            "age_65_79": 0.1709,
+            "age_80_plus": 0.0984
+          },
+          "auc_logreg": 0.5094,
+          "auc_gap_logreg": 0.1464,
+          "auc_augmented": 0.673,
+          "augmentation_delta": -0.0131
         },
         {
           "run_id": "mst_eps5_seed0",
-          "auc": 0.5275,
-          "auc_gap": 0.1586,
-          "auc_logreg": 0.5618,
-          "auc_gap_logreg": 0.094,
-          "auc_augmented": 0.6778,
-          "augmentation_delta": -0.0083
+          "auc": 0.5047,
+          "auc_gap": 0.1814,
+          "brier": 0.5282,
+          "brier_gap": 0.2925,
+          "subgroup_auc": {
+            "female": 0.5094,
+            "male": 0.498,
+            "age_under_65": 0.4536,
+            "age_65_79": 0.5026,
+            "age_80_plus": 0.575
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2048,
+            "male": 0.1748,
+            "age_under_65": 0.3947,
+            "age_65_79": 0.1274,
+            "age_80_plus": -0.0019
+          },
+          "auc_logreg": 0.511,
+          "auc_gap_logreg": 0.1448,
+          "auc_augmented": 0.6946,
+          "augmentation_delta": 0.0085
         },
         {
           "run_id": "mst_eps8_seed0",
-          "auc": 0.4813,
-          "auc_gap": 0.2048,
-          "auc_logreg": 0.525,
-          "auc_gap_logreg": 0.1308,
-          "auc_augmented": 0.7018,
-          "augmentation_delta": 0.0157
+          "auc": 0.4412,
+          "auc_gap": 0.2449,
+          "brier": 0.5283,
+          "brier_gap": 0.2926,
+          "subgroup_auc": {
+            "female": 0.3991,
+            "male": 0.4653,
+            "age_under_65": 0.4989,
+            "age_65_79": 0.4144,
+            "age_80_plus": 0.3918
+          },
+          "subgroup_auc_gap": {
+            "female": 0.3151,
+            "male": 0.2075,
+            "age_under_65": 0.3494,
+            "age_65_79": 0.2156,
+            "age_80_plus": 0.1813
+          },
+          "auc_logreg": 0.4543,
+          "auc_gap_logreg": 0.2015,
+          "auc_augmented": 0.6553,
+          "augmentation_delta": -0.0308
+        },
+        {
+          "run_id": "patectgan_eps15_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "patectgan_eps1_seed0",
+          "auc": 0.4769,
+          "auc_gap": 0.2092,
+          "brier": 0.2962,
+          "brier_gap": 0.0605,
+          "subgroup_auc": {
+            "female": 0.5214,
+            "male": 0.448,
+            "age_under_65": 0.5272,
+            "age_65_79": 0.4359,
+            "age_80_plus": 0.4951
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1928,
+            "male": 0.2248,
+            "age_under_65": 0.3211,
+            "age_65_79": 0.1941,
+            "age_80_plus": 0.078
+          },
+          "auc_logreg": 0.5996,
+          "auc_gap_logreg": 0.0562,
+          "auc_augmented": 0.6893,
+          "augmentation_delta": 0.0032
+        },
+        {
+          "run_id": "patectgan_eps5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "tvae_cap256_seed0",
+          "auc": 0.6407,
+          "auc_gap": 0.0454,
+          "brier": 0.2992,
+          "brier_gap": 0.0635,
+          "subgroup_auc": {
+            "female": 0.7037,
+            "male": 0.6045,
+            "age_under_65": 0.7663,
+            "age_65_79": 0.6112,
+            "age_80_plus": 0.5546
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0105,
+            "male": 0.0683,
+            "age_under_65": 0.082,
+            "age_65_79": 0.0188,
+            "age_80_plus": 0.0185
+          },
+          "auc_logreg": 0.645,
+          "auc_gap_logreg": 0.0108,
+          "auc_augmented": 0.6406,
+          "augmentation_delta": -0.0455
+        },
+        {
+          "run_id": "tvae_ep1000_seed0",
+          "auc": 0.6293,
+          "auc_gap": 0.0568,
+          "brier": 0.2766,
+          "brier_gap": 0.0409,
+          "subgroup_auc": {
+            "female": 0.6733,
+            "male": 0.5947,
+            "age_under_65": 0.6621,
+            "age_65_79": 0.6841,
+            "age_80_plus": 0.5058
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0409,
+            "male": 0.0781,
+            "age_under_65": 0.1862,
+            "age_65_79": -0.0541,
+            "age_80_plus": 0.0673
+          },
+          "auc_logreg": 0.5567,
+          "auc_gap_logreg": 0.0991,
+          "auc_augmented": 0.6745,
+          "augmentation_delta": -0.0116
+        },
+        {
+          "run_id": "tvae_ind_seed0",
+          "auc": 0.5252,
+          "auc_gap": 0.1609,
+          "brier": 0.335,
+          "brier_gap": 0.0993,
+          "subgroup_auc": {
+            "female": 0.5353,
+            "male": 0.5157,
+            "age_under_65": 0.5448,
+            "age_65_79": 0.5694,
+            "age_80_plus": 0.4357
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1789,
+            "male": 0.1571,
+            "age_under_65": 0.3035,
+            "age_65_79": 0.0606,
+            "age_80_plus": 0.1374
+          },
+          "auc_logreg": 0.5563,
+          "auc_gap_logreg": 0.0995,
+          "auc_augmented": 0.6582,
+          "augmentation_delta": -0.0279
+        },
+        {
+          "run_id": "tvae_qt_seed0",
+          "auc": 0.6212,
+          "auc_gap": 0.0649,
+          "brier": 0.266,
+          "brier_gap": 0.0303,
+          "subgroup_auc": {
+            "female": 0.695,
+            "male": 0.5765,
+            "age_under_65": 0.777,
+            "age_65_79": 0.5985,
+            "age_80_plus": 0.4805
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0192,
+            "male": 0.0963,
+            "age_under_65": 0.0713,
+            "age_65_79": 0.0315,
+            "age_80_plus": 0.0926
+          },
+          "auc_logreg": 0.6418,
+          "auc_gap_logreg": 0.014,
+          "auc_augmented": 0.689,
+          "augmentation_delta": 0.0029
+        },
+        {
+          "run_id": "tvae_qt_seed1",
+          "auc": 0.5822,
+          "auc_gap": 0.1039,
+          "brier": 0.3098,
+          "brier_gap": 0.0741,
+          "subgroup_auc": {
+            "female": 0.5971,
+            "male": 0.5716,
+            "age_under_65": 0.7027,
+            "age_65_79": 0.5818,
+            "age_80_plus": 0.4678
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1171,
+            "male": 0.1012,
+            "age_under_65": 0.1456,
+            "age_65_79": 0.0482,
+            "age_80_plus": 0.1053
+          },
+          "auc_logreg": 0.6277,
+          "auc_gap_logreg": 0.0281,
+          "auc_augmented": 0.672,
+          "augmentation_delta": -0.0141
+        },
+        {
+          "run_id": "tvae_qt_seed2",
+          "auc": 0.6069,
+          "auc_gap": 0.0792,
+          "brier": 0.2985,
+          "brier_gap": 0.0628,
+          "subgroup_auc": {
+            "female": 0.6703,
+            "male": 0.5612,
+            "age_under_65": 0.7157,
+            "age_65_79": 0.5918,
+            "age_80_plus": 0.5331
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0439,
+            "male": 0.1116,
+            "age_under_65": 0.1326,
+            "age_65_79": 0.0382,
+            "age_80_plus": 0.04
+          },
+          "auc_logreg": 0.6392,
+          "auc_gap_logreg": 0.0166,
+          "auc_augmented": 0.6903,
+          "augmentation_delta": 0.0042
         },
         {
           "run_id": "tvae_seed0",
           "auc": 0.5951,
           "auc_gap": 0.091,
+          "brier": 0.3092,
+          "brier_gap": 0.0735,
+          "subgroup_auc": {
+            "female": 0.7033,
+            "male": 0.5473,
+            "age_under_65": 0.6169,
+            "age_65_79": 0.6603,
+            "age_80_plus": 0.4649
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0109,
+            "male": 0.1255,
+            "age_under_65": 0.2314,
+            "age_65_79": -0.0303,
+            "age_80_plus": 0.1082
+          },
           "auc_logreg": 0.6243,
           "auc_gap_logreg": 0.0315,
           "auc_augmented": 0.6825,
@@ -204,6 +851,22 @@
           "run_id": "tvae_seed1",
           "auc": 0.6696,
           "auc_gap": 0.0165,
+          "brier": 0.269,
+          "brier_gap": 0.0333,
+          "subgroup_auc": {
+            "female": 0.7018,
+            "male": 0.6465,
+            "age_under_65": 0.718,
+            "age_65_79": 0.7059,
+            "age_80_plus": 0.5322
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0124,
+            "male": 0.0263,
+            "age_under_65": 0.1303,
+            "age_65_79": -0.0759,
+            "age_80_plus": 0.0409
+          },
           "auc_logreg": 0.5882,
           "auc_gap_logreg": 0.0676,
           "auc_augmented": 0.7001,
@@ -213,6 +876,22 @@
           "run_id": "tvae_seed2",
           "auc": 0.6323,
           "auc_gap": 0.0538,
+          "brier": 0.2677,
+          "brier_gap": 0.032,
+          "subgroup_auc": {
+            "female": 0.7303,
+            "male": 0.5764,
+            "age_under_65": 0.6828,
+            "age_65_79": 0.6591,
+            "age_80_plus": 0.5634
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0161,
+            "male": 0.0964,
+            "age_under_65": 0.1655,
+            "age_65_79": -0.0291,
+            "age_80_plus": 0.0097
+          },
           "auc_logreg": 0.5723,
           "auc_gap_logreg": 0.0835,
           "auc_augmented": 0.6847,
@@ -220,6 +899,14 @@
         }
       ],
       "baseline_auc_logreg": 0.6558,
+      "baseline_brier": 0.2357,
+      "baseline_subgroup_auc": {
+        "female": 0.7142,
+        "male": 0.6728,
+        "age_under_65": 0.8483,
+        "age_65_79": 0.63,
+        "age_80_plus": 0.5731
+      },
       "positives_train": 322,
       "positives_holdout": 96
     },
@@ -230,27 +917,100 @@
       "baseline_auc": 0.6861,
       "tstr": [
         {
-          "run_id": "aim50_eps1_seed0",
-          "auc": 0.5463,
-          "auc_gap": 0.1398,
-          "auc_logreg": 0.5861,
-          "auc_gap_logreg": 0.0697,
-          "auc_augmented": 0.6957,
-          "augmentation_delta": 0.0096
+          "run_id": "aim40_eps1_seed0",
+          "auc": 0.4502,
+          "auc_gap": 0.2359,
+          "brier": 0.2891,
+          "brier_gap": 0.0534,
+          "subgroup_auc": {
+            "female": 0.5191,
+            "male": 0.4014,
+            "age_under_65": 0.4046,
+            "age_65_79": 0.4421,
+            "age_80_plus": 0.4854
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1951,
+            "male": 0.2714,
+            "age_under_65": 0.4437,
+            "age_65_79": 0.1879,
+            "age_80_plus": 0.0877
+          },
+          "auc_logreg": 0.5111,
+          "auc_gap_logreg": 0.1447,
+          "auc_augmented": 0.666,
+          "augmentation_delta": -0.0201
         },
         {
-          "run_id": "aim50_eps5_seed0",
-          "auc": 0.4595,
-          "auc_gap": 0.2266,
-          "auc_logreg": 0.3884,
-          "auc_gap_logreg": 0.2674,
-          "auc_augmented": 0.6931,
-          "augmentation_delta": 0.007
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.5269,
+          "auc_gap": 0.1592,
+          "brier": 0.4949,
+          "brier_gap": 0.2592,
+          "subgroup_auc": {
+            "female": 0.5195,
+            "male": 0.5249,
+            "age_under_65": 0.6391,
+            "age_65_79": 0.4982,
+            "age_80_plus": 0.4717
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1947,
+            "male": 0.1479,
+            "age_under_65": 0.2092,
+            "age_65_79": 0.1318,
+            "age_80_plus": 0.1014
+          },
+          "auc_logreg": 0.4726,
+          "auc_gap_logreg": 0.1832,
+          "auc_augmented": 0.6727,
+          "augmentation_delta": -0.0134
+        },
+        {
+          "run_id": "ctgan_qt_seed0",
+          "auc": 0.5946,
+          "auc_gap": 0.0915,
+          "brier": 0.3008,
+          "brier_gap": 0.0651,
+          "subgroup_auc": {
+            "female": 0.5131,
+            "male": 0.6493,
+            "age_under_65": 0.6475,
+            "age_65_79": 0.5629,
+            "age_80_plus": 0.5984
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2011,
+            "male": 0.0235,
+            "age_under_65": 0.2008,
+            "age_65_79": 0.0671,
+            "age_80_plus": -0.0253
+          },
+          "auc_logreg": 0.5186,
+          "auc_gap_logreg": 0.1372,
+          "auc_augmented": 0.6855,
+          "augmentation_delta": -0.0006
         },
         {
           "run_id": "ctgan_seed0",
           "auc": 0.4407,
           "auc_gap": 0.2454,
+          "brier": 0.3215,
+          "brier_gap": 0.0858,
+          "subgroup_auc": {
+            "female": 0.3728,
+            "male": 0.4902,
+            "age_under_65": 0.4238,
+            "age_65_79": 0.4803,
+            "age_80_plus": 0.3616
+          },
+          "subgroup_auc_gap": {
+            "female": 0.3414,
+            "male": 0.1826,
+            "age_under_65": 0.4245,
+            "age_65_79": 0.1497,
+            "age_80_plus": 0.2115
+          },
           "auc_logreg": 0.4513,
           "auc_gap_logreg": 0.2045,
           "auc_augmented": 0.619,
@@ -260,6 +1020,22 @@
           "run_id": "ctgan_seed1",
           "auc": 0.5016,
           "auc_gap": 0.1845,
+          "brier": 0.2832,
+          "brier_gap": 0.0475,
+          "subgroup_auc": {
+            "female": 0.602,
+            "male": 0.4423,
+            "age_under_65": 0.4705,
+            "age_65_79": 0.4962,
+            "age_80_plus": 0.5575
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1122,
+            "male": 0.2305,
+            "age_under_65": 0.3778,
+            "age_65_79": 0.1338,
+            "age_80_plus": 0.0156
+          },
           "auc_logreg": 0.5215,
           "auc_gap_logreg": 0.1343,
           "auc_augmented": 0.6689,
@@ -269,10 +1045,126 @@
           "run_id": "ctgan_seed2",
           "auc": 0.6064,
           "auc_gap": 0.0797,
+          "brier": 0.3233,
+          "brier_gap": 0.0876,
+          "subgroup_auc": {
+            "female": 0.521,
+            "male": 0.6572,
+            "age_under_65": 0.5425,
+            "age_65_79": 0.6685,
+            "age_80_plus": 0.5546
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1932,
+            "male": 0.0156,
+            "age_under_65": 0.3058,
+            "age_65_79": -0.0385,
+            "age_80_plus": 0.0185
+          },
           "auc_logreg": 0.5555,
           "auc_gap_logreg": 0.1003,
           "auc_augmented": 0.7134,
           "augmentation_delta": 0.0273
+        },
+        {
+          "run_id": "ddpm_g_seed0",
+          "auc": 0.425,
+          "auc_gap": 0.2611,
+          "brier": 0.3052,
+          "brier_gap": 0.0695,
+          "subgroup_auc": {
+            "female": 0.5184,
+            "male": 0.3653,
+            "age_under_65": 0.4375,
+            "age_65_79": 0.4209,
+            "age_80_plus": 0.4152
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1958,
+            "male": 0.3075,
+            "age_under_65": 0.4108,
+            "age_65_79": 0.2091,
+            "age_80_plus": 0.1579
+          },
+          "auc_logreg": 0.4881,
+          "auc_gap_logreg": 0.1677,
+          "auc_augmented": 0.6558,
+          "augmentation_delta": -0.0303
+        },
+        {
+          "run_id": "ddpm_seed0",
+          "auc": 0.5448,
+          "auc_gap": 0.1413,
+          "brier": 0.3697,
+          "brier_gap": 0.134,
+          "subgroup_auc": {
+            "female": 0.6043,
+            "male": 0.4918,
+            "age_under_65": 0.5778,
+            "age_65_79": 0.5488,
+            "age_80_plus": 0.4912
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1099,
+            "male": 0.181,
+            "age_under_65": 0.2705,
+            "age_65_79": 0.0812,
+            "age_80_plus": 0.0819
+          },
+          "auc_logreg": 0.5274,
+          "auc_gap_logreg": 0.1284,
+          "auc_augmented": 0.661,
+          "augmentation_delta": -0.0251
+        },
+        {
+          "run_id": "ddpm_seed1",
+          "auc": 0.51,
+          "auc_gap": 0.1761,
+          "brier": 0.2555,
+          "brier_gap": 0.0198,
+          "subgroup_auc": {
+            "female": 0.5158,
+            "male": 0.5133,
+            "age_under_65": 0.5372,
+            "age_65_79": 0.5247,
+            "age_80_plus": 0.4883
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1984,
+            "male": 0.1595,
+            "age_under_65": 0.3111,
+            "age_65_79": 0.1053,
+            "age_80_plus": 0.0848
+          },
+          "auc_logreg": 0.497,
+          "auc_gap_logreg": 0.1588,
+          "auc_augmented": 0.684,
+          "augmentation_delta": -0.0021
+        },
+        {
+          "run_id": "ddpm_seed2",
+          "auc": 0.496,
+          "auc_gap": 0.1901,
+          "brier": 0.2572,
+          "brier_gap": 0.0215,
+          "subgroup_auc": {
+            "female": 0.5821,
+            "male": 0.4414,
+            "age_under_65": 0.3571,
+            "age_65_79": 0.5082,
+            "age_80_plus": 0.615
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1321,
+            "male": 0.2314,
+            "age_under_65": 0.4912,
+            "age_65_79": 0.1218,
+            "age_80_plus": -0.0419
+          },
+          "auc_logreg": 0.4506,
+          "auc_gap_logreg": 0.2052,
+          "auc_augmented": 0.6665,
+          "augmentation_delta": -0.0196
         },
         {
           "run_id": "dpctgan_eps10_seed0",
@@ -281,17 +1173,33 @@
         },
         {
           "run_id": "dpctgan_eps15_seed0",
-          "auc": 0.5075,
-          "auc_gap": 0.1786,
-          "auc_logreg": 0.439,
-          "auc_gap_logreg": 0.2168,
-          "auc_augmented": 0.7093,
-          "augmentation_delta": 0.0232
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
         },
         {
           "run_id": "dpctgan_eps15_seed1",
-          "auc": null,
-          "note": "target missing or single-class in synthetic data"
+          "auc": 0.5147,
+          "auc_gap": 0.1714,
+          "brier": 0.2739,
+          "brier_gap": 0.0382,
+          "subgroup_auc": {
+            "female": 0.5416,
+            "male": 0.507,
+            "age_under_65": 0.5644,
+            "age_65_79": 0.4844,
+            "age_80_plus": 0.5049
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1726,
+            "male": 0.1658,
+            "age_under_65": 0.2839,
+            "age_65_79": 0.1456,
+            "age_80_plus": 0.0682
+          },
+          "auc_logreg": 0.4881,
+          "auc_gap_logreg": 0.1677,
+          "auc_augmented": 0.6736,
+          "augmentation_delta": -0.0125
         },
         {
           "run_id": "dpctgan_eps15_seed2",
@@ -322,6 +1230,22 @@
           "run_id": "gaussian_copula_seed0",
           "auc": 0.5281,
           "auc_gap": 0.158,
+          "brier": 0.3217,
+          "brier_gap": 0.086,
+          "subgroup_auc": {
+            "female": 0.4816,
+            "male": 0.5495,
+            "age_under_65": 0.5111,
+            "age_65_79": 0.5271,
+            "age_80_plus": 0.5468
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2326,
+            "male": 0.1233,
+            "age_under_65": 0.3372,
+            "age_65_79": 0.1029,
+            "age_80_plus": 0.0263
+          },
           "auc_logreg": 0.5715,
           "auc_gap_logreg": 0.0843,
           "auc_augmented": 0.6899,
@@ -331,6 +1255,22 @@
           "run_id": "gaussian_copula_seed1",
           "auc": 0.5032,
           "auc_gap": 0.1829,
+          "brier": 0.2823,
+          "brier_gap": 0.0466,
+          "subgroup_auc": {
+            "female": 0.4989,
+            "male": 0.5002,
+            "age_under_65": 0.4245,
+            "age_65_79": 0.5015,
+            "age_80_plus": 0.5789
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2153,
+            "male": 0.1726,
+            "age_under_65": 0.4238,
+            "age_65_79": 0.1285,
+            "age_80_plus": -0.0058
+          },
           "auc_logreg": 0.4869,
           "auc_gap_logreg": 0.1689,
           "auc_augmented": 0.6514,
@@ -340,87 +1280,457 @@
           "run_id": "gaussian_copula_seed2",
           "auc": 0.5464,
           "auc_gap": 0.1397,
+          "brier": 0.2668,
+          "brier_gap": 0.0311,
+          "subgroup_auc": {
+            "female": 0.5938,
+            "male": 0.5039,
+            "age_under_65": 0.5739,
+            "age_65_79": 0.5732,
+            "age_80_plus": 0.4717
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1204,
+            "male": 0.1689,
+            "age_under_65": 0.2744,
+            "age_65_79": 0.0568,
+            "age_80_plus": 0.1014
+          },
           "auc_logreg": 0.486,
           "auc_gap_logreg": 0.1698,
           "auc_augmented": 0.6812,
           "augmentation_delta": -0.0049
         },
         {
-          "run_id": "mst_eps10_seed0",
-          "auc": 0.5409,
-          "auc_gap": 0.1452,
-          "auc_logreg": 0.4278,
-          "auc_gap_logreg": 0.228,
-          "auc_augmented": 0.6941,
-          "augmentation_delta": 0.008
+          "run_id": "mst_eps0p5_seed0",
+          "auc": 0.5382,
+          "auc_gap": 0.1479,
+          "brier": 0.4817,
+          "brier_gap": 0.246,
+          "subgroup_auc": {
+            "female": 0.5086,
+            "male": 0.5575,
+            "age_under_65": 0.564,
+            "age_65_79": 0.5288,
+            "age_80_plus": 0.5283
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2056,
+            "male": 0.1153,
+            "age_under_65": 0.2843,
+            "age_65_79": 0.1012,
+            "age_80_plus": 0.0448
+          },
+          "auc_logreg": 0.5041,
+          "auc_gap_logreg": 0.1517,
+          "auc_augmented": 0.6818,
+          "augmentation_delta": -0.0043
         },
         {
-          "run_id": "mst_eps15_seed0",
-          "auc": 0.5417,
-          "auc_gap": 0.1444,
-          "auc_logreg": 0.5682,
-          "auc_gap_logreg": 0.0876,
+          "run_id": "mst_eps10_seed0",
+          "auc": 0.4629,
+          "auc_gap": 0.2232,
+          "brier": 0.5763,
+          "brier_gap": 0.3406,
+          "subgroup_auc": {
+            "female": 0.473,
+            "male": 0.455,
+            "age_under_65": 0.5249,
+            "age_65_79": 0.4165,
+            "age_80_plus": 0.4698
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2412,
+            "male": 0.2178,
+            "age_under_65": 0.3234,
+            "age_65_79": 0.2135,
+            "age_80_plus": 0.1033
+          },
+          "auc_logreg": 0.4818,
+          "auc_gap_logreg": 0.174,
           "auc_augmented": 0.682,
           "augmentation_delta": -0.0041
         },
         {
+          "run_id": "mst_eps15_seed0",
+          "auc": 0.5388,
+          "auc_gap": 0.1473,
+          "brier": 0.3597,
+          "brier_gap": 0.124,
+          "subgroup_auc": {
+            "female": 0.461,
+            "male": 0.5981,
+            "age_under_65": 0.567,
+            "age_65_79": 0.5712,
+            "age_80_plus": 0.4435
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2532,
+            "male": 0.0747,
+            "age_under_65": 0.2813,
+            "age_65_79": 0.0588,
+            "age_80_plus": 0.1296
+          },
+          "auc_logreg": 0.5341,
+          "auc_gap_logreg": 0.1217,
+          "auc_augmented": 0.6854,
+          "augmentation_delta": -0.0007
+        },
+        {
           "run_id": "mst_eps15_seed1",
-          "auc": 0.5217,
-          "auc_gap": 0.1644,
-          "auc_logreg": 0.5453,
-          "auc_gap_logreg": 0.1105,
-          "auc_augmented": 0.6927,
-          "augmentation_delta": 0.0066
+          "auc": 0.566,
+          "auc_gap": 0.1201,
+          "brier": 0.3576,
+          "brier_gap": 0.1219,
+          "subgroup_auc": {
+            "female": 0.5953,
+            "male": 0.5493,
+            "age_under_65": 0.495,
+            "age_65_79": 0.6259,
+            "age_80_plus": 0.5273
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1189,
+            "male": 0.1235,
+            "age_under_65": 0.3533,
+            "age_65_79": 0.0041,
+            "age_80_plus": 0.0458
+          },
+          "auc_logreg": 0.5716,
+          "auc_gap_logreg": 0.0842,
+          "auc_augmented": 0.6741,
+          "augmentation_delta": -0.012
         },
         {
           "run_id": "mst_eps15_seed2",
-          "auc": 0.5466,
-          "auc_gap": 0.1395,
-          "auc_logreg": 0.5202,
-          "auc_gap_logreg": 0.1356,
-          "auc_augmented": 0.6819,
-          "augmentation_delta": -0.0042
+          "auc": 0.4986,
+          "auc_gap": 0.1875,
+          "brier": 0.5894,
+          "brier_gap": 0.3537,
+          "subgroup_auc": {
+            "female": 0.5964,
+            "male": 0.4375,
+            "age_under_65": 0.5678,
+            "age_65_79": 0.4435,
+            "age_80_plus": 0.5078
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1178,
+            "male": 0.2353,
+            "age_under_65": 0.2805,
+            "age_65_79": 0.1865,
+            "age_80_plus": 0.0653
+          },
+          "auc_logreg": 0.5054,
+          "auc_gap_logreg": 0.1504,
+          "auc_augmented": 0.6598,
+          "augmentation_delta": -0.0263
         },
         {
           "run_id": "mst_eps1_seed0",
-          "auc": 0.5596,
-          "auc_gap": 0.1265,
-          "auc_logreg": 0.5492,
-          "auc_gap_logreg": 0.1066,
-          "auc_augmented": 0.6943,
-          "augmentation_delta": 0.0082
+          "auc": 0.4731,
+          "auc_gap": 0.213,
+          "brier": 0.368,
+          "brier_gap": 0.1323,
+          "subgroup_auc": {
+            "female": 0.4734,
+            "male": 0.4723,
+            "age_under_65": 0.4912,
+            "age_65_79": 0.5134,
+            "age_80_plus": 0.4064
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2408,
+            "male": 0.2005,
+            "age_under_65": 0.3571,
+            "age_65_79": 0.1166,
+            "age_80_plus": 0.1667
+          },
+          "auc_logreg": 0.4715,
+          "auc_gap_logreg": 0.1843,
+          "auc_augmented": 0.6855,
+          "augmentation_delta": -0.0006
         },
         {
           "run_id": "mst_eps20_seed0",
-          "auc": 0.498,
-          "auc_gap": 0.1881,
-          "auc_logreg": 0.5181,
-          "auc_gap_logreg": 0.1377,
-          "auc_augmented": 0.6822,
-          "augmentation_delta": -0.0039
+          "auc": 0.5395,
+          "auc_gap": 0.1466,
+          "brier": 0.576,
+          "brier_gap": 0.3403,
+          "subgroup_auc": {
+            "female": 0.4779,
+            "male": 0.5753,
+            "age_under_65": 0.5065,
+            "age_65_79": 0.5756,
+            "age_80_plus": 0.5185
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2363,
+            "male": 0.0975,
+            "age_under_65": 0.3418,
+            "age_65_79": 0.0544,
+            "age_80_plus": 0.0546
+          },
+          "auc_logreg": 0.514,
+          "auc_gap_logreg": 0.1418,
+          "auc_augmented": 0.6667,
+          "augmentation_delta": -0.0194
         },
         {
           "run_id": "mst_eps5_seed0",
-          "auc": 0.5148,
-          "auc_gap": 0.1713,
-          "auc_logreg": 0.5641,
-          "auc_gap_logreg": 0.0917,
-          "auc_augmented": 0.6758,
-          "augmentation_delta": -0.0103
+          "auc": 0.504,
+          "auc_gap": 0.1821,
+          "brier": 0.5391,
+          "brier_gap": 0.3034,
+          "subgroup_auc": {
+            "female": 0.4756,
+            "male": 0.5105,
+            "age_under_65": 0.4636,
+            "age_65_79": 0.5032,
+            "age_80_plus": 0.5361
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2386,
+            "male": 0.1623,
+            "age_under_65": 0.3847,
+            "age_65_79": 0.1268,
+            "age_80_plus": 0.037
+          },
+          "auc_logreg": 0.4746,
+          "auc_gap_logreg": 0.1812,
+          "auc_augmented": 0.6791,
+          "augmentation_delta": -0.007
         },
         {
           "run_id": "mst_eps8_seed0",
-          "auc": 0.4785,
-          "auc_gap": 0.2076,
-          "auc_logreg": 0.5233,
-          "auc_gap_logreg": 0.1325,
-          "auc_augmented": 0.6977,
-          "augmentation_delta": 0.0116
+          "auc": 0.4743,
+          "auc_gap": 0.2118,
+          "brier": 0.457,
+          "brier_gap": 0.2213,
+          "subgroup_auc": {
+            "female": 0.4164,
+            "male": 0.5249,
+            "age_under_65": 0.5418,
+            "age_65_79": 0.4018,
+            "age_80_plus": 0.5146
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2978,
+            "male": 0.1479,
+            "age_under_65": 0.3065,
+            "age_65_79": 0.2282,
+            "age_80_plus": 0.0585
+          },
+          "auc_logreg": 0.4724,
+          "auc_gap_logreg": 0.1834,
+          "auc_augmented": 0.6522,
+          "augmentation_delta": -0.0339
+        },
+        {
+          "run_id": "patectgan_eps15_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "patectgan_eps1_seed0",
+          "auc": 0.5392,
+          "auc_gap": 0.1469,
+          "brier": 0.3106,
+          "brier_gap": 0.0749,
+          "subgroup_auc": {
+            "female": 0.5161,
+            "male": 0.5671,
+            "age_under_65": 0.5011,
+            "age_65_79": 0.5159,
+            "age_80_plus": 0.6082
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1981,
+            "male": 0.1057,
+            "age_under_65": 0.3472,
+            "age_65_79": 0.1141,
+            "age_80_plus": -0.0351
+          },
+          "auc_logreg": 0.4953,
+          "auc_gap_logreg": 0.1605,
+          "auc_augmented": 0.6707,
+          "augmentation_delta": -0.0154
+        },
+        {
+          "run_id": "patectgan_eps5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "tvae_cap256_seed0",
+          "auc": 0.628,
+          "auc_gap": 0.0581,
+          "brier": 0.305,
+          "brier_gap": 0.0693,
+          "subgroup_auc": {
+            "female": 0.7089,
+            "male": 0.578,
+            "age_under_65": 0.7471,
+            "age_65_79": 0.6106,
+            "age_80_plus": 0.5302
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0053,
+            "male": 0.0948,
+            "age_under_65": 0.1012,
+            "age_65_79": 0.0194,
+            "age_80_plus": 0.0429
+          },
+          "auc_logreg": 0.6483,
+          "auc_gap_logreg": 0.0075,
+          "auc_augmented": 0.6667,
+          "augmentation_delta": -0.0194
+        },
+        {
+          "run_id": "tvae_ep1000_seed0",
+          "auc": 0.627,
+          "auc_gap": 0.0591,
+          "brier": 0.2741,
+          "brier_gap": 0.0384,
+          "subgroup_auc": {
+            "female": 0.6545,
+            "male": 0.607,
+            "age_under_65": 0.669,
+            "age_65_79": 0.6953,
+            "age_80_plus": 0.4747
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0597,
+            "male": 0.0658,
+            "age_under_65": 0.1793,
+            "age_65_79": -0.0653,
+            "age_80_plus": 0.0984
+          },
+          "auc_logreg": 0.5529,
+          "auc_gap_logreg": 0.1029,
+          "auc_augmented": 0.658,
+          "augmentation_delta": -0.0281
+        },
+        {
+          "run_id": "tvae_ind_seed0",
+          "auc": 0.5376,
+          "auc_gap": 0.1485,
+          "brier": 0.3296,
+          "brier_gap": 0.0939,
+          "subgroup_auc": {
+            "female": 0.5439,
+            "male": 0.5344,
+            "age_under_65": 0.567,
+            "age_65_79": 0.5924,
+            "age_80_plus": 0.3957
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1703,
+            "male": 0.1384,
+            "age_under_65": 0.2813,
+            "age_65_79": 0.0376,
+            "age_80_plus": 0.1774
+          },
+          "auc_logreg": 0.5528,
+          "auc_gap_logreg": 0.103,
+          "auc_augmented": 0.6463,
+          "augmentation_delta": -0.0398
+        },
+        {
+          "run_id": "tvae_qt_seed0",
+          "auc": 0.6093,
+          "auc_gap": 0.0768,
+          "brier": 0.2698,
+          "brier_gap": 0.0341,
+          "subgroup_auc": {
+            "female": 0.6399,
+            "male": 0.5862,
+            "age_under_65": 0.7303,
+            "age_65_79": 0.5959,
+            "age_80_plus": 0.4815
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0743,
+            "male": 0.0866,
+            "age_under_65": 0.118,
+            "age_65_79": 0.0341,
+            "age_80_plus": 0.0916
+          },
+          "auc_logreg": 0.6335,
+          "auc_gap_logreg": 0.0223,
+          "auc_augmented": 0.6846,
+          "augmentation_delta": -0.0015
+        },
+        {
+          "run_id": "tvae_qt_seed1",
+          "auc": 0.5784,
+          "auc_gap": 0.1077,
+          "brier": 0.3094,
+          "brier_gap": 0.0737,
+          "subgroup_auc": {
+            "female": 0.5956,
+            "male": 0.5719,
+            "age_under_65": 0.692,
+            "age_65_79": 0.5959,
+            "age_80_plus": 0.4386
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1186,
+            "male": 0.1009,
+            "age_under_65": 0.1563,
+            "age_65_79": 0.0341,
+            "age_80_plus": 0.1345
+          },
+          "auc_logreg": 0.6243,
+          "auc_gap_logreg": 0.0315,
+          "auc_augmented": 0.6894,
+          "augmentation_delta": 0.0033
+        },
+        {
+          "run_id": "tvae_qt_seed2",
+          "auc": 0.6023,
+          "auc_gap": 0.0838,
+          "brier": 0.3032,
+          "brier_gap": 0.0675,
+          "subgroup_auc": {
+            "female": 0.6643,
+            "male": 0.5522,
+            "age_under_65": 0.6973,
+            "age_65_79": 0.5868,
+            "age_80_plus": 0.538
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0499,
+            "male": 0.1206,
+            "age_under_65": 0.151,
+            "age_65_79": 0.0432,
+            "age_80_plus": 0.0351
+          },
+          "auc_logreg": 0.6381,
+          "auc_gap_logreg": 0.0177,
+          "auc_augmented": 0.6671,
+          "augmentation_delta": -0.019
         },
         {
           "run_id": "tvae_seed0",
           "auc": 0.5972,
           "auc_gap": 0.0889,
+          "brier": 0.31,
+          "brier_gap": 0.0743,
+          "subgroup_auc": {
+            "female": 0.7007,
+            "male": 0.5413,
+            "age_under_65": 0.613,
+            "age_65_79": 0.6324,
+            "age_80_plus": 0.5127
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0135,
+            "male": 0.1315,
+            "age_under_65": 0.2353,
+            "age_65_79": -0.0024,
+            "age_80_plus": 0.0604
+          },
           "auc_logreg": 0.6292,
           "auc_gap_logreg": 0.0266,
           "auc_augmented": 0.6783,
@@ -430,6 +1740,22 @@
           "run_id": "tvae_seed1",
           "auc": 0.6655,
           "auc_gap": 0.0206,
+          "brier": 0.2654,
+          "brier_gap": 0.0297,
+          "subgroup_auc": {
+            "female": 0.6935,
+            "male": 0.647,
+            "age_under_65": 0.7027,
+            "age_65_79": 0.72,
+            "age_80_plus": 0.5156
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0207,
+            "male": 0.0258,
+            "age_under_65": 0.1456,
+            "age_65_79": -0.09,
+            "age_80_plus": 0.0575
+          },
           "auc_logreg": 0.5889,
           "auc_gap_logreg": 0.0669,
           "auc_augmented": 0.6932,
@@ -439,6 +1765,22 @@
           "run_id": "tvae_seed2",
           "auc": 0.6039,
           "auc_gap": 0.0822,
+          "brier": 0.2774,
+          "brier_gap": 0.0417,
+          "subgroup_auc": {
+            "female": 0.6815,
+            "male": 0.5632,
+            "age_under_65": 0.6352,
+            "age_65_79": 0.6465,
+            "age_80_plus": 0.5273
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0327,
+            "male": 0.1096,
+            "age_under_65": 0.2131,
+            "age_65_79": -0.0165,
+            "age_80_plus": 0.0458
+          },
           "auc_logreg": 0.5736,
           "auc_gap_logreg": 0.0822,
           "auc_augmented": 0.6804,
@@ -446,6 +1788,14 @@
         }
       ],
       "baseline_auc_logreg": 0.6558,
+      "baseline_brier": 0.2357,
+      "baseline_subgroup_auc": {
+        "female": 0.7142,
+        "male": 0.6728,
+        "age_under_65": 0.8483,
+        "age_65_79": 0.63,
+        "age_80_plus": 0.5731
+      },
       "positives_train": 531,
       "positives_holdout": 168
     },
@@ -456,27 +1806,100 @@
       "baseline_auc": 0.5729,
       "tstr": [
         {
-          "run_id": "aim50_eps1_seed0",
-          "auc": 0.5506,
-          "auc_gap": 0.0223,
-          "auc_logreg": 0.5336,
-          "auc_gap_logreg": 0.0102,
-          "auc_augmented": 0.5881,
-          "augmentation_delta": 0.0152
+          "run_id": "aim40_eps1_seed0",
+          "auc": 0.5689,
+          "auc_gap": 0.004,
+          "brier": 0.0706,
+          "brier_gap": 0.0052,
+          "subgroup_auc": {
+            "female": 0.4961,
+            "male": 0.6329,
+            "age_under_65": 0.7036,
+            "age_65_79": 0.6387,
+            "age_80_plus": 0.2967
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0593,
+            "male": -0.0403,
+            "age_under_65": -0.1045,
+            "age_65_79": 0.0224,
+            "age_80_plus": 0.11
+          },
+          "auc_logreg": 0.5043,
+          "auc_gap_logreg": 0.0395,
+          "auc_augmented": 0.5752,
+          "augmentation_delta": 0.0023
         },
         {
-          "run_id": "aim50_eps5_seed0",
-          "auc": 0.54,
-          "auc_gap": 0.0329,
-          "auc_logreg": 0.5348,
-          "auc_gap_logreg": 0.009,
-          "auc_augmented": 0.5944,
-          "augmentation_delta": 0.0215
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.6285,
+          "auc_gap": -0.0556,
+          "brier": 0.0757,
+          "brier_gap": 0.0103,
+          "subgroup_auc": {
+            "female": 0.4575,
+            "male": 0.7591,
+            "age_under_65": 0.5778,
+            "age_65_79": 0.7857,
+            "age_80_plus": 0.5
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0979,
+            "male": -0.1665,
+            "age_under_65": 0.0213,
+            "age_65_79": -0.1246,
+            "age_80_plus": -0.0933
+          },
+          "auc_logreg": 0.5163,
+          "auc_gap_logreg": 0.0275,
+          "auc_augmented": 0.6551,
+          "augmentation_delta": 0.0822
+        },
+        {
+          "run_id": "ctgan_qt_seed0",
+          "auc": 0.6344,
+          "auc_gap": -0.0615,
+          "brier": 0.0927,
+          "brier_gap": 0.0273,
+          "subgroup_auc": {
+            "female": 0.5644,
+            "male": 0.6859,
+            "age_under_65": 0.4947,
+            "age_65_79": 0.8543,
+            "age_80_plus": 0.58
+          },
+          "subgroup_auc_gap": {
+            "female": -0.009,
+            "male": -0.0933,
+            "age_under_65": 0.1044,
+            "age_65_79": -0.1932,
+            "age_80_plus": -0.1733
+          },
+          "auc_logreg": 0.5075,
+          "auc_gap_logreg": 0.0363,
+          "auc_augmented": 0.5621,
+          "augmentation_delta": -0.0108
         },
         {
           "run_id": "ctgan_seed0",
           "auc": 0.4481,
           "auc_gap": 0.1248,
+          "brier": 0.0688,
+          "brier_gap": 0.0034,
+          "subgroup_auc": {
+            "female": 0.5245,
+            "male": 0.3919,
+            "age_under_65": 0.533,
+            "age_65_79": 0.4202,
+            "age_80_plus": 0.4267
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0309,
+            "male": 0.2007,
+            "age_under_65": 0.0661,
+            "age_65_79": 0.2409,
+            "age_80_plus": -0.02
+          },
           "auc_logreg": 0.5617,
           "auc_gap_logreg": -0.0179,
           "auc_augmented": 0.5169,
@@ -486,6 +1909,22 @@
           "run_id": "ctgan_seed1",
           "auc": 0.3726,
           "auc_gap": 0.2003,
+          "brier": 0.0938,
+          "brier_gap": 0.0284,
+          "subgroup_auc": {
+            "female": 0.4072,
+            "male": 0.347,
+            "age_under_65": 0.4627,
+            "age_65_79": 0.3739,
+            "age_80_plus": 0.2667
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1482,
+            "male": 0.2456,
+            "age_under_65": 0.1364,
+            "age_65_79": 0.2872,
+            "age_80_plus": 0.14
+          },
           "auc_logreg": 0.5402,
           "auc_gap_logreg": 0.0036,
           "auc_augmented": 0.5935,
@@ -495,10 +1934,126 @@
           "run_id": "ctgan_seed2",
           "auc": 0.6192,
           "auc_gap": -0.0463,
+          "brier": 0.0694,
+          "brier_gap": 0.004,
+          "subgroup_auc": {
+            "female": 0.6856,
+            "male": 0.5685,
+            "age_under_65": 0.7953,
+            "age_65_79": 0.5294,
+            "age_80_plus": 0.5067
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1302,
+            "male": 0.0241,
+            "age_under_65": -0.1962,
+            "age_65_79": 0.1317,
+            "age_80_plus": -0.1
+          },
           "auc_logreg": 0.586,
           "auc_gap_logreg": -0.0422,
           "auc_augmented": 0.5427,
           "augmentation_delta": -0.0302
+        },
+        {
+          "run_id": "ddpm_g_seed0",
+          "auc": 0.4523,
+          "auc_gap": 0.1206,
+          "brier": 0.1355,
+          "brier_gap": 0.0701,
+          "subgroup_auc": {
+            "female": 0.5631,
+            "male": 0.3685,
+            "age_under_65": 0.5032,
+            "age_65_79": 0.4664,
+            "age_80_plus": 0.3567
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0077,
+            "male": 0.2241,
+            "age_under_65": 0.0959,
+            "age_65_79": 0.1947,
+            "age_80_plus": 0.05
+          },
+          "auc_logreg": 0.5621,
+          "auc_gap_logreg": -0.0183,
+          "auc_augmented": 0.6323,
+          "augmentation_delta": 0.0594
+        },
+        {
+          "run_id": "ddpm_seed0",
+          "auc": 0.4076,
+          "auc_gap": 0.1653,
+          "brier": 0.3818,
+          "brier_gap": 0.3164,
+          "subgroup_auc": {
+            "female": 0.3853,
+            "male": 0.4268,
+            "age_under_65": 0.4051,
+            "age_65_79": 0.4202,
+            "age_80_plus": 0.3567
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1701,
+            "male": 0.1658,
+            "age_under_65": 0.194,
+            "age_65_79": 0.2409,
+            "age_80_plus": 0.05
+          },
+          "auc_logreg": 0.5133,
+          "auc_gap_logreg": 0.0305,
+          "auc_augmented": 0.6312,
+          "augmentation_delta": 0.0583
+        },
+        {
+          "run_id": "ddpm_seed1",
+          "auc": 0.4627,
+          "auc_gap": 0.1102,
+          "brier": 0.1571,
+          "brier_gap": 0.0917,
+          "subgroup_auc": {
+            "female": 0.4588,
+            "male": 0.4711,
+            "age_under_65": 0.4883,
+            "age_65_79": 0.612,
+            "age_80_plus": 0.2733
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0966,
+            "male": 0.1215,
+            "age_under_65": 0.1108,
+            "age_65_79": 0.0491,
+            "age_80_plus": 0.1334
+          },
+          "auc_logreg": 0.5102,
+          "auc_gap_logreg": 0.0336,
+          "auc_augmented": 0.6177,
+          "augmentation_delta": 0.0448
+        },
+        {
+          "run_id": "ddpm_seed2",
+          "auc": 0.4456,
+          "auc_gap": 0.1273,
+          "brier": 0.2667,
+          "brier_gap": 0.2013,
+          "subgroup_auc": {
+            "female": 0.2745,
+            "male": 0.5732,
+            "age_under_65": 0.5096,
+            "age_65_79": 0.3964,
+            "age_80_plus": 0.3933
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2809,
+            "male": 0.0194,
+            "age_under_65": 0.0895,
+            "age_65_79": 0.2647,
+            "age_80_plus": 0.0134
+          },
+          "auc_logreg": 0.3505,
+          "auc_gap_logreg": 0.1933,
+          "auc_augmented": 0.6174,
+          "augmentation_delta": 0.0445
         },
         {
           "run_id": "dpctgan_eps10_seed0",
@@ -532,12 +2087,8 @@
         },
         {
           "run_id": "dpctgan_eps5_seed0",
-          "auc": 0.5574,
-          "auc_gap": 0.0155,
-          "auc_logreg": 0.4527,
-          "auc_gap_logreg": 0.0911,
-          "auc_augmented": 0.5499,
-          "augmentation_delta": -0.023
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
         },
         {
           "run_id": "dpctgan_eps8_seed0",
@@ -548,6 +2099,22 @@
           "run_id": "gaussian_copula_seed0",
           "auc": 0.4257,
           "auc_gap": 0.1472,
+          "brier": 0.0669,
+          "brier_gap": 0.0015,
+          "subgroup_auc": {
+            "female": 0.4704,
+            "male": 0.3987,
+            "age_under_65": 0.3539,
+            "age_65_79": 0.493,
+            "age_80_plus": 0.4633
+          },
+          "subgroup_auc_gap": {
+            "female": 0.085,
+            "male": 0.1939,
+            "age_under_65": 0.2452,
+            "age_65_79": 0.1681,
+            "age_80_plus": -0.0566
+          },
           "auc_logreg": 0.4923,
           "auc_gap_logreg": 0.0515,
           "auc_augmented": 0.5106,
@@ -557,6 +2124,22 @@
           "run_id": "gaussian_copula_seed1",
           "auc": 0.5673,
           "auc_gap": 0.0056,
+          "brier": 0.0662,
+          "brier_gap": 0.0008,
+          "subgroup_auc": {
+            "female": 0.6495,
+            "male": 0.502,
+            "age_under_65": 0.7249,
+            "age_65_79": 0.5504,
+            "age_80_plus": 0.37
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0941,
+            "male": 0.0906,
+            "age_under_65": -0.1258,
+            "age_65_79": 0.1107,
+            "age_80_plus": 0.0367
+          },
           "auc_logreg": 0.5203,
           "auc_gap_logreg": 0.0235,
           "auc_augmented": 0.5748,
@@ -566,87 +2149,437 @@
           "run_id": "gaussian_copula_seed2",
           "auc": 0.4736,
           "auc_gap": 0.0993,
+          "brier": 0.0671,
+          "brier_gap": 0.0017,
+          "subgroup_auc": {
+            "female": 0.5039,
+            "male": 0.4544,
+            "age_under_65": 0.6482,
+            "age_65_79": 0.4454,
+            "age_80_plus": 0.29
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0515,
+            "male": 0.1382,
+            "age_under_65": -0.0491,
+            "age_65_79": 0.2157,
+            "age_80_plus": 0.1167
+          },
           "auc_logreg": 0.4697,
           "auc_gap_logreg": 0.0741,
           "auc_augmented": 0.5077,
           "augmentation_delta": -0.0652
         },
         {
+          "run_id": "mst_eps0p5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
           "run_id": "mst_eps10_seed0",
-          "auc": 0.5138,
-          "auc_gap": 0.0591,
-          "auc_logreg": 0.4519,
-          "auc_gap_logreg": 0.0919,
-          "auc_augmented": 0.5906,
-          "augmentation_delta": 0.0177
+          "auc": 0.451,
+          "auc_gap": 0.1219,
+          "brier": 0.2116,
+          "brier_gap": 0.1462,
+          "subgroup_auc": {
+            "female": 0.4871,
+            "male": 0.4275,
+            "age_under_65": 0.4776,
+            "age_65_79": 0.4328,
+            "age_80_plus": 0.4567
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0683,
+            "male": 0.1651,
+            "age_under_65": 0.1215,
+            "age_65_79": 0.2283,
+            "age_80_plus": -0.05
+          },
+          "auc_logreg": 0.5084,
+          "auc_gap_logreg": 0.0354,
+          "auc_augmented": 0.5725,
+          "augmentation_delta": -0.0004
         },
         {
           "run_id": "mst_eps15_seed0",
-          "auc": 0.5928,
-          "auc_gap": -0.0199,
-          "auc_logreg": 0.5515,
-          "auc_gap_logreg": -0.0077,
-          "auc_augmented": 0.5854,
-          "augmentation_delta": 0.0125
+          "auc": 0.6287,
+          "auc_gap": -0.0558,
+          "brier": 0.0662,
+          "brier_gap": 0.0008,
+          "subgroup_auc": {
+            "female": 0.5683,
+            "male": 0.6879,
+            "age_under_65": 0.6333,
+            "age_65_79": 0.6457,
+            "age_80_plus": 0.6267
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0129,
+            "male": -0.0953,
+            "age_under_65": -0.0342,
+            "age_65_79": 0.0154,
+            "age_80_plus": -0.22
+          },
+          "auc_logreg": 0.5025,
+          "auc_gap_logreg": 0.0413,
+          "auc_augmented": 0.561,
+          "augmentation_delta": -0.0119
         },
         {
           "run_id": "mst_eps15_seed1",
-          "auc": 0.5095,
-          "auc_gap": 0.0634,
-          "auc_logreg": 0.5429,
-          "auc_gap_logreg": 0.0009,
-          "auc_augmented": 0.5806,
-          "augmentation_delta": 0.0077
+          "auc": 0.5537,
+          "auc_gap": 0.0192,
+          "brier": 0.0683,
+          "brier_gap": 0.0029,
+          "subgroup_auc": {
+            "female": 0.549,
+            "male": 0.5638,
+            "age_under_65": 0.5288,
+            "age_65_79": 0.7031,
+            "age_80_plus": 0.39
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0064,
+            "male": 0.0288,
+            "age_under_65": 0.0703,
+            "age_65_79": -0.042,
+            "age_80_plus": 0.0167
+          },
+          "auc_logreg": 0.6052,
+          "auc_gap_logreg": -0.0614,
+          "auc_augmented": 0.5876,
+          "augmentation_delta": 0.0147
         },
         {
           "run_id": "mst_eps15_seed2",
-          "auc": 0.6579,
-          "auc_gap": -0.085,
-          "auc_logreg": 0.6012,
-          "auc_gap_logreg": -0.0574,
-          "auc_augmented": 0.6,
-          "augmentation_delta": 0.0271
+          "auc": 0.4986,
+          "auc_gap": 0.0743,
+          "brier": 0.0884,
+          "brier_gap": 0.023,
+          "subgroup_auc": {
+            "female": 0.5786,
+            "male": 0.4389,
+            "age_under_65": 0.403,
+            "age_65_79": 0.6064,
+            "age_80_plus": 0.5433
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0232,
+            "male": 0.1537,
+            "age_under_65": 0.1961,
+            "age_65_79": 0.0547,
+            "age_80_plus": -0.1366
+          },
+          "auc_logreg": 0.5856,
+          "auc_gap_logreg": -0.0418,
+          "auc_augmented": 0.5716,
+          "augmentation_delta": -0.0013
         },
         {
           "run_id": "mst_eps1_seed0",
-          "auc": 0.5781,
-          "auc_gap": -0.0052,
-          "auc_logreg": 0.4411,
-          "auc_gap_logreg": 0.1027,
-          "auc_augmented": 0.5456,
-          "augmentation_delta": -0.0273
+          "auc": 0.4505,
+          "auc_gap": 0.1224,
+          "brier": 0.0696,
+          "brier_gap": 0.0042,
+          "subgroup_auc": {
+            "female": 0.3911,
+            "male": 0.4983,
+            "age_under_65": 0.5362,
+            "age_65_79": 0.2857,
+            "age_80_plus": 0.5317
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1643,
+            "male": 0.0943,
+            "age_under_65": 0.0629,
+            "age_65_79": 0.3754,
+            "age_80_plus": -0.125
+          },
+          "auc_logreg": 0.5314,
+          "auc_gap_logreg": 0.0124,
+          "auc_augmented": 0.5547,
+          "augmentation_delta": -0.0182
         },
         {
           "run_id": "mst_eps20_seed0",
-          "auc": 0.6879,
-          "auc_gap": -0.115,
-          "auc_logreg": 0.5976,
-          "auc_gap_logreg": -0.0538,
-          "auc_augmented": 0.6308,
-          "augmentation_delta": 0.0579
+          "auc": 0.5578,
+          "auc_gap": 0.0151,
+          "brier": 0.1113,
+          "brier_gap": 0.0459,
+          "subgroup_auc": {
+            "female": 0.5348,
+            "male": 0.5624,
+            "age_under_65": 0.6055,
+            "age_65_79": 0.4804,
+            "age_80_plus": 0.54
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0206,
+            "male": 0.0302,
+            "age_under_65": -0.0064,
+            "age_65_79": 0.1807,
+            "age_80_plus": -0.1333
+          },
+          "auc_logreg": 0.6348,
+          "auc_gap_logreg": -0.091,
+          "auc_augmented": 0.6177,
+          "augmentation_delta": 0.0448
         },
         {
           "run_id": "mst_eps5_seed0",
-          "auc": 0.5838,
-          "auc_gap": -0.0109,
-          "auc_logreg": 0.6116,
-          "auc_gap_logreg": -0.0678,
-          "auc_augmented": 0.586,
-          "augmentation_delta": 0.0131
+          "auc": 0.4953,
+          "auc_gap": 0.0776,
+          "brier": 0.1331,
+          "brier_gap": 0.0677,
+          "subgroup_auc": {
+            "female": 0.5077,
+            "male": 0.4886,
+            "age_under_65": 0.4968,
+            "age_65_79": 0.451,
+            "age_80_plus": 0.5467
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0477,
+            "male": 0.104,
+            "age_under_65": 0.1023,
+            "age_65_79": 0.2101,
+            "age_80_plus": -0.14
+          },
+          "auc_logreg": 0.5169,
+          "auc_gap_logreg": 0.0269,
+          "auc_augmented": 0.5255,
+          "augmentation_delta": -0.0474
         },
         {
           "run_id": "mst_eps8_seed0",
-          "auc": 0.6107,
-          "auc_gap": -0.0378,
-          "auc_logreg": 0.5718,
-          "auc_gap_logreg": -0.028,
-          "auc_augmented": 0.5635,
-          "augmentation_delta": -0.0094
+          "auc": 0.6621,
+          "auc_gap": -0.0892,
+          "brier": 0.0682,
+          "brier_gap": 0.0028,
+          "subgroup_auc": {
+            "female": 0.7062,
+            "male": 0.649,
+            "age_under_65": 0.678,
+            "age_65_79": 0.6723,
+            "age_80_plus": 0.5867
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1508,
+            "male": -0.0564,
+            "age_under_65": -0.0789,
+            "age_65_79": -0.0112,
+            "age_80_plus": -0.18
+          },
+          "auc_logreg": 0.5023,
+          "auc_gap_logreg": 0.0415,
+          "auc_augmented": 0.5547,
+          "augmentation_delta": -0.0182
+        },
+        {
+          "run_id": "patectgan_eps15_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "patectgan_eps1_seed0",
+          "auc": 0.493,
+          "auc_gap": 0.0799,
+          "brier": 0.0672,
+          "brier_gap": 0.0018,
+          "subgroup_auc": {
+            "female": 0.4304,
+            "male": 0.555,
+            "age_under_65": 0.3859,
+            "age_65_79": 0.6793,
+            "age_80_plus": 0.3933
+          },
+          "subgroup_auc_gap": {
+            "female": 0.125,
+            "male": 0.0376,
+            "age_under_65": 0.2132,
+            "age_65_79": -0.0182,
+            "age_80_plus": 0.0134
+          },
+          "auc_logreg": 0.4993,
+          "auc_gap_logreg": 0.0445,
+          "auc_augmented": 0.5183,
+          "augmentation_delta": -0.0546
+        },
+        {
+          "run_id": "patectgan_eps5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "tvae_cap256_seed0",
+          "auc": 0.5576,
+          "auc_gap": 0.0153,
+          "brier": 0.07,
+          "brier_gap": 0.0046,
+          "subgroup_auc": {
+            "female": 0.5954,
+            "male": 0.5221,
+            "age_under_65": 0.6098,
+            "age_65_79": 0.7045,
+            "age_80_plus": 0.3533
+          },
+          "subgroup_auc_gap": {
+            "female": -0.04,
+            "male": 0.0705,
+            "age_under_65": -0.0107,
+            "age_65_79": -0.0434,
+            "age_80_plus": 0.0534
+          },
+          "auc_logreg": 0.5938,
+          "auc_gap_logreg": -0.05,
+          "auc_augmented": 0.5867,
+          "augmentation_delta": 0.0138
+        },
+        {
+          "run_id": "tvae_ep1000_seed0",
+          "auc": 0.516,
+          "auc_gap": 0.0569,
+          "brier": 0.0793,
+          "brier_gap": 0.0139,
+          "subgroup_auc": {
+            "female": 0.5155,
+            "male": 0.5034,
+            "age_under_65": 0.6205,
+            "age_65_79": 0.5728,
+            "age_80_plus": 0.3333
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0399,
+            "male": 0.0892,
+            "age_under_65": -0.0214,
+            "age_65_79": 0.0883,
+            "age_80_plus": 0.0734
+          },
+          "auc_logreg": 0.544,
+          "auc_gap_logreg": -0.0002,
+          "auc_augmented": 0.5224,
+          "augmentation_delta": -0.0505
+        },
+        {
+          "run_id": "tvae_ind_seed0",
+          "auc": 0.5111,
+          "auc_gap": 0.0618,
+          "brier": 0.0682,
+          "brier_gap": 0.0028,
+          "subgroup_auc": {
+            "female": 0.5696,
+            "male": 0.4772,
+            "age_under_65": 0.5458,
+            "age_65_79": 0.4664,
+            "age_80_plus": 0.5367
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0142,
+            "male": 0.1154,
+            "age_under_65": 0.0533,
+            "age_65_79": 0.1947,
+            "age_80_plus": -0.13
+          },
+          "auc_logreg": 0.5698,
+          "auc_gap_logreg": -0.026,
+          "auc_augmented": 0.5556,
+          "augmentation_delta": -0.0173
+        },
+        {
+          "run_id": "tvae_qt_seed0",
+          "auc": 0.5851,
+          "auc_gap": -0.0122,
+          "brier": 0.068,
+          "brier_gap": 0.0026,
+          "subgroup_auc": {
+            "female": 0.7345,
+            "male": 0.4805,
+            "age_under_65": 0.4051,
+            "age_65_79": 0.6303,
+            "age_80_plus": 0.75
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1791,
+            "male": 0.1121,
+            "age_under_65": 0.194,
+            "age_65_79": 0.0308,
+            "age_80_plus": -0.3433
+          },
+          "auc_logreg": 0.4607,
+          "auc_gap_logreg": 0.0831,
+          "auc_augmented": 0.6055,
+          "augmentation_delta": 0.0326
+        },
+        {
+          "run_id": "tvae_qt_seed1",
+          "auc": 0.4526,
+          "auc_gap": 0.1203,
+          "brier": 0.0759,
+          "brier_gap": 0.0105,
+          "subgroup_auc": {
+            "female": 0.3595,
+            "male": 0.5161,
+            "age_under_65": 0.484,
+            "age_65_79": 0.5252,
+            "age_80_plus": 0.3167
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1959,
+            "male": 0.0765,
+            "age_under_65": 0.1151,
+            "age_65_79": 0.1359,
+            "age_80_plus": 0.09
+          },
+          "auc_logreg": 0.4164,
+          "auc_gap_logreg": 0.1274,
+          "auc_augmented": 0.5327,
+          "augmentation_delta": -0.0402
+        },
+        {
+          "run_id": "tvae_qt_seed2",
+          "auc": 0.4058,
+          "auc_gap": 0.1671,
+          "brier": 0.0749,
+          "brier_gap": 0.0095,
+          "subgroup_auc": {
+            "female": 0.3003,
+            "male": 0.4866,
+            "age_under_65": 0.4776,
+            "age_65_79": 0.3669,
+            "age_80_plus": 0.3667
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2551,
+            "male": 0.106,
+            "age_under_65": 0.1215,
+            "age_65_79": 0.2942,
+            "age_80_plus": 0.04
+          },
+          "auc_logreg": 0.4625,
+          "auc_gap_logreg": 0.0813,
+          "auc_augmented": 0.47,
+          "augmentation_delta": -0.1029
         },
         {
           "run_id": "tvae_seed0",
           "auc": 0.4815,
           "auc_gap": 0.0914,
+          "brier": 0.0843,
+          "brier_gap": 0.0189,
+          "subgroup_auc": {
+            "female": 0.5103,
+            "male": 0.4638,
+            "age_under_65": 0.6205,
+            "age_65_79": 0.4972,
+            "age_80_plus": 0.3233
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0451,
+            "male": 0.1288,
+            "age_under_65": -0.0214,
+            "age_65_79": 0.1639,
+            "age_80_plus": 0.0834
+          },
           "auc_logreg": 0.5682,
           "auc_gap_logreg": -0.0244,
           "auc_augmented": 0.4616,
@@ -656,6 +2589,22 @@
           "run_id": "tvae_seed1",
           "auc": 0.3304,
           "auc_gap": 0.2425,
+          "brier": 0.07,
+          "brier_gap": 0.0046,
+          "subgroup_auc": {
+            "female": 0.3505,
+            "male": 0.3557,
+            "age_under_65": 0.4563,
+            "age_65_79": 0.2759,
+            "age_80_plus": 0.1933
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2049,
+            "male": 0.2369,
+            "age_under_65": 0.1428,
+            "age_65_79": 0.3852,
+            "age_80_plus": 0.2134
+          },
           "auc_logreg": 0.4596,
           "auc_gap_logreg": 0.0842,
           "auc_augmented": 0.572,
@@ -665,6 +2614,22 @@
           "run_id": "tvae_seed2",
           "auc": 0.4921,
           "auc_gap": 0.0808,
+          "brier": 0.0682,
+          "brier_gap": 0.0028,
+          "subgroup_auc": {
+            "female": 0.5335,
+            "male": 0.4537,
+            "age_under_65": 0.4883,
+            "age_65_79": 0.6064,
+            "age_80_plus": 0.3133
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0219,
+            "male": 0.1389,
+            "age_under_65": 0.1108,
+            "age_65_79": 0.0547,
+            "age_80_plus": 0.0934
+          },
           "auc_logreg": 0.5375,
           "auc_gap_logreg": 0.0063,
           "auc_augmented": 0.4767,
@@ -672,6 +2637,14 @@
         }
       ],
       "baseline_auc_logreg": 0.5438,
+      "baseline_brier": 0.0654,
+      "baseline_subgroup_auc": {
+        "female": 0.5554,
+        "male": 0.5926,
+        "age_under_65": 0.5991,
+        "age_65_79": 0.6611,
+        "age_80_plus": 0.4067
+      },
       "positives_train": 98,
       "positives_holdout": 18
     },
@@ -682,27 +2655,100 @@
       "baseline_auc": 0.5435,
       "tstr": [
         {
-          "run_id": "aim50_eps1_seed0",
-          "auc": 0.4407,
-          "auc_gap": 0.1028,
-          "auc_logreg": 0.3507,
-          "auc_gap_logreg": 0.1637,
-          "auc_augmented": 0.4562,
-          "augmentation_delta": -0.0873
+          "run_id": "aim40_eps1_seed0",
+          "auc": 0.4153,
+          "auc_gap": 0.1282,
+          "brier": 0.3174,
+          "brier_gap": 0.268,
+          "subgroup_auc": {
+            "female": 0.3268,
+            "male": 0.4773,
+            "age_under_65": 0.4829,
+            "age_65_79": 0.4421,
+            "age_80_plus": 0.32
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1459,
+            "male": 0.0947,
+            "age_under_65": 0.0857,
+            "age_65_79": 0.0434,
+            "age_80_plus": 0.1818
+          },
+          "auc_logreg": 0.3782,
+          "auc_gap_logreg": 0.1362,
+          "auc_augmented": 0.5469,
+          "augmentation_delta": 0.0034
         },
         {
-          "run_id": "aim50_eps5_seed0",
-          "auc": 0.5079,
-          "auc_gap": 0.0356,
-          "auc_logreg": 0.4586,
-          "auc_gap_logreg": 0.0558,
-          "auc_augmented": 0.5443,
-          "augmentation_delta": 0.0008
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.4604,
+          "auc_gap": 0.0831,
+          "brier": 0.0492,
+          "brier_gap": -0.0002,
+          "subgroup_auc": {
+            "female": 0.4753,
+            "male": 0.4386,
+            "age_under_65": 0.2857,
+            "age_65_79": 0.467,
+            "age_80_plus": 0.6048
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0026,
+            "male": 0.1334,
+            "age_under_65": 0.2829,
+            "age_65_79": 0.0185,
+            "age_80_plus": -0.103
+          },
+          "auc_logreg": 0.6128,
+          "auc_gap_logreg": -0.0984,
+          "auc_augmented": 0.4659,
+          "augmentation_delta": -0.0776
+        },
+        {
+          "run_id": "ctgan_qt_seed0",
+          "auc": 0.5272,
+          "auc_gap": 0.0163,
+          "brier": 0.0485,
+          "brier_gap": -0.0009,
+          "subgroup_auc": {
+            "female": 0.5404,
+            "male": 0.5173,
+            "age_under_65": 0.6171,
+            "age_65_79": 0.5509,
+            "age_80_plus": 0.4109
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0677,
+            "male": 0.0547,
+            "age_under_65": -0.0485,
+            "age_65_79": -0.0654,
+            "age_80_plus": 0.0909
+          },
+          "auc_logreg": 0.5347,
+          "auc_gap_logreg": -0.0203,
+          "auc_augmented": 0.4991,
+          "augmentation_delta": -0.0444
         },
         {
           "run_id": "ctgan_seed0",
           "auc": 0.5014,
           "auc_gap": 0.0421,
+          "brier": 0.0491,
+          "brier_gap": -0.0003,
+          "subgroup_auc": {
+            "female": 0.4603,
+            "male": 0.5326,
+            "age_under_65": 0.3743,
+            "age_65_79": 0.5544,
+            "age_80_plus": 0.4824
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0124,
+            "male": 0.0394,
+            "age_under_65": 0.1943,
+            "age_65_79": -0.0689,
+            "age_80_plus": 0.0194
+          },
           "auc_logreg": 0.4773,
           "auc_gap_logreg": 0.0371,
           "auc_augmented": 0.5413,
@@ -712,6 +2758,22 @@
           "run_id": "ctgan_seed1",
           "auc": 0.5305,
           "auc_gap": 0.013,
+          "brier": 0.0485,
+          "brier_gap": -0.0009,
+          "subgroup_auc": {
+            "female": 0.5853,
+            "male": 0.4971,
+            "age_under_65": 0.6057,
+            "age_65_79": 0.4446,
+            "age_80_plus": 0.6424
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1126,
+            "male": 0.0749,
+            "age_under_65": -0.0371,
+            "age_65_79": 0.0409,
+            "age_80_plus": -0.1406
+          },
           "auc_logreg": 0.4169,
           "auc_gap_logreg": 0.0975,
           "auc_augmented": 0.5301,
@@ -721,10 +2783,126 @@
           "run_id": "ctgan_seed2",
           "auc": 0.4542,
           "auc_gap": 0.0893,
+          "brier": 0.0482,
+          "brier_gap": -0.0012,
+          "subgroup_auc": {
+            "female": 0.2676,
+            "male": 0.5723,
+            "age_under_65": 0.6543,
+            "age_65_79": 0.5025,
+            "age_80_plus": 0.1212
+          },
+          "subgroup_auc_gap": {
+            "female": 0.2051,
+            "male": -0.0003,
+            "age_under_65": -0.0857,
+            "age_65_79": -0.017,
+            "age_80_plus": 0.3806
+          },
           "auc_logreg": 0.39,
           "auc_gap_logreg": 0.1244,
           "auc_augmented": 0.4374,
           "augmentation_delta": -0.1061
+        },
+        {
+          "run_id": "ddpm_g_seed0",
+          "auc": 0.5976,
+          "auc_gap": -0.0541,
+          "brier": 0.1917,
+          "brier_gap": 0.1423,
+          "subgroup_auc": {
+            "female": 0.599,
+            "male": 0.5938,
+            "age_under_65": 0.5886,
+            "age_65_79": 0.6004,
+            "age_80_plus": 0.6012
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1263,
+            "male": -0.0218,
+            "age_under_65": -0.02,
+            "age_65_79": -0.1149,
+            "age_80_plus": -0.0994
+          },
+          "auc_logreg": 0.4496,
+          "auc_gap_logreg": 0.0648,
+          "auc_augmented": 0.5536,
+          "augmentation_delta": 0.0101
+        },
+        {
+          "run_id": "ddpm_seed0",
+          "auc": 0.7039,
+          "auc_gap": -0.1604,
+          "brier": 0.1383,
+          "brier_gap": 0.0889,
+          "subgroup_auc": {
+            "female": 0.6224,
+            "male": 0.7552,
+            "age_under_65": 0.5771,
+            "age_65_79": 0.7672,
+            "age_80_plus": 0.6327
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1497,
+            "male": -0.1832,
+            "age_under_65": -0.0085,
+            "age_65_79": -0.2817,
+            "age_80_plus": -0.1309
+          },
+          "auc_logreg": 0.446,
+          "auc_gap_logreg": 0.0684,
+          "auc_augmented": 0.4781,
+          "augmentation_delta": -0.0654
+        },
+        {
+          "run_id": "ddpm_seed1",
+          "auc": 0.4878,
+          "auc_gap": 0.0557,
+          "brier": 0.3537,
+          "brier_gap": 0.3043,
+          "subgroup_auc": {
+            "female": 0.4518,
+            "male": 0.5094,
+            "age_under_65": 0.4886,
+            "age_65_79": 0.521,
+            "age_80_plus": 0.4461
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0209,
+            "male": 0.0626,
+            "age_under_65": 0.08,
+            "age_65_79": -0.0355,
+            "age_80_plus": 0.0557
+          },
+          "auc_logreg": 0.4934,
+          "auc_gap_logreg": 0.021,
+          "auc_augmented": 0.6568,
+          "augmentation_delta": 0.1133
+        },
+        {
+          "run_id": "ddpm_seed2",
+          "auc": 0.3966,
+          "auc_gap": 0.1469,
+          "brier": 0.2521,
+          "brier_gap": 0.2027,
+          "subgroup_auc": {
+            "female": 0.3001,
+            "male": 0.4386,
+            "age_under_65": 0.4371,
+            "age_65_79": 0.3192,
+            "age_80_plus": 0.3842
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1726,
+            "male": 0.1334,
+            "age_under_65": 0.1315,
+            "age_65_79": 0.1663,
+            "age_80_plus": 0.1176
+          },
+          "auc_logreg": 0.4508,
+          "auc_gap_logreg": 0.0636,
+          "auc_augmented": 0.5381,
+          "augmentation_delta": -0.0054
         },
         {
           "run_id": "dpctgan_eps10_seed0",
@@ -770,6 +2948,22 @@
           "run_id": "gaussian_copula_seed0",
           "auc": 0.6404,
           "auc_gap": -0.0969,
+          "brier": 0.0479,
+          "brier_gap": -0.0015,
+          "subgroup_auc": {
+            "female": 0.6562,
+            "male": 0.6239,
+            "age_under_65": 0.5886,
+            "age_65_79": 0.6633,
+            "age_80_plus": 0.6861
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1835,
+            "male": -0.0519,
+            "age_under_65": -0.02,
+            "age_65_79": -0.1778,
+            "age_80_plus": -0.1843
+          },
           "auc_logreg": 0.4819,
           "auc_gap_logreg": 0.0325,
           "auc_augmented": 0.5292,
@@ -779,6 +2973,22 @@
           "run_id": "gaussian_copula_seed1",
           "auc": 0.4639,
           "auc_gap": 0.0796,
+          "brier": 0.048,
+          "brier_gap": -0.0014,
+          "subgroup_auc": {
+            "female": 0.4368,
+            "male": 0.4564,
+            "age_under_65": 0.38,
+            "age_65_79": 0.4421,
+            "age_80_plus": 0.6655
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0359,
+            "male": 0.1156,
+            "age_under_65": 0.1886,
+            "age_65_79": 0.0434,
+            "age_80_plus": -0.1637
+          },
           "auc_logreg": 0.5099,
           "auc_gap_logreg": 0.0045,
           "auc_augmented": 0.5729,
@@ -788,87 +2998,457 @@
           "run_id": "gaussian_copula_seed2",
           "auc": 0.5041,
           "auc_gap": 0.0394,
+          "brier": 0.0479,
+          "brier_gap": -0.0015,
+          "subgroup_auc": {
+            "female": 0.3424,
+            "male": 0.6164,
+            "age_under_65": 0.6743,
+            "age_65_79": 0.546,
+            "age_80_plus": 0.44
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1303,
+            "male": -0.0444,
+            "age_under_65": -0.1057,
+            "age_65_79": -0.0605,
+            "age_80_plus": 0.0618
+          },
           "auc_logreg": 0.4065,
           "auc_gap_logreg": 0.1079,
           "auc_augmented": 0.4923,
           "augmentation_delta": -0.0512
         },
         {
+          "run_id": "mst_eps0p5_seed0",
+          "auc": 0.4801,
+          "auc_gap": 0.0634,
+          "brier": 0.1317,
+          "brier_gap": 0.0823,
+          "subgroup_auc": {
+            "female": 0.5241,
+            "male": 0.4581,
+            "age_under_65": 0.3857,
+            "age_65_79": 0.4675,
+            "age_80_plus": 0.5297
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0514,
+            "male": 0.1139,
+            "age_under_65": 0.1829,
+            "age_65_79": 0.018,
+            "age_80_plus": -0.0279
+          },
+          "auc_logreg": 0.3887,
+          "auc_gap_logreg": 0.1257,
+          "auc_augmented": 0.4824,
+          "augmentation_delta": -0.0611
+        },
+        {
           "run_id": "mst_eps10_seed0",
-          "auc": 0.5713,
-          "auc_gap": -0.0278,
-          "auc_logreg": 0.5753,
-          "auc_gap_logreg": -0.0609,
-          "auc_augmented": 0.5417,
-          "augmentation_delta": -0.0018
+          "auc": 0.3995,
+          "auc_gap": 0.144,
+          "brier": 0.0593,
+          "brier_gap": 0.0099,
+          "subgroup_auc": {
+            "female": 0.3307,
+            "male": 0.4632,
+            "age_under_65": 0.3829,
+            "age_65_79": 0.4271,
+            "age_80_plus": 0.3406
+          },
+          "subgroup_auc_gap": {
+            "female": 0.142,
+            "male": 0.1088,
+            "age_under_65": 0.1857,
+            "age_65_79": 0.0584,
+            "age_80_plus": 0.1612
+          },
+          "auc_logreg": 0.5807,
+          "auc_gap_logreg": -0.0663,
+          "auc_augmented": 0.556,
+          "augmentation_delta": 0.0125
         },
         {
           "run_id": "mst_eps15_seed0",
-          "auc": 0.4932,
-          "auc_gap": 0.0503,
-          "auc_logreg": 0.5765,
-          "auc_gap_logreg": -0.0621,
-          "auc_augmented": 0.5311,
-          "augmentation_delta": -0.0124
+          "auc": 0.4921,
+          "auc_gap": 0.0514,
+          "brier": 0.0484,
+          "brier_gap": -0.001,
+          "subgroup_auc": {
+            "female": 0.5462,
+            "male": 0.4749,
+            "age_under_65": 0.5286,
+            "age_65_79": 0.4675,
+            "age_80_plus": 0.4909
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0735,
+            "male": 0.0971,
+            "age_under_65": 0.04,
+            "age_65_79": 0.018,
+            "age_80_plus": 0.0109
+          },
+          "auc_logreg": 0.5574,
+          "auc_gap_logreg": -0.043,
+          "auc_augmented": 0.5176,
+          "augmentation_delta": -0.0259
         },
         {
           "run_id": "mst_eps15_seed1",
-          "auc": 0.4033,
-          "auc_gap": 0.1402,
-          "auc_logreg": 0.6125,
-          "auc_gap_logreg": -0.0981,
-          "auc_augmented": 0.5454,
-          "augmentation_delta": 0.0019
+          "auc": 0.4629,
+          "auc_gap": 0.0806,
+          "brier": 0.0492,
+          "brier_gap": -0.0002,
+          "subgroup_auc": {
+            "female": 0.4577,
+            "male": 0.5009,
+            "age_under_65": 0.4571,
+            "age_65_79": 0.49,
+            "age_80_plus": 0.4582
+          },
+          "subgroup_auc_gap": {
+            "female": 0.015,
+            "male": 0.0711,
+            "age_under_65": 0.1115,
+            "age_65_79": -0.0045,
+            "age_80_plus": 0.0436
+          },
+          "auc_logreg": 0.514,
+          "auc_gap_logreg": 0.0004,
+          "auc_augmented": 0.5725,
+          "augmentation_delta": 0.029
         },
         {
           "run_id": "mst_eps15_seed2",
-          "auc": 0.3703,
-          "auc_gap": 0.1732,
-          "auc_logreg": 0.632,
-          "auc_gap_logreg": -0.1176,
-          "auc_augmented": 0.575,
-          "augmentation_delta": 0.0315
+          "auc": 0.469,
+          "auc_gap": 0.0745,
+          "brier": 0.0506,
+          "brier_gap": 0.0012,
+          "subgroup_auc": {
+            "female": 0.4746,
+            "male": 0.466,
+            "age_under_65": 0.5371,
+            "age_65_79": 0.501,
+            "age_80_plus": 0.3612
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0019,
+            "male": 0.106,
+            "age_under_65": 0.0315,
+            "age_65_79": -0.0155,
+            "age_80_plus": 0.1406
+          },
+          "auc_logreg": 0.5757,
+          "auc_gap_logreg": -0.0613,
+          "auc_augmented": 0.5262,
+          "augmentation_delta": -0.0173
         },
         {
           "run_id": "mst_eps1_seed0",
-          "auc": 0.4714,
-          "auc_gap": 0.0721,
-          "auc_logreg": 0.4057,
-          "auc_gap_logreg": 0.1087,
-          "auc_augmented": 0.5696,
-          "augmentation_delta": 0.0261
+          "auc": 0.5255,
+          "auc_gap": 0.018,
+          "brier": 0.0516,
+          "brier_gap": 0.0022,
+          "subgroup_auc": {
+            "female": 0.5599,
+            "male": 0.5074,
+            "age_under_65": 0.4971,
+            "age_65_79": 0.5899,
+            "age_80_plus": 0.4412
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0872,
+            "male": 0.0646,
+            "age_under_65": 0.0715,
+            "age_65_79": -0.1044,
+            "age_80_plus": 0.0606
+          },
+          "auc_logreg": 0.5147,
+          "auc_gap_logreg": -0.0003,
+          "auc_augmented": 0.4916,
+          "augmentation_delta": -0.0519
         },
         {
           "run_id": "mst_eps20_seed0",
-          "auc": 0.4398,
-          "auc_gap": 0.1037,
-          "auc_logreg": 0.5109,
-          "auc_gap_logreg": 0.0035,
-          "auc_augmented": 0.4964,
-          "augmentation_delta": -0.0471
+          "auc": 0.4977,
+          "auc_gap": 0.0458,
+          "brier": 0.0512,
+          "brier_gap": 0.0018,
+          "subgroup_auc": {
+            "female": 0.4134,
+            "male": 0.5443,
+            "age_under_65": 0.6286,
+            "age_65_79": 0.48,
+            "age_80_plus": 0.3345
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0593,
+            "male": 0.0277,
+            "age_under_65": -0.06,
+            "age_65_79": 0.0055,
+            "age_80_plus": 0.1673
+          },
+          "auc_logreg": 0.5317,
+          "auc_gap_logreg": -0.0173,
+          "auc_augmented": 0.5621,
+          "augmentation_delta": 0.0186
         },
         {
           "run_id": "mst_eps5_seed0",
-          "auc": 0.5469,
-          "auc_gap": -0.0034,
-          "auc_logreg": 0.589,
-          "auc_gap_logreg": -0.0746,
-          "auc_augmented": 0.5553,
-          "augmentation_delta": 0.0118
+          "auc": 0.4802,
+          "auc_gap": 0.0633,
+          "brier": 0.0479,
+          "brier_gap": -0.0015,
+          "subgroup_auc": {
+            "female": 0.5505,
+            "male": 0.4417,
+            "age_under_65": 0.3771,
+            "age_65_79": 0.5,
+            "age_80_plus": 0.5697
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0778,
+            "male": 0.1303,
+            "age_under_65": 0.1915,
+            "age_65_79": -0.0145,
+            "age_80_plus": -0.0679
+          },
+          "auc_logreg": 0.4604,
+          "auc_gap_logreg": 0.054,
+          "auc_augmented": 0.5757,
+          "augmentation_delta": 0.0322
         },
         {
           "run_id": "mst_eps8_seed0",
-          "auc": 0.4495,
-          "auc_gap": 0.094,
-          "auc_logreg": 0.6016,
-          "auc_gap_logreg": -0.0872,
-          "auc_augmented": 0.5321,
-          "augmentation_delta": -0.0114
+          "auc": 0.6748,
+          "auc_gap": -0.1313,
+          "brier": 0.0484,
+          "brier_gap": -0.001,
+          "subgroup_auc": {
+            "female": 0.6934,
+            "male": 0.6742,
+            "age_under_65": 0.52,
+            "age_65_79": 0.8267,
+            "age_80_plus": 0.5418
+          },
+          "subgroup_auc_gap": {
+            "female": -0.2207,
+            "male": -0.1022,
+            "age_under_65": 0.0486,
+            "age_65_79": -0.3412,
+            "age_80_plus": -0.04
+          },
+          "auc_logreg": 0.5055,
+          "auc_gap_logreg": 0.0089,
+          "auc_augmented": 0.5339,
+          "augmentation_delta": -0.0096
+        },
+        {
+          "run_id": "patectgan_eps15_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "patectgan_eps1_seed0",
+          "auc": 0.6267,
+          "auc_gap": -0.0832,
+          "brier": 0.0462,
+          "brier_gap": -0.0032,
+          "subgroup_auc": {
+            "female": 0.681,
+            "male": 0.601,
+            "age_under_65": 0.64,
+            "age_65_79": 0.5919,
+            "age_80_plus": 0.6521
+          },
+          "subgroup_auc_gap": {
+            "female": -0.2083,
+            "male": -0.029,
+            "age_under_65": -0.0714,
+            "age_65_79": -0.1064,
+            "age_80_plus": -0.1503
+          },
+          "auc_logreg": 0.585,
+          "auc_gap_logreg": -0.0706,
+          "auc_augmented": 0.5755,
+          "augmentation_delta": 0.032
+        },
+        {
+          "run_id": "patectgan_eps5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "tvae_cap256_seed0",
+          "auc": 0.4612,
+          "auc_gap": 0.0823,
+          "brier": 0.0523,
+          "brier_gap": 0.0029,
+          "subgroup_auc": {
+            "female": 0.6315,
+            "male": 0.3385,
+            "age_under_65": 0.5114,
+            "age_65_79": 0.3676,
+            "age_80_plus": 0.5236
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1588,
+            "male": 0.2335,
+            "age_under_65": 0.0572,
+            "age_65_79": 0.1179,
+            "age_80_plus": -0.0218
+          },
+          "auc_logreg": 0.4888,
+          "auc_gap_logreg": 0.0256,
+          "auc_augmented": 0.5033,
+          "augmentation_delta": -0.0402
+        },
+        {
+          "run_id": "tvae_ep1000_seed0",
+          "auc": 0.5432,
+          "auc_gap": 0.0003,
+          "brier": 0.0662,
+          "brier_gap": 0.0168,
+          "subgroup_auc": {
+            "female": 0.5996,
+            "male": 0.4838,
+            "age_under_65": 0.5714,
+            "age_65_79": 0.4755,
+            "age_80_plus": 0.543
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1269,
+            "male": 0.0882,
+            "age_under_65": -0.0028,
+            "age_65_79": 0.01,
+            "age_80_plus": -0.0412
+          },
+          "auc_logreg": 0.6258,
+          "auc_gap_logreg": -0.1114,
+          "auc_augmented": 0.5682,
+          "augmentation_delta": 0.0247
+        },
+        {
+          "run_id": "tvae_ind_seed0",
+          "auc": 0.546,
+          "auc_gap": -0.0025,
+          "brier": 0.0644,
+          "brier_gap": 0.015,
+          "subgroup_auc": {
+            "female": 0.4525,
+            "male": 0.561,
+            "age_under_65": 0.3629,
+            "age_65_79": 0.6523,
+            "age_80_plus": 0.2655
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0202,
+            "male": 0.011,
+            "age_under_65": 0.2057,
+            "age_65_79": -0.1668,
+            "age_80_plus": 0.2363
+          },
+          "auc_logreg": 0.6057,
+          "auc_gap_logreg": -0.0913,
+          "auc_augmented": 0.5014,
+          "augmentation_delta": -0.0421
+        },
+        {
+          "run_id": "tvae_qt_seed0",
+          "auc": 0.5725,
+          "auc_gap": -0.029,
+          "brier": 0.0571,
+          "brier_gap": 0.0077,
+          "subgroup_auc": {
+            "female": 0.612,
+            "male": 0.5388,
+            "age_under_65": 0.6314,
+            "age_65_79": 0.4665,
+            "age_80_plus": 0.5988
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1393,
+            "male": 0.0332,
+            "age_under_65": -0.0628,
+            "age_65_79": 0.019,
+            "age_80_plus": -0.097
+          },
+          "auc_logreg": 0.5376,
+          "auc_gap_logreg": -0.0232,
+          "auc_augmented": 0.5865,
+          "augmentation_delta": 0.043
+        },
+        {
+          "run_id": "tvae_qt_seed1",
+          "auc": 0.5574,
+          "auc_gap": -0.0139,
+          "brier": 0.0563,
+          "brier_gap": 0.0069,
+          "subgroup_auc": {
+            "female": 0.4727,
+            "male": 0.5785,
+            "age_under_65": 0.5029,
+            "age_65_79": 0.5015,
+            "age_80_plus": 0.5673
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0,
+            "male": -0.0065,
+            "age_under_65": 0.0657,
+            "age_65_79": -0.016,
+            "age_80_plus": -0.0655
+          },
+          "auc_logreg": 0.6053,
+          "auc_gap_logreg": -0.0909,
+          "auc_augmented": 0.5369,
+          "augmentation_delta": -0.0066
+        },
+        {
+          "run_id": "tvae_qt_seed2",
+          "auc": 0.4985,
+          "auc_gap": 0.045,
+          "brier": 0.0695,
+          "brier_gap": 0.0201,
+          "subgroup_auc": {
+            "female": 0.4831,
+            "male": 0.4793,
+            "age_under_65": 0.4514,
+            "age_65_79": 0.4835,
+            "age_80_plus": 0.5115
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0104,
+            "male": 0.0927,
+            "age_under_65": 0.1172,
+            "age_65_79": 0.002,
+            "age_80_plus": -0.0097
+          },
+          "auc_logreg": 0.4299,
+          "auc_gap_logreg": 0.0845,
+          "auc_augmented": 0.4818,
+          "augmentation_delta": -0.0617
         },
         {
           "run_id": "tvae_seed0",
           "auc": 0.5293,
           "auc_gap": 0.0142,
+          "brier": 0.0631,
+          "brier_gap": 0.0137,
+          "subgroup_auc": {
+            "female": 0.5352,
+            "male": 0.5156,
+            "age_under_65": 0.4286,
+            "age_65_79": 0.472,
+            "age_80_plus": 0.5818
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0625,
+            "male": 0.0564,
+            "age_under_65": 0.14,
+            "age_65_79": 0.0135,
+            "age_80_plus": -0.08
+          },
           "auc_logreg": 0.6128,
           "auc_gap_logreg": -0.0984,
           "auc_augmented": 0.5832,
@@ -878,6 +3458,22 @@
           "run_id": "tvae_seed1",
           "auc": 0.5136,
           "auc_gap": 0.0299,
+          "brier": 0.0921,
+          "brier_gap": 0.0427,
+          "subgroup_auc": {
+            "female": 0.5202,
+            "male": 0.4735,
+            "age_under_65": 0.4029,
+            "age_65_79": 0.4855,
+            "age_80_plus": 0.5394
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0475,
+            "male": 0.0985,
+            "age_under_65": 0.1657,
+            "age_65_79": 0.0,
+            "age_80_plus": -0.0376
+          },
           "auc_logreg": 0.623,
           "auc_gap_logreg": -0.1086,
           "auc_augmented": 0.535,
@@ -887,6 +3483,22 @@
           "run_id": "tvae_seed2",
           "auc": 0.6139,
           "auc_gap": -0.0704,
+          "brier": 0.0783,
+          "brier_gap": 0.0289,
+          "subgroup_auc": {
+            "female": 0.5352,
+            "male": 0.6485,
+            "age_under_65": 0.5429,
+            "age_65_79": 0.5564,
+            "age_80_plus": 0.6533
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0625,
+            "male": -0.0765,
+            "age_under_65": 0.0257,
+            "age_65_79": -0.0709,
+            "age_80_plus": -0.1515
+          },
           "auc_logreg": 0.4756,
           "auc_gap_logreg": 0.0388,
           "auc_augmented": 0.5053,
@@ -894,6 +3506,14 @@
         }
       ],
       "baseline_auc_logreg": 0.5144,
+      "baseline_brier": 0.0494,
+      "baseline_subgroup_auc": {
+        "female": 0.4727,
+        "male": 0.572,
+        "age_under_65": 0.5686,
+        "age_65_79": 0.4855,
+        "age_80_plus": 0.5018
+      },
       "positives_train": 1208,
       "positives_holdout": 417
     },
@@ -904,27 +3524,100 @@
       "baseline_auc": 0.5435,
       "tstr": [
         {
-          "run_id": "aim50_eps1_seed0",
-          "auc": 0.3797,
-          "auc_gap": 0.1638,
-          "auc_logreg": 0.3559,
-          "auc_gap_logreg": 0.1585,
-          "auc_augmented": 0.4667,
-          "augmentation_delta": -0.0768
+          "run_id": "aim40_eps1_seed0",
+          "auc": 0.5751,
+          "auc_gap": -0.0316,
+          "brier": 0.0691,
+          "brier_gap": 0.0197,
+          "subgroup_auc": {
+            "female": 0.4414,
+            "male": 0.6585,
+            "age_under_65": 0.6743,
+            "age_65_79": 0.6469,
+            "age_80_plus": 0.3006
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0313,
+            "male": -0.0865,
+            "age_under_65": -0.1057,
+            "age_65_79": -0.1614,
+            "age_80_plus": 0.2012
+          },
+          "auc_logreg": 0.4916,
+          "auc_gap_logreg": 0.0228,
+          "auc_augmented": 0.5413,
+          "augmentation_delta": -0.0022
         },
         {
-          "run_id": "aim50_eps5_seed0",
-          "auc": 0.5639,
-          "auc_gap": -0.0204,
-          "auc_logreg": 0.5546,
-          "auc_gap_logreg": -0.0402,
-          "auc_augmented": 0.5568,
-          "augmentation_delta": 0.0133
+          "run_id": "aim50_eps1_seed0",
+          "auc": 0.5604,
+          "auc_gap": -0.0169,
+          "brier": 0.0574,
+          "brier_gap": 0.008,
+          "subgroup_auc": {
+            "female": 0.5905,
+            "male": 0.5234,
+            "age_under_65": 0.5514,
+            "age_65_79": 0.5609,
+            "age_80_plus": 0.5903
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1178,
+            "male": 0.0486,
+            "age_under_65": 0.0172,
+            "age_65_79": -0.0754,
+            "age_80_plus": -0.0885
+          },
+          "auc_logreg": 0.5461,
+          "auc_gap_logreg": -0.0317,
+          "auc_augmented": 0.5111,
+          "augmentation_delta": -0.0324
+        },
+        {
+          "run_id": "ctgan_qt_seed0",
+          "auc": 0.4303,
+          "auc_gap": 0.1132,
+          "brier": 0.0518,
+          "brier_gap": 0.0024,
+          "subgroup_auc": {
+            "female": 0.3301,
+            "male": 0.5111,
+            "age_under_65": 0.4514,
+            "age_65_79": 0.4241,
+            "age_80_plus": 0.3806
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1426,
+            "male": 0.0609,
+            "age_under_65": 0.1172,
+            "age_65_79": 0.0614,
+            "age_80_plus": 0.1212
+          },
+          "auc_logreg": 0.4608,
+          "auc_gap_logreg": 0.0536,
+          "auc_augmented": 0.4915,
+          "augmentation_delta": -0.052
         },
         {
           "run_id": "ctgan_seed0",
           "auc": 0.5761,
           "auc_gap": -0.0326,
+          "brier": 0.0477,
+          "brier_gap": -0.0017,
+          "subgroup_auc": {
+            "female": 0.5423,
+            "male": 0.5993,
+            "age_under_65": 0.6771,
+            "age_65_79": 0.6089,
+            "age_80_plus": 0.3588
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0696,
+            "male": -0.0273,
+            "age_under_65": -0.1085,
+            "age_65_79": -0.1234,
+            "age_80_plus": 0.143
+          },
           "auc_logreg": 0.5828,
           "auc_gap_logreg": -0.0684,
           "auc_augmented": 0.6964,
@@ -934,6 +3627,22 @@
           "run_id": "ctgan_seed1",
           "auc": 0.4428,
           "auc_gap": 0.1007,
+          "brier": 0.0489,
+          "brier_gap": -0.0005,
+          "subgroup_auc": {
+            "female": 0.3542,
+            "male": 0.5043,
+            "age_under_65": 0.7429,
+            "age_65_79": 0.3207,
+            "age_80_plus": 0.3891
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1185,
+            "male": 0.0677,
+            "age_under_65": -0.1743,
+            "age_65_79": 0.1648,
+            "age_80_plus": 0.1127
+          },
           "auc_logreg": 0.4858,
           "auc_gap_logreg": 0.0286,
           "auc_augmented": 0.5321,
@@ -943,10 +3652,126 @@
           "run_id": "ctgan_seed2",
           "auc": 0.4122,
           "auc_gap": 0.1313,
+          "brier": 0.0508,
+          "brier_gap": 0.0014,
+          "subgroup_auc": {
+            "female": 0.4264,
+            "male": 0.4014,
+            "age_under_65": 0.4143,
+            "age_65_79": 0.3896,
+            "age_80_plus": 0.4061
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0463,
+            "male": 0.1706,
+            "age_under_65": 0.1543,
+            "age_65_79": 0.0959,
+            "age_80_plus": 0.0957
+          },
           "auc_logreg": 0.4927,
           "auc_gap_logreg": 0.0217,
           "auc_augmented": 0.4978,
           "augmentation_delta": -0.0457
+        },
+        {
+          "run_id": "ddpm_g_seed0",
+          "auc": 0.6113,
+          "auc_gap": -0.0678,
+          "brier": 0.0604,
+          "brier_gap": 0.011,
+          "subgroup_auc": {
+            "female": 0.5443,
+            "male": 0.6482,
+            "age_under_65": 0.5914,
+            "age_65_79": 0.7363,
+            "age_80_plus": 0.4
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0716,
+            "male": -0.0762,
+            "age_under_65": -0.0228,
+            "age_65_79": -0.2508,
+            "age_80_plus": 0.1018
+          },
+          "auc_logreg": 0.4496,
+          "auc_gap_logreg": 0.0648,
+          "auc_augmented": 0.5259,
+          "augmentation_delta": -0.0176
+        },
+        {
+          "run_id": "ddpm_seed0",
+          "auc": 0.5398,
+          "auc_gap": 0.0037,
+          "brier": 0.2996,
+          "brier_gap": 0.2502,
+          "subgroup_auc": {
+            "female": 0.4212,
+            "male": 0.6079,
+            "age_under_65": 0.6171,
+            "age_65_79": 0.5634,
+            "age_80_plus": 0.4085
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0515,
+            "male": -0.0359,
+            "age_under_65": -0.0485,
+            "age_65_79": -0.0779,
+            "age_80_plus": 0.0933
+          },
+          "auc_logreg": 0.5154,
+          "auc_gap_logreg": -0.001,
+          "auc_augmented": 0.5502,
+          "augmentation_delta": 0.0067
+        },
+        {
+          "run_id": "ddpm_seed1",
+          "auc": 0.4906,
+          "auc_gap": 0.0529,
+          "brier": 0.1368,
+          "brier_gap": 0.0874,
+          "subgroup_auc": {
+            "female": 0.4421,
+            "male": 0.5262,
+            "age_under_65": 0.3057,
+            "age_65_79": 0.5115,
+            "age_80_plus": 0.6679
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0306,
+            "male": 0.0458,
+            "age_under_65": 0.2629,
+            "age_65_79": -0.026,
+            "age_80_plus": -0.1661
+          },
+          "auc_logreg": 0.4765,
+          "auc_gap_logreg": 0.0379,
+          "auc_augmented": 0.5641,
+          "augmentation_delta": 0.0206
+        },
+        {
+          "run_id": "ddpm_seed2",
+          "auc": 0.5375,
+          "auc_gap": 0.006,
+          "brier": 0.1466,
+          "brier_gap": 0.0972,
+          "subgroup_auc": {
+            "female": 0.6751,
+            "male": 0.4674,
+            "age_under_65": 0.3914,
+            "age_65_79": 0.52,
+            "age_80_plus": 0.6909
+          },
+          "subgroup_auc_gap": {
+            "female": -0.2024,
+            "male": 0.1046,
+            "age_under_65": 0.1772,
+            "age_65_79": -0.0345,
+            "age_80_plus": -0.1891
+          },
+          "auc_logreg": 0.469,
+          "auc_gap_logreg": 0.0454,
+          "auc_augmented": 0.5614,
+          "augmentation_delta": 0.0179
         },
         {
           "run_id": "dpctgan_eps10_seed0",
@@ -970,8 +3795,28 @@
         },
         {
           "run_id": "dpctgan_eps1_seed0",
-          "auc": null,
-          "note": "target missing or single-class in synthetic data"
+          "auc": 0.5625,
+          "auc_gap": -0.019,
+          "brier": 0.0633,
+          "brier_gap": 0.0139,
+          "subgroup_auc": {
+            "female": 0.5924,
+            "male": 0.5347,
+            "age_under_65": 0.5529,
+            "age_65_79": 0.5255,
+            "age_80_plus": 0.6061
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1197,
+            "male": 0.0373,
+            "age_under_65": 0.0157,
+            "age_65_79": -0.04,
+            "age_80_plus": -0.1043
+          },
+          "auc_logreg": 0.5214,
+          "auc_gap_logreg": -0.007,
+          "auc_augmented": 0.5759,
+          "augmentation_delta": 0.0324
         },
         {
           "run_id": "dpctgan_eps20_seed0",
@@ -992,6 +3837,22 @@
           "run_id": "gaussian_copula_seed0",
           "auc": 0.5466,
           "auc_gap": -0.0031,
+          "brier": 0.0473,
+          "brier_gap": -0.0021,
+          "subgroup_auc": {
+            "female": 0.4902,
+            "male": 0.5778,
+            "age_under_65": 0.5886,
+            "age_65_79": 0.52,
+            "age_80_plus": 0.6073
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0175,
+            "male": -0.0058,
+            "age_under_65": -0.02,
+            "age_65_79": -0.0345,
+            "age_80_plus": -0.1055
+          },
           "auc_logreg": 0.448,
           "auc_gap_logreg": 0.0664,
           "auc_augmented": 0.5278,
@@ -1001,6 +3862,22 @@
           "run_id": "gaussian_copula_seed1",
           "auc": 0.5203,
           "auc_gap": 0.0232,
+          "brier": 0.048,
+          "brier_gap": -0.0014,
+          "subgroup_auc": {
+            "female": 0.5371,
+            "male": 0.493,
+            "age_under_65": 0.4371,
+            "age_65_79": 0.5345,
+            "age_80_plus": 0.583
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0644,
+            "male": 0.079,
+            "age_under_65": 0.1315,
+            "age_65_79": -0.049,
+            "age_80_plus": -0.0812
+          },
           "auc_logreg": 0.5125,
           "auc_gap_logreg": 0.0019,
           "auc_augmented": 0.5765,
@@ -1010,87 +3887,457 @@
           "run_id": "gaussian_copula_seed2",
           "auc": 0.544,
           "auc_gap": -0.0005,
+          "brier": 0.0479,
+          "brier_gap": -0.0015,
+          "subgroup_auc": {
+            "female": 0.5072,
+            "male": 0.5665,
+            "age_under_65": 0.5086,
+            "age_65_79": 0.6009,
+            "age_80_plus": 0.4691
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0345,
+            "male": 0.0055,
+            "age_under_65": 0.06,
+            "age_65_79": -0.1154,
+            "age_80_plus": 0.0327
+          },
           "auc_logreg": 0.4514,
           "auc_gap_logreg": 0.063,
           "auc_augmented": 0.4648,
           "augmentation_delta": -0.0787
         },
         {
+          "run_id": "mst_eps0p5_seed0",
+          "auc": 0.5139,
+          "auc_gap": 0.0296,
+          "brier": 0.0479,
+          "brier_gap": -0.0015,
+          "subgroup_auc": {
+            "female": 0.5905,
+            "male": 0.4776,
+            "age_under_65": 0.3314,
+            "age_65_79": 0.5475,
+            "age_80_plus": 0.5867
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1178,
+            "male": 0.0944,
+            "age_under_65": 0.2372,
+            "age_65_79": -0.062,
+            "age_80_plus": -0.0849
+          },
+          "auc_logreg": 0.6203,
+          "auc_gap_logreg": -0.1059,
+          "auc_augmented": 0.5843,
+          "augmentation_delta": 0.0408
+        },
+        {
           "run_id": "mst_eps10_seed0",
-          "auc": 0.5575,
-          "auc_gap": -0.014,
-          "auc_logreg": 0.5245,
-          "auc_gap_logreg": -0.0101,
-          "auc_augmented": 0.5267,
-          "augmentation_delta": -0.0168
+          "auc": 0.6509,
+          "auc_gap": -0.1074,
+          "brier": 0.0519,
+          "brier_gap": 0.0025,
+          "subgroup_auc": {
+            "female": 0.6016,
+            "male": 0.6855,
+            "age_under_65": 0.6714,
+            "age_65_79": 0.6359,
+            "age_80_plus": 0.6182
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1289,
+            "male": -0.1135,
+            "age_under_65": -0.1028,
+            "age_65_79": -0.1504,
+            "age_80_plus": -0.1164
+          },
+          "auc_logreg": 0.7356,
+          "auc_gap_logreg": -0.2212,
+          "auc_augmented": 0.5038,
+          "augmentation_delta": -0.0397
         },
         {
           "run_id": "mst_eps15_seed0",
-          "auc": 0.5231,
-          "auc_gap": 0.0204,
-          "auc_logreg": 0.5906,
-          "auc_gap_logreg": -0.0762,
-          "auc_augmented": 0.5516,
-          "augmentation_delta": 0.0081
+          "auc": 0.6092,
+          "auc_gap": -0.0657,
+          "brier": 0.0494,
+          "brier_gap": 0.0,
+          "subgroup_auc": {
+            "female": 0.5632,
+            "male": 0.6516,
+            "age_under_65": 0.6886,
+            "age_65_79": 0.5989,
+            "age_80_plus": 0.5382
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0905,
+            "male": -0.0796,
+            "age_under_65": -0.12,
+            "age_65_79": -0.1134,
+            "age_80_plus": -0.0364
+          },
+          "auc_logreg": 0.5876,
+          "auc_gap_logreg": -0.0732,
+          "auc_augmented": 0.5302,
+          "augmentation_delta": -0.0133
         },
         {
           "run_id": "mst_eps15_seed1",
-          "auc": 0.5872,
-          "auc_gap": -0.0437,
-          "auc_logreg": 0.6036,
-          "auc_gap_logreg": -0.0892,
-          "auc_augmented": 0.5198,
-          "augmentation_delta": -0.0237
+          "auc": 0.349,
+          "auc_gap": 0.1945,
+          "brier": 0.0498,
+          "brier_gap": 0.0004,
+          "subgroup_auc": {
+            "female": 0.2956,
+            "male": 0.4044,
+            "age_under_65": 0.3943,
+            "age_65_79": 0.3372,
+            "age_80_plus": 0.3248
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1771,
+            "male": 0.1676,
+            "age_under_65": 0.1743,
+            "age_65_79": 0.1483,
+            "age_80_plus": 0.177
+          },
+          "auc_logreg": 0.5725,
+          "auc_gap_logreg": -0.0581,
+          "auc_augmented": 0.502,
+          "augmentation_delta": -0.0415
         },
         {
           "run_id": "mst_eps15_seed2",
-          "auc": 0.4577,
-          "auc_gap": 0.0858,
-          "auc_logreg": 0.6483,
-          "auc_gap_logreg": -0.1339,
-          "auc_augmented": 0.4933,
-          "augmentation_delta": -0.0502
+          "auc": 0.5012,
+          "auc_gap": 0.0423,
+          "brier": 0.0492,
+          "brier_gap": -0.0002,
+          "subgroup_auc": {
+            "female": 0.5358,
+            "male": 0.5084,
+            "age_under_65": 0.4429,
+            "age_65_79": 0.5814,
+            "age_80_plus": 0.417
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0631,
+            "male": 0.0636,
+            "age_under_65": 0.1257,
+            "age_65_79": -0.0959,
+            "age_80_plus": 0.0848
+          },
+          "auc_logreg": 0.6104,
+          "auc_gap_logreg": -0.096,
+          "auc_augmented": 0.5455,
+          "augmentation_delta": 0.002
         },
         {
           "run_id": "mst_eps1_seed0",
-          "auc": 0.4957,
-          "auc_gap": 0.0478,
-          "auc_logreg": 0.4794,
-          "auc_gap_logreg": 0.035,
-          "auc_augmented": 0.5166,
-          "augmentation_delta": -0.0269
+          "auc": 0.5487,
+          "auc_gap": -0.0052,
+          "brier": 0.177,
+          "brier_gap": 0.1276,
+          "subgroup_auc": {
+            "female": 0.6341,
+            "male": 0.5036,
+            "age_under_65": 0.5314,
+            "age_65_79": 0.5534,
+            "age_80_plus": 0.5745
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1614,
+            "male": 0.0684,
+            "age_under_65": 0.0372,
+            "age_65_79": -0.0679,
+            "age_80_plus": -0.0727
+          },
+          "auc_logreg": 0.4835,
+          "auc_gap_logreg": 0.0309,
+          "auc_augmented": 0.5365,
+          "augmentation_delta": -0.007
         },
         {
           "run_id": "mst_eps20_seed0",
-          "auc": 0.4605,
-          "auc_gap": 0.083,
-          "auc_logreg": 0.5955,
-          "auc_gap_logreg": -0.0811,
-          "auc_augmented": 0.5577,
-          "augmentation_delta": 0.0142
+          "auc": 0.4536,
+          "auc_gap": 0.0899,
+          "brier": 0.0764,
+          "brier_gap": 0.027,
+          "subgroup_auc": {
+            "female": 0.4225,
+            "male": 0.4889,
+            "age_under_65": 0.5914,
+            "age_65_79": 0.47,
+            "age_80_plus": 0.1988
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0502,
+            "male": 0.0831,
+            "age_under_65": -0.0228,
+            "age_65_79": 0.0155,
+            "age_80_plus": 0.303
+          },
+          "auc_logreg": 0.5307,
+          "auc_gap_logreg": -0.0163,
+          "auc_augmented": 0.4943,
+          "augmentation_delta": -0.0492
         },
         {
           "run_id": "mst_eps5_seed0",
-          "auc": 0.55,
-          "auc_gap": -0.0065,
-          "auc_logreg": 0.5202,
-          "auc_gap_logreg": -0.0058,
+          "auc": 0.6258,
+          "auc_gap": -0.0823,
+          "brier": 0.0495,
+          "brier_gap": 0.0001,
+          "subgroup_auc": {
+            "female": 0.7109,
+            "male": 0.5614,
+            "age_under_65": 0.5,
+            "age_65_79": 0.6494,
+            "age_80_plus": 0.6533
+          },
+          "subgroup_auc_gap": {
+            "female": -0.2382,
+            "male": 0.0106,
+            "age_under_65": 0.0686,
+            "age_65_79": -0.1639,
+            "age_80_plus": -0.1515
+          },
+          "auc_logreg": 0.4442,
+          "auc_gap_logreg": 0.0702,
+          "auc_augmented": 0.5513,
+          "augmentation_delta": 0.0078
+        },
+        {
+          "run_id": "mst_eps8_seed0",
+          "auc": 0.6355,
+          "auc_gap": -0.092,
+          "brier": 0.0498,
+          "brier_gap": 0.0004,
+          "subgroup_auc": {
+            "female": 0.6055,
+            "male": 0.6622,
+            "age_under_65": 0.6143,
+            "age_65_79": 0.7418,
+            "age_80_plus": 0.4339
+          },
+          "subgroup_auc_gap": {
+            "female": -0.1328,
+            "male": -0.0902,
+            "age_under_65": -0.0457,
+            "age_65_79": -0.2563,
+            "age_80_plus": 0.0679
+          },
+          "auc_logreg": 0.5536,
+          "auc_gap_logreg": -0.0392,
+          "auc_augmented": 0.5413,
+          "augmentation_delta": -0.0022
+        },
+        {
+          "run_id": "patectgan_eps15_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "patectgan_eps1_seed0",
+          "auc": 0.4235,
+          "auc_gap": 0.12,
+          "brier": 0.0474,
+          "brier_gap": -0.002,
+          "subgroup_auc": {
+            "female": 0.5286,
+            "male": 0.3621,
+            "age_under_65": 0.3314,
+            "age_65_79": 0.4221,
+            "age_80_plus": 0.52
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0559,
+            "male": 0.2099,
+            "age_under_65": 0.2372,
+            "age_65_79": 0.0634,
+            "age_80_plus": -0.0182
+          },
+          "auc_logreg": 0.621,
+          "auc_gap_logreg": -0.1066,
+          "auc_augmented": 0.6237,
+          "augmentation_delta": 0.0802
+        },
+        {
+          "run_id": "patectgan_eps5_seed0",
+          "auc": null,
+          "note": "target missing or single-class in synthetic data"
+        },
+        {
+          "run_id": "tvae_cap256_seed0",
+          "auc": 0.4371,
+          "auc_gap": 0.1064,
+          "brier": 0.0514,
+          "brier_gap": 0.002,
+          "subgroup_auc": {
+            "female": 0.5807,
+            "male": 0.3333,
+            "age_under_65": 0.4057,
+            "age_65_79": 0.3601,
+            "age_80_plus": 0.4776
+          },
+          "subgroup_auc_gap": {
+            "female": -0.108,
+            "male": 0.2387,
+            "age_under_65": 0.1629,
+            "age_65_79": 0.1254,
+            "age_80_plus": 0.0242
+          },
+          "auc_logreg": 0.4773,
+          "auc_gap_logreg": 0.0371,
+          "auc_augmented": 0.4959,
+          "augmentation_delta": -0.0476
+        },
+        {
+          "run_id": "tvae_ep1000_seed0",
+          "auc": 0.5221,
+          "auc_gap": 0.0214,
+          "brier": 0.067,
+          "brier_gap": 0.0176,
+          "subgroup_auc": {
+            "female": 0.5592,
+            "male": 0.4773,
+            "age_under_65": 0.6029,
+            "age_65_79": 0.4326,
+            "age_80_plus": 0.5503
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0865,
+            "male": 0.0947,
+            "age_under_65": -0.0343,
+            "age_65_79": 0.0529,
+            "age_80_plus": -0.0485
+          },
+          "auc_logreg": 0.6248,
+          "auc_gap_logreg": -0.1104,
+          "auc_augmented": 0.5854,
+          "augmentation_delta": 0.0419
+        },
+        {
+          "run_id": "tvae_ind_seed0",
+          "auc": 0.5182,
+          "auc_gap": 0.0253,
+          "brier": 0.0628,
+          "brier_gap": 0.0134,
+          "subgroup_auc": {
+            "female": 0.3848,
+            "male": 0.5521,
+            "age_under_65": 0.36,
+            "age_65_79": 0.6304,
+            "age_80_plus": 0.1697
+          },
+          "subgroup_auc_gap": {
+            "female": 0.0879,
+            "male": 0.0199,
+            "age_under_65": 0.2086,
+            "age_65_79": -0.1449,
+            "age_80_plus": 0.3321
+          },
+          "auc_logreg": 0.622,
+          "auc_gap_logreg": -0.1076,
           "auc_augmented": 0.5424,
           "augmentation_delta": -0.0011
         },
         {
-          "run_id": "mst_eps8_seed0",
-          "auc": 0.5324,
-          "auc_gap": 0.0111,
-          "auc_logreg": 0.5353,
-          "auc_gap_logreg": -0.0209,
-          "auc_augmented": 0.5921,
-          "augmentation_delta": 0.0486
+          "run_id": "tvae_qt_seed0",
+          "auc": 0.576,
+          "auc_gap": -0.0325,
+          "brier": 0.0536,
+          "brier_gap": 0.0042,
+          "subgroup_auc": {
+            "female": 0.5404,
+            "male": 0.5723,
+            "age_under_65": 0.5857,
+            "age_65_79": 0.509,
+            "age_80_plus": 0.5709
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0677,
+            "male": -0.0003,
+            "age_under_65": -0.0171,
+            "age_65_79": -0.0235,
+            "age_80_plus": -0.0691
+          },
+          "auc_logreg": 0.532,
+          "auc_gap_logreg": -0.0176,
+          "auc_augmented": 0.5898,
+          "augmentation_delta": 0.0463
+        },
+        {
+          "run_id": "tvae_qt_seed1",
+          "auc": 0.5397,
+          "auc_gap": 0.0038,
+          "brier": 0.055,
+          "brier_gap": 0.0056,
+          "subgroup_auc": {
+            "female": 0.4811,
+            "male": 0.5562,
+            "age_under_65": 0.5857,
+            "age_65_79": 0.477,
+            "age_80_plus": 0.5236
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0084,
+            "male": 0.0158,
+            "age_under_65": -0.0171,
+            "age_65_79": 0.0085,
+            "age_80_plus": -0.0218
+          },
+          "auc_logreg": 0.5934,
+          "auc_gap_logreg": -0.079,
+          "auc_augmented": 0.5427,
+          "augmentation_delta": -0.0008
+        },
+        {
+          "run_id": "tvae_qt_seed2",
+          "auc": 0.5141,
+          "auc_gap": 0.0294,
+          "brier": 0.069,
+          "brier_gap": 0.0196,
+          "subgroup_auc": {
+            "female": 0.5267,
+            "male": 0.4803,
+            "age_under_65": 0.4543,
+            "age_65_79": 0.4965,
+            "age_80_plus": 0.5467
+          },
+          "subgroup_auc_gap": {
+            "female": -0.054,
+            "male": 0.0917,
+            "age_under_65": 0.1143,
+            "age_65_79": -0.011,
+            "age_80_plus": -0.0449
+          },
+          "auc_logreg": 0.4286,
+          "auc_gap_logreg": 0.0858,
+          "auc_augmented": 0.5295,
+          "augmentation_delta": -0.014
         },
         {
           "run_id": "tvae_seed0",
           "auc": 0.5363,
           "auc_gap": 0.0072,
+          "brier": 0.0712,
+          "brier_gap": 0.0218,
+          "subgroup_auc": {
+            "female": 0.5104,
+            "male": 0.546,
+            "age_under_65": 0.4571,
+            "age_65_79": 0.5225,
+            "age_80_plus": 0.4194
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0377,
+            "male": 0.026,
+            "age_under_65": 0.1115,
+            "age_65_79": -0.037,
+            "age_80_plus": 0.0824
+          },
           "auc_logreg": 0.6124,
           "auc_gap_logreg": -0.098,
           "auc_augmented": 0.5398,
@@ -1100,6 +4347,22 @@
           "run_id": "tvae_seed1",
           "auc": 0.5004,
           "auc_gap": 0.0431,
+          "brier": 0.0969,
+          "brier_gap": 0.0475,
+          "subgroup_auc": {
+            "female": 0.5514,
+            "male": 0.4338,
+            "age_under_65": 0.3857,
+            "age_65_79": 0.4486,
+            "age_80_plus": 0.6
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0787,
+            "male": 0.1382,
+            "age_under_65": 0.1829,
+            "age_65_79": 0.0369,
+            "age_80_plus": -0.0982
+          },
           "auc_logreg": 0.6095,
           "auc_gap_logreg": -0.0951,
           "auc_augmented": 0.4834,
@@ -1109,6 +4372,22 @@
           "run_id": "tvae_seed2",
           "auc": 0.6047,
           "auc_gap": -0.0612,
+          "brier": 0.0745,
+          "brier_gap": 0.0251,
+          "subgroup_auc": {
+            "female": 0.4805,
+            "male": 0.6711,
+            "age_under_65": 0.5943,
+            "age_65_79": 0.5345,
+            "age_80_plus": 0.6218
+          },
+          "subgroup_auc_gap": {
+            "female": -0.0078,
+            "male": -0.0991,
+            "age_under_65": -0.0257,
+            "age_65_79": -0.049,
+            "age_80_plus": -0.12
+          },
           "auc_logreg": 0.4691,
           "auc_gap_logreg": 0.0453,
           "auc_augmented": 0.5605,
@@ -1116,6 +4395,14 @@
         }
       ],
       "baseline_auc_logreg": 0.5144,
+      "baseline_brier": 0.0494,
+      "baseline_subgroup_auc": {
+        "female": 0.4727,
+        "male": 0.572,
+        "age_under_65": 0.5686,
+        "age_65_79": 0.4855,
+        "age_80_plus": 0.5018
+      },
       "positives_train": 83,
       "positives_holdout": 21
     }
@@ -1123,24 +4410,37 @@
   "n_train": 3520,
   "n_holdout": 1174,
   "aggregate_auc_gap": {
-    "aim50_eps1_seed0": 0.1135,
-    "aim50_eps5_seed0": 0.0993,
+    "aim40_eps1_seed0": 0.0988,
+    "aim50_eps1_seed0": 0.0742,
+    "ctgan_qt_seed0": 0.0682,
     "ctgan_seed0": 0.1289,
     "ctgan_seed1": 0.1343,
     "ctgan_seed2": 0.0725,
-    "dpctgan_eps15_seed0": 0.1786,
-    "dpctgan_eps5_seed0": 0.0155,
+    "ddpm_g_seed0": 0.0875,
+    "ddpm_seed0": 0.053,
+    "ddpm_seed1": 0.1011,
+    "ddpm_seed2": 0.1264,
+    "dpctgan_eps15_seed1": 0.1788,
+    "dpctgan_eps1_seed0": 0.0521,
     "gaussian_copula_seed0": 0.0825,
     "gaussian_copula_seed1": 0.0851,
     "gaussian_copula_seed2": 0.0865,
-    "mst_eps10_seed0": 0.0646,
-    "mst_eps15_seed0": 0.0727,
-    "mst_eps15_seed1": 0.0994,
-    "mst_eps15_seed2": 0.1185,
-    "mst_eps1_seed0": 0.0817,
-    "mst_eps20_seed0": 0.0842,
-    "mst_eps5_seed0": 0.0618,
-    "mst_eps8_seed0": 0.0959,
+    "mst_eps0p5_seed0": 0.1291,
+    "mst_eps10_seed0": 0.1239,
+    "mst_eps15_seed0": 0.0544,
+    "mst_eps15_seed1": 0.1155,
+    "mst_eps15_seed2": 0.1269,
+    "mst_eps1_seed0": 0.115,
+    "mst_eps20_seed0": 0.102,
+    "mst_eps5_seed0": 0.0844,
+    "mst_eps8_seed0": 0.0288,
+    "patectgan_eps1_seed0": 0.0946,
+    "tvae_cap256_seed0": 0.0615,
+    "tvae_ep1000_seed0": 0.0389,
+    "tvae_ind_seed0": 0.0788,
+    "tvae_qt_seed0": 0.0136,
+    "tvae_qt_seed1": 0.0644,
+    "tvae_qt_seed2": 0.0809,
     "tvae_seed0": 0.0585,
     "tvae_seed1": 0.0705,
     "tvae_seed2": 0.017
@@ -1150,19 +4450,23 @@
       "synthesizer": "aim",
       "epsilon": 1.0,
       "n_runs": 1,
-      "mean_gap": 0.1135,
+      "mean_gap": 0.0742,
       "sd_gap": null,
-      "mean_gap_logreg": 0.0984,
-      "mean_augmentation_delta": -0.0266
+      "mean_gap_logreg": 0.0362,
+      "mean_augmentation_delta": -0.013,
+      "mean_brier_gap": 0.084,
+      "mean_worst_subgroup_gap": 0.2008
     },
     {
-      "synthesizer": "aim",
-      "epsilon": 5.0,
+      "synthesizer": "aim40",
+      "epsilon": 1.0,
       "n_runs": 1,
-      "mean_gap": 0.0993,
+      "mean_gap": 0.0988,
       "sd_gap": null,
-      "mean_gap_logreg": 0.1144,
-      "mean_augmentation_delta": 0.0018
+      "mean_gap_logreg": 0.1039,
+      "mean_augmentation_delta": -0.0009,
+      "mean_brier_gap": 0.0751,
+      "mean_worst_subgroup_gap": 0.2632
     },
     {
       "synthesizer": "ctgan",
@@ -1171,25 +4475,64 @@
       "mean_gap": 0.1119,
       "sd_gap": 0.0342,
       "mean_gap_logreg": 0.0717,
-      "mean_augmentation_delta": -0.0169
+      "mean_augmentation_delta": -0.0169,
+      "mean_brier_gap": 0.0374,
+      "mean_worst_subgroup_gap": 0.2621
+    },
+    {
+      "synthesizer": "ctgan_qt",
+      "epsilon": null,
+      "n_runs": 1,
+      "mean_gap": 0.0682,
+      "sd_gap": null,
+      "mean_gap_logreg": 0.0704,
+      "mean_augmentation_delta": -0.0257,
+      "mean_brier_gap": 0.0442,
+      "mean_worst_subgroup_gap": 0.1926
+    },
+    {
+      "synthesizer": "ddpm",
+      "epsilon": null,
+      "n_runs": 3,
+      "mean_gap": 0.0935,
+      "sd_gap": 0.0373,
+      "mean_gap_logreg": 0.1009,
+      "mean_augmentation_delta": 0.0132,
+      "mean_brier_gap": 0.1277,
+      "mean_worst_subgroup_gap": 0.2261
+    },
+    {
+      "synthesizer": "ddpm_g",
+      "epsilon": null,
+      "n_runs": 1,
+      "mean_gap": 0.0875,
+      "sd_gap": null,
+      "mean_gap_logreg": 0.0899,
+      "mean_augmentation_delta": 0.0063,
+      "mean_brier_gap": 0.1032,
+      "mean_worst_subgroup_gap": 0.2017
     },
     {
       "synthesizer": "dpctgan",
-      "epsilon": 5.0,
+      "epsilon": 1.0,
       "n_runs": 1,
-      "mean_gap": 0.0155,
+      "mean_gap": 0.0521,
       "sd_gap": null,
-      "mean_gap_logreg": 0.0911,
-      "mean_augmentation_delta": -0.023
+      "mean_gap_logreg": 0.0706,
+      "mean_augmentation_delta": 0.0205,
+      "mean_brier_gap": 0.006,
+      "mean_worst_subgroup_gap": 0.1716
     },
     {
       "synthesizer": "dpctgan",
       "epsilon": 15.0,
       "n_runs": 1,
-      "mean_gap": 0.1786,
+      "mean_gap": 0.1788,
       "sd_gap": null,
-      "mean_gap_logreg": 0.2168,
-      "mean_augmentation_delta": 0.0232
+      "mean_gap_logreg": 0.1663,
+      "mean_augmentation_delta": -0.0129,
+      "mean_brier_gap": 0.0217,
+      "mean_worst_subgroup_gap": 0.3161
     },
     {
       "synthesizer": "gaussian_copula",
@@ -1198,61 +4541,97 @@
       "mean_gap": 0.0847,
       "sd_gap": 0.002,
       "mean_gap_logreg": 0.0787,
-      "mean_augmentation_delta": -0.0211
+      "mean_augmentation_delta": -0.0211,
+      "mean_brier_gap": 0.0203,
+      "mean_worst_subgroup_gap": 0.2166
+    },
+    {
+      "synthesizer": "mst",
+      "epsilon": 0.5,
+      "n_runs": 1,
+      "mean_gap": 0.1291,
+      "sd_gap": null,
+      "mean_gap_logreg": 0.0864,
+      "mean_augmentation_delta": -0.0077,
+      "mean_brier_gap": 0.1196,
+      "mean_worst_subgroup_gap": 0.2947
     },
     {
       "synthesizer": "mst",
       "epsilon": 1.0,
       "n_runs": 1,
-      "mean_gap": 0.0817,
+      "mean_gap": 0.115,
       "sd_gap": null,
-      "mean_gap_logreg": 0.1017,
-      "mean_augmentation_delta": -0.0059
+      "mean_gap_logreg": 0.0841,
+      "mean_augmentation_delta": -0.0125,
+      "mean_brier_gap": 0.0799,
+      "mean_worst_subgroup_gap": 0.2687
     },
     {
       "synthesizer": "mst",
       "epsilon": 5.0,
       "n_runs": 1,
-      "mean_gap": 0.0618,
+      "mean_gap": 0.0844,
       "sd_gap": null,
-      "mean_gap_logreg": 0.0075,
-      "mean_augmentation_delta": 0.001
+      "mean_gap_logreg": 0.0954,
+      "mean_augmentation_delta": -0.0012,
+      "mean_brier_gap": 0.1324,
+      "mean_worst_subgroup_gap": 0.2499
     },
     {
       "synthesizer": "mst",
       "epsilon": 8.0,
       "n_runs": 1,
-      "mean_gap": 0.0959,
+      "mean_gap": 0.0288,
       "sd_gap": null,
-      "mean_gap_logreg": 0.0254,
-      "mean_augmentation_delta": 0.011
+      "mean_gap_logreg": 0.0792,
+      "mean_augmentation_delta": -0.0189,
+      "mean_brier_gap": 0.1032,
+      "mean_worst_subgroup_gap": 0.1522
     },
     {
       "synthesizer": "mst",
       "epsilon": 10.0,
       "n_runs": 1,
-      "mean_gap": 0.0646,
+      "mean_gap": 0.1239,
       "sd_gap": null,
-      "mean_gap_logreg": 0.0933,
-      "mean_augmentation_delta": 0.0004
+      "mean_gap_logreg": 0.0186,
+      "mean_augmentation_delta": -0.0084,
+      "mean_brier_gap": 0.1705,
+      "mean_worst_subgroup_gap": 0.2045
     },
     {
       "synthesizer": "mst",
       "epsilon": 15.0,
       "n_runs": 3,
-      "mean_gap": 0.0969,
-      "sd_gap": 0.023,
-      "mean_gap_logreg": 0.0007,
-      "mean_augmentation_delta": -0.0007
+      "mean_gap": 0.0989,
+      "sd_gap": 0.039,
+      "mean_gap_logreg": 0.026,
+      "mean_augmentation_delta": -0.0084,
+      "mean_brier_gap": 0.0808,
+      "mean_worst_subgroup_gap": 0.1907
     },
     {
       "synthesizer": "mst",
       "epsilon": 20.0,
       "n_runs": 1,
-      "mean_gap": 0.0842,
+      "mean_gap": 0.102,
       "sd_gap": null,
-      "mean_gap_logreg": 0.0335,
-      "mean_augmentation_delta": 0.0074
+      "mean_gap_logreg": 0.0327,
+      "mean_augmentation_delta": -0.0037,
+      "mean_brier_gap": 0.1486,
+      "mean_worst_subgroup_gap": 0.2734
+    },
+    {
+      "synthesizer": "patectgan",
+      "epsilon": 1.0,
+      "n_runs": 1,
+      "mean_gap": 0.0946,
+      "sd_gap": null,
+      "mean_gap_logreg": 0.0168,
+      "mean_augmentation_delta": 0.0091,
+      "mean_brier_gap": 0.0264,
+      "mean_worst_subgroup_gap": 0.2179
     },
     {
       "synthesizer": "tvae",
@@ -1261,7 +4640,53 @@
       "mean_gap": 0.0487,
       "sd_gap": 0.0281,
       "mean_gap_logreg": 0.0072,
-      "mean_augmentation_delta": -0.0173
+      "mean_augmentation_delta": -0.0173,
+      "mean_brier_gap": 0.0327,
+      "mean_worst_subgroup_gap": 0.1618
+    },
+    {
+      "synthesizer": "tvae_cap256",
+      "epsilon": null,
+      "n_runs": 1,
+      "mean_gap": 0.0615,
+      "sd_gap": null,
+      "mean_gap_logreg": 0.0062,
+      "mean_augmentation_delta": -0.0278,
+      "mean_brier_gap": 0.0285,
+      "mean_worst_subgroup_gap": 0.1452
+    },
+    {
+      "synthesizer": "tvae_ep1000",
+      "epsilon": null,
+      "n_runs": 1,
+      "mean_gap": 0.0389,
+      "sd_gap": null,
+      "mean_gap_logreg": -0.004,
+      "mean_augmentation_delta": -0.0047,
+      "mean_brier_gap": 0.0255,
+      "mean_worst_subgroup_gap": 0.1275
+    },
+    {
+      "synthesizer": "tvae_ind",
+      "epsilon": null,
+      "n_runs": 1,
+      "mean_gap": 0.0788,
+      "sd_gap": null,
+      "mean_gap_logreg": -0.0045,
+      "mean_augmentation_delta": -0.0256,
+      "mean_brier_gap": 0.0449,
+      "mean_worst_subgroup_gap": 0.2696
+    },
+    {
+      "synthesizer": "tvae_qt",
+      "epsilon": null,
+      "n_runs": 3,
+      "mean_gap": 0.053,
+      "sd_gap": 0.0351,
+      "mean_gap_logreg": 0.0254,
+      "mean_augmentation_delta": -0.0086,
+      "mean_brier_gap": 0.0286,
+      "mean_worst_subgroup_gap": 0.122
     }
   ]
 }

@@ -52109,7 +52109,7 @@
               "synthetic": 0.0006
             },
             {
-              "pair": "cause_of_death_isCV_f5a_w3mo_first|cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first",
+              "pair": "cause_of_death_isCV_f5a_w3mo_first|cause_of_death_isAllCause_f5a_w3mo_first",
               "delta": 0.9994,
               "real": 1.0,
               "synthetic": 0.0006
@@ -55801,13 +55801,13 @@
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isRenal_f5a_w7d_first",
+              "pair": "cause_of_death_isRenal_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
+              "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isRenal_f5a_w7d_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -59547,7 +59547,7 @@
               "synthetic": 0.0006
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1a_first|cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
+              "pair": "cause_of_death_isCV_f5a_w1a_first|cause_of_death_isRenal_f5a_w1a_first",
               "delta": 0.9993,
               "real": 1.0,
               "synthetic": 0.0007
@@ -66914,13 +66914,13 @@
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isCV_f5a_w6mo_first|cause_of_death_isRenal_f5a_w6mo_first",
+              "pair": "cause_of_death_isRenal_f5a_w1mo_first|cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first",
               "delta": 0.9995,
               "real": 1.0,
               "synthetic": 0.0005
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1mo_first|cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first",
+              "pair": "cause_of_death_isCV_f5a_w6mo_first|cause_of_death_isRenal_f5a_w6mo_first",
               "delta": 0.9995,
               "real": 1.0,
               "synthetic": 0.0005
@@ -74141,7 +74141,7 @@
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isRenal_f5a_w1mo_first|cause_of_death_isAllCause_f5a_w1mo_first",
+              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first|cause_of_death_isAllCause_f5a_w1mo_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -74153,7 +74153,7 @@
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first|cause_of_death_isAllCause_f5a_w1mo_first",
+              "pair": "cause_of_death_isRenal_f5a_w1mo_first|cause_of_death_isAllCause_f5a_w1mo_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -130268,8 +130268,8 @@
           "fabricated_pairs": 614,
           "fabricated_rate": 0.0535,
           "fabricated_examples": [
-            "lab_results_tropTHs_value_last|med_rdoad_syst_history",
             "lab_results_tropTHs_value_last|conditions_aidshiv",
+            "lab_results_tropTHs_value_last|med_rdoad_syst_history",
             "encounters_numOfPreviousHFStays_count|encounter_primary_reason_HF_Disease_f5a_w7d_first"
           ],
           "worst": [
@@ -144355,7 +144355,7 @@
               "synthetic": 0.0004
             },
             {
-              "pair": "cause_of_death_isNonRenalAndNonCV_f5a_w7d_first|cause_of_death_isAllCause_f5a_w7d_first",
+              "pair": "cause_of_death_isCV_f5a_w7d_first|cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
               "delta": 0.9996,
               "real": 1.0,
               "synthetic": 0.0004
@@ -149114,13 +149114,13 @@
               "synthetic": 1.0
             },
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
               "delta": 0.7945,
               "real": 0.8082,
               "synthetic": 0.0136
             },
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
               "delta": 0.7945,
               "real": 0.8082,
               "synthetic": 0.0136
@@ -153852,12 +153852,6 @@
               "synthetic": 0.0
             },
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
-              "delta": 0.8082,
-              "real": 0.8082,
-              "synthetic": 0.0
-            },
-            {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_renal_complications_f5a_w3a_first",
               "delta": 0.8082,
               "real": 0.8082,
@@ -153865,6 +153859,12 @@
             },
             {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
+              "delta": 0.8082,
+              "real": 0.8082,
+              "synthetic": 0.0
+            },
+            {
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
               "delta": 0.8082,
               "real": 0.8082,
               "synthetic": 0.0
@@ -158576,25 +158576,25 @@
           ],
           "worst": [
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
-              "delta": 0.7501,
-              "real": 0.8082,
-              "synthetic": 0.0581
-            },
-            {
               "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
               "delta": 0.7501,
               "real": 0.8082,
               "synthetic": 0.0581
             },
             {
-              "pair": "nyha_nyha_pET|cause_of_death_isAllCause_f5a_w5a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
+              "delta": 0.7501,
+              "real": 0.8082,
+              "synthetic": 0.0581
+            },
+            {
+              "pair": "nyha_nyha_pET|cause_of_death_isCV_f5a_w5a_first",
               "delta": 0.7409,
               "real": 0.1042,
               "synthetic": 0.8451
             },
             {
-              "pair": "nyha_nyha_pET|cause_of_death_isCV_f5a_w5a_first",
+              "pair": "nyha_nyha_pET|cause_of_death_isAllCause_f5a_w5a_first",
               "delta": 0.7409,
               "real": 0.1042,
               "synthetic": 0.8451
@@ -182245,18 +182245,18 @@
           "fabricated_rate": 0.0012,
           "fabricated_examples": [
             "lab_results_creatUS_value_last|med_arb_history",
-            "lab_results_creatUS_value_last|med_arni_history",
-            "lab_results_creatUS_value_last|med_antiarrhytmic_history"
+            "lab_results_creatUS_value_last|med_antiarrhytmic_history",
+            "lab_results_creatUS_value_last|med_arni_history"
           ],
           "worst": [
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
               "delta": 0.8082,
               "real": 0.8082,
               "synthetic": 0.0
             },
             {
-              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+              "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
               "delta": 0.8082,
               "real": 0.8082,
               "synthetic": 0.0
@@ -187080,13 +187080,13 @@
           "synthetic": 0.146
         },
         {
-          "pair": "cause_of_death_isCV_f5a_w1mo_first|conditions_myocarditis",
+          "pair": "cause_of_death_isAllCause_f5a_w1mo_first|conditions_myocarditis",
           "delta": 0.251,
           "real": 0.0049,
           "synthetic": 0.2559
         },
         {
-          "pair": "cause_of_death_isAllCause_f5a_w1mo_first|conditions_myocarditis",
+          "pair": "cause_of_death_isCV_f5a_w1mo_first|conditions_myocarditis",
           "delta": 0.251,
           "real": 0.0049,
           "synthetic": 0.2559
@@ -187117,7 +187117,13 @@
       "fabricated_examples": [],
       "worst": [
         {
-          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "delta": 0.8082,
+          "real": 0.8082,
+          "synthetic": 0.0
+        },
+        {
+          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_renal_complications_f5a_w3a_first",
           "delta": 0.8082,
           "real": 0.8082,
           "synthetic": 0.0
@@ -187129,13 +187135,7 @@
           "synthetic": 0.0
         },
         {
-          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_CV_Disease_f5a_w3a_first",
-          "delta": 0.8082,
-          "real": 0.8082,
-          "synthetic": 0.0
-        },
-        {
-          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_renal_complications_f5a_w3a_first",
+          "pair": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first|encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
           "delta": 0.8082,
           "real": 0.8082,
           "synthetic": 0.0
