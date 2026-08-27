@@ -337,7 +337,10 @@ class ReleaseDocsStep(PipelineStep):
         formal guarantee -- docs must never claim more than the recorded
         provenance supports."""
         runs = gen_summary.get("runs", []) or []
-        dp_runs = [r for r in runs if r.get("is_dp")]
+        # is_dp is the recorded flag; a recorded epsilon is treated as DP
+        # evidence too, so an older or hand-repaired summary can never
+        # make an epsilon-labelled file read as "no DP label".
+        dp_runs = [r for r in runs if r.get("is_dp") or r.get("epsilon") is not None]
         if not dp_runs:
             return ("- No file in this build carries a differential-privacy label; the "
                     "non-DP synthesizers provide empirical privacy evidence (attacks and "

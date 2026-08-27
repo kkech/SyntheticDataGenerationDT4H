@@ -125,7 +125,10 @@ def _verdicts_by_policy(checks: list, measured: dict) -> dict:
         if "distance_share" in measured:
             limit = _distance_limit(policy)
             per_check["distance"] = {
-                "passed": measured["distance_share"] <= limit,
+                # A degenerate subset threshold (p5 == 0) fails under every
+                # policy: no share can evidence safety against it.
+                "passed": (not measured.get("distance_degenerate")
+                           and measured["distance_share"] <= limit),
                 "threshold": limit,
             }
         # A missing measurement means the check could not be evaluated at
@@ -308,13 +311,25 @@ def main() -> int:
         measured["distance_columns_used"] = len(subset)
         measured["distance_full_width"] = full_width
         limit = _distance_limit(policy)
-        check("distance", share <= limit,
-              f"{too_close}/{len(sample)} sampled record(s) ({share:.1%}) closer than "
-              f"the holdout p5 threshold ({p5}, over {len(subset)} column(s)"
-              + ("" if full_width else ", SUBSET of the full schema")
-              + f"); policy limit {limit:.0%} = "
-              f"{policy['distance_multiplier']:g}x the natural "
-              f"{DISTANCE_NATURAL_SHARE:.0%} share")
+        measured["distance_degenerate"] = bool(p5 <= 0)
+        if p5 <= 0:
+            # Degenerate threshold: on a narrow column subset, unseen real
+            # patients themselves collide with training records at distance
+            # zero, so "closer than p5" is unsatisfiable and the check would
+            # pass vacuously. That is not evidence of safety -- refuse it.
+            check("distance", False,
+                  f"holdout p5 threshold is 0 over the {len(subset)} shared "
+                  f"column(s): real unseen patients already collide with "
+                  f"training records at this width, so the distance check "
+                  f"cannot discriminate and a pass here would be vacuous")
+        else:
+            check("distance", share <= limit,
+                  f"{too_close}/{len(sample)} sampled record(s) ({share:.1%}) closer than "
+                  f"the holdout p5 threshold ({p5}, over {len(subset)} column(s)"
+                  + ("" if full_width else ", SUBSET of the full schema")
+                  + f"); policy limit {limit:.0%} = "
+                  f"{policy['distance_multiplier']:g}x the natural "
+                  f"{DISTANCE_NATURAL_SHARE:.0%} share")
     else:
         check("distance", False, "no committed privacy assessment -- run the privacy step first")
 
