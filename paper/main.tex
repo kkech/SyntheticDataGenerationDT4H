@@ -390,6 +390,8 @@ published).
 \centering
 \caption{Generative model families and the run plan (variants in parentheses).}
 \label{tab:runplan}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{llll}
 \toprule
 family & library & privacy & runs \\
@@ -582,8 +584,8 @@ recorded evidence, never hardcoded---and the environment freeze
 (\texttt{pip freeze}).
 \end{itemize}
 
-[Deposit: Zenodo DOI to be minted at acceptance; repository:
-\url{https://github.com/kkech/SyntheticDataGenerationDT4H}.]
+[Deposit: Zenodo DOI to be minted at acceptance; code repository: the public
+partner repository, URL to be finalized with the consortium.]
 
 \section{Technical Validation}
 
@@ -899,7 +901,7 @@ seeds).}
 \label{fig:tstr}
 \end{figure}
 
-\subsection{Privacy: distances and the four-attack suite}
+\subsection{Privacy: distances and the five-attack suite}
 
 An unseen real patient's nearest-training-record distance has 5th percentile 0.063
 and median 0.103 (Gower-style, in sentinel space); by construction, 5\% of real
@@ -1149,10 +1151,11 @@ Anonymeter \citep{giomi2023unified}.
 Single clinical site and a modest cohort (4{,}694 patients): absolute
 fidelity---particularly for laboratory values observed in few patients---is
 sample-size-limited, and the pipeline is designed to rerun unchanged on the
-forthcoming larger extract. The DP results in this draft predate the
-reviewed-public-domain re-fit (marked throughout); until that campaign
-replaces them, the DP files carry chance-level empirical attack results but no
-valid formal guarantee. AIM's privacy-budget sweep is incomplete above $\eps = 1$
+forthcoming larger extract. The DP results reported here predate the
+reviewed-public-domain re-fit; until that campaign replaces them, the DP
+files carry chance-level empirical attack results but no
+valid formal guarantee.
+% REFIT: delete the two sentences above once the re-fit campaign lands. AIM's privacy-budget sweep is incomplete above $\eps = 1$
 in this campaign (a Private-PGM scaling result we report rather than hide; the
 raised compute cap gives $\eps = 5$ a realistic retry). The C2ST of
 $\geq 0.997$ is measured to be genuine, distributed joint imperfection (the

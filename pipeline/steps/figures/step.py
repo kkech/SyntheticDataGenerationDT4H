@@ -326,7 +326,9 @@ class FiguresStep(PipelineStep):
             ax.set_ylabel("event-free probability")
             ax.set_ylim(0, 1.02)
             ax.set_title(name.replace("_", " "), fontsize=9)
-            ax.legend(fontsize=6.5)
+            # Survival curves stay in the upper band, so the lower-left
+            # corner is the one region an in-axes legend cannot overlap.
+            ax.legend(fontsize=6.5, loc="lower left", ncol=2)
         fig.suptitle("Kaplan-Meier fidelity (nulls = censored at 5 years)", y=1.04)
         self._rep_caption(fig)
         self._save(plt, fig, "fig_km_curves")
