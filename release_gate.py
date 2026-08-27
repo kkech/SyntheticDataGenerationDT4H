@@ -234,6 +234,19 @@ def main() -> int:
         measured["coherence_baseline"] = base
         measured["coherence_rules_violated"] = cand_summary.get("rules_violated")
         measured["coherence_baseline_rules_violated"] = hold_summary.get("rules_violated")
+        # Reported, not thresholded: the share of RECORDS carrying at
+        # least one violation. The threshold above is per rule-check,
+        # which understates how many released patients are affected --
+        # a reader deciding whether to release needs both, against the
+        # real holdout's own share.
+        cand_rows = R.row_violation_mask(candidate, ruleset)
+        hold_rows = R.row_violation_mask(holdout_decoded, ruleset)
+        measured["coherence_row_share"] = round(float(cand_rows.mean()), 5)
+        measured["coherence_row_share_baseline"] = round(float(hold_rows.mean()), 5)
+        print(f"     rows carrying at least one violation: "
+              f"{measured['coherence_row_share']:.1%} "
+              f"(real holdout: {measured['coherence_row_share_baseline']:.1%}) -- "
+              f"reported, not thresholded")
         threshold = _coherence_threshold(policy, base)
         check("coherence", rate <= threshold,
               f"violation rate {rate} vs holdout baseline {base} "
@@ -321,6 +334,15 @@ def main() -> int:
         f.write("| check | result | detail |\n|---|---|---|\n")
         for c in checks:
             f.write(f"| {c['check']} | {'PASS' if c['passed'] else 'FAIL'} | {c['detail']} |\n")
+
+        if "coherence_row_share" in measured:
+            f.write(f"\nReported, not thresholded: "
+                    f"**{measured['coherence_row_share']:.1%}** of this file's records "
+                    f"carry at least one rule violation, against "
+                    f"**{measured['coherence_row_share_baseline']:.1%}** of the real "
+                    f"holdout's. The coherence check above is per applicable rule-check, "
+                    f"which is the smaller number; a release decision should be taken on "
+                    f"both.\n")
 
         f.write("\n## Verdict under each policy\n\n"
                 "The same measurement, re-thresholded. Absolute checks (schema, "

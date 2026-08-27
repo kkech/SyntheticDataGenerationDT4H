@@ -60,13 +60,28 @@ class CoherenceStep(PipelineStep):
 
         results = {"n_rules": len(ruleset), "rules_by_type": by_type, "frames": []}
 
+        # Two different questions, both worth answering: the violation
+        # RATE is per applicable rule-check (how often the data breaks a
+        # rule it is subject to), while the row SHARE is the fraction of
+        # patients carrying at least one violation. A release decision
+        # needs the second -- "what fraction of released records is
+        # clinically impossible" -- and the real frames give it a
+        # baseline, since real data violates the rule set too.
+        def _row_share(frame) -> dict:
+            mask = R.row_violation_mask(frame, ruleset)
+            n = int(mask.sum())
+            return {"rows": int(len(frame)), "rows_with_any_violation": n,
+                    "share_rows_with_any_violation": round(n / len(frame), 5) if len(frame) else None}
+
         for label, frame in (("train (real)", train), ("holdout (real, unseen)", holdout)):
             res = R.evaluate_rules(frame, ruleset)
             summary = R.summarize_rule_results(res)
+            summary.update(_row_share(frame))
             summary["frame"] = label
             results["frames"].append(summary)
             print(f"  {label}: overall violation rate "
-                  f"{summary['overall_violation_rate']} over {summary['rule_checks_applicable']} checks")
+                  f"{summary['overall_violation_rate']} over {summary['rule_checks_applicable']} checks; "
+                  f"{summary['share_rows_with_any_violation']:.1%} of rows carry at least one violation")
 
         holdout_rate = results["frames"][1]["overall_violation_rate"] or 0.0
 
@@ -76,6 +91,7 @@ class CoherenceStep(PipelineStep):
             synth, _ = align_categorical_case(synth, train)
             res = R.evaluate_rules(synth, ruleset)
             summary = R.summarize_rule_results(res)
+            summary.update(_row_share(synth))
             summary["frame"] = f"synthetic[{run_id}]"
             summary["run_id"] = run_id
             worst = sorted((r for r in res if r["violation_rate"]),
@@ -87,7 +103,8 @@ class CoherenceStep(PipelineStep):
             results["frames"].append(summary)
             flag = "✅" if (summary["overall_violation_rate"] or 0) <= max(holdout_rate * 3, 0.01) else "⚠️ "
             print(f"  {flag} {run_id}: violation rate {summary['overall_violation_rate']} "
-                  f"({summary['rules_violated']}/{summary['rules']} rules violated)")
+                  f"({summary['rules_violated']}/{summary['rules']} rules violated); "
+                  f"{summary['share_rows_with_any_violation']:.1%} of rows affected")
 
         json_path = os.path.join(out_dir, "DT4H_Coherence_Audit.json")
         with open(json_path, "w") as f:
@@ -119,12 +136,22 @@ class CoherenceStep(PipelineStep):
             "rows that are individually implausible patients even when every column's "
             "distribution is correct.",
             "",
-            "| frame | applicable checks | violations | violation rate | rules violated |",
-            "|---|---|---|---|---|",
+            "Two measures, answering different questions: the violation RATE is per "
+            "applicable rule-check, while the row SHARE is the fraction of patients "
+            "carrying at least one violation -- the one a release decision turns on, "
+            "read against the real holdout's own share.",
+            "",
+            "| frame | applicable checks | violations | violation rate | rules violated "
+            "| rows with >=1 violation |",
+            "|---|---|---|---|---|---|",
         ]
         for f in r["frames"]:
+            share = f.get("share_rows_with_any_violation")
+            share_cell = (f"{share:.1%} ({f.get('rows_with_any_violation')}/{f.get('rows')})"
+                          if share is not None else "n/a")
             lines.append(f"| {f['frame']} | {f['rule_checks_applicable']} | {f['violations']} "
-                         f"| {f['overall_violation_rate']} | {f['rules_violated']}/{f['rules']} |")
+                         f"| {f['overall_violation_rate']} | {f['rules_violated']}/{f['rules']} "
+                         f"| {share_cell} |")
         lines += ["", "## Worst rules per synthetic dataset", ""]
         for f in r["frames"]:
             if not f.get("worst_rules"):
