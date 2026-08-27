@@ -66,9 +66,19 @@ def summarize_value_counts(series: pl.Series) -> dict:
     # Secondary sort by the value itself so the top-N is deterministic when
     # counts tie: without it, ties resolve on arbitrary hash order and the
     # published table can shuffle between otherwise identical runs. Nulls
-    # sort last so they never displace a shown category slot.
+    # sort last so they never displace a shown category slot. Nested dtypes
+    # (the raw extract's ARRAY[NOMINAL] columns) cannot cast to String, so
+    # their key is the Python-list repr -- vc is at most one row per
+    # distinct value, so map_elements here is cheap.
+    if series.dtype.is_nested():
+        sort_key = pl.col(value_col).map_elements(
+            lambda v: str(v.to_list() if hasattr(v, "to_list") else v),
+            return_dtype=pl.String,
+        )
+    else:
+        sort_key = pl.col(value_col).cast(pl.String)
     vc = vc.sort(
-        ["count", pl.col(value_col).cast(pl.String)],
+        ["count", sort_key],
         descending=[True, False],
         nulls_last=True,
     )
