@@ -201,8 +201,35 @@ def preflight(config: PipelineConfig | None = None, min_free_gb: float = 5.0) ->
             free, total = torch.cuda.mem_get_info()
             check("CUDA GPU", True, f"{torch.cuda.get_device_name(0)}, {free/1e9:.1f} GB free of {total/1e9:.1f} GB")
         else:
-            print("  ⚠️  no CUDA GPU -- ctgan/tvae/dpctgan will train on CPU (much slower); "
-                  "gaussian_copula/mst/aim unaffected")
+            # Distinguish "this machine has no GPU" from "the machine has a
+            # GPU but the installed torch wheel targets a newer CUDA than
+            # the driver supports" -- the wheel/driver mismatch otherwise
+            # reads as missing hardware and sends a partner site down the
+            # wrong path (found at a site with 8 idle GPUs and a torch
+            # wheel one CUDA generation ahead of the driver).
+            driver = None
+            try:
+                import subprocess
+                smi = subprocess.run(
+                    ["nvidia-smi", "--query-gpu=driver_version,name", "--format=csv,noheader"],
+                    capture_output=True, text=True, timeout=10)
+                if smi.returncode == 0 and smi.stdout.strip():
+                    driver = smi.stdout.strip().splitlines()[0]
+            except Exception:
+                pass
+            wheel_cuda = getattr(torch.version, "cuda", None)
+            if driver:
+                check("CUDA GPU", False,
+                      f"nvidia-smi sees a GPU (driver {driver}) but "
+                      f"torch {torch.__version__} (built for CUDA {wheel_cuda or 'CPU-only'}) "
+                      f"cannot use it -- the installed wheel does not match the driver. "
+                      f"Fix: install a torch build for your driver's CUDA generation, "
+                      f"e.g. `pip install 'torch==2.5.*'` (CUDA 12.x wheels run on "
+                      f"drivers >= 525). CPU training works but is many times slower "
+                      f"and the README runtimes will not hold.")
+            else:
+                print("  ⚠️  no CUDA GPU -- ctgan/tvae/dpctgan will train on CPU (much slower); "
+                      "gaussian_copula/mst/aim unaffected")
     except Exception:
         pass
 

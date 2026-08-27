@@ -1,0 +1,786 @@
+{
+  "note": "Columns derived by preprocessing from the UC1 feature-set metadata; the source indicator columns are dropped from the modelling frame after combining, so these derived columns CARRY the medication/condition content and must not be skipped. Generated from metadata.json only -- no patient data. Rules mirror pipeline/steps/preprocess/transforms.py.",
+  "derived_columns": {
+    "med_acei": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_acei_any": "Whether angiotensin-converting enzyme (ACE)-inhibitors administered during the admission",
+        "med_requests_acei_any": "Whether angiotensin-converting enzyme (ACE)-inhibitors prescribed during the admission"
+      }
+    },
+    "med_anti_coag": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_anti_coag_any": "Whether anticoagulant agents administered during the admission",
+        "med_requests_anti_coag_any": "Whether anticoagulant agents prescribed during the admission"
+      }
+    },
+    "med_anti_plat": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_anti_plat_any": "Whether antiplatelet agents administered during the admission",
+        "med_requests_anti_plat_any": "Whether antiplatelet agents prescribed during the admission"
+      }
+    },
+    "med_antiarrhytmic": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_antiarrhytmic_any": "Whether antiarrhythmic drugs administered during the admission",
+        "med_requests_antiarrhytmic_any": "Whether antiarrhythmic drugs prescribed during the admission"
+      }
+    },
+    "med_antiinfl": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_antiinfl_any": "Whether anti-inflammatory drugs administered during the admission",
+        "med_requests_antiinfl_any": "Whether anti-inflammatory drugs prescribed during the admission"
+      }
+    },
+    "med_arb": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_arb_any": "Whether angiotensin receptor blocker (ARB) administered during the admission",
+        "med_requests_arb_any": "Whether angiotensin receptor blocker (ARB) prescribed during the admission"
+      }
+    },
+    "med_ari": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_ari_any": "Whether ari (drugs to prevent nerve damage in diabetes) administered during the admission",
+        "med_requests_ari_any": "Whether ari (drugs to prevent nerve damage in diabetes) prescribed during the admission"
+      }
+    },
+    "med_arni": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_arni_any": "Whether angiotensin receptor-neprilysin inhibitor (ARNi) administered during the admission",
+        "med_requests_arni_any": "Whether angiotensin receptor-neprilysin inhibitor (ARNi) prescribed during the admission"
+      }
+    },
+    "med_bb": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_bb_any": "Whether beta blockers administered during the admission",
+        "med_requests_bb_any": "Whether beta blockers prescribed during the admission"
+      }
+    },
+    "med_ccb": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_ccb_any": "Whether calcium channel blockers administered during the admission",
+        "med_requests_ccb_any": "Whether calcium channel blockers prescribed during the admission"
+      }
+    },
+    "med_cortico_syst": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_cortico_syst_any": "Whether corticosteroids systemic administered during the admission",
+        "med_requests_cortico_syst_any": "Whether corticosteroids systemic prescribed during the admission"
+      }
+    },
+    "med_digitalis": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_digitalis_any": "Whether digitalis glycosides administered during the admission",
+        "med_requests_digitalis_any": "Whether digitalis glycosides prescribed during the admission"
+      }
+    },
+    "med_diuretics": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_diuretics_any": "Whether diuretics administered during the admission",
+        "med_requests_diuretics_any": "Whether diuretics prescribed during the admission"
+      }
+    },
+    "med_diuretics_loop": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_diuretics_loop_any": "Whether Loop diuretics administered during the admission",
+        "med_requests_diuretics_loop_any": "Whether Loop diuretics prescribed during the admission"
+      }
+    },
+    "med_inotropes": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_inotropes_any": "Whether inotropes administered during the admission",
+        "med_requests_inotropes_any": "Whether inotropes prescribed during the admission"
+      }
+    },
+    "med_insulins": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_insulins_any": "Whether insulins and analogs administered during the admission",
+        "med_requests_insulins_any": "Whether insulins and analogs prescribed during the admission"
+      }
+    },
+    "med_ivabradine": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_ivabradine_any": "Whether ivabradine administered during the admission",
+        "med_requests_ivabradine_any": "Whether ivabradine prescribed during the admission"
+      }
+    },
+    "med_ll": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_ll_any": "Whether ll administered during the admission",
+        "med_requests_ll_any": "Whether ll prescribed during the admission"
+      }
+    },
+    "med_mra": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_mra_any": "Whether mineralcorticoid receptor antagonist administered during the admission",
+        "med_requests_mra_any": "Whether mineralcorticoid receptor antagonist prescribed during the admission"
+      }
+    },
+    "med_oral_antidiabetic": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_oral_antidiabetic_any": "Whether oral_antidiabetic administered during the admission",
+        "med_requests_oral_antidiabetic_any": "Whether oral_antidiabetic prescribed during the admission"
+      }
+    },
+    "med_platelet": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_platelet_any": "Whether platelet administered during the admission",
+        "med_requests_platelet_any": "Whether platelet prescribed during the admission"
+      }
+    },
+    "med_potassium_binders": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_potassium_binders_any": "Whether potassium_binders administered during the admission",
+        "med_requests_potassium_binders_any": "Whether potassium_binders prescribed during the admission"
+      }
+    },
+    "med_rasi": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_rasi_any": "Whether renin\u2013angiotensin system inhibitor administered during the admission",
+        "med_requests_rasi_any": "Whether renin\u2013angiotensin system inhibitor prescribed during the admission"
+      }
+    },
+    "med_rdoad": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_rdoad_any": "Whether respiratory drugs for obstructive airway diseases, inhalants administered during the admission",
+        "med_requests_rdoad_any": "Whether respiratory drugs for obstructive airway diseases, inhalants prescribed during the admission"
+      }
+    },
+    "med_rdoad_syst": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_rdoad_syst_any": "Whether respiratory drugs for obstructive airway diseases, systemic use administered during the admission",
+        "med_requests_rdoad_syst_any": "Whether respiratory drugs for obstructive airway diseases, systemic use prescribed during the admission"
+      }
+    },
+    "med_thrombolytic": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_thrombolytic_any": "Whether thrombolytic drugs/fibrinolytics administered during the admission",
+        "med_requests_thrombolytic_any": "Whether thrombolytic drugs/fibrinolytics prescribed during the admission"
+      }
+    },
+    "med_vasodil": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_vasodil_any": "Whether vasodil administered during the admission",
+        "med_requests_vasodil_any": "Whether vasodil prescribed during the admission"
+      }
+    },
+    "med_acei_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_acei_any": "Whether angiotensin-converting enzyme (ACE)-inhibitors administered in their clinical history prior to the date of admission",
+        "med_requests_history_acei_any": "Whether angiotensin-converting enzyme (ACE)-inhibitors prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_anti_coag_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_anti_coag_any": "Whether anticoagulant agents administered in their clinical history prior to the date of admission",
+        "med_requests_history_anti_coag_any": "Whether anticoagulant agents prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_anti_plat_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_anti_plat_any": "Whether antiplatelet agents administered in their clinical history prior to the date of admission",
+        "med_requests_history_anti_plat_any": "Whether antiplatelet agents prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_antiarrhytmic_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_antiarrhytmic_any": "Whether antiarrhythmic drugs administered in their clinical history prior to the date of admission",
+        "med_requests_history_antiarrhytmic_any": "Whether antiarrhythmic drugs prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_antiinfl_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_antiinfl_any": "Whether anti-inflammatory drugs administered in their clinical history prior to the date of admission",
+        "med_requests_history_antiinfl_any": "Whether anti-inflammatory drugs prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_arb_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_arb_any": "Whether angiotensin receptor blocker (ARB) administered in their clinical history prior to the date of admission",
+        "med_requests_history_arb_any": "Whether angiotensin receptor blocker (ARB) prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_ari_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_ari_any": "Whether ari (drugs to prevent nerve damage in diabetes) administered in their clinical history prior to the date of admission",
+        "med_requests_history_ari_any": "Whether ari (drugs to prevent nerve damage in diabetes) prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_arni_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_arni_any": "Whether angiotensin receptor-neprilysin inhibitor (ARNi) administered in their clinical history prior to the date of admission",
+        "med_requests_history_arni_any": "Whether angiotensin receptor-neprilysin inhibitor (ARNi) prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_bb_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_bb_any": "Whether beta blockers administered in their clinical history prior to the date of admission",
+        "med_requests_history_bb_any": "Whether beta blockers prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_ccb_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_ccb_any": "Whether calcium channel blockers administered in their clinical history prior to the date of admission",
+        "med_requests_history_ccb_any": "Whether calcium channel blockers prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_cortico_syst_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_cortico_syst_any": "Whether corticosteroids systemic administered in their clinical history prior to the date of admission",
+        "med_requests_history_cortico_syst_any": "Whether corticosteroids systemic prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_digitalis_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_digitalis_any": "Whether digitalis glycosides administered in their clinical history prior to the date of admission",
+        "med_requests_history_digitalis_any": "Whether digitalis glycosides prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_diuretics_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_diuretics_any": "Whether diuretics administered in their clinical history prior to the date of admission",
+        "med_requests_history_diuretics_any": "Whether diuretics prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_diuretics_loop_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_diuretics_loop_any": "Whether Loop diuretics administered in their clinical history prior to the date of admission",
+        "med_requests_history_diuretics_loop_any": "Whether Loop diuretics prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_inotropes_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_inotropes_any": "Whether inotropes administered in their clinical history prior to the date of admission",
+        "med_requests_history_inotropes_any": "Whether inotropes prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_insulins_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_insulins_any": "Whether insulins and analogs administered in their clinical history prior to the date of admission",
+        "med_requests_history_insulins_any": "Whether insulins and analogs prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_ivabradine_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_ivabradine_any": "Whether ivabradine administered in their clinical history prior to the date of admission",
+        "med_requests_history_ivabradine_any": "Whether ivabradine prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_ll_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_ll_any": "Whether ll administered in their clinical history prior to the date of admission",
+        "med_requests_history_ll_any": "Whether ll prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_mra_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_mra_any": "Whether mineralcorticoid receptor antagonist administered in their clinical history prior to the date of admission",
+        "med_requests_history_mra_any": "Whether mineralcorticoid receptor antagonist prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_oral_antidiabetic_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_oral_antidiabetic_any": "Whether oral_antidiabetic administered in their clinical history prior to the date of admission",
+        "med_requests_history_oral_antidiabetic_any": "Whether oral_antidiabetic prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_platelet_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_platelet_any": "Whether platelet administered in their clinical history prior to the date of admission",
+        "med_requests_history_platelet_any": "Whether platelet prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_potassium_binders_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_potassium_binders_any": "Whether potassium_binders administered in their clinical history prior to the date of admission",
+        "med_requests_history_potassium_binders_any": "Whether potassium_binders prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_rasi_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_rasi_any": "Whether renin\u2013angiotensin system inhibitor administered in their clinical history prior to the date of admission",
+        "med_requests_history_rasi_any": "Whether renin\u2013angiotensin system inhibitor prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_rdoad_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_rdoad_any": "Whether respiratory drugs for obstructive airway diseases, inhalants administered in their clinical history prior to the date of admission",
+        "med_requests_history_rdoad_any": "Whether respiratory drugs for obstructive airway diseases, inhalants prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_rdoad_syst_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_rdoad_syst_any": "Whether respiratory drugs for obstructive airway diseases, systemic use administered in their clinical history prior to the date of admission",
+        "med_requests_history_rdoad_syst_any": "Whether respiratory drugs for obstructive airway diseases, systemic use prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_thrombolytic_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_thrombolytic_any": "Whether thrombolytic drugs/fibrinolytics administered in their clinical history prior to the date of admission",
+        "med_requests_history_thrombolytic_any": "Whether thrombolytic drugs/fibrinolytics prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_vasodil_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_vasodil_any": "Whether vasodil administered in their clinical history prior to the date of admission",
+        "med_requests_history_vasodil_any": "Whether vasodil prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "conditions_af": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_af_pre_dc_any": "Whether the patient has atrial fibrillation in their clinical history prior to the date of discharge",
+        "conditions_af_pre_adm_any": "Whether the patient has atrial fibrillation in their clinical history prior to the date of admission",
+        "conditions_af_during_pET_any": "Whether the patient has atrial fibrillation within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_aidshiv": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_aidshiv_pre_adm_any": "Whether the patient has AIDS or HIV in their clinical history prior to the date of admission",
+        "conditions_aidshiv_during_pET_any": "Whether the patient has AIDS or HIV within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_ap": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_ap_pre_adm_any": "Whether the patient has angina pectoris in their clinical history prior to the date of admission",
+        "conditions_ap_during_pET_any": "Whether the patient has angina pectoris within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_ckd_chronic": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_ckd_chronic_pre_dc_any": "Whether the patient has renal disease chronic in their clinical history prior to the date of discharge",
+        "conditions_ckd_chronic_pre_adm_any": "Whether the patient has renal disease chronic in their clinical history prior to the date of admission",
+        "conditions_ckd_chronic_during_pET_any": "Whether the patient has renal disease chronic within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_cm": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_cm_pre_dc_any": "Whether the patient has cardiomyopathy in their clinical history prior to the date of discharge",
+        "conditions_cm_pre_adm_any": "Whether the patient has cardiomyopathy in their clinical history prior to the date of admission",
+        "conditions_cm_during_pET_any": "Whether the patient has cardiomyopathy within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_copd": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_copd_pre_dc_any": "Whether the patient has COPD in their clinical history prior to the date of discharge",
+        "conditions_copd_pre_adm_any": "Whether the patient has COPD in their clinical history prior to the date of admission",
+        "conditions_copd_during_pET_any": "Whether the patient has COPD within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_dem": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_dem_pre_dc_any": "Whether the patient has dementia in their clinical history prior to the date of discharge",
+        "conditions_dem_pre_adm_any": "Whether the patient has dementia in their clinical history prior to the date of admission",
+        "conditions_dem_during_pET_any": "Whether the patient has dementia within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_dep": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_dep_pre_dc_any": "Whether the patient has depression in their clinical history prior to the date of discharge",
+        "conditions_dep_pre_adm_any": "Whether the patient has depression in their clinical history prior to the date of admission",
+        "conditions_dep_during_pET_any": "Whether the patient has depression within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_devices": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_devices_pre_adm_any": "Whether the patient has cardiac and vascular implants and grafts in their clinical history prior to the date of admission",
+        "conditions_devices_during_pET_any": "Whether the patient has cardiac and vascular implants and grafts within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_dia": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_dia_pre_adm_any": "Whether the patient has dialysis in their clinical history prior to the date of admission",
+        "conditions_dia_during_pET_any": "Whether the patient has dialysis within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_diabetes": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_diabetes_pre_dc_any": "Whether the patient has diabetes mellitus in their clinical history prior to the date of discharge",
+        "conditions_diabetes_pre_adm_any": "Whether the patient has diabetes mellitus in their clinical history prior to the date of admission",
+        "conditions_diabetes_during_pET_any": "Whether the patient has diabetes mellitus within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_dysl": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_dysl_pre_adm_any": "Whether the patient has dyslipidemia in their clinical history prior to the date of admission",
+        "conditions_dysl_during_pET_any": "Whether the patient has dyslipidemia within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_hf": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_hf_pre_adm_any": "Whether the patient has heart failure in their clinical history prior to the date of admission",
+        "conditions_hf_during_pET_any": "Whether the patient has heart failure within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_hyp": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_hyp_pre_dc_any": "Whether the patient has hypertension in their clinical history prior to the date of discharge",
+        "conditions_hyp_pre_adm_any": "Whether the patient has hypertension in their clinical history prior to the date of admission",
+        "conditions_hyp_during_pET_any": "Whether the patient has hypertension within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_hyperthyroid": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_hyperthyroid_pre_adm_any": "Whether the patient has hyperthyroidism in their clinical history prior to the date of admission",
+        "conditions_hyperthyroid_during_pET_any": "Whether the patient has hyperthyroidism within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_hypothyroid": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_hypothyroid_pre_dc_any": "Whether the patient has hypothyroidism in their clinical history prior to the date of discharge",
+        "conditions_hypothyroid_pre_adm_any": "Whether the patient has hypothyroidism in their clinical history prior to the date of admission",
+        "conditions_hypothyroid_during_pET_any": "Whether the patient has hypothyroidism within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_ibd": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_ibd_pre_adm_any": "Whether the patient has inflammable bowel disease in their clinical history prior to the date of admission",
+        "conditions_ibd_during_pET_any": "Whether the patient has inflammable bowel disease within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_ihd": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_ihd_pre_dc_any": "Whether the patient has ischemic heart disease in their clinical history prior to the date of discharge",
+        "conditions_ihd_pre_adm_any": "Whether the patient has ischemic heart disease in their clinical history prior to the date of admission",
+        "conditions_ihd_during_pET_any": "Whether the patient has ischemic heart disease within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_ld": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_ld_pre_adm_any": "Whether the patient has liver disease in their clinical history prior to the date of admission",
+        "conditions_ld_during_pET_any": "Whether the patient has liver disease within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_mc": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_mc_pre_dc_any": "Whether the patient has malignant cancer in their clinical history prior to the date of discharge",
+        "conditions_mc_pre_adm_any": "Whether the patient has malignant cancer in their clinical history prior to the date of admission",
+        "conditions_mc_during_pET_any": "Whether the patient has malignant cancer within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_mi": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_mi_pre_dc_any": "Whether the patient has myocardial infarction in their clinical history prior to the date of discharge",
+        "conditions_mi_pre_adm_any": "Whether the patient has myocardial infarction in their clinical history prior to the date of admission",
+        "conditions_mi_during_pET_any": "Whether the patient has myocardial infarction within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_myocarditis": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_myocarditis_pre_adm_any": "Whether the patient has myocarditis in their clinical history prior to the date of admission",
+        "conditions_myocarditis_during_pET_any": "Whether the patient has myocarditis within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_osa": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_osa_pre_adm_any": "Whether the patient has obstructive sleep apnea in their clinical history prior to the date of admission",
+        "conditions_osa_during_pET_any": "Whether the patient has obstructive sleep apnea within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_pad": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_pad_pre_dc_any": "Whether the patient has peripheral artery disease in their clinical history prior to the date of discharge",
+        "conditions_pad_pre_adm_any": "Whether the patient has peripheral artery disease in their clinical history prior to the date of admission",
+        "conditions_pad_during_pET_any": "Whether the patient has peripheral artery disease within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_pericardial": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_pericardial_pre_adm_any": "Whether the patient has pericardial disease in their clinical history prior to the date of admission",
+        "conditions_pericardial_during_pET_any": "Whether the patient has pericardial disease within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_rd": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_rd_pre_dc_any": "Whether the patient has rheumatic disease in their clinical history prior to the date of discharge",
+        "conditions_rd_pre_adm_any": "Whether the patient has rheumatic disease in their clinical history prior to the date of admission",
+        "conditions_rd_during_pET_any": "Whether the patient has rheumatic disease within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_revasc": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_revasc_pre_adm_any": "Whether the patient has revascularized CABG, PCI in their clinical history prior to the date of admission",
+        "conditions_revasc_during_pET_any": "Whether the patient has revascularized CABG, PCI within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_stroke": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_stroke_pre_dc_any": "Whether the patient has stroke in their clinical history prior to the date of discharge",
+        "conditions_stroke_pre_adm_any": "Whether the patient has stroke in their clinical history prior to the date of admission",
+        "conditions_stroke_during_pET_any": "Whether the patient has stroke within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_substance_abuse": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_substance_abuse_pre_adm_any": "Whether the patient has substance abuse in their clinical history prior to the date of admission",
+        "conditions_substance_abuse_during_pET_any": "Whether the patient has substance abuse within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_tia": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_tia_pre_adm_any": "Whether the patient has transient ischemic attack in their clinical history prior to the date of admission",
+        "conditions_tia_during_pET_any": "Whether the patient has transient ischemic attack within the hospital admission and discharge timeframe."
+      }
+    },
+    "conditions_vd": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the condition is flagged in ANY of the three observation windows (before discharge, before admission, during the encounter); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "conditions_vd_pre_dc_any": "Whether the patient has valvular disease in their clinical history prior to the date of discharge",
+        "conditions_vd_pre_adm_any": "Whether the patient has valvular disease in their clinical history prior to the date of admission",
+        "conditions_vd_during_pET_any": "Whether the patient has valvular disease within the hospital admission and discharge timeframe."
+      }
+    }
+  }
+}

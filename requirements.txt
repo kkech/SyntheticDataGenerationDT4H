@@ -47,11 +47,21 @@ numpy>=1.24,<2.3
 # environment already has a working torch, this will leave it alone.
 # The pipeline detects CUDA at runtime and falls back to CPU.
 #
+# The upper bound is a CUDA-GENERATION bound, not an API bound: newer
+# torch releases ship wheels built for newer CUDA (2.6+ moves past
+# CUDA 12.4), and a wheel one CUDA generation ahead of the host driver
+# imports fine but reports no GPU -- so training silently drops to CPU
+# on a machine full of GPUs (observed at a partner site: a CUDA-13
+# wheel on a driver-535 host). torch 2.x wheels within this bound
+# target CUDA 12.x and run on any driver >= 525. If your driver is
+# newer you may raise the bound; preflight now names the mismatch
+# explicitly either way.
+#
 # For a CPU-only machine, install the smaller CPU build as its own
 # command FIRST (never combined with -r, or PyPI packages fail to
 # resolve against the PyTorch index):
-#   pip install "torch>=2.0,<3" --index-url https://download.pytorch.org/whl/cpu
-torch>=2.0,<3
+#   pip install "torch>=2.0,<2.6" --index-url https://download.pytorch.org/whl/cpu
+torch>=2.0,<2.6
 
 # --- build note ---
 # smartnoise-synth pulls antlr4-python3-runtime 4.9.3, which is published

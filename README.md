@@ -250,11 +250,32 @@ git clone <partner-repo-url>
 cd SyntheticDataGenerationTabularDT4H
 python -m venv .synthenv && source .synthenv/bin/activate
 pip install -r requirements.txt          # see the numpy note under Setup
+# REVIEW STEP (required once per site): read the 61 ranges in
+# public_domains.json against your own clinical knowledge, then set
+# "reviewed": true (add reviewed_by / reviewed_at). The file ships with
+# reviewed=false on purpose -- the origin site's sign-off does not
+# transfer, and DP fitting refuses to start until YOUR site signs off.
 python main.py --preflight --data-dir /your/part-parquet-folder
 ./run_job.sh start --force --extended --data-dir /your/part-parquet-folder
 ./run_job.sh status                      # any time; `follow` streams the log
 python release_gate.py --all             # after the run: gate every file, both policies
+python make_derived_columns_map.py       # semantic map for the derived med_*/conditions_* columns
 ```
+
+Two things worth knowing before the long run:
+
+* **GPU check**: if `nvidia-smi` sees your GPU but preflight reports the
+  torch wheel cannot use it, the installed wheel targets a newer CUDA
+  than your driver supports -- install a build matching your driver
+  (e.g. `pip install "torch==2.5.*"` for any driver >= 525) rather than
+  accepting the silent CPU fallback; the quoted runtimes assume a GPU.
+* **Derived columns**: the released datasets contain ~85 `med_*` /
+  `conditions_*` columns that are NOT in `metadata.json` -- they are
+  OR-combinations of the declared indicator variants, and the sources
+  are dropped after combining, so they carry all medication/condition
+  content and must not be skipped. `make_derived_columns_map.py` writes
+  `DT4H_Derived_Columns.json`/`.md` mapping each one to its source
+  columns and their meanings (from metadata.json only; no patient data).
 
 Add `--metadata /path/to/metadata.json` if the JSON does not live inside
 the data folder. `--extended` is optional: dropping it runs the core
