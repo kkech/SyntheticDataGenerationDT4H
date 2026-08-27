@@ -165,7 +165,12 @@ def _verdicts_by_policy(checks: list, measured: dict) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Synthetic-file release gate.")
-    parser.add_argument("--file", required=True, help="Candidate DT4H_Synthetic_*.csv")
+    parser.add_argument("--file", help="Candidate DT4H_Synthetic_*.csv")
+    parser.add_argument("--all", action="store_true",
+                        help="Gate every DT4H_Synthetic_*.csv and DT4H_Candidate_*.csv in "
+                             "output/generate/ and print a both-policies summary table. "
+                             "Per-file reports are written as usual; exit code is 0 when "
+                             "the sweep completes (verdicts live in the reports).")
     parser.add_argument("--policy", choices=sorted(POLICIES), default=DEFAULT_POLICY,
                         help=f"Threshold policy for the coherence and distance checks "
                              f"(default: {DEFAULT_POLICY}). Every report states the verdict "
@@ -203,8 +208,52 @@ def main() -> int:
         print(f"Note: {args.note}")
     config = PipelineConfig()
 
-    _require_csv(args.file)
-    candidate = pd.read_csv(args.file, low_memory=False)
+    if args.all:
+        import glob as _glob
+        gen = config.step_dir("generate")
+        paths = sorted(_glob.glob(os.path.join(gen, "DT4H_Synthetic_*.csv"))) + \
+                sorted(_glob.glob(os.path.join(gen, "DT4H_Candidate_*.csv")))
+        if not paths:
+            print(f"No candidate CSVs found in {gen}.")
+            return 1
+        print(f"Gating {len(paths)} file(s) under every policy...\n")
+        rows = []
+        for p in paths:
+            print("\n" + "#" * 70 + f"\n# {os.path.basename(p)}\n" + "#" * 70)
+            try:
+                _gate(p, policy, policy_name, args, config)
+            except SystemExit as e:
+                print(f"  skipped: {e}")
+            name = os.path.basename(p).replace(".csv", "")
+            sidecar = os.path.join(os.path.dirname(p), f"DT4H_Release_Gate_{name}.json")
+            try:
+                with open(sidecar) as fh:
+                    d = json.load(fh)
+                v = d.get("verdict_by_policy", {})
+                fails = [c["check"] for c in d.get("checks", []) if not c.get("passed")]
+                rows.append((name, v.get("release", {}).get("verdict", "?"),
+                             v.get("controlled", {}).get("verdict", "?"),
+                             ",".join(fails) or "-"))
+            except Exception as e:
+                rows.append((name, "ERROR", "ERROR", str(e)[:40]))
+        print("\n" + "=" * 70 + "\nGATE SUMMARY (same measurement, both policies)\n" + "=" * 70)
+        print(f"{'file':44s} {'release':8s} {'controlled':10s} failing checks")
+        for name, rel, con, fails in rows:
+            print(f"{name:44s} {rel:8s} {con:10s} {fails}")
+        n_rel = sum(1 for r in rows if r[1] == "PASS")
+        n_con = sum(1 for r in rows if r[2] == "PASS")
+        print(f"\n{n_rel}/{len(rows)} pass 'release'; {n_con}/{len(rows)} pass 'controlled'. "
+              f"Reports written next to each file.")
+        return 0
+
+    if not args.file:
+        parser.error("--file <csv> or --all is required")
+    return _gate(args.file, policy, policy_name, args, config)
+
+
+def _gate(path, policy, policy_name, args, config) -> int:
+    _require_csv(path)
+    candidate = pd.read_csv(path, low_memory=False)
     train = pl.read_parquet(config.train_output_path).to_pandas()
     holdout = pl.read_parquet(config.holdout_output_path).to_pandas()
     # The candidate is in DECODED (released) space, so the leakage and
@@ -227,7 +276,7 @@ def main() -> int:
         checks.append({"check": name, "passed": bool(passed), "detail": detail})
         print(f"  {'✅' if passed else '❌'} {name}: {detail}")
 
-    print(f"Release gate for {args.file} ({candidate.shape[0]} x {candidate.shape[1]}):")
+    print(f"Release gate for {path} ({candidate.shape[0]} x {candidate.shape[1]}):")
 
     extra = [c for c in candidate.columns if c not in train.columns]
     check("schema", not extra and len(candidate) > 0,
@@ -366,7 +415,7 @@ def main() -> int:
     by_policy = _verdicts_by_policy(checks, measured)
     print("\nSame measurement under every policy:")
     for pname, v in by_policy.items():
-        marker = " <- selected" if pname == args.policy and not overrides else ""
+        marker = " <- selected" if pname == args.policy and not policy_name.startswith("custom") else ""
         detail = ", ".join(f"{k} {'ok' if d['passed'] else 'over'} "
                            f"(limit {d['threshold']:g})"
                            for k, d in v["checks"].items())
@@ -377,8 +426,8 @@ def main() -> int:
               f"it needs the note recorded above and a consortium ruling behind it.")
 
     timestamp = datetime.now(timezone.utc).isoformat()
-    name = os.path.basename(args.file).replace(".csv", "")
-    report = os.path.join(os.path.dirname(args.file), f"DT4H_Release_Gate_{name}.md")
+    name = os.path.basename(path).replace(".csv", "")
+    report = os.path.join(os.path.dirname(path), f"DT4H_Release_Gate_{name}.md")
     with open(report, "w") as f:
         f.write(f"# Release Gate: {name}\n\n"
                 f"Evaluated {timestamp}\n\n"
@@ -438,7 +487,7 @@ def main() -> int:
     sidecar = report.replace(".md", ".json")
     with open(sidecar, "w") as f:
         json.dump({
-            "file": os.path.basename(args.file),
+            "file": os.path.basename(path),
             "evaluated": timestamp,
             "policy": policy_name,
             "policy_thresholds": policy,
