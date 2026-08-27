@@ -13,6 +13,9 @@
       "violations": 17,
       "overall_violation_rate": 0.00014,
       "rules_violated": 14,
+      "rows": 3520,
+      "rows_with_any_violation": 9,
+      "share_rows_with_any_violation": 0.00256,
       "frame": "train (real)"
     },
     {
@@ -21,6 +24,9 @@
       "violations": 88,
       "overall_violation_rate": 0.00232,
       "rules_violated": 70,
+      "rows": 1174,
+      "rows_with_any_violation": 23,
+      "share_rows_with_any_violation": 0.01959,
       "frame": "holdout (real, unseen)"
     },
     {
@@ -29,6 +35,9 @@
       "violations": 272,
       "overall_violation_rate": 0.03708,
       "rules_violated": 4,
+      "rows": 3520,
+      "rows_with_any_violation": 228,
+      "share_rows_with_any_violation": 0.06477,
       "frame": "synthetic[aim40_eps1_seed0]",
       "run_id": "aim40_eps1_seed0",
       "worst_rules": [
@@ -84,6 +93,9 @@
       "violations": 405,
       "overall_violation_rate": 0.05282,
       "rules_violated": 4,
+      "rows": 3520,
+      "rows_with_any_violation": 388,
+      "share_rows_with_any_violation": 0.11023,
       "frame": "synthetic[aim50_eps1_seed0]",
       "run_id": "aim50_eps1_seed0",
       "worst_rules": [
@@ -139,6 +151,9 @@
       "violations": 41514,
       "overall_violation_rate": 0.38864,
       "rules_violated": 350,
+      "rows": 3520,
+      "rows_with_any_violation": 3425,
+      "share_rows_with_any_violation": 0.97301,
       "frame": "synthetic[ctgan_qt_seed0]",
       "run_id": "ctgan_qt_seed0",
       "worst_rules": [
@@ -205,6 +220,9 @@
       "violations": 39728,
       "overall_violation_rate": 0.30536,
       "rules_violated": 347,
+      "rows": 3520,
+      "rows_with_any_violation": 3509,
+      "share_rows_with_any_violation": 0.99687,
       "frame": "synthetic[ctgan_seed0]",
       "run_id": "ctgan_seed0",
       "worst_rules": [
@@ -271,6 +289,9 @@
       "violations": 40007,
       "overall_violation_rate": 0.35081,
       "rules_violated": 336,
+      "rows": 3520,
+      "rows_with_any_violation": 3507,
+      "share_rows_with_any_violation": 0.99631,
       "frame": "synthetic[ctgan_seed1]",
       "run_id": "ctgan_seed1",
       "worst_rules": [
@@ -337,6 +358,9 @@
       "violations": 34297,
       "overall_violation_rate": 0.29903,
       "rules_violated": 341,
+      "rows": 3520,
+      "rows_with_any_violation": 3422,
+      "share_rows_with_any_violation": 0.97216,
       "frame": "synthetic[ctgan_seed2]",
       "run_id": "ctgan_seed2",
       "worst_rules": [
@@ -403,6 +427,9 @@
       "violations": 66028,
       "overall_violation_rate": 0.23777,
       "rules_violated": 362,
+      "rows": 3520,
+      "rows_with_any_violation": 3516,
+      "share_rows_with_any_violation": 0.99886,
       "frame": "synthetic[ddpm_g_seed0]",
       "run_id": "ddpm_g_seed0",
       "worst_rules": [
@@ -469,6 +496,9 @@
       "violations": 140063,
       "overall_violation_rate": 0.39141,
       "rules_violated": 362,
+      "rows": 3520,
+      "rows_with_any_violation": 3520,
+      "share_rows_with_any_violation": 1.0,
       "frame": "synthetic[ddpm_seed0]",
       "run_id": "ddpm_seed0",
       "worst_rules": [
@@ -535,6 +565,9 @@
       "violations": 155309,
       "overall_violation_rate": 0.41095,
       "rules_violated": 362,
+      "rows": 3520,
+      "rows_with_any_violation": 3520,
+      "share_rows_with_any_violation": 1.0,
       "frame": "synthetic[ddpm_seed1]",
       "run_id": "ddpm_seed1",
       "worst_rules": [
@@ -601,6 +634,9 @@
       "violations": 158083,
       "overall_violation_rate": 0.43714,
       "rules_violated": 362,
+      "rows": 3520,
+      "rows_with_any_violation": 3519,
+      "share_rows_with_any_violation": 0.99972,
       "frame": "synthetic[ddpm_seed2]",
       "run_id": "ddpm_seed2",
       "worst_rules": [
@@ -667,6 +703,9 @@
       "violations": 39532,
       "overall_violation_rate": 0.73156,
       "rules_violated": 108,
+      "rows": 3520,
+      "rows_with_any_violation": 3520,
+      "share_rows_with_any_violation": 1.0,
       "frame": "synthetic[dpctgan_eps10_seed0]",
       "run_id": "dpctgan_eps10_seed0",
       "worst_rules": [
@@ -733,6 +772,9 @@
       "violations": 8153,
       "overall_violation_rate": 0.30039,
       "rules_violated": 73,
+      "rows": 3520,
+      "rows_with_any_violation": 3519,
+      "share_rows_with_any_violation": 0.99972,
       "frame": "synthetic[dpctgan_eps15_seed0]",
       "run_id": "dpctgan_eps15_seed0",
       "worst_rules": [
@@ -799,6 +841,9 @@
       "violations": 45599,
       "overall_violation_rate": 0.76165,
       "rules_violated": 103,
+      "rows": 3520,
+      "rows_with_any_violation": 3520,
+      "share_rows_with_any_violation": 1.0,
       "frame": "synthetic[dpctgan_eps15_seed1]",
       "run_id": "dpctgan_eps15_seed1",
       "worst_rules": [
@@ -865,6 +910,9 @@
       "violations": 8604,
       "overall_violation_rate": 0.09168,
       "rules_violated": 77,
+      "rows": 3520,
+      "rows_with_any_violation": 3397,
+      "share_rows_with_any_violation": 0.96506,
       "frame": "synthetic[dpctgan_eps15_seed2]",
       "run_id": "dpctgan_eps15_seed2",
       "worst_rules": [
@@ -931,6 +979,9 @@
       "violations": 61242,
       "overall_violation_rate": 0.62185,
       "rules_violated": 138,
+      "rows": 3520,
+      "rows_with_any_violation": 3520,
+      "share_rows_with_any_violation": 1.0,
       "frame": "synthetic[dpctgan_eps1_seed0]",
       "run_id": "dpctgan_eps1_seed0",
       "worst_rules": [
@@ -997,6 +1048,9 @@
       "violations": 41572,
       "overall_violation_rate": 0.48256,
       "rules_violated": 82,
+      "rows": 3520,
+      "rows_with_any_violation": 3520,
+      "share_rows_with_any_violation": 1.0,
       "frame": "synthetic[dpctgan_eps20_seed0]",
       "run_id": "dpctgan_eps20_seed0",
       "worst_rules": [
@@ -1063,6 +1117,9 @@
       "violations": 22359,
       "overall_violation_rate": 0.47317,
       "rules_violated": 86,
+      "rows": 3520,
+      "rows_with_any_violation": 3520,
+      "share_rows_with_any_violation": 1.0,
       "frame": "synthetic[dpctgan_eps5_seed0]",
       "run_id": "dpctgan_eps5_seed0",
       "worst_rules": [
@@ -1129,6 +1186,9 @@
       "violations": 31859,
       "overall_violation_rate": 0.49016,
       "rules_violated": 74,
+      "rows": 3520,
+      "rows_with_any_violation": 3520,
+      "share_rows_with_any_violation": 1.0,
       "frame": "synthetic[dpctgan_eps8_seed0]",
       "run_id": "dpctgan_eps8_seed0",
       "worst_rules": [
@@ -1195,6 +1255,9 @@
       "violations": 23597,
       "overall_violation_rate": 0.27848,
       "rules_violated": 330,
+      "rows": 3520,
+      "rows_with_any_violation": 3390,
+      "share_rows_with_any_violation": 0.96307,
       "frame": "synthetic[gaussian_copula_seed0]",
       "run_id": "gaussian_copula_seed0",
       "worst_rules": [
@@ -1261,6 +1324,9 @@
       "violations": 23945,
       "overall_violation_rate": 0.27885,
       "rules_violated": 324,
+      "rows": 3520,
+      "rows_with_any_violation": 3394,
+      "share_rows_with_any_violation": 0.9642,
       "frame": "synthetic[gaussian_copula_seed1]",
       "run_id": "gaussian_copula_seed1",
       "worst_rules": [
@@ -1327,6 +1393,9 @@
       "violations": 23629,
       "overall_violation_rate": 0.28219,
       "rules_violated": 317,
+      "rows": 3520,
+      "rows_with_any_violation": 3391,
+      "share_rows_with_any_violation": 0.96335,
       "frame": "synthetic[gaussian_copula_seed2]",
       "run_id": "gaussian_copula_seed2",
       "worst_rules": [
@@ -1393,6 +1462,9 @@
       "violations": 27948,
       "overall_violation_rate": 0.27912,
       "rules_violated": 229,
+      "rows": 3520,
+      "rows_with_any_violation": 2961,
+      "share_rows_with_any_violation": 0.84119,
       "frame": "synthetic[mst_eps0p5_seed0]",
       "run_id": "mst_eps0p5_seed0",
       "worst_rules": [
@@ -1459,6 +1531,9 @@
       "violations": 6108,
       "overall_violation_rate": 0.04953,
       "rules_violated": 296,
+      "rows": 3520,
+      "rows_with_any_violation": 905,
+      "share_rows_with_any_violation": 0.2571,
       "frame": "synthetic[mst_eps10_seed0]",
       "run_id": "mst_eps10_seed0",
       "worst_rules": [
@@ -1525,6 +1600,9 @@
       "violations": 6681,
       "overall_violation_rate": 0.05284,
       "rules_violated": 315,
+      "rows": 3520,
+      "rows_with_any_violation": 749,
+      "share_rows_with_any_violation": 0.21278,
       "frame": "synthetic[mst_eps15_seed0]",
       "run_id": "mst_eps15_seed0",
       "worst_rules": [
@@ -1591,6 +1669,9 @@
       "violations": 6996,
       "overall_violation_rate": 0.05693,
       "rules_violated": 323,
+      "rows": 3520,
+      "rows_with_any_violation": 771,
+      "share_rows_with_any_violation": 0.21903,
       "frame": "synthetic[mst_eps15_seed1]",
       "run_id": "mst_eps15_seed1",
       "worst_rules": [
@@ -1657,6 +1738,9 @@
       "violations": 5363,
       "overall_violation_rate": 0.04403,
       "rules_violated": 301,
+      "rows": 3520,
+      "rows_with_any_violation": 887,
+      "share_rows_with_any_violation": 0.25199,
       "frame": "synthetic[mst_eps15_seed2]",
       "run_id": "mst_eps15_seed2",
       "worst_rules": [
@@ -1723,6 +1807,9 @@
       "violations": 29290,
       "overall_violation_rate": 0.24361,
       "rules_violated": 278,
+      "rows": 3520,
+      "rows_with_any_violation": 2361,
+      "share_rows_with_any_violation": 0.67074,
       "frame": "synthetic[mst_eps1_seed0]",
       "run_id": "mst_eps1_seed0",
       "worst_rules": [
@@ -1789,6 +1876,9 @@
       "violations": 4838,
       "overall_violation_rate": 0.03978,
       "rules_violated": 309,
+      "rows": 3520,
+      "rows_with_any_violation": 768,
+      "share_rows_with_any_violation": 0.21818,
       "frame": "synthetic[mst_eps20_seed0]",
       "run_id": "mst_eps20_seed0",
       "worst_rules": [
@@ -1855,6 +1945,9 @@
       "violations": 9319,
       "overall_violation_rate": 0.07516,
       "rules_violated": 304,
+      "rows": 3520,
+      "rows_with_any_violation": 1229,
+      "share_rows_with_any_violation": 0.34915,
       "frame": "synthetic[mst_eps5_seed0]",
       "run_id": "mst_eps5_seed0",
       "worst_rules": [
@@ -1921,6 +2014,9 @@
       "violations": 7405,
       "overall_violation_rate": 0.06099,
       "rules_violated": 310,
+      "rows": 3520,
+      "rows_with_any_violation": 960,
+      "share_rows_with_any_violation": 0.27273,
       "frame": "synthetic[mst_eps8_seed0]",
       "run_id": "mst_eps8_seed0",
       "worst_rules": [
@@ -1987,6 +2083,9 @@
       "violations": 2863,
       "overall_violation_rate": 0.04335,
       "rules_violated": 180,
+      "rows": 3520,
+      "rows_with_any_violation": 1682,
+      "share_rows_with_any_violation": 0.47784,
       "frame": "synthetic[patectgan_eps15_seed0]",
       "run_id": "patectgan_eps15_seed0",
       "worst_rules": [
@@ -2053,6 +2152,9 @@
       "violations": 49162,
       "overall_violation_rate": 0.4458,
       "rules_violated": 362,
+      "rows": 3520,
+      "rows_with_any_violation": 3519,
+      "share_rows_with_any_violation": 0.99972,
       "frame": "synthetic[patectgan_eps1_seed0]",
       "run_id": "patectgan_eps1_seed0",
       "worst_rules": [
@@ -2119,6 +2221,9 @@
       "violations": 6534,
       "overall_violation_rate": 0.0584,
       "rules_violated": 188,
+      "rows": 3520,
+      "rows_with_any_violation": 2738,
+      "share_rows_with_any_violation": 0.77784,
       "frame": "synthetic[patectgan_eps5_seed0]",
       "run_id": "patectgan_eps5_seed0",
       "worst_rules": [
@@ -2185,6 +2290,9 @@
       "violations": 2341,
       "overall_violation_rate": 0.02261,
       "rules_violated": 191,
+      "rows": 3520,
+      "rows_with_any_violation": 953,
+      "share_rows_with_any_violation": 0.27074,
       "frame": "synthetic[tvae_cap256_seed0]",
       "run_id": "tvae_cap256_seed0",
       "worst_rules": [
@@ -2251,6 +2359,9 @@
       "violations": 2351,
       "overall_violation_rate": 0.0235,
       "rules_violated": 219,
+      "rows": 3520,
+      "rows_with_any_violation": 885,
+      "share_rows_with_any_violation": 0.25142,
       "frame": "synthetic[tvae_ep1000_seed0]",
       "run_id": "tvae_ep1000_seed0",
       "worst_rules": [
@@ -2317,6 +2428,9 @@
       "violations": 1888,
       "overall_violation_rate": 0.01855,
       "rules_violated": 175,
+      "rows": 3520,
+      "rows_with_any_violation": 749,
+      "share_rows_with_any_violation": 0.21278,
       "frame": "synthetic[tvae_ind_seed0]",
       "run_id": "tvae_ind_seed0",
       "worst_rules": [
@@ -2383,6 +2497,9 @@
       "violations": 2195,
       "overall_violation_rate": 0.02208,
       "rules_violated": 191,
+      "rows": 3520,
+      "rows_with_any_violation": 995,
+      "share_rows_with_any_violation": 0.28267,
       "frame": "synthetic[tvae_qt_seed0]",
       "run_id": "tvae_qt_seed0",
       "worst_rules": [
@@ -2449,6 +2566,9 @@
       "violations": 2015,
       "overall_violation_rate": 0.01933,
       "rules_violated": 164,
+      "rows": 3520,
+      "rows_with_any_violation": 900,
+      "share_rows_with_any_violation": 0.25568,
       "frame": "synthetic[tvae_qt_seed1]",
       "run_id": "tvae_qt_seed1",
       "worst_rules": [
@@ -2515,6 +2635,9 @@
       "violations": 2630,
       "overall_violation_rate": 0.02562,
       "rules_violated": 174,
+      "rows": 3520,
+      "rows_with_any_violation": 1094,
+      "share_rows_with_any_violation": 0.3108,
       "frame": "synthetic[tvae_qt_seed2]",
       "run_id": "tvae_qt_seed2",
       "worst_rules": [
@@ -2581,6 +2704,9 @@
       "violations": 2310,
       "overall_violation_rate": 0.02252,
       "rules_violated": 200,
+      "rows": 3520,
+      "rows_with_any_violation": 925,
+      "share_rows_with_any_violation": 0.26278,
       "frame": "synthetic[tvae_seed0]",
       "run_id": "tvae_seed0",
       "worst_rules": [
@@ -2647,6 +2773,9 @@
       "violations": 2332,
       "overall_violation_rate": 0.0234,
       "rules_violated": 180,
+      "rows": 3520,
+      "rows_with_any_violation": 868,
+      "share_rows_with_any_violation": 0.24659,
       "frame": "synthetic[tvae_seed1]",
       "run_id": "tvae_seed1",
       "worst_rules": [
@@ -2713,6 +2842,9 @@
       "violations": 1966,
       "overall_violation_rate": 0.01984,
       "rules_violated": 153,
+      "rows": 3520,
+      "rows_with_any_violation": 872,
+      "share_rows_with_any_violation": 0.24773,
       "frame": "synthetic[tvae_seed2]",
       "run_id": "tvae_seed2",
       "worst_rules": [

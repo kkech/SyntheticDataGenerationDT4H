@@ -2,52 +2,54 @@
 
 363 rules ({'implication': 351, 'category_range': 4, 'days_bounds': 1, 'flag_days_consistency': 7}) mined/learned from the TRAIN split and validated on real data. The holdout row is the fair baseline: real, unseen patients violating the same rules. A synthetic dataset far above it produces rows that are individually implausible patients even when every column's distribution is correct.
 
-| frame | applicable checks | violations | violation rate | rules violated |
-|---|---|---|---|---|
-| train (real) | 117993 | 17 | 0.00014 | 14/363 |
-| holdout (real, unseen) | 37897 | 88 | 0.00232 | 70/363 |
-| synthetic[aim40_eps1_seed0] | 7336 | 272 | 0.03708 | 4/363 |
-| synthetic[aim50_eps1_seed0] | 7667 | 405 | 0.05282 | 4/363 |
-| synthetic[ctgan_qt_seed0] | 106820 | 41514 | 0.38864 | 350/363 |
-| synthetic[ctgan_seed0] | 130103 | 39728 | 0.30536 | 347/363 |
-| synthetic[ctgan_seed1] | 114041 | 40007 | 0.35081 | 336/363 |
-| synthetic[ctgan_seed2] | 114694 | 34297 | 0.29903 | 341/363 |
-| synthetic[ddpm_g_seed0] | 277702 | 66028 | 0.23777 | 362/363 |
-| synthetic[ddpm_seed0] | 357843 | 140063 | 0.39141 | 362/363 |
-| synthetic[ddpm_seed1] | 377931 | 155309 | 0.41095 | 362/363 |
-| synthetic[ddpm_seed2] | 361630 | 158083 | 0.43714 | 362/363 |
-| synthetic[dpctgan_eps10_seed0] | 54038 | 39532 | 0.73156 | 108/363 |
-| synthetic[dpctgan_eps15_seed0] | 27141 | 8153 | 0.30039 | 73/363 |
-| synthetic[dpctgan_eps15_seed1] | 59869 | 45599 | 0.76165 | 103/363 |
-| synthetic[dpctgan_eps15_seed2] | 93852 | 8604 | 0.09168 | 77/363 |
-| synthetic[dpctgan_eps1_seed0] | 98484 | 61242 | 0.62185 | 138/363 |
-| synthetic[dpctgan_eps20_seed0] | 86149 | 41572 | 0.48256 | 82/363 |
-| synthetic[dpctgan_eps5_seed0] | 47254 | 22359 | 0.47317 | 86/363 |
-| synthetic[dpctgan_eps8_seed0] | 64997 | 31859 | 0.49016 | 74/363 |
-| synthetic[gaussian_copula_seed0] | 84735 | 23597 | 0.27848 | 330/363 |
-| synthetic[gaussian_copula_seed1] | 85871 | 23945 | 0.27885 | 324/363 |
-| synthetic[gaussian_copula_seed2] | 83734 | 23629 | 0.28219 | 317/363 |
-| synthetic[mst_eps0p5_seed0] | 100128 | 27948 | 0.27912 | 229/363 |
-| synthetic[mst_eps10_seed0] | 123328 | 6108 | 0.04953 | 296/363 |
-| synthetic[mst_eps15_seed0] | 126437 | 6681 | 0.05284 | 315/363 |
-| synthetic[mst_eps15_seed1] | 122880 | 6996 | 0.05693 | 323/363 |
-| synthetic[mst_eps15_seed2] | 121802 | 5363 | 0.04403 | 301/363 |
-| synthetic[mst_eps1_seed0] | 120235 | 29290 | 0.24361 | 278/363 |
-| synthetic[mst_eps20_seed0] | 121607 | 4838 | 0.03978 | 309/363 |
-| synthetic[mst_eps5_seed0] | 123983 | 9319 | 0.07516 | 304/363 |
-| synthetic[mst_eps8_seed0] | 121420 | 7405 | 0.06099 | 310/363 |
-| synthetic[patectgan_eps15_seed0] | 66042 | 2863 | 0.04335 | 180/363 |
-| synthetic[patectgan_eps1_seed0] | 110278 | 49162 | 0.4458 | 362/363 |
-| synthetic[patectgan_eps5_seed0] | 111879 | 6534 | 0.0584 | 188/363 |
-| synthetic[tvae_cap256_seed0] | 103546 | 2341 | 0.02261 | 191/363 |
-| synthetic[tvae_ep1000_seed0] | 100037 | 2351 | 0.0235 | 219/363 |
-| synthetic[tvae_ind_seed0] | 101760 | 1888 | 0.01855 | 175/363 |
-| synthetic[tvae_qt_seed0] | 99411 | 2195 | 0.02208 | 191/363 |
-| synthetic[tvae_qt_seed1] | 104217 | 2015 | 0.01933 | 164/363 |
-| synthetic[tvae_qt_seed2] | 102664 | 2630 | 0.02562 | 174/363 |
-| synthetic[tvae_seed0] | 102586 | 2310 | 0.02252 | 200/363 |
-| synthetic[tvae_seed1] | 99657 | 2332 | 0.0234 | 180/363 |
-| synthetic[tvae_seed2] | 99090 | 1966 | 0.01984 | 153/363 |
+Two measures, answering different questions: the violation RATE is per applicable rule-check, while the row SHARE is the fraction of patients carrying at least one violation -- the one a release decision turns on, read against the real holdout's own share.
+
+| frame | applicable checks | violations | violation rate | rules violated | rows with >=1 violation |
+|---|---|---|---|---|---|
+| train (real) | 117993 | 17 | 0.00014 | 14/363 | 0.3% (9/3520) |
+| holdout (real, unseen) | 37897 | 88 | 0.00232 | 70/363 | 2.0% (23/1174) |
+| synthetic[aim40_eps1_seed0] | 7336 | 272 | 0.03708 | 4/363 | 6.5% (228/3520) |
+| synthetic[aim50_eps1_seed0] | 7667 | 405 | 0.05282 | 4/363 | 11.0% (388/3520) |
+| synthetic[ctgan_qt_seed0] | 106820 | 41514 | 0.38864 | 350/363 | 97.3% (3425/3520) |
+| synthetic[ctgan_seed0] | 130103 | 39728 | 0.30536 | 347/363 | 99.7% (3509/3520) |
+| synthetic[ctgan_seed1] | 114041 | 40007 | 0.35081 | 336/363 | 99.6% (3507/3520) |
+| synthetic[ctgan_seed2] | 114694 | 34297 | 0.29903 | 341/363 | 97.2% (3422/3520) |
+| synthetic[ddpm_g_seed0] | 277702 | 66028 | 0.23777 | 362/363 | 99.9% (3516/3520) |
+| synthetic[ddpm_seed0] | 357843 | 140063 | 0.39141 | 362/363 | 100.0% (3520/3520) |
+| synthetic[ddpm_seed1] | 377931 | 155309 | 0.41095 | 362/363 | 100.0% (3520/3520) |
+| synthetic[ddpm_seed2] | 361630 | 158083 | 0.43714 | 362/363 | 100.0% (3519/3520) |
+| synthetic[dpctgan_eps10_seed0] | 54038 | 39532 | 0.73156 | 108/363 | 100.0% (3520/3520) |
+| synthetic[dpctgan_eps15_seed0] | 27141 | 8153 | 0.30039 | 73/363 | 100.0% (3519/3520) |
+| synthetic[dpctgan_eps15_seed1] | 59869 | 45599 | 0.76165 | 103/363 | 100.0% (3520/3520) |
+| synthetic[dpctgan_eps15_seed2] | 93852 | 8604 | 0.09168 | 77/363 | 96.5% (3397/3520) |
+| synthetic[dpctgan_eps1_seed0] | 98484 | 61242 | 0.62185 | 138/363 | 100.0% (3520/3520) |
+| synthetic[dpctgan_eps20_seed0] | 86149 | 41572 | 0.48256 | 82/363 | 100.0% (3520/3520) |
+| synthetic[dpctgan_eps5_seed0] | 47254 | 22359 | 0.47317 | 86/363 | 100.0% (3520/3520) |
+| synthetic[dpctgan_eps8_seed0] | 64997 | 31859 | 0.49016 | 74/363 | 100.0% (3520/3520) |
+| synthetic[gaussian_copula_seed0] | 84735 | 23597 | 0.27848 | 330/363 | 96.3% (3390/3520) |
+| synthetic[gaussian_copula_seed1] | 85871 | 23945 | 0.27885 | 324/363 | 96.4% (3394/3520) |
+| synthetic[gaussian_copula_seed2] | 83734 | 23629 | 0.28219 | 317/363 | 96.3% (3391/3520) |
+| synthetic[mst_eps0p5_seed0] | 100128 | 27948 | 0.27912 | 229/363 | 84.1% (2961/3520) |
+| synthetic[mst_eps10_seed0] | 123328 | 6108 | 0.04953 | 296/363 | 25.7% (905/3520) |
+| synthetic[mst_eps15_seed0] | 126437 | 6681 | 0.05284 | 315/363 | 21.3% (749/3520) |
+| synthetic[mst_eps15_seed1] | 122880 | 6996 | 0.05693 | 323/363 | 21.9% (771/3520) |
+| synthetic[mst_eps15_seed2] | 121802 | 5363 | 0.04403 | 301/363 | 25.2% (887/3520) |
+| synthetic[mst_eps1_seed0] | 120235 | 29290 | 0.24361 | 278/363 | 67.1% (2361/3520) |
+| synthetic[mst_eps20_seed0] | 121607 | 4838 | 0.03978 | 309/363 | 21.8% (768/3520) |
+| synthetic[mst_eps5_seed0] | 123983 | 9319 | 0.07516 | 304/363 | 34.9% (1229/3520) |
+| synthetic[mst_eps8_seed0] | 121420 | 7405 | 0.06099 | 310/363 | 27.3% (960/3520) |
+| synthetic[patectgan_eps15_seed0] | 66042 | 2863 | 0.04335 | 180/363 | 47.8% (1682/3520) |
+| synthetic[patectgan_eps1_seed0] | 110278 | 49162 | 0.4458 | 362/363 | 100.0% (3519/3520) |
+| synthetic[patectgan_eps5_seed0] | 111879 | 6534 | 0.0584 | 188/363 | 77.8% (2738/3520) |
+| synthetic[tvae_cap256_seed0] | 103546 | 2341 | 0.02261 | 191/363 | 27.1% (953/3520) |
+| synthetic[tvae_ep1000_seed0] | 100037 | 2351 | 0.0235 | 219/363 | 25.1% (885/3520) |
+| synthetic[tvae_ind_seed0] | 101760 | 1888 | 0.01855 | 175/363 | 21.3% (749/3520) |
+| synthetic[tvae_qt_seed0] | 99411 | 2195 | 0.02208 | 191/363 | 28.3% (995/3520) |
+| synthetic[tvae_qt_seed1] | 104217 | 2015 | 0.01933 | 164/363 | 25.6% (900/3520) |
+| synthetic[tvae_qt_seed2] | 102664 | 2630 | 0.02562 | 174/363 | 31.1% (1094/3520) |
+| synthetic[tvae_seed0] | 102586 | 2310 | 0.02252 | 200/363 | 26.3% (925/3520) |
+| synthetic[tvae_seed1] | 99657 | 2332 | 0.0234 | 180/363 | 24.7% (868/3520) |
+| synthetic[tvae_seed2] | 99090 | 1966 | 0.01984 | 153/363 | 24.8% (872/3520) |
 
 ## Worst rules per synthetic dataset
 
