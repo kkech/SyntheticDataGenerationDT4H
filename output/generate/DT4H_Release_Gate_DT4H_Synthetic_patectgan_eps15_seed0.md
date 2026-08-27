@@ -1,6 +1,6 @@
 # Release Gate: DT4H_Synthetic_patectgan_eps15_seed0
 
-Evaluated 2026-08-27T12:17:51.561470+00:00
+Evaluated 2026-08-27T12:26:06.582117+00:00
 
 **FAIL -- DO NOT RELEASE**
 
@@ -13,7 +13,7 @@ Policy: `release` -- coherence 10x the holdout baseline (or +1% absolute), dista
 | freshness | PASS | 0 cell(s) an up-to-date decode would change |
 | leakage | PASS | 0 verbatim training row(s) (compared in released/decoded space) |
 | coherence | FAIL | violation rate 0.04253 vs holdout baseline 0.00024 (threshold 0.01024 = max(10x baseline, baseline+0.01)) |
-| distance | PASS | 11/500 sampled record(s) (2.2%) closer than the holdout p5 threshold (0.062785, over 249 column(s)); policy limit 10% = 2x the natural 5% share |
+| distance | PASS | 46/3520 record(s) (1.3%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.062785, over 249 column(s)); policy limit 10% = 2x the natural 5% share |
 
 Distance check computed over **249** column(s); p5 threshold 0.062785 from: committed full-width holdout p5 (privacy step).
 
