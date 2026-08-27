@@ -126,6 +126,9 @@ case "${1:-}" in
     echo "  status               is it running + per-step status + log tail"
     echo "  follow               stream the timestamped log live"
     echo "  stop                 stop the job without losing completed steps"
+    echo ""
+    echo "For the v3 corrected-methods rerun campaign, use ./run_v3.sh (no args ="
+    echo "cheap validation; long stages stay locked until it passes)."
     exit 1
     ;;
 esac

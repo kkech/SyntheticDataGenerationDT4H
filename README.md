@@ -37,6 +37,29 @@ sits next to fresh results:
 | 12 | `figures` | publication-quality figures (ε-curves, TSTR gaps, KS profiles vs floor, DCR histograms, KM overlays, coherence, C2ST, MIA) as PNG+PDF, regenerated from the committed step results | `output/figures/` |
 | 13 | `release_docs` | **codebook** (per-column semantics incl. what a null means), **Datasheet for the Dataset**, **per-file capability labels** (one JSON per released file aggregating fidelity/coherence/distance/attack/gate evidence), and the exact `pip freeze` of the producing environment | `output/release_docs/` |
 
+### The v3 corrected-methods rerun (validate first, long runs last)
+
+The rerun after the methodology fixes is packaged as staged commands in
+`run_v3.sh`. Running it with **no arguments does only the cheap part** --
+pre-run checks, artifact scrubbing, and a ~5-minute DP wiring pilot with
+automatic verification -- and every long stage refuses to start until that
+validation has passed:
+
+```
+./run_v3.sh                # RUN THIS FIRST: validate (~10 min, nothing long)
+./run_v3.sh analysis       # analysis steps over existing outputs + re-gate (detached)
+./run_v3.sh dp-cpu         # MST re-fit lane }  run these two in parallel
+./run_v3.sh dp-gpu         # DP-GAN lane    }  (each detached, ~1 day total)
+./run_v3.sh finalize       # analysis + re-gate over the re-fit outputs
+./run_v3.sh all            # or the whole remaining sequence in one detached job
+./run_v3.sh status | follow <stage> | stop <stage>
+```
+
+DP stages additionally require a human-reviewed `public_domains.json`
+(`reviewed: true`); results are snapshotted via `backup_results.py` before
+the first destructive stage. `FULL=1` widens the DP sweeps to every epsilon
+point; `DRY=1` prints a lane's run list without executing.
+
 ### Long runs (survives SSH disconnect)
 
 A full run takes hours; run it as a detached job so closing the terminal

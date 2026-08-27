@@ -174,26 +174,38 @@ def main() -> int:
     record = step._run_one(spec, train, real, constants, config, out_dir, n_rows,
                            column_subsets)
 
-    runs = summary.setdefault("runs", [])
-    previous = None
-    for i, r in enumerate(runs):
-        if r.get("run_id") == args.run_id:
-            previous = r.get("status")
-            runs[i] = record
-            break
-    else:
-        runs.append(record)
-    summary["run_plan_size"] = len(runs)
-    summary.setdefault("single_run_updates", []).append({
-        "run_id": args.run_id,
-        "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "git_commit": prov["git"]["commit"],
-        "timeout_seconds": spec.get("timeout_seconds"),
-        "rows": n_rows,
-        "status": record["status"],
-        "previous_status": previous,
-    })
-    step._write_summary(summary, out_dir)
+    # Parallel lanes (run_v3.sh dp-cpu / dp-gpu) run several run_one
+    # processes at once; the summary loaded before the hours-long fit is
+    # stale by now, and writing it back would silently drop any row a
+    # concurrent retry merged in the meantime. Re-read and write under an
+    # exclusive lock so merges serialize.
+    import fcntl
+
+    lock_path = os.path.join(out_dir, SUMMARY_NAME + ".lock")
+    with open(lock_path, "w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        summary = _load_summary(out_dir)
+        runs = summary.setdefault("runs", [])
+        previous = None
+        for i, r in enumerate(runs):
+            if r.get("run_id") == args.run_id:
+                previous = r.get("status")
+                runs[i] = record
+                break
+        else:
+            runs.append(record)
+        summary["run_plan_size"] = len(runs)
+        summary.setdefault("single_run_updates", []).append({
+            "run_id": args.run_id,
+            "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "git_commit": prov["git"]["commit"],
+            "timeout_seconds": spec.get("timeout_seconds"),
+            "rows": n_rows,
+            "status": record["status"],
+            "previous_status": previous,
+        })
+        step._write_summary(summary, out_dir)
+        fcntl.flock(lock, fcntl.LOCK_UN)
     print(f"Merged into {os.path.join(out_dir, SUMMARY_NAME)} "
           + (f"(replaced the previous '{previous}' row)." if previous
              else "(appended: this run was not in the summary)."))
