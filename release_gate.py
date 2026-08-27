@@ -96,6 +96,24 @@ DCR_SAMPLE = 500
 DISTANCE_NATURAL_SHARE = 0.05
 
 
+
+def _require_csv(path: str) -> None:
+    """Fail with a plain message when the file is not a text CSV -- the
+    classic slip is handing the model .pkl to --file (pickle starts with
+    byte 0x80) or a parquet (starts with PAR1), which pandas otherwise
+    reports as an opaque UnicodeDecodeError from the C parser."""
+    import os as _os
+    with open(path, "rb") as fh:
+        head = fh.read(4)
+    if head[:1] == b"\x80":
+        raise SystemExit(f"❌ {path} is a PICKLE, not a CSV. --file takes the synthetic "
+                         f"CSV; the fitted model .pkl goes to --model.")
+    if head == b"PAR1":
+        raise SystemExit(f"❌ {path} is a PARQUET file, not a CSV. --file takes the "
+                         f"synthetic DT4H_Synthetic_*.csv.")
+    if _os.path.basename(path).endswith(".pkl"):
+        raise SystemExit(f"❌ {path} looks like a model pickle. --file takes the synthetic CSV.")
+
 def _coherence_threshold(policy: dict, baseline: float) -> float:
     return max(policy["coherence_multiplier"] * baseline,
                baseline + policy["coherence_absolute"])
@@ -185,6 +203,7 @@ def main() -> int:
         print(f"Note: {args.note}")
     config = PipelineConfig()
 
+    _require_csv(args.file)
     candidate = pd.read_csv(args.file, low_memory=False)
     train = pl.read_parquet(config.train_output_path).to_pandas()
     holdout = pl.read_parquet(config.holdout_output_path).to_pandas()

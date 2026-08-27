@@ -52,6 +52,24 @@ from pipeline.steps.privacy.distance import build_encoder, nearest_two_distances
 MAX_ROUNDS_DEFAULT = 10
 
 
+
+def _require_csv(path: str) -> None:
+    """Fail with a plain message when the file is not a text CSV -- the
+    classic slip is handing the model .pkl to --file (pickle starts with
+    byte 0x80) or a parquet (starts with PAR1), which pandas otherwise
+    reports as an opaque UnicodeDecodeError from the C parser."""
+    import os as _os
+    with open(path, "rb") as fh:
+        head = fh.read(4)
+    if head[:1] == b"\x80":
+        raise SystemExit(f"❌ {path} is a PICKLE, not a CSV. --file takes the synthetic "
+                         f"CSV; the fitted model .pkl goes to --model.")
+    if head == b"PAR1":
+        raise SystemExit(f"❌ {path} is a PARQUET file, not a CSV. --file takes the "
+                         f"synthetic DT4H_Synthetic_*.csv.")
+    if _os.path.basename(path).endswith(".pkl"):
+        raise SystemExit(f"❌ {path} looks like a model pickle. --file takes the synthetic CSV.")
+
 def _distances_to_train(frame, train, encode, columns):
     """Nearest-training-record distance for every row of `frame`,
     computed over `columns` -- the intersection of the candidate's and
@@ -148,6 +166,7 @@ def main() -> int:
         with open(summary_path) as f:
             constants = json.load(f).get("constant_columns_held_out", {})
 
+    _require_csv(args.file)
     candidate = pd.read_csv(args.file, low_memory=False, float_precision="round_trip")
     candidate, _ = align_categorical_case(candidate, train_decoded)
     target_rows = len(candidate)
