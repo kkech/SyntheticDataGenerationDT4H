@@ -75,7 +75,10 @@ NOTE = (
     "and fails at fit time (before hours of training) if any training value falls "
     "outside the declared domain. This file is released with the data: it is part "
     "of the mechanism specification a reader needs to check the (epsilon, delta) "
-    "claim."
+    "claim. BEFORE RELEASING the file, delete the observed_min/observed_max keys "
+    "from every entry: they are exact values of real patients, kept here only so "
+    "the reviewer can see that a proposal covers the cohort. Only lo/hi (and "
+    "sentinel_encoded) are part of the public declaration."
 )
 
 

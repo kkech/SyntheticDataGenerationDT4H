@@ -1,0 +1,445 @@
+{
+  "reviewed": false,
+  "note": "TEMPLATE -- NOT YET A PRIVACY GUARANTEE. Each entry is the a-priori PUBLIC domain [lo, hi] declared for a numeric column: the range a value could take for any patient who might have been in the cohort, decided from clinical / measurement knowledge, NOT from this dataset. DP runs bound each column to this domain, so a range fitted to the observed data leaks the data. REVIEW WORKFLOW: (1) read every range and replace anything you would not defend without looking at the cohort -- the proposals here were seeded from already-published observed ranges, rounded outward to one significant figure, purely to save typing; (2) widen anything clinically implausible (a domain wider than the cohort costs utility, a domain narrower than the cohort is both a privacy leak and a fit-time error); (3) set \"reviewed\": true. The generate step refuses to fit any DP synthesizer while reviewed is false, and fails at fit time (before hours of training) if any training value falls outside the declared domain. This file is released with the data: it is part of the mechanism specification a reader needs to check the (epsilon, delta) claim. BEFORE RELEASING the file, delete the observed_min/observed_max keys from every entry: they are exact values of real patients, kept here only so the reviewer can see that a proposal covers the cohort. Only lo/hi (and sentinel_encoded) are part of the public declaration.",
+  "generated_by": "make_public_domains.py",
+  "proposal_rule": "observed range rounded outward to 1 significant figure (a small positive floor is proposed as 0)",
+  "sources": {
+    "profile": {
+      "path": "/home/user/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Column_Analysis.json",
+      "sha256": "d9a9cbd6bfdf577538b0a4ebd027aa4cf2d2744dae14285741db366c788a44af"
+    },
+    "encoding_map": {
+      "path": "/home/user/SyntheticDataGenerationDT4H/output/preprocess/DT4H_Numeric_Missing_Encoding.json",
+      "sha256": "f4037abf6b5fefcc17f44aca6825b0259f04cfa4d2ba02d655eb91f79cc323b3"
+    }
+  },
+  "domains": {
+    "patient_demographics_age": {
+      "lo": 10.0,
+      "hi": 200.0,
+      "observed_min": 18.0,
+      "observed_max": 104.0,
+      "sentinel_encoded": false
+    },
+    "encounters_lengthOfStay": {
+      "lo": 0.0,
+      "hi": 300.0,
+      "observed_min": 1.0,
+      "observed_max": 257.0,
+      "sentinel_encoded": false
+    },
+    "encounters_numOfPreviousHFStays_count": {
+      "lo": 0.0,
+      "hi": 800.0,
+      "observed_min": 0.0,
+      "observed_max": 757.0,
+      "sentinel_encoded": false
+    },
+    "vital_signs_weight_value_p6mo_last": {
+      "lo": 30.0,
+      "hi": 300.0,
+      "observed_min": 32.0,
+      "observed_max": 208.6,
+      "sentinel_encoded": true
+    },
+    "vital_signs_weight_value_p6mo_first": {
+      "lo": 30.0,
+      "hi": 300.0,
+      "observed_min": 33.9,
+      "observed_max": 241.0,
+      "sentinel_encoded": true
+    },
+    "vital_signs_height_value_p1a_avg": {
+      "lo": 90.0,
+      "hi": 300.0,
+      "observed_min": 96.94999999999999,
+      "observed_max": 207.0,
+      "sentinel_encoded": true
+    },
+    "vital_signs_weight_value_last": {
+      "lo": 30.0,
+      "hi": 300.0,
+      "observed_min": 32.0,
+      "observed_max": 208.6,
+      "sentinel_encoded": true
+    },
+    "vital_signs_height_value_last": {
+      "lo": 100.0,
+      "hi": 300.0,
+      "observed_min": 110.0,
+      "observed_max": 207.0,
+      "sentinel_encoded": true
+    },
+    "vital_signs_bmi_value_last": {
+      "lo": 10.0,
+      "hi": 80.0,
+      "observed_min": 13.21178491214163,
+      "observed_max": 79.5847750865052,
+      "sentinel_encoded": true
+    },
+    "vital_signs_systolicBp_value_first": {
+      "lo": 40.0,
+      "hi": 300.0,
+      "observed_min": 46.0,
+      "observed_max": 257.0,
+      "sentinel_encoded": true
+    },
+    "vital_signs_systolicBp_value_last": {
+      "lo": 50.0,
+      "hi": 300.0,
+      "observed_min": 50.0,
+      "observed_max": 221.0,
+      "sentinel_encoded": true
+    },
+    "vital_signs_diastolicBp_value_first": {
+      "lo": 0.0,
+      "hi": 300.0,
+      "observed_min": 8.0,
+      "observed_max": 201.0,
+      "sentinel_encoded": true
+    },
+    "vital_signs_diastolicBp_value_last": {
+      "lo": 0.0,
+      "hi": 200.0,
+      "observed_min": 6.0,
+      "observed_max": 158.0,
+      "sentinel_encoded": true
+    },
+    "vital_signs_heartRate_value_first": {
+      "lo": 0.0,
+      "hi": 300.0,
+      "observed_min": 1.0,
+      "observed_max": 223.0,
+      "sentinel_encoded": true
+    },
+    "vital_signs_heartRate_value_last": {
+      "lo": 0.0,
+      "hi": 300.0,
+      "observed_min": 0.0,
+      "observed_max": 254.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_hemoglobin_value_last": {
+      "lo": 30.0,
+      "hi": 300.0,
+      "observed_min": 32.228,
+      "observed_max": 233.653,
+      "sentinel_encoded": true
+    },
+    "lab_results_hemoglobin_value_first": {
+      "lo": 0.0,
+      "hi": 300.0,
+      "observed_min": 0.16114,
+      "observed_max": 219.1504,
+      "sentinel_encoded": true
+    },
+    "lab_results_ferritin_value_last": {
+      "lo": 0.0,
+      "hi": 50000.0,
+      "observed_min": 4.0,
+      "observed_max": 42076.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_ferritin_value_first": {
+      "lo": 0.0,
+      "hi": 50000.0,
+      "observed_min": 4.0,
+      "observed_max": 42076.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_ntProBnp_value_last": {
+      "lo": 0.0,
+      "hi": 70000.0,
+      "observed_min": 33.0,
+      "observed_max": 70000.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_ntProBnp_value_first": {
+      "lo": 0.0,
+      "hi": 70000.0,
+      "observed_min": 34.5,
+      "observed_max": 70000.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_crpNonHs_value_last": {
+      "lo": 0.0,
+      "hi": 700.0,
+      "observed_min": 0.3,
+      "observed_max": 629.7,
+      "sentinel_encoded": true
+    },
+    "lab_results_crpNonHs_value_first": {
+      "lo": 0.0,
+      "hi": 600.0,
+      "observed_min": 0.3,
+      "observed_max": 578.1,
+      "sentinel_encoded": true
+    },
+    "lab_results_tropTHs_value_last": {
+      "lo": 0.0,
+      "hi": 70.0,
+      "observed_min": 0.004,
+      "observed_max": 65.65,
+      "sentinel_encoded": true
+    },
+    "lab_results_tropTHs_value_first": {
+      "lo": 0.0,
+      "hi": 20.0,
+      "observed_min": 0.004,
+      "observed_max": 17.389,
+      "sentinel_encoded": true
+    },
+    "lab_results_tropTnHs_value_last": {
+      "lo": 0.0,
+      "hi": 20000.0,
+      "observed_min": 3.0,
+      "observed_max": 15400.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_tropTnHs_value_first": {
+      "lo": 0.0,
+      "hi": 7000.0,
+      "observed_min": 3.0,
+      "observed_max": 6140.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_triGly_value_last": {
+      "lo": 0.0,
+      "hi": 20.0,
+      "observed_min": 0.2,
+      "observed_max": 11.35,
+      "sentinel_encoded": true
+    },
+    "lab_results_triGly_value_first": {
+      "lo": 0.0,
+      "hi": 20.0,
+      "observed_min": 0.2,
+      "observed_max": 16.5,
+      "sentinel_encoded": true
+    },
+    "lab_results_cholTot_value_last": {
+      "lo": 1.0,
+      "hi": 9.0,
+      "observed_min": 1.17,
+      "observed_max": 8.71,
+      "sentinel_encoded": true
+    },
+    "lab_results_cholTot_value_first": {
+      "lo": 1.0,
+      "hi": 9.0,
+      "observed_min": 1.17,
+      "observed_max": 8.71,
+      "sentinel_encoded": true
+    },
+    "lab_results_hdl_value_last": {
+      "lo": 0.2,
+      "hi": 4.0,
+      "observed_min": 0.22,
+      "observed_max": 3.76,
+      "sentinel_encoded": true
+    },
+    "lab_results_hdl_value_first": {
+      "lo": 0.0,
+      "hi": 4.0,
+      "observed_min": 0.16,
+      "observed_max": 3.85,
+      "sentinel_encoded": true
+    },
+    "lab_results_ldl_value_last": {
+      "lo": 0.0,
+      "hi": 7.0,
+      "observed_min": 0.04,
+      "observed_max": 6.4475,
+      "sentinel_encoded": true
+    },
+    "lab_results_ldl_value_first": {
+      "lo": 0.0,
+      "hi": 7.0,
+      "observed_min": 0.04,
+      "observed_max": 6.4475,
+      "sentinel_encoded": true
+    },
+    "lab_results_potassium_value_last": {
+      "lo": 1.0,
+      "hi": 8.0,
+      "observed_min": 1.85,
+      "observed_max": 7.5,
+      "sentinel_encoded": true
+    },
+    "lab_results_potassium_value_first": {
+      "lo": 1.0,
+      "hi": 9.0,
+      "observed_min": 1.85,
+      "observed_max": 8.8,
+      "sentinel_encoded": true
+    },
+    "lab_results_sodium_value_last": {
+      "lo": 100.0,
+      "hi": 200.0,
+      "observed_min": 109.0,
+      "observed_max": 160.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_sodium_value_first": {
+      "lo": 100.0,
+      "hi": 200.0,
+      "observed_min": 109.0,
+      "observed_max": 165.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_creatUS_value_last": {
+      "lo": 0.0,
+      "hi": 3000.0,
+      "observed_min": 44.56928,
+      "observed_max": 2706.9616,
+      "sentinel_encoded": true
+    },
+    "lab_results_creatUS_value_first": {
+      "lo": 0.0,
+      "hi": 3000.0,
+      "observed_min": 44.56928,
+      "observed_max": 2839.312,
+      "sentinel_encoded": true
+    },
+    "lab_results_albuminBS_value_last": {
+      "lo": 9.0,
+      "hi": 50.0,
+      "observed_min": 9.0,
+      "observed_max": 50.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_albuminBS_value_first": {
+      "lo": 10.0,
+      "hi": 50.0,
+      "observed_min": 10.0,
+      "observed_max": 50.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_validSerumCreatinine_value_last": {
+      "lo": 0.0,
+      "hi": 30.0,
+      "observed_min": 0.7917,
+      "observed_max": 22.57476,
+      "sentinel_encoded": true
+    },
+    "lab_results_validSerumCreatinine_value_first": {
+      "lo": 0.0,
+      "hi": 30.0,
+      "observed_min": 0.9048,
+      "observed_max": 22.57476,
+      "sentinel_encoded": true
+    },
+    "lab_results_valideGFR_value_first": {
+      "lo": 0.0,
+      "hi": 90.0,
+      "observed_min": 3.0,
+      "observed_max": 90.0,
+      "sentinel_encoded": true
+    },
+    "lab_results_valideGFR_value_last": {
+      "lo": 0.0,
+      "hi": 90.0,
+      "observed_min": 3.0,
+      "observed_max": 90.0,
+      "sentinel_encoded": true
+    },
+    "echocardiographs_lvef_pET_last": {
+      "lo": -200.0,
+      "hi": 100.0,
+      "observed_min": -179.0,
+      "observed_max": 96.0,
+      "sentinel_encoded": true
+    },
+    "echocardiographs_lvef_pET_first": {
+      "lo": -50.0,
+      "hi": 100.0,
+      "observed_min": -44.0,
+      "observed_max": 100.0,
+      "sentinel_encoded": true
+    },
+    "electrocardiographs_ecg_qrs_duration_pET_first": {
+      "lo": 20.0,
+      "hi": 300.0,
+      "observed_min": 20.0,
+      "observed_max": 252.0,
+      "sentinel_encoded": true
+    },
+    "electrocardiographs_ecg_qrs_duration_pET_last": {
+      "lo": 50.0,
+      "hi": 300.0,
+      "observed_min": 56.0,
+      "observed_max": 250.0,
+      "sentinel_encoded": true
+    },
+    "electrocardiographs_ecg_qt_duration_corrected_pET_first": {
+      "lo": 100.0,
+      "hi": 800.0,
+      "observed_min": 186.0,
+      "observed_max": 767.0,
+      "sentinel_encoded": true
+    },
+    "electrocardiographs_ecg_qt_duration_corrected_pET_last": {
+      "lo": 100.0,
+      "hi": 800.0,
+      "observed_min": 168.0,
+      "observed_max": 733.0,
+      "sentinel_encoded": true
+    },
+    "smoking_status_smoker_startTime_count": {
+      "lo": 0.0,
+      "hi": 20.0,
+      "observed_min": 0.0,
+      "observed_max": 19.0,
+      "sentinel_encoded": false
+    },
+    "nyha_nyha_pET": {
+      "lo": 0.0,
+      "hi": 4.0,
+      "observed_min": 0.0,
+      "observed_max": 4.0,
+      "sentinel_encoded": false
+    },
+    "conditions_heartFailure_timeFromEarliest_first": {
+      "lo": 0.0,
+      "hi": 200.0,
+      "observed_min": 0.0,
+      "observed_max": 123.0,
+      "sentinel_encoded": true
+    },
+    "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first": {
+      "lo": 0.0,
+      "hi": 2000.0,
+      "observed_min": 1.0,
+      "observed_max": 1805.0,
+      "sentinel_encoded": true
+    },
+    "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first": {
+      "lo": 0.0,
+      "hi": 2000.0,
+      "observed_min": 0.0,
+      "observed_max": 1805.0,
+      "sentinel_encoded": true
+    },
+    "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first": {
+      "lo": 0.0,
+      "hi": 2000.0,
+      "observed_min": 0.0,
+      "observed_max": 1694.0,
+      "sentinel_encoded": true
+    },
+    "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first": {
+      "lo": 0.0,
+      "hi": 2000.0,
+      "observed_min": 1.0,
+      "observed_max": 1826.0,
+      "sentinel_encoded": true
+    },
+    "eGFR_2021_ckd_epi_creatinine": {
+      "lo": 20.0,
+      "hi": 300.0,
+      "observed_min": 20.091671,
+      "observed_max": 231.686837,
+      "sentinel_encoded": true
+    }
+  }
+}

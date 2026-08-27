@@ -155,8 +155,9 @@ class _SmartNoiseBase(Synthesizer):
     transform_style = "cube"
 
     def fit(self, df, categorical_columns, continuous_columns) -> None:
-        from snsynth import Synthesizer as SNSynthesizer
-
+        # Validate the privacy inputs BEFORE importing the library or
+        # touching the data: a misconfigured DP run should fail on any
+        # machine, in milliseconds, with a message about the run plan.
         epsilon = self.params.get("epsilon")
         if epsilon is None:
             raise ValueError(
@@ -183,7 +184,12 @@ class _SmartNoiseBase(Synthesizer):
             create_kwargs["epochs"] = self.params.get("epochs", 300)
             create_kwargs["batch_size"] = self.params.get("batch_size", 50)
 
+        # The domain guard runs before the library import for the same
+        # reason: an unreviewed public_domains.json is a plan-level error.
         domains, domains_sha = load_public_domains(self.params.get("public_domains_path"))
+
+        from snsynth import Synthesizer as SNSynthesizer
+
         encoding = self._load_encoding(self.params.get("numeric_encoding_path"))
         self._public_domains_sha256 = domains_sha
         constraints = self._bound_constraints(df, continuous_columns, domains, encoding)

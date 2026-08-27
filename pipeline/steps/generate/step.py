@@ -64,6 +64,24 @@ class GenerateStep(PipelineStep):
         print(f"\nRun plan: {len(plan)} run(s) -- "
               + ", ".join(spec["run_id"] for spec in plan))
 
+        # PRE-FLIGHT: if the plan contains DP runs, the reviewed public
+        # domain declaration must exist NOW. Each DP run would raise on
+        # its own anyway, but discovering that 20 runs in -- after the
+        # non-DP models have trained for hours -- helps nobody, and a
+        # campaign that cannot produce a valid epsilon claim should not
+        # start at all.
+        dp_runs = [s["run_id"] for s in plan if self._is_dp(s["synthesizer"])]
+        if dp_runs:
+            from pipeline.steps.generate.synthesizers.smartnoise_models import (
+                load_public_domains,
+            )
+
+            domains, sha = load_public_domains(config.public_domains_path)
+            print(f"Public numeric domains: {len(domains)} reviewed column range(s) "
+                  f"from {config.public_domains_path} (sha256 {sha[:12]}...) -- these "
+                  f"bound all {len(dp_runs)} DP run(s); no bound is derived from the "
+                  f"training data.")
+
         # Width-limited runs: "top" = the standard AIM subset
         # (config.aim_max_columns); an integer k = the top-k subset by the
         # same auditable selection. Selections are computed once per
@@ -118,6 +136,15 @@ class GenerateStep(PipelineStep):
             )
 
     # --- helpers ---
+
+    @staticmethod
+    def _is_dp(synthesizer_name: str) -> bool:
+        """Whether a plan entry names a DP synthesizer, without building
+        it (the registry class attribute is the single source of truth)."""
+        from pipeline.steps.generate.synthesizers import REGISTRY
+
+        cls = REGISTRY.get(synthesizer_name)
+        return bool(cls and cls.is_dp)
 
     def _report_environment(self, prov: dict) -> None:
         env = prov["environment"]
@@ -261,9 +288,7 @@ class GenerateStep(PipelineStep):
         params.setdefault("epochs", config.epochs)
         params.setdefault("batch_size", config.batch_size)
 
-        from pipeline.steps.generate.synthesizers import REGISTRY
-
-        is_dp = REGISTRY[name].is_dp if name in REGISTRY else False
+        is_dp = self._is_dp(name)
         if spec.get("epsilon") is not None:
             params["epsilon"] = spec["epsilon"]
         elif is_dp:

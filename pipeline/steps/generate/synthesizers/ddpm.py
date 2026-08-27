@@ -259,8 +259,18 @@ class DDPMSynthesizer(Synthesizer):
                 loss = loss + (pa * pb).sum()
             return loss
 
-        x0_min = torch.from_numpy(self._x0_min).to(device)
-        x0_max = torch.from_numpy(self._x0_max).to(device)
+        if hasattr(self, "_x0_min"):
+            x0_min = torch.from_numpy(self._x0_min).to(device)
+            x0_max = torch.from_numpy(self._x0_max).to(device)
+        else:
+            # A generator pickled before the stabilizers existed. Sample
+            # it rather than crash, but say so: this is the diverging
+            # configuration, and its output is the one that decoded half
+            # its numerics to null.
+            print("⚠️  This fitted ddpm predates x0-clamping (no training support "
+                  "stored) -- sampling UNCLAMPED. Refit to get the stabilized model.")
+            x0_min = torch.full((self._dim,), float("-inf"), device=device)
+            x0_max = torch.full((self._dim,), float("inf"), device=device)
 
         x = torch.randn(n_rows, self._dim, generator=gen, device=device)
         with torch.no_grad():

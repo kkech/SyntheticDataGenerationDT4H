@@ -61,7 +61,11 @@ def _row_hashes(df: pd.DataFrame, columns: list[str]) -> pd.Series:
     Both frames go through the SAME numeric normalization, so equality of
     the hash means equality of the values, not of the dtypes.
     """
-    ordered = _normalize_numeric(df[columns]).astype(str)
+    # Missing values must hash as a VALUE, not blow up the join: pandas
+    # leaves NaN/NA as a float under astype(str), which the join rejects.
+    # Both frames get the same token, so a missing cell matches a missing
+    # cell and nothing else.
+    ordered = _normalize_numeric(df[columns]).astype(str).fillna("<NA>")
     joined = ordered.agg("\x1f".join, axis=1)  # unit separator: not valid in the data
     return joined.map(lambda s: hashlib.sha256(s.encode()).hexdigest())
 
