@@ -409,7 +409,8 @@ class AttacksStep(PipelineStep):
             num = pd.to_numeric(obj, errors="coerce").astype(float)
             vals = []
             for v, n in zip(obj.tolist(), num.tolist()):
-                if v is None:
+                # None or NaN (pandas may keep either in an object column)
+                if v is None or (isinstance(v, float) and v != v):
                     vals.append("Missing")
                 elif n == n:  # numeric-coercible (not NaN)
                     vals.append(str(int(n)) if float(n).is_integer() else str(float(n)))

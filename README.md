@@ -127,10 +127,30 @@ unguided seeds as its exact control), and `patectgan` at ε ∈ {1,5,15}.
 Variant runs record qualified model names so grouping never averages
 them into the base families.
 
-DP preprocessing spends **zero ε**: per-column domains are passed as
-public bounds (they are released in the committed sentinel encoding
-map), so the entire budget goes to synthesis at every ε — which is also
-what makes the ε=1 runs possible at all.
+**DP numeric bounds are declared, not measured.** Every DP run is
+bounded by `public_domains.json`: an a-priori, human-**reviewed** public
+domain `[lo, hi]` per numeric column. `make_public_domains.py` writes the
+template (observed ranges rounded outward to one significant figure,
+purely to save typing); a human edits every range for clinical
+plausibility and sets `"reviewed": true`, and DP fitting **refuses to
+start** until they have. This matters more than it sounds: bounds taken
+from the training data — what this pipeline did previously — make the
+released mechanism depend on private records through an unnoised
+channel, so the ε claim does not hold however small ε is. For
+sentinel-encoded columns the lower bound is
+`pub_lo − max(0.25·(pub_hi − pub_lo), 1)`, a *pure function of the public
+domain* mirroring the data-side sentinel formula; containment of the
+training values is asserted at fit time, so a too-narrow declared range
+fails in seconds instead of after hours. Bound discovery therefore
+spends **zero ε** legitimately — the whole budget goes to synthesis at
+every ε, which is what makes the ε=1 runs possible — and every run
+records its **(ε, δ)** together with the SHA-256 of the domain file that
+bounded it. Two residual leaks are disclosed rather than hidden:
+snsynth's `LabelTransformer` still learns **categorical vocabularies**
+from the training data at zero ε (standard practice, but a real
+disclosure), and **AIM's column selection** is computed on the train
+split without noise, so width-limited runs are DP *given* that column
+set.
 
 Every run records full provenance: its own seed, library versions, git
 commit, hardware, and the SHA-256 of the exact training file. Expect

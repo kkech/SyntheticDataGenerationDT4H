@@ -321,7 +321,7 @@ class ReleaseDocsStep(PipelineStep):
         if not evidence:
             return ("fully scripted (see `DT4H_Preprocessing_Summary.md`). NOT VERIFIED IN "
                     "THIS BUILD: no per-column KS/TVD-vs-raw distribution-preservation check "
-                    "is recorded, so no distribution-preserving guarantee is asserted here.")
+                    "is recorded, so no distribution-preserving guarantee is asserted here")
         ks = evidence.get("ks_max", evidence.get("ks"))
         tvd = evidence.get("tvd_max", evidence.get("tvd"))
         return (f"distribution-preserving on all retained columns "

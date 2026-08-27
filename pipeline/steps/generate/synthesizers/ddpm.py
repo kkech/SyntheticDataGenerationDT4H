@@ -16,7 +16,36 @@ Gaussian DDPM over a continuous embedding of the table:
 
 An MLP predicts the added noise given the noisy row and a Fourier time
 embedding; sampling is standard ancestral DDPM. Reported in the paper as
-an in-house diffusion baseline, not as the reference TabDDPM.
+an in-house diffusion baseline, not as the reference TabDDPM -- and it
+stays that: this is a small, dependency-free reimplementation, not a
+tuned competitor to the published models.
+
+STABILIZERS (added after the first evaluation run, where the reverse
+chain visibly diverged: numeric outputs piled up at the quantile
+extremes and roughly half of them decoded to null, i.e. below the
+sentinel floor):
+
+  * x0-CLAMPING. Each reverse step now reconstructs the implied clean
+    row x0_hat = (x_t - sqrt(1-ab_t) * eps_pred) / sqrt(ab_t), clamps it
+    per dimension to the training embedding's own min/max, and rebuilds
+    the posterior mean from the clamped value using the standard DDPM
+    posterior. The naive epsilon-parameterized update this replaced had
+    no mechanism to stop an over-confident noise prediction from walking
+    the state outside the data manifold, and the error compounds over
+    1000 steps. Clamping is the standard fix (it is what reference DDPM
+    implementations do by default) and it is honest here: the bound is a
+    property of the training embedding, which this non-DP model is
+    allowed to depend on.
+  * EMA WEIGHTS (decay 0.999). Sampling uses an exponential moving
+    average of the denoiser weights rather than the last SGD iterate,
+    which is standard practice for diffusion models and removes the
+    step-to-step noise in the final parameters.
+  * A LONGER BUDGET. See config.synthesizer_params['ddpm']: 500 epochs
+    (37 s) left the model plainly under-trained; the default is now 4000
+    (~5 min).
+
+Everything else -- the cosine schedule, the one-hot relaxation, the
+optional logic guidance -- is unchanged.
 """
 
 import numpy as np
@@ -63,6 +92,14 @@ class DDPMSynthesizer(Synthesizer):
 
         x0 = np.concatenate(parts, axis=1).astype(np.float32)
         self._dim = x0.shape[1]
+        # Per-dimension support of the training embedding, used to clamp
+        # the implied x0 at every reverse step (see the module docstring).
+        # Widened by a small margin so the clamp bounds the chain without
+        # snapping every sample onto an observed extreme.
+        span = x0.max(axis=0) - x0.min(axis=0)
+        margin = 0.05 * np.maximum(span, 1e-3)
+        self._x0_min = (x0.min(axis=0) - margin).astype(np.float32)
+        self._x0_max = (x0.max(axis=0) + margin).astype(np.float32)
 
         # LOGIC-GUIDED SAMPLING (optional): mine boolean implications
         # from the training frame with the SAME code the coherence audit
@@ -149,6 +186,22 @@ class DDPMSynthesizer(Synthesizer):
         batch = min(int(self.params.get("batch_size", 500)), n)
         epochs = int(self.params.get("epochs", 500))
 
+        # EMA of the weights: sampling from the last SGD iterate is
+        # needlessly noisy, and averaging is the standard remedy for
+        # diffusion models. Only floating-point tensors are averaged;
+        # anything else (buffers of integer counters, if the module ever
+        # grows one) is copied as-is.
+        ema_decay = float(self.params.get("ema_decay", 0.999))
+        ema = {k: v.detach().clone() for k, v in self._model.state_dict().items()}
+
+        def _ema_update():
+            with torch.no_grad():
+                for k, v in self._model.state_dict().items():
+                    if ema[k].is_floating_point():
+                        ema[k].mul_(ema_decay).add_(v.detach(), alpha=1.0 - ema_decay)
+                    else:
+                        ema[k].copy_(v.detach())
+
         self._model.train()
         for epoch in range(epochs):
             perm = torch.randperm(n, device=device)
@@ -164,9 +217,17 @@ class DDPMSynthesizer(Synthesizer):
                 opt.zero_grad()
                 loss.backward()
                 opt.step()
+                _ema_update()
             if (epoch + 1) % max(epochs // 10, 1) == 0:
                 print(f"  ddpm epoch {epoch + 1}/{epochs} loss {loss.item():.4f}")
+
+        # Sampling uses the EMA weights; the raw final iterate is not
+        # kept, so what is saved to disk is exactly what generated the
+        # published rows.
+        self._model.load_state_dict(ema)
         self._model.eval()
+        self._ema_decay = ema_decay
+        print(f"  ddpm: sampling weights = EMA(decay {ema_decay}) of training weights.")
 
     def sample(self, n_rows: int) -> pd.DataFrame:
         import torch
@@ -198,19 +259,36 @@ class DDPMSynthesizer(Synthesizer):
                 loss = loss + (pa * pb).sum()
             return loss
 
+        x0_min = torch.from_numpy(self._x0_min).to(device)
+        x0_max = torch.from_numpy(self._x0_max).to(device)
+
         x = torch.randn(n_rows, self._dim, generator=gen, device=device)
         with torch.no_grad():
             for t in range(self._T - 1, -1, -1):
                 tt = torch.full((n_rows,), t, device=device, dtype=torch.float32)
                 eps = self._model(x, tt / self._T)
-                coef = betas[t] / (1 - ab[t]).sqrt()
-                x = (x - coef * eps) / alphas[t].sqrt()
+
+                # x0-clamped posterior mean (see the module docstring).
+                # ab_prev is 1 at t=0, which makes the final step reduce
+                # to "return the clamped x0_hat" -- the standard
+                # convention.
+                ab_t = ab[t]
+                ab_prev = ab[t - 1] if t > 0 else torch.ones_like(ab_t)
+                x0_hat = (x - (1 - ab_t).sqrt() * eps) / ab_t.sqrt()
+                x0_hat = torch.clamp(x0_hat, min=x0_min, max=x0_max)
+                x = ((ab_prev.sqrt() * betas[t] / (1 - ab_t)) * x0_hat
+                     + (alphas[t].sqrt() * (1 - ab_prev) / (1 - ab_t)) * x)
+
                 if self._guidance is not None:
                     with torch.enable_grad():
                         xg = x.detach().requires_grad_(True)
                         grad = torch.autograd.grad(_rule_loss(xg), xg)[0]
                     x = x - self._guidance["scale"] * grad
                 if t > 0:
+                    # sigma_t = sqrt(beta_t), unchanged: Ho et al. report
+                    # this and the posterior variance as equivalent in
+                    # practice, and keeping it isolates the effect of the
+                    # x0 clamp on the same noise levels as before.
                     x = x + betas[t].sqrt() * torch.randn(
                         n_rows, self._dim, generator=gen, device=device)
         x = x.cpu().numpy()
@@ -233,8 +311,11 @@ class DDPMSynthesizer(Synthesizer):
     def describe(self) -> dict:
         d = super().describe()
         d.update({"model_class": "native Gaussian DDPM (quantile-normalized numerics "
-                                 "+ one-hot categoricals, MLP denoiser)",
+                                 "+ one-hot categoricals, MLP denoiser, x0-clamped "
+                                 "posterior sampling, EMA weights)",
                   "timesteps": getattr(self, "_T", None),
+                  "x0_clamped": hasattr(self, "_x0_min"),
+                  "ema_decay": getattr(self, "_ema_decay", None),
                   "logic_guided": bool(getattr(self, "_guidance", None)),
                   "guidance_rules": len(self._guidance["pairs"]) if getattr(
                       self, "_guidance", None) else 0})
