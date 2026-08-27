@@ -1,54 +1,66 @@
 {
   "load_data": {
     "completed": true,
-    "completed_at": "2026-08-24T08:54:21.569562+00:00"
+    "completed_at": "2026-08-27T13:32:36.401491+00:00"
   },
   "profile_data": {
-    "completed": true,
-    "completed_at": "2026-08-24T08:54:21.924166+00:00"
+    "completed": false,
+    "failed_at": "2026-08-27T13:32:36.575176+00:00",
+    "error": "InvalidOperationError: cannot cast List type (inner: 'String', to: 'String')\n\nThis error occurred in the following expression:\n\tcol(\"electrocardiographs_ecg_type_of_rhythms_pET_first\").strict_cast(String)\n"
   },
   "preprocess": {
-    "completed": true,
-    "completed_at": "2026-08-24T08:54:22.150537+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.917077+00:00"
   },
   "profile_preprocessed_data": {
-    "completed": true,
-    "completed_at": "2026-08-24T08:54:22.286152+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.917304+00:00"
   },
   "generate": {
-    "completed": true,
-    "completed_at": "2026-08-26T18:31:55.066472+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.917521+00:00"
   },
   "evaluate": {
-    "completed": true,
-    "completed_at": "2026-08-27T11:20:08.979521+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.917739+00:00"
   },
   "utility": {
-    "completed": true,
-    "completed_at": "2026-08-27T11:35:41.580949+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.918428+00:00"
   },
   "privacy": {
-    "completed": true,
-    "completed_at": "2026-08-27T11:40:24.658039+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.918650+00:00"
   },
   "coherence": {
-    "completed": true,
-    "completed_at": "2026-08-27T11:21:50.827480+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.917955+00:00"
   },
   "survival": {
-    "completed": true,
-    "completed_at": "2026-08-27T11:24:11.125984+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.918203+00:00"
   },
   "attacks": {
-    "completed": true,
-    "completed_at": "2026-08-27T11:51:28.545837+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.918866+00:00"
   },
   "figures": {
-    "completed": true,
-    "completed_at": "2026-08-27T11:51:33.428688+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.919111+00:00"
   },
   "release_docs": {
-    "completed": true,
-    "completed_at": "2026-08-27T11:51:33.896663+00:00"
+    "completed": false,
+    "pending": true,
+    "queued_at": "2026-08-27T13:32:35.919324+00:00"
   }
 }
