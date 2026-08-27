@@ -26,11 +26,22 @@ def set_global_seeds(seed: int) -> dict:
     same hardware and library versions, but GPU kernels are not always
     bit-deterministic across driver/hardware changes, so exact
     reproduction on different hardware is not guaranteed.
+
+    PYTHONHASHSEED is deliberately NOT set here. Setting it at runtime is
+    a no-op: CPython fixes the hash seed at interpreter start-up, so
+    assigning the environment variable from inside the process changes
+    nothing and only creates the impression that set iteration order is
+    pinned. It matters only when the LAUNCHER exports it
+    (`PYTHONHASHSEED=0 python main.py`) and only for code that iterates
+    over a set or dict built from set operations. The pipeline's own
+    order-sensitive spot -- the AIM column selection -- now sorts its
+    inputs explicitly (see column_selection.py), which is the durable
+    fix; the env var is a launcher-level belt to that braces.
     """
-    record = {"seed": seed, "python_random": True, "numpy": False, "torch": False}
+    record = {"seed": seed, "python_random": True, "numpy": False, "torch": False,
+              "pythonhashseed_from_launcher": os.environ.get("PYTHONHASHSEED")}
 
     random.seed(seed)
-    os.environ["PYTHONHASHSEED"] = str(seed)
 
     try:
         import numpy as np
@@ -70,17 +81,28 @@ def library_versions() -> dict:
 
 
 def git_revision() -> dict:
-    """Code revision, so the exact pipeline version is recoverable."""
+    """Code revision, so the exact pipeline version is recoverable.
+
+    `dirty` is TRI-STATE on purpose: True (uncommitted changes), False
+    (verified clean), or None (git could not be queried -- not a
+    repository, git missing, command failed). It used to be
+    bool(_run(...)), which turned every failed query into a confident
+    "clean" in the published provenance: an assertion about the code
+    state made without any evidence for it. Callers must distinguish
+    None from False.
+    """
     def _run(args):
         try:
             return subprocess.check_output(args, stderr=subprocess.DEVNULL, text=True).strip()
         except Exception:
             return None
 
+    status = _run(["git", "status", "--porcelain"])
     return {
         "commit": _run(["git", "rev-parse", "HEAD"]),
         "branch": _run(["git", "rev-parse", "--abbrev-ref", "HEAD"]),
-        "dirty": bool(_run(["git", "status", "--porcelain"])),
+        "dirty": None if status is None else bool(status),
+        "dirty_known": status is not None,
     }
 
 

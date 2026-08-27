@@ -20,8 +20,26 @@ Three guarantees:
     pool: outcome variants correlate near-1.0 with each other and would
     crowd out actual predictors.
 
-Scores are computed on the TRAIN split only and written to a committed
-JSON so the selection is auditable.
+Scores are computed on the TRAIN split only. The committed JSON records
+the RANKING and the selection parameters -- not the scores themselves:
+the scores are exact, unnoised statistics of real patient data, and
+publishing them next to a DP-labelled dataset would release precisely
+the kind of quantity the DP claim is about. The order is what makes the
+selection auditable; the magnitudes were only ever diagnostics.
+
+DISCLOSURE, NOT A FIX: the selection is itself data-dependent. Which
+columns a width-limited (AIM) run models at all is chosen by looking at
+the real training split without any privacy budget, so a DP run using
+this subset is DP *given the column set*, and the column set leaks. That
+is a documented limitation of the width-limited runs and must be stated
+wherever they are reported; closing it needs either a public column list
+(chosen from clinical knowledge / metadata alone) or a DP selection
+mechanism (e.g. exponential mechanism over the association scores) with
+its own share of the budget. Neither is implemented here.
+
+Iteration order is pinned: the anchors, the ranked pool and ties are all
+sorted, so the committed selection is identical across processes rather
+than depending on set-iteration order (which varies with PYTHONHASHSEED).
 """
 
 import numpy as np
@@ -60,22 +78,33 @@ def _pair_association(train, a, b, numeric_set, codes) -> float | None:
 
 
 def select_important_columns(train: pd.DataFrame, outcome_cols: set[str],
-                             forced: list[str], k: int) -> tuple[list[str], dict]:
+                             forced: list[str], k: int) -> tuple[list[str], list[str]]:
     """Top-k columns of `train` by outcome relevance.
 
-    Returns (selected column list in train order, {column: score}).
-    `forced` columns count toward k and are included regardless of score.
+    Returns (selected column list in train order, ranked pool columns
+    best-first). `forced` columns count toward k and are included
+    regardless of score.
+
+    Scores stay internal by design -- see the module docstring: they are
+    unnoised statistics of the real training split, so only the RANK
+    order leaves this function and reaches the committed JSON.
+
+    `outcome_cols` arrives as a set, so it is sorted before it drives any
+    loop: the anchor order affects nothing but floating-point summation
+    order, and "affects nothing but floating point" is exactly how an
+    irreproducible committed artifact happens.
     """
     numeric, categorical = _numeric_and_categorical(train)
     numeric_set = set(numeric)
     codes = _cat_codes(train, categorical)
 
-    anchors = [c for c in outcome_cols if c in train.columns]
+    anchors = sorted(c for c in outcome_cols if c in train.columns)
     forced_present = [c for c in dict.fromkeys(forced) if c in train.columns]
+    forced_set = set(forced_present)
 
     scores: dict[str, float] = {}
     pool = [c for c in train.columns
-            if c not in outcome_cols and c not in forced_present]
+            if c not in outcome_cols and c not in forced_set]
     for c in pool:
         vals = []
         for a in anchors:
@@ -84,8 +113,10 @@ def select_important_columns(train: pd.DataFrame, outcome_cols: set[str],
                 vals.append(abs(v))
         scores[c] = round(float(np.mean(vals)), 4) if vals else 0.0
 
-    ranked = sorted(pool, key=lambda c: -scores[c])
+    # Ties broken by column name, so equal scores (common at 0.0) cannot
+    # reorder between runs.
+    ranked = sorted(pool, key=lambda c: (-scores[c], c))
     n_fill = max(k - len(forced_present), 0)
-    chosen = set(forced_present) | set(ranked[:n_fill])
+    chosen = forced_set | set(ranked[:n_fill])
     selected = [c for c in train.columns if c in chosen]  # keep train order
-    return selected, scores
+    return selected, ranked

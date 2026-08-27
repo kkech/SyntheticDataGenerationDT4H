@@ -26,8 +26,10 @@ import subprocess
 import sys
 from datetime import date
 
+from pipeline.common.profiling import coarsen_extreme
 from pipeline.config import PipelineConfig
 from pipeline.steps.base import PipelineStep
+from pipeline.steps.preprocess.transforms import NYHA_COLUMN, NYHA_MISSING_SENTINEL
 
 
 class ReleaseDocsStep(PipelineStep):
@@ -207,6 +209,11 @@ class ReleaseDocsStep(PipelineStep):
             "(also published in the profiling reports). **A null is never 'unknown noise' "
             "in this dataset -- its meaning is stated per column.**",
             "",
+            "Numeric ranges below are **coarsened for disclosure control**: each min/max is "
+            "rounded outward (min down, max up) to 2 significant figures, so a published "
+            "endpoint is never an exact single-patient value while still bounding the true "
+            "range.",
+            "",
             "| column | type | description | values / range | missing % | null means |",
             "|---|---|---|---|---|---|",
         ]
@@ -217,20 +224,40 @@ class ReleaseDocsStep(PipelineStep):
             d = " ".join(d.split())
             return d[:110] + ("…" if len(d) > 110 else "")
 
+        def _coarse_range(lo, hi):
+            return f"{coarsen_extreme(float(lo), 'floor')} .. {coarsen_extreme(float(hi), 'ceil')}"
+
         for c in train.columns:
             s = train[c]
             declared = var_meta.get(c, {}).get("dataType", "")
             missing_note = "n/a (no nulls)"
             if c in encoding:
+                # The encoding spec records the kind of missingness the
+                # sentinel stands in for ('no_event' vs 'not_measured').
+                kind = encoding[c].get("missingness_kind")
                 missing_note = ("no event occurred (structural)"
-                                if encoding[c].get("structural") else "not measured")
+                                if kind == "no_event" else "not measured")
             if s.dtype in (pl.Float32, pl.Float64, pl.Int32, pl.Int64):
                 spec = encoding.get(c)
-                if spec:
-                    rng = f"{spec.get('min_observed', '')} .. {round(float(s.max()), 2)}"
+                if c == NYHA_COLUMN:
+                    # NYHA carries its missingness as an in-band sentinel
+                    # (0 = not assessed), NOT via the encoding map, so the
+                    # generic "no nulls -> 0% missing" path reports it as if
+                    # nothing were missing. Report the true sentinel share
+                    # and range over the real ordinal classes (1-4).
+                    non_sentinel = s.filter(s != NYHA_MISSING_SENTINEL)
+                    if non_sentinel.len():
+                        rng = _coarse_range(non_sentinel.min(), non_sentinel.max())
+                    else:
+                        rng = "n/a"
+                    miss = f"{100 * (s == NYHA_MISSING_SENTINEL).sum() / len(s):.0f}%"
+                    missing_note = f"not assessed (sentinel {NYHA_MISSING_SENTINEL})"
+                elif spec:
+                    rng = _coarse_range(spec.get("min_observed", s.min()),
+                                        spec.get("max_observed", s.max()))
                     miss = f"{100 * (s == spec['sentinel']).sum() / len(s):.0f}%"
                 else:
-                    rng = f"{round(float(s.min()), 2)} .. {round(float(s.max()), 2)}"
+                    rng = _coarse_range(s.min(), s.max())
                     miss = "0%"
                 lines.append(f"| `{c}` | numeric {declared} | {_desc(c)} | {rng} | {miss} | {missing_note} |")
             else:
@@ -249,6 +276,96 @@ class ReleaseDocsStep(PipelineStep):
 
     # --- datasheet ---
 
+    @staticmethod
+    def _exact_match_claim(config) -> str:
+        """Fill the 'no verbatim training rows' claim from the actual
+        privacy assessment (exact_matches per run), never as static text.
+        Missing or contradicting evidence -> an explicit NOT VERIFIED line
+        so the datasheet cannot claim more than the build proved."""
+        p = os.path.join(config.step_dir("privacy"), "DT4H_Privacy_Assessment.json")
+        if not os.path.exists(p):
+            return ("NOT VERIFIED IN THIS BUILD: the privacy assessment "
+                    "(DT4H_Privacy_Assessment.json) is absent, so exact training-row "
+                    "reproduction was not checked.")
+        with open(p) as f:
+            priv = json.load(f)
+        runs = priv.get("runs", []) or []
+        if not runs:
+            return ("NOT VERIFIED IN THIS BUILD: the privacy assessment records no "
+                    "per-file exact-match results.")
+        missing = [r.get("run_id", "?") for r in runs if r.get("exact_matches") is None]
+        if missing:
+            return (f"NOT VERIFIED IN THIS BUILD: {len(missing)} assessed file(s) have no "
+                    f"exact-match count recorded (e.g. {missing[:3]}).")
+        offenders = [(r.get("run_id", "?"), r["exact_matches"])
+                     for r in runs if r.get("exact_matches", 0) > 0]
+        if offenders:
+            return (f"NOT VERIFIED IN THIS BUILD: {len(offenders)} of {len(runs)} assessed "
+                    f"file(s) reproduced training rows verbatim "
+                    f"(e.g. {offenders[0][0]}: {offenders[0][1]} exact match(es)). "
+                    f"These files must not be released.")
+        return (f"verified: zero exact training-row reproductions across all {len(runs)} "
+                f"assessed released file(s) (DT4H_Privacy_Assessment.json)")
+
+    @staticmethod
+    def _distribution_claim(config) -> str:
+        """The distribution-preservation claim, conditioned on a recorded
+        KS/TVD-vs-raw check in the preprocessing summary. No such record ->
+        NOT VERIFIED rather than the old static 'KS = 0, TVD = 0'."""
+        p = os.path.join(config.step_dir("preprocess"), "DT4H_Preprocessing_Summary.json")
+        evidence = None
+        if os.path.exists(p):
+            with open(p) as f:
+                summ = json.load(f)
+            evidence = summ.get("distribution_preservation") or summ.get("ks_tvd_vs_raw")
+        if not evidence:
+            return ("fully scripted (see `DT4H_Preprocessing_Summary.md`). NOT VERIFIED IN "
+                    "THIS BUILD: no per-column KS/TVD-vs-raw distribution-preservation check "
+                    "is recorded, so no distribution-preserving guarantee is asserted here.")
+        ks = evidence.get("ks_max", evidence.get("ks"))
+        tvd = evidence.get("tvd_max", evidence.get("tvd"))
+        return (f"distribution-preserving on all retained columns "
+                f"(max KS = {ks}, max TVD = {tvd} vs raw; see "
+                f"`DT4H_Preprocessing_Summary.md`) and fully scripted")
+
+    @staticmethod
+    def _dp_paragraph(gen_summary) -> str:
+        """DP wording derived from the generation summary's recorded per-run
+        provenance, written to be TRUE whether or not the DP re-fit that
+        records (epsilon, delta) and a public-domain bounds source has
+        happened. When those fields are absent, fall back to voiding the
+        formal guarantee -- docs must never claim more than the recorded
+        provenance supports."""
+        runs = gen_summary.get("runs", []) or []
+        dp_runs = [r for r in runs if r.get("is_dp")]
+        if not dp_runs:
+            return ("- No file in this build carries a differential-privacy label; the "
+                    "non-DP synthesizers provide empirical privacy evidence (attacks and "
+                    "record-level distances) only, not a formal guarantee.")
+        # Recorded per-run DP provenance (present only once the DP re-fit
+        # populates them): a delta, and where the public column domains came
+        # from (a reviewed public_domains.json rather than the data).
+        deltas = sorted({r.get("delta") for r in dp_runs if r.get("delta") is not None})
+        bounds_sources = sorted({r.get("bounds_source") for r in dp_runs
+                                 if r.get("bounds_source")})
+        if deltas and bounds_sources:
+            eps = sorted({r.get("epsilon") for r in dp_runs if r.get("epsilon") is not None})
+            return (
+                "- DP-labelled files record a per-run (epsilon, delta) "
+                f"(epsilon in {{{', '.join(f'{e:g}' for e in eps)}}}, "
+                f"delta in {{{', '.join(f'{d:g}' for d in deltas)}}}). Public column "
+                f"domains are taken from a reviewed public metadata source "
+                f"({', '.join(bounds_sources)}), so no epsilon is spent discovering "
+                "them. Categorical vocabularies and the AIM column selection are "
+                "data-dependent and are disclosed as such.")
+        return (
+            "- DP-labelled files were fit with a per-run epsilon, but this build did "
+            "NOT record a delta or a reviewed public-domain source: column bounds were "
+            "data-derived, so the formal (epsilon, delta) guarantee is void for these "
+            "files. See Uses/limitations; treat their privacy as empirical (attacks and "
+            "record-level distances) until a DP re-fit records the (epsilon, delta) and "
+            "public-domain provenance.")
+
     def _write_datasheet(self, train, out_dir, config) -> None:
         n_rows, n_cols = train.height, train.width
         gen_summary = {}
@@ -257,6 +374,9 @@ class ReleaseDocsStep(PipelineStep):
             with open(p) as f:
                 gen_summary = json.load(f)
         prov = gen_summary.get("provenance", {})
+        exact_match_claim = self._exact_match_claim(config)
+        distribution_claim = self._distribution_claim(config)
+        dp_paragraph = self._dp_paragraph(gen_summary)
 
         text = f"""# Datasheet: DT4H UC1 Synthetic Heart-Failure Cohort
 
@@ -279,8 +399,8 @@ Structure follows *Datasheets for Datasets* (Gebru et al., 2021).
   cohort held out for evaluation and never shown to any generator).
 - Column semantics: see `DT4H_Codebook.md`. Missingness is preserved by design and
   carries meaning (structural "no event" vs "not measured").
-- No real patient records, identifiers, or verbatim rows are included (verified:
-  zero exact training-row reproductions in every released file).
+- No real patient records or identifiers are included. Verbatim-row check --
+  {exact_match_claim}.
 
 ## Collection & preprocessing
 - Source data were extracted from the electronic health records of the providing
@@ -292,8 +412,7 @@ Structure follows *Datasheets for Datasets* (Gebru et al., 2021).
   only aggregate statistics, synthetic records and reports leave it. Processing
   is governed by the project's data-sharing and governance agreements between
   the consortium partners.
-- Preprocessing is provably distribution-preserving (KS = 0, TVD = 0 vs raw on all
-  retained columns) and fully scripted; see `DT4H_Preprocessing_Summary.md`.
+- Preprocessing is {distribution_claim}.
 - Generators: see the run plan in `DT4H_Generation_Summary.md` (seeds, epsilon
   values, library versions, git commit `{prov.get('git', {}).get('commit', 'n/a')}`,
   training-file SHA-256).
@@ -309,8 +428,7 @@ Structure follows *Datasheets for Datasets* (Gebru et al., 2021).
 - Record-level distances, membership-inference and attribute-inference attacks are
   reported in `DT4H_Privacy_Assessment.md` and `DT4H_Privacy_Attacks.md`, all
   evaluated against a genuine unseen-patient baseline.
-- DP-labelled files carry a formal (epsilon, delta) guarantee by construction;
-  column domains are treated as public metadata (released in the encoding map).
+{dp_paragraph}
 - Every file must pass `release_gate.py` before distribution.
 
 ## Distribution & maintenance

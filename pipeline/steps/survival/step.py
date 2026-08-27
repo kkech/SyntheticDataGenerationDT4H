@@ -388,15 +388,29 @@ class SurvivalStep(PipelineStep):
                   f"({type(e).__name__}: {e}).")
             return None
 
+    def _train_scaler(self, train) -> dict:
+        """{covariate: (mean, sd)} from the REAL TRAIN effect frame, so
+        every frame is standardized on the same scale."""
+        x, _, _, _ = self._effect_frame(train)
+        return {c: (float(x[c].mean()), float(x[c].std()))
+                for c in x.columns if c != "male"}
+
+    # Fewer than this many shared covariates between the real and a
+    # synthetic fit and the coefficient comparison is not meaningful.
+    MIN_MATCHED_COEFFICIENTS = 4
+
     def _effect_replication(self, train, holdout, synthetic_files, config):
         import pandas as pd
 
-        real_fit = self._fit_effects(train)
+        scaler = self._train_scaler(train)
+        real_fit = self._fit_effects(train, scaler)
         if real_fit is None:
             print("  ⚠️  Not enough labelled data for effect replication; skipped.")
             return {"note": "insufficient data"}
-        hold_fit = self._fit_effects(holdout)
-        out = {"real_train": real_fit, "real_holdout": hold_fit, "synthetic": {}}
+        hold_fit = self._fit_effects(holdout, scaler)
+        out = {"real_train": real_fit, "real_holdout": hold_fit, "synthetic": {},
+               "standardization": "all frames standardized by the real TRAIN "
+                                  "split's covariate mean/SD"}
         print(f"  model: {real_fit['model']} | train coefficients: {real_fit['coefficients']}")
 
         real_coef = real_fit["coefficients"]
@@ -404,7 +418,8 @@ class SurvivalStep(PipelineStep):
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
             synth = pd.read_csv(path, low_memory=False)
             synth, _ = align_categorical_case(synth, train)
-            fit = self._fit_effects(synth) if ENDPOINTS["all_cause_death"] in synth.columns else None
+            fit = (self._fit_effects(synth, scaler)
+                   if ENDPOINTS["all_cause_death"] in synth.columns else None)
             if fit is None:
                 out["synthetic"][run_id] = {"note": "not estimable"}
                 continue
@@ -414,8 +429,18 @@ class SurvivalStep(PipelineStep):
                      and abs(real_coef[c]) > 0.02]
             comparable = [c for c in real_coef if abs(real_coef[c]) > 0.02]
             fit["sign_agreement"] = f"{len(signs)}/{len(comparable)}"
-            fit["mean_abs_coef_error"] = round(float(np.mean(
-                [abs(fit["coefficients"].get(c, 0.0) - v) for c, v in real_coef.items()])), 4)
+            # Error only over covariates present in BOTH fits: substituting
+            # 0.0 for an absent covariate rewarded degenerate fits that
+            # dropped columns.
+            matched = [c for c in real_coef if c in fit["coefficients"]]
+            fit["coefficients_matched"] = f"{len(matched)}/{len(real_coef)}"
+            if len(matched) < self.MIN_MATCHED_COEFFICIENTS:
+                fit["mean_abs_coef_error"] = None
+                fit["note"] = (f"not comparable ({len(matched)}/{len(real_coef)} "
+                               "covariates shared with the real fit)")
+            else:
+                fit["mean_abs_coef_error"] = round(float(np.mean(
+                    [abs(fit["coefficients"][c] - real_coef[c]) for c in matched])), 4)
             out["synthetic"][run_id] = fit
         return out
 
@@ -437,13 +462,30 @@ class SurvivalStep(PipelineStep):
         lines = ["# Survival Fidelity", "",
                  "Endpoints use the five-year follow-up columns: a recorded days-to-event is an "
                  "event, a null is administrative censoring at 1825 days -- the same rule for real "
-                 "and synthetic data. The train-vs-holdout log-rank p-value calibrates what pure "
-                 "sampling noise looks like.", ""]
+                 "and synthetic data. A recorded time beyond 1825 days is treated as censoring at "
+                 "1825 (out of horizon), counted per frame as `times_beyond_horizon`. The "
+                 "train-vs-holdout log-rank p-value calibrates what pure sampling noise looks like.",
+                 "",
+                 "Disclosure: synthetic days-to-event values below the real observed minimum were "
+                 "nulled by the sentinel decode upstream and are read here as censoring; those "
+                 "erased early events cannot be recovered from the released CSVs (see `decode_note` "
+                 "in the JSON).",
+                 "",
+                 "Effect-replication covariates are standardized in EVERY frame (real train, real "
+                 "holdout, synthetic) by the REAL TRAIN split's mean/SD, so scale infidelity in a "
+                 "synthetic frame shows up as a coefficient discrepancy instead of being "
+                 "re-normalized away.", ""]
         for name, e in r.get("endpoints", {}).items():
+            beyond = e.get("times_beyond_horizon") or {}
+            beyond_note = ""
+            if any(beyond.values()):
+                worst = {k: v for k, v in beyond.items() if v}
+                beyond_note = (f" | times beyond 1825d censored at horizon: {worst}")
             lines += [f"## {name}", "",
                       f"train events {e['curves']['train']['events']}/{e['curves']['train']['n']} | "
                       f"holdout {e['curves']['holdout']['events']}/{e['curves']['holdout']['n']} | "
-                      f"log-rank train-vs-holdout p = {e['logrank_train_vs_holdout_p']}", "",
+                      f"log-rank train-vs-holdout p = {e['logrank_train_vs_holdout_p']}"
+                      f"{beyond_note}", "",
                       "| run | 1y survival | 5y survival | log-rank vs holdout (p) | equivalent (TOST ±5pp, 1y/3y/5y) |",
                       "|---|---|---|---|---|"]
             tv_eq = (e.get("equivalence_train_vs_holdout") or {}).get(
@@ -468,17 +510,24 @@ class SurvivalStep(PipelineStep):
         eff = r.get("effects", {})
         if eff.get("real_train"):
             lines += ["## Effect-estimate replication", "",
-                      f"Model: {eff['real_train']['model']}, standardized (per-SD) coefficients.",
-                      "", "| frame | n | events | sign agreement | mean |coef error| |",
-                      "|---|---|---|---|---|",
-                      f"| real train | {eff['real_train']['n']} | {eff['real_train']['events']} | - | - |"]
+                      f"Model: {eff['real_train']['model']}, per-SD coefficients standardized by "
+                      "the real TRAIN split's mean/SD in every frame. The coefficient error is "
+                      "computed only over covariates present in BOTH the real and the synthetic "
+                      "fit (`matched`); runs sharing fewer than "
+                      f"{SurvivalStep.MIN_MATCHED_COEFFICIENTS} covariates are not comparable.",
+                      "", "| frame | n | events | sign agreement | coef matched | mean |coef error| |",
+                      "|---|---|---|---|---|---|",
+                      f"| real train | {eff['real_train']['n']} | {eff['real_train']['events']} | - | - | - |"]
             if eff.get("real_holdout"):
                 h = eff["real_holdout"]
-                lines.append(f"| real holdout | {h['n']} | {h['events']} | - | - |")
+                lines.append(f"| real holdout | {h['n']} | {h['events']} | - | - | - |")
             for rid, fit in eff.get("synthetic", {}).items():
-                if fit.get("note"):
-                    lines.append(f"| {rid} | - | - | {fit['note']} | - |")
+                if fit.get("mean_abs_coef_error") is None:
+                    lines.append(f"| {rid} | {fit.get('n', '-')} | {fit.get('events', '-')} "
+                                 f"| {fit.get('sign_agreement', '-')} "
+                                 f"| {fit.get('coefficients_matched', '-')} "
+                                 f"| {fit.get('note', 'not estimable')} |")
                 else:
                     lines.append(f"| {rid} | {fit['n']} | {fit['events']} | {fit['sign_agreement']} "
-                                 f"| {fit['mean_abs_coef_error']} |")
+                                 f"| {fit['coefficients_matched']} | {fit['mean_abs_coef_error']} |")
         return "\n".join(lines) + "\n"

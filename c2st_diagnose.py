@@ -34,12 +34,18 @@ from pipeline.steps.generate.step import GenerateStep
 
 
 def single_feature_auc(real: pd.Series, synth: pd.Series) -> float:
-    """AUC of one column separating real (0) from synthetic (1).
+    """RAW AUC of one column separating real (0) from synthetic (1).
 
     Numerics: rank AUC (Mann-Whitney), with NaN placed on its own rank
     below the observed values so missingness differences count.
     Categoricals: score each row by the synthetic/real frequency ratio
     of its category -- the AUC of the optimal single-column classifier.
+
+    Deliberately NOT folded to max(auc, 1-auc): the folded statistic has
+    null expectation ABOVE 0.5 (pure noise folds upward), which made
+    unremarkable columns read as mild tells. The raw value keeps the
+    direction too: >0.5 means synthetic rows score higher under this
+    column's ranking, <0.5 means real rows do.
     """
     from sklearn.metrics import roc_auc_score
 
@@ -58,8 +64,7 @@ def single_feature_auc(real: pd.Series, synth: pd.Series) -> float:
         ratio = {c: (ps.get(c, 1e-9)) / (pr.get(c, 1e-9)) for c in cats}
         score = np.concatenate([r.map(ratio).to_numpy(dtype=float),
                                 s.map(ratio).to_numpy(dtype=float)])
-    auc = roc_auc_score(y, score)
-    return round(float(max(auc, 1 - auc)), 4)  # direction-free
+    return round(float(roc_auc_score(y, score)), 4)
 
 
 def real_granularity(col: pd.Series, sample: int = 2000) -> float | None:
@@ -68,7 +73,11 @@ def real_granularity(col: pd.Series, sample: int = 2000) -> float | None:
     v = pd.to_numeric(col, errors="coerce").dropna()
     if v.empty:
         return None
-    v = v.iloc[:sample]
+    if len(v) > sample:
+        # Random and seeded rather than the frame's head: row order can
+        # carry structure (load order, site, time), and the head is then
+        # not exchangeable with the rest of the column.
+        v = v.sample(n=sample, random_state=0)
     decimals = 0
     for x in v:
         s = f"{x:.6f}".rstrip("0").rstrip(".")
@@ -112,23 +121,28 @@ def main() -> None:
     print(f"Real train: {train.shape[0]} rows | synthetic: {synth.shape[0]} rows | "
           f"{len(columns)} comparable columns\n")
 
-    print("Single-feature tells (AUC of ONE column separating real from synthetic):")
+    print("Single-feature tells (raw AUC of ONE column separating real=0 from "
+          "synthetic=1;\n0.5 = uninformative, deviation in EITHER direction is a tell):")
     tells = sorted(((c, single_feature_auc(train[c], synth[c])) for c in columns),
-                   key=lambda t: -t[1])
+                   key=lambda t: -abs(t[1] - 0.5))
     for c, a in tells[: args.top]:
         kind = "num" if pd.api.types.is_numeric_dtype(train[c]) else "cat"
-        print(f"  {a:.4f}  [{kind}] {c}")
-    n_strong = sum(1 for _, a in tells if a > 0.6)
-    print(f"  ... {n_strong}/{len(tells)} columns alone exceed AUC 0.6\n")
+        direction = "synth-high" if a > 0.5 else "real-high"
+        print(f"  {a:.4f}  [{kind}, {direction}] {c}")
+    n_strong = sum(1 for _, a in tells if abs(a - 0.5) > 0.1)
+    print(f"  ... {n_strong}/{len(tells)} columns alone deviate from 0.5 by more than 0.1\n")
 
     print("Full C2ST, as released:")
-    auc_raw = c2st_auc(train, synth, columns, seed=config.seed)
-    print(f"  AUC = {auc_raw}")
+    res_raw = c2st_auc(train, synth, columns, seed=config.seed)
+    auc_raw = res_raw["auc"]
+    print(f"  AUC = {auc_raw} ± {res_raw['auc_sd']} (out-of-fold, "
+          f"{res_raw['columns_used']} columns, coverage {res_raw['schema_coverage']})")
 
     print("\nFull C2ST after snapping synthetic numerics to real value grids:")
     snapped = snap_to_granularity(synth, train)
-    auc_snap = c2st_auc(train, snapped, columns, seed=config.seed)
-    print(f"  AUC = {auc_snap}")
+    res_snap = c2st_auc(train, snapped, columns, seed=config.seed)
+    auc_snap = res_snap["auc"]
+    print(f"  AUC = {auc_snap} ± {res_snap['auc_sd']}")
 
     drop = round(auc_raw - auc_snap, 4)
     print(f"\nVerdict: granularity accounts for an AUC drop of {drop}. "
@@ -139,7 +153,9 @@ def main() -> None:
     if args.json:
         with open(args.json, "w") as f:
             json.dump({"file": args.file, "c2st_raw": auc_raw,
+                       "c2st_raw_detail": res_raw,
                        "c2st_granularity_snapped": auc_snap,
+                       "c2st_granularity_snapped_detail": res_snap,
                        "single_feature_tells": tells[:50]}, f, indent=2)
         print(f"Saved -> {args.json}")
 

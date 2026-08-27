@@ -141,17 +141,24 @@ class CoherenceStep(PipelineStep):
             "carrying at least one violation -- the one a release decision turns on, "
             "read against the real holdout's own share.",
             "",
+            "The 'consequent Missing' column is the evasion check for implication rules: "
+            "the share of antecedent-true checks whose consequent was Missing and thus "
+            "undecidable. A generator can push its violation rate toward zero by emitting "
+            "Missing consequents; a share far above the real frames' reveals exactly that.",
+            "",
             "| frame | applicable checks | violations | violation rate | rules violated "
-            "| rows with >=1 violation |",
-            "|---|---|---|---|---|---|",
+            "| consequent Missing | rows with >=1 violation |",
+            "|---|---|---|---|---|---|---|",
         ]
         for f in r["frames"]:
             share = f.get("share_rows_with_any_violation")
             share_cell = (f"{share:.1%} ({f.get('rows_with_any_violation')}/{f.get('rows')})"
                           if share is not None else "n/a")
+            cms = f.get("consequent_missing_share")
+            cms_cell = f"{cms:.1%}" if cms is not None else "n/a"
             lines.append(f"| {f['frame']} | {f['rule_checks_applicable']} | {f['violations']} "
                          f"| {f['overall_violation_rate']} | {f['rules_violated']}/{f['rules']} "
-                         f"| {share_cell} |")
+                         f"| {cms_cell} | {share_cell} |")
         lines += ["", "## Worst rules per synthetic dataset", ""]
         for f in r["frames"]:
             if not f.get("worst_rules"):

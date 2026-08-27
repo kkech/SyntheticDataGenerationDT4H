@@ -27,6 +27,20 @@ The 38 constant columns the generate step re-attaches verbatim are
 EXCLUDED from all aggregates: they are copies, not modelling successes,
 and would flatter every model equally.
 
+MATCHED-SIZE SCORING: the floor is only exchangeable with comparisons
+at the same (n_a, n_b). KS-type two-sample statistics concentrate
+toward zero as sample sizes grow, so a floor computed at
+(n_train, n_holdout) read against full-size train-vs-synthetic runs
+(n_train vs n_train) would make the floor look ~40% looser than the
+comparisons it calibrates. Every train-vs-synthetic comparison --
+marginals, subgroup fidelity, association deltas, C2ST -- therefore
+subsamples the synthetic frame to the holdout's row count with seeds
+derived from config.seed (marginals average three seeded draws;
+association profiling and C2ST use one draw, repeats being too costly
+there). Holdout-vs-synthetic needs no draw: KS at (n, m) has the same
+null distribution as at (m, n), so it already sits on the floor's
+geometry.
+
 Runs sharing a (model, epsilon) are aggregated across seeds as
 mean +/- sd, and DP models get an epsilon-sweep view.
 
@@ -43,7 +57,7 @@ from pipeline.config import PipelineConfig
 from pipeline.common.alignment import align_categorical_case
 from pipeline.steps.base import PipelineStep
 from pipeline.steps.evaluate.associations import association_profile, compare_association_profiles
-from pipeline.steps.evaluate.metrics import compare_frames
+from pipeline.steps.evaluate.metrics import compare_frames, compare_frames_subsampled
 
 
 class EvaluateStep(PipelineStep):
@@ -125,8 +139,12 @@ class EvaluateStep(PipelineStep):
         modelled_cols = [c for c in train.columns if c not in constants]
         print("Computing the C2ST floor (train vs holdout)...")
         c2st_floor = c2st_auc(train, holdout, modelled_cols, seed=config.seed)
-        results["c2st_floor_train_vs_holdout"] = c2st_floor
-        print(f"  C2ST floor AUC = {c2st_floor} (0.5 = indistinguishable)")
+        # The bare AUC keeps its historical key; the fold/coverage
+        # detail is additive.
+        results["c2st_floor_train_vs_holdout"] = c2st_floor["auc"]
+        results["c2st_floor_detail"] = c2st_floor
+        print(f"  C2ST floor AUC = {c2st_floor['auc']} ± {c2st_floor['auc_sd']} "
+              f"(out-of-fold; 0.5 = indistinguishable)")
 
         strata = self._strata(train)
         subgroup_floor = {}
@@ -141,6 +159,11 @@ class EvaluateStep(PipelineStep):
                                      "tvd_mean": agg["tvd"].get("mean")}
         results["subgroup_noise_floor"] = subgroup_floor
         print(f"Subgroup strata with sufficient support: {list(subgroup_floor)}")
+
+        # Matched-size scoring (see module docstring): every synthetic
+        # comparison read against the train-vs-holdout floor draws the
+        # synthetic frame down to the holdout's row count first.
+        match_rows = len(holdout)
 
         for path in synthetic_files:
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
@@ -179,22 +202,39 @@ class EvaluateStep(PipelineStep):
                 "representation_audit": rep,
                 "stale_file": bool(stale_cells),
                 "stale_cells": stale_cells,
-                "train_vs_synthetic": compare_frames(
+                # Matched to the floor's (n_train, n_holdout) geometry:
+                # three seeded draws of the synthetic frame, averaged.
+                "train_vs_synthetic": compare_frames_subsampled(
                     train, synthetic, "train", f"synthetic[{run_id}]",
+                    n_rows=match_rows, base_seed=config.seed, repeats=3,
                     exclude_columns=constants),
+                # (n_holdout vs n_synthetic) shares the floor's geometry
+                # already -- KS at (n, m) is distributed as at (m, n) --
+                # so the full synthetic frame is used.
                 "holdout_vs_synthetic": compare_frames(
                     holdout, synthetic, "holdout", f"synthetic[{run_id}]",
                     exclude_columns=constants),
                 # Full-schema view (constants included) for transparency;
                 # aggregates only -- the modelled-columns view stays the
                 # headline because constants are copies, not modelling.
-                "train_vs_synthetic_full_schema_aggregates": compare_frames(
-                    train, synthetic, "train", f"synthetic[{run_id}] (full schema)"
+                # Same matched-size draws so the only difference from the
+                # headline is the constant columns themselves.
+                "train_vs_synthetic_full_schema_aggregates": compare_frames_subsampled(
+                    train, synthetic, "train", f"synthetic[{run_id}] (full schema)",
+                    n_rows=match_rows, base_seed=config.seed, repeats=3,
                 )["aggregates"],
             }
 
-            entry["c2st_auc"] = c2st_auc(train, synthetic, modelled_cols, seed=config.seed)
-            print(f"  C2ST AUC = {entry['c2st_auc']} (floor {c2st_floor})")
+            # One seeded draw for C2ST and associations: refitting the
+            # classifier / the O(p^2) profile three times is not worth
+            # the noise reduction, and one draw already puts the class
+            # sizes on the floor's geometry.
+            synthetic_matched = self._subsample(synthetic, match_rows, config.seed)
+            c2st = c2st_auc(train, synthetic_matched, modelled_cols, seed=config.seed)
+            entry["c2st_auc"] = c2st["auc"]  # historical key: bare AUC
+            entry["c2st"] = c2st
+            print(f"  C2ST AUC = {c2st['auc']} ± {c2st['auc_sd']} "
+                  f"(floor {c2st_floor['auc']}, schema coverage {c2st['schema_coverage']})")
 
             entry["subgroup_fidelity"] = {}
             s_strata = self._strata(synthetic)
@@ -202,19 +242,28 @@ class EvaluateStep(PipelineStep):
                 sm = s_strata.get(sname)
                 if sm is None or sm.sum() < 50:
                     continue
-                agg = compare_frames(train[strata[sname]], synthetic[sm],
-                                     f"train[{sname}]", f"synthetic[{sname}]",
-                                     exclude_columns=constants)["aggregates"]
+                # Each stratum drawn down to ITS holdout stratum's size,
+                # so the per-stratum floor stays exchangeable too.
+                comp = compare_frames_subsampled(
+                    train[strata[sname]], synthetic[sm],
+                    f"train[{sname}]", f"synthetic[{sname}]",
+                    n_rows=floor["n_holdout"], base_seed=config.seed, repeats=3,
+                    exclude_columns=constants)
                 entry["subgroup_fidelity"][sname] = {
                     "n_synthetic": int(sm.sum()),
-                    "ks_mean": agg["ks"].get("mean"),
-                    "tvd_mean": agg["tvd"].get("mean"),
+                    "subsample_rows": comp["subsample_rows"],
+                    "ks_mean": comp["aggregates"]["ks"].get("mean"),
+                    "tvd_mean": comp["aggregates"]["tvd"].get("mean"),
                 }
 
             print(f"  Profiling association structure of '{run_id}'...")
+            # The association floor compares an n_train profile to an
+            # n_holdout profile, so the synthetic profile must carry
+            # n_holdout estimation noise to be read against it.
             entry["associations"] = compare_association_profiles(
-                real_assoc, association_profile(synthetic)
+                real_assoc, association_profile(synthetic_matched)
             )
+            entry["associations"]["subsample_rows"] = int(len(synthetic_matched))
             fab = sum(entry["associations"].get(k, {}).get("fabricated_pairs", 0)
                       for k in ("num_num", "cat_cat", "num_cat"))
             if fab:
@@ -280,6 +329,15 @@ class EvaluateStep(PipelineStep):
         return df
 
     @staticmethod
+    def _subsample(df, n_rows: int, seed: int):
+        """Seeded draw of n_rows without replacement (the frame itself
+        when already small enough) -- used to put C2ST and association
+        comparisons on the noise floor's sampling geometry."""
+        if len(df) <= n_rows:
+            return df
+        return df.sample(n=n_rows, random_state=seed)
+
+    @staticmethod
     def _strata(df):
         """Clinically meaningful subgroups for per-stratum fidelity.
         Returns {name: boolean mask}; missing stratifier columns simply
@@ -322,13 +380,24 @@ class EvaluateStep(PipelineStep):
     @staticmethod
     def _group_runs(comparisons: list) -> list:
         """Mean +/- sd of the headline aggregates per (model, epsilon)
-        group, across seeds."""
-        groups: dict[tuple, list] = {}
+        group, across seeds.
+
+        Runs flagged stale_file are EXCLUDED from the group statistics:
+        their scores describe a file the current pipeline would not
+        write, so averaging them in would contaminate the group with
+        numbers no rerun can reproduce. They stay fully visible in the
+        per-run table (flagged there) and are named per group in
+        stale_runs_excluded."""
+        groups: dict[tuple, dict] = {}
         for c in comparisons:
             if "train_vs_synthetic" not in c:
                 continue
             key = (c.get("synthesizer") or c["run_id"], c.get("epsilon"))
-            groups.setdefault(key, []).append(c["train_vs_synthetic"]["aggregates"])
+            g = groups.setdefault(key, {"aggs": [], "stale": []})
+            if c.get("stale_file"):
+                g["stale"].append(c["run_id"])
+            else:
+                g["aggs"].append(c["train_vs_synthetic"]["aggregates"])
 
         def _mean_sd(values):
             values = [v for v in values if v is not None]
@@ -339,12 +408,14 @@ class EvaluateStep(PipelineStep):
                     "n": len(values)}
 
         out = []
-        for (model, eps), aggs in sorted(groups.items(),
-                                         key=lambda kv: (kv[0][0], kv[0][1] or 0)):
+        for (model, eps), g in sorted(groups.items(),
+                                      key=lambda kv: (kv[0][0], kv[0][1] or 0)):
+            aggs = g["aggs"]
             out.append({
                 "synthesizer": model,
                 "epsilon": eps,
                 "n_runs": len(aggs),
+                "stale_runs_excluded": g["stale"],
                 "ks_mean": _mean_sd([a["ks"].get("mean") for a in aggs]),
                 "tvd_mean": _mean_sd([a["tvd"].get("mean") for a in aggs]),
                 "missing_rate_mad": _mean_sd([a["missing_rate_mean_abs_diff"] for a in aggs]),
@@ -358,12 +429,18 @@ class EvaluateStep(PipelineStep):
         lines = [
             "# Evaluation: fidelity against the sampling-noise floor",
             "",
-            "Metrics are computed per column over observed values (nulls excluded); "
-            "missingness rates are compared separately. KS and TVD are in [0,1], "
-            "lower is closer; `W/std` is the Wasserstein distance in units of the "
-            "reference standard deviation. The `train vs holdout` row is the "
-            "sampling-noise floor: two disjoint samples of real patients differ by "
-            "this much purely by chance, so read every synthetic row against it. "
+            "Numeric metrics (KS, `W/std`) are computed over observed values only; "
+            "the missing-rate MAD compares numeric missingness separately, and covers "
+            "numeric columns alone. Categorical TVD instead treats nulls as an "
+            "explicit 'Missing' category, so categorical missingness differences are "
+            "already inside the TVD. KS and TVD are in [0,1], lower is closer; "
+            "`W/std` is the Wasserstein distance in units of the reference standard "
+            "deviation. The `train vs holdout` row is the sampling-noise floor: two "
+            "disjoint samples of real patients differ by this much purely by chance, "
+            "so read every synthetic row against it. To keep that reading fair, each "
+            "synthetic frame is subsampled to the holdout's row count (averaged over "
+            "seeded draws) before train-vs-synthetic scoring -- the floor is only "
+            "exchangeable with comparisons at the same sample sizes. "
             f"{len(results.get('constant_columns_excluded', []))} constant columns "
             "(re-attached verbatim, trivially perfect) are excluded from all aggregates.",
             "",
@@ -389,7 +466,8 @@ class EvaluateStep(PipelineStep):
             else:
                 if c.get("stale_file"):
                     lines.append(f"| 🚨 synthetic[{c['run_id']}] IS STALE "
-                                 f"({c['stale_cells']} undecoded cells) -- rerun generate | | | | | | | | |")
+                                 f"({c['stale_cells']} undecoded cells; excluded from group "
+                                 f"aggregates) -- rerun generate | | | | | | | | |")
                 lines.append(_row(c["train_vs_synthetic"]))
                 detail_sections.append(c["train_vs_synthetic"])
 
@@ -413,18 +491,34 @@ class EvaluateStep(PipelineStep):
                              f"| {_pm(g['ks_mean'])} | {_pm(g['tvd_mean'])} "
                              f"| {_pm(g['missing_rate_mad'])} |")
 
+            stale_excluded = [r for g in results["groups"]
+                              for r in g.get("stale_runs_excluded", [])]
+            if stale_excluded:
+                lines += ["", "Excluded from these group aggregates as stale "
+                              "(scores describe outdated files; see the per-run table): "
+                              + ", ".join(f"`{r}`" for r in stale_excluded) + "."]
+
         lines += [
             "",
             "## Full-joint distinguishability (C2ST)",
             "",
-            "AUC of a classifier separating real from synthetic rows; 0.5 = joints "
-            f"indistinguishable. Floor (train vs holdout): **{results.get('c2st_floor_train_vs_holdout', '-')}**.",
+            "Out-of-fold AUC (5-fold stratified CV) of a classifier separating real "
+            "from synthetic rows, over the columns present in BOTH frames; 0.5 = "
+            "joints indistinguishable. `coverage` is the fraction of modelled columns "
+            "the synthetic file actually contains -- width-limited runs are scored on "
+            "that intersection only, never on schema width itself. Floor (train vs "
+            f"holdout): **{results.get('c2st_floor_train_vs_holdout', '-')}**.",
             "",
-            "| run | C2ST AUC |", "|---|---|",
+            "| run | C2ST AUC | ± sd | coverage |", "|---|---|---|---|",
         ]
         for c in results["comparisons"]:
             if "c2st_auc" in c:
-                lines.append(f"| {c['run_id']} | {c['c2st_auc']} |")
+                d = c.get("c2st", {})
+                sd = d.get("auc_sd")
+                cov = d.get("schema_coverage")
+                lines.append(f"| {c['run_id']} | {c['c2st_auc']} "
+                             f"| {sd if sd is not None else '-'} "
+                             f"| {cov if cov is not None else '-'} |")
 
         if results.get("subgroup_noise_floor"):
             floor = results["subgroup_noise_floor"]

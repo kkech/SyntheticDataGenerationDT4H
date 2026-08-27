@@ -89,6 +89,29 @@ def load_generator(path: str):
             with open(path, "rb") as f:
                 return pickle.load(f)
     except Exception as e:
+        # Only the numpy 1.x/2.x RNG-state/module-rename family of failures
+        # gets the numpy-mismatch diagnosis. Every other failure (a missing
+        # file, a corrupt pickle, an unrelated import error) must surface as
+        # itself -- misattributing them to numpy sent people chasing a
+        # version that was never the problem.
+        msg = str(e)
+        looks_like_numpy_mismatch = (
+            "numpy._core" in msg
+            or "numpy.core" in msg
+            or "BitGenerator" in msg
+            or ("MT19937" in msg)
+            or (isinstance(e, ModuleNotFoundError)
+                and getattr(e, "name", "").split(".")[0] == "numpy")
+        )
+        if not looks_like_numpy_mismatch:
+            # Re-raise as the original exception type with the path added,
+            # falling back to RuntimeError if that type's constructor does
+            # not take a plain message.
+            detail = f"Cannot load {path}: {type(e).__name__}: {e}"
+            try:
+                raise type(e)(detail) from e
+            except TypeError:
+                raise RuntimeError(detail) from e
         saved_numpy = None
         sidecar = path + ".env.json"
         if os.path.exists(sidecar):

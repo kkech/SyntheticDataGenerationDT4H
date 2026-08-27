@@ -19,6 +19,11 @@ without retraining anything.
      pipeline) until the target row count is restored or --max-rounds
      is exhausted; without it, the output is simply smaller.
 
+DP runs (run id containing 'eps') are REFUSED: the rejection filter is
+data-dependent post-processing against the training data, which voids
+the differential-privacy guarantee the run exists for. --force-dp
+overrides with a loud warning; the output then carries no DP claim.
+
 The output is re-audited (representation, leakage in decoded space,
 distance re-check) and written next to the input as
 <name>_postprocessed.csv (or --out). It is a NEW release candidate:
@@ -47,17 +52,15 @@ from pipeline.steps.privacy.distance import build_encoder, nearest_two_distances
 MAX_ROUNDS_DEFAULT = 10
 
 
-def _distances_to_train(frame, train, encode):
-    """Nearest-training-record distance for every row of `frame`
-    (columns missing from the released subset padded as NA, as the
-    privacy step does)."""
-    missing = [c for c in train.columns if c not in frame.columns]
-    padded = frame
-    if missing:
-        padded = pd.concat([frame, pd.DataFrame(pd.NA, index=frame.index, columns=missing)],
-                           axis=1)
-    t_num, t_cat = encode(train)
-    s_num, s_cat = encode(padded)
+def _distances_to_train(frame, train, encode, columns):
+    """Nearest-training-record distance for every row of `frame`,
+    computed over `columns` -- the intersection of the candidate's and
+    the training frame's columns, with `encode` built on that same
+    subset. A width-limited candidate used to be NA-padded to full
+    width, which guaranteed large distances against the full-width
+    threshold and made the filter vacuous."""
+    t_num, t_cat = encode(train[columns])
+    s_num, s_cat = encode(frame[columns])
     d1, _ = nearest_two_distances(s_num, s_cat, t_num, t_cat)
     return d1
 
@@ -95,6 +98,11 @@ def main() -> int:
     parser.add_argument("--no-filter", action="store_true", help="Skip the distance filter.")
     parser.add_argument("--max-rounds", type=int, default=MAX_ROUNDS_DEFAULT,
                         help="Top-up sampling rounds when --model is given.")
+    parser.add_argument("--force-dp", action="store_true",
+                        help="Post-process a DP run's output anyway. The distance "
+                             "filter is data-dependent post-processing that VOIDS the "
+                             "run's differential-privacy guarantee -- only pass this "
+                             "with a governance decision behind it.")
     args = parser.parse_args()
     config = PipelineConfig()
     # Default name deliberately does NOT match the DT4H_Synthetic_*.csv
@@ -107,16 +115,32 @@ def main() -> int:
     out_path = args.out or os.path.join(os.path.dirname(args.file),
                                         f"DT4H_Candidate_{stem}_postprocessed.csv")
 
+    # A DP run's output must NOT go through the rejection filter: dropping
+    # records by their distance to the TRAINING data is data-dependent
+    # post-processing, which voids the differential-privacy guarantee the
+    # run was made for (the guarantee only survives data-INDEPENDENT
+    # post-processing). Run ids carry the budget as 'eps<value>'.
+    if "eps" in stem:
+        if not args.force_dp:
+            print(f"🚫 '{stem}' looks like a DP run (run id contains 'eps'). "
+                  f"The nearest-record rejection filter consults the training data, "
+                  f"so applying it VOIDS the DP guarantee -- the released file could "
+                  f"no longer honestly claim its epsilon. Refusing. If the file is "
+                  f"knowingly released WITHOUT its DP claim, re-run with --force-dp.")
+            return 2
+        print("⚠️  ⚠️  ⚠️  --force-dp: post-processing a DP run's output. The output "
+              "file's differential-privacy guarantee is VOID -- it must not be "
+              "released or documented as differentially private. ⚠️  ⚠️  ⚠️")
+
     train = pl.read_parquet(config.train_output_path).to_pandas()
     train_decoded, _ = GenerateStep._decode_numeric_missing(train.copy(), config)
 
     priv_path = os.path.join(config.step_dir("privacy"), "DT4H_Privacy_Assessment.json")
     with open(priv_path) as f:
-        p5 = json.load(f)["holdout_baseline"]["dcr_p5"]
+        committed_p5 = json.load(f)["holdout_baseline"]["dcr_p5"]
 
     enc_path = os.path.join(config.step_dir("preprocess"), "DT4H_Numeric_Missing_Encoding.json")
     encoding = json.load(open(enc_path)) if os.path.exists(enc_path) else {}
-    encode, _, _ = build_encoder(train, encoding)
 
     summary_path = os.path.join(config.step_dir("generate"), "DT4H_Generation_Summary.json")
     constants = {}
@@ -129,6 +153,26 @@ def main() -> int:
     target_rows = len(candidate)
     print(f"Candidate: {target_rows} x {candidate.shape[1]} ({os.path.basename(args.file)})")
 
+    # SUBSET-AWARE distances: encoder and threshold both live on the
+    # intersection of candidate and train columns. A width-limited
+    # candidate compared NA-padded against the FULL-width holdout p5
+    # gets guaranteed-large distances and the filter turns vacuous, so
+    # the p5 baseline is recomputed on the shared subset in that case.
+    subset = [c for c in train.columns if c in candidate.columns]
+    encode, _, _ = build_encoder(train[subset], encoding)
+    if len(subset) == len(train.columns):
+        p5 = committed_p5
+    else:
+        holdout = pl.read_parquet(config.holdout_output_path).to_pandas()
+        h_num, h_cat = encode(holdout[subset])
+        t_num, t_cat = encode(train[subset])
+        dh, _ = nearest_two_distances(h_num, h_cat, t_num, t_cat)
+        p5 = round(float(np.percentile(dh, 5)), 6)
+        print(f"⚠️  width-limited candidate: {len(subset)}/{len(train.columns)} "
+              f"columns shared with the training frame; holdout p5 recomputed on "
+              f"that subset = {p5} (committed full-width p5 {committed_p5} does "
+              f"not apply).")
+
     grid = infer_granularity(train_decoded[[c for c in candidate.columns
                                             if c in train_decoded.columns]])
 
@@ -139,10 +183,11 @@ def main() -> int:
               f"({len(grid)} gridded columns detected).")
 
     if not args.no_filter:
-        d1 = _distances_to_train(candidate, train, encode)
+        d1 = _distances_to_train(candidate, train, encode, subset)
         close = d1 < p5
         print(f"Distance filter: {int(close.sum())}/{len(candidate)} record(s) "
-              f"({close.mean():.1%}) below the holdout p5 threshold ({p5}) -- dropping them "
+              f"({close.mean():.1%}) below the holdout p5 threshold ({p5}, "
+              f"over {len(subset)} column(s)) -- dropping them "
               f"(natural rate for real unseen patients: 5%).")
         candidate = candidate.loc[~close].reset_index(drop=True)
 
@@ -155,8 +200,20 @@ def main() -> int:
                                 constants, config)
             if not args.no_snap:
                 batch, _ = snap_to_granularity(batch, grid)
-            bd = _distances_to_train(batch, train, encode)
-            keep = batch.loc[bd >= p5].head(need)
+            bd = _distances_to_train(batch, train, encode, subset)
+            keep = batch.loc[bd >= p5]
+            # A generator resampled with the same state can return the
+            # same batch again -- defensively drop rows identical to an
+            # already-kept candidate row (or repeated inside the batch)
+            # before topping up, so the output never carries duplicates.
+            if len(keep):
+                pooled = pd.concat([candidate, keep], ignore_index=True)
+                dup = pooled.duplicated(keep="first").to_numpy()[len(candidate):]
+                if dup.any():
+                    print(f"    dropped {int(dup.sum())} duplicate replacement row(s) "
+                          f"(identical to already-kept rows or repeated in the batch)")
+                keep = keep[~dup]
+            keep = keep.head(need)
             print(f"    kept {len(keep)} (passed the distance threshold); "
                   f"still need {max(need - len(keep), 0)}")
             if len(keep):
@@ -175,9 +232,10 @@ def main() -> int:
     print(f"Representation: {rep_summary(rep)}")
     leak = leakage.check_exact_duplicates(candidate, train_decoded)
     print(leakage.summarize(leak))
-    d1 = _distances_to_train(candidate, train, encode)
+    d1 = _distances_to_train(candidate, train, encode, subset)
     print(f"Final distance profile: min {d1.min():.4f}, "
-          f"{(d1 < p5).mean():.1%} below the p5 threshold.")
+          f"{(d1 < p5).mean():.1%} below the p5 threshold "
+          f"({p5}, over {len(subset)} column(s)).")
 
     candidate.to_csv(out_path, index=False)
     print(f"✅ {len(candidate)} x {candidate.shape[1]} -> {out_path}")

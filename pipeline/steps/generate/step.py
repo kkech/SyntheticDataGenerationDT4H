@@ -130,9 +130,14 @@ class GenerateStep(PipelineStep):
                       "Lower config.batch_size if training hits CUDA OOM.")
         elif env.get("cuda_available") is False:
             print("⚠️  No CUDA GPU detected: GPU-backed synthesizers fall back to CPU (slow).")
-        if prov["git"]["dirty"]:
+        if prov["git"]["dirty"] is True:
             print("⚠️  Working tree has uncommitted changes -- this run is not reproducible "
                   "from the recorded git commit alone.")
+        elif prov["git"]["dirty"] is None:
+            # None means git could not be queried, which is NOT evidence
+            # of a clean tree -- do not let silence read as a clean bill.
+            print("⚠️  Could not determine the git working-tree state (git unavailable "
+                  "or not a repository) -- the recorded revision is unverified.")
 
     def _split_constant_columns(self, df, config: PipelineConfig):
         """
@@ -171,10 +176,9 @@ class GenerateStep(PipelineStep):
         print(f"\nSelecting top {k} outcome-relevant columns for "
               f"width-limited runs ({len(forced)} force-included: "
               f"{len(targets)} TSTR targets + demographics/NYHA)...")
-        selected, scores = select_important_columns(
+        selected, ranking = select_important_columns(
             train, outcomes, forced, k)
-        print(f"  Selected {len(selected)} columns "
-              f"(top scored: {sorted(scores, key=lambda c: -scores[c])[:5]})")
+        print(f"  Selected {len(selected)} columns (top ranked: {ranking[:5]})")
 
         path = os.path.join(out_dir,
                             "DT4H_AIM_Column_Selection.json" if k == config.aim_max_columns
@@ -186,9 +190,19 @@ class GenerateStep(PipelineStep):
                           "on the training split; TSTR targets, age, gender and NYHA "
                           "force-included; other outcome columns excluded from the ranked pool",
                 "k": k,
-                "force_included": [c for c in forced if c in train.columns],
+                "force_included": sorted(c for c in forced if c in train.columns),
                 "selected_columns": selected,
-                "scores": dict(sorted(scores.items(), key=lambda kv: -kv[1])),
+                # RANKS ONLY, no scores. The scores are exact statistics
+                # of the real training split; publishing them alongside a
+                # DP-labelled dataset would release an unnoised function
+                # of private data next to the file it bounded. The order
+                # is what makes the selection auditable; the magnitudes
+                # were only ever diagnostics.
+                "ranked_pool": ranking,
+                "disclosure": "the selection itself is data-dependent (computed on the "
+                              "train split without noise); for DP runs it must be "
+                              "disclosed as a non-private step, or replaced by a public "
+                              "or DP column choice",
             }, f, indent=2)
         print(f"  Saved column selection (auditable) -> {path}")
         return selected
@@ -246,7 +260,29 @@ class GenerateStep(PipelineStep):
         params.update(spec.get("params") or {})
         params.setdefault("epochs", config.epochs)
         params.setdefault("batch_size", config.batch_size)
-        params["epsilon"] = spec["epsilon"] if spec.get("epsilon") is not None else config.epsilon
+
+        from pipeline.steps.generate.synthesizers import REGISTRY
+
+        is_dp = REGISTRY[name].is_dp if name in REGISTRY else False
+        if spec.get("epsilon") is not None:
+            params["epsilon"] = spec["epsilon"]
+        elif is_dp:
+            # No fallback epsilon, deliberately: a DP file whose budget
+            # was inherited from a config default cannot be reported
+            # honestly, and the plan is the place to fix it.
+            raise ValueError(
+                f"Run '{run_id}' uses the DP synthesizer '{name}' but its spec has no "
+                f"epsilon. Every DP run must state its own budget explicitly.")
+        if is_dp:
+            # Bounds and sentinel identification are per-run inputs the DP
+            # synthesizers cannot look up themselves (they never see the
+            # config). The domain file is the reviewed public declaration;
+            # the encoding map only says WHICH columns are sentinel-coded.
+            from pipeline.steps.preprocess.transforms import NUMERIC_ENCODING_FILENAME
+
+            params["public_domains_path"] = config.public_domains_path
+            params["numeric_encoding_path"] = os.path.join(
+                config.step_dir("preprocess"), NUMERIC_ENCODING_FILENAME)
 
         # Width-limited runs train on an importance subset: "top" is the
         # standard AIM width, an integer selects that top-k.
@@ -293,7 +329,9 @@ class GenerateStep(PipelineStep):
             record.update(synth.describe())
 
             if synth.is_dp:
-                print(f"Differential privacy ON -- total epsilon budget: {params['epsilon']}")
+                print(f"Differential privacy ON -- total epsilon budget: {params['epsilon']}"
+                      f" (bounds come from the reviewed public domain file; delta is "
+                      f"recorded once the model is built)")
             else:
                 print("No formal privacy guarantee (non-DP model).")
             if not synth.uses_gpu:
@@ -485,7 +523,14 @@ class GenerateStep(PipelineStep):
                   f"are left as-is. Re-run the preprocess step to produce the map.")
 
         if NYHA_COLUMN in synthetic.columns and pd.api.types.is_numeric_dtype(synthetic[NYHA_COLUMN]):
-            col = pd.to_numeric(synthetic[NYHA_COLUMN], errors="coerce").round()
+            import numpy as np
+
+            # NOT Series.round(): pandas/numpy round half to EVEN, so 2.5
+            # becomes 2 while 3.5 becomes 4 -- a systematic, class-dependent
+            # bias in an ordinal clinical variable. floor(x + 0.5) rounds
+            # half up uniformly, which is what "nearest NYHA class" means.
+            col = pd.to_numeric(synthetic[NYHA_COLUMN], errors="coerce")
+            col = np.floor(col + 0.5)
             not_assessed = col <= 0
             n = int(not_assessed.sum())
             synthetic[NYHA_COLUMN] = col.clip(upper=4)
@@ -518,7 +563,9 @@ class GenerateStep(PipelineStep):
             "## Reproducibility",
             f"- Seed: `{p['seed_state']['seed']}`",
             f"- Git commit: `{git['commit']}` (branch `{git['branch']}`"
-            + (", **uncommitted changes present**" if git["dirty"] else "") + ")",
+            + (", **uncommitted changes present**" if git["dirty"] is True
+               else ", working-tree state **unknown**" if git["dirty"] is None
+               else "") + ")",
             f"- Training data: `{p['training_data']['path']}`",
             f"- Training data SHA-256: `{p['training_data']['sha256']}`",
             f"- Python {env['python']} on {env['platform']}",
@@ -551,11 +598,15 @@ class GenerateStep(PipelineStep):
             "",
             "## Runs",
             "",
-            "| run | model | ε | seed | status | rows x cols | duration | verbatim training rows | notes |",
-            "|---|---|---|---|---|---|---|---|---|",
+            "| run | model | ε | δ | seed | status | rows x cols | duration | verbatim training rows | notes |",
+            "|---|---|---|---|---|---|---|---|---|---|",
         ]
         for r in s["runs"]:
             dp = f"{r['epsilon']:g}" if r.get("epsilon") is not None else "-"
+            # delta is only meaningful for the DP runs; recorded per run
+            # by the synthesizer's describe(), together with the sha256 of
+            # the public domain file that bounded it.
+            dl = f"{r['delta']:.3g}" if r.get("delta") is not None else "-"
             if r["status"] == "ok":
                 shape = f"{r['output_rows']} x {r['output_columns']}"
                 lk = r.get("leakage", {})
@@ -570,8 +621,11 @@ class GenerateStep(PipelineStep):
                 notes = f"{r.get('error_type')}: {str(r.get('error'))[:80]}"
             if r.get("width_limited"):
                 notes = (notes + "; " if notes else "") + f"width-limited ({r['trained_columns']} cols)"
+            if r.get("public_domains_sha256"):
+                notes = (notes + "; " if notes else "") + \
+                    f"bounds `{r['public_domains_sha256'][:12]}`"
             lines.append(
-                f"| {r.get('run_id', r['synthesizer'])} | {r['synthesizer']} | {dp} "
+                f"| {r.get('run_id', r['synthesizer'])} | {r['synthesizer']} | {dp} | {dl} "
                 f"| {r.get('seed', '-')} | {r['status']} | {shape} | "
                 f"{r.get('duration_seconds')}s | {leak_cell} | {notes} |"
             )
@@ -603,6 +657,12 @@ class GenerateStep(PipelineStep):
             "not detect near-duplicates; the privacy step's distance-to-closest-record "
             "analysis against the holdout baseline covers the rest.",
             "- Non-DP models carry no formal privacy guarantee regardless of this check.",
+            "- DP runs are bounded by the reviewed a-priori public domains in "
+            "`public_domains.json` (sha-256 recorded per run above), so no epsilon is "
+            "spent on -- and no bound is derived from -- the training data. Two "
+            "residual, disclosed leaks remain: snsynth learns categorical vocabularies "
+            "from the training data, and AIM's column selection is computed on the "
+            "train split without noise.",
             "- Width-limited runs synthesize a column subset by design; their files have "
             "fewer columns and are evaluated over those columns only.",
         ]

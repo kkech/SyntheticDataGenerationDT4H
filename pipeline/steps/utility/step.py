@@ -95,6 +95,7 @@ class UtilityStep(PipelineStep):
 
         # Per-run aggregates across targets, then grouped per (model, eps).
         metrics = {"auc_gap": {}, "auc_gap_logreg": {}, "augmentation_delta": {},
+                   "augmentation_delta_vs_bootstrap": {},
                    "brier_gap": {}, "worst_subgroup_gap": {}}
         for t in results["targets"]:
             for r in t["tstr"]:
@@ -107,6 +108,9 @@ class UtilityStep(PipelineStep):
                 if r.get("augmentation_delta") is not None:
                     metrics["augmentation_delta"].setdefault(r["run_id"], []).append(
                         r["augmentation_delta"])
+                if r.get("augmentation_delta_vs_bootstrap") is not None:
+                    metrics["augmentation_delta_vs_bootstrap"].setdefault(
+                        r["run_id"], []).append(r["augmentation_delta_vs_bootstrap"])
                 if r.get("brier_gap") is not None:
                     metrics["brier_gap"].setdefault(r["run_id"], []).append(
                         r["brier_gap"])
@@ -135,11 +139,18 @@ class UtilityStep(PipelineStep):
             results["grouped_auc_gap"].append({
                 "synthesizer": model, "epsilon": eps, "n_runs": len(gaps),
                 "mean_gap": round(statistics.mean(gaps), 4),
+                # sd_gap None means "single run: sd not available" -- an
+                # observed sd of exactly 0.0 is reported as 0.0, which is
+                # a different statement.
                 "sd_gap": round(statistics.stdev(gaps), 4) if len(gaps) > 1 else None,
+                "sd_gap_note": None if len(gaps) > 1 else "not available (single run)",
                 "mean_gap_logreg": round(statistics.mean(m["auc_gap_logreg"]), 4)
                     if m.get("auc_gap_logreg") else None,
                 "mean_augmentation_delta": round(statistics.mean(m["augmentation_delta"]), 4)
                     if m.get("augmentation_delta") else None,
+                "mean_augmentation_delta_vs_bootstrap": round(
+                    statistics.mean(m["augmentation_delta_vs_bootstrap"]), 4)
+                    if m.get("augmentation_delta_vs_bootstrap") else None,
                 "mean_brier_gap": round(statistics.mean(m["brier_gap"]), 4)
                     if m.get("brier_gap") else None,
                 "mean_worst_subgroup_gap": round(statistics.mean(m["worst_subgroup_gap"]), 4)
@@ -150,9 +161,11 @@ class UtilityStep(PipelineStep):
               "(augmentation: positive = synthetic data ADDS value):")
         for g in results["grouped_auc_gap"]:
             eps = f" ε={g['epsilon']:g}" if g.get("epsilon") is not None else ""
-            sd = f" ± {g['sd_gap']}" if g.get("sd_gap") is not None else ""
+            sd = (f" ± {g['sd_gap']}" if g.get("sd_gap") is not None
+                  else " (sd n/a: single run)")
             print(f"  {g['synthesizer']}{eps}: HistGB {g['mean_gap']:+.4f}{sd} | "
                   f"LogReg {g.get('mean_gap_logreg')} | augment {g.get('mean_augmentation_delta')} "
+                  f"(vs bootstrap {g.get('mean_augmentation_delta_vs_bootstrap')}) "
                   f"| Brier gap {g.get('mean_brier_gap')} "
                   f"| worst-stratum gap {g.get('mean_worst_subgroup_gap')} "
                   f"({g['n_runs']} run(s))")
@@ -229,6 +242,7 @@ class UtilityStep(PipelineStep):
         baseline = round(float(roc_auc_score(y_test_all, base_proba)), 4)
         baseline_lr = self._fit_score_logreg(x_train, y_train_all, x_test, y_test_all, config.seed)
         entry["baseline_auc"] = baseline
+        entry["baseline_auc_ci95"] = self._bootstrap_auc_ci(y_test_all, base_proba, config.seed)
         entry["baseline_auc_logreg"] = baseline_lr
         entry["baseline_brier"] = round(float(brier_score_loss(y_test_all, base_proba)), 4)
         entry["baseline_subgroup_auc"] = self._subgroup_aucs(base_proba, y_test_all, strata_masks)
@@ -236,6 +250,27 @@ class UtilityStep(PipelineStep):
         entry["positives_holdout"] = int(y_test_all.sum())
         print(f"  baseline (train real -> test holdout): AUC={baseline} (HistGB) / {baseline_lr} (LogReg) "
               f"| Brier {entry['baseline_brier']}")
+
+        # Size-matched augmentation control, computed ONCE per target (per
+        # distinct added size): real + a bootstrap resample of REAL rows of
+        # the same size the synthetic augmentation adds, same seed policy
+        # and model. auc_augmented compares real+synthetic (n + n_s rows)
+        # against a baseline trained on n rows, so "synthetic adds value"
+        # is confounded with "more rows"; this control isolates that.
+        import numpy as np
+        bootstrap_aug_cache: dict[int, float] = {}
+
+        def _bootstrap_aug_auc(n_added: int) -> float:
+            if n_added not in bootstrap_aug_cache:
+                rng = np.random.default_rng(config.seed)
+                idx = rng.integers(0, len(y_train_all), size=n_added)
+                x_aug = pd.concat([x_train, x_train.iloc[idx]], ignore_index=True)
+                y_aug = pd.concat([y_train_all.reset_index(drop=True),
+                                   y_train_all.iloc[idx].reset_index(drop=True)],
+                                  ignore_index=True)
+                bootstrap_aug_cache[n_added] = self._fit_score(
+                    x_aug, y_aug, x_test, y_test_all, config.seed)
+            return bootstrap_aug_cache[n_added]
 
         for path in synthetic_files:
             run_id = os.path.basename(path)[len("DT4H_Synthetic_"):-len(".csv")]
@@ -251,6 +286,9 @@ class UtilityStep(PipelineStep):
                 proba = self._fit_predict(x_s, y_s, x_test, config.seed)
                 record["auc"] = round(float(roc_auc_score(y_test_all, proba)), 4)
                 record["auc_gap"] = round(baseline - record["auc"], 4)
+                # Uncertainty on the TSTR AUC: bootstrap over holdout
+                # predictions (1000 resamples, seeded).
+                record["auc_ci95"] = self._bootstrap_auc_ci(y_test_all, proba, config.seed)
                 # Calibration: AUC parity with broken probabilities is
                 # not clinical utility.
                 record["brier"] = round(float(brier_score_loss(y_test_all, proba)), 4)
@@ -274,9 +312,18 @@ class UtilityStep(PipelineStep):
                                    y_s.reset_index(drop=True)], ignore_index=True)
                 record["auc_augmented"] = self._fit_score(x_aug, y_aug, x_test, y_test_all, config.seed)
                 record["augmentation_delta"] = round(record["auc_augmented"] - baseline, 4)
-                print(f"  {run_id}: TSTR AUC={record['auc']} (gap {record['auc_gap']:+.4f}) | "
+                # Size-matched control: is the augmentation gain more than
+                # what bootstrap-resampled REAL rows of the same added
+                # size buy? Positive = synthetic beats the row-count
+                # effect, not just the baseline.
+                record["auc_augmented_bootstrap"] = _bootstrap_aug_auc(len(y_s))
+                record["augmentation_delta_vs_bootstrap"] = round(
+                    record["auc_augmented"] - record["auc_augmented_bootstrap"], 4)
+                print(f"  {run_id}: TSTR AUC={record['auc']} "
+                      f"(CI95 {record['auc_ci95']}, gap {record['auc_gap']:+.4f}) | "
                       f"LogReg gap {record['auc_gap_logreg']:+.4f} | "
-                      f"augmentation {record['augmentation_delta']:+.4f}")
+                      f"augmentation {record['augmentation_delta']:+.4f} "
+                      f"(vs size-matched bootstrap {record['augmentation_delta_vs_bootstrap']:+.4f})")
             entry["tstr"].append(record)
         return entry
 
@@ -344,6 +391,30 @@ class UtilityStep(PipelineStep):
         model = HistGradientBoostingClassifier(random_state=seed)
         model.fit(x_train[usable], y_train)
         return model.predict_proba(x_test[usable])[:, 1]
+
+    @staticmethod
+    def _bootstrap_auc_ci(y_test, proba, seed, n_boot: int = 1000):
+        """95% bootstrap CI for the holdout AUC: resample the holdout
+        predictions (not the model) 1000 times, seeded. Returns
+        [lo, hi] or None when too few resamples are two-class."""
+        import numpy as np
+        from sklearn.metrics import roc_auc_score
+
+        rng = np.random.default_rng(seed)
+        y = np.asarray(y_test, dtype=int)
+        p = np.asarray(proba, dtype=float)
+        n = len(y)
+        aucs = []
+        for _ in range(n_boot):
+            idx = rng.integers(0, n, size=n)
+            ys = y[idx]
+            if ys.min() == ys.max():
+                continue
+            aucs.append(roc_auc_score(ys, p[idx]))
+        if len(aucs) < n_boot // 2:
+            return None
+        lo, hi = np.percentile(aucs, [2.5, 97.5])
+        return [round(float(lo), 4), round(float(hi), 4)]
 
     @staticmethod
     def _subgroup_aucs(proba, y_test, strata_masks) -> dict:
@@ -416,32 +487,51 @@ class UtilityStep(PipelineStep):
             if t.get("note"):
                 lines.append(f"_{t['note']}_")
                 continue
+            base_ci = t.get("baseline_auc_ci95")
             lines += [
                 f"train {t['n_train_labelled']} labelled ({t.get('positives_train')} positive), "
                 f"holdout {t['n_holdout_labelled']} labelled ({t.get('positives_holdout')} positive) | "
-                f"baseline AUC **{t['baseline_auc']}** (HistGB) / {t.get('baseline_auc_logreg')} (LogReg)", "",
-                "| run | TSTR AUC | gap | LogReg gap | augmentation Δ |", "|---|---|---|---|---|"]
+                f"baseline AUC **{t['baseline_auc']}**"
+                + (f" (95% CI {base_ci[0]}-{base_ci[1]})" if base_ci else "")
+                + f" (HistGB) / {t.get('baseline_auc_logreg')} (LogReg)", "",
+                "CIs are bootstrap over holdout predictions (1000 resamples). "
+                "'aug Δ vs bootstrap' is the size-matched control: the augmented AUC minus "
+                "the AUC of real + bootstrap-resampled REAL rows of the same added size "
+                "(positive = synthetic beats the pure row-count effect).", "",
+                "| run | TSTR AUC | 95% CI | gap | LogReg gap | augmentation Δ | aug Δ vs bootstrap |",
+                "|---|---|---|---|---|---|---|"]
             for s in t["tstr"]:
                 if s.get("auc") is None:
-                    lines.append(f"| {s['run_id']} | - | {s.get('note', '')} | - | - |")
+                    lines.append(f"| {s['run_id']} | - | - | {s.get('note', '')} | - | - | - |")
                 else:
+                    ci = s.get("auc_ci95")
+                    ci_cell = f"{ci[0]}-{ci[1]}" if ci else "-"
                     lr = f"{s['auc_gap_logreg']:+.4f}" if s.get("auc_gap_logreg") is not None else "-"
                     ag = f"{s['augmentation_delta']:+.4f}" if s.get("augmentation_delta") is not None else "-"
-                    lines.append(f"| {s['run_id']} | {s['auc']} | {s['auc_gap']:+.4f} | {lr} | {ag} |")
+                    ab = (f"{s['augmentation_delta_vs_bootstrap']:+.4f}"
+                          if s.get("augmentation_delta_vs_bootstrap") is not None else "-")
+                    lines.append(f"| {s['run_id']} | {s['auc']} | {ci_cell} | {s['auc_gap']:+.4f} "
+                                 f"| {lr} | {ag} | {ab} |")
 
         if r.get("grouped_auc_gap"):
             lines += ["", "## Per (model, ε) across seeds and targets",
                       "",
                       "Gaps vs baseline, lower is better; augmentation Δ is the AUC change from "
-                      "training on real+synthetic vs real alone (positive = synthetic data adds value).",
-                      "", "| model | ε | runs | HistGB gap ± sd | LogReg gap | augmentation Δ | Brier gap | worst-stratum gap |",
-                      "|---|---|---|---|---|---|---|---|"]
+                      "training on real+synthetic vs real alone (positive = synthetic data adds "
+                      "value), and 'vs bootstrap' subtracts the size-matched real-resample "
+                      "control. 'sd n/a (single run)' means no spread can be estimated -- it is "
+                      "NOT the same statement as an observed sd of 0.",
+                      "", "| model | ε | runs | HistGB gap ± sd | LogReg gap | augmentation Δ "
+                      "| aug Δ vs bootstrap | Brier gap | worst-stratum gap |",
+                      "|---|---|---|---|---|---|---|---|---|"]
             for g in r["grouped_auc_gap"]:
                 eps = f"{g['epsilon']:g}" if g.get("epsilon") is not None else "-"
-                sd = f" ± {g['sd_gap']}" if g.get("sd_gap") is not None else ""
+                sd = (f" ± {g['sd_gap']}" if g.get("sd_gap") is not None
+                      else " (sd n/a: single run)")
                 lines.append(f"| {g['synthesizer']} | {eps} | {g['n_runs']} "
                              f"| {g['mean_gap']:+.4f}{sd} | {g.get('mean_gap_logreg')} "
                              f"| {g.get('mean_augmentation_delta')} "
+                             f"| {g.get('mean_augmentation_delta_vs_bootstrap')} "
                              f"| {g.get('mean_brier_gap')} "
                              f"| {g.get('mean_worst_subgroup_gap')} |")
         return "\n".join(lines) + "\n"

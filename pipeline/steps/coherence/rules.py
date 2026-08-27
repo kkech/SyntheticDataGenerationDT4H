@@ -71,30 +71,39 @@ def _bool_matrix(df: pd.DataFrame):
 
 
 def mine_boolean_implications(train: pd.DataFrame) -> list[dict]:
-    """Implications a=true => b=true holding on the train split."""
+    """Implications a=true => b=true holding on the train split.
+
+    Support and violation rate are counted over DECIDABLE rows only
+    (a true AND b not Missing) -- the same denominator evaluate_rules
+    uses, so the committed train_violation_rate is reproducible by
+    re-evaluating the rule set on the train split. Counting over all
+    antecedent-true rows (the old behavior) diluted the rate for
+    often-missing consequents and biased rule selection toward them."""
     cols, T, F = _bool_matrix(train)
     rules = []
     if not cols:
         return rules
-    support = T.sum(axis=0)
+    Ti = T.astype(np.int64)
+    # decidable[i, j] = count(a_i true AND b_j not Missing)
+    decidable = Ti.T @ (T | F).astype(np.int64)
     # violations[i, j] = count(a_i true AND b_j explicitly false)
-    violations = T.astype(np.int64).T @ F.astype(np.int64)
+    violations = Ti.T @ F.astype(np.int64)
     for i, a in enumerate(cols):
-        if support[i] < MIN_SUPPORT:
-            continue
         for j, b in enumerate(cols):
             if i == j:
+                continue
+            if decidable[i, j] < MIN_SUPPORT:
                 continue
             # skip trivial rules: b true almost everywhere anyway
             if T[:, j].mean() > 0.95:
                 continue
-            rate = violations[i, j] / support[i]
+            rate = violations[i, j] / decidable[i, j]
             if rate <= MAX_TRAIN_VIOLATION:
                 rules.append({
                     "type": "implication",
                     "if_true": a,
                     "then_true": b,
-                    "train_support": int(support[i]),
+                    "train_support": int(decidable[i, j]),
                     "train_violation_rate": round(float(rate), 5),
                 })
     return rules
@@ -160,8 +169,13 @@ def evaluate_rules(df: pd.DataFrame, rules: list[dict]) -> list[dict]:
                 a = _lower(df[r["if_true"]]) == "true"
                 b = _lower(df[r["then_true"]])
                 applicable = a & (b != "missing")
+                # antecedent-true checks with a Missing consequent cannot
+                # violate; their share is tracked so a generator emitting
+                # "Missing" consequents cannot silently evade the rule.
                 entry.update({"applicable": int(applicable.sum()),
-                              "violations": int((applicable & (b == "false")).sum())})
+                              "violations": int((applicable & (b == "false")).sum()),
+                              "antecedent_true": int(a.sum()),
+                              "consequent_missing": int((a & (b == "missing")).sum())})
         elif r["type"] == "category_range":
             if r["categorical"] not in df.columns or r["numeric"] not in df.columns:
                 entry.update({"applicable": 0, "violations": 0})
@@ -206,12 +220,22 @@ def evaluate_rules(df: pd.DataFrame, rules: list[dict]) -> list[dict]:
 def summarize_rule_results(results: list[dict]) -> dict:
     applicable = sum(r["applicable"] for r in results)
     violations = sum(r["violations"] for r in results)
+    # Missing-consequent evasion check, over implication rules: the share
+    # of antecedent-true checks whose consequent was Missing and thus
+    # undecidable. A generator can drive the violation rate to zero by
+    # emitting Missing consequents -- this number exposes that.
+    antecedent_true = sum(r.get("antecedent_true", 0) for r in results
+                          if r["type"] == "implication")
+    consequent_missing = sum(r.get("consequent_missing", 0) for r in results
+                             if r["type"] == "implication")
     return {
         "rules": len(results),
         "rule_checks_applicable": int(applicable),
         "violations": int(violations),
         "overall_violation_rate": round(violations / applicable, 5) if applicable else None,
         "rules_violated": sum(1 for r in results if r["violations"] > 0),
+        "consequent_missing_share": (round(consequent_missing / antecedent_true, 5)
+                                     if antecedent_true else None),
     }
 
 

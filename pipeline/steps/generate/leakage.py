@@ -20,9 +20,48 @@ import hashlib
 import pandas as pd
 
 
+def _normalize_numeric(frame: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cast every numeric column to float64 before stringification.
+
+    Without this, the check is defeated by dtype drift alone: a value
+    stored as int64 stringifies to "3" while the same value coming back
+    from a synthesizer as float64 stringifies to "3.0", so a row that is
+    a verbatim copy of a training record hashes differently and is
+    reported as clean. That is the worst possible direction for a safety
+    check to fail in, and it is invisible -- the count is simply 0.
+
+    Booleans are left alone: they are numeric to pandas, but the real
+    frame spells them as strings ("true"/"false") and the case-alignment
+    step upstream matches those spellings; turning True into "1.0" here
+    would break that match instead of fixing one.
+
+    Precision note: float64 cannot represent integers above 2^53 exactly,
+    so two distinct huge integers could collide. That direction is safe
+    (it can only over-report leakage, never hide it), and no such column
+    survives preprocessing.
+    """
+    out = {}
+    for c in frame.columns:
+        col = frame[c]
+        if pd.api.types.is_numeric_dtype(col) and not pd.api.types.is_bool_dtype(col):
+            try:
+                out[c] = pd.Series(col.to_numpy(dtype="float64", na_value=float("nan")),
+                                   index=frame.index)
+                continue
+            except (TypeError, ValueError):
+                pass  # exotic numeric dtype: fall back to the raw values
+        out[c] = col
+    return pd.DataFrame(out, index=frame.index)[list(frame.columns)]
+
+
 def _row_hashes(df: pd.DataFrame, columns: list[str]) -> pd.Series:
-    """Stable per-row hash over a fixed column order."""
-    ordered = df[columns].astype(str)
+    """Stable per-row hash over a fixed column order.
+
+    Both frames go through the SAME numeric normalization, so equality of
+    the hash means equality of the values, not of the dtypes.
+    """
+    ordered = _normalize_numeric(df[columns]).astype(str)
     joined = ordered.agg("\x1f".join, axis=1)  # unit separator: not valid in the data
     return joined.map(lambda s: hashlib.sha256(s.encode()).hexdigest())
 
@@ -31,9 +70,10 @@ def check_exact_duplicates(synthetic: pd.DataFrame, real: pd.DataFrame) -> dict:
     """
     Counts synthetic rows that exactly reproduce a training row.
 
-    Compares only on columns common to both, in a fixed order, with values
-    stringified so dtype differences between the real frame and a
-    synthesizer's output do not mask a genuine match.
+    Compares only on columns common to both, in a fixed order, with
+    numeric columns normalized to float64 and then stringified, so dtype
+    differences between the real frame and a synthesizer's output ("3"
+    vs "3.0") cannot mask a genuine match.
     """
     common = [c for c in real.columns if c in synthetic.columns]
     if not common:

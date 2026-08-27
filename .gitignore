@@ -8,6 +8,14 @@ output/preprocess/UC1_Preprocessed.parquet
 output/preprocess/UC1_Train.parquet
 output/preprocess/UC1_Holdout.parquet
 
+# Committed real-patient row samples (20 raw / 20 preprocessed rows). These
+# are patient-level data, not aggregates -- keep them out of git going
+# forward. Purging them from existing history is a separate manual step
+# (git filter-repo / BFG) the maintainer must run; ignoring them here just
+# stops them being re-added.
+output/profile_data/DT4H_Sample20.parquet
+output/profile_preprocessed_data/DT4H_Preprocessed_Sample20.parquet
+
 # Synthetic outputs are derived from real patient data and non-DP models
 # carry no formal privacy guarantee -- do not auto-commit them. Publish a
 # specific vetted file deliberately (git add -f) once its leakage and

@@ -150,32 +150,33 @@ class AttacksStep(PipelineStep):
             entry = {"run_id": run_id}
             entry["membership_inference"] = self._mia(
                 train_num, train_cat, hold_num, hold_cat, synth_num, synth_cat, rng,
-                member_quartile=member_quartile)
+                member_quartile=member_quartile, nonmember_quartile=nonmember_quartile)
             m = entry["membership_inference"]
-            worst = max(m["attack_auc"], m["learned_attack_auc"])
-            worst_ci = (m["attack_auc_ci95"] if m["attack_auc"] >= m["learned_attack_auc"]
-                        else m["learned_attack_auc_ci95"])
-            verdict = "✅" if worst_ci[0] <= 0.5 <= worst_ci[1] or worst < 0.55 else "🚨"
+            verdict = "✅" if m["mia_pass"] else "🚨"
             print(f"  {verdict} MIA distance attack AUC = {m['attack_auc']} "
                   f"(95% CI {m['attack_auc_ci95']}); learned attack AUC = "
                   f"{m['learned_attack_auc']} (95% CI {m['learned_attack_auc_ci95']}; "
                   f"0.5 = no membership leakage)")
+            print(f"     worst attack: {m['worst_attack']} -- pass requires its CI "
+                  f"upper bound {m['worst_attack_auc_ci95'][1]} < 0.55")
             if m.get("mia_by_atypicality"):
                 qs = m["mia_by_atypicality"]
-                print("  who is at risk: "
-                      + " | ".join(f"{q['quartile'].split()[0]} AUC {q['attack_auc']}"
+                print("  who is at risk (within-stratum): "
+                      + " | ".join(f"{q['quartile'].split()[0]} AUC "
+                                   f"{q['attack_auc'] if q['attack_auc'] is not None else 'n/a'}"
                                    for q in qs))
             print(f"  empirical ε lower bound (DP audit): "
                   f"{m['empirical_epsilon_lower_bound']} "
                   f"(a DP run's claimed budget must exceed this)")
 
-            entry["attribute_inference"] = self._aia(train, holdout, synth, sensitive)
+            entry["attribute_inference"] = self._aia(train_decoded, holdout_decoded,
+                                                     synth, sensitive)
             for a in entry["attribute_inference"]:
                 print(f"  AIA {a['sensitive']}: member acc {a['accuracy_members']} vs "
                       f"non-member {a['accuracy_nonmembers']} (baseline {a['baseline_accuracy']}) "
                       f"-> membership advantage {a['membership_advantage']:+.4f}")
 
-            entry["anonymeter"] = self._anonymeter(train, holdout, synth)
+            entry["anonymeter"] = self._anonymeter(train_decoded, holdout_decoded, synth)
             entry["duration_seconds"] = round(time.time() - t0, 1)
             results["runs"].append(entry)
 
@@ -192,7 +193,7 @@ class AttacksStep(PipelineStep):
     # --- membership inference ---
 
     def _mia(self, train_num, train_cat, hold_num, hold_cat, synth_num, synth_cat, rng,
-             member_quartile=None) -> dict:
+             member_quartile=None, nonmember_quartile=None) -> dict:
         from sklearn.metrics import roc_auc_score
 
         d_mem, d2_mem = nearest_two_distances(train_num, train_cat, synth_num, synth_cat)
@@ -250,12 +251,26 @@ class AttacksStep(PipelineStep):
         emp_eps = max(self._empirical_epsilon(-d_mem, -d_non),
                       self._empirical_epsilon(oof[:len(d_mem)], oof[len(d_mem):]))
 
+        # The verdict hangs on the WORST attack's CI UPPER bound: "CI
+        # contains 0.5" got EASIER to pass as the CI got noisier, so a
+        # sloppy estimate could clear a leaky model. An upper bound below
+        # 0.55 is affirmative evidence the worst attack stays near chance.
+        if learned_auc >= auc:
+            worst_name, worst_auc, worst_ci = "cv-logreg over (d1, d2, d1/d2)", learned_auc, learned_ci
+        else:
+            worst_name, worst_auc, worst_ci = "nearest-synthetic-distance", auc, ci
+
         out = {"attack": "nearest-synthetic-distance",
                "attack_auc": round(auc, 4),
                "attack_auc_ci95": ci,
                "learned_attack": "cv-logreg over (d1, d2, d1/d2)",
                "learned_attack_auc": round(learned_auc, 4),
                "learned_attack_auc_ci95": learned_ci,
+               "worst_attack": worst_name,
+               "worst_attack_auc": round(worst_auc, 4),
+               "worst_attack_auc_ci95": worst_ci,
+               "mia_pass": bool(worst_ci[1] < 0.55),
+               "mia_pass_rule": "95% CI upper bound of the worst attack < 0.55",
                "member_median_distance": round(float(np.median(d_mem)), 6),
                "nonmember_median_distance": round(float(np.median(d_non)), 6),
                "empirical_epsilon_lower_bound": emp_eps,
@@ -263,23 +278,32 @@ class AttacksStep(PipelineStep):
                                            "thresholds, both attack score sets, "
                                            "both accept/reject directions"}
 
-        # WHO is at risk: attack success per member-atypicality quartile
-        # (each quartile's members scored against all non-members).
-        if member_quartile is not None:
+        # WHO is at risk: WITHIN-STRATUM attack success -- members in an
+        # atypicality quartile vs the non-members whose own atypicality
+        # (same score, same reference set and encoder) falls in that
+        # member-defined bin. Scoring each member quartile against ALL
+        # non-members measured density (typical members are close to
+        # everything: Q1 high, Q4 low for every model), not leakage.
+        if member_quartile is not None and nonmember_quartile is not None:
             names = ["Q1 (most typical)", "Q2", "Q3", "Q4 (most atypical)"]
             by_q = []
             for qi in range(4):
-                mask = member_quartile == qi
-                if not mask.any():
-                    continue
-                sc = np.concatenate([-d_mem[mask], -d_non])
-                lb = np.concatenate([np.ones(int(mask.sum())), np.zeros(len(d_non))])
-                by_q.append({
-                    "quartile": names[qi],
-                    "n_members": int(mask.sum()),
-                    "attack_auc": round(float(roc_auc_score(lb, sc)), 4),
-                    "member_median_distance": round(float(np.median(d_mem[mask])), 6),
-                })
+                m_mask = member_quartile == qi
+                n_mask = nonmember_quartile == qi
+                row = {"quartile": names[qi],
+                       "n_members": int(m_mask.sum()),
+                       "n_nonmembers": int(n_mask.sum())}
+                if m_mask.any() and n_mask.sum() >= 30:
+                    sc = np.concatenate([-d_mem[m_mask], -d_non[n_mask]])
+                    lb = np.concatenate([np.ones(int(m_mask.sum())),
+                                         np.zeros(int(n_mask.sum()))])
+                    row["attack_auc"] = round(float(roc_auc_score(lb, sc)), 4)
+                    row["member_median_distance"] = round(float(np.median(d_mem[m_mask])), 6)
+                else:
+                    row["attack_auc"] = None
+                    row["note"] = ("skipped: fewer than 30 non-members in stratum"
+                                   if m_mask.any() else "skipped: no members in stratum")
+                by_q.append(row)
             out["mia_by_atypicality"] = by_q
         return out
 
@@ -315,31 +339,99 @@ class AttacksStep(PipelineStep):
 
     # --- attribute inference ---
 
-    def _aia(self, train, holdout, synth, sensitive) -> list[dict]:
+    @staticmethod
+    def _fit_quasi_encoder(train, quasi):
+        """ONE shared quasi-identifier encoder, fit on the TRAIN frame
+        only, applied to every frame. Fitting per frame (each frame's own
+        min-max range, pd.factorize in first-appearance order) put
+        train/holdout/synthetic in different coordinate systems, making
+        the membership-advantage comparison meaningless.
+
+        Per quasi-identifier, decided from train alone: numeric columns
+        are normalized by the TRAIN min/max (clipped to [0,1], NaN ->
+        0.5); categorical columns get a sorted category -> code map from
+        train, with every unseen category collapsing to one distinct
+        code. Returns a function mapping a frame to its coordinate
+        matrix."""
         import pandas as pd
+
+        transforms = []
+        for q in quasi:
+            v = pd.to_numeric(train[q], errors="coerce")
+            if v.notna().mean() > 0.5:  # numeric-vs-categorical decided from train only
+                lo = float(v.min())
+                rng_ = float(v.max()) - lo
+
+                def _num(df, q=q, lo=lo, rng_=rng_):
+                    x = pd.to_numeric(df[q], errors="coerce").astype(float)
+                    x = (x - lo) / rng_ if rng_ > 0 else x * 0.0
+                    return x.clip(0.0, 1.0).fillna(0.5).to_numpy(dtype=float)
+
+                transforms.append(_num)
+            else:
+                s_train = train[q].astype("object").where(train[q].notna(), "Missing").astype(str)
+                codes = {c: float(i) for i, c in enumerate(sorted(s_train.unique()))}
+                unseen = float(len(codes))  # one distinct code for categories train never saw
+
+                def _cat(df, q=q, codes=codes, unseen=unseen):
+                    s = df[q].astype("object").where(df[q].notna(), "Missing").astype(str)
+                    return s.map(codes).fillna(unseen).to_numpy(dtype=float)
+
+                transforms.append(_cat)
+
+        def _q_matrix(df):
+            return np.column_stack([t(df) for t in transforms])
+
+        return _q_matrix
+
+    def _aia(self, train, holdout, synth, sensitive) -> list[dict]:
+        """All three frames must arrive in the same (DECODED) space --
+        run() decodes the real frames before calling."""
+        import pandas as pd
+
+        from pipeline.steps.preprocess.transforms import NYHA_COLUMN
 
         quasi = [q for q in QUASI_IDENTIFIERS if q in train.columns and q in synth.columns]
         if not quasi or not sensitive:
             return []
 
-        def _q_matrix(df):
-            cols = []
-            for q in quasi:
-                v = pd.to_numeric(df[q], errors="coerce")
-                if v.notna().mean() > 0.5:
-                    rng_ = v.max() - v.min()
-                    cols.append(((v - v.min()) / rng_ if rng_ > 0 else v * 0).fillna(0.5).to_numpy())
+        _q_matrix = self._fit_quasi_encoder(train, quasi)
+
+        def _sens_repr(series, name):
+            """One comparable string form for a sensitive attribute
+            across parquet-loaded real frames and CSV-parsed synthetic
+            ones: null -> "Missing", booleans via str(), numerics
+            integer-safe ("2", never "2.0"). The NYHA "not assessed"
+            sentinel (0 / "0.0") means Missing in real frames and is
+            mapped accordingly even if a frame arrives undecoded."""
+            obj = series.astype("object").where(series.notna(), None)
+            obj = obj.map(lambda v: str(v) if isinstance(v, (bool, np.bool_)) else v)
+            num = pd.to_numeric(obj, errors="coerce").astype(float)
+            vals = []
+            for v, n in zip(obj.tolist(), num.tolist()):
+                if v is None:
+                    vals.append("Missing")
+                elif n == n:  # numeric-coercible (not NaN)
+                    vals.append(str(int(n)) if float(n).is_integer() else str(float(n)))
                 else:
-                    cols.append(pd.factorize(df[q].astype(str))[0].astype(float))
-            return np.column_stack(cols)
+                    vals.append(str(v))
+            out = pd.Series(vals, index=series.index)
+            if name == NYHA_COLUMN:
+                out = out.mask(out == "0", "Missing")
+            return out
 
         qs = _q_matrix(synth)
         out = []
         for s in sensitive:
             if s not in synth.columns:
                 continue
-            synth_vals = synth[s].astype("object").where(synth[s].notna(), "Missing").astype(str)
-            baseline = float(synth_vals.value_counts(normalize=True).iloc[0])
+            synth_vals = _sens_repr(synth[s], s)
+            # Baseline = majority-class share of the REAL HOLDOUT: the
+            # accuracy a no-information attacker gets on unseen real
+            # patients. The synthetic frame's own majority share said
+            # nothing about the attacked population.
+            baseline = float(_sens_repr(holdout[s], s)
+                             .value_counts(normalize=True).iloc[0])
 
             def _attack(df_real):
                 qr = _q_matrix(df_real)
@@ -349,13 +441,14 @@ class AttacksStep(PipelineStep):
                     chunk = qr[start:start + 512]
                     d = np.abs(chunk[:, None, :] - qs[None, :, :]).sum(axis=2)
                     pred.extend(synth_vals.iloc[np.argmin(d, axis=1)].tolist())
-                truth = df_real[s].astype("object").where(df_real[s].notna(), "Missing").astype(str)
+                truth = _sens_repr(df_real[s], s)
                 return float((np.asarray(pred) == truth.to_numpy()).mean())
 
             acc_m = _attack(train)
             acc_n = _attack(holdout)
             out.append({"sensitive": s,
                         "baseline_accuracy": round(baseline, 4),
+                        "baseline_source": "holdout majority-class share",
                         "accuracy_members": round(acc_m, 4),
                         "accuracy_nonmembers": round(acc_n, 4),
                         "membership_advantage": round(acc_m - acc_n, 4)})
@@ -451,12 +544,23 @@ class AttacksStep(PipelineStep):
             anon = run.get("anonymeter", {})
             so = anon.get("singling_out_risk")
             lk = anon.get("linkability_risk")
-            anon_cell = (f"SO {so if so is not None else '-'}, link {lk if lk is not None else '-'}"
-                         if (so is not None or lk is not None) else "skipped")
+            if so is not None or lk is not None:
+                anon_cell = (f"SO {so if so is not None else '-'}, "
+                             f"link {lk if lk is not None else '-'}")
+            elif "note" in anon:
+                anon_cell = "not installed (skipped)"
+            elif any(str(anon.get(k, "")).startswith("failed")
+                     for k in ("singling_out_note", "linkability_note")):
+                anon_cell = "FAILED (see JSON)"
+            else:
+                anon_cell = "skipped"
             l_auc = m.get("learned_attack_auc")
             l_ci = m.get("learned_attack_auc_ci95") or ["-", "-"]
             learned_cell = (f"{l_auc} ({l_ci[0]}-{l_ci[1]})" if l_auc is not None else "-")
-            flag = "" if max(m["attack_auc"], l_auc or 0) < 0.55 else " 🚨"
+            # Pass rule: the WORST attack's CI upper bound must sit below
+            # 0.55 -- a rule that a noisier CI cannot make easier to pass.
+            worst_ci = m.get("worst_attack_auc_ci95") or m.get("attack_auc_ci95")
+            flag = "" if worst_ci[1] < 0.55 else f" 🚨 (worst: {m.get('worst_attack', '?')})"
             lines.append(f"| {run['run_id']}{flag} | {m['attack_auc']} "
                          f"({m['attack_auc_ci95'][0]}-{m['attack_auc_ci95'][1]}) "
                          f"| {learned_cell} "
@@ -464,10 +568,15 @@ class AttacksStep(PipelineStep):
                          f"| {adv if adv is not None else '-'} | {anon_cell} |")
         lines += [
             "", "## Who is at risk: membership inference by patient atypicality", "",
-            "Members are split into quartiles of atypicality (distance to their "
-            "5th-nearest fellow member); each quartile is attacked against all "
-            "non-members. A model that leaks selectively on unusual patients shows "
-            "an elevated Q4 AUC even when the overall AUC is at chance.",
+            "WITHIN-STRATUM AUC: members and non-members both get the same "
+            "atypicality score (distance to their 5th-nearest member, same "
+            "reference set and encoder), non-members are binned by the member "
+            "quartile cut points, and each stratum's AUC compares members-in-Qi "
+            "against non-members-in-Qi only. 0.5 = no leakage on that stratum; "
+            "elevated values indicate SELECTIVE leakage on that stratum (e.g. a "
+            "model that memorizes its unusual patients shows it in Q4). Strata "
+            "with fewer than 30 non-members are skipped ('-'). Cell format: "
+            "AUC (n members / n non-members).",
             "",
             "| run | Q1 typical | Q2 | Q3 | Q4 atypical |",
             "|---|---|---|---|---|",
@@ -475,9 +584,14 @@ class AttacksStep(PipelineStep):
         for run in r["runs"]:
             qs = run["membership_inference"].get("mia_by_atypicality") or []
             if len(qs) == 4:
-                flag = " 🚨" if qs[3]["attack_auc"] >= 0.6 else ""
-                lines.append(f"| {run['run_id']}{flag} | "
-                             + " | ".join(str(q["attack_auc"]) for q in qs) + " |")
+                q4 = qs[3].get("attack_auc")
+                flag = " 🚨" if q4 is not None and q4 >= 0.6 else ""
+                cells = []
+                for q in qs:
+                    auc_txt = "-" if q.get("attack_auc") is None else str(q["attack_auc"])
+                    cells.append(f"{auc_txt} ({q.get('n_members', '-')}/"
+                                 f"{q.get('n_nonmembers', '-')})")
+                lines.append(f"| {run['run_id']}{flag} | " + " | ".join(cells) + " |")
         lines += ["", "## Attribute inference detail", "",
                   "| run | sensitive attribute | baseline | member acc | non-member acc | advantage |",
                   "|---|---|---|---|---|---|"]

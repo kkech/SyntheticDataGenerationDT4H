@@ -9,11 +9,46 @@ rolled into a "suppressed" bucket instead, so raw record-level values never
 end up in a committed report.
 """
 
+import math
+
 import polars as pl
 
 HIGH_CARDINALITY_THRESHOLD = 50
 TOP_N_CATEGORIES = 20
 SUPPRESSION_THRESHOLD = 5
+
+# The released extremes must NOT be exact single-patient values: an exact
+# published min or max hands out one real record's value. min/max are
+# coarsened by rounding OUTWARD (min down, max up) to this many significant
+# figures, so the released range always contains -- and never reveals -- the
+# true extreme. Quantiles are computed with linear interpolation for the same
+# reason: 'nearest' returns an actual observed value.
+EXTREME_SIG_FIGS = 2
+
+# The per-column null count is reported under this key inside top_values.
+# Namespaced so a real category literally named "null" cannot collide with
+# it and overwrite (or be overwritten by) the null count.
+NULL_COUNT_KEY = "__null__"
+
+
+def coarsen_extreme(x: float, direction: str) -> float:
+    """Round x OUTWARD to EXTREME_SIG_FIGS significant figures.
+
+    direction='floor' (for a minimum) rounds toward -inf; direction='ceil'
+    (for a maximum) rounds toward +inf. The result is a wider, disclosure-
+    safe interval whose endpoints are not exact observed patient values.
+    """
+    if x is None:
+        return None
+    x = float(x)
+    if x == 0.0 or not math.isfinite(x):
+        return x
+    exp = math.floor(math.log10(abs(x)))
+    factor = 10.0 ** (exp - (EXTREME_SIG_FIGS - 1))
+    scaled = x / factor
+    stepped = math.floor(scaled) if direction == "floor" else math.ceil(scaled)
+    ndigits = (EXTREME_SIG_FIGS - 1) - exp
+    return round(stepped * factor, ndigits)
 
 
 def classify_column(dtype: pl.DataType) -> str:
@@ -26,8 +61,17 @@ def classify_column(dtype: pl.DataType) -> str:
 
 def summarize_value_counts(series: pl.Series) -> dict:
     """Top value counts with rare/near-unique values suppressed for privacy."""
-    vc = series.value_counts().sort("count", descending=True)
+    vc = series.value_counts()
     value_col = [c for c in vc.columns if c != "count"][0]
+    # Secondary sort by the value itself so the top-N is deterministic when
+    # counts tie: without it, ties resolve on arbitrary hash order and the
+    # published table can shuffle between otherwise identical runs. Nulls
+    # sort last so they never displace a shown category slot.
+    vc = vc.sort(
+        ["count", pl.col(value_col).cast(pl.String)],
+        descending=[True, False],
+        nulls_last=True,
+    )
 
     top_values = {}
     shown_non_null = 0
@@ -36,7 +80,7 @@ def summarize_value_counts(series: pl.Series) -> dict:
 
     for value, count in vc.select([value_col, "count"]).iter_rows():
         if value is None:
-            top_values["null"] = count
+            top_values[NULL_COUNT_KEY] = count
             continue
         if shown_non_null < TOP_N_CATEGORIES and count >= SUPPRESSION_THRESHOLD:
             top_values[str(value)] = count
@@ -56,8 +100,10 @@ def summarize_value_counts(series: pl.Series) -> dict:
 
 
 def analyze_boolean(series: pl.Series) -> dict:
+    # unique_count excludes null: a null is "missing", not a third boolean
+    # category, and counting it inflated a plain true/false column to 3.
     result = {
-        "unique_count": series.n_unique(),
+        "unique_count": series.drop_nulls().n_unique(),
         "is_constant": series.drop_nulls().n_unique() <= 1,
     }
     result.update(summarize_value_counts(series))
@@ -69,10 +115,15 @@ def analyze_numeric(series: pl.Series) -> dict:
     if non_null.len() == 0:
         return {"note": "All values are null."}
 
-    quantiles = {str(q): non_null.quantile(q) for q in (0.05, 0.25, 0.5, 0.75, 0.95)}
+    # interpolation='linear' (not 'nearest') so a reported quantile is an
+    # interpolated statistic, never a specific patient's observed value.
+    quantiles = {str(q): non_null.quantile(q, interpolation="linear")
+                 for q in (0.05, 0.25, 0.5, 0.75, 0.95)}
     return {
-        "min": non_null.min(),
-        "max": non_null.max(),
+        # Coarsened outward so the released extremes are not exact patient
+        # values (see coarsen_extreme); mean/std are already aggregates.
+        "min": coarsen_extreme(non_null.min(), "floor"),
+        "max": coarsen_extreme(non_null.max(), "ceil"),
         "mean": non_null.mean(),
         "std": non_null.std(),
         "quantiles": quantiles,
@@ -152,7 +203,8 @@ def write_markdown(analysis: dict, total_rows: int, path: str) -> None:
             lines.append(f"- top values (shown only where count ≥ {SUPPRESSION_THRESHOLD}):")
             if info["top_values"]:
                 for value, count in info["top_values"].items():
-                    lines.append(f"  - `{value}`: {count}")
+                    shown = "null (missing)" if value == NULL_COUNT_KEY else f"`{value}`"
+                    lines.append(f"  - {shown}: {count}")
             else:
                 lines.append("  - (none met the display threshold)")
             if "suppressed" in info:

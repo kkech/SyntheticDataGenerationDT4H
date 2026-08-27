@@ -77,7 +77,28 @@ def load_variable_metadata(path: str) -> dict:
 
 
 def validate_against_metadata(df: pl.DataFrame, var_meta: dict) -> dict:
-    """QA check: flags any drift between the declared schema and the actual data columns."""
+    """QA check: flags any drift between the declared schema and the actual data columns.
+
+    Also enforces the patient-level-split precondition while pid is still
+    present: the downstream train/holdout split treats every ROW as an
+    independent unit, which is only a patient-level split if each patient
+    (pid) appears exactly once. If pid is duplicated, the same patient could
+    land in both train and holdout, contaminating the privacy baseline and
+    every TSTR/holdout comparison -- so this is a hard error, not a warning.
+    (The split itself lives in preprocess/step.py, which cannot see pid by
+    then; this is the cheapest place the raw frame with pid is in hand.)
+    """
+    if "pid" in df.columns:
+        n_rows = df.height
+        n_patients = df["pid"].n_unique()
+        if n_patients != n_rows:
+            raise ValueError(
+                f"pid is not unique per row ({n_patients} distinct pids across "
+                f"{n_rows} rows): the row-wise train/holdout split assumes one row "
+                f"per patient, so duplicated pids would split a single patient across "
+                f"train and holdout and break the privacy/utility baselines. "
+                f"Aggregate to one row per patient before preprocessing."
+            )
     df_cols = set(df.columns)
     meta_cols = set(var_meta.keys())
     missing_from_data = sorted(meta_cols - df_cols)
@@ -321,7 +342,13 @@ def prefer_first_last_numerics(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
 def build_nyha_map(var_meta: dict, column: str = NYHA_COLUMN) -> dict:
     """Derives the LOINC-code -> ordinal-severity mapping from
     metadata.json's valueSet ("Class-I".."Class-IV") instead of a
-    hardcoded dict, so it stays correct if the underlying codes change."""
+    hardcoded dict, so it stays correct if the underlying codes change.
+
+    Raises if the built map is empty: an empty map (metadata format drift --
+    a renamed valueSet key, a changed display string) would otherwise pass
+    silently and, applied with default=None, null the ENTIRE NYHA column,
+    after which the sentinel fill relabels every patient "not assessed".
+    """
     concepts = var_meta.get(column, {}).get("valueSet", {}).get("concept", [])
     roman_to_int = {"I": 1, "II": 2, "III": 3, "IV": 4}
     mapping = {}
@@ -329,6 +356,14 @@ def build_nyha_map(var_meta: dict, column: str = NYHA_COLUMN) -> dict:
         m = re.search(r"Class-([IV]+)$", c["display"])
         if m and m.group(1) in roman_to_int:
             mapping[c["code"]] = roman_to_int[m.group(1)]
+    if not mapping:
+        raise ValueError(
+            f"NYHA valueSet for '{column}' produced an EMPTY code->severity map "
+            f"({len(concepts)} concept(s) seen). The metadata format has likely "
+            f"drifted (expected displays ending in 'Class-I'..'Class-IV'). Refusing "
+            f"to continue -- an empty map would null the entire NYHA column and then "
+            f"relabel every patient 'not assessed'."
+        )
     return mapping
 
 
@@ -338,7 +373,24 @@ def encode_nyha(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
         return df, {"skipped": True}
     nyha_map = build_nyha_map(var_meta)
     print(f"  Encoding {NYHA_COLUMN} via metadata valueSet: {nyha_map}")
+
+    before_nulls = int(df[NYHA_COLUMN].null_count())
+    # Which non-null codes actually present in the data are NOT in the map:
+    # replacing them with default=None would silently turn a real assessment
+    # into a "missing" value (later relabeled "not assessed").
+    present_codes = set(df[NYHA_COLUMN].drop_nulls().unique().to_list())
+    unmapped = sorted(str(c) for c in present_codes - set(nyha_map))
+
     df = df.with_columns(pl.col(NYHA_COLUMN).replace(nyha_map, default=None).alias(NYHA_COLUMN))
+
+    after_nulls = int(df[NYHA_COLUMN].null_count())
+    if after_nulls > before_nulls:
+        raise ValueError(
+            f"Encoding {NYHA_COLUMN} turned {after_nulls - before_nulls} non-null "
+            f"value(s) into null: {len(unmapped)} observed code(s) are absent from the "
+            f"metadata valueSet map and would be silently dropped to 'not assessed'. "
+            f"Unmapped code(s): {unmapped}. Fix the metadata valueSet before continuing."
+        )
     return df, {"skipped": False, "map": nyha_map}
 
 

@@ -66,6 +66,10 @@ class FiguresStep(PipelineStep):
         os.makedirs(self.out_dir, exist_ok=True)
         self.config = config
 
+        # A missing input file is a documented skip; any OTHER failure is
+        # collected and raised at the END, so every figure still gets
+        # attempted but a silently dropped paper figure fails the step.
+        failures = []
         for fig_fn in (self._fig_epsilon_curves, self._fig_tstr, self._fig_ks_profiles,
                        self._fig_dcr, self._fig_km, self._fig_coherence,
                        self._fig_c2st, self._fig_mia):
@@ -75,8 +79,13 @@ class FiguresStep(PipelineStep):
                 print(f"⚠️  Skipping {fig_fn.__name__}: missing input ({e})")
             except Exception as e:
                 print(f"⚠️  {fig_fn.__name__} failed: {type(e).__name__}: {e}")
+                failures.append(f"{fig_fn.__name__}: {type(e).__name__}: {e}")
 
         print(f"Figures written to {self.out_dir}")
+        if failures:
+            raise RuntimeError(
+                f"{len(failures)} figure(s) failed (all figures were still "
+                "attempted): " + "; ".join(failures))
 
     # --- helpers ---
 
@@ -164,17 +173,25 @@ class FiguresStep(PipelineStep):
         groups = [g for g in ut.get("grouped_auc_gap", [])]
         if not groups:
             raise FileNotFoundError("no grouped utility results")
-        labels, gaps, sds, colors = [], [], [], []
+        labels, gaps, sds, colors, single = [], [], [], [], []
         for g in sorted(groups, key=lambda g: g["mean_gap"]):
             short = {"gaussian_copula": "copula"}.get(g["synthesizer"], g["synthesizer"])
             eps = f" (ε={g['epsilon']:g})" if g.get("epsilon") is not None else ""
-            labels.append(f"{short}{eps}")
+            # Single-run groups have NO sd (not an sd of 0): they get no
+            # error bar and an asterisked label instead of a fake ±0.
+            is_single = g.get("sd_gap") is None
+            labels.append(f"{short}{eps}" + ("*" if is_single else ""))
             gaps.append(g["mean_gap"])
-            sds.append(g.get("sd_gap") or 0.0)
+            sds.append(0.0 if is_single else g["sd_gap"])
+            single.append(is_single)
             colors.append(MODEL_COLORS.get(g["synthesizer"], "#999"))
         fig, ax = plt.subplots(figsize=(6, 0.36 * len(labels) + 1.2))
         y = range(len(labels))
-        ax.barh(y, gaps, xerr=sds, color=colors, height=0.62, error_kw={"linewidth": 1})
+        # Error bars only where an sd exists; sd=0 keeps its (zero-length)
+        # whisker so it stays visually distinct from "no sd available".
+        xerr = [[0.0 if s else sd for sd, s in zip(sds, single)],
+                [0.0 if s else sd for sd, s in zip(sds, single)]]
+        ax.barh(y, gaps, xerr=xerr, color=colors, height=0.62, error_kw={"linewidth": 1})
         for yi, gap, sd in zip(y, gaps, sds):
             # value label beyond the bar end (and its error whisker)
             x = gap + sd + 0.004 if gap >= 0 else gap - sd - 0.004
@@ -188,6 +205,11 @@ class FiguresStep(PipelineStep):
         ax.set_xlabel("TSTR AUC gap vs real-data baseline (lower is better)")
         ax.set_title("Downstream utility: train-synthetic, test-real (holdout)")
         ax.invert_yaxis()
+        if any(single):
+            fig.text(0.01, -0.03, "* single run: sd not available, no error bar "
+                     "(bars with whiskers show ± sd across runs; a zero-length "
+                     "whisker is an observed sd of 0).",
+                     fontsize=6.5, color="#666666", ha="left")
         self._save(plt, fig, "fig_tstr_gaps")
 
     def _fig_ks_profiles(self, plt):
@@ -225,6 +247,7 @@ class FiguresStep(PipelineStep):
         ax.set_title("Numeric fidelity profile vs the sampling-noise floor")
         # Legend outside the axes: every in-plot position collides with a curve.
         ax.legend(fontsize=7.5, loc="center left", bbox_to_anchor=(1.02, 0.5))
+        self._rep_caption(fig)
         self._save(plt, fig, "fig_ks_profiles")
 
     def _fig_dcr(self, plt):
@@ -240,24 +263,34 @@ class FiguresStep(PipelineStep):
         b = np.asarray(base["counts"], float)
         ax.fill_between(centers, b / b.sum(), step="mid", alpha=0.35, color=REAL_COLOR,
                         label="real unseen patients\n(holdout→train)")
+        # x-limit follows the data: the rightmost bin edge with any mass
+        # across every plotted histogram (a hardcoded limit clipped or
+        # wasted space depending on the run set).
+        occupied = edges[1:][b > 0]
+        max_x = float(occupied.max()) if occupied.size else float(edges[-1])
         reps = [r["run_id"] for r in pv["runs"]
                 if r["run_id"] in self._representative_ids({r2["run_id"] for r2 in pv["runs"]})]
         for r in pv["runs"]:
             if r["run_id"] not in reps or not r.get("dcr_histogram"):
                 continue
             h = np.asarray(r["dcr_histogram"]["counts"], float)
+            occupied = edges[1:len(h) + 1][h > 0]
+            if occupied.size:
+                max_x = max(max_x, float(occupied.max()))
             m = self._model_of(r["run_id"])
             ax.plot(centers, h / h.sum(), color=MODEL_COLORS.get(m, "#999"),
                     linewidth=2, label=self._display_label(r["run_id"]),
                     drawstyle="steps-mid")
-        ax.axvline(pv["holdout_baseline"]["dcr_p5"], color=FLOOR_COLOR, linestyle="--",
+        p5 = pv["holdout_baseline"]["dcr_p5"]
+        ax.axvline(p5, color=FLOOR_COLOR, linestyle="--",
                    linewidth=1, label="holdout p5\n(risk threshold)")
-        ax.set_xlim(0, 0.75)  # nothing lives beyond; free the space for the data
+        ax.set_xlim(0, max(max_x, float(p5)) * 1.05)
         ax.set_xlabel("distance to closest training record (DCR)")
         ax.set_ylabel("share of records")
         ax.set_title("Privacy: synthetic records vs the unseen-patient baseline")
         # Legend outside the axes: the in-plot box overlapped the histograms.
         ax.legend(fontsize=7.5, loc="center left", bbox_to_anchor=(1.02, 0.5))
+        self._rep_caption(fig)
         self._save(plt, fig, "fig_dcr")
 
     def _fig_km(self, plt):
@@ -289,6 +322,7 @@ class FiguresStep(PipelineStep):
             ax.set_title(name.replace("_", " "), fontsize=9)
             ax.legend(fontsize=6.5)
         fig.suptitle("Kaplan-Meier fidelity (nulls = censored at 5 years)", y=1.04)
+        self._rep_caption(fig)
         self._save(plt, fig, "fig_km_curves")
 
     def _fig_coherence(self, plt):
@@ -311,6 +345,7 @@ class FiguresStep(PipelineStep):
         ax.set_xlabel("rule-violation rate (real frames = fair baseline)")
         ax.set_title("Row-level clinical coherence")
         ax.invert_yaxis()
+        self._rep_caption(fig)
         self._save(plt, fig, "fig_coherence")
 
     def _fig_c2st(self, plt):
@@ -343,6 +378,7 @@ class FiguresStep(PipelineStep):
         ax.legend(fontsize=7.5, loc="upper center", bbox_to_anchor=(0.5, -0.22),
                   ncol=2)
         ax.invert_yaxis()
+        self._rep_caption(fig)
         self._save(plt, fig, "fig_c2st")
 
     def _fig_mia(self, plt):
@@ -374,9 +410,32 @@ class FiguresStep(PipelineStep):
 
     # --- representative-run selection ---
 
+    # Stated on every figure that overlays one run per model.
+    REP_RULE = ("one run per model: seed 0; DP models at ε=15 where present, "
+                "else the numerically largest completed ε")
+
+    @staticmethod
+    def _eps_of(run_id: str):
+        """Numeric epsilon parsed from a run id ('eps20' -> 20.0,
+        'eps0p5' -> 0.5), or None when the id carries no epsilon."""
+        import re
+
+        m = re.search(r"_eps(\d+)(?:p(\d+))?(?:_|$)", run_id)
+        if not m:
+            return None
+        return float(m.group(1) + ("." + m.group(2) if m.group(2) else ""))
+
+    def _rep_caption(self, fig) -> None:
+        """Selection-rule note under a figure that shows representative
+        runs only."""
+        fig.text(0.01, -0.03, f"Shown: {self.REP_RULE}.",
+                 fontsize=6.5, color="#666666", ha="left")
+
     def _representative_ids(self, run_ids: set) -> set:
         """One run per model for readable overlays: seed 0 for non-DP,
-        headline epsilon (or the largest completed) at seed 0 for DP."""
+        headline ε=15 (or the NUMERICALLY largest completed ε -- a
+        lexicographic sort would rank eps5 above eps20) at seed 0 for
+        DP models."""
         reps = set()
         for m in MODEL_COLORS:
             candidates = [r for r in run_ids if r and self._model_of(r) == m]
@@ -384,8 +443,16 @@ class FiguresStep(PipelineStep):
                 continue
             preferred = [r for r in candidates if r.endswith("_seed0")]
             pool = preferred or candidates
-            headline = [r for r in pool if "eps15" in r]
-            reps.add(sorted(headline or pool)[-1])
+            headline = [r for r in pool if self._eps_of(r) == 15.0]
+            if headline:
+                reps.add(sorted(headline)[-1])
+                continue
+            with_eps = [(self._eps_of(r), r) for r in pool]
+            eps_runs = [(e, r) for e, r in with_eps if e is not None]
+            if eps_runs:
+                reps.add(max(eps_runs)[1])
+            else:
+                reps.add(sorted(pool)[-1])
         return reps
 
     def _representative_runs(self, ev: dict) -> list:

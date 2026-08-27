@@ -17,7 +17,11 @@ Checks, each mandatory:
                       the policy's multiple of the natural rate (5% of real
                       unseen patients fall below their own p5 by
                       construction, so zero tolerance would fail real data
-                      too). Spot check on a sample for speed.
+                      too). Spot check on a sample for speed. Width-limited
+                      candidates are measured on the shared column subset
+                      against a p5 recomputed on that same subset -- never
+                      against the full-width threshold, which NA-padding
+                      would let them pass vacuously.
 
 Checks 4 and 5 are thresholded by the selected POLICY (see POLICIES
 below); the others are absolute facts. Every report states the verdict
@@ -259,19 +263,39 @@ def main() -> int:
     priv_path = os.path.join(config.step_dir("privacy"), "DT4H_Privacy_Assessment.json")
     if os.path.exists(priv_path):
         with open(priv_path) as f:
-            p5 = json.load(f)["holdout_baseline"]["dcr_p5"]
+            committed_p5 = json.load(f)["holdout_baseline"]["dcr_p5"]
         enc_path = os.path.join(config.step_dir("preprocess"), "DT4H_Numeric_Missing_Encoding.json")
         encoding = json.load(open(enc_path)) if os.path.exists(enc_path) else {}
-        encode, _, _ = build_encoder(train, encoding)
+        # SUBSET-AWARE: the check runs on the intersection of candidate
+        # and train columns. NA-padding a width-limited candidate and
+        # measuring it against the FULL-width holdout p5 guaranteed
+        # large distances -- a file missing half its columns passed
+        # vacuously. Candidate distances and the p5 baseline they are
+        # compared against must live in the same column subspace.
+        subset = [c for c in train.columns if c in candidate.columns]
+        full_width = len(subset) == len(train.columns)
+        encode, _, _ = build_encoder(train[subset], encoding)
+        t_num, t_cat = encode(train[subset])
+        if full_width:
+            # committed value: the privacy step computed it with this
+            # exact full-width encoder, so no recompute is needed
+            p5 = committed_p5
+            p5_source = "committed full-width holdout p5 (privacy step)"
+        else:
+            h_num, h_cat = encode(holdout[subset])
+            dh, _ = nearest_two_distances(h_num, h_cat, t_num, t_cat)
+            p5 = round(float(np.percentile(dh, 5)), 6)
+            p5_source = (f"holdout-vs-train p5 recomputed on the {len(subset)}-column "
+                         f"subset (candidate missing "
+                         f"{len(train.columns) - len(subset)} of "
+                         f"{len(train.columns)} columns)")
+            print(f"  ⚠️  width-limited candidate: distance check restricted to the "
+                  f"{len(subset)} shared column(s); subset p5 = {p5} "
+                  f"(committed full-width p5 {committed_p5} does not apply)")
         rng = np.random.default_rng(0)
         sample = candidate.iloc[rng.choice(len(candidate), min(DCR_SAMPLE, len(candidate)),
-                                           replace=False)].copy()
-        missing = [c for c in train.columns if c not in sample.columns]
-        if missing:
-            sample = pd.concat([sample, pd.DataFrame(pd.NA, index=sample.index,
-                                                     columns=missing)], axis=1)
-        t_num, t_cat = encode(train)
-        s_num, s_cat = encode(sample)
+                                           replace=False)]
+        s_num, s_cat = encode(sample[subset])
         d1, _ = nearest_two_distances(s_num, s_cat, t_num, t_cat)
         too_close = int((d1 < p5).sum())
         share = too_close / len(sample)
@@ -279,10 +303,16 @@ def main() -> int:
         measured["distance_sampled"] = int(len(sample))
         measured["distance_closer"] = too_close
         measured["holdout_p5"] = p5
+        measured["holdout_p5_committed"] = committed_p5
+        measured["holdout_p5_source"] = p5_source
+        measured["distance_columns_used"] = len(subset)
+        measured["distance_full_width"] = full_width
         limit = _distance_limit(policy)
         check("distance", share <= limit,
               f"{too_close}/{len(sample)} sampled record(s) ({share:.1%}) closer than "
-              f"the holdout p5 threshold ({p5}); policy limit {limit:.0%} = "
+              f"the holdout p5 threshold ({p5}, over {len(subset)} column(s)"
+              + ("" if full_width else ", SUBSET of the full schema")
+              + f"); policy limit {limit:.0%} = "
               f"{policy['distance_multiplier']:g}x the natural "
               f"{DISTANCE_NATURAL_SHARE:.0%} share")
     else:
@@ -334,6 +364,17 @@ def main() -> int:
         f.write("| check | result | detail |\n|---|---|---|\n")
         for c in checks:
             f.write(f"| {c['check']} | {'PASS' if c['passed'] else 'FAIL'} | {c['detail']} |\n")
+
+        if "distance_columns_used" in measured:
+            f.write(f"\nDistance check computed over "
+                    f"**{measured['distance_columns_used']}** column(s); "
+                    f"p5 threshold {measured['holdout_p5']} from: "
+                    f"{measured['holdout_p5_source']}.")
+            if not measured.get("distance_full_width", True):
+                f.write(" **The candidate is narrower than the full schema: the "
+                        "committed full-width p5 does not apply and the baseline was "
+                        "recomputed on the shared column subset.**")
+            f.write("\n")
 
         if "coherence_row_share" in measured:
             f.write(f"\nReported, not thresholded: "

@@ -29,7 +29,7 @@ from datetime import datetime
 
 from pipeline.config import PipelineConfig
 from pipeline.logging_setup import start_logging, stop_logging
-from pipeline.state import PipelineState
+from pipeline.state import PipelineState, plan_cascade_invalidations
 from pipeline.steps.load_data import LoadDataStep
 from pipeline.steps.profile_data import ProfileDataStep
 from pipeline.steps.preprocess import PreprocessStep
@@ -72,6 +72,7 @@ def run_pipeline(
     force: bool = False,
     force_steps: list[str] | None = None,
     only: list[str] | None = None,
+    no_cascade: bool = False,
 ) -> None:
     config = config or PipelineConfig()
     state = PipelineState(config.status_path)
@@ -83,6 +84,32 @@ def run_pipeline(
 
     import os
     import shutil
+
+    # STALE-MIX GUARD. Rerunning an upstream step (forced or simply not
+    # completed yet) makes every completed step AFTER it stale: its outputs
+    # were computed from the OLD upstream data, and a later analysis-only
+    # run would evaluate old synthetic CSVs against a new split/encoding
+    # with nothing detecting the mix. So every completed step later in
+    # pipeline order than the earliest step queued to run is invalidated
+    # (marked pending) up front. Steps in the current selection then rerun
+    # now; steps outside it (e.g. under --only) rerun on the next full run.
+    queued = {s.name for s in steps
+              if force or s.name in force_steps or not state.is_completed(s.name)}
+    step_names = [s.name for s in STEPS]
+    stale = plan_cascade_invalidations(step_names, queued, state.is_completed)
+    if stale and not no_cascade:
+        earliest = min(queued, key=step_names.index)
+        print(f"🔁 Cascade: '{earliest}' will rerun, so the completed outputs of every "
+              f"later step were built from data this run is about to replace.")
+        for name in stale:
+            state.mark_pending(name, note=f"invalidated: upstream step '{earliest}' reran")
+            print(f"   invalidated '{name}' (marked pending -- its outputs would mix "
+                  f"old results with the new '{earliest}' outputs)")
+        print(f"   Pass --no-cascade to keep downstream steps marked completed instead.")
+    elif stale and no_cascade:
+        print(f"⚠️  --no-cascade: leaving {len(stale)} completed downstream step(s) as-is "
+              f"({', '.join(stale)}). Their outputs may mix generations (old results vs "
+              f"the upstream data this run regenerates) -- verifying consistency is on you.")
 
     to_run = []
     for step in steps:
@@ -244,6 +271,11 @@ def main() -> None:
                          help="Rerun this step even if already completed (repeatable).")
     parser.add_argument("--only", action="append", default=None,
                          help="Run only these step(s) (repeatable).")
+    parser.add_argument("--no-cascade", action="store_true",
+                         help="Do NOT invalidate completed downstream steps when an upstream "
+                              "step reruns. WARNING: this can leave analysis outputs computed "
+                              "from a previous generation of the data sitting next to fresh "
+                              "upstream outputs -- mixing generations is then on you.")
     parser.add_argument("--analysis", action="store_true",
                          help="Rerun ALL analysis steps (evaluate through release_docs) over the "
                               "existing generated outputs. No regeneration -- cheap and safe.")
@@ -317,7 +349,7 @@ def main() -> None:
     handle = start_logging(args.log) if args.log else None
     try:
         run_pipeline(config=cfg, force=args.force, force_steps=args.force_step,
-                     only=args.only)
+                     only=args.only, no_cascade=args.no_cascade)
     finally:
         if handle:
             stop_logging(handle)

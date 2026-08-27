@@ -71,6 +71,40 @@ def _seeded_sample(model, n_rows: int, seed) -> pd.DataFrame:
     return model.sample(num_rows=n_rows)
 
 
+class _SDVSynthesizer(Synthesizer):
+    """Shared per-call sampling seed bookkeeping for the SDV models.
+
+    Resetting SDV's RNG to the SAME integer on every sample() call made
+    repeated calls return IDENTICAL batches. That silently broke every
+    caller that samples more than once from one fitted model:
+    conditional_demo's rejection sampling and coherent_sample's top-up
+    loops would draw the same rows forever, and the "extra" rows a
+    top-up produced were duplicates of the first batch.
+
+    Fix: seed call i with `seed + i`, counting calls on the INSTANCE. A
+    single-batch run is unchanged (i = 0), so the committed CSVs still
+    reproduce, and successive calls are different but still fully
+    determined by the run seed. The counter is excluded from the pickled
+    state (see __getstate__), so a generator loaded from disk always
+    starts again at i = 0 and its first batch reproduces the committed
+    output byte for byte.
+    """
+
+    def _next_sample_seed(self):
+        seed = self.params.get("seed")
+        call = getattr(self, "_sample_calls", 0)
+        self._sample_calls = call + 1
+        return None if seed is None else int(seed) + call
+
+    def sample(self, n_rows: int) -> pd.DataFrame:
+        return _seeded_sample(self._model, n_rows, self._next_sample_seed())
+
+    def __getstate__(self):
+        state = dict(self.__dict__)
+        state.pop("_sample_calls", None)  # a fresh load starts at call 0
+        return state
+
+
 def save_metadata(model, path: str) -> bool:
     """
     Persist the detected SDV metadata alongside the run.
@@ -91,7 +125,7 @@ def save_metadata(model, path: str) -> bool:
         return False
 
 
-class SDVCTGANSynthesizer(Synthesizer):
+class SDVCTGANSynthesizer(_SDVSynthesizer):
     """Conditional Tabular GAN. The long-standing baseline; recent
     benchmarks report diffusion-based models and TVAE outperforming it."""
 
@@ -112,11 +146,8 @@ class SDVCTGANSynthesizer(Synthesizer):
         )
         self._model.fit(df)
 
-    def sample(self, n_rows: int) -> pd.DataFrame:
-        return _seeded_sample(self._model, n_rows, self.params.get("seed"))
 
-
-class SDVTVAESynthesizer(Synthesizer):
+class SDVTVAESynthesizer(_SDVSynthesizer):
     """Tabular VAE. Usually stronger than CTGAN on mixed-type tabular data
     and cheaper to train, so it is a useful second baseline."""
 
@@ -142,11 +173,8 @@ class SDVTVAESynthesizer(Synthesizer):
         )
         self._model.fit(df)
 
-    def sample(self, n_rows: int) -> pd.DataFrame:
-        return _seeded_sample(self._model, n_rows, self.params.get("seed"))
 
-
-class SDVGaussianCopulaSynthesizer(Synthesizer):
+class SDVGaussianCopulaSynthesizer(_SDVSynthesizer):
     """Fast statistical baseline -- no neural training, no GPU. Useful as a
     sanity floor: any deep model that cannot beat it is misconfigured."""
 
@@ -160,6 +188,3 @@ class SDVGaussianCopulaSynthesizer(Synthesizer):
         metadata = _build_metadata(df)
         self._model = GaussianCopulaSynthesizer(metadata)
         self._model.fit(df)
-
-    def sample(self, n_rows: int) -> pd.DataFrame:
-        return _seeded_sample(self._model, n_rows, self.params.get("seed"))

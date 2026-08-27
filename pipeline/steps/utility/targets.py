@@ -19,7 +19,7 @@ import json
 import re
 
 MIN_CLASS_TRAIN = 10   # each class must appear at least this often in training data
-MIN_CLASS_TEST = 5     # and this often in the holdout used for testing
+MIN_CLASS_TEST = 10    # and this often in the holdout used for testing
 MORTALITY_PATTERN = re.compile(r"death|mortal", re.IGNORECASE)
 # Time-window / form tokens that distinguish variants of the same
 # endpoint: _f5a, any _w<number><unit> window (w7d, w1mo, w6mo, w3mo,
@@ -54,16 +54,24 @@ def select_targets(train, outcome_cols: set[str], max_targets: int,
 
     `explicit` (config.utility_targets) overrides the automatic choice
     but is still validated: absent or non-binary columns are skipped
-    with a warning rather than crashing a long run.
+    with a warning rather than crashing a long run, and the same
+    minimum-class-count check as the automatic selection applies (an
+    explicitly requested target with 3 positives is no more evaluable
+    than an automatically found one).
     """
     if explicit:
         picked = []
         for t in explicit:
-            if t in train.columns and to_binary(train[t]) is not None:
-                picked.append(t)
-            else:
+            y = to_binary(train[t]) if t in train.columns else None
+            if y is None:
                 print(f"⚠️  Requested utility target '{t}' is absent or not a "
                       "two-class boolean column; skipped.")
+                continue
+            if min(int(y.sum()), int((1 - y).sum())) < MIN_CLASS_TRAIN:
+                print(f"⚠️  Requested utility target '{t}' has fewer than "
+                      f"{MIN_CLASS_TRAIN} training records of one class; skipped.")
+                continue
+            picked.append(t)
         return picked
 
     candidates = []  # (balance, column, family)

@@ -103,11 +103,18 @@ class PipelineConfig:
     # CUDA OOM -- ~250 categorical columns make the conditional vector
     # wide, so memory scales with column count as well as batch size.
     batch_size: int = 500
-    # Fallback epsilon for a run spec without one. DP preprocessing
-    # spends NOTHING: per-column domains are passed as public bounds
-    # (they are released in the committed sentinel encoding map), so the
-    # entire budget goes to synthesis at every epsilon in the sweep.
-    epsilon: float = 15.0
+    # NOTE: there is deliberately NO fallback epsilon. A DP run spec
+    # without an explicit epsilon now raises instead of quietly
+    # inheriting a default -- a released file whose budget came from a
+    # fallback cannot be reported honestly. resolved_run_plan() always
+    # sets one; run_plan overrides must too.
+
+    # The a-priori PUBLIC numeric domain declaration every DP run is
+    # bounded by (see synthesizers/smartnoise_models.py and
+    # make_public_domains.py). Human-reviewed: DP fitting refuses to
+    # start while this file is missing or `reviewed` is not true, because
+    # bounds derived from the training data void the epsilon claim.
+    public_domains_path: str = os.path.join(REPO_ROOT, "public_domains.json")
 
     # Seeds every RNG the synthesizers use, and is recorded in the run
     # provenance. Required for a reproducible published dataset.
@@ -167,6 +174,15 @@ class PipelineConfig:
         self.synthesizer_params.setdefault("dpctgan", {"epochs": 300, "batch_size": 50})
         # Same memory-stable configuration as dpctgan (same GAN machinery).
         self.synthesizer_params.setdefault("patectgan", {"epochs": 300, "batch_size": 50})
+        # Diffusion converges far slower than the GANs and the denoiser is
+        # a small MLP: 500 epochs fit in 37s and left the reverse chain
+        # visibly under-trained (samples saturating at the quantile
+        # extremes). 4000 epochs is ~5 minutes -- cheap enough to be the
+        # default. The ddpm_g entry only applies if a run spec names
+        # 'ddpm_g' as the synthesizer; the extended plan runs guidance
+        # through the 'ddpm' class and sets epochs in the spec itself.
+        self.synthesizer_params.setdefault("ddpm", {"epochs": 4000})
+        self.synthesizer_params.setdefault("ddpm_g", {"epochs": 4000})
         if self.metadata_path is None:
             self.metadata_path = os.path.join(self.output_dir, "profile_data", "metadata.json")
         if self.local_full_dataset_path is None:
@@ -268,7 +284,7 @@ class PipelineConfig:
             plan.append({"run_id": f"ddpm_seed{seed}", "synthesizer": "ddpm",
                          "seed": seed, "epsilon": None, "columns": None,
                          "timeout_seconds": None,
-                         "params": {"epochs": 2000}})
+                         "params": {"epochs": 4000}})
         # Logic-GUIDED diffusion: identical model, plus the mined
         # implication rules as a sampling-time prior (the paper's own
         # coherence instrument closed into the generator). One run;
@@ -276,7 +292,7 @@ class PipelineConfig:
         plan.append({"run_id": "ddpm_g_seed0", "synthesizer": "ddpm",
                      "record_as": "ddpm_g", "seed": self.variance_seeds[0],
                      "epsilon": None, "columns": None, "timeout_seconds": None,
-                     "params": {"epochs": 2000, "guidance_scale": 5.0}})
+                     "params": {"epochs": 4000, "guidance_scale": 5.0}})
         # PATE-CTGAN: the second DP-GAN framework, at three sweep points
         # (a full sweep would only replicate dpctgan's budget-independent
         # failure mode if it fails, and three points suffice if it does
