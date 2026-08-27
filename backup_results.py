@@ -52,12 +52,34 @@ def _tree_size(path: str):
     return total, count
 
 
-def do_backup(output_dir: str) -> int:
+def _slim_paths(output_dir: str) -> list:
+    """The files a run_one-based campaign can overwrite, and nothing else:
+    everything in output/generate/ except non-DP model pickles (non-DP runs
+    are never re-fit by the v3 campaign, and analysis outputs regenerate
+    from the CSVs). Keeps the snapshot small enough for a tight disk."""
+    gen = os.path.join(output_dir, "generate")
+    keep = []
+    for root, _dirs, files in os.walk(gen):
+        for f in files:
+            fp = os.path.join(root, f)
+            rel = os.path.relpath(fp, output_dir)
+            if os.path.basename(root) == "models" and "eps" not in f:
+                continue  # non-DP pickle: not touched by the campaign
+            keep.append(rel)
+    return keep
+
+
+def do_backup(output_dir: str, slim: bool = False) -> int:
     if not os.path.isdir(output_dir):
         print(f"Nothing to back up: {output_dir} does not exist.")
         return 1
 
-    size, count = _tree_size(output_dir)
+    if slim:
+        rels = _slim_paths(output_dir)
+        size = sum(os.path.getsize(os.path.join(output_dir, r)) for r in rels)
+        count = len(rels)
+    else:
+        size, count = _tree_size(output_dir)
     free = shutil.disk_usage(BACKUP_ROOT if os.path.isdir(BACKUP_ROOT) else REPO).free
     # copy + 10% headroom; refuse rather than die halfway
     if free < size * 1.1:
@@ -74,8 +96,15 @@ def do_backup(output_dir: str) -> int:
         return 1
     os.makedirs(BACKUP_ROOT, exist_ok=True)
 
-    print(f"Backing up {count} file(s), {size/1e9:.2f} GB -> {dest}")
-    shutil.copytree(output_dir, os.path.join(dest, "output"))
+    print(f"Backing up {count} file(s), {size/1e9:.2f} GB -> {dest}"
+          + (" [slim: generate outputs + DP pickles only]" if slim else ""))
+    if slim:
+        for rel in rels:
+            target = os.path.join(dest, "output", rel)
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            shutil.copy2(os.path.join(output_dir, rel), target)
+    else:
+        shutil.copytree(output_dir, os.path.join(dest, "output"))
     for extra in EXTRAS:
         src = os.path.join(REPO, extra)
         if os.path.exists(src):
@@ -88,9 +117,11 @@ def do_backup(output_dir: str) -> int:
         "source_output_dir": output_dir,
         "files": copied_count,
         "bytes": copied_size,
+        "slim": slim,
         "note": "Contains gitignored patient-derived artifacts (synthetic CSVs, "
-                "fitted models, split parquets). Never commit; never leave the "
-                "secure environment.",
+                "fitted models" + ("" if slim else ", split parquets") + "). Never "
+                "commit; never leave the secure environment."
+                + (" SLIM snapshot: restore replaces only what it contains." if slim else ""),
     }
     with open(os.path.join(dest, "manifest.json"), "w") as f:
         json.dump(manifest, f, indent=2)
@@ -127,6 +158,29 @@ def do_restore(name: str, output_dir: str, yes: bool) -> int:
         print(f"🚫 {name} has no manifest -- it may be an incomplete backup; "
               f"refusing to restore it.")
         return 1
+    manifest = json.load(open(os.path.join(src, "manifest.json")))
+    if manifest.get("slim"):
+        if not yes:
+            print(f"Restoring SLIM snapshot {name} would overwrite the files it "
+                  f"contains inside {output_dir} (other files untouched). "
+                  f"Re-run with --yes to confirm.")
+            return 1
+        restored = 0
+        snap_root = os.path.join(src, "output")
+        for root, _dirs, files in os.walk(snap_root):
+            for f in files:
+                sp = os.path.join(root, f)
+                rel = os.path.relpath(sp, snap_root)
+                target = os.path.join(output_dir, rel)
+                os.makedirs(os.path.dirname(target), exist_ok=True)
+                shutil.copy2(sp, target)
+                restored += 1
+        for extra in EXTRAS:
+            e = os.path.join(src, extra)
+            if os.path.exists(e):
+                shutil.copy2(e, os.path.join(REPO, extra))
+        print(f"✅ Restored {restored} file(s) from slim snapshot {name} into {output_dir}")
+        return 0
     if not yes:
         print(f"Restoring would REPLACE the current {output_dir} with snapshot "
               f"{name}. Re-run with --yes to confirm.")
@@ -151,6 +205,9 @@ def main() -> int:
     parser.add_argument("--list", action="store_true", help="List existing backups.")
     parser.add_argument("--restore", metavar="NAME", help="Restore a snapshot by name.")
     parser.add_argument("--yes", action="store_true", help="Confirm a restore.")
+    parser.add_argument("--slim", action="store_true",
+                        help="Back up only what a run_one-based campaign can overwrite: "
+                             "output/generate/ minus non-DP model pickles. Fits a tight disk.")
     parser.add_argument("--output-dir", default=os.path.join(REPO, "output"),
                         help="Results tree to back up / restore to (default: output/).")
     args = parser.parse_args()
@@ -159,7 +216,7 @@ def main() -> int:
         return do_list()
     if args.restore:
         return do_restore(args.restore, args.output_dir, args.yes)
-    return do_backup(args.output_dir)
+    return do_backup(args.output_dir, slim=args.slim)
 
 
 if __name__ == "__main__":

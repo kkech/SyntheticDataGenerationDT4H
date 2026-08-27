@@ -296,6 +296,10 @@ def main() -> None:
                               "it does not live inside --data-dir. Copied to "
                               "output/profile_data/metadata.json for the downstream steps.")
     parser.add_argument("--status", action="store_true", help="Print step-completion status and exit.")
+    parser.add_argument("--min-free-gb", type=float, default=None,
+                         help="Override the preflight free-disk requirement (GB). The v3 "
+                              "campaign needs ~2 GB (slim backup + DP re-fit outputs), not "
+                              "the full-campaign 5 GB.")
     parser.add_argument("--preflight", action="store_true",
                          help="Verify libraries, GPU, inputs, disk and config, then exit. "
                               "Run this before a long run.")
@@ -327,7 +331,7 @@ def main() -> None:
     # models and datasets -- a full campaign's 5 GB headroom would block
     # them pointlessly on a tight disk.
     analysis_only = bool(args.only) and set(args.only) <= set(ANALYSIS_STEPS)
-    min_free = 1.0 if analysis_only else 5.0
+    min_free = args.min_free_gb if args.min_free_gb is not None else (1.0 if analysis_only else 5.0)
 
     if args.preflight:
         raise SystemExit(0 if preflight(cfg, min_free_gb=min_free) else 1)

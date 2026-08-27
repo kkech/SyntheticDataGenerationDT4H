@@ -109,8 +109,8 @@ ensure_backup() {
     echo "Backup already taken this campaign ($(cat "$BACKUP_MARKER")). Delete $BACKUP_MARKER to force a new one."
     return 0
   fi
-  echo "Snapshotting results before the first destructive stage (backup_results.py)..."
-  py backup_results.py
+  echo "Snapshotting what the campaign can overwrite (slim backup: generate outputs + DP pickles)..."
+  py backup_results.py --slim
   date -u +%Y-%m-%dT%H:%M:%SZ > "$BACKUP_MARKER"
 }
 
@@ -241,7 +241,7 @@ stage_check() {
       echo "⚠️  $j still contains the raw 'scores' block -- run: ./run_v3.sh fix-artifacts"
     fi
   done
-  py main.py --preflight
+  py main.py --preflight --min-free-gb 2
 }
 
 stage_fix_artifacts() {
