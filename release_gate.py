@@ -334,7 +334,16 @@ def _gate(path, policy, policy_name, args, config) -> int:
     priv_path = os.path.join(config.step_dir("privacy"), "DT4H_Privacy_Assessment.json")
     if os.path.exists(priv_path):
         with open(priv_path) as f:
-            committed_p5 = json.load(f)["holdout_baseline"]["dcr_p5"]
+            _priv = json.load(f)
+        committed_p5 = _priv["holdout_baseline"]["dcr_p5"]
+        # The privacy step already measured EVERY row of each standard run
+        # against the same encoder and threshold. For those files, use the
+        # full-sample share instead of a 500-record spot check: at the 10%
+        # limit the spot check's sampling error (~1.3pp) can flip a
+        # borderline verdict in either direction -- it did, once.
+        _run_id = os.path.basename(path).replace("DT4H_Synthetic_", "").replace(".csv", "")
+        full_share = next((r.get("share_closer_than_holdout_p5") for r in _priv.get("runs", [])
+                           if r.get("run_id") == _run_id), None)
         enc_path = os.path.join(config.step_dir("preprocess"), "DT4H_Numeric_Missing_Encoding.json")
         encoding = json.load(open(enc_path)) if os.path.exists(enc_path) else {}
         # SUBSET-AWARE: the check runs on the intersection of candidate
@@ -363,16 +372,25 @@ def _gate(path, policy, policy_name, args, config) -> int:
             print(f"  ⚠️  width-limited candidate: distance check restricted to the "
                   f"{len(subset)} shared column(s); subset p5 = {p5} "
                   f"(committed full-width p5 {committed_p5} does not apply)")
-        rng = np.random.default_rng(0)
-        sample = candidate.iloc[rng.choice(len(candidate), min(DCR_SAMPLE, len(candidate)),
-                                           replace=False)]
-        s_num, s_cat = encode(sample[subset])
-        d1, _ = nearest_two_distances(s_num, s_cat, t_num, t_cat)
-        too_close = int((d1 < p5).sum())
-        share = too_close / len(sample)
+        if full_width and full_share is not None:
+            share = float(full_share)
+            n_measured = len(candidate)
+            too_close = int(round(share * n_measured))
+            share_source = "privacy step (all rows, same encoder)"
+        else:
+            rng = np.random.default_rng(0)
+            sample = candidate.iloc[rng.choice(len(candidate), min(DCR_SAMPLE, len(candidate)),
+                                               replace=False)]
+            s_num, s_cat = encode(sample[subset])
+            d1, _ = nearest_two_distances(s_num, s_cat, t_num, t_cat)
+            too_close = int((d1 < p5).sum())
+            n_measured = len(sample)
+            share = too_close / n_measured
+            share_source = f"spot check ({n_measured} sampled rows)"
         measured["distance_share"] = share
-        measured["distance_sampled"] = int(len(sample))
+        measured["distance_sampled"] = int(n_measured)
         measured["distance_closer"] = too_close
+        measured["distance_share_source"] = share_source
         measured["holdout_p5"] = p5
         measured["holdout_p5_committed"] = committed_p5
         measured["holdout_p5_source"] = p5_source
@@ -392,7 +410,7 @@ def _gate(path, policy, policy_name, args, config) -> int:
                   f"cannot discriminate and a pass here would be vacuous")
         else:
             check("distance", share <= limit,
-                  f"{too_close}/{len(sample)} sampled record(s) ({share:.1%}) closer than "
+                  f"{too_close}/{n_measured} record(s) ({share:.1%}, {share_source}) closer than "
                   f"the holdout p5 threshold ({p5}, over {len(subset)} column(s)"
                   + ("" if full_width else ", SUBSET of the full schema")
                   + f"); policy limit {limit:.0%} = "
