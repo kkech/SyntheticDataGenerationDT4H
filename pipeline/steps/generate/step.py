@@ -576,6 +576,26 @@ class GenerateStep(PipelineStep):
                 f"{r.get('duration_seconds')}s | {leak_cell} | {notes} |"
             )
 
+        if s.get("single_run_updates"):
+            lines += [
+                "",
+                "## Single-run updates",
+                "",
+                "Runs re-executed on their own after the campaign (`run_one.py`), typically "
+                "to retry an infrastructural failure such as a time limit. The table above "
+                "shows the latest attempt for each.",
+                "",
+                "| run | at (UTC) | status | previous | time limit | commit |",
+                "|---|---|---|---|---|---|",
+            ]
+            for u in s["single_run_updates"]:
+                lines.append(
+                    f"| {u.get('run_id')} | {u.get('at')} | {u.get('status')} "
+                    f"| {u.get('previous_status') or 'not in summary'} "
+                    f"| {u.get('timeout_seconds') or 'default'}s "
+                    f"| `{str(u.get('git_commit'))[:8]}` |"
+                )
+
         lines += [
             "",
             "## Caveats",

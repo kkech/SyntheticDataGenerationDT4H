@@ -80,7 +80,11 @@ python main.py --extended --force  # full campaign PLUS the roadmap runs (quanti
 python regenerate.py --model output/generate/models/<name>.pkl --rows N --out file.csv
 python conditional_demo.py --model output/generate/models/tvae_seed0.pkl \
     --rows 500 --condition patient_demographics_gender=female --out sample.csv
+python run_one.py --list           # re-run ONE plan entry in place (e.g. after a timeout),
+python run_one.py --run-id aim50_eps5_seed0 --timeout 21600   #   merging it into the summary
+                                   #   -- unlike `--only generate`, nothing else is deleted
 python release_gate.py --file output/generate/DT4H_Synthetic_<run>.csv   # go/no-go before distributing
+python release_gate.py --file <...> --policy controlled --note "consortium 2026-08-27"
 python respell_released_files.py    # one-time: canonicalize pre-fix CSV spellings on disk
 python postprocess_candidate.py --file output/generate/DT4H_Synthetic_<run>.csv \
     [--model output/generate/models/<run>.pkl]   # granularity snap + distance-tail filter
@@ -175,6 +179,27 @@ singling-out/linkability, a per-patient-atypicality risk profile, and
 an empirical ε lower bound that a DP run's claimed budget must exceed —
 the formal guarantee is audited, not merely stated. The release gate
 (`release_gate.py`) is the per-file go/no-go over all of that evidence.
+
+Four of the gate's six checks are absolute facts (schema,
+representation, freshness, verbatim leakage). The other two are
+thresholded by a named **policy**, because "how much clinical
+incoherence is acceptable" and "how close to a training record is too
+close" are governance decisions, not measurements:
+
+| policy | coherence limit | distance limit | for |
+|---|---|---|---|
+| `release` (default) | 10× the holdout's own violation rate | 2× the natural 5% share | open or brokered release |
+| `controlled` | 20× that rate | 2× — **unchanged** | controlled-access sharing under a DUA |
+
+The two limits are deliberately independent: `controlled` accepts lower
+clinical coherence **without touching the memorization margin**, which
+is the privacy-protective check. Every report states the verdict under
+*every* policy and writes a JSON sidecar naming the one used, so a
+relaxed pass can never be read as an open-release pass — the capability
+labels carry `release_gate_policy` and `cleared_for_open_release` for
+the same reason. `--coherence-multiplier` / `--distance-multiplier`
+override the thresholds ad hoc and are recorded as a custom policy;
+`--note` records who authorized it.
 
 ## Setup
 

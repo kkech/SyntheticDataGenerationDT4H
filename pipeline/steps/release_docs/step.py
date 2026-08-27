@@ -112,12 +112,23 @@ class ReleaseDocsStep(PipelineStep):
             mia = a.get("membership_inference", {})
             atyp = mia.get("mia_by_atypicality") or []
             aia = a.get("attribute_inference") or []
-            gate_path = os.path.join(config.step_dir("generate"),
-                                     f"DT4H_Release_Gate_DT4H_Synthetic_{rid}.md")
-            gate = None
-            if os.path.exists(gate_path):
-                text = open(gate_path).read()
+            # Gate verdicts are policy-dependent: prefer the machine-
+            # readable sidecar, which names the policy the file was gated
+            # under, and fall back to the markdown for older reports.
+            gate_base = os.path.join(config.step_dir("generate"),
+                                     f"DT4H_Release_Gate_DT4H_Synthetic_{rid}")
+            gate, gate_policy, gate_open = None, None, None
+            if os.path.exists(gate_base + ".json"):
+                with open(gate_base + ".json") as f:
+                    g = json.load(f)
+                gate = g.get("verdict")
+                gate_policy = g.get("policy")
+                gate_open = g.get("cleared_for_open_release")
+            elif os.path.exists(gate_base + ".md"):
+                text = open(gate_base + ".md").read()
                 gate = "PASS" if "PASS -- cleared for release" in text else "FAIL"
+                gate_policy = "release"
+                gate_open = gate == "PASS"
 
             label = {
                 "run_id": rid,
@@ -166,11 +177,18 @@ class ReleaseDocsStep(PipelineStep):
                     "linkability_risk": (a.get("anonymeter") or {}).get("linkability_risk"),
                 },
                 "release_gate": gate or "not gated",
+                # A PASS is only as strong as the policy behind it: a file
+                # cleared under a relaxed policy is not cleared for open
+                # release, and the label must not let the two read alike.
+                "release_gate_policy": gate_policy,
+                "cleared_for_open_release": gate_open,
             }
             with open(os.path.join(labels_dir, f"DT4H_Label_{rid}.json"), "w") as f:
                 json.dump(label, f, indent=2, default=str)
             index.append({"run_id": rid, "synthesizer": label["synthesizer"],
-                          "epsilon": run.get("epsilon"), "release_gate": label["release_gate"]})
+                          "epsilon": run.get("epsilon"), "release_gate": label["release_gate"],
+                          "release_gate_policy": gate_policy,
+                          "cleared_for_open_release": gate_open})
 
         with open(os.path.join(out_dir, "DT4H_Capability_Labels_Index.json"), "w") as f:
             json.dump({"labels": index, "directory": "labels/"}, f, indent=2, default=str)

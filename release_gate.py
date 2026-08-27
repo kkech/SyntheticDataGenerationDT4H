@@ -3,6 +3,7 @@ Release gate: the automated go/no-go check a candidate synthetic file
 must pass before it is distributed.
 
     python release_gate.py --file output/generate/DT4H_Synthetic_<run>.csv
+    python release_gate.py --file <...> --policy controlled --note "consortium 2026-08-27"
 
 Checks, each mandatory:
   1. schema        -- columns are a subset of the released schema, no extras;
@@ -13,13 +14,19 @@ Checks, each mandatory:
                       holdout baseline (rules from the committed rule set);
   5. distance      -- the share of sampled records closer to a training
                       record than the holdout p5 threshold must not exceed
-                      twice the natural rate (5% of real unseen patients
-                      fall below their own p5 by construction, so zero
-                      tolerance would fail real data too). Spot check on
-                      a sample for speed.
+                      the policy's multiple of the natural rate (5% of real
+                      unseen patients fall below their own p5 by
+                      construction, so zero tolerance would fail real data
+                      too). Spot check on a sample for speed.
 
-Writes DT4H_Release_Gate_<name>.md next to the file and exits non-zero
-on FAIL, so it can gate a scripted publishing flow.
+Checks 4 and 5 are thresholded by the selected POLICY (see POLICIES
+below); the others are absolute facts. Every report states the verdict
+under ALL policies, so a relaxed pass is never readable without its
+stricter counterpart.
+
+Writes DT4H_Release_Gate_<name>.md and DT4H_Release_Gate_<name>.json
+next to the file, and exits non-zero on FAIL under the selected policy,
+so it can gate a scripted publishing flow.
 """
 
 import argparse
@@ -39,25 +46,136 @@ from pipeline.steps.generate import leakage
 from pipeline.steps.generate.step import GenerateStep
 from pipeline.steps.privacy.distance import build_encoder, nearest_two_distances
 
-# Coherence policy: a candidate passes if its rule-violation rate is
-# within one order of magnitude of the real holdout's own rate, or
-# within 1 percentage point absolute -- whichever is more permissive.
-# Stated as policy so it can be tightened per release decision.
-COHERENCE_MULTIPLIER = 10.0
-COHERENCE_ABSOLUTE = 0.01
+# --- policy ---
+#
+# Two of the six checks are thresholded rather than absolute (schema,
+# freshness, leakage and representation are pass/fail facts). Their
+# thresholds are POLICY, not measurement, so they are named, versioned
+# and stamped into every report rather than edited in place:
+#
+#   coherence -- how far above the real holdout's own rule-violation rate
+#     a synthetic file may sit. The holdout is real patient data and
+#     still violates the rule set (mostly rare, one-off inconsistencies),
+#     so this is a multiple of a measured baseline, not of zero.
+#   distance -- the share of records closer to a training record than the
+#     holdout p5 threshold. 5% of real unseen patients fall below that
+#     threshold BY CONSTRUCTION, so a perfect generator lands at ~5% too
+#     and zero tolerance would reject real data itself.
+#
+# The distance limit is the privacy-protective one; the coherence limit
+# is a data-quality one. They are deliberately separated so a release
+# decision can accept lower clinical coherence WITHOUT touching the
+# memorization margin -- which is what the 'controlled' policy does.
+#
+# Whichever policy is selected, every report states the verdict under
+# ALL policies, so a relaxed pass is never readable without its stricter
+# counterpart. Changing these numbers is a consortium decision; record it
+# with --note so the report carries the authority for the change.
+POLICIES = {
+    "release": {
+        "coherence_multiplier": 10.0,
+        "coherence_absolute": 0.01,
+        "distance_multiplier": 2.0,
+        "intent": "open or brokered release of a file that leaves the enclave",
+    },
+    "controlled": {
+        "coherence_multiplier": 20.0,
+        "coherence_absolute": 0.03,
+        "distance_multiplier": 2.0,
+        "intent": "controlled-access sharing under a data-use agreement, where a "
+                  "recipient is bound by contract and the file is not public",
+    },
+}
+DEFAULT_POLICY = "release"
+
 DCR_SAMPLE = 500
-# Distance policy: 5% of real unseen patients fall below the holdout p5
-# threshold BY CONSTRUCTION, so a perfect generator would land at ~5% too
-# and zero tolerance would reject real data itself. A candidate passes if
-# its share below the threshold is at most this multiple of the natural 5%.
 DISTANCE_NATURAL_SHARE = 0.05
-DISTANCE_SHARE_MULTIPLIER = 2.0
+
+
+def _coherence_threshold(policy: dict, baseline: float) -> float:
+    return max(policy["coherence_multiplier"] * baseline,
+               baseline + policy["coherence_absolute"])
+
+
+def _distance_limit(policy: dict) -> float:
+    return policy["distance_multiplier"] * DISTANCE_NATURAL_SHARE
+
+
+def _verdicts_by_policy(checks: list, measured: dict) -> dict:
+    """The verdict this same measurement produces under every named
+    policy. The absolute checks (schema, representation, freshness,
+    leakage) are policy-independent, so only coherence and distance are
+    re-thresholded -- and a file failing an absolute check fails
+    everywhere, which is the point of stating them all."""
+    absolute = [c for c in checks if c["check"] not in ("coherence", "distance")]
+    absolute_ok = all(c["passed"] for c in absolute)
+    out = {}
+    for name, policy in POLICIES.items():
+        per_check = {}
+        if "coherence_rate" in measured:
+            threshold = _coherence_threshold(policy, measured["coherence_baseline"])
+            per_check["coherence"] = {
+                "passed": measured["coherence_rate"] <= threshold,
+                "threshold": round(threshold, 5),
+            }
+        if "distance_share" in measured:
+            limit = _distance_limit(policy)
+            per_check["distance"] = {
+                "passed": measured["distance_share"] <= limit,
+                "threshold": limit,
+            }
+        # A missing measurement means the check could not be evaluated at
+        # all (no rule set, no privacy assessment); that is a FAIL under
+        # every policy, exactly as the check itself recorded.
+        complete = len(per_check) == 2
+        out[name] = {
+            "verdict": "PASS" if (absolute_ok and complete
+                                  and all(v["passed"] for v in per_check.values()))
+                       else "FAIL",
+            "checks": per_check,
+            "intent": policy["intent"],
+        }
+    return out
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Synthetic-file release gate.")
     parser.add_argument("--file", required=True, help="Candidate DT4H_Synthetic_*.csv")
+    parser.add_argument("--policy", choices=sorted(POLICIES), default=DEFAULT_POLICY,
+                        help=f"Threshold policy for the coherence and distance checks "
+                             f"(default: {DEFAULT_POLICY}). Every report states the verdict "
+                             f"under all policies regardless.")
+    parser.add_argument("--coherence-multiplier", type=float,
+                        help="Override the policy's coherence multiple of the holdout "
+                             "baseline. Recorded in the report as a custom policy.")
+    parser.add_argument("--distance-multiplier", type=float,
+                        help="Override the policy's multiple of the natural 5%% distance "
+                             "share. THIS IS THE PRIVACY MARGIN -- recorded in the report "
+                             "as a custom policy and flagged in the verdict.")
+    parser.add_argument("--note",
+                        help="Free text recorded in the report: who authorized a "
+                             "non-default policy, and when (e.g. a consortium decision).")
     args = parser.parse_args()
+
+    policy_name = args.policy
+    policy = dict(POLICIES[policy_name])
+    overrides = {}
+    if args.coherence_multiplier is not None:
+        overrides["coherence_multiplier"] = args.coherence_multiplier
+    if args.distance_multiplier is not None:
+        overrides["distance_multiplier"] = args.distance_multiplier
+    if overrides:
+        policy.update(overrides)
+        policy["intent"] = (f"custom thresholds over the '{policy_name}' policy "
+                            f"({', '.join(f'{k}={v:g}' for k, v in overrides.items())})")
+        policy_name = f"custom (from {policy_name})"
+    print(f"Policy: {policy_name} -- coherence "
+          f"{policy['coherence_multiplier']:g}x holdout baseline "
+          f"(or +{policy['coherence_absolute']:.0%} absolute), distance "
+          f"{policy['distance_multiplier']:g}x the natural "
+          f"{DISTANCE_NATURAL_SHARE:.0%} share")
+    if args.note:
+        print(f"Note: {args.note}")
     config = PipelineConfig()
 
     candidate = pd.read_csv(args.file, low_memory=False)
@@ -75,6 +193,9 @@ def main() -> int:
               f"real schema's spellings after CSV parsing (expected for boolean "
               f"columns, which pandas parses to bool dtype)")
     checks = []
+    # Values the thresholded checks are computed from, kept so the report
+    # can state the verdict under every policy from one measurement.
+    measured = {}
 
     def check(name, passed, detail):
         checks.append({"check": name, "passed": bool(passed), "detail": detail})
@@ -109,11 +230,16 @@ def main() -> int:
         hold_summary = R.summarize_rule_results(R.evaluate_rules(holdout_decoded, ruleset))
         rate = cand_summary["overall_violation_rate"] or 0.0
         base = hold_summary["overall_violation_rate"] or 0.0
-        threshold = max(COHERENCE_MULTIPLIER * base, base + COHERENCE_ABSOLUTE)
+        measured["coherence_rate"] = rate
+        measured["coherence_baseline"] = base
+        measured["coherence_rules_violated"] = cand_summary.get("rules_violated")
+        measured["coherence_baseline_rules_violated"] = hold_summary.get("rules_violated")
+        threshold = _coherence_threshold(policy, base)
         check("coherence", rate <= threshold,
               f"violation rate {rate} vs holdout baseline {base} "
-              f"(threshold {round(threshold, 5)} = max({COHERENCE_MULTIPLIER:g}x baseline, "
-              f"baseline+{COHERENCE_ABSOLUTE}))")
+              f"(threshold {round(threshold, 5)} = "
+              f"max({policy['coherence_multiplier']:g}x baseline, "
+              f"baseline+{policy['coherence_absolute']}))")
     else:
         check("coherence", False, "no committed rule set -- run the coherence step first")
 
@@ -136,27 +262,97 @@ def main() -> int:
         d1, _ = nearest_two_distances(s_num, s_cat, t_num, t_cat)
         too_close = int((d1 < p5).sum())
         share = too_close / len(sample)
-        limit = DISTANCE_SHARE_MULTIPLIER * DISTANCE_NATURAL_SHARE
+        measured["distance_share"] = share
+        measured["distance_sampled"] = int(len(sample))
+        measured["distance_closer"] = too_close
+        measured["holdout_p5"] = p5
+        limit = _distance_limit(policy)
         check("distance", share <= limit,
               f"{too_close}/{len(sample)} sampled record(s) ({share:.1%}) closer than "
               f"the holdout p5 threshold ({p5}); policy limit {limit:.0%} = "
-              f"{DISTANCE_SHARE_MULTIPLIER:g}x the natural 5% share")
+              f"{policy['distance_multiplier']:g}x the natural "
+              f"{DISTANCE_NATURAL_SHARE:.0%} share")
     else:
         check("distance", False, "no committed privacy assessment -- run the privacy step first")
 
     passed = all(c["passed"] for c in checks)
-    verdict = "PASS -- cleared for release" if passed else "FAIL -- DO NOT RELEASE"
+    default_policy = policy_name == DEFAULT_POLICY
+    if passed and default_policy:
+        verdict = "PASS -- cleared for release"
+    elif passed:
+        verdict = (f"PASS under the '{policy_name}' policy -- NOT cleared for open "
+                   f"release; cleared only for: {policy['intent']}")
+    else:
+        verdict = "FAIL -- DO NOT RELEASE"
     print(f"\n{'✅' if passed else '🚫'} {verdict}")
 
+    by_policy = _verdicts_by_policy(checks, measured)
+    print("\nSame measurement under every policy:")
+    for pname, v in by_policy.items():
+        marker = " <- selected" if pname == args.policy and not overrides else ""
+        detail = ", ".join(f"{k} {'ok' if d['passed'] else 'over'} "
+                           f"(limit {d['threshold']:g})"
+                           for k, d in v["checks"].items())
+        print(f"  {pname:<12} {v['verdict']:<5} {detail}{marker}")
+    if passed and not default_policy:
+        print(f"⚠️  This file does NOT pass the default '{DEFAULT_POLICY}' policy. "
+              f"Relaxed-policy clearance is a governance decision, not a technical one: "
+              f"it needs the note recorded above and a consortium ruling behind it.")
+
+    timestamp = datetime.now(timezone.utc).isoformat()
     name = os.path.basename(args.file).replace(".csv", "")
     report = os.path.join(os.path.dirname(args.file), f"DT4H_Release_Gate_{name}.md")
     with open(report, "w") as f:
         f.write(f"# Release Gate: {name}\n\n"
-                f"Evaluated {datetime.now(timezone.utc).isoformat()}\n\n"
-                f"**{verdict}**\n\n| check | result | detail |\n|---|---|---|\n")
+                f"Evaluated {timestamp}\n\n"
+                f"**{verdict}**\n\n"
+                f"Policy: `{policy_name}` -- coherence "
+                f"{policy['coherence_multiplier']:g}x the holdout baseline "
+                f"(or +{policy['coherence_absolute']:.0%} absolute), distance "
+                f"{policy['distance_multiplier']:g}x the natural "
+                f"{DISTANCE_NATURAL_SHARE:.0%} share. "
+                f"Intent: {policy['intent']}.\n\n")
+        if args.note:
+            f.write(f"Note: {args.note}\n\n")
+        if passed and not default_policy:
+            f.write(f"> This file does not pass the default `{DEFAULT_POLICY}` policy. "
+                    f"Clearance under a relaxed policy is a governance decision and "
+                    f"carries only the scope stated above.\n\n")
+        f.write("| check | result | detail |\n|---|---|---|\n")
         for c in checks:
             f.write(f"| {c['check']} | {'PASS' if c['passed'] else 'FAIL'} | {c['detail']} |\n")
+
+        f.write("\n## Verdict under each policy\n\n"
+                "The same measurement, re-thresholded. Absolute checks (schema, "
+                "representation, freshness, leakage) are policy-independent.\n\n"
+                "| policy | verdict | coherence limit | distance limit | intent |\n"
+                "|---|---|---|---|---|\n")
+        for pname, v in by_policy.items():
+            coh = v["checks"].get("coherence", {})
+            dist = v["checks"].get("distance", {})
+            f.write(f"| {pname} | {v['verdict']} "
+                    f"| {coh.get('threshold', 'n/a')} "
+                    f"{'✅' if coh.get('passed') else '❌' if coh else ''} "
+                    f"| {dist.get('threshold', 'n/a')} "
+                    f"{'✅' if dist.get('passed') else '❌' if dist else ''} "
+                    f"| {v['intent']} |\n")
     print(f"Report -> {report}")
+
+    sidecar = report.replace(".md", ".json")
+    with open(sidecar, "w") as f:
+        json.dump({
+            "file": os.path.basename(args.file),
+            "evaluated": timestamp,
+            "policy": policy_name,
+            "policy_thresholds": policy,
+            "note": args.note,
+            "verdict": "PASS" if passed else "FAIL",
+            "cleared_for_open_release": bool(passed and default_policy),
+            "checks": checks,
+            "measured": measured,
+            "verdict_by_policy": by_policy,
+        }, f, indent=2, default=str)
+    print(f"Report -> {sidecar}")
     return 0 if passed else 1
 
 
