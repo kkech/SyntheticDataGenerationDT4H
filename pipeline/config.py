@@ -77,7 +77,7 @@ class PipelineConfig:
     headline_epsilon: float = 15.0
     variance_seeds: tuple = (0, 1, 2)
     aim_max_columns: int = 50
-    aim_timeout_seconds: int = 7200
+    aim_timeout_seconds: int = 21600
     run_plan: tuple = None  # explicit override; None = build from the fields above
     synthesizer_params: dict = None  # per-synthesizer overrides, keyed by name
     # Opt-in roadmap runs appended after the frozen base plan (main.py

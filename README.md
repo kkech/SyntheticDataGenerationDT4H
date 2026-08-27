@@ -238,6 +238,49 @@ the same reason. `--coherence-multiplier` / `--distance-multiplier`
 override the thresholds ad hoc and are recorded as a custom policy;
 `--note` records who authorized it.
 
+## Running at a partner site
+
+This repository is site-portable: point it at your own DT4H UC1 extract
+(the Spark `part-*.parquet` files plus the feature-set `metadata.json`)
+and the entire campaign -- generation, evaluation, gating, documentation
+-- runs unchanged.
+
+```
+git clone <partner-repo-url>
+cd SyntheticDataGenerationTabularDT4H
+python -m venv .synthenv && source .synthenv/bin/activate
+pip install -r requirements.txt          # see the numpy note under Setup
+python main.py --preflight --data-dir /your/part-parquet-folder
+./run_job.sh start --force --extended --data-dir /your/part-parquet-folder
+./run_job.sh status                      # any time; `follow` streams the log
+python release_gate.py --all             # after the run: gate every file, both policies
+```
+
+Add `--metadata /path/to/metadata.json` if the JSON does not live inside
+the data folder. `--extended` is optional: dropping it runs the core
+31-run plan (six model families) and saves roughly 20 hours; the
+extended plan adds the model variants, the diffusion baseline and
+PATE-CTGAN. A machine without a CUDA GPU runs everything too, just
+slower on the GAN/VAE models -- preflight says so explicitly.
+
+The pipeline argues for itself at a new site, before hours are spent:
+
+* **preflight** refuses to start and names anything missing (libraries,
+  GPU, data, the reviewed public-domain file, disk);
+* **preprocess** hard-fails with a named error if the extract violates an
+  assumption (duplicated patient ids, unmapped NYHA codes);
+* **DP fits** abort BEFORE training if any of your values falls outside a
+  declared public domain, naming the column. The fix is a one-line edit
+  to `public_domains.json`: widen that range to what you would defend
+  from clinical knowledge alone, keep `reviewed: true`, and note the
+  change -- the file is part of the released mechanism specification, so
+  a widened range must be re-declared with the release, never fitted to
+  your data.
+
+Everything your run produces stays in your local `output/` (gitignored,
+same boundaries as described under *Data & privacy boundaries*): nothing
+patient-derived can be pushed back by accident.
+
 ## Setup
 
 Python 3.10+, a CUDA GPU recommended for the GAN/VAE models.
