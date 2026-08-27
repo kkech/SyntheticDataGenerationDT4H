@@ -155,17 +155,23 @@ class FiguresStep(PipelineStep):
             ax.set_xlabel("ε (privacy budget)")
             ax.set_title(label, fontsize=9)
             ax.set_xscale("log")
+            # Log fidelity axis: the sweep's story is MST/AIM saturating AT
+            # the floor while DP-CTGAN sits 40x above it -- on a linear axis
+            # every near-floor curve collapses into one band at the bottom.
+            ax.set_yscale("log")
             eps_values = sorted({g["epsilon"] for g in groups
                                  if g.get("epsilon") is not None})
             ticks = ([0.5] if 0.5 in eps_values else []) + [1, 5, 10, 20]
             ax.set_xticks(ticks)
             ax.set_xticklabels([f"{t:g}" for t in ticks])
-        # One shared legend below the panels: an in-panel box collides with
-        # the curves in every panel.
+        # One shared legend in RESERVED space below the panels: an in-panel
+        # box collides with the curves, and a negative-anchor overlay
+        # collides with the x-axis labels.
+        fig.subplots_adjust(bottom=0.30, top=0.82, wspace=0.28)
         handles, labels = axes[0].get_legend_handles_labels()
         fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=8,
-                   bbox_to_anchor=(0.5, -0.08))
-        fig.suptitle("Privacy-utility trade-off: fidelity vs ε (lower is better)", y=1.03)
+                   bbox_to_anchor=(0.5, 0.01))
+        fig.suptitle("Privacy-utility trade-off: fidelity vs ε (lower is better)", y=0.96)
         self._save(plt, fig, "fig_epsilon_curves")
 
     def _fig_tstr(self, plt):
