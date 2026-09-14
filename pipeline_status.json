@@ -1,17 +1,15 @@
 {
   "load_data": {
     "completed": true,
-    "completed_at": "2026-08-27T13:32:36.401491+00:00"
+    "completed_at": "2026-09-14T09:52:00.472982+00:00"
   },
   "profile_data": {
-    "completed": false,
-    "failed_at": "2026-08-27T13:32:36.575176+00:00",
-    "error": "InvalidOperationError: cannot cast List type (inner: 'String', to: 'String')\n\nThis error occurred in the following expression:\n\tcol(\"electrocardiographs_ecg_type_of_rhythms_pET_first\").strict_cast(String)\n"
+    "completed": true,
+    "completed_at": "2026-09-14T09:52:00.805200+00:00"
   },
   "preprocess": {
-    "completed": false,
-    "pending": true,
-    "queued_at": "2026-08-27T13:32:35.917077+00:00"
+    "completed": true,
+    "completed_at": "2026-09-14T09:52:01.036182+00:00"
   },
   "profile_preprocessed_data": {
     "completed": false,

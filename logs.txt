@@ -1,30 +1,109 @@
-[13:32:35] ======================================================================
-[13:32:35] Run started: 2026-08-27T13:32:35.916266+00:00
-[13:32:35] Command: main.py --force --extended
-[13:32:35] ======================================================================
-[13:32:35] 🧹 Deleted previous outputs of 'load_data' (/home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/load_data) for a clean rerun.
+[09:52:00] ======================================================================
+[09:52:00] Run started: 2026-09-14T09:52:00.075798+00:00
+[09:52:00] Command: main.py --data-dir /mnt/inbox/transfer-2026-09-11-07-49-29-m.j.boonstra-3/ --only load_data --only profile_data --only preprocess --force --no-cascade
+[09:52:00] ======================================================================
 
-[13:32:35] ======================================================================
-[13:32:35] ▶️  RUNNING 'load_data' (started 13:32:35)
-[13:32:35] ======================================================================
-[13:32:35] Found 3 part file(s):
-[13:32:36]   part-00000-ab6e8732-8495-4a9c-af13-fda00abb0899-c000.snappy.parquet: 2284 rows x 528 cols
-[13:32:36]   part-00001-9aaa92e9-ddad-4861-94fb-c3abb59d94ea-c000.snappy.parquet: 2120 rows x 528 cols
-[13:32:36]   part-00002-4eeb4ef0-377f-43b2-9f44-38c632f1f6c6-c000.snappy.parquet: 290 rows x 528 cols
-[13:32:36] Concatenated: 4694 rows x 528 cols
-[13:32:36] Saved full dataset (local only, not for git) -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/load_data/UC1_Resolved_Full.parquet
-[13:32:36] ✅ 'load_data' completed in 0s.
-[13:32:36] 🧹 Deleted previous outputs of 'profile_data' (/home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_data) for a clean rerun.
+[09:52:00] ======================================================================
+[09:52:00] ▶️  RUNNING 'load_data' (started 09:52:00)
+[09:52:00] ======================================================================
+[09:52:00] Found 4 part file(s):
+[09:52:00]   part-00000-65d66873-241b-41e4-8942-19aba28cec24-c000.snappy.parquet: 1381 rows x 540 cols
+[09:52:00]   part-00001-c689f1ef-548f-4a22-a7fe-c114848ee426-c000.snappy.parquet: 1335 rows x 540 cols
+[09:52:00]   part-00002-b455a6c4-5131-48fd-acc9-f4334d3498e0-c000.snappy.parquet: 1335 rows x 540 cols
+[09:52:00]   part-00003-ce3e4832-46be-4350-b71a-9ce1ef605826-c000.snappy.parquet: 394 rows x 540 cols
+[09:52:00] Concatenated: 4445 rows x 540 cols
+[09:52:00] Saved full dataset (local only, not for git) -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/load_data/UC1_Resolved_Full.parquet
+[09:52:00] ✅ 'load_data' completed in 0s.
 
-[13:32:36] ======================================================================
-[13:32:36] ▶️  RUNNING 'profile_data' (started 13:32:36)
-[13:32:36] ======================================================================
-[13:32:36] Copied metadata file -> /home/konstantinos.kechagi@mydre.org/generationV2/SyntheticDataGenerationDT4H/output/profile_data/metadata.json
-[13:32:36] Profiling 4694 rows x 528 columns...
-[13:32:36] ❌ Step 'profile_data' failed after 0s: cannot cast List type (inner: 'String', to: 'String')
+[09:52:00] ======================================================================
+[09:52:00] ▶️  RUNNING 'profile_data' (started 09:52:00)
+[09:52:00] ======================================================================
+[09:52:00] Copied metadata file -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/profile_data/metadata.json
+[09:52:00] Profiling 4445 rows x 540 columns...
+[09:52:00] Saved column analysis (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/profile_data/DT4H_Column_Analysis.json
+[09:52:00] Saved column analysis (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/profile_data/DT4H_Column_Analysis.md
+[09:52:00] Saved random sample of 20 row(s) (seed=0) -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/profile_data/DT4H_Sample20.parquet
+[09:52:00] ✅ 'profile_data' completed in 0s.
+[09:52:00] 🧹 Deleted previous outputs of 'preprocess' (/home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/preprocess) for a clean rerun.
 
-[13:32:36] This error occurred in the following expression:
-[13:32:36] 	col("electrocardiographs_ecg_type_of_rhythms_pET_first").strict_cast(String)
+[09:52:00] ======================================================================
+[09:52:00] ▶️  RUNNING 'preprocess' (started 09:52:00)
+[09:52:00] ======================================================================
+[09:52:00] Loaded 4445 rows x 540 columns.
+[09:52:00] Unique patients (pid): 4445
+[09:52:00] Validating against metadata...
+[09:52:00]   540 declared in metadata.json, 540 present in data, 540 match.
+[09:52:00] Checking expected non-null pairs...
+[09:52:00]   lab_results_hdl_value_first: 213 non-null vs lab_results_ldl_value_first: 215 non-null (expected similar (ordered together))
+[09:52:00]   lab_results_potassium_value_first: 4287 non-null vs lab_results_sodium_value_first: 4205 non-null (expected similar (ordered together))
+[09:52:00]   lab_results_albuminBS_value_first: 1513 non-null vs lab_results_ntProBnp_value_first: 1674 non-null (expected similar)
+[09:52:00]   ⚠️ lab_results_albuminBS_value_first: 1513 non-null vs lab_results_crpNonHs_value_first: 2606 non-null (expected similar)
+[09:52:00]   ⚠️ lab_results_albuminBS_value_first: 1513 non-null vs lab_results_hba1c_value_first: 160 non-null (expected similar)
+[09:52:00]   ⚠️ vital_signs_heartRate_value_first: 4440 non-null vs vital_signs_oxygenSaturation_value_first: 1918 non-null (expected similar, oxygen sat maybe slightly lower)
+[09:52:00] Flattening ARRAY[NOMINAL] columns...
+[09:52:00]   Flattening 2 ARRAY[NOMINAL] column(s) to scalar: ['electrocardiographs_ecg_type_of_rhythms_pET_first', 'electrocardiographs_ecg_type_of_rhythms_pET_last']
+[09:52:00] Normalizing numeric dtypes...
+[09:52:00]   Casting 183 Decimal column(s) to Float64: 183 column(s)
+[09:52:00] Checking symptom columns...
+[09:52:00]   30 symptom_* column(s) present, 30 currently constant (NLP module not yet integrated) -- kept in the data, not dropped.
+[09:52:00] Combining medication columns...
+[09:52:00]   Combined medication columns into 58 feature(s) (30 current + 28 history).
+[09:52:00] Combining condition columns...
+[09:52:00]   Combined condition columns into 31 feature(s).
+[09:52:00] Encoding NYHA...
+[09:52:00]   Encoding nyha_nyha_pET via metadata valueSet: {'LA28404-4': 1, 'LA28405-1': 2, 'LA28406-9': 3, 'LA28407-7': 4}
+[09:52:00]   Encoding nyha_nyha via metadata valueSet: {'LA28404-4': 1, 'LA28405-1': 2, 'LA28406-9': 3, 'LA28407-7': 4}
+[09:52:00] Preferring _first/_last numeric variants...
+[09:52:00]   Dropping 140 numeric aggregate column(s) (bare/_min/_max/_avg/_stddev) in favor of _first/_last.
+[09:52:00] Dropping identifier/datetime columns...
+[09:52:00]   Dropping 7 IDENTIFIER/DATETIME column(s): ['pid', 'encounterId', 'eventTime', 'exitTime', 'referenceTimePoint', 'encounters_admissionDate', 'encounters_dischargeDate']
+[09:52:00] Dropping near-unique identifier-like columns (safety net)...
+[09:52:00]   Dropping 1 near-unique identifier-like column(s) not caught by declared type: ['patient_demographics_sourceIdentifier']
+[09:52:00] Final null cleanup...
+[09:52:00]   Sentinel-encoded 49 numeric column(s) (4 time-to-event 'no event', 45 'not measured'); dropped 35 column(s) with fewer than 222 observed values (5% of 4445 rows).
+[09:52:00]     dropped lab_results_tfs_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_tfs_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_bnp_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_bnp_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_crpHs_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_crpHs_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_tropIHs_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_tropIHs_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_tropInHs_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_tropInHs_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_tropTHs_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_tropTHs_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_tropTnHs_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_tropTnHs_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_hdl_value_first (only 213 observed)
+[09:52:00]     dropped lab_results_hdl_value_last (only 213 observed)
+[09:52:00]     dropped lab_results_albuminUS_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_albuminUS_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_bun_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_bun_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_acr_value_first (only 0 observed)
+[09:52:00]     dropped lab_results_acr_value_last (only 0 observed)
+[09:52:00]     dropped lab_results_ldl_value_first (only 215 observed)
+[09:52:00]     dropped lab_results_ldl_value_last (only 215 observed)
+[09:52:00]     dropped lab_results_hba1c%_value_first (only 63 observed)
+[09:52:00]     dropped lab_results_hba1c%_value_last (only 63 observed)
+[09:52:00]     dropped lab_results_hba1c_value_first (only 160 observed)
+[09:52:00]     dropped lab_results_hba1c_value_last (only 160 observed)
+[09:52:00]     dropped electrocardiographs_ecg_qrs_axis_pET_last (only 0 observed)
+[09:52:00]     dropped electrocardiographs_ecg_qrs_axis_pET_first (only 0 observed)
+[09:52:00]     dropped smoking_status_smoker_totalSmokingDuration_sum (only 71 observed)
+[09:52:00]     dropped encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first (only 64 observed)
+[09:52:00]     dropped cause_of_death_number_of_days_to_death_for_CV_f5a_first (only 62 observed)
+[09:52:00]     dropped cause_of_death_number_of_days_to_death_for_renal_f5a_first (only 0 observed)
+[09:52:00]     dropped cause_of_death_number_of_days_to_death_for_non_renal_and_non_CV_f5a_first (only 0 observed)
+[09:52:00]   Encoding map (for decoding synthetic output back to null) -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/preprocess/DT4H_Numeric_Missing_Encoding.json
+[09:52:00]   Normalized 190 boolean/categorical column(s) to String; 63 of them had nulls filled with an explicit 'Missing' category.
+[09:52:00] Remaining missing cells after all imputation: 0 null, 0 NaN
+[09:52:00] Saved 4445 rows x 254 columns -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/preprocess/UC1_Preprocessed.parquet
+[09:52:01] Holdout split (seed 0): 3334 train rows -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/preprocess/UC1_Train.parquet, 1111 holdout rows -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/preprocess/UC1_Holdout.parquet
+[09:52:01] Saved holdout split manifest -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/preprocess/DT4H_Holdout_Split.json
+[09:52:01] Saved preprocessing summary (JSON) -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/preprocess/DT4H_Preprocessing_Summary.json
+[09:52:01] Saved preprocessing summary (Markdown) -> /home/konstantinos.kechagi@mydre.org/generationV2/dt4h-v22-probe/output/preprocess/DT4H_Preprocessing_Summary.md
+[09:52:01] ✅ 'preprocess' completed in 0s.
 
-
-[13:32:36] Run finished: 2026-08-27T13:32:36.575652+00:00
+[09:52:01] Run finished: 2026-09-14T09:52:01.036517+00:00
