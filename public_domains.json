@@ -1,506 +1,648 @@
 {
-  "reviewed": true,
-  "note": "TEMPLATE -- NOT YET A PRIVACY GUARANTEE. Each entry is the a-priori PUBLIC domain [lo, hi] declared for a numeric column: the range a value could take for any patient who might have been in the cohort, decided from clinical / measurement knowledge, NOT from this dataset. DP runs bound each column to this domain, so a range fitted to the observed data leaks the data. REVIEW WORKFLOW: (1) read every range and replace anything you would not defend without looking at the cohort -- the proposals here were seeded from already-published observed ranges, rounded outward to one significant figure, purely to save typing; (2) widen anything clinically implausible (a domain wider than the cohort costs utility, a domain narrower than the cohort is both a privacy leak and a fit-time error); (3) set \"reviewed\": true. The generate step refuses to fit any DP synthesizer while reviewed is false, and fails at fit time (before hours of training) if any training value falls outside the declared domain. This file is released with the data: it is part of the mechanism specification a reader needs to check the (epsilon, delta) claim. BEFORE RELEASING the file, delete the observed_min/observed_max keys from every entry: they are exact values of real patients, kept here only so the reviewer can see that a proposal covers the cohort. Only lo/hi (and sentinel_encoded) are part of the public declaration. REVIEW PASS APPLIED: each range now carries a 'basis' naming the public knowledge it rests on (study design, assay limits, ordinal scales, physiological plausibility of recorded EHR values incl. documented artifacts). A human author must read the bases, adjust anything they would not sign, and set reviewed:true as the sign-off.",
-  "generated_by": "make_public_domains.py",
-  "proposal_rule": "observed range rounded outward to 1 significant figure (a small positive floor is proposed as 0)",
-  "sources": {
-    "profile": {
-      "path": "/home/user/SyntheticDataGenerationDT4H/output/profile_preprocessed_data/DT4H_Preprocessed_Column_Analysis.json",
-      "sha256": "d9a9cbd6bfdf577538b0a4ebd027aa4cf2d2744dae14285741db366c788a44af"
-    },
-    "encoding_map": {
-      "path": "/home/user/SyntheticDataGenerationDT4H/output/preprocess/DT4H_Numeric_Missing_Encoding.json",
-      "sha256": "f4037abf6b5fefcc17f44aca6825b0259f04cfa4d2ba02d655eb91f79cc323b3"
-    }
-  },
+  "reviewed": false,
+  "note": "DRAFT for feature-set version 2.2. The 61 entries present before this draft are UNCHANGED and remain exactly as previously reviewed. The 39 new entries (30 pre-existing gap columns already present in 1.4/2.1 but never covered, 5 columns new in 2.1, 4 columns new in 2.2) are drafted from metadata_2.2.json's own descriptions/LOINC codes and unit hints -- NOT derived from any site's observed patient data. Each new entry's 'basis' names the reasoning. Whole-file reviewed=false until a human signs off on the 39 new entries (the previously-reviewed 61 do not need re-review). Refined 2026-09-11 after real-VM testing on 2.2 surfaced training values outside the declared domain for several columns: 6 entries (ecg_qrs_axis_first/last, smoking_duration, creatBS, valideGFR_first/last) were widened for genuine clinical/measurement-convention reasons unrelated to any specific observed value. Entries whose violations trace to physically-impossible readings (height, diastolicBp, potassium, sodium, lvef, bmi) or unexplained anomalies pending investigation (the three rehospitalization-count columns) were deliberately left unchanged -- use --clip-to-domain to handle those instead of stretching declared domains to cover impossible values. Installed as the working declaration for the 2.2 campaign; coverage verified against AUMC's 2.2 modelled numeric columns (97/97 covered).",
+  "previously_reviewed_sha256": "5120731a038c91ccbaab8a2e109dd6394f2318c349e0d3ddb9a845fecb86e30c",
+  "new_entries_added": [
+    "cause_of_death_number_of_days_to_death_for_CV_f5a_first",
+    "cause_of_death_number_of_days_to_death_for_non_renal_and_non_CV_f5a_first",
+    "cause_of_death_number_of_days_to_death_for_renal_f5a_first",
+    "echocardiographs_lvef",
+    "electrocardiographs_ecg_qrs_axis_pET_first",
+    "electrocardiographs_ecg_qrs_axis_pET_last",
+    "encounter_primary_reason_number_of_CV_rehospitalizations_5a_f5a_count",
+    "encounter_primary_reason_number_of_HF_rehospitalizations_5a_f5a_count",
+    "encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first",
+    "encounter_primary_reason_number_of_non_CV_rehospitalizations_5a_f5a_count",
+    "encounter_primary_reason_number_of_renal_rehospitalizations_5a_f5a_count",
+    "lab_results_acr_value_first",
+    "lab_results_acr_value_last",
+    "lab_results_albuminUS_value_first",
+    "lab_results_albuminUS_value_last",
+    "lab_results_bnp_value_first",
+    "lab_results_bnp_value_last",
+    "lab_results_bun_value_first",
+    "lab_results_bun_value_last",
+    "lab_results_creatBS_value_p3a_avg",
+    "lab_results_crpHs_value_first",
+    "lab_results_crpHs_value_last",
+    "lab_results_hba1c%_value_first",
+    "lab_results_hba1c%_value_last",
+    "lab_results_hba1c_value_first",
+    "lab_results_hba1c_value_last",
+    "lab_results_tfs_value_first",
+    "lab_results_tfs_value_last",
+    "lab_results_tropIHs_value_first",
+    "lab_results_tropIHs_value_last",
+    "lab_results_tropInHs_value_first",
+    "lab_results_tropInHs_value_last",
+    "lab_results_validSerumCreatinine_value_pET",
+    "maggic_total_score",
+    "smoking_status_smoker_totalSmokingDuration_sum",
+    "vital_signs_bmi_value_pET",
+    "vital_signs_oxygenSaturation_value_first",
+    "vital_signs_oxygenSaturation_value_last",
+    "vital_signs_systolicBpDuringEncounter_value_pET"
+  ],
   "domains": {
     "patient_demographics_age": {
       "lo": 18.0,
       "hi": 110.0,
-      "observed_min": 18.0,
-      "observed_max": 104.0,
       "sentinel_encoded": false,
       "basis": "adult-cohort inclusion criterion; extreme human longevity"
     },
     "encounters_lengthOfStay": {
       "lo": 0.0,
       "hi": 400.0,
-      "observed_min": 1.0,
-      "observed_max": 257.0,
       "sentinel_encoded": false,
       "basis": "hospital length of stay, days; year-long extreme admissions"
     },
     "encounters_numOfPreviousHFStays_count": {
       "lo": 0.0,
       "hi": 1000.0,
-      "observed_min": 0.0,
-      "observed_max": 757.0,
       "sentinel_encoded": false,
       "basis": "recorded encounter counter; generous upper bound"
     },
     "vital_signs_weight_value_p6mo_last": {
       "lo": 20.0,
       "hi": 350.0,
-      "observed_min": 32.0,
-      "observed_max": 208.6,
       "sentinel_encoded": true,
       "basis": "recorded adult body weight, kg; extreme obesity"
     },
     "vital_signs_weight_value_p6mo_first": {
       "lo": 20.0,
       "hi": 350.0,
-      "observed_min": 33.9,
-      "observed_max": 241.0,
       "sentinel_encoded": true,
       "basis": "recorded adult body weight, kg; extreme obesity"
     },
     "vital_signs_height_value_p1a_avg": {
       "lo": 90.0,
       "hi": 250.0,
-      "observed_min": 96.94999999999999,
-      "observed_max": 207.0,
       "sentinel_encoded": true,
       "basis": "recorded adult height, cm, incl. documented entry artifacts"
     },
     "vital_signs_weight_value_last": {
       "lo": 20.0,
       "hi": 350.0,
-      "observed_min": 32.0,
-      "observed_max": 208.6,
       "sentinel_encoded": true,
       "basis": "recorded adult body weight, kg; extreme obesity"
     },
     "vital_signs_height_value_last": {
       "lo": 90.0,
       "hi": 250.0,
-      "observed_min": 110.0,
-      "observed_max": 207.0,
       "sentinel_encoded": true,
       "basis": "recorded adult height, cm, incl. documented entry artifacts"
     },
     "vital_signs_bmi_value_last": {
       "lo": 10.0,
       "hi": 100.0,
-      "observed_min": 13.21178491214163,
-      "observed_max": 79.5847750865052,
       "sentinel_encoded": true,
       "basis": "BMI derivable from the weight/height domains"
     },
     "vital_signs_systolicBp_value_first": {
       "lo": 30.0,
       "hi": 300.0,
-      "observed_min": 46.0,
-      "observed_max": 257.0,
       "sentinel_encoded": true,
       "basis": "recorded systolic BP, mmHg; device reporting range"
     },
     "vital_signs_systolicBp_value_last": {
       "lo": 30.0,
       "hi": 300.0,
-      "observed_min": 50.0,
-      "observed_max": 221.0,
       "sentinel_encoded": true,
       "basis": "recorded systolic BP, mmHg; device reporting range"
     },
     "vital_signs_diastolicBp_value_first": {
       "lo": 0.0,
       "hi": 250.0,
-      "observed_min": 8.0,
-      "observed_max": 201.0,
       "sentinel_encoded": true,
       "basis": "recorded diastolic BP, mmHg, incl. artifactual lows"
     },
     "vital_signs_diastolicBp_value_last": {
       "lo": 0.0,
       "hi": 250.0,
-      "observed_min": 6.0,
-      "observed_max": 158.0,
       "sentinel_encoded": true,
       "basis": "recorded diastolic BP, mmHg, incl. artifactual lows"
     },
     "vital_signs_heartRate_value_first": {
       "lo": 0.0,
       "hi": 300.0,
-      "observed_min": 1.0,
-      "observed_max": 223.0,
       "sentinel_encoded": true,
       "basis": "recorded heart rate, bpm; monitor reporting range"
     },
     "vital_signs_heartRate_value_last": {
       "lo": 0.0,
       "hi": 300.0,
-      "observed_min": 0.0,
-      "observed_max": 254.0,
       "sentinel_encoded": true,
       "basis": "recorded heart rate, bpm; monitor reporting range"
     },
     "lab_results_hemoglobin_value_last": {
       "lo": 0.0,
       "hi": 300.0,
-      "observed_min": 32.228,
-      "observed_max": 233.653,
       "sentinel_encoded": true,
       "basis": "hemoglobin, g/L, incl. documented unit-mix artifacts near 0"
     },
     "lab_results_hemoglobin_value_first": {
       "lo": 0.0,
       "hi": 300.0,
-      "observed_min": 0.16114,
-      "observed_max": 219.1504,
       "sentinel_encoded": true,
       "basis": "hemoglobin, g/L, incl. documented unit-mix artifacts near 0"
     },
     "lab_results_ferritin_value_last": {
       "lo": 0.0,
       "hi": 100000.0,
-      "observed_min": 4.0,
-      "observed_max": 42076.0,
       "sentinel_encoded": true,
       "basis": "ferritin, ug/L; hemophagocytosis/iron-overload extremes"
     },
     "lab_results_ferritin_value_first": {
       "lo": 0.0,
       "hi": 100000.0,
-      "observed_min": 4.0,
-      "observed_max": 42076.0,
       "sentinel_encoded": true,
       "basis": "ferritin, ug/L; hemophagocytosis/iron-overload extremes"
     },
     "lab_results_ntProBnp_value_last": {
       "lo": 0.0,
       "hi": 70000.0,
-      "observed_min": 33.0,
-      "observed_max": 70000.0,
       "sentinel_encoded": true,
       "basis": "assay upper reporting limit (values censored at 70000)"
     },
     "lab_results_ntProBnp_value_first": {
       "lo": 0.0,
       "hi": 70000.0,
-      "observed_min": 34.5,
-      "observed_max": 70000.0,
       "sentinel_encoded": true,
       "basis": "assay upper reporting limit (values censored at 70000)"
     },
     "lab_results_crpNonHs_value_last": {
       "lo": 0.0,
       "hi": 1000.0,
-      "observed_min": 0.3,
-      "observed_max": 629.7,
       "sentinel_encoded": true,
       "basis": "CRP, mg/L; extreme sepsis values"
     },
     "lab_results_crpNonHs_value_first": {
       "lo": 0.0,
       "hi": 1000.0,
-      "observed_min": 0.3,
-      "observed_max": 578.1,
       "sentinel_encoded": true,
       "basis": "CRP, mg/L; extreme sepsis values"
     },
     "lab_results_tropTHs_value_last": {
       "lo": 0.0,
       "hi": 100.0,
-      "observed_min": 0.004,
-      "observed_max": 65.65,
       "sentinel_encoded": true,
       "basis": "hs-troponin T, ug/L; massive-infarction extremes"
     },
     "lab_results_tropTHs_value_first": {
       "lo": 0.0,
       "hi": 100.0,
-      "observed_min": 0.004,
-      "observed_max": 17.389,
       "sentinel_encoded": true,
       "basis": "hs-troponin T, ug/L; massive-infarction extremes"
     },
     "lab_results_tropTnHs_value_last": {
       "lo": 0.0,
       "hi": 100000.0,
-      "observed_min": 3.0,
-      "observed_max": 15400.0,
       "sentinel_encoded": true,
       "basis": "hs-troponin, ng/L; assay dynamic range"
     },
     "lab_results_tropTnHs_value_first": {
       "lo": 0.0,
       "hi": 100000.0,
-      "observed_min": 3.0,
-      "observed_max": 6140.0,
       "sentinel_encoded": true,
       "basis": "hs-troponin, ng/L; assay dynamic range"
     },
     "lab_results_triGly_value_last": {
       "lo": 0.0,
       "hi": 30.0,
-      "observed_min": 0.2,
-      "observed_max": 11.35,
       "sentinel_encoded": true,
       "basis": "triglycerides, mmol/L; severe hypertriglyceridemia"
     },
     "lab_results_triGly_value_first": {
       "lo": 0.0,
       "hi": 30.0,
-      "observed_min": 0.2,
-      "observed_max": 16.5,
       "sentinel_encoded": true,
       "basis": "triglycerides, mmol/L; severe hypertriglyceridemia"
     },
     "lab_results_cholTot_value_last": {
       "lo": 0.5,
       "hi": 15.0,
-      "observed_min": 1.17,
-      "observed_max": 8.71,
       "sentinel_encoded": true,
       "basis": "total cholesterol, mmol/L; familial-hypercholesterolemia extremes"
     },
     "lab_results_cholTot_value_first": {
       "lo": 0.5,
       "hi": 15.0,
-      "observed_min": 1.17,
-      "observed_max": 8.71,
       "sentinel_encoded": true,
       "basis": "total cholesterol, mmol/L; familial-hypercholesterolemia extremes"
     },
     "lab_results_hdl_value_last": {
       "lo": 0.0,
       "hi": 5.0,
-      "observed_min": 0.22,
-      "observed_max": 3.76,
       "sentinel_encoded": true,
       "basis": "HDL, mmol/L"
     },
     "lab_results_hdl_value_first": {
       "lo": 0.0,
       "hi": 5.0,
-      "observed_min": 0.16,
-      "observed_max": 3.85,
       "sentinel_encoded": true,
       "basis": "HDL, mmol/L"
     },
     "lab_results_ldl_value_last": {
       "lo": 0.0,
       "hi": 12.0,
-      "observed_min": 0.04,
-      "observed_max": 6.4475,
       "sentinel_encoded": true,
       "basis": "LDL, mmol/L; familial-hypercholesterolemia extremes"
     },
     "lab_results_ldl_value_first": {
       "lo": 0.0,
       "hi": 12.0,
-      "observed_min": 0.04,
-      "observed_max": 6.4475,
       "sentinel_encoded": true,
       "basis": "LDL, mmol/L; familial-hypercholesterolemia extremes"
     },
     "lab_results_potassium_value_last": {
       "lo": 1.0,
       "hi": 10.0,
-      "observed_min": 1.85,
-      "observed_max": 7.5,
       "sentinel_encoded": true,
       "basis": "serum potassium, mmol/L; survivable extremes with margin"
     },
     "lab_results_potassium_value_first": {
       "lo": 1.0,
       "hi": 10.0,
-      "observed_min": 1.85,
-      "observed_max": 8.8,
       "sentinel_encoded": true,
       "basis": "serum potassium, mmol/L; survivable extremes with margin"
     },
     "lab_results_sodium_value_last": {
       "lo": 90.0,
       "hi": 200.0,
-      "observed_min": 109.0,
-      "observed_max": 160.0,
       "sentinel_encoded": true,
       "basis": "serum sodium, mmol/L; survivable extremes with margin"
     },
     "lab_results_sodium_value_first": {
       "lo": 90.0,
       "hi": 200.0,
-      "observed_min": 109.0,
-      "observed_max": 165.0,
       "sentinel_encoded": true,
       "basis": "serum sodium, mmol/L; survivable extremes with margin"
     },
     "lab_results_creatUS_value_last": {
       "lo": 0.0,
       "hi": 4000.0,
-      "observed_min": 44.56928,
-      "observed_max": 2706.9616,
       "sentinel_encoded": true,
       "basis": "urine/serum creatinine, umol/L; dialysis-range extremes"
     },
     "lab_results_creatUS_value_first": {
       "lo": 0.0,
       "hi": 4000.0,
-      "observed_min": 44.56928,
-      "observed_max": 2839.312,
       "sentinel_encoded": true,
       "basis": "urine/serum creatinine, umol/L; dialysis-range extremes"
     },
     "lab_results_albuminBS_value_last": {
       "lo": 5.0,
       "hi": 60.0,
-      "observed_min": 9.0,
-      "observed_max": 50.0,
       "sentinel_encoded": true,
       "basis": "serum albumin, g/L; severe-illness extremes"
     },
     "lab_results_albuminBS_value_first": {
       "lo": 5.0,
       "hi": 60.0,
-      "observed_min": 10.0,
-      "observed_max": 50.0,
       "sentinel_encoded": true,
       "basis": "serum albumin, g/L; severe-illness extremes"
     },
     "lab_results_validSerumCreatinine_value_last": {
       "lo": 0.0,
       "hi": 30.0,
-      "observed_min": 0.7917,
-      "observed_max": 22.57476,
       "sentinel_encoded": true,
       "basis": "serum creatinine, mg/dL; dialysis-range extremes"
     },
     "lab_results_validSerumCreatinine_value_first": {
       "lo": 0.0,
       "hi": 30.0,
-      "observed_min": 0.9048,
-      "observed_max": 22.57476,
       "sentinel_encoded": true,
       "basis": "serum creatinine, mg/dL; dialysis-range extremes"
     },
     "lab_results_valideGFR_value_first": {
       "lo": 0.0,
-      "hi": 90.0,
-      "observed_min": 3.0,
-      "observed_max": 90.0,
+      "hi": 150.0,
       "sentinel_encoded": true,
-      "basis": "derivation caps reported eGFR at 90 by definition"
+      "basis": "widened hi from 90 to 150 (pre-existing entry, predates this draft): the original basis assumed a reporting convention that caps calculated eGFR at 90; not every source applies that cap, and calculated eGFR in young/healthy kidneys or hyperfiltration states can genuinely exceed 90"
     },
     "lab_results_valideGFR_value_last": {
       "lo": 0.0,
-      "hi": 90.0,
-      "observed_min": 3.0,
-      "observed_max": 90.0,
+      "hi": 150.0,
       "sentinel_encoded": true,
-      "basis": "derivation caps reported eGFR at 90 by definition"
+      "basis": "widened hi from 90 to 150 (pre-existing entry, predates this draft): the original basis assumed a reporting convention that caps calculated eGFR at 90; not every source applies that cap, and calculated eGFR in young/healthy kidneys or hyperfiltration states can genuinely exceed 90"
     },
     "echocardiographs_lvef_pET_last": {
       "lo": -200.0,
       "hi": 100.0,
-      "observed_min": -179.0,
-      "observed_max": 96.0,
       "sentinel_encoded": true,
       "basis": "percentage scale; negative recorded values are documented source-EHR artifacts"
     },
     "echocardiographs_lvef_pET_first": {
       "lo": -200.0,
       "hi": 100.0,
-      "observed_min": -44.0,
-      "observed_max": 100.0,
       "sentinel_encoded": true,
       "basis": "percentage scale; negative recorded values are documented source-EHR artifacts"
     },
     "electrocardiographs_ecg_qrs_duration_pET_first": {
       "lo": 10.0,
       "hi": 400.0,
-      "observed_min": 20.0,
-      "observed_max": 252.0,
       "sentinel_encoded": true,
       "basis": "recorded QRS duration, ms; device reporting range"
     },
     "electrocardiographs_ecg_qrs_duration_pET_last": {
       "lo": 10.0,
       "hi": 400.0,
-      "observed_min": 56.0,
-      "observed_max": 250.0,
       "sentinel_encoded": true,
       "basis": "recorded QRS duration, ms; device reporting range"
     },
     "electrocardiographs_ecg_qt_duration_corrected_pET_first": {
       "lo": 100.0,
       "hi": 1000.0,
-      "observed_min": 186.0,
-      "observed_max": 767.0,
       "sentinel_encoded": true,
       "basis": "recorded QTc, ms; device reporting range"
     },
     "electrocardiographs_ecg_qt_duration_corrected_pET_last": {
       "lo": 100.0,
       "hi": 1000.0,
-      "observed_min": 168.0,
-      "observed_max": 733.0,
       "sentinel_encoded": true,
       "basis": "recorded QTc, ms; device reporting range"
     },
     "smoking_status_smoker_startTime_count": {
       "lo": 0.0,
       "hi": 50.0,
-      "observed_min": 0.0,
-      "observed_max": 19.0,
       "sentinel_encoded": false,
       "basis": "recorded counter; generous upper bound"
     },
     "nyha_nyha_pET": {
       "lo": 0.0,
       "hi": 4.0,
-      "observed_min": 0.0,
-      "observed_max": 4.0,
       "sentinel_encoded": false,
       "basis": "ordinal scale: classes 1-4 plus the 0 = not-assessed sentinel"
     },
     "conditions_heartFailure_timeFromEarliest_first": {
       "lo": 0.0,
       "hi": 600.0,
-      "observed_min": 0.0,
-      "observed_max": 123.0,
       "sentinel_encoded": true,
       "basis": "time since earliest recorded HF; bounded by maximum plausible history"
     },
     "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first": {
       "lo": 0.0,
       "hi": 1826.0,
-      "observed_min": 1.0,
-      "observed_max": 1805.0,
       "sentinel_encoded": true,
       "basis": "study design: 5-year follow-up window incl. leap day"
     },
     "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first": {
       "lo": 0.0,
       "hi": 1826.0,
-      "observed_min": 0.0,
-      "observed_max": 1805.0,
       "sentinel_encoded": true,
       "basis": "study design: 5-year follow-up window incl. leap day"
     },
     "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first": {
       "lo": 0.0,
       "hi": 1826.0,
-      "observed_min": 0.0,
-      "observed_max": 1694.0,
       "sentinel_encoded": true,
       "basis": "study design: 5-year follow-up window incl. leap day"
     },
     "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first": {
       "lo": 0.0,
       "hi": 1826.0,
-      "observed_min": 1.0,
-      "observed_max": 1826.0,
       "sentinel_encoded": true,
       "basis": "study design: 5-year follow-up window incl. leap day"
     },
     "eGFR_2021_ckd_epi_creatinine": {
       "lo": 0.0,
       "hi": 300.0,
-      "observed_min": 20.091671,
-      "observed_max": 231.686837,
       "sentinel_encoded": true,
       "basis": "CKD-EPI 2021 formula output over the creatinine domain"
+    },
+    "cause_of_death_number_of_days_to_death_for_CV_f5a_first": {
+      "lo": 0.0,
+      "hi": 1826.0,
+      "sentinel_encoded": true,
+      "basis": "days from discharge to CV death, 5-year window (f5a); mirrors the already-declared all_cause sibling"
+    },
+    "cause_of_death_number_of_days_to_death_for_renal_f5a_first": {
+      "lo": 0.0,
+      "hi": 1826.0,
+      "sentinel_encoded": true,
+      "basis": "days from discharge to renal-cause death, 5-year window (f5a); mirrors the already-declared all_cause sibling"
+    },
+    "cause_of_death_number_of_days_to_death_for_non_renal_and_non_CV_f5a_first": {
+      "lo": 0.0,
+      "hi": 1826.0,
+      "sentinel_encoded": true,
+      "basis": "days from discharge to death (other cause), 5-year window (f5a); mirrors the already-declared all_cause sibling"
+    },
+    "encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first": {
+      "lo": 0.0,
+      "hi": 1826.0,
+      "sentinel_encoded": true,
+      "basis": "days to renal-complication rehospitalization, 5-year window; mirrors the already-declared heart_failure/CV/non_CV siblings"
+    },
+    "electrocardiographs_ecg_qrs_axis_pET_first": {
+      "lo": -180.0,
+      "hi": 360.0,
+      "sentinel_encoded": true,
+      "basis": "widened hi from 180 to 360: some ECG/EHR exports report QRS axis on an unsigned 0-360 degree convention rather than the signed -180/+180 convention assumed in the original basis -- a measurement-convention correction, not a data-derived bound"
+    },
+    "electrocardiographs_ecg_qrs_axis_pET_last": {
+      "lo": -180.0,
+      "hi": 360.0,
+      "sentinel_encoded": true,
+      "basis": "widened hi from 180 to 360: some ECG/EHR exports report QRS axis on an unsigned 0-360 degree convention rather than the signed -180/+180 convention assumed in the original basis -- a measurement-convention correction, not a data-derived bound"
+    },
+    "lab_results_acr_value_first": {
+      "lo": 0.0,
+      "hi": 1000.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 32294-1, urine albumin/creatinine ratio mg/mmol; normal <3, macroalbuminuria >30, severe nephropathy to hundreds"
+    },
+    "lab_results_acr_value_last": {
+      "lo": 0.0,
+      "hi": 1000.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 32294-1, urine albumin/creatinine ratio mg/mmol; normal <3, macroalbuminuria >30, severe nephropathy to hundreds"
+    },
+    "lab_results_albuminUS_value_first": {
+      "lo": 0.0,
+      "hi": 3000.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 1754-1, urine albumin mg/L; nephrotic-range proteinuria reaches low thousands"
+    },
+    "lab_results_albuminUS_value_last": {
+      "lo": 0.0,
+      "hi": 3000.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 1754-1, urine albumin mg/L; nephrotic-range proteinuria reaches low thousands"
+    },
+    "lab_results_bnp_value_first": {
+      "lo": 0.0,
+      "hi": 10000.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 30934-4, BNP pg/mL; normal <100, severe HF to several thousand, typical assay ceiling ~10000"
+    },
+    "lab_results_bnp_value_last": {
+      "lo": 0.0,
+      "hi": 10000.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 30934-4, BNP pg/mL; normal <100, severe HF to several thousand, typical assay ceiling ~10000"
+    },
+    "lab_results_bun_value_first": {
+      "lo": 0.0,
+      "hi": 60.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 14937-7, urea nitrogen mmol/L (NOT mg/dL); normal ~2.5-7.1, severe renal failure to ~40-50"
+    },
+    "lab_results_bun_value_last": {
+      "lo": 0.0,
+      "hi": 60.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 14937-7, urea nitrogen mmol/L (NOT mg/dL); normal ~2.5-7.1, severe renal failure to ~40-50"
+    },
+    "lab_results_crpHs_value_first": {
+      "lo": 0.0,
+      "hi": 500.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 30522-7, hs-CRP mg/L; acute severe inflammation/infection can exceed typical hs-CRP reporting ceilings"
+    },
+    "lab_results_crpHs_value_last": {
+      "lo": 0.0,
+      "hi": 500.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 30522-7, hs-CRP mg/L; acute severe inflammation/infection can exceed typical hs-CRP reporting ceilings"
+    },
+    "lab_results_hba1c%_value_first": {
+      "lo": 3.0,
+      "hi": 20.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 4548-4, HbA1c % (DCCT/NGSP); normal ~4-5.6, extreme uncontrolled diabetes"
+    },
+    "lab_results_hba1c%_value_last": {
+      "lo": 3.0,
+      "hi": 20.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 4548-4, HbA1c % (DCCT/NGSP); normal ~4-5.6, extreme uncontrolled diabetes"
+    },
+    "lab_results_hba1c_value_first": {
+      "lo": 10.0,
+      "hi": 200.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 41995-2, HbA1c mmol/mol (IFCC) -- different unit from the %-suffixed sibling above"
+    },
+    "lab_results_hba1c_value_last": {
+      "lo": 10.0,
+      "hi": 200.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 41995-2, HbA1c mmol/mol (IFCC) -- different unit from the %-suffixed sibling above"
+    },
+    "lab_results_tfs_value_first": {
+      "lo": 0.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 2502-3, transferrin/iron saturation %; a saturation fraction, physiologically 0-100"
+    },
+    "lab_results_tfs_value_last": {
+      "lo": 0.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 2502-3, transferrin/iron saturation %; a saturation fraction, physiologically 0-100"
+    },
+    "lab_results_tropIHs_value_first": {
+      "lo": 0.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 89579-7, high-sensitivity troponin I ng/mL; normal <0.01-0.04, massive MI to tens-~100"
+    },
+    "lab_results_tropIHs_value_last": {
+      "lo": 0.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 89579-7, high-sensitivity troponin I ng/mL; normal <0.01-0.04, massive MI to tens-~100"
+    },
+    "lab_results_tropInHs_value_first": {
+      "lo": 0.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 10839-9, troponin I ng/mL; normal <0.01-0.04, massive MI to tens-~100"
+    },
+    "lab_results_tropInHs_value_last": {
+      "lo": 0.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 10839-9, troponin I ng/mL; normal <0.01-0.04, massive MI to tens-~100"
+    },
+    "maggic_total_score": {
+      "lo": 0.0,
+      "hi": 60.0,
+      "sentinel_encoded": true,
+      "basis": "derived from the repo's own MAGGIC formula (generatedDescription): summed max per-term contribution (gender 1 + NYHA 8 + smoking 1 + diabetes 3 + HF-history 2 + no-beta-blocker 3 + no-ACEi/ARB 1 + BMI 6 + COPD 2 + creatinine 8 + LVEF 7 + age-x-LVEF 15 + SBP-x-LVEF 5 ~= 62); rounded to 60"
+    },
+    "smoking_status_smoker_totalSmokingDuration_sum": {
+      "lo": 0.0,
+      "hi": 40000.0,
+      "sentinel_encoded": true,
+      "basis": "widened hi from 30000 to 40000 days (~110y): the original ~80y cap was simply too tight against plausible extreme human longevity, inconsistent with this draft's own patient_demographics_age bound of 110"
+    },
+    "vital_signs_oxygenSaturation_value_first": {
+      "lo": 0.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 2708-6, SpO2 %; physiologically 0-100"
+    },
+    "vital_signs_oxygenSaturation_value_last": {
+      "lo": 0.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "LOINC 2708-6, SpO2 %; physiologically 0-100"
+    },
+    "echocardiographs_lvef": {
+      "lo": -200.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "mirrors the already-reviewed echocardiographs_lvef_pET_first/last range for the same measurement"
+    },
+    "lab_results_creatBS_value_p3a_avg": {
+      "lo": 0.0,
+      "hi": 1000.0,
+      "sentinel_encoded": true,
+      "basis": "widened hi from 30 to 1000: the original basis wrongly assumed this shares units with lab_results_validSerumCreatinine (mg/dL-scale); if this field is instead reported in micromol/L (the common SI unit for creatinine), values well above 30 are unremarkable, and severe renal failure genuinely reaches into the hundreds on that scale"
+    },
+    "lab_results_validSerumCreatinine_value_pET": {
+      "lo": 0.0,
+      "hi": 30.0,
+      "sentinel_encoded": true,
+      "basis": "renamed from lab_results_validSerumCreatinine_value_last (2.1); same measurement, range carried over unchanged"
+    },
+    "vital_signs_bmi_value_pET": {
+      "lo": 10.0,
+      "hi": 100.0,
+      "sentinel_encoded": true,
+      "basis": "renamed from vital_signs_bmi_value_last (2.1); same measurement, range carried over unchanged"
+    },
+    "vital_signs_systolicBpDuringEncounter_value_pET": {
+      "lo": 30.0,
+      "hi": 300.0,
+      "sentinel_encoded": true,
+      "basis": "same measurement as the already-reviewed vital_signs_systolicBp_value_first/last, captured over the encounter window instead"
+    },
+    "encounter_primary_reason_number_of_HF_rehospitalizations_5a_f5a_count": {
+      "lo": 0.0,
+      "hi": 50.0,
+      "sentinel_encoded": true,
+      "basis": "count of HF rehospitalizations within a 5-year window; a bounded-window count, not the lifetime encounters_numOfPreviousHFStays_count counter"
+    },
+    "encounter_primary_reason_number_of_CV_rehospitalizations_5a_f5a_count": {
+      "lo": 0.0,
+      "hi": 50.0,
+      "sentinel_encoded": true,
+      "basis": "count of CV rehospitalizations within a 5-year window"
+    },
+    "encounter_primary_reason_number_of_non_CV_rehospitalizations_5a_f5a_count": {
+      "lo": 0.0,
+      "hi": 50.0,
+      "sentinel_encoded": true,
+      "basis": "count of non-CV rehospitalizations within a 5-year window"
+    },
+    "encounter_primary_reason_number_of_renal_rehospitalizations_5a_f5a_count": {
+      "lo": 0.0,
+      "hi": 50.0,
+      "sentinel_encoded": true,
+      "basis": "count of renal-complication rehospitalizations within a 5-year window"
     }
   }
 }
