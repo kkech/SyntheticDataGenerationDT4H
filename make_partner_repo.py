@@ -125,15 +125,18 @@ def export(dest: str) -> None:
         d["reviewed"] = False
         d.pop("reviewed_by", None)
         d.pop("reviewed_at", None)
-        d["note"] = ("PUBLIC domain declaration [lo, hi] per numeric column, with the "
-                     "basis naming the public knowledge each range rests on. Released "
-                     "as part of the DP mechanism specification; the observed extremes "
-                     "used during the origin-site review are not part of this file. "
-                     "reviewed is false ON PURPOSE: review these ranges against your "
-                     "own site's clinical knowledge, then set reviewed to true (add "
-                     "reviewed_by/reviewed_at) -- DP fitting refuses to start until "
-                     "you do, because an unreviewed bound that later turns out "
-                     "data-derived voids the epsilon claim.")
+        scrub_note = ("EXPORTED COPY: reviewed is false ON PURPOSE -- the origin "
+                      "site's sign-off does not travel with the code. Review these "
+                      "ranges against your own site's clinical knowledge, then set "
+                      "reviewed to true (add reviewed_by/reviewed_at); DP fitting "
+                      "refuses to start until you do. Any observed extremes used "
+                      "during the origin-site review are not part of this file.")
+        # Preserve the declaration's own documentation (entry provenance,
+        # version history); the scrub addendum is appended, not a
+        # replacement, and never duplicated on re-export.
+        existing = d.get("note", "")
+        if scrub_note not in existing:
+            d["note"] = (existing + " " + scrub_note).strip()
         with open(pd_path, "w") as f:
             json.dump(d, f, indent=2)
         print(f"  scrubbed public_domains.json ({removed} observed_* value(s) removed; "
