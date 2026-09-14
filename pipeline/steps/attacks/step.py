@@ -389,7 +389,7 @@ class AttacksStep(PipelineStep):
         run() decodes the real frames before calling."""
         import pandas as pd
 
-        from pipeline.steps.preprocess.transforms import NYHA_COLUMN
+        from pipeline.steps.preprocess.transforms import NYHA_COLUMNS
 
         quasi = [q for q in QUASI_IDENTIFIERS if q in train.columns and q in synth.columns]
         if not quasi or not sensitive:
@@ -417,7 +417,7 @@ class AttacksStep(PipelineStep):
                 else:
                     vals.append(str(v))
             out = pd.Series(vals, index=series.index)
-            if name == NYHA_COLUMN:
+            if name in NYHA_COLUMNS:
                 out = out.mask(out == "0", "Missing")
             return out
 

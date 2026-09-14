@@ -12,6 +12,11 @@ import re
 import polars as pl
 
 NYHA_COLUMN = "nyha_nyha_pET"
+# Feature-set 2.2 adds a second NYHA column (plain "nyha_nyha", NOMINAL,
+# same LOINC valueSet). Every NYHA column gets the same ordinal encoding
+# and the same exclusions from generic categorical/numeric handling;
+# schemas that lack one of them are unaffected.
+NYHA_COLUMNS = (NYHA_COLUMN, "nyha_nyha")
 
 # Numeric measurements show up as up to 6 variants: _first, _last, _min,
 # _max, _avg, _stddev (no bare column). Only _first/_last are kept for
@@ -256,12 +261,23 @@ def combine_medications(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     A medication is considered present if either the "admins" or "requests"
     table flags it. Null is treated as "not flagged" (False), not
     "unknown" -- these are presence/absence flags.
-    """
-    admin_pat = re.compile(r"^med_admins_(?!history_)(.+)$")
-    admin_hist_pat = re.compile(r"^med_admins_history_(.+)$")
 
-    med_types = sorted({m.group(1) for c in df.columns if (m := admin_pat.match(c))})
-    med_hist_types = sorted({m.group(1) for c in df.columns if (m := admin_hist_pat.match(c))})
+    Groups are keyed on the union of admins AND requests variants, not on
+    admins alone: feature-set 2.2 introduced requests-only indicators
+    (med_requests_activeDuringEncounter_*_any) with no admins counterpart,
+    and keying on admins left them out of the combined schema entirely --
+    raw variant columns surviving into the modelling frame that the
+    derived-columns map never described. A single-variant group still gets
+    the med_<X> name and null->False treatment, so every medication
+    indicator reaches the modelling frame through the same door. On the
+    1.4/2.1 schema every medication has both variants, so this changes
+    nothing there.
+    """
+    cur_pat = re.compile(r"^med_(?:admins|requests)_(?!history_)(.+)$")
+    hist_pat = re.compile(r"^med_(?:admins|requests)_history_(.+)$")
+
+    med_types = sorted({m.group(1) for c in df.columns if (m := cur_pat.match(c))})
+    med_hist_types = sorted({m.group(1) for c in df.columns if (m := hist_pat.match(c))})
 
     new_cols = []
     drop_cols = []
@@ -368,30 +384,49 @@ def build_nyha_map(var_meta: dict, column: str = NYHA_COLUMN) -> dict:
 
 
 def encode_nyha(df: pl.DataFrame, var_meta: dict) -> tuple[pl.DataFrame, dict]:
-    if NYHA_COLUMN not in df.columns:
-        print(f"  (skip) NYHA column '{NYHA_COLUMN}' not found.")
+    """Ordinal-encodes every NYHA column present (2.2 carries two: the
+    windowed nyha_nyha_pET and a plain nyha_nyha), each via its own
+    metadata valueSet. Without this, the 2.2 base column would fall
+    through to generic categorical handling and be modelled as an
+    unordered bag of LOINC codes next to its ordinal sibling."""
+    present = [c for c in NYHA_COLUMNS if c in df.columns]
+    if not present:
+        print(f"  (skip) no NYHA column found (looked for {list(NYHA_COLUMNS)}).")
         return df, {"skipped": True}
-    nyha_map = build_nyha_map(var_meta)
-    print(f"  Encoding {NYHA_COLUMN} via metadata valueSet: {nyha_map}")
 
-    before_nulls = int(df[NYHA_COLUMN].null_count())
-    # Which non-null codes actually present in the data are NOT in the map:
-    # replacing them with default=None would silently turn a real assessment
-    # into a "missing" value (later relabeled "not assessed").
-    present_codes = set(df[NYHA_COLUMN].drop_nulls().unique().to_list())
-    unmapped = sorted(str(c) for c in present_codes - set(nyha_map))
+    maps = {}
+    for column in present:
+        try:
+            nyha_map = build_nyha_map(var_meta, column=column)
+        except ValueError:
+            # A schema may declare the extra NYHA column without repeating
+            # the valueSet; both columns carry the same LOINC codes, so
+            # the primary column's reviewed map is the correct fallback.
+            # If THAT map is also unbuildable, the error propagates.
+            nyha_map = build_nyha_map(var_meta)
+            print(f"  ({column}: no usable valueSet of its own -- "
+                  f"using {NYHA_COLUMN}'s map)")
+        print(f"  Encoding {column} via metadata valueSet: {nyha_map}")
 
-    df = df.with_columns(pl.col(NYHA_COLUMN).replace(nyha_map, default=None).alias(NYHA_COLUMN))
+        before_nulls = int(df[column].null_count())
+        # Which non-null codes actually present in the data are NOT in the
+        # map: replacing them with default=None would silently turn a real
+        # assessment into a "missing" value (later relabeled "not assessed").
+        present_codes = set(df[column].drop_nulls().unique().to_list())
+        unmapped = sorted(str(c) for c in present_codes - set(nyha_map))
 
-    after_nulls = int(df[NYHA_COLUMN].null_count())
-    if after_nulls > before_nulls:
-        raise ValueError(
-            f"Encoding {NYHA_COLUMN} turned {after_nulls - before_nulls} non-null "
-            f"value(s) into null: {len(unmapped)} observed code(s) are absent from the "
-            f"metadata valueSet map and would be silently dropped to 'not assessed'. "
-            f"Unmapped code(s): {unmapped}. Fix the metadata valueSet before continuing."
-        )
-    return df, {"skipped": False, "map": nyha_map}
+        df = df.with_columns(pl.col(column).replace(nyha_map, default=None).alias(column))
+
+        after_nulls = int(df[column].null_count())
+        if after_nulls > before_nulls:
+            raise ValueError(
+                f"Encoding {column} turned {after_nulls - before_nulls} non-null "
+                f"value(s) into null: {len(unmapped)} observed code(s) are absent from the "
+                f"metadata valueSet map and would be silently dropped to 'not assessed'. "
+                f"Unmapped code(s): {unmapped}. Fix the metadata valueSet before continuing."
+            )
+        maps[column] = nyha_map
+    return df, {"skipped": False, "maps": maps, "map": maps[present[0]]}
 
 
 # --- dtype normalization ---
@@ -435,14 +470,17 @@ def normalize_numeric_dtypes(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
 # --- final null cleanup (generic, by declared type) ---
 
 def impute_nyha_missing(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
-    if NYHA_COLUMN not in df.columns:
-        return df, {"filled": 0}
-    n_missing = df[NYHA_COLUMN].null_count()
-    if n_missing:
-        print(f"  Filling {n_missing} missing '{NYHA_COLUMN}' value(s) with sentinel "
-              f"{NYHA_MISSING_SENTINEL} ('not assessed', kept distinct from real classes 1-4).")
-        df = df.with_columns(pl.col(NYHA_COLUMN).fill_null(NYHA_MISSING_SENTINEL))
-    return df, {"filled": n_missing, "sentinel": NYHA_MISSING_SENTINEL}
+    total_filled = 0
+    for column in NYHA_COLUMNS:
+        if column not in df.columns:
+            continue
+        n_missing = df[column].null_count()
+        if n_missing:
+            print(f"  Filling {n_missing} missing '{column}' value(s) with sentinel "
+                  f"{NYHA_MISSING_SENTINEL} ('not assessed', kept distinct from real classes 1-4).")
+            df = df.with_columns(pl.col(column).fill_null(NYHA_MISSING_SENTINEL))
+        total_filled += n_missing
+    return df, {"filled": total_filled, "sentinel": NYHA_MISSING_SENTINEL}
 
 
 # Filename for the per-column sentinel map written next to the
@@ -505,7 +543,7 @@ def encode_numeric_missing(df: pl.DataFrame, var_meta: dict, encoding_path: str)
     numeric_cols = [name for name, v in var_meta.items()
                     if v.get("dataType") == "NUMERIC"
                     and name in df.columns
-                    and name != NYHA_COLUMN]
+                    and name not in NYHA_COLUMNS]
 
     min_nonnull = max(NUMERIC_MIN_NONNULL, int(NUMERIC_MIN_NONNULL_FRACTION * df.height))
 
@@ -599,7 +637,7 @@ def impute_categorical_and_boolean(df: pl.DataFrame, var_meta: dict) -> tuple[pl
     """
     cols = [
         c for c in df.columns
-        if df[c].dtype in (pl.Boolean, pl.String) and c != NYHA_COLUMN
+        if df[c].dtype in (pl.Boolean, pl.String) and c not in NYHA_COLUMNS
     ]
 
     filled = []

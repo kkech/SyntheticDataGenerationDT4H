@@ -29,7 +29,7 @@ from datetime import date
 from pipeline.common.profiling import coarsen_extreme
 from pipeline.config import PipelineConfig
 from pipeline.steps.base import PipelineStep
-from pipeline.steps.preprocess.transforms import NYHA_COLUMN, NYHA_MISSING_SENTINEL
+from pipeline.steps.preprocess.transforms import NYHA_COLUMNS, NYHA_MISSING_SENTINEL
 
 
 class ReleaseDocsStep(PipelineStep):
@@ -239,7 +239,7 @@ class ReleaseDocsStep(PipelineStep):
                                 if kind == "no_event" else "not measured")
             if s.dtype in (pl.Float32, pl.Float64, pl.Int32, pl.Int64):
                 spec = encoding.get(c)
-                if c == NYHA_COLUMN:
+                if c in NYHA_COLUMNS:
                     # NYHA carries its missingness as an in-band sentinel
                     # (0 = not assessed), NOT via the encoding map, so the
                     # generic "no nulls -> 0% missing" path reports it as if

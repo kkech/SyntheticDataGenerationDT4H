@@ -43,6 +43,7 @@ DEFAULT_DEST = os.path.join(os.path.dirname(REPO), "SyntheticDataGenerationTabul
 # nothing else. Additions here are deliberate, reviewed decisions.
 ALLOWLIST = (
     "pipeline",
+    "tests",
     "main.py",
     "run_job.sh",
     "release_gate.py",

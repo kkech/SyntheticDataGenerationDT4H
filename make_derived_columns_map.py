@@ -61,16 +61,21 @@ def load_feature_descriptions(metadata_path: str) -> dict:
 
 
 def medication_groups(columns) -> dict:
-    """Mirror of combine_medications: {derived_name: [source columns]}."""
-    admin_pat = re.compile(r"^med_admins_(?!history_)(.+)$")
-    admin_hist_pat = re.compile(r"^med_admins_history_(.+)$")
+    """Mirror of combine_medications: {derived_name: [source columns]}.
+
+    Keyed on the UNION of admins and requests variants, like the
+    combiner itself: feature-set 2.2 has requests-only indicators
+    (med_requests_activeDuringEncounter_*_any) that must appear in the
+    map even though no admins counterpart exists."""
+    cur_pat = re.compile(r"^med_(?:admins|requests)_(?!history_)(.+)$")
+    hist_pat = re.compile(r"^med_(?:admins|requests)_history_(.+)$")
     cols = set(columns)
     groups = {}
-    for med in sorted({m.group(1) for c in cols if (m := admin_pat.match(c))}):
+    for med in sorted({m.group(1) for c in cols if (m := cur_pat.match(c))}):
         sources = [c for c in (f"med_admins_{med}", f"med_requests_{med}") if c in cols]
         if sources:
             groups[f"med_{_strip_any_suffix(med)}"] = sources
-    for med in sorted({m.group(1) for c in cols if (m := admin_hist_pat.match(c))}):
+    for med in sorted({m.group(1) for c in cols if (m := hist_pat.match(c))}):
         sources = [c for c in (f"med_admins_history_{med}", f"med_requests_history_{med}") if c in cols]
         if sources:
             groups[f"med_{_strip_any_suffix(med)}_history"] = sources

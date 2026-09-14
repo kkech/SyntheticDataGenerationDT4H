@@ -310,7 +310,7 @@ class EvaluateStep(PipelineStep):
         import polars as pl
 
         from pipeline.steps.preprocess.transforms import (
-            NYHA_COLUMN,
+            NYHA_COLUMNS,
             build_nyha_map,
             flatten_array_columns,
             load_variable_metadata,
@@ -322,10 +322,16 @@ class EvaluateStep(PipelineStep):
             orig_pl, _ = flatten_array_columns(orig_pl, load_variable_metadata(config.metadata_path))
         orig_pl, _ = normalize_numeric_dtypes(orig_pl)
         df = orig_pl.to_pandas()
-        if NYHA_COLUMN in df.columns and os.path.exists(config.metadata_path):
-            nyha_map = build_nyha_map(load_variable_metadata(config.metadata_path))
+        nyha_present = [c for c in NYHA_COLUMNS if c in df.columns]
+        if nyha_present and os.path.exists(config.metadata_path):
+            var_meta = load_variable_metadata(config.metadata_path)
             df = df.copy()
-            df[NYHA_COLUMN] = df[NYHA_COLUMN].map(nyha_map)
+            for column in nyha_present:
+                try:
+                    nyha_map = build_nyha_map(var_meta, column=column)
+                except ValueError:
+                    nyha_map = build_nyha_map(var_meta)
+                df[column] = df[column].map(nyha_map)
         return df
 
     @staticmethod

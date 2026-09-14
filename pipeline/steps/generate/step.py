@@ -525,7 +525,7 @@ class GenerateStep(PipelineStep):
 
         from pipeline.steps.preprocess.transforms import (
             NUMERIC_ENCODING_FILENAME,
-            NYHA_COLUMN,
+            NYHA_COLUMNS,
         )
 
         decoded = {}
@@ -547,21 +547,23 @@ class GenerateStep(PipelineStep):
             print(f"⚠️  No numeric encoding map at {encoding_path} -- sentinels (if any) "
                   f"are left as-is. Re-run the preprocess step to produce the map.")
 
-        if NYHA_COLUMN in synthetic.columns and pd.api.types.is_numeric_dtype(synthetic[NYHA_COLUMN]):
+        for nyha_col in NYHA_COLUMNS:
+            if nyha_col not in synthetic.columns or not pd.api.types.is_numeric_dtype(synthetic[nyha_col]):
+                continue
             import numpy as np
 
             # NOT Series.round(): pandas/numpy round half to EVEN, so 2.5
             # becomes 2 while 3.5 becomes 4 -- a systematic, class-dependent
             # bias in an ordinal clinical variable. floor(x + 0.5) rounds
             # half up uniformly, which is what "nearest NYHA class" means.
-            col = pd.to_numeric(synthetic[NYHA_COLUMN], errors="coerce")
+            col = pd.to_numeric(synthetic[nyha_col], errors="coerce")
             col = np.floor(col + 0.5)
             not_assessed = col <= 0
             n = int(not_assessed.sum())
-            synthetic[NYHA_COLUMN] = col.clip(upper=4)
+            synthetic[nyha_col] = col.clip(upper=4)
             if n:
-                synthetic.loc[not_assessed, NYHA_COLUMN] = pd.NA
-                decoded[NYHA_COLUMN] = n
+                synthetic.loc[not_assessed, nyha_col] = pd.NA
+                decoded[nyha_col] = n
 
         return synthetic, decoded
 
