@@ -10,6 +10,22 @@
         "med_requests_acei_any": "Whether angiotensin-converting enzyme (ACE)-inhibitors prescribed during the admission"
       }
     },
+    "med_activeDuringEncounter_ace_inhibitors_arb_use": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_requests_activeDuringEncounter_ace_inhibitors_arb_use_any": "Whether angiotensin-converting enzyme (ACE)-inhibitors or angiotensin receptor blocker (ARB) were started before the encounter and not stopped before or during it, or started during the encounter"
+      }
+    },
+    "med_activeDuringEncounter_bb": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_requests_activeDuringEncounter_bb_any": "Whether beta blockers were started before the encounter and not stopped before or during it, or started during the encounter"
+      }
+    },
     "med_anti_coag": {
       "derivation": "any_true_of_sources",
       "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
@@ -224,6 +240,15 @@
       "sources": {
         "med_admins_rdoad_syst_any": "Whether respiratory drugs for obstructive airway diseases, systemic use administered during the admission",
         "med_requests_rdoad_syst_any": "Whether respiratory drugs for obstructive airway diseases, systemic use prescribed during the admission"
+      }
+    },
+    "med_sglt2i": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_sglt2i_any": "Whether SGLT2i administered during the admission",
+        "med_requests_sglt2i_any": "Whether SGLT2i prescribed during the admission"
       }
     },
     "med_thrombolytic": {
@@ -467,6 +492,15 @@
       "sources": {
         "med_admins_history_rdoad_syst_any": "Whether respiratory drugs for obstructive airway diseases, systemic use administered in their clinical history prior to the date of admission",
         "med_requests_history_rdoad_syst_any": "Whether respiratory drugs for obstructive airway diseases, systemic use prescribed in their clinical history prior to the date of admission"
+      }
+    },
+    "med_sglt2i_history": {
+      "derivation": "any_true_of_sources",
+      "rule": "True if the medication is flagged by ANY source indicator (administered or requested); null in a source is treated as not-flagged, not unknown.",
+      "null_handling": "source nulls treated as False (presence flags)",
+      "sources": {
+        "med_admins_history_sglt2i_any": "Whether SGLT2i administered in their clinical history prior to the date of admission",
+        "med_requests_history_sglt2i_any": "Whether SGLT2i prescribed in their clinical history prior to the date of admission"
       }
     },
     "med_thrombolytic_history": {
