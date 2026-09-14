@@ -59,6 +59,13 @@ class PreprocessStep(PipelineStep):
         print("Normalizing numeric dtypes...")
         df, summary["numeric_dtype_normalization"] = t.normalize_numeric_dtypes(df)
 
+        # BEFORE sentinel encoding: an out-of-domain artifact would
+        # otherwise distort the sentinel offset and the decode floor
+        # (see the transform's docstring for the observed failure).
+        print("Invalidating out-of-domain values (declared public ranges)...")
+        df, summary["out_of_domain_invalidation"] = t.invalidate_out_of_domain(
+            df, config.public_domains_path)
+
         print("Checking symptom columns...")
         summary["symptom_columns"] = t.report_symptom_columns(df)
 
@@ -208,6 +215,12 @@ class PreprocessStep(PipelineStep):
         lines += [
             "",
             "## Transformations",
+            "- Out-of-domain invalidation: "
+            + ("skipped (no public-domain declaration)"
+               if s.get("out_of_domain_invalidation", {}).get("skipped")
+               else f"{s.get('out_of_domain_invalidation', {}).get('total_cells_invalidated', 0)} cell(s) "
+                    f"outside their declared public range -> null (invalid measurement): "
+                    f"{s.get('out_of_domain_invalidation', {}).get('cells_invalidated_by_column', {})}"),
             f"- ARRAY[NOMINAL] columns flattened: {s['array_columns_flattened']['flattened']}",
             f"- Symptom columns: {s['symptom_columns']['count']} present, "
             f"{s['symptom_columns']['currently_constant']} currently constant, kept (not dropped)",

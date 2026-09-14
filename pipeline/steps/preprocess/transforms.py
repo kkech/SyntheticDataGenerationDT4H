@@ -483,6 +483,64 @@ def impute_nyha_missing(df: pl.DataFrame) -> tuple[pl.DataFrame, dict]:
     return df, {"filled": total_filled, "sentinel": NYHA_MISSING_SENTINEL}
 
 
+def invalidate_out_of_domain(df: pl.DataFrame, domains_path: str) -> tuple[pl.DataFrame, dict]:
+    """Numeric values outside their column's declared PUBLIC domain are
+    invalid measurements (a sodium of 2 mmol/L, a height of 30 cm, a
+    negative days-to-event) and become null -- BEFORE sentinel encoding,
+    so the sentinel offset and the decode floor are computed from
+    plausible values only.
+
+    Why this must run upstream rather than being clipped at DP fit time:
+    a single artifact low below the public range drags the observed
+    minimum down, the sentinel formula then places EVERY missing-marker
+    below the public sentinel bound, and clipping those markers back up
+    lands them ABOVE the artifact-distorted decode floor -- so cells
+    that were never measured would decode as real readings (observed on
+    real data: ~180 missing sodium values would have decoded as 62.5
+    mmol/L). Nulling the artifact instead keeps the missingness signal
+    honest and restores containment for every model, DP and non-DP.
+
+    This is a fixed public rule: the declaration is released metadata,
+    and 'outside the declared range -> invalid' does not depend on the
+    data. The ranges are used regardless of the review flag -- review
+    gates the DP epsilon claim; this rule only needs the ranges to be
+    fixed and public. Skipped with a note when no declaration exists.
+    Counts are reported per column; values never are."""
+    if not domains_path or not os.path.exists(domains_path):
+        print("  (skip) no public-domain declaration found -- out-of-domain "
+              "invalidation not applied.")
+        return df, {"skipped": True}
+    with open(domains_path) as f:
+        doc = json.load(f)
+    domains = doc.get("domains") or {}
+    invalidated = {}
+    for col, spec in domains.items():
+        if col not in df.columns or col in NYHA_COLUMNS:
+            continue
+        if not df[col].dtype.is_numeric():
+            continue
+        lo, hi = float(spec.get("lo", float("-inf"))), float(spec.get("hi", float("inf")))
+        if hi <= lo:
+            continue
+        out = (df[col] < lo) | (df[col] > hi)
+        n = int(out.sum())
+        if n:
+            df = df.with_columns(
+                pl.when((pl.col(col) < lo) | (pl.col(col) > hi))
+                .then(None).otherwise(pl.col(col)).alias(col))
+            invalidated[col] = n
+            print(f"  {col}: {n} value(s) outside the declared public domain "
+                  f"[{lo:g}, {hi:g}] -> null (invalid measurement)")
+    total = sum(invalidated.values())
+    if total:
+        print(f"  Invalidated {total} out-of-domain cell(s) across "
+              f"{len(invalidated)} column(s); they are 'not measured' from here on.")
+    else:
+        print("  Every numeric value lies within its declared public domain.")
+    return df, {"skipped": False, "cells_invalidated_by_column": invalidated,
+                "total_cells_invalidated": total}
+
+
 # Filename for the per-column sentinel map written next to the
 # preprocessed parquet. The generate step reads it to decode sentinels
 # back to null in the synthetic output; keeping it on disk (rather than

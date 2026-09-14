@@ -191,3 +191,49 @@ def test_impute_nyha_missing_fills_every_nyha_column():
     assert out[t.NYHA_COLUMN].to_list() == [1, t.NYHA_MISSING_SENTINEL]
     assert out["nyha_nyha"].to_list() == [t.NYHA_MISSING_SENTINEL, 4]
     assert info["filled"] == 2
+
+
+# --- out-of-domain invalidation ---
+
+def test_invalidate_out_of_domain_nulls_artifacts_keeps_valid(tmp_path):
+    import json as _json
+    dom = tmp_path / "domains.json"
+    dom.write_text(_json.dumps({"reviewed": False, "domains": {
+        "sodium": {"lo": 90.0, "hi": 200.0},
+        "count": {"lo": 0.0, "hi": 50.0},
+        "bad": {"lo": 5.0, "hi": 5.0},          # degenerate: ignored
+    }}))
+    df = pl.DataFrame({
+        "sodium": pl.Series([2.0, 140.0, None, 250.0], dtype=pl.Float64),
+        "count": pl.Series([230.0, 3.0, 0.0, 50.0], dtype=pl.Float64),
+        "bad": pl.Series([1.0, 2.0, 3.0, 4.0], dtype=pl.Float64),
+        "no_domain": pl.Series([9999.0, 1.0, 2.0, 3.0], dtype=pl.Float64),
+    })
+    out, info = t.invalidate_out_of_domain(df, str(dom))
+    assert out["sodium"].to_list() == [None, 140.0, None, None]
+    assert out["count"].to_list() == [None, 3.0, 0.0, 50.0]
+    assert out["bad"].to_list() == [1.0, 2.0, 3.0, 4.0]          # degenerate untouched
+    assert out["no_domain"].to_list() == [9999.0, 1.0, 2.0, 3.0]  # no entry: untouched
+    assert info["cells_invalidated_by_column"] == {"sodium": 2, "count": 1}
+    assert info["total_cells_invalidated"] == 3
+
+
+def test_invalidate_out_of_domain_restores_sane_sentinels(tmp_path):
+    # The failure this transform exists for: an artifact low drags the
+    # observed min down, so sentinels undershoot the public sentinel
+    # bound and, once clipped, would decode as real values. After
+    # invalidation the observed min is plausible again.
+    import json as _json
+    dom = tmp_path / "domains.json"
+    dom.write_text(_json.dumps({"domains": {"sodium": {"lo": 90.0, "hi": 200.0}}}))
+    df = pl.DataFrame({"sodium": pl.Series([2.0] + [None] * 3 + [120.0, 140.0, 170.0],
+                                           dtype=pl.Float64)})
+    out, _ = t.invalidate_out_of_domain(df, str(dom))
+    non_null = out["sodium"].drop_nulls()
+    assert float(non_null.min()) >= 90.0   # sentinel/decode floor now inside the domain
+
+
+def test_invalidate_out_of_domain_skips_without_declaration():
+    df = pl.DataFrame({"sodium": pl.Series([2.0], dtype=pl.Float64)})
+    out, info = t.invalidate_out_of_domain(df, "/nonexistent/path.json")
+    assert info["skipped"] and out["sodium"].to_list() == [2.0]
