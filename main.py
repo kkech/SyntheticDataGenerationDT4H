@@ -255,6 +255,7 @@ def preflight(config: PipelineConfig | None = None, min_free_gb: float = 5.0) ->
     # but a long run should be refused HERE, before it detaches.
     dp_in_plan = any(s.get("epsilon") is not None for s in plan)
     if dp_in_plan:
+        domains = None
         try:
             from pipeline.steps.generate.synthesizers.smartnoise_models import load_public_domains
 
@@ -265,6 +266,52 @@ def preflight(config: PipelineConfig | None = None, min_free_gb: float = 5.0) ->
             check("public domains reviewed (DP runs)", False,
                   f"{e} -- run `python make_public_domains.py`, review every range, "
                   f"set \"reviewed\": true")
+
+        # Report BEFORE any run starts how many datapoints actually sit
+        # outside their declared domain -- whether that's zero, a handful
+        # of documented entry artifacts, or enough to suggest something
+        # upstream is actually broken (this number is the difference
+        # between "fine to clip" and "go investigate the data first").
+        # A separate try/except from the check above: a failure here must
+        # never read back as "public domains reviewed: False" when the
+        # domains loaded just fine.
+        if domains is not None and os.path.exists(config.train_output_path):
+            try:
+                import json
+
+                import pandas as pd
+
+                from pipeline.steps.generate.synthesizers.smartnoise_models import (
+                    coarse_observed_span,
+                    compute_domain_report,
+                )
+                from pipeline.steps.preprocess.transforms import NUMERIC_ENCODING_FILENAME
+
+                train_df = pd.read_parquet(config.train_output_path)
+                continuous = [c for c in train_df.columns if pd.api.types.is_numeric_dtype(train_df[c])]
+                enc_path = os.path.join(config.step_dir("preprocess"), NUMERIC_ENCODING_FILENAME)
+                encoding = {}
+                if os.path.exists(enc_path):
+                    with open(enc_path) as f:
+                        encoding = json.load(f)
+                report = compute_domain_report(train_df, continuous, domains, encoding)
+                violating = {c: r for c, r in report["columns"].items() if r["violates"]}
+                if violating:
+                    total = sum(r["n_below"] + r["n_above"] for r in violating.values())
+                    print(f"  ⚠️  {len(violating)} continuous column(s), {total} datapoint(s) total, "
+                          f"fall outside their declared public domain -- these will FAIL the run "
+                          f"unless --clip-to-domain is set (which clips them to the declared "
+                          f"bound, not to anything derived from the data):")
+                    for c, r in sorted(violating.items(), key=lambda kv: -(kv[1]["n_below"] + kv[1]["n_above"])):
+                        n = r["n_below"] + r["n_above"]
+                        print(f"      {c}: {n}/{r['n_total']} datapoint(s) outside "
+                              f"[{r['lower']:g}, {r['pub_hi']:g}] "
+                              f"(observed {coarse_observed_span(r)}, coarsened)")
+                else:
+                    print("  ✅ every continuous column's training values fall within its declared public domain")
+            except Exception as e:
+                print(f"  ⚠️  Could not check training values against the public domain: "
+                      f"{type(e).__name__}: {e}")
 
     # Rough per-run durations measured on this project's own full-scale
     # runs (T4, 211 columns), for a total-duration expectation only.
@@ -343,6 +390,13 @@ def main() -> None:
                          help="Override the preflight free-disk requirement (GB). The v3 "
                               "campaign needs ~2 GB (slim backup + DP re-fit outputs), not "
                               "the full-campaign 5 GB.")
+    parser.add_argument("--clip-to-domain", action="store_true",
+                        help="Instead of failing when a continuous column's training "
+                             "values fall outside its declared public domain, clip those "
+                             "cells TO THE DECLARED BOUND (never to anything derived from "
+                             "the data) and record the clip in the run's provenance. For "
+                             "documented entry artifacts; run --preflight first to see "
+                             "how many cells are affected.")
     parser.add_argument("--preflight", action="store_true",
                          help="Verify libraries, GPU, inputs, disk and config, then exit. "
                               "Run this before a long run.")
@@ -364,6 +418,8 @@ def main() -> None:
     cfg_kwargs = {}
     if args.extended:
         cfg_kwargs["extended_plan"] = True
+    if args.clip_to_domain:
+        cfg_kwargs["clip_to_domain"] = True
     if args.data_dir:
         cfg_kwargs["transfer_folder"] = args.data_dir
     if args.metadata:

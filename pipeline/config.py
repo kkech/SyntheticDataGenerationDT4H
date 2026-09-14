@@ -116,6 +116,16 @@ class PipelineConfig:
     # bounds derived from the training data void the epsilon claim.
     public_domains_path: str = os.path.join(REPO_ROOT, "public_domains.json")
 
+    # DP fitting only. Off (the default): any training value outside its
+    # declared public domain aborts that run before fitting. On: such
+    # cells are clipped TO THE DECLARED PUBLIC BOUND itself (never to
+    # anything derived from the data) and the run proceeds, recording
+    # clipped_cells_by_column in its provenance. For documented entry
+    # artifacts (e.g. a height of 30cm, an LVEF of 120%) that the
+    # domain deliberately does not widen to cover. --preflight reports
+    # how many cells this would affect before you decide to set it.
+    clip_to_domain: bool = False
+
     # Seeds every RNG the synthesizers use, and is recorded in the run
     # provenance. Required for a reproducible published dataset.
     seed: int = 0

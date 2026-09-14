@@ -83,6 +83,7 @@ import os
 
 import pandas as pd
 
+from pipeline.common.profiling import coarsen_extreme
 from pipeline.steps.generate.synthesizers.base import Synthesizer
 
 #: Same gap fraction the preprocessing sentinel used
@@ -101,6 +102,17 @@ _REVIEW_INSTRUCTIONS = (
 )
 
 
+def coarse_observed_span(r: dict) -> str:
+    """A violating column's observed extremes for prints, logs, and
+    exception text -- rounded OUTWARD to the profiler's own 2-significant-
+    figure disclosure rule (coarsen_extreme), never the exact values:
+    a per-column extreme is one patient's value, and run output travels
+    further than enclaves (this project's own logs end up in git)."""
+    lo = coarsen_extreme(float(r["col_min"]), "floor")
+    hi = coarsen_extreme(float(r["col_max"]), "ceil")
+    return f"[~{lo:g}, ~{hi:g}]"
+
+
 def sentinel_public_bound(pub_lo: float, pub_hi: float) -> float:
     """The public lower bound for a sentinel-encoded column.
 
@@ -109,6 +121,48 @@ def sentinel_public_bound(pub_lo: float, pub_hi: float) -> float:
     range, this is always at or below the actual sentinel in the data.
     """
     return pub_lo - max((pub_hi - pub_lo) * SENTINEL_GAP_FRACTION, SENTINEL_GAP_FLOOR)
+
+
+def compute_domain_report(df, continuous_columns, domains, encoding) -> dict:
+    """
+    Per-column comparison of `df`'s actual values against the declared
+    public domain -- shared by the fit-time check (raise, or clip if
+    --clip-to-domain) and by --preflight (report only, no data touched
+    beyond counting). Never mutates `df`.
+
+    Returns {"missing": [...], "degenerate": [...],
+             "columns": {col: {"lower", "pub_hi", "col_min", "col_max",
+                                "n_below", "n_above", "n_total",
+                                "violates"}}} -- "columns" covers every
+    continuous column with a valid (non-missing, non-degenerate) domain
+    entry, whether or not it violates.
+    """
+    missing, degenerate, columns = [], [], {}
+    for c in continuous_columns:
+        spec = domains.get(c)
+        if spec is None:
+            missing.append(c)
+            continue
+        pub_lo, pub_hi = float(spec["lo"]), float(spec["hi"])
+        if pub_hi <= pub_lo:
+            degenerate.append(f"{c} [{pub_lo}, {pub_hi}]")
+            continue
+        lower = sentinel_public_bound(pub_lo, pub_hi) if c in encoding else pub_lo
+
+        col = df[c]
+        n_below = int((col < lower).sum())
+        n_above = int((col > pub_hi).sum())
+        columns[c] = {
+            "lower": lower,
+            "pub_hi": pub_hi,
+            "col_min": float(col.min()),
+            "col_max": float(col.max()),
+            "n_below": n_below,
+            "n_above": n_above,
+            "n_total": int(len(col)),
+            "violates": bool(n_below or n_above),
+        }
+    return {"missing": missing, "degenerate": degenerate, "columns": columns}
 
 
 def file_sha256(path: str) -> str | None:
@@ -192,7 +246,15 @@ class _SmartNoiseBase(Synthesizer):
 
         encoding = self._load_encoding(self.params.get("numeric_encoding_path"))
         self._public_domains_sha256 = domains_sha
-        constraints = self._bound_constraints(df, continuous_columns, domains, encoding)
+        # Clipping mutates values, so it must never touch the shared
+        # training frame every run in the plan reuses -- work on a private
+        # copy rather than the caller's `df` when it's enabled.
+        clip_to_domain = bool(self.params.get("clip_to_domain", False))
+        if clip_to_domain:
+            df = df.copy()
+        constraints, clip_report = self._bound_constraints(
+            df, continuous_columns, domains, encoding, clip=clip_to_domain)
+        self._clip_report = clip_report
         n_sentinel = sum(1 for c in continuous_columns if c in encoding)
         print(f"  Bounds for {len(constraints)} continuous column(s) taken from the "
               f"REVIEWED public domain declaration (sha256 {str(domains_sha)[:12]}...); "
@@ -242,39 +304,32 @@ class _SmartNoiseBase(Synthesizer):
         with open(path) as f:
             return json.load(f)
 
-    def _bound_constraints(self, df, continuous_columns, domains, encoding) -> dict:
+    def _bound_constraints(self, df, continuous_columns, domains, encoding, clip: bool = False) -> tuple[dict, dict]:
         """
-        Per-column snsynth transformers bounded by the PUBLIC domain.
+        Per-column snsynth transformers bounded by the PUBLIC domain, plus
+        a clip report ({column: n_cells_clipped}, empty unless `clip`).
 
         See the module docstring for why the bounds may not come from
-        `df`. `df` is touched here only for the containment guard, which
-        aborts the run and releases nothing.
+        `df`. By default `df` is touched here only for the containment
+        guard, which aborts the run and releases nothing.
+
+        `clip=True` (main.py --clip-to-domain) instead clips any
+        out-of-bound cell to the declared bound IN PLACE on `df` --
+        callers MUST pass a private copy, never the frame other runs in
+        the plan still need untouched. This is NOT a data-dependent
+        bound: the clip target is the already-public, already-reviewed
+        [lower, pub_hi] declared before this run ever touched the data,
+        the same numbers that would otherwise just cause a hard failure.
+        It exists for documented entry artifacts (e.g. a height of 30cm,
+        an LVEF of 120%) that the public domain deliberately does NOT
+        widen to cover, since a physiologically real bound is more
+        useful than one padded out to whatever garbage a given export
+        happens to contain.
         """
         from snsynth.transform import BinTransformer, MinMaxTransformer
 
-        out = {}
-        missing, violations, degenerate = [], [], []
-        for c in continuous_columns:
-            spec = domains.get(c)
-            if spec is None:
-                missing.append(c)
-                continue
-            pub_lo, pub_hi = float(spec["lo"]), float(spec["hi"])
-            if pub_hi <= pub_lo:
-                degenerate.append(f"{c} [{pub_lo}, {pub_hi}]")
-                continue
-            lower = sentinel_public_bound(pub_lo, pub_hi) if c in encoding else pub_lo
-
-            col_min, col_max = float(df[c].min()), float(df[c].max())
-            if col_min < lower or col_max > pub_hi:
-                violations.append(
-                    f"{c}: training values span [{col_min:g}, {col_max:g}] but the "
-                    f"public bound is [{lower:g}, {pub_hi:g}]")
-                continue
-
-            out[c] = (BinTransformer(lower=lower, upper=pub_hi)
-                      if self.transform_style == "cube"
-                      else MinMaxTransformer(lower=lower, upper=pub_hi))
+        report = compute_domain_report(df, continuous_columns, domains, encoding)
+        missing, degenerate = report["missing"], report["degenerate"]
 
         if missing:
             raise ValueError(
@@ -287,18 +342,41 @@ class _SmartNoiseBase(Synthesizer):
             raise ValueError(
                 f"Public domain(s) with hi <= lo: {degenerate[:10]}. Fix the reviewed "
                 f"file: a domain must be a real interval.")
-        if violations:
+
+        violating = {c: r for c, r in report["columns"].items() if r["violates"]}
+        clip_report = {}
+        if violating and not clip:
             # Fail BEFORE fitting. A too-narrow reviewed range is the one
             # mistake that would otherwise surface hours later as clipped
             # values, and clipping silently reintroduces a data-dependent
-            # bound.
+            # bound -- unless explicitly requested (--clip-to-domain),
+            # clipped to the PUBLIC bound itself, never the data's own.
+            violations = [
+                f"{c}: training values span {coarse_observed_span(r)} (coarsened) but the "
+                f"public bound is [{r['lower']:g}, {r['pub_hi']:g}]"
+                for c, r in violating.items()
+            ]
             raise ValueError(
                 "Training values fall outside the reviewed public domain -- the "
                 "declared domain must contain the data it bounds (widen it in "
-                f"{self.params.get('public_domains_path')}):\n  "
+                f"{self.params.get('public_domains_path')}, or pass --clip-to-domain "
+                "to clip documented entry artifacts to the declared bound instead):\n  "
                 + "\n  ".join(violations[:20])
                 + (f"\n  ... and {len(violations) - 20} more" if len(violations) > 20 else ""))
-        return out
+
+        out = {}
+        for c, r in report["columns"].items():
+            if r["violates"]:
+                n = r["n_below"] + r["n_above"]
+                df[c] = df[c].clip(lower=r["lower"], upper=r["pub_hi"])
+                clip_report[c] = n
+                print(f"  Clipped {n} of {r['n_total']} cell(s) in '{c}' to its declared "
+                      f"public domain [{r['lower']:g}, {r['pub_hi']:g}] "
+                      f"(observed {coarse_observed_span(r)}, coarsened).")
+            out[c] = (BinTransformer(lower=r["lower"], upper=r["pub_hi"])
+                      if self.transform_style == "cube"
+                      else MinMaxTransformer(lower=r["lower"], upper=r["pub_hi"]))
+        return out, clip_report
 
     def sample(self, n_rows: int) -> pd.DataFrame:
         return self._model.sample(n_rows)
@@ -308,6 +386,20 @@ class _SmartNoiseBase(Synthesizer):
         which revision of the public domain declaration bounded the run."""
         d = super().describe()
         sha = getattr(self, "_public_domains_sha256", None)
+        clip_report = getattr(self, "_clip_report", None) or {}
+        caveats = [
+            "categorical vocabularies are learned from the training data by "
+            "snsynth's LabelTransformer at zero epsilon (standard practice, "
+            "disclosed leak)",
+            "numeric bounds are public and human-reviewed; sentinel bounds are a "
+            "pure function of the public domain",
+        ]
+        if clip_report:
+            caveats.append(
+                "--clip-to-domain was set: cells outside the declared public bound "
+                "were clipped TO THAT BOUND (not to any data-derived value) rather "
+                "than failing the run -- see clipped_cells_by_column."
+            )
         d.update({
             "epsilon": getattr(self, "_epsilon", self.params.get("epsilon")),
             "delta": getattr(self, "_delta", None),
@@ -315,13 +407,8 @@ class _SmartNoiseBase(Synthesizer):
             "bounds_source": (f"public_domains.json rev {sha}" if sha
                               else "public_domains.json (not yet loaded)"),
             "public_domains_sha256": sha,
-            "privacy_caveats": [
-                "categorical vocabularies are learned from the training data by "
-                "snsynth's LabelTransformer at zero epsilon (standard practice, "
-                "disclosed leak)",
-                "numeric bounds are public and human-reviewed; sentinel bounds are a "
-                "pure function of the public domain",
-            ],
+            "clipped_cells_by_column": clip_report,
+            "privacy_caveats": caveats,
         })
         return d
 

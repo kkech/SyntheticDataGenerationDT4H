@@ -81,6 +81,22 @@ class GenerateStep(PipelineStep):
                   f"from {config.public_domains_path} (sha256 {sha[:12]}...) -- these "
                   f"bound all {len(dp_runs)} DP run(s); no bound is derived from the "
                   f"training data.")
+            # Fail the CAMPAIGN now, not the first DP run hours in: every
+            # continuous training column must have a declared range. This
+            # includes columns that only BECOME numeric in preprocessing
+            # (ordinal-encoded NYHA) -- the class that slipped past a
+            # schema-level coverage check and failed a site's DP runs.
+            missing_domains = sorted(set(continuous) - set(domains))
+            if missing_domains:
+                raise ValueError(
+                    f"{len(missing_domains)} continuous training column(s) have no "
+                    f"entry in the reviewed public domain file -- every DP run would "
+                    f"fail: {missing_domains[:15]}"
+                    + (" ..." if len(missing_domains) > 15 else "")
+                    + ". Add reviewed entries (or re-run make_public_domains.py and "
+                      "review the additions) before starting the campaign.")
+            print(f"  Domain coverage: all {len(continuous)} continuous training "
+                  f"column(s) have a declared range.")
 
         # Width-limited runs: "top" = the standard AIM subset
         # (config.aim_max_columns); an integer k = the top-k subset by the
@@ -308,6 +324,7 @@ class GenerateStep(PipelineStep):
             params["public_domains_path"] = config.public_domains_path
             params["numeric_encoding_path"] = os.path.join(
                 config.step_dir("preprocess"), NUMERIC_ENCODING_FILENAME)
+            params["clip_to_domain"] = config.clip_to_domain
 
         # Width-limited runs train on an importance subset: "top" is the
         # standard AIM width, an integer selects that top-k.
