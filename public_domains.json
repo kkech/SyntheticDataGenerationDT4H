@@ -41,7 +41,8 @@
     "vital_signs_bmi_value_pET",
     "vital_signs_oxygenSaturation_value_first",
     "vital_signs_oxygenSaturation_value_last",
-    "vital_signs_systolicBpDuringEncounter_value_pET"
+    "vital_signs_systolicBpDuringEncounter_value_pET",
+    "nyha_nyha"
   ],
   "domains": {
     "patient_demographics_age": {
@@ -643,6 +644,12 @@
       "hi": 50.0,
       "sentinel_encoded": true,
       "basis": "count of renal-complication rehospitalizations within a 5-year window"
+    },
+    "nyha_nyha": {
+      "lo": 0.0,
+      "hi": 4.0,
+      "sentinel_encoded": false,
+      "basis": "ordinal scale: classes 1-4 plus the 0 = not-assessed sentinel (2.2's plain nyha_nyha, same LOINC valueSet and encoding as nyha_nyha_pET)"
     }
   }
 }
