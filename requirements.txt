@@ -96,3 +96,8 @@ matplotlib>=3.7
 # tested, ignore it. Run `python main.py --preflight` before any long
 # campaign; loading generators pickled under a different numpy major
 # raises a clear error naming this fix.
+
+# --- tests ---
+# `python -m pytest tests/` is the pre-campaign sanity check at every
+# site; run it after any pull and before any long run.
+pytest>=8
