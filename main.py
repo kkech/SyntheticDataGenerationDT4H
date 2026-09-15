@@ -304,9 +304,17 @@ def preflight(config: PipelineConfig | None = None, min_free_gb: float = 5.0) ->
                           f"bound, not to anything derived from the data):")
                     for c, r in sorted(violating.items(), key=lambda kv: -(kv[1]["n_below"] + kv[1]["n_above"])):
                         n = r["n_below"] + r["n_above"]
+                        # The sentinel tag is the key diagnostic: a column
+                        # flagged as NOT sentinel-encoded whose observed
+                        # minimum sits near -(0.25 x range) below zero is a
+                        # train parquet carrying sentinels the CURRENT
+                        # encoding map does not know about -- i.e. stale,
+                        # mixed preprocess artifacts, not bad data.
+                        tag = ("sentinel-encoded per current map" if c in encoding
+                               else "NOT sentinel-encoded per current map")
                         print(f"      {c}: {n}/{r['n_total']} datapoint(s) outside "
                               f"[{r['lower']:g}, {r['pub_hi']:g}] "
-                              f"(observed {coarse_observed_span(r)}, coarsened)")
+                              f"(observed {coarse_observed_span(r)}, coarsened; {tag})")
                 else:
                     print("  ✅ every continuous column's training values fall within its declared public domain")
             except Exception as e:
