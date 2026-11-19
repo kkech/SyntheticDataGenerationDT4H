@@ -82,10 +82,12 @@ controlled access, a tiering we propose as the honest release standard for curre
 tabular synthesis. The complete pipeline, the a-priori public-domain declaration
 that makes the DP accounting sound, and every report regenerate from one command;
 clinical missingness is preserved end-to-end by a sentinel encoding decoded back to
-null in the released files. All results are from the first clinical site of the
-DT4H federation; the site-portable pipeline is being rolled out to the partner
-sites, whose campaigns will reproduce every table and figure on their own cohorts
-under identical, noise-floor-calibrated criteria.
+null in the released files. The detailed results are from the first clinical site
+of the DT4H federation; the same pipeline has since run at six further hospitals
+(802--6{,}274 patients, 126 additional datasets), where the cohort-dependent noise
+floor, the dissociated capability profile of marginal-based and neural synthesis,
+and, wherever the attacks have been run, chance-level membership inference all
+replicate.
 \end{abstract}
 
 \section{Background \& Summary}
@@ -1064,6 +1066,151 @@ file passing the \texttt{controlled} policy. AIM (completed at $\eps{=}1$ on its
 (11\%), 0\% below the distance threshold, survival endpoints outside its subset.
 \end{table}
 
+\subsection{Replication across the federation}
+\label{sec:federation}
+
+The validation above is from the first clinical site. The same pipeline has
+since run at six further DT4H hospitals, each on its own extract inside its own
+secure environment, with only aggregate reports leaving the site
+(Table~\ref{tab:sites}). Together the seven sites hold 168 completed synthetic
+datasets. Brno and Rome ran the full run plan of Table~\ref{tab:runplan};
+Bucharest ran it without AIM and with MST at $\eps = 15$ only; Utrecht, London,
+and Stockholm generated two files each, MST at $\eps = 15$ and TVAE, on a single
+seed. The runs that did not complete are AIM at the higher privacy budgets
+(per-run compute cap; beyond $\eps = 1$, AIM completed $\eps = 5$ on its
+40-column subset at Rome and $\eps = 5$ and $8$ at both widths at Brno) and MST
+at $\eps = 0.5$ at Brno. Every completed dataset at every site passed the verbatim-record check. The DP files at
+the partner sites were fitted under the a-priori public-domain declaration, each
+run recording the declaration's hash; the release gate has not yet been run at any
+partner site, so no release-tier verdict is reported for them.
+% NOTE (numbers freeze): the reference-site row reads 42/52 from the generation
+% summary and from the rows of Table~\ref{tab:runs}; the abstract, Methods and
+% that table's total line say 43/51 -- reconcile at the numbers freeze.
+% NOTE: this subsection names the hospitals; the rest of the paper says "the
+% first clinical site". Confirm naming with the consortium (or switch to
+% Site A--G) before submission.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Generation campaign and evaluation coverage per site. Each generator is
+trained on the 75\% training split and produces as many synthetic records; the
+holdout is the real-data reference. Modelled columns exclude constants, which
+differ by site; rules are the clinical-logic rules mined from that site's
+training data.}
+\label{tab:sites}
+\begin{tabular}{lrrrrcp{4.6cm}}
+\toprule
+site & patients & train / holdout & columns & rules & datasets & evaluation available \\
+\midrule
+Amsterdam (NL)\textsuperscript{a} & 4{,}694 & 3{,}520 / 1{,}174 & 211 & 233 & 42 / 52 & all steps, including the release gate \\
+Bucharest (RO) & 6{,}274 & 4{,}706 / 1{,}568 & 101 & 10 & 32 / 32 & all steps; no survival endpoint in the extract; Anonymeter not run \\
+Rome (IT) & 5{,}031 & 3{,}773 / 1{,}258 & 151 & 138 & 43 / 52 & fidelity and coherence; survival, utility, privacy, and attack steps pending \\
+Utrecht (NL) & 2{,}482 & 1{,}862 / 620 & 198 & 466 & 2 / 2 & all steps; both survival endpoints \\
+Brno (CZ) & 2{,}065 & 1{,}549 / 516 & 234 & 511 & 45 / 52 & all steps; all-cause death only; Anonymeter not run \\
+London (UK) & 1{,}005 & 754 / 251 & 220 & 256 & 2 / 2 & all steps; all-cause death only \\
+Stockholm (SE) & 802 & 602 / 200 & 182 & 220 & 2 / 2 & all steps; HF rehospitalization only \\
+Barcelona (ES) & --- & --- & --- & --- & 0 & not started \\
+\midrule
+total & 22{,}353 & & & & 168 & \\
+\bottomrule
+\end{tabular}
+
+\raggedright\footnotesize \textsuperscript{a}\,The reference site of the
+preceding sections.
+\end{table}
+
+Table~\ref{tab:sitesheadline} reads the two generators common to all seven sites
+against each site's own real-versus-real reference. Three results replicate.
+
+\emph{The noise floor is a property of the cohort, not of the method.} The
+train-vs-holdout KS distance rises from 0.025 at the largest site (Bucharest,
+4{,}706 training patients) to 0.108 at the smallest (Stockholm, 602), a fourfold
+range: a synthetic KS of 0.13 is five times the floor at one site and barely above
+it at another. Fidelity is therefore comparable across sites only relative to each
+site's floor, which is what the matched-size calibration provides.
+
+\emph{The capability profile of the two families is the same everywhere.} MST
+reproduces categorical marginals at or near the floor at every site (TVD
+0.004--0.023 against floors of 0.006--0.022) but not numeric ones (KS 0.41--0.53);
+TVAE has the better numeric marginals (KS 0.13--0.28, 2.5 to 5 times the floor) and
+the worse categorical ones; and neither is indistinguishable from real data
+anywhere (C2ST AUC $\geq 0.992$). Row coherence replicates in the same way: real
+unseen patients break the mined rules in at most 1.2\% of rows at every site,
+whereas 19--47\% of synthetic rows do at the five sites with more than 200 rules.
+The low synthetic rates at Rome and Bucharest (1--4\%) reflect how few rules could
+be mined there (138 and 10, with 104 and 128 constant columns removed), not more
+coherent generators.
+
+\emph{The attacks stay at chance.} At the five partner-site cohorts with an attack
+report, no file contains a verbatim training row, and the distance-based
+membership attack stays between AUC 0.48 and 0.54 for both generators. MST places
+no record nearer the training data than the unseen-patient p5 threshold at any
+partner site; TVAE places 4--20\% there, the highest share at London (20.2\%),
+where both membership attacks remain at chance (AUC 0.51 and 0.52). The 24\%
+MST share at the reference site belongs to the pre-re-fit campaign and is the one
+figure in this comparison that does not replicate.
+
+Survival equivalence is the result that travels least, and the reason is
+statistical power. The $\pm 5$\,pp TOST needs the real training and holdout
+curves to be equivalent to each other before a synthetic file can be tested
+against them; that calibration holds at the reference site and for
+rehospitalization at Utrecht, and fails at Brno, London, and Stockholm and for
+death at Utrecht, where the 90\% confidence half-widths (0.03--0.06) approach or
+exceed the margin. On the one partner endpoint that can be tested, MST is
+equivalent to the holdout at all three horizons and TVAE at none, consistent
+with MST's survival result at the reference site. Downstream-utility targets are selected per
+site from the labels available there and are not compared here.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Headline results per site for the two generators common to all sites
+(seed 0), each under the site's own real-data reference: train vs holdout for KS,
+TVD, and C2ST (the sampling-noise floor); the holdout for rule violations; 5\% by
+construction for the distance share; chance for the distance-based membership
+attack. Pending: the step has not yet run at that site.}
+\label{tab:sitesheadline}
+\begin{tabular}{llcccccc}
+\toprule
+site & data & KS mean & TVD mean & C2ST AUC & rows violating (\%) & below p5 (\%) & MIA AUC \\
+\midrule
+Amsterdam\textsuperscript{a} & real (train vs holdout) & 0.049 & 0.010 & 0.492 & 0.8 & 5.0 & 0.500 \\
+ & MST ($\eps{=}15$) & 0.414 & 0.009 & 1.000 & 21.0 & 24.0 & 0.502 \\
+ & TVAE & 0.204 & 0.056 & 0.998 & 26.1 & 12.2 & 0.520 \\
+\addlinespace
+Bucharest & real (train vs holdout) & 0.025 & 0.006 & 0.512 & 0.0 & 5.0 & 0.500 \\
+ & MST ($\eps{=}15$) & 0.529 & 0.004 & 1.000 & 2.4 & 0.0 & 0.511 \\
+ & TVAE & 0.127 & 0.033 & 0.999 & 1.1 & 7.5 & 0.528 \\
+\addlinespace
+Rome & real (train vs holdout) & 0.031 & 0.012 & 0.518 & 0.0 & pending & pending \\
+ & MST ($\eps{=}15$) & 0.533 & 0.005 & 1.000 & 3.0 & pending & pending \\
+ & TVAE & 0.149 & 0.035 & 0.999 & 4.1 & pending & pending \\
+\addlinespace
+Utrecht & real (train vs holdout) & 0.059 & 0.014 & 0.495 & 0.8 & 5.0 & 0.500 \\
+ & MST ($\eps{=}15$) & 0.487 & 0.012 & 1.000 & 26.3 & 0.0 & 0.522 \\
+ & TVAE & 0.178 & 0.052 & 0.992 & 21.2 & 6.1 & 0.543 \\
+\addlinespace
+Brno & real (train vs holdout) & 0.059 & 0.018 & 0.502 & 0.8 & 5.0 & 0.500 \\
+ & MST ($\eps{=}15$) & 0.503 & 0.009 & 1.000 & 27.2 & 0.0 & 0.510 \\
+ & TVAE & 0.181 & 0.057 & 0.999 & 28.7 & 8.9 & 0.527 \\
+\addlinespace
+London & real (train vs holdout) & 0.088 & 0.021 & 0.556 & 1.2 & 5.0 & 0.500 \\
+ & MST ($\eps{=}15$) & 0.533 & 0.016 & 1.000 & 47.5 & 0.0 & 0.485 \\
+ & TVAE & 0.226 & 0.059 & 0.995 & 19.4 & 20.2 & 0.514 \\
+\addlinespace
+Stockholm & real (train vs holdout) & 0.108 & 0.022 & 0.434 & 1.0 & 5.0 & 0.500 \\
+ & MST ($\eps{=}15$) & 0.518 & 0.023 & 1.000 & 34.6 & 0.0 & 0.486 \\
+ & TVAE & 0.275 & 0.073 & 0.999 & 22.6 & 4.3 & 0.516 \\
+\bottomrule
+\end{tabular}
+
+\raggedright\footnotesize \textsuperscript{a}\,Reference site; its MST file
+predates the reviewed-public-domain re-fit.% REFIT
+\end{table}
+
 \section{Usage Notes}
 
 \begin{itemize}
@@ -1148,7 +1295,8 @@ Anonymeter \citep{giomi2023unified}.
 
 \section{Limitations}
 
-Single clinical site and a modest cohort (4{,}694 patients): absolute
+The detailed validation is from one clinical site with a modest cohort
+(4{,}694 patients): absolute
 fidelity---particularly for laboratory values observed in few patients---is
 sample-size-limited, and the pipeline is designed to rerun unchanged on the
 forthcoming larger extract. The DP results reported here predate the
@@ -1174,7 +1322,11 @@ for real and synthetic, so comparisons are unaffected). The membership-inference
 suite now includes a cross-validated learned attack and an empirical
 privacy-loss bound; shadow-model attacks with auxiliary data remain possible in
 principle, and the DP models' formal guarantee will bound them only after the
-re-fit.
+re-fit. The federation replication (Section~\ref{sec:federation}) is partial:
+three partner sites generated only two generators on a single seed, one site's
+analysis stops after the coherence audit, survival equivalence cannot be tested
+at the smaller cohorts, no partner file has been gated, and one of the eight
+sites has not started.
 
 \section{Future Work}
 
@@ -1208,16 +1360,16 @@ addresses only the sample-size component.
 \item \textbf{A reference diffusion baseline} (TabDDPM-class),
 dependency-permitting in the secure environment, replacing the diverged in-house
 implementation before any claim about diffusion models is made.
-\item \textbf{The federation rollout.} The results here are from one clinical
-site; the frozen, site-portable pipeline (a partner repository, exported by an
-allowlisted and verified procedure, runs the full campaign from one command
-against any site's extract) is being deployed to the DT4H partner sites. Each
-site's campaign reproduces every table, figure, gate report, and datasheet on
-its own cohort under identical criteria; because all metrics are calibrated to
-each site's own noise floor, results are comparable across sites by
-construction, and every sample-size-limited result (sparse-lab fidelity, joint
-structure, utility baselines, coherence generalization) tightens as cohorts
-grow.
+\item \textbf{Completing the federation rollout.} Six partner sites have run
+the frozen, site-portable pipeline (Section~\ref{sec:federation}); the partner
+repository, exported by an allowlisted and verified procedure, runs the full
+campaign from one command against any site's extract. What remains is the full
+model comparison at Utrecht, London, and Stockholm; the survival, utility,
+privacy, and attack steps at Rome; the release gate at every partner site; and
+the eighth site. Because all metrics are calibrated to each site's own noise
+floor, results are comparable across sites by construction, and every
+sample-size-limited result (sparse-lab fidelity, joint structure, utility
+baselines, survival equivalence) tightens as cohorts grow.
 \item \textbf{Transforms promoted into preprocessing} (affecting the DP models'
 binning as well), now that the model-side quantile transform has proven its
 numeric-fidelity value.
