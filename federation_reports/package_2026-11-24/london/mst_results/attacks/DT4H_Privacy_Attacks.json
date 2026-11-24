@@ -1,0 +1,109 @@
+{
+  "n_members": 754,
+  "n_nonmembers": 251,
+  "quasi_identifiers": [
+    "patient_demographics_age",
+    "patient_demographics_gender",
+    "encounters_admissionYear"
+  ],
+  "member_atypicality": {
+    "k": 5,
+    "quartile_cuts": [
+      0.084465,
+      0.112762,
+      0.14078
+    ]
+  },
+  "runs": [
+    {
+      "run_id": "mst_eps15_seed0",
+      "membership_inference": {
+        "attack": "nearest-synthetic-distance",
+        "attack_auc": 0.4848,
+        "attack_auc_ci95": [
+          0.4437,
+          0.5258
+        ],
+        "learned_attack": "cv-logreg over (d1, d2, d1/d2)",
+        "learned_attack_auc": 0.4656,
+        "learned_attack_auc_ci95": [
+          0.4266,
+          0.5033
+        ],
+        "worst_attack": "nearest-synthetic-distance",
+        "worst_attack_auc": 0.4848,
+        "worst_attack_auc_ci95": [
+          0.4437,
+          0.5258
+        ],
+        "mia_pass": true,
+        "mia_pass_rule": "95% CI upper bound of the worst attack < 0.55",
+        "member_median_distance": 0.150664,
+        "nonmember_median_distance": 0.14435,
+        "empirical_epsilon_lower_bound": 0.0,
+        "empirical_epsilon_method": "max log(CP05(TPR)/CP95(FPR)) over thresholds, both attack score sets, both accept/reject directions",
+        "mia_by_atypicality": [
+          {
+            "quartile": "Q1 (most typical)",
+            "n_members": 189,
+            "n_nonmembers": 62,
+            "attack_auc": 0.5629,
+            "member_median_distance": 0.086855
+          },
+          {
+            "quartile": "Q2",
+            "n_members": 188,
+            "n_nonmembers": 77,
+            "attack_auc": 0.4531,
+            "member_median_distance": 0.128412
+          },
+          {
+            "quartile": "Q3",
+            "n_members": 189,
+            "n_nonmembers": 61,
+            "attack_auc": 0.5677,
+            "member_median_distance": 0.174886
+          },
+          {
+            "quartile": "Q4 (most atypical)",
+            "n_members": 188,
+            "n_nonmembers": 51,
+            "attack_auc": 0.4827,
+            "member_median_distance": 0.21932
+          }
+        ]
+      },
+      "attribute_inference": [
+        {
+          "sensitive": "cause_of_death_isAllCause_f5a_w5a_first",
+          "baseline_accuracy": 0.6255,
+          "baseline_source": "holdout majority-class share",
+          "accuracy_members": 0.5809,
+          "accuracy_nonmembers": 0.5737,
+          "membership_advantage": 0.0072
+        },
+        {
+          "sensitive": "ckd_severity_from_calculated_egfr",
+          "baseline_accuracy": 0.2908,
+          "baseline_source": "holdout majority-class share",
+          "accuracy_members": 0.2812,
+          "accuracy_nonmembers": 0.2669,
+          "membership_advantage": 0.0142
+        },
+        {
+          "sensitive": "nyha_nyha_pET",
+          "baseline_accuracy": 1.0,
+          "baseline_source": "holdout majority-class share",
+          "accuracy_members": 1.0,
+          "accuracy_nonmembers": 1.0,
+          "membership_advantage": 0.0
+        }
+      ],
+      "anonymeter": {
+        "singling_out_risk": 0.0083,
+        "linkability_risk": 0.0
+      },
+      "duration_seconds": 8.9
+    }
+  ]
+}

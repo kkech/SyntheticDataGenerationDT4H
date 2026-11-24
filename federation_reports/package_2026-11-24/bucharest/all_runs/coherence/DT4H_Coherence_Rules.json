@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "min_support": 50,
+    "max_train_violation": 0.002,
+    "range_margin_fraction": 0.05
+  },
+  "rules": [
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 54,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 54,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 54,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 66,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 54,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 66,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ap",
+      "then_true": "conditions_ihd",
+      "train_support": 860,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "conditions_ihd",
+      "train_support": 904,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "category_range",
+      "categorical": "hyperkalemia_severity_categorizedValue",
+      "numeric": "lab_results_potassium_value_first",
+      "ranges": {
+        "mild": [
+          3.4055,
+          9.8145
+        ],
+        "moderate": [
+          3.7355,
+          7.5945
+        ],
+        "normal": [
+          1.7155,
+          10.3945
+        ]
+      },
+      "margin": 0.3945
+    },
+    {
+      "type": "category_range",
+      "categorical": "hyperkalemia_severity_categorizedValue",
+      "numeric": "lab_results_potassium_value_last",
+      "ranges": {
+        "mild": [
+          3.555,
+          6.845
+        ],
+        "moderate": [
+          5.115,
+          6.325
+        ],
+        "normal": [
+          1.365,
+          5.535
+        ]
+      },
+      "margin": 0.385
+    }
+  ]
+}

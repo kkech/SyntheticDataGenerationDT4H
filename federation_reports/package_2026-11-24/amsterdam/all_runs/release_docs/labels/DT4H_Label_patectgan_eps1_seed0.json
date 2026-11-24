@@ -1,0 +1,48 @@
+{
+  "run_id": "patectgan_eps1_seed0",
+  "file": "DT4H_Synthetic_patectgan_eps1_seed0.csv",
+  "synthesizer": "patectgan",
+  "base_synthesizer": "patectgan",
+  "run_transform": null,
+  "differential_privacy": {
+    "formal_guarantee": true,
+    "epsilon": 1.0
+  },
+  "seed": 0,
+  "rows": 3520,
+  "columns": 249,
+  "fidelity": {
+    "ks_mean_numeric": 0.5717,
+    "tvd_mean_categorical": 0.0741,
+    "missing_rate_mad": 0.1357,
+    "c2st_auc": 1.0
+  },
+  "joint_structure": {
+    "fabricated_association_pairs": null
+  },
+  "row_coherence": {
+    "violation_rate": 0.44246
+  },
+  "survival": {
+    "all_cause_death": false,
+    "hf_rehospitalization": true
+  },
+  "distances": {
+    "verbatim_training_rows": 0,
+    "dcr_median": 0.221605,
+    "share_closer_than_holdout_p5": 0.0,
+    "nndr_median": 0.986
+  },
+  "attacks": {
+    "mia_auc": 0.5072,
+    "mia_learned_auc": 0.4832,
+    "empirical_epsilon_lower_bound": 0.0,
+    "mia_auc_most_atypical_quartile": 0.4769,
+    "aia_worst_membership_advantage": 0.0133,
+    "singling_out_risk": 0.0,
+    "linkability_risk": 0.0
+  },
+  "release_gate": "not gated",
+  "release_gate_policy": null,
+  "cleared_for_open_release": null
+}

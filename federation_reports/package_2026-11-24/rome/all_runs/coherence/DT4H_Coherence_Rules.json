@@ -1,0 +1,1043 @@
+{
+  "parameters": {
+    "min_support": 50,
+    "max_train_violation": 0.002,
+    "range_margin_fraction": 0.05
+  },
+  "rules": [
+    {
+      "type": "implication",
+      "if_true": "smoking_status_smoker_last",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 1704,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_formerSmoker_last",
+      "then_true": "smoking_status_smoker_last",
+      "train_support": 1704,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 1704,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 109,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 109,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_occurred_prior_to_18_months_any",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 118,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 137,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 311,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 311,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 311,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 311,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 183,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 311,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 395,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 395,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 395,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 232,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 311,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 395,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 489,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 489,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 290,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 311,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 395,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 489,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 601,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 302,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 133,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 311,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 395,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 489,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 601,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 54,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 121,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 167,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 393,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 393,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 393,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 393,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 508,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 508,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 282,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 393,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 508,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 649,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 150,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 393,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 508,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 649,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 109,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 109,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 627,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ap",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 173,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ap",
+      "then_true": "conditions_ihd",
+      "train_support": 225,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ckd_chronic",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 467,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ckd_chronic",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ckd_chronic",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_cm",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 239,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_copd",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_dem",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 51,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_diabetes",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 842,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_dysl",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 1030,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 1704,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 109,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 109,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 1366,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 59,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 72,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 75,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 75,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ihd",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 1188,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ld",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 139,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mc",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 65,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 1125,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "conditions_ihd",
+      "train_support": 1990,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_pad",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 272,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 427,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_vd",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 204,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "category_range",
+      "categorical": "ckd_severity_from_calculated_egfr",
+      "numeric": "lab_results_valideGFR_value_first",
+      "ranges": {
+        "mild_to_moderate_decrease": [
+          -2.25,
+          126.25
+        ],
+        "mildly_decreased": [
+          -2.25,
+          118.25
+        ],
+        "moderate_to_severe_decrease": [
+          -1.25,
+          108.25
+        ],
+        "normal_or_high": [
+          0.75,
+          135.25
+        ],
+        "severe_decrease": [
+          2.75,
+          84.25
+        ]
+      },
+      "margin": 6.25
+    },
+    {
+      "type": "category_range",
+      "categorical": "ckd_severity_from_calculated_egfr",
+      "numeric": "lab_results_valideGFR_value_last",
+      "ranges": {
+        "mild_to_moderate_decrease": [
+          -2.45,
+          98.45
+        ],
+        "mildly_decreased": [
+          -2.45,
+          114.45
+        ],
+        "moderate_to_severe_decrease": [
+          -1.45,
+          108.45
+        ],
+        "normal_or_high": [
+          -3.45,
+          138.45
+        ],
+        "severe_decrease": [
+          2.55,
+          37.45
+        ]
+      },
+      "margin": 6.45
+    },
+    {
+      "type": "category_range",
+      "categorical": "hyperkalemia_severity_categorizedValue",
+      "numeric": "lab_results_potassium_value_first",
+      "ranges": {
+        "mild": [
+          2.535,
+          6.865
+        ],
+        "moderate": [
+          2.735,
+          6.365
+        ],
+        "normal": [
+          1.735,
+          9.765
+        ]
+      },
+      "margin": 0.365
+    },
+    {
+      "type": "category_range",
+      "categorical": "hyperkalemia_severity_categorizedValue",
+      "numeric": "lab_results_potassium_value_last",
+      "ranges": {
+        "mild": [
+          4.74,
+          5.66
+        ],
+        "moderate": [
+          5.24,
+          6.06
+        ],
+        "normal": [
+          1.74,
+          5.16
+        ]
+      },
+      "margin": 0.26
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+Policy: release -- coherence 10x holdout baseline (or +1% absolute), distance 2x the natural 5% share
+Gating 1 file(s) under every policy...
+
+
+######################################################################
+# DT4H_Synthetic_tvae_seed0.csv
+######################################################################
+  note: 91988 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for <output>/tvae_results/generate/DT4H_Synthetic_tvae_seed0.csv (754 x 257):
+  ✅ schema: 257 columns, 0 not in released schema
+  ✅ representation: representation audit clean; 1 column(s) with genuinely new categories
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 19.4% (real holdout: 1.2%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00626 vs holdout baseline 0.00029 (threshold 0.01029 = max(10x baseline, baseline+0.01))
+  ❌ distance: 152/754 record(s) (20.2%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.048053, over 257 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence ok (limit 0.01029), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03029), distance over (limit 0.1)
+Report -> <output>/tvae_results/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed0.md
+Report -> <output>/tvae_results/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed0.json
+
+======================================================================
+GATE SUMMARY (same measurement, both policies)
+======================================================================
+file                                         release  controlled failing checks
+DT4H_Synthetic_tvae_seed0                    FAIL     FAIL       distance
+
+0/1 pass 'release'; 0/1 pass 'controlled'. Reports written next to each file.

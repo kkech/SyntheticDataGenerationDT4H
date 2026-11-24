@@ -1,0 +1,883 @@
+WARNING:2026-09-24 14:14:32,845:jax._src.xla_bridge:794: An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not installed. Falling back to cpu.
+/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/.synthenv/lib/python3.10/site-packages/mbi/dataset.py:87: UserWarning: Pandas dataframe inputs are deprecated, please pass in a dictionary of numpy arrays instead.
+  warnings.warn(
+Full extended plan: 52 runs
+New plan: 32 runs (31 original + 1 new: mst_eps15_seed0)
+
+=== STEP 1: generate (reuse 31, execute only mst_eps15_seed0) ===
+🔁 Cascade: 'generate' will rerun, so the completed outputs of every later step were built from data this run is about to replace.
+   invalidated 'evaluate' (marked pending -- its outputs would mix old results with the new 'generate' outputs)
+   invalidated 'coherence' (marked pending -- its outputs would mix old results with the new 'generate' outputs)
+   invalidated 'survival' (marked pending -- its outputs would mix old results with the new 'generate' outputs)
+   invalidated 'utility' (marked pending -- its outputs would mix old results with the new 'generate' outputs)
+   invalidated 'privacy' (marked pending -- its outputs would mix old results with the new 'generate' outputs)
+   invalidated 'attacks' (marked pending -- its outputs would mix old results with the new 'generate' outputs)
+   invalidated 'figures' (marked pending -- its outputs would mix old results with the new 'generate' outputs)
+   invalidated 'release_docs' (marked pending -- its outputs would mix old results with the new 'generate' outputs)
+   Pass --no-cascade to keep downstream steps marked completed instead.
+↩️  Retrying only the failed run(s) in 'generate' -- /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate is kept, not wiped; already-successful runs are reused.
+
+======================================================================
+▶️  RUNNING 'generate' (started 14:14:26)
+======================================================================
+Loaded TRAINING split: 4706 rows x 229 columns (the 25% holdout is never shown to any generator)
+Seed: 0 | python 3.10.12
+GPU: NVIDIA L4 -- 23.46 GB free of 23.66 GB (CUDA 12.4)
+⚠️  Working tree has uncommitted changes -- this run is not reproducible from the recorded git commit alone.
+Holding out 128 constant column(s) from training (re-attached verbatim after sampling).
+Training columns: 38 continuous, 63 categorical
+
+Run plan: 32 run(s) -- gaussian_copula_seed0, gaussian_copula_seed1, gaussian_copula_seed2, tvae_seed0, tvae_seed1, tvae_seed2, ctgan_seed0, ctgan_seed1, ctgan_seed2, dpctgan_eps1_seed0, dpctgan_eps5_seed0, dpctgan_eps8_seed0, dpctgan_eps10_seed0, dpctgan_eps15_seed0, dpctgan_eps20_seed0, dpctgan_eps15_seed1, dpctgan_eps15_seed2, tvae_qt_seed0, tvae_qt_seed1, tvae_qt_seed2, tvae_cap256_seed0, tvae_ep1000_seed0, tvae_ind_seed0, ctgan_qt_seed0, ddpm_seed0, ddpm_seed1, ddpm_seed2, ddpm_g_seed0, patectgan_eps1_seed0, patectgan_eps5_seed0, patectgan_eps15_seed0, mst_eps15_seed0
+Public numeric domains: 101 reviewed column range(s) from /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/public_domains.json (sha256 283379d243f3...) -- these bound all 12 DP run(s); no bound is derived from the training data.
+  Domain coverage: all 38 continuous training column(s) have a declared range.
+
+↩️  Resuming: 31/32 run(s) already completed in a previous attempt at this exact training data are reused as-is; 1 run(s) remain.
+
+[run 1/1]
+======================================================================
+▶️  RUN: mst_eps15_seed0 (model mst, seed 0, ε=15.0)
+======================================================================
+Differential privacy ON -- total epsilon budget: 15.0 (bounds come from the reviewed public domain file; delta is recorded once the model is built)
+CPU-only synthesizer (no GPU acceleration available for this method).
+Training... (time limit: 21600s for fit, 21600s for sampling)
+  Bounds for 38 continuous column(s) taken from the REVIEWED public domain declaration (sha256 283379d243f3...); 23 of them widened to the public sentinel bound. No epsilon is spent on bound discovery: the bounds are not a function of this data.
+  Guarantee recorded as (ε=15, δ=3.1e-06).
+Saved fitted generator (local only, gitignored) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/models/mst_eps15_seed0.pkl
+Sampling 4706 rows...
+  Categorical representation already aligned (0 cells changed).
+✅ No verbatim training records in the synthetic output (4706 rows, 229 columns compared).
+  Decoded sentinels back to null in 24 numeric column(s): 25773 cells restored to null ('no event' / 'not measured').
+✅ mst_eps15_seed0: 4706 x 229 -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps15_seed0.csv (664.6s)
+
+Saved generation summary -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Generation_Summary.json
+Saved generation summary -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Generation_Summary.md
+
+32 run(s) succeeded, 0 failed.
+✅ 'generate' completed in 669s.
+
+=== STEP 2: rerun invalidated analysis steps over all 32 runs ===
+⏭️  Skipping 'load_data' (already completed). Use --force or --force-step load_data to rerun.
+⏭️  Skipping 'profile_data' (already completed). Use --force or --force-step profile_data to rerun.
+⏭️  Skipping 'preprocess' (already completed). Use --force or --force-step preprocess to rerun.
+⏭️  Skipping 'profile_preprocessed_data' (already completed). Use --force or --force-step profile_preprocessed_data to rerun.
+⏭️  Skipping 'generate' (already completed). Use --force or --force-step generate to rerun.
+🧹 Deleted previous outputs of 'evaluate' (/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/evaluate) for a clean rerun.
+
+======================================================================
+▶️  RUNNING 'evaluate' (started 14:25:35)
+======================================================================
+Train (decoded): 4706 x 229 | Holdout (decoded): 1568 x 229
+Excluding 128 constant column(s) from all aggregates (re-attached verbatim by generate -- copies, not modelling successes).
+  Flattening 2 ARRAY[NOMINAL] column(s) to scalar: ['electrocardiographs_ecg_type_of_rhythms_pET_first', 'electrocardiographs_ecg_type_of_rhythms_pET_last']
+  Casting 183 Decimal column(s) to Float64: 183 column(s)
+
+Comparing original vs preprocessed (lossless-preprocessing proof)...
+
+Computing the sampling-noise floor (train vs holdout)...
+  Noise floor: KS mean=0.0255, TVD mean=0.0065, missing-rate MAD=0.0041 -- no synthesizer can honestly do better than this.
+
+Profiling association structure of the training data...
+  9876 measurable column pairs (numeric-numeric 703, categorical-categorical 1953, numeric-categorical 7220)
+Computing the association noise floor (train vs holdout profiles)...
+  num_num: mean |Δ| floor = 0.0285 over 703 pairs
+  cat_cat: mean |Δ| floor = 0.0231 over 1953 pairs
+  num_cat: mean |Δ| floor = 0.0113 over 7220 pairs
+Computing the C2ST floor (train vs holdout)...
+  C2ST floor AUC = 0.5122 ± 0.0118 (out-of-fold; 0.5 = indistinguishable)
+Subgroup strata with sufficient support: ['female', 'male', 'age_under_65', 'age_65_79', 'age_80_plus']
+  representation audit clean
+
+Comparing against 'ctgan_qt_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'ctgan_qt_seed0'...
+  train vs ctgan_qt_seed0: KS mean=0.181 (floor 0.0255), TVD mean=0.082 (floor 0.0065), missing-rate MAD=0.0833
+  representation audit clean
+
+Comparing against 'ctgan_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9999 ± 0.0002 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'ctgan_seed0'...
+  train vs ctgan_seed0: KS mean=0.2367 (floor 0.0255), TVD mean=0.098 (floor 0.0065), missing-rate MAD=0.0402
+  representation audit clean
+
+Comparing against 'ctgan_seed1' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'ctgan_seed1'...
+  train vs ctgan_seed1: KS mean=0.2677 (floor 0.0255), TVD mean=0.0955 (floor 0.0065), missing-rate MAD=0.0396
+  representation audit clean
+
+Comparing against 'ctgan_seed2' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0001 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'ctgan_seed2'...
+  train vs ctgan_seed2: KS mean=0.2603 (floor 0.0255), TVD mean=0.0909 (floor 0.0065), missing-rate MAD=0.0392
+  representation audit clean
+
+Comparing against 'ddpm_g_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9887 ± 0.0029 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'ddpm_g_seed0'...
+  train vs ddpm_g_seed0: KS mean=0.1442 (floor 0.0255), TVD mean=0.0403 (floor 0.0065), missing-rate MAD=0.0523
+  representation audit clean
+
+Comparing against 'ddpm_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9448 ± 0.0107 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'ddpm_seed0'...
+  train vs ddpm_seed0: KS mean=0.1371 (floor 0.0255), TVD mean=0.0209 (floor 0.0065), missing-rate MAD=0.0498
+  representation audit clean
+
+Comparing against 'ddpm_seed1' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9485 ± 0.005 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'ddpm_seed1'...
+  train vs ddpm_seed1: KS mean=0.1119 (floor 0.0255), TVD mean=0.0208 (floor 0.0065), missing-rate MAD=0.0471
+  representation audit clean
+
+Comparing against 'ddpm_seed2' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9519 ± 0.0075 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'ddpm_seed2'...
+  train vs ddpm_seed2: KS mean=0.1368 (floor 0.0255), TVD mean=0.0202 (floor 0.0065), missing-rate MAD=0.0552
+  representation audit clean
+
+Comparing against 'dpctgan_eps10_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'dpctgan_eps10_seed0'...
+  ⚠️  29 fabricated association(s) (near-zero real, strong synthetic)
+  train vs dpctgan_eps10_seed0: KS mean=0.8539 (floor 0.0255), TVD mean=0.1644 (floor 0.0065), missing-rate MAD=0.3023
+  representation audit clean
+
+Comparing against 'dpctgan_eps15_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'dpctgan_eps15_seed0'...
+  ⚠️  39 fabricated association(s) (near-zero real, strong synthetic)
+  train vs dpctgan_eps15_seed0: KS mean=0.833 (floor 0.0255), TVD mean=0.1294 (floor 0.0065), missing-rate MAD=0.317
+  representation audit clean
+
+Comparing against 'dpctgan_eps15_seed1' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9999 ± 0.0002 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'dpctgan_eps15_seed1'...
+  ⚠️  23 fabricated association(s) (near-zero real, strong synthetic)
+  train vs dpctgan_eps15_seed1: KS mean=0.7561 (floor 0.0255), TVD mean=0.1347 (floor 0.0065), missing-rate MAD=0.1716
+  representation audit clean
+
+Comparing against 'dpctgan_eps15_seed2' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'dpctgan_eps15_seed2'...
+  ⚠️  43 fabricated association(s) (near-zero real, strong synthetic)
+  train vs dpctgan_eps15_seed2: KS mean=0.9024 (floor 0.0255), TVD mean=0.1206 (floor 0.0065), missing-rate MAD=0.3012
+  representation audit clean
+
+Comparing against 'dpctgan_eps1_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'dpctgan_eps1_seed0'...
+  ⚠️  20 fabricated association(s) (near-zero real, strong synthetic)
+  train vs dpctgan_eps1_seed0: KS mean=0.8282 (floor 0.0255), TVD mean=0.1169 (floor 0.0065), missing-rate MAD=0.2812
+  representation audit clean
+
+Comparing against 'dpctgan_eps20_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'dpctgan_eps20_seed0'...
+  ⚠️  19 fabricated association(s) (near-zero real, strong synthetic)
+  train vs dpctgan_eps20_seed0: KS mean=0.784 (floor 0.0255), TVD mean=0.1313 (floor 0.0065), missing-rate MAD=0.255
+  representation audit clean
+
+Comparing against 'dpctgan_eps5_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9999 ± 0.0002 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'dpctgan_eps5_seed0'...
+  ⚠️  33 fabricated association(s) (near-zero real, strong synthetic)
+  train vs dpctgan_eps5_seed0: KS mean=0.7574 (floor 0.0255), TVD mean=0.1302 (floor 0.0065), missing-rate MAD=0.2628
+  representation audit clean
+
+Comparing against 'dpctgan_eps8_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'dpctgan_eps8_seed0'...
+  ⚠️  33 fabricated association(s) (near-zero real, strong synthetic)
+  train vs dpctgan_eps8_seed0: KS mean=0.7479 (floor 0.0255), TVD mean=0.1143 (floor 0.0065), missing-rate MAD=0.2771
+  representation audit clean
+
+Comparing against 'gaussian_copula_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'gaussian_copula_seed0'...
+  train vs gaussian_copula_seed0: KS mean=0.3424 (floor 0.0255), TVD mean=0.0091 (floor 0.0065), missing-rate MAD=0.0514
+  representation audit clean
+
+Comparing against 'gaussian_copula_seed1' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'gaussian_copula_seed1'...
+  train vs gaussian_copula_seed1: KS mean=0.3424 (floor 0.0255), TVD mean=0.0092 (floor 0.0065), missing-rate MAD=0.0481
+  representation audit clean
+
+Comparing against 'gaussian_copula_seed2' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'gaussian_copula_seed2'...
+  train vs gaussian_copula_seed2: KS mean=0.3428 (floor 0.0255), TVD mean=0.0089 (floor 0.0065), missing-rate MAD=0.0503
+  representation audit clean
+
+Comparing against 'mst_eps15_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'mst_eps15_seed0'...
+  ⚠️  319 fabricated association(s) (near-zero real, strong synthetic)
+  train vs mst_eps15_seed0: KS mean=0.5294 (floor 0.0255), TVD mean=0.004 (floor 0.0065), missing-rate MAD=0.0026
+  representation audit clean
+
+Comparing against 'patectgan_eps15_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'patectgan_eps15_seed0'...
+  ⚠️  8 fabricated association(s) (near-zero real, strong synthetic)
+  train vs patectgan_eps15_seed0: KS mean=0.3279 (floor 0.0255), TVD mean=0.0353 (floor 0.0065), missing-rate MAD=0.0685
+  representation audit clean
+
+Comparing against 'patectgan_eps1_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'patectgan_eps1_seed0'...
+  train vs patectgan_eps1_seed0: KS mean=0.5425 (floor 0.0255), TVD mean=0.111 (floor 0.0065), missing-rate MAD=0.0949
+  representation audit clean
+
+Comparing against 'patectgan_eps5_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 1.0 ± 0.0 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'patectgan_eps5_seed0'...
+  ⚠️  8 fabricated association(s) (near-zero real, strong synthetic)
+  train vs patectgan_eps5_seed0: KS mean=0.3269 (floor 0.0255), TVD mean=0.0381 (floor 0.0065), missing-rate MAD=0.0676
+  representation audit clean
+
+Comparing against 'tvae_cap256_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9988 ± 0.0003 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'tvae_cap256_seed0'...
+  train vs tvae_cap256_seed0: KS mean=0.1236 (floor 0.0255), TVD mean=0.0324 (floor 0.0065), missing-rate MAD=0.0161
+  representation audit clean
+
+Comparing against 'tvae_ep1000_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9977 ± 0.0011 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'tvae_ep1000_seed0'...
+  ⚠️  2 fabricated association(s) (near-zero real, strong synthetic)
+  train vs tvae_ep1000_seed0: KS mean=0.1375 (floor 0.0255), TVD mean=0.0306 (floor 0.0065), missing-rate MAD=0.0131
+  representation audit clean
+
+Comparing against 'tvae_ind_seed0' (4706 rows x 229 cols)...
+🚨 STALE FILE: DT4H_Synthetic_tvae_ind_seed0.csv contains 4 cell(s) across 1 column(s) that the current pipeline would not produce (undecoded sentinel-region values). Scores below describe the stale file. Re-run the generate step to refresh it.
+  C2ST AUC = 0.9973 ± 0.0006 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'tvae_ind_seed0'...
+  train vs tvae_ind_seed0: KS mean=0.1185 (floor 0.0255), TVD mean=0.035 (floor 0.0065), missing-rate MAD=0.0188
+  representation audit clean
+
+Comparing against 'tvae_qt_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 0.997 ± 0.0009 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'tvae_qt_seed0'...
+  ⚠️  2 fabricated association(s) (near-zero real, strong synthetic)
+  train vs tvae_qt_seed0: KS mean=0.1025 (floor 0.0255), TVD mean=0.0347 (floor 0.0065), missing-rate MAD=0.0284
+  representation audit clean
+
+Comparing against 'tvae_qt_seed1' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9947 ± 0.001 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'tvae_qt_seed1'...
+  train vs tvae_qt_seed1: KS mean=0.112 (floor 0.0255), TVD mean=0.0372 (floor 0.0065), missing-rate MAD=0.0219
+  representation audit clean
+
+Comparing against 'tvae_qt_seed2' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9963 ± 0.0019 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'tvae_qt_seed2'...
+  train vs tvae_qt_seed2: KS mean=0.1129 (floor 0.0255), TVD mean=0.0305 (floor 0.0065), missing-rate MAD=0.0145
+  representation audit clean
+
+Comparing against 'tvae_seed0' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9988 ± 0.0004 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'tvae_seed0'...
+  train vs tvae_seed0: KS mean=0.1266 (floor 0.0255), TVD mean=0.0329 (floor 0.0065), missing-rate MAD=0.0182
+  representation audit clean
+
+Comparing against 'tvae_seed1' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9987 ± 0.0005 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'tvae_seed1'...
+  ⚠️  1 fabricated association(s) (near-zero real, strong synthetic)
+  train vs tvae_seed1: KS mean=0.1319 (floor 0.0255), TVD mean=0.0348 (floor 0.0065), missing-rate MAD=0.0242
+  representation audit clean
+
+Comparing against 'tvae_seed2' (4706 rows x 229 cols)...
+  C2ST AUC = 0.9986 ± 0.0008 (floor 0.5122, schema coverage 1.0)
+  Profiling association structure of 'tvae_seed2'...
+  train vs tvae_seed2: KS mean=0.1276 (floor 0.0255), TVD mean=0.0311 (floor 0.0065), missing-rate MAD=0.0138
+
+Saved evaluation detail (JSON) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/evaluate/DT4H_Evaluation.json
+Saved evaluation overview (Markdown) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/evaluate/DT4H_Evaluation.md
+✅ 'evaluate' completed in 591s.
+🧹 Deleted previous outputs of 'coherence' (/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/coherence) for a clean rerun.
+
+======================================================================
+▶️  RUNNING 'coherence' (started 14:35:26)
+======================================================================
+Mining coherence rules from the train split...
+  10 rules: {'implication': 8, 'category_range': 2}
+  Saved rule set -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/coherence/DT4H_Coherence_Rules.json
+  train (real): overall violation rate 0.0 over 11444 checks; 0.0% of rows carry at least one violation
+  holdout (real, unseen): overall violation rate 0.0 over 3836 checks; 0.0% of rows carry at least one violation
+  ⚠️  ctgan_qt_seed0: violation rate 0.13418 (10/10 rules violated); 26.5% of rows affected
+  ⚠️  ctgan_seed0: violation rate 0.12599 (10/10 rules violated); 22.9% of rows affected
+  ⚠️  ctgan_seed1: violation rate 0.13548 (10/10 rules violated); 24.6% of rows affected
+  ⚠️  ctgan_seed2: violation rate 0.1178 (10/10 rules violated); 22.5% of rows affected
+  ✅ ddpm_g_seed0: violation rate 0.00398 (1/10 rules violated); 0.8% of rows affected
+  ⚠️  ddpm_seed0: violation rate 0.01151 (9/10 rules violated); 2.4% of rows affected
+  ⚠️  ddpm_seed1: violation rate 0.01407 (9/10 rules violated); 2.9% of rows affected
+  ⚠️  ddpm_seed2: violation rate 0.01241 (9/10 rules violated); 2.6% of rows affected
+  ⚠️  dpctgan_eps10_seed0: violation rate 0.18241 (3/10 rules violated); 47.4% of rows affected
+  ⚠️  dpctgan_eps15_seed0: violation rate 0.01604 (2/10 rules violated); 2.8% of rows affected
+  ✅ dpctgan_eps15_seed1: violation rate 0.0 (0/10 rules violated); 0.0% of rows affected
+  ✅ dpctgan_eps15_seed2: violation rate 0.00185 (4/10 rules violated); 0.2% of rows affected
+  ⚠️  dpctgan_eps1_seed0: violation rate 0.56748 (2/10 rules violated); 56.7% of rows affected
+  ✅ dpctgan_eps20_seed0: violation rate 0.0002 (1/10 rules violated); 0.0% of rows affected
+  ⚠️  dpctgan_eps5_seed0: violation rate 0.1191 (2/10 rules violated); 34.0% of rows affected
+  ⚠️  dpctgan_eps8_seed0: violation rate 0.02507 (1/10 rules violated); 3.4% of rows affected
+  ⚠️  gaussian_copula_seed0: violation rate 0.06043 (6/10 rules violated); 13.2% of rows affected
+  ⚠️  gaussian_copula_seed1: violation rate 0.0655 (7/10 rules violated); 14.3% of rows affected
+  ⚠️  gaussian_copula_seed2: violation rate 0.05847 (9/10 rules violated); 13.1% of rows affected
+  ⚠️  mst_eps15_seed0: violation rate 0.01746 (9/10 rules violated); 2.4% of rows affected
+  ⚠️  patectgan_eps15_seed0: violation rate 0.01628 (4/10 rules violated); 3.7% of rows affected
+  ⚠️  patectgan_eps1_seed0: violation rate 0.21393 (10/10 rules violated); 35.8% of rows affected
+  ⚠️  patectgan_eps5_seed0: violation rate 0.03165 (4/10 rules violated); 6.7% of rows affected
+  ✅ tvae_cap256_seed0: violation rate 0.00382 (4/10 rules violated); 0.9% of rows affected
+  ✅ tvae_ep1000_seed0: violation rate 0.00574 (5/10 rules violated); 1.3% of rows affected
+  ✅ tvae_ind_seed0: violation rate 0.00168 (5/10 rules violated); 0.4% of rows affected
+  ⚠️  tvae_qt_seed0: violation rate 0.01353 (8/10 rules violated); 2.9% of rows affected
+  ✅ tvae_qt_seed1: violation rate 0.00873 (8/10 rules violated); 2.1% of rows affected
+  ⚠️  tvae_qt_seed2: violation rate 0.01286 (6/10 rules violated); 2.9% of rows affected
+  ✅ tvae_seed0: violation rate 0.00481 (5/10 rules violated); 1.1% of rows affected
+  ✅ tvae_seed1: violation rate 0.00328 (3/10 rules violated); 0.8% of rows affected
+  ✅ tvae_seed2: violation rate 0.00492 (5/10 rules violated); 1.1% of rows affected
+Saved coherence audit -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/coherence/DT4H_Coherence_Audit.json / /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/coherence/DT4H_Coherence_Audit.md
+✅ 'coherence' completed in 37s.
+🧹 Deleted previous outputs of 'survival' (/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/survival) for a clean rerun.
+
+======================================================================
+▶️  RUNNING 'survival' (started 14:36:02)
+======================================================================
+⚠️  Endpoint column cause_of_death_number_of_days_to_death_for_all_cause_f5a_first absent; skipping 'all_cause_death'.
+⚠️  Endpoint column encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first absent; skipping 'hf_rehospitalization'.
+
+Effect-estimate replication (1-year all-cause mortality)...
+  ⚠️  Endpoint column cause_of_death_number_of_days_to_death_for_all_cause_f5a_first absent; effect replication skipped.
+Saved survival fidelity -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/survival/DT4H_Survival_Fidelity.json / /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/survival/DT4H_Survival_Fidelity.md
+✅ 'survival' completed in 0s.
+🧹 Deleted previous outputs of 'utility' (/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/utility) for a clean rerun.
+
+======================================================================
+▶️  RUNNING 'utility' (started 14:36:02)
+======================================================================
+Real train: 4706 rows | holdout (test set, unseen by generators AND classifiers): 1568 rows
+Targets (2, family-diversified): ['encounter_primary_reason_non_CV_Disease_f5a_w3a_first', 'encounter_primary_reason_CV_Disease_f5a_w3a_first']
+Features: 169 columns (all declared outcome columns excluded to prevent cross-outcome leakage)
+
+Target: encounter_primary_reason_non_CV_Disease_f5a_w3a_first
+  baseline (train real -> test holdout): AUC=0.5963 (HistGB) / 0.441 (LogReg) | Brier 0.2805
+  ctgan_qt_seed0: TSTR AUC=0.486 (CI95 [0.3091, 0.6585], gap +0.1103) | LogReg gap -0.0994 | augmentation -0.0932 (vs size-matched bootstrap -0.0124)
+  ctgan_seed0: TSTR AUC=0.5171 (CI95 [0.3511, 0.6785], gap +0.0792) | LogReg gap -0.1444 | augmentation -0.0249 (vs size-matched bootstrap -0.0016)
+  ctgan_seed1: TSTR AUC=0.5963 (CI95 [0.4425, 0.7462], gap +0.0000) | LogReg gap +0.0839 | augmentation -0.0435 (vs size-matched bootstrap +0.0326)
+  ctgan_seed2: TSTR AUC=0.472 (CI95 [0.3209, 0.6333], gap +0.1243) | LogReg gap +0.0388 | augmentation -0.0699 (vs size-matched bootstrap -0.0870)
+  ddpm_g_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  ddpm_seed0: TSTR AUC=0.4705 (CI95 [0.304, 0.632], gap +0.1258) | LogReg gap -0.1071 | augmentation -0.0357 (vs size-matched bootstrap -0.0512)
+  ddpm_seed1: TSTR AUC=0.5512 (CI95 [0.3991, 0.7123], gap +0.0451) | LogReg gap +0.0295 | augmentation +0.0279 (vs size-matched bootstrap -0.0171)
+  ddpm_seed2: TSTR AUC=0.5885 (CI95 [0.4237, 0.7414], gap +0.0078) | LogReg gap -0.0932 | augmentation +0.0279 (vs size-matched bootstrap -0.0062)
+  dpctgan_eps10_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps15_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps15_seed1: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps15_seed2: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps1_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps20_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps5_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps8_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  gaussian_copula_seed0: TSTR AUC=0.4115 (CI95 [0.2507, 0.5708], gap +0.1848) | LogReg gap -0.1087 | augmentation -0.0295 (vs size-matched bootstrap -0.0372)
+  gaussian_copula_seed1: TSTR AUC=0.3991 (CI95 [0.2419, 0.5606], gap +0.1972) | LogReg gap -0.1165 | augmentation -0.0093 (vs size-matched bootstrap +0.0218)
+  gaussian_copula_seed2: TSTR AUC=0.4612 (CI95 [0.2984, 0.6281], gap +0.1351) | LogReg gap +0.0808 | augmentation -0.0451 (vs size-matched bootstrap -0.0451)
+  mst_eps15_seed0: TSTR AUC=0.528 (CI95 [0.3584, 0.6852], gap +0.0683) | LogReg gap -0.2174 | augmentation -0.0156 (vs size-matched bootstrap -0.0187)
+  patectgan_eps15_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  patectgan_eps1_seed0: TSTR AUC=0.6071 (CI95 [0.444, 0.7565], gap -0.0108) | LogReg gap -0.1351 | augmentation +0.0124 (vs size-matched bootstrap +0.0590)
+  patectgan_eps5_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_cap256_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_ep1000_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_ind_seed0: TSTR AUC=0.5916 (CI95 [0.4099, 0.7509], gap +0.0047) | LogReg gap -0.0435 | augmentation -0.0575 (vs size-matched bootstrap -0.0916)
+  tvae_qt_seed0: TSTR AUC=0.4309 (CI95 [0.2678, 0.5957], gap +0.1654) | LogReg gap -0.0388 | augmentation -0.1258 (vs size-matched bootstrap -0.1568)
+  tvae_qt_seed1: TSTR AUC=0.4689 (CI95 [0.3031, 0.6277], gap +0.1274) | LogReg gap -0.1429 | augmentation -0.0652 (vs size-matched bootstrap -0.1071)
+  tvae_qt_seed2: TSTR AUC=0.4612 (CI95 [0.3088, 0.6277], gap +0.1351) | LogReg gap -0.0404 | augmentation +0.0248 (vs size-matched bootstrap +0.0217)
+  tvae_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_seed1: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_seed2: TSTR AUC=0.5528 (CI95 [0.3923, 0.705], gap +0.0435) | LogReg gap -0.0699 | augmentation -0.0683 (vs size-matched bootstrap -0.0838)
+
+Target: encounter_primary_reason_CV_Disease_f5a_w3a_first
+  baseline (train real -> test holdout): AUC=0.5963 (HistGB) / 0.441 (LogReg) | Brier 0.2805
+  ctgan_qt_seed0: TSTR AUC=0.4457 (CI95 [0.2856, 0.6091], gap +0.1506) | LogReg gap -0.0155 | augmentation -0.0606 (vs size-matched bootstrap -0.0062)
+  ctgan_seed0: TSTR AUC=0.5652 (CI95 [0.4005, 0.7205], gap +0.0311) | LogReg gap +0.1196 | augmentation +0.0295 (vs size-matched bootstrap +0.0699)
+  ctgan_seed1: TSTR AUC=0.6444 (CI95 [0.4815, 0.7952], gap -0.0481) | LogReg gap -0.1273 | augmentation +0.0652 (vs size-matched bootstrap +0.1072)
+  ctgan_seed2: TSTR AUC=0.4845 (CI95 [0.3272, 0.6382], gap +0.1118) | LogReg gap -0.1692 | augmentation +0.0341 (vs size-matched bootstrap +0.0279)
+  ddpm_g_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  ddpm_seed0: TSTR AUC=0.4938 (CI95 [0.3451, 0.6537], gap +0.1025) | LogReg gap -0.0854 | augmentation -0.0528 (vs size-matched bootstrap -0.0947)
+  ddpm_seed1: TSTR AUC=0.5186 (CI95 [0.3531, 0.6775], gap +0.0777) | LogReg gap +0.0155 | augmentation +0.0419 (vs size-matched bootstrap +0.0373)
+  ddpm_seed2: TSTR AUC=0.5683 (CI95 [0.4059, 0.7277], gap +0.0280) | LogReg gap -0.0838 | augmentation +0.0326 (vs size-matched bootstrap -0.0015)
+  dpctgan_eps10_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps15_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps15_seed1: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps15_seed2: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps1_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps20_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps5_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  dpctgan_eps8_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  gaussian_copula_seed0: TSTR AUC=0.4565 (CI95 [0.2984, 0.6349], gap +0.1398) | LogReg gap -0.0885 | augmentation -0.0683 (vs size-matched bootstrap -0.0465)
+  gaussian_copula_seed1: TSTR AUC=0.5062 (CI95 [0.3463, 0.6739], gap +0.0901) | LogReg gap -0.1165 | augmentation -0.0621 (vs size-matched bootstrap -0.0652)
+  gaussian_copula_seed2: TSTR AUC=0.4969 (CI95 [0.3306, 0.6652], gap +0.0994) | LogReg gap -0.0326 | augmentation +0.0015 (vs size-matched bootstrap +0.0171)
+  mst_eps15_seed0: TSTR AUC=0.4728 (CI95 [0.3111, 0.64], gap +0.1235) | LogReg gap +0.1025 | augmentation -0.0109 (vs size-matched bootstrap +0.0140)
+  patectgan_eps15_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  patectgan_eps1_seed0: TSTR AUC=0.4394 (CI95 [0.2921, 0.6145], gap +0.1569) | LogReg gap +0.0668 | augmentation -0.0730 (vs size-matched bootstrap -0.0823)
+  patectgan_eps5_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_cap256_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_ep1000_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_ind_seed0: TSTR AUC=0.573 (CI95 [0.3969, 0.7382], gap +0.0233) | LogReg gap -0.0714 | augmentation -0.0746 (vs size-matched bootstrap -0.1087)
+  tvae_qt_seed0: TSTR AUC=0.3929 (CI95 [0.2269, 0.5492], gap +0.2034) | LogReg gap -0.0326 | augmentation -0.0870 (vs size-matched bootstrap -0.1398)
+  tvae_qt_seed1: TSTR AUC=0.4876 (CI95 [0.3197, 0.6426], gap +0.1087) | LogReg gap -0.1708 | augmentation -0.0420 (vs size-matched bootstrap -0.0575)
+  tvae_qt_seed2: TSTR AUC=0.4612 (CI95 [0.3088, 0.6277], gap +0.1351) | LogReg gap -0.0404 | augmentation +0.0248 (vs size-matched bootstrap +0.0217)
+  tvae_seed0: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_seed1: not evaluable (target missing or single-class in synthetic data) -- itself a utility finding
+  tvae_seed2: TSTR AUC=0.4837 (CI95 [0.3229, 0.6443], gap +0.1126) | LogReg gap -0.1009 | augmentation -0.0295 (vs size-matched bootstrap -0.0652)
+
+Mean AUC gap vs baseline per (model, ε), lower is better (augmentation: positive = synthetic data ADDS value):
+  ctgan: HistGB +0.0497 ± 0.0712 | LogReg -0.0331 | augment -0.0016 (vs bootstrap 0.0248) | Brier gap 0.0522 | worst-stratum gap 0.0998 (3 run(s))
+  ctgan_qt: HistGB +0.1305 (sd n/a: single run) | LogReg -0.0575 | augment -0.0769 (vs bootstrap -0.0093) | Brier gap 0.0876 | worst-stratum gap 0.1666 (1 run(s))
+  ddpm: HistGB +0.0645 ± 0.0482 | LogReg -0.0541 | augment 0.007 (vs bootstrap -0.0222) | Brier gap 0.0345 | worst-stratum gap 0.0852 (3 run(s))
+  gaussian_copula: HistGB +0.1411 ± 0.0226 | LogReg -0.0637 | augment -0.0355 (vs bootstrap -0.0258) | Brier gap 0.065 | worst-stratum gap 0.1992 (3 run(s))
+  mst ε=15: HistGB +0.0959 (sd n/a: single run) | LogReg -0.0575 | augment -0.0132 (vs bootstrap -0.0024) | Brier gap 0.1999 | worst-stratum gap 0.1553 (1 run(s))
+  patectgan ε=1: HistGB +0.0731 (sd n/a: single run) | LogReg -0.0341 | augment -0.0303 (vs bootstrap -0.0117) | Brier gap 0.0571 | worst-stratum gap 0.0902 (1 run(s))
+  tvae: HistGB +0.0781 (sd n/a: single run) | LogReg -0.0854 | augment -0.0489 (vs bootstrap -0.0745) | Brier gap 0.0628 | worst-stratum gap 0.0852 (1 run(s))
+  tvae_ind: HistGB +0.0140 (sd n/a: single run) | LogReg -0.0575 | augment -0.066 (vs bootstrap -0.1002) | Brier gap 0.0269 | worst-stratum gap 0.0927 (1 run(s))
+  tvae_qt: HistGB +0.1459 ± 0.0345 | LogReg -0.0776 | augment -0.0451 (vs bootstrap -0.0696) | Brier gap 0.1256 | worst-stratum gap 0.1773 (3 run(s))
+
+Saved utility results (JSON) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/utility/DT4H_Utility_TSTR.json
+Saved utility results (Markdown) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/utility/DT4H_Utility_TSTR.md
+✅ 'utility' completed in 151s.
+🧹 Deleted previous outputs of 'privacy' (/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/privacy) for a clean rerun.
+
+======================================================================
+▶️  RUNNING 'privacy' (started 14:38:34)
+======================================================================
+Training reference: 4706 x 229 (sentinel space) | holdout: 1568 rows (real patients the models never saw)
+Distance space: 38 numeric + 63 categorical columns (constants excluded -- they cannot separate records)
+Computing holdout-to-train baseline (unseen real patients vs training records)...
+  holdout baseline DCR: p5=0.025555, median=0.046082 (2s)
+
+Assessing 'ctgan_qt_seed0' (4706 rows)...
+  ✅ DCR p5=0.057732 median=0.082836 | exact matches=0 | NNDR median=0.9655 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (5.8s)
+
+Assessing 'ctgan_seed0' (4706 rows)...
+  ✅ DCR p5=0.058028 median=0.083531 | exact matches=0 | NNDR median=0.9643 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.6s)
+
+Assessing 'ctgan_seed1' (4706 rows)...
+  ✅ DCR p5=0.067058 median=0.09493 | exact matches=0 | NNDR median=0.9672 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.4s)
+
+Assessing 'ctgan_seed2' (4706 rows)...
+  ✅ DCR p5=0.057275 median=0.083602 | exact matches=0 | NNDR median=0.9654 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.5s)
+
+Assessing 'ddpm_g_seed0' (4706 rows)...
+  ✅ DCR p5=0.031094 median=0.049438 | exact matches=0 | NNDR median=0.9332 | closer-than-holdout-p5: 1.2% (no-memorization expectation ~5%) (5.2s)
+
+Assessing 'ddpm_seed0' (4706 rows)...
+  ✅ DCR p5=0.027178 median=0.045523 | exact matches=0 | NNDR median=0.9283 | closer-than-holdout-p5: 3.2% (no-memorization expectation ~5%) (5.0s)
+
+Assessing 'ddpm_seed1' (4706 rows)...
+  ✅ DCR p5=0.027672 median=0.045777 | exact matches=0 | NNDR median=0.9259 | closer-than-holdout-p5: 3.3% (no-memorization expectation ~5%) (5.1s)
+
+Assessing 'ddpm_seed2' (4706 rows)...
+  ✅ DCR p5=0.027768 median=0.045059 | exact matches=0 | NNDR median=0.9283 | closer-than-holdout-p5: 3.1% (no-memorization expectation ~5%) (5.1s)
+
+Assessing 'dpctgan_eps10_seed0' (4706 rows)...
+  ✅ DCR p5=0.116402 median=0.128218 | exact matches=0 | NNDR median=0.9892 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.0s)
+
+Assessing 'dpctgan_eps15_seed0' (4706 rows)...
+  ✅ DCR p5=0.13716 median=0.148365 | exact matches=0 | NNDR median=0.9859 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (5.1s)
+
+Assessing 'dpctgan_eps15_seed1' (4706 rows)...
+  ✅ DCR p5=0.120897 median=0.131974 | exact matches=0 | NNDR median=0.9873 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (5.1s)
+
+Assessing 'dpctgan_eps15_seed2' (4706 rows)...
+  ✅ DCR p5=0.136917 median=0.151194 | exact matches=0 | NNDR median=0.9915 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (5.1s)
+
+Assessing 'dpctgan_eps1_seed0' (4706 rows)...
+  ✅ DCR p5=0.114701 median=0.130716 | exact matches=0 | NNDR median=0.9792 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (5.1s)
+
+Assessing 'dpctgan_eps20_seed0' (4706 rows)...
+  ✅ DCR p5=0.12804 median=0.139701 | exact matches=0 | NNDR median=0.9868 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (5.4s)
+
+Assessing 'dpctgan_eps5_seed0' (4706 rows)...
+  ✅ DCR p5=0.099358 median=0.11239 | exact matches=0 | NNDR median=0.9668 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.4s)
+
+Assessing 'dpctgan_eps8_seed0' (4706 rows)...
+  ✅ DCR p5=0.098743 median=0.11261 | exact matches=0 | NNDR median=0.9751 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.5s)
+
+Assessing 'gaussian_copula_seed0' (4706 rows)...
+  ✅ DCR p5=0.057866 median=0.086224 | exact matches=0 | NNDR median=0.9628 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.5s)
+
+Assessing 'gaussian_copula_seed1' (4706 rows)...
+  ✅ DCR p5=0.057869 median=0.086636 | exact matches=0 | NNDR median=0.9612 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.6s)
+
+Assessing 'gaussian_copula_seed2' (4706 rows)...
+  ✅ DCR p5=0.058354 median=0.08648 | exact matches=0 | NNDR median=0.9623 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.7s)
+
+Assessing 'mst_eps15_seed0' (4706 rows)...
+  ✅ DCR p5=0.072517 median=0.087961 | exact matches=0 | NNDR median=0.9626 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (6.6s)
+
+Assessing 'patectgan_eps15_seed0' (4706 rows)...
+  ✅ DCR p5=0.033698 median=0.05113 | exact matches=0 | NNDR median=0.9374 | closer-than-holdout-p5: 0.5% (no-memorization expectation ~5%) (5.1s)
+
+Assessing 'patectgan_eps1_seed0' (4706 rows)...
+  ✅ DCR p5=0.155381 median=0.200483 | exact matches=0 | NNDR median=0.9858 | closer-than-holdout-p5: 0.0% (no-memorization expectation ~5%) (5.2s)
+
+Assessing 'patectgan_eps5_seed0' (4706 rows)...
+  ✅ DCR p5=0.039169 median=0.057309 | exact matches=0 | NNDR median=0.9455 | closer-than-holdout-p5: 0.1% (no-memorization expectation ~5%) (5.2s)
+
+Assessing 'tvae_cap256_seed0' (4706 rows)...
+  ✅ DCR p5=0.023359 median=0.038711 | exact matches=0 | NNDR median=0.9169 | closer-than-holdout-p5: 8.0% (no-memorization expectation ~5%) (5.1s)
+
+Assessing 'tvae_ep1000_seed0' (4706 rows)...
+  ✅ DCR p5=0.024274 median=0.041429 | exact matches=0 | NNDR median=0.9196 | closer-than-holdout-p5: 6.4% (no-memorization expectation ~5%) (5.5s)
+
+Assessing 'tvae_ind_seed0' (4706 rows)...
+  ✅ DCR p5=0.022294 median=0.037412 | exact matches=0 | NNDR median=0.9143 | closer-than-holdout-p5: 10.0% (no-memorization expectation ~5%) (6.6s)
+
+Assessing 'tvae_qt_seed0' (4706 rows)...
+  ✅ DCR p5=0.024088 median=0.039637 | exact matches=0 | NNDR median=0.9186 | closer-than-holdout-p5: 6.9% (no-memorization expectation ~5%) (6.4s)
+
+Assessing 'tvae_qt_seed1' (4706 rows)...
+  ✅ DCR p5=0.024831 median=0.041336 | exact matches=0 | NNDR median=0.9221 | closer-than-holdout-p5: 5.7% (no-memorization expectation ~5%) (6.5s)
+
+Assessing 'tvae_qt_seed2' (4706 rows)...
+  ✅ DCR p5=0.023235 median=0.039005 | exact matches=0 | NNDR median=0.9193 | closer-than-holdout-p5: 8.1% (no-memorization expectation ~5%) (5.2s)
+
+Assessing 'tvae_seed0' (4706 rows)...
+  ✅ DCR p5=0.023801 median=0.040173 | exact matches=0 | NNDR median=0.9184 | closer-than-holdout-p5: 7.5% (no-memorization expectation ~5%) (5.2s)
+
+Assessing 'tvae_seed1' (4706 rows)...
+  ✅ DCR p5=0.023466 median=0.039331 | exact matches=0 | NNDR median=0.917 | closer-than-holdout-p5: 8.2% (no-memorization expectation ~5%) (6.2s)
+
+Assessing 'tvae_seed2' (4706 rows)...
+  ✅ DCR p5=0.024315 median=0.040821 | exact matches=0 | NNDR median=0.9211 | closer-than-holdout-p5: 6.5% (no-memorization expectation ~5%) (5.1s)
+
+Saved privacy assessment (JSON) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/privacy/DT4H_Privacy_Assessment.json
+Saved privacy assessment (Markdown) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/privacy/DT4H_Privacy_Assessment.md
+✅ 'privacy' completed in 221s.
+🧹 Deleted previous outputs of 'attacks' (/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/attacks) for a clean rerun.
+
+======================================================================
+▶️  RUNNING 'attacks' (started 14:42:14)
+======================================================================
+Members (train): 4706 | non-members (holdout): 1568
+Attribute-inference sensitive targets: ['cause_of_death_isAllCause_f5a_w5a_first', 'ckd_severity_from_calculated_egfr', 'nyha_nyha_pET']
+Computing member atypicality (distance to 5th-nearest member)...
+  atypicality quartile cuts (informational): [0.0478, 0.0568, 0.0677]
+
+Attacking 'ctgan_qt_seed0'...
+  ✅ MIA distance attack AUC = 0.4975 (95% CI [0.4826, 0.5132]); learned attack AUC = 0.4861 (95% CI [0.4695, 0.5032]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5132 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4804 | Q2 AUC 0.4862 | Q3 AUC 0.4854 | Q4 AUC 0.4885
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3183 vs non-member 0.3087 (baseline 0.3769) -> membership advantage +0.0096
+  AIA nyha_nyha_pET: member acc 0.3657 vs non-member 0.3661 (baseline 0.3782) -> membership advantage -0.0004
+
+Attacking 'ctgan_seed0'...
+  ✅ MIA distance attack AUC = 0.5076 (95% CI [0.4909, 0.5231]); learned attack AUC = 0.498 (95% CI [0.4817, 0.5144]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5231 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4926 | Q2 AUC 0.5248 | Q3 AUC 0.4803 | Q4 AUC 0.5067
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.2947 vs non-member 0.2883 (baseline 0.3769) -> membership advantage +0.0065
+  AIA nyha_nyha_pET: member acc 0.3668 vs non-member 0.3622 (baseline 0.3782) -> membership advantage +0.0045
+
+Attacking 'ctgan_seed1'...
+  ✅ MIA distance attack AUC = 0.5024 (95% CI [0.4859, 0.5204]); learned attack AUC = 0.496 (95% CI [0.4813, 0.5139]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5204 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4835 | Q2 AUC 0.4813 | Q3 AUC 0.4989 | Q4 AUC 0.5107
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3279 vs non-member 0.3335 (baseline 0.3769) -> membership advantage -0.0057
+  AIA nyha_nyha_pET: member acc 0.3372 vs non-member 0.3176 (baseline 0.3782) -> membership advantage +0.0196
+
+Attacking 'ctgan_seed2'...
+  ✅ MIA distance attack AUC = 0.5027 (95% CI [0.4867, 0.52]); learned attack AUC = 0.4975 (95% CI [0.4825, 0.5144]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.52 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5 | Q2 AUC 0.4907 | Q3 AUC 0.4959 | Q4 AUC 0.4873
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3209 vs non-member 0.3093 (baseline 0.3769) -> membership advantage +0.0116
+  AIA nyha_nyha_pET: member acc 0.3279 vs non-member 0.3048 (baseline 0.3782) -> membership advantage +0.0230
+
+Attacking 'ddpm_g_seed0'...
+  ✅ MIA distance attack AUC = 0.5151 (95% CI [0.4983, 0.5332]); learned attack AUC = 0.5141 (95% CI [0.4977, 0.5281]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5332 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5219 | Q2 AUC 0.5183 | Q3 AUC 0.5093 | Q4 AUC 0.4959
+  empirical ε lower bound (DP audit): 0.0052 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3944 vs non-member 0.4018 (baseline 0.3769) -> membership advantage -0.0074
+  AIA nyha_nyha_pET: member acc 0.327 vs non-member 0.354 (baseline 0.3782) -> membership advantage -0.0269
+
+Attacking 'ddpm_seed0'...
+  ✅ MIA distance attack AUC = 0.5103 (95% CI [0.4956, 0.5266]); learned attack AUC = 0.4931 (95% CI [0.4775, 0.5097]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5266 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4997 | Q2 AUC 0.511 | Q3 AUC 0.5102 | Q4 AUC 0.4981
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3855 vs non-member 0.3673 (baseline 0.3769) -> membership advantage +0.0181
+  AIA nyha_nyha_pET: member acc 0.3355 vs non-member 0.3355 (baseline 0.3782) -> membership advantage +0.0001
+
+Attacking 'ddpm_seed1'...
+  ✅ MIA distance attack AUC = 0.5146 (95% CI [0.4977, 0.531]); learned attack AUC = 0.509 (95% CI [0.4913, 0.526]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.531 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5178 | Q2 AUC 0.5027 | Q3 AUC 0.5141 | Q4 AUC 0.5002
+  empirical ε lower bound (DP audit): 0.0372 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3695 vs non-member 0.3731 (baseline 0.3769) -> membership advantage -0.0036
+  AIA nyha_nyha_pET: member acc 0.3164 vs non-member 0.3316 (baseline 0.3782) -> membership advantage -0.0152
+
+Attacking 'ddpm_seed2'...
+  ✅ MIA distance attack AUC = 0.5076 (95% CI [0.49, 0.5232]); learned attack AUC = 0.5003 (95% CI [0.4837, 0.5173]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5232 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5142 | Q2 AUC 0.5151 | Q3 AUC 0.4791 | Q4 AUC 0.4984
+  empirical ε lower bound (DP audit): 0.0918 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3812 vs non-member 0.3737 (baseline 0.3769) -> membership advantage +0.0075
+  AIA nyha_nyha_pET: member acc 0.3338 vs non-member 0.3259 (baseline 0.3782) -> membership advantage +0.0079
+
+Attacking 'dpctgan_eps10_seed0'...
+  ✅ MIA distance attack AUC = 0.5064 (95% CI [0.4909, 0.5232]); learned attack AUC = 0.5081 (95% CI [0.4929, 0.5244]; 0.5 = no membership leakage)
+     worst attack: cv-logreg over (d1, d2, d1/d2) -- pass requires its CI upper bound 0.5244 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.491 | Q2 AUC 0.51 | Q3 AUC 0.4964 | Q4 AUC 0.5098
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3757 vs non-member 0.3769 (baseline 0.3769) -> membership advantage -0.0012
+  AIA nyha_nyha_pET: member acc 0.3302 vs non-member 0.352 (baseline 0.3782) -> membership advantage -0.0218
+
+Attacking 'dpctgan_eps15_seed0'...
+  ✅ MIA distance attack AUC = 0.5011 (95% CI [0.486, 0.5172]); learned attack AUC = 0.5077 (95% CI [0.4889, 0.5255]; 0.5 = no membership leakage)
+     worst attack: cv-logreg over (d1, d2, d1/d2) -- pass requires its CI upper bound 0.5255 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4956 | Q2 AUC 0.487 | Q3 AUC 0.4777 | Q4 AUC 0.5158
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.1156 vs non-member 0.1193 (baseline 0.3769) -> membership advantage -0.0037
+  AIA nyha_nyha_pET: member acc 0.3302 vs non-member 0.352 (baseline 0.3782) -> membership advantage -0.0218
+
+Attacking 'dpctgan_eps15_seed1'...
+  ✅ MIA distance attack AUC = 0.5059 (95% CI [0.4896, 0.5218]); learned attack AUC = 0.5149 (95% CI [0.4974, 0.5297]; 0.5 = no membership leakage)
+     worst attack: cv-logreg over (d1, d2, d1/d2) -- pass requires its CI upper bound 0.5297 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4877 | Q2 AUC 0.4981 | Q3 AUC 0.4968 | Q4 AUC 0.5196
+  empirical ε lower bound (DP audit): 0.0837 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.1725 vs non-member 0.1811 (baseline 0.3769) -> membership advantage -0.0086
+  AIA nyha_nyha_pET: member acc 0.3653 vs non-member 0.3597 (baseline 0.3782) -> membership advantage +0.0056
+
+Attacking 'dpctgan_eps15_seed2'...
+  ✅ MIA distance attack AUC = 0.5074 (95% CI [0.4914, 0.5226]); learned attack AUC = 0.5025 (95% CI [0.4872, 0.5184]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5226 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4604 | Q2 AUC 0.5231 | Q3 AUC 0.5158 | Q4 AUC 0.5074
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3621 vs non-member 0.3546 (baseline 0.3769) -> membership advantage +0.0075
+  AIA nyha_nyha_pET: member acc 0.003 vs non-member 0.0019 (baseline 0.3782) -> membership advantage +0.0011
+
+Attacking 'dpctgan_eps1_seed0'...
+  ✅ MIA distance attack AUC = 0.5141 (95% CI [0.498, 0.5301]); learned attack AUC = 0.5157 (95% CI [0.5012, 0.5319]; 0.5 = no membership leakage)
+     worst attack: cv-logreg over (d1, d2, d1/d2) -- pass requires its CI upper bound 0.5319 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5303 | Q2 AUC 0.5116 | Q3 AUC 0.4951 | Q4 AUC 0.5091
+  empirical ε lower bound (DP audit): 0.0081 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.1685 vs non-member 0.1582 (baseline 0.3769) -> membership advantage +0.0103
+  AIA nyha_nyha_pET: member acc 0.3302 vs non-member 0.352 (baseline 0.3782) -> membership advantage -0.0218
+
+Attacking 'dpctgan_eps20_seed0'...
+  ✅ MIA distance attack AUC = 0.504 (95% CI [0.4883, 0.5211]); learned attack AUC = 0.5026 (95% CI [0.4862, 0.5191]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5211 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5001 | Q2 AUC 0.4926 | Q3 AUC 0.4953 | Q4 AUC 0.5147
+  empirical ε lower bound (DP audit): 0.193 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3729 vs non-member 0.3731 (baseline 0.3769) -> membership advantage -0.0002
+  AIA nyha_nyha_pET: member acc 0.0 vs non-member 0.0 (baseline 0.3782) -> membership advantage +0.0000
+
+Attacking 'dpctgan_eps5_seed0'...
+  ✅ MIA distance attack AUC = 0.5141 (95% CI [0.4975, 0.5312]); learned attack AUC = 0.5072 (95% CI [0.4907, 0.5225]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5312 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4799 | Q2 AUC 0.5204 | Q3 AUC 0.5115 | Q4 AUC 0.5296
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.0914 vs non-member 0.0976 (baseline 0.3769) -> membership advantage -0.0062
+  AIA nyha_nyha_pET: member acc 0.3302 vs non-member 0.352 (baseline 0.3782) -> membership advantage -0.0218
+
+Attacking 'dpctgan_eps8_seed0'...
+  ✅ MIA distance attack AUC = 0.5278 (95% CI [0.5128, 0.5462]); learned attack AUC = 0.5272 (95% CI [0.5102, 0.5416]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5462 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5317 | Q2 AUC 0.5369 | Q3 AUC 0.5353 | Q4 AUC 0.4988
+  empirical ε lower bound (DP audit): 0.0591 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3504 vs non-member 0.3431 (baseline 0.3769) -> membership advantage +0.0073
+  AIA nyha_nyha_pET: member acc 0.3961 vs non-member 0.3737 (baseline 0.3782) -> membership advantage +0.0224
+
+Attacking 'gaussian_copula_seed0'...
+  ✅ MIA distance attack AUC = 0.4988 (95% CI [0.4839, 0.516]); learned attack AUC = 0.5009 (95% CI [0.4834, 0.5187]; 0.5 = no membership leakage)
+     worst attack: cv-logreg over (d1, d2, d1/d2) -- pass requires its CI upper bound 0.5187 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4721 | Q2 AUC 0.4836 | Q3 AUC 0.5092 | Q4 AUC 0.4855
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.293 vs non-member 0.2761 (baseline 0.3769) -> membership advantage +0.0169
+  AIA nyha_nyha_pET: member acc 0.3272 vs non-member 0.3501 (baseline 0.3782) -> membership advantage -0.0229
+
+Attacking 'gaussian_copula_seed1'...
+  ✅ MIA distance attack AUC = 0.4984 (95% CI [0.4812, 0.5148]); learned attack AUC = 0.4973 (95% CI [0.4805, 0.514]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5148 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4783 | Q2 AUC 0.4701 | Q3 AUC 0.5071 | Q4 AUC 0.5017
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.2992 vs non-member 0.2959 (baseline 0.3769) -> membership advantage +0.0033
+  AIA nyha_nyha_pET: member acc 0.3485 vs non-member 0.3316 (baseline 0.3782) -> membership advantage +0.0169
+
+Attacking 'gaussian_copula_seed2'...
+  ✅ MIA distance attack AUC = 0.4935 (95% CI [0.4757, 0.5093]); learned attack AUC = 0.4906 (95% CI [0.4752, 0.5079]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5093 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4662 | Q2 AUC 0.4699 | Q3 AUC 0.4898 | Q4 AUC 0.5036
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3141 vs non-member 0.3278 (baseline 0.3769) -> membership advantage -0.0137
+  AIA nyha_nyha_pET: member acc 0.3466 vs non-member 0.345 (baseline 0.3782) -> membership advantage +0.0016
+
+Attacking 'mst_eps15_seed0'...
+  ✅ MIA distance attack AUC = 0.5115 (95% CI [0.4948, 0.5284]); learned attack AUC = 0.5016 (95% CI [0.4867, 0.5166]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5284 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.4788 | Q2 AUC 0.5233 | Q3 AUC 0.4999 | Q4 AUC 0.524
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.2862 vs non-member 0.271 (baseline 0.3769) -> membership advantage +0.0152
+  AIA nyha_nyha_pET: member acc 0.3525 vs non-member 0.3508 (baseline 0.3782) -> membership advantage +0.0018
+
+Attacking 'patectgan_eps15_seed0'...
+  ✅ MIA distance attack AUC = 0.5058 (95% CI [0.4901, 0.5209]); learned attack AUC = 0.5029 (95% CI [0.4874, 0.5188]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5209 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5205 | Q2 AUC 0.4873 | Q3 AUC 0.489 | Q4 AUC 0.5043
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3755 vs non-member 0.3769 (baseline 0.3769) -> membership advantage -0.0014
+  AIA nyha_nyha_pET: member acc 0.3298 vs non-member 0.3131 (baseline 0.3782) -> membership advantage +0.0167
+
+Attacking 'patectgan_eps1_seed0'...
+  ✅ MIA distance attack AUC = 0.5042 (95% CI [0.4854, 0.5197]); learned attack AUC = 0.4962 (95% CI [0.4809, 0.5127]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5197 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5509 | Q2 AUC 0.465 | Q3 AUC 0.4941 | Q4 AUC 0.4971
+  empirical ε lower bound (DP audit): 0.0026 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.2856 vs non-member 0.2787 (baseline 0.3769) -> membership advantage +0.0069
+  AIA nyha_nyha_pET: member acc 0.35 vs non-member 0.3565 (baseline 0.3782) -> membership advantage -0.0065
+
+Attacking 'patectgan_eps5_seed0'...
+  ✅ MIA distance attack AUC = 0.5064 (95% CI [0.4906, 0.5244]); learned attack AUC = 0.498 (95% CI [0.4792, 0.5158]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5244 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5163 | Q2 AUC 0.4968 | Q3 AUC 0.4861 | Q4 AUC 0.4969
+  empirical ε lower bound (DP audit): 0.0 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3744 vs non-member 0.3763 (baseline 0.3769) -> membership advantage -0.0019
+  AIA nyha_nyha_pET: member acc 0.3068 vs non-member 0.3093 (baseline 0.3782) -> membership advantage -0.0025
+
+Attacking 'tvae_cap256_seed0'...
+  ✅ MIA distance attack AUC = 0.5244 (95% CI [0.5068, 0.5423]); learned attack AUC = 0.5244 (95% CI [0.5072, 0.542]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5423 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.536 | Q2 AUC 0.5159 | Q3 AUC 0.5363 | Q4 AUC 0.5204
+  empirical ε lower bound (DP audit): 0.1397 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3345 vs non-member 0.3272 (baseline 0.3769) -> membership advantage +0.0073
+  AIA nyha_nyha_pET: member acc 0.3428 vs non-member 0.3367 (baseline 0.3782) -> membership advantage +0.0060
+
+Attacking 'tvae_ep1000_seed0'...
+  ✅ MIA distance attack AUC = 0.5186 (95% CI [0.5029, 0.5342]); learned attack AUC = 0.5131 (95% CI [0.4968, 0.5297]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5342 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.526 | Q2 AUC 0.5074 | Q3 AUC 0.5262 | Q4 AUC 0.5219
+  empirical ε lower bound (DP audit): 0.0136 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3753 vs non-member 0.3744 (baseline 0.3769) -> membership advantage +0.0009
+  AIA nyha_nyha_pET: member acc 0.3394 vs non-member 0.354 (baseline 0.3782) -> membership advantage -0.0146
+
+Attacking 'tvae_ind_seed0'...
+  ✅ MIA distance attack AUC = 0.5207 (95% CI [0.5037, 0.5372]); learned attack AUC = 0.5149 (95% CI [0.4971, 0.5319]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5372 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5199 | Q2 AUC 0.5271 | Q3 AUC 0.5197 | Q4 AUC 0.5246
+  empirical ε lower bound (DP audit): 0.0308 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3821 vs non-member 0.3776 (baseline 0.3769) -> membership advantage +0.0045
+  AIA nyha_nyha_pET: member acc 0.3708 vs non-member 0.3412 (baseline 0.3782) -> membership advantage +0.0296
+
+Attacking 'tvae_qt_seed0'...
+  ✅ MIA distance attack AUC = 0.5201 (95% CI [0.5039, 0.5358]); learned attack AUC = 0.5197 (95% CI [0.5046, 0.5385]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5358 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5401 | Q2 AUC 0.5071 | Q3 AUC 0.5236 | Q4 AUC 0.521
+  empirical ε lower bound (DP audit): 0.0305 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3674 vs non-member 0.3629 (baseline 0.3769) -> membership advantage +0.0045
+  AIA nyha_nyha_pET: member acc 0.351 vs non-member 0.3406 (baseline 0.3782) -> membership advantage +0.0105
+
+Attacking 'tvae_qt_seed1'...
+  ✅ MIA distance attack AUC = 0.5172 (95% CI [0.5003, 0.5348]); learned attack AUC = 0.5129 (95% CI [0.4954, 0.5281]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5348 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5257 | Q2 AUC 0.5242 | Q3 AUC 0.5075 | Q4 AUC 0.5137
+  empirical ε lower bound (DP audit): 0.0305 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.344 vs non-member 0.3533 (baseline 0.3769) -> membership advantage -0.0093
+  AIA nyha_nyha_pET: member acc 0.3468 vs non-member 0.3565 (baseline 0.3782) -> membership advantage -0.0097
+
+Attacking 'tvae_qt_seed2'...
+  ✅ MIA distance attack AUC = 0.5206 (95% CI [0.5047, 0.5355]); learned attack AUC = 0.5178 (95% CI [0.5024, 0.5335]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5355 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5188 | Q2 AUC 0.5378 | Q3 AUC 0.5257 | Q4 AUC 0.4966
+  empirical ε lower bound (DP audit): 0.032 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3523 vs non-member 0.3482 (baseline 0.3769) -> membership advantage +0.0041
+  AIA nyha_nyha_pET: member acc 0.3536 vs non-member 0.375 (baseline 0.3782) -> membership advantage -0.0214
+
+Attacking 'tvae_seed0'...
+  🚨 MIA distance attack AUC = 0.5283 (95% CI [0.5122, 0.5424]); learned attack AUC = 0.5354 (95% CI [0.5184, 0.5503]; 0.5 = no membership leakage)
+     worst attack: cv-logreg over (d1, d2, d1/d2) -- pass requires its CI upper bound 0.5503 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5215 | Q2 AUC 0.5165 | Q3 AUC 0.569 | Q4 AUC 0.5221
+  empirical ε lower bound (DP audit): 0.0861 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3755 vs non-member 0.3833 (baseline 0.3769) -> membership advantage -0.0078
+  AIA nyha_nyha_pET: member acc 0.3564 vs non-member 0.3393 (baseline 0.3782) -> membership advantage +0.0171
+
+Attacking 'tvae_seed1'...
+  ✅ MIA distance attack AUC = 0.5187 (95% CI [0.5015, 0.5347]); learned attack AUC = 0.5176 (95% CI [0.5014, 0.5351]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.5347 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5393 | Q2 AUC 0.5104 | Q3 AUC 0.5309 | Q4 AUC 0.4973
+  empirical ε lower bound (DP audit): 0.0287 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3687 vs non-member 0.3591 (baseline 0.3769) -> membership advantage +0.0096
+  AIA nyha_nyha_pET: member acc 0.3606 vs non-member 0.3705 (baseline 0.3782) -> membership advantage -0.0099
+
+Attacking 'tvae_seed2'...
+  ✅ MIA distance attack AUC = 0.5187 (95% CI [0.5031, 0.535]); learned attack AUC = 0.5154 (95% CI [0.5001, 0.5324]; 0.5 = no membership leakage)
+     worst attack: nearest-synthetic-distance -- pass requires its CI upper bound 0.535 < 0.55
+  who is at risk (within-stratum): Q1 AUC 0.5513 | Q2 AUC 0.4924 | Q3 AUC 0.5249 | Q4 AUC 0.5164
+  empirical ε lower bound (DP audit): 0.2098 (a DP run's claimed budget must exceed this)
+  AIA cause_of_death_isAllCause_f5a_w5a_first: member acc 1.0 vs non-member 0.9994 (baseline 0.9994) -> membership advantage +0.0006
+  AIA ckd_severity_from_calculated_egfr: member acc 0.3432 vs non-member 0.352 (baseline 0.3769) -> membership advantage -0.0089
+  AIA nyha_nyha_pET: member acc 0.3394 vs non-member 0.354 (baseline 0.3782) -> membership advantage -0.0146
+
+Saved attack results -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/attacks/DT4H_Privacy_Attacks.json / /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/attacks/DT4H_Privacy_Attacks.md
+✅ 'attacks' completed in 465s.
+🧹 Deleted previous outputs of 'figures' (/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/figures) for a clean rerun.
+
+======================================================================
+▶️  RUNNING 'figures' (started 14:49:59)
+======================================================================
+  saved fig_epsilon_curves.png/.pdf
+  saved fig_tstr_gaps.png/.pdf
+  saved fig_ks_profiles.png/.pdf
+  saved fig_dcr.png/.pdf
+⚠️  Skipping _fig_km: missing input (no endpoints in survival JSON)
+  saved fig_coherence.png/.pdf
+  saved fig_c2st.png/.pdf
+  saved fig_mia.png/.pdf
+Figures written to /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/figures
+✅ 'figures' completed in 5s.
+🧹 Deleted previous outputs of 'release_docs' (/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/release_docs) for a clean rerun.
+
+======================================================================
+▶️  RUNNING 'release_docs' (started 14:50:04)
+======================================================================
+Saved codebook (229 columns) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/release_docs/DT4H_Codebook.md
+Saved datasheet -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/release_docs/DT4H_Datasheet.md
+Saved environment freeze (90 packages) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/release_docs/DT4H_Environment_Freeze.txt
+Saved capability labels for 32 released file(s) -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/release_docs/labels
+✅ 'release_docs' completed in 1s.
+
+FOLD_IN_DONE

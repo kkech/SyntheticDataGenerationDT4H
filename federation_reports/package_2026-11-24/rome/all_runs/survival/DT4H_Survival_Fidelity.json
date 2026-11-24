@@ -1,0 +1,8 @@
+{
+  "follow_up_days": 1825,
+  "decode_note": "Synthetic days-to-event values below the real observed minimum were nulled by the generate step's sentinel decode and are read here as censoring at 1825 days; erased synthetic early events cannot be recovered from the released CSVs, so synthetic survival may be biased upward by exactly those events.",
+  "endpoints": {},
+  "effects": {
+    "note": "skipped: endpoint column cause_of_death_number_of_days_to_death_for_all_cause_f5a_first absent from the preprocessed data"
+  }
+}

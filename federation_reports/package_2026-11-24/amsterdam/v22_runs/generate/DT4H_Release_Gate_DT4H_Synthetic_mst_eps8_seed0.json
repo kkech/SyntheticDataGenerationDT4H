@@ -1,0 +1,94 @@
+{
+  "file": "DT4H_Synthetic_mst_eps8_seed0.csv",
+  "evaluated": "2026-11-24T09:44:58.249978+00:00",
+  "policy": "release",
+  "policy_thresholds": {
+    "coherence_multiplier": 10.0,
+    "coherence_absolute": 0.01,
+    "distance_multiplier": 2.0,
+    "intent": "open or brokered release of a file that leaves the enclave"
+  },
+  "note": null,
+  "verdict": "FAIL",
+  "cleared_for_open_release": false,
+  "checks": [
+    {
+      "check": "schema",
+      "passed": true,
+      "detail": "254 columns, 0 not in released schema"
+    },
+    {
+      "check": "representation",
+      "passed": true,
+      "detail": "representation audit clean"
+    },
+    {
+      "check": "freshness",
+      "passed": true,
+      "detail": "0 cell(s) an up-to-date decode would change"
+    },
+    {
+      "check": "leakage",
+      "passed": true,
+      "detail": "0 verbatim training row(s) (compared in released/decoded space)"
+    },
+    {
+      "check": "coherence",
+      "passed": false,
+      "detail": "violation rate 0.04184 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))"
+    },
+    {
+      "check": "distance",
+      "passed": false,
+      "detail": "918/3334 record(s) (27.5%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share"
+    }
+  ],
+  "measured": {
+    "coherence_rate": 0.04184,
+    "coherence_baseline": 0.00037,
+    "coherence_rules_violated": 193,
+    "coherence_baseline_rules_violated": 7,
+    "coherence_row_share": 0.23695,
+    "coherence_row_share_baseline": 0.0045,
+    "distance_share": 0.2753,
+    "distance_sampled": 3334,
+    "distance_closer": 918,
+    "distance_share_source": "privacy step (all rows, same encoder)",
+    "holdout_p5": 0.070828,
+    "holdout_p5_committed": 0.070828,
+    "holdout_p5_source": "committed full-width holdout p5 (privacy step)",
+    "distance_columns_used": 254,
+    "distance_full_width": true,
+    "distance_degenerate": false
+  },
+  "verdict_by_policy": {
+    "release": {
+      "verdict": "FAIL",
+      "checks": {
+        "coherence": {
+          "passed": false,
+          "threshold": 0.01037
+        },
+        "distance": {
+          "passed": false,
+          "threshold": 0.1
+        }
+      },
+      "intent": "open or brokered release of a file that leaves the enclave"
+    },
+    "controlled": {
+      "verdict": "FAIL",
+      "checks": {
+        "coherence": {
+          "passed": false,
+          "threshold": 0.03037
+        },
+        "distance": {
+          "passed": false,
+          "threshold": 0.1
+        }
+      },
+      "intent": "controlled-access sharing under a data-use agreement, where a recipient is bound by contract and the file is not public"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "labels": [
+    {
+      "run_id": "mst_eps15_seed0",
+      "synthesizer": "mst",
+      "epsilon": 15.0,
+      "release_gate": "FAIL",
+      "release_gate_policy": "release",
+      "cleared_for_open_release": false
+    }
+  ],
+  "directory": "labels/"
+}

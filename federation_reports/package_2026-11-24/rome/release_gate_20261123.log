@@ -1,0 +1,959 @@
+Policy: release -- coherence 10x holdout baseline (or +1% absolute), distance 2x the natural 5% share
+Gating 43 file(s) under every policy...
+
+
+######################################################################
+# DT4H_Synthetic_aim40_eps1_seed0.csv
+######################################################################
+  note: 399938 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_aim40_eps1_seed0.csv (3773 x 144):
+  ✅ schema: 144 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.9% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00254 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 144 shared column(s); subset p5 = 0.021614 (committed full-width p5 0.028125 does not apply)
+  ✅ distance: 0/500 record(s) (0.0%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.021614, over 144 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps1_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_aim40_eps5_seed0.csv
+######################################################################
+  note: 399938 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_aim40_eps5_seed0.csv (3773 x 144):
+  ✅ schema: 144 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.1% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00031 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 144 shared column(s); subset p5 = 0.021614 (committed full-width p5 0.028125 does not apply)
+  ✅ distance: 0/500 record(s) (0.0%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.021614, over 144 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps5_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_aim50_eps1_seed0.csv
+######################################################################
+  note: 415030 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_aim50_eps1_seed0.csv (3773 x 154):
+  ✅ schema: 154 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.5% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00142 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 154 shared column(s); subset p5 = 0.028286 (committed full-width p5 0.028125 does not apply)
+  ✅ distance: 0/500 record(s) (0.0%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.028286, over 154 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim50_eps1_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim50_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_qt_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ctgan_qt_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 68.2% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.15617 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_qt_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_qt_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ctgan_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 77.5% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.19073 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_seed1.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ctgan_seed1.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 68.8% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.16574 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed1.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed1.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_seed2.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ctgan_seed2.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 69.7% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.18327 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed2.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed2.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_g_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ddpm_g_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.6% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00719 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_g_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_g_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ddpm_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 10.6% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01501 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 7/3773 record(s) (0.2%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_seed1.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ddpm_seed1.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 9.8% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01119 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 10/3773 record(s) (0.3%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed1.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed1.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_seed2.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ddpm_seed2.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 9.1% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01323 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 12/3773 record(s) (0.3%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed2.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed2.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps10_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps10_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.22777 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps10_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps10_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps15_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps15_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 31.4% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02753 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps15_seed1.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps15_seed1.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.20982 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed1.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed1.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps15_seed2.csv
+######################################################################
+  note: 467852 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps15_seed2.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.81109 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed2.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed2.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps1_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps1_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.33148 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps1_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps20_seed0.csv
+######################################################################
+  note: 464079 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps20_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.496 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps20_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps20_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps5_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps5_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.65132 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps5_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps8_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps8_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 98.1% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.43655 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps8_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps8_seed0.json
+
+######################################################################
+# DT4H_Synthetic_gaussian_copula_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_gaussian_copula_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 58.2% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.15832 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed0.json
+
+######################################################################
+# DT4H_Synthetic_gaussian_copula_seed1.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_gaussian_copula_seed1.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 60.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.16422 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed1.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed1.json
+
+######################################################################
+# DT4H_Synthetic_gaussian_copula_seed2.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_gaussian_copula_seed2.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 59.2% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.15876 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed2.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed2.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps0p5_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps0p5_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 46.1% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.11733 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps0p5_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps0p5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps10_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps10_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.5% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01289 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps10_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps10_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps15_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps15_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01038 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps15_seed1.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps15_seed1.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.2% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01017 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed1.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed1.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps15_seed2.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps15_seed2.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.8% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00756 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed2.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed2.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps1_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps1_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 17.9% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.05815 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps1_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps20_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps20_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.0% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00884 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps20_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps20_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps5_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps5_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 4.7% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.0176 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps5_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps8_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps8_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.9% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01323 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps8_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps8_seed0.json
+
+######################################################################
+# DT4H_Synthetic_patectgan_eps15_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_patectgan_eps15_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 36.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.03634 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps15_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_patectgan_eps1_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_patectgan_eps1_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 95.3% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.23153 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps1_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_patectgan_eps5_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_patectgan_eps5_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 28.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.05405 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3773 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps5_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_cap256_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_cap256_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 4.8% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00934 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 102/3773 record(s) (2.7%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_cap256_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_cap256_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_ep1000_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_ep1000_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 4.5% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01157 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 59/3773 record(s) (1.6%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ep1000_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ep1000_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_ind_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_ind_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 5.5% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.0158 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 114/3773 record(s) (3.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ind_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ind_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_qt_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_qt_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 4.5% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00827 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 77/3773 record(s) (2.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_qt_seed1.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_qt_seed1.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 4.0% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00678 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 64/3773 record(s) (1.7%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed1.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed1.json
+
+######################################################################
+# DT4H_Synthetic_tvae_qt_seed2.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_qt_seed2.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 4.8% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00779 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 89/3773 record(s) (2.4%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed2.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed2.json
+
+######################################################################
+# DT4H_Synthetic_tvae_seed0.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_seed0.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 4.1% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01118 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 135/3773 record(s) (3.6%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed0.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_seed1.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_seed1.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 4.4% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01171 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 97/3773 record(s) (2.6%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed1.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed1.json
+
+######################################################################
+# DT4H_Synthetic_tvae_seed2.csv
+######################################################################
+  note: 460306 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_seed2.csv (3773 x 255):
+  ✅ schema: 255 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.1% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00622 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 121/3773 record(s) (3.2%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.028125, over 255 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed2.md
+Report -> /home/rmucsc.rm.unicatt.it/sb005127/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed2.json
+
+======================================================================
+GATE SUMMARY (same measurement, both policies)
+======================================================================
+file                                         release  controlled failing checks
+DT4H_Synthetic_aim40_eps1_seed0              PASS     PASS       -
+DT4H_Synthetic_aim40_eps5_seed0              PASS     PASS       -
+DT4H_Synthetic_aim50_eps1_seed0              PASS     PASS       -
+DT4H_Synthetic_ctgan_qt_seed0                FAIL     FAIL       coherence
+DT4H_Synthetic_ctgan_seed0                   FAIL     FAIL       coherence
+DT4H_Synthetic_ctgan_seed1                   FAIL     FAIL       coherence
+DT4H_Synthetic_ctgan_seed2                   FAIL     FAIL       coherence
+DT4H_Synthetic_ddpm_g_seed0                  PASS     PASS       -
+DT4H_Synthetic_ddpm_seed0                    FAIL     PASS       coherence
+DT4H_Synthetic_ddpm_seed1                    FAIL     PASS       coherence
+DT4H_Synthetic_ddpm_seed2                    FAIL     PASS       coherence
+DT4H_Synthetic_dpctgan_eps10_seed0           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps15_seed0           FAIL     PASS       coherence
+DT4H_Synthetic_dpctgan_eps15_seed1           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps15_seed2           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps1_seed0            FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps20_seed0           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps5_seed0            FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps8_seed0            FAIL     FAIL       coherence
+DT4H_Synthetic_gaussian_copula_seed0         FAIL     FAIL       coherence
+DT4H_Synthetic_gaussian_copula_seed1         FAIL     FAIL       coherence
+DT4H_Synthetic_gaussian_copula_seed2         FAIL     FAIL       coherence
+DT4H_Synthetic_mst_eps0p5_seed0              FAIL     FAIL       coherence
+DT4H_Synthetic_mst_eps10_seed0               FAIL     PASS       coherence
+DT4H_Synthetic_mst_eps15_seed0               FAIL     PASS       coherence
+DT4H_Synthetic_mst_eps15_seed1               FAIL     PASS       coherence
+DT4H_Synthetic_mst_eps15_seed2               PASS     PASS       -
+DT4H_Synthetic_mst_eps1_seed0                FAIL     FAIL       coherence
+DT4H_Synthetic_mst_eps20_seed0               PASS     PASS       -
+DT4H_Synthetic_mst_eps5_seed0                FAIL     PASS       coherence
+DT4H_Synthetic_mst_eps8_seed0                FAIL     PASS       coherence
+DT4H_Synthetic_patectgan_eps15_seed0         FAIL     FAIL       coherence
+DT4H_Synthetic_patectgan_eps1_seed0          FAIL     FAIL       coherence
+DT4H_Synthetic_patectgan_eps5_seed0          FAIL     FAIL       coherence
+DT4H_Synthetic_tvae_cap256_seed0             PASS     PASS       -
+DT4H_Synthetic_tvae_ep1000_seed0             FAIL     PASS       coherence
+DT4H_Synthetic_tvae_ind_seed0                FAIL     PASS       coherence
+DT4H_Synthetic_tvae_qt_seed0                 PASS     PASS       -
+DT4H_Synthetic_tvae_qt_seed1                 PASS     PASS       -
+DT4H_Synthetic_tvae_qt_seed2                 PASS     PASS       -
+DT4H_Synthetic_tvae_seed0                    FAIL     PASS       coherence
+DT4H_Synthetic_tvae_seed1                    FAIL     PASS       coherence
+DT4H_Synthetic_tvae_seed2                    PASS     PASS       -
+
+11/43 pass 'release'; 24/43 pass 'controlled'. Reports written next to each file.

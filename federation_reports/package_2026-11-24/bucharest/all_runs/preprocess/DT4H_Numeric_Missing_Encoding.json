@@ -1,0 +1,209 @@
+{
+  "vital_signs_diastolicBp_value_first": {
+    "sentinel": -41.25,
+    "decode_threshold": -17.125,
+    "min_observed": 7.0,
+    "max_observed": 200.0,
+    "n_encoded": 1294,
+    "n_observed": 4980,
+    "missingness_kind": "not_measured"
+  },
+  "vital_signs_diastolicBp_value_last": {
+    "sentinel": -41.25,
+    "decode_threshold": -17.125,
+    "min_observed": 7.0,
+    "max_observed": 200.0,
+    "n_encoded": 1294,
+    "n_observed": 4980,
+    "missingness_kind": "not_measured"
+  },
+  "vital_signs_heartRate_value_first": {
+    "sentinel": -57.5,
+    "decode_threshold": -26.75,
+    "min_observed": 4.0,
+    "max_observed": 250.0,
+    "n_encoded": 2505,
+    "n_observed": 3769,
+    "missingness_kind": "not_measured"
+  },
+  "vital_signs_heartRate_value_last": {
+    "sentinel": -45.0,
+    "decode_threshold": -20.5,
+    "min_observed": 4.0,
+    "max_observed": 200.0,
+    "n_encoded": 2505,
+    "n_observed": 3769,
+    "missingness_kind": "not_measured"
+  },
+  "vital_signs_systolicBp_value_first": {
+    "sentinel": -31.5,
+    "decode_threshold": -0.75,
+    "min_observed": 30.0,
+    "max_observed": 276.0,
+    "n_encoded": 1271,
+    "n_observed": 5003,
+    "missingness_kind": "not_measured"
+  },
+  "vital_signs_systolicBp_value_last": {
+    "sentinel": -5.0,
+    "decode_threshold": 22.5,
+    "min_observed": 50.0,
+    "max_observed": 270.0,
+    "n_encoded": 1269,
+    "n_observed": 5005,
+    "missingness_kind": "not_measured"
+  },
+  "vital_signs_oxygenSaturation_value_first": {
+    "sentinel": -16.25,
+    "decode_threshold": -4.625,
+    "min_observed": 7.0,
+    "max_observed": 100.0,
+    "n_encoded": 2964,
+    "n_observed": 3310,
+    "missingness_kind": "not_measured"
+  },
+  "vital_signs_oxygenSaturation_value_last": {
+    "sentinel": -16.25,
+    "decode_threshold": -4.625,
+    "min_observed": 7.0,
+    "max_observed": 100.0,
+    "n_encoded": 2964,
+    "n_observed": 3310,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_hemoglobin_value_first": {
+    "sentinel": -1.25,
+    "decode_threshold": 19.375,
+    "min_observed": 40.0,
+    "max_observed": 205.0,
+    "n_encoded": 37,
+    "n_observed": 6237,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_hemoglobin_value_last": {
+    "sentinel": -1.5,
+    "decode_threshold": 19.25,
+    "min_observed": 40.0,
+    "max_observed": 206.0,
+    "n_encoded": 37,
+    "n_observed": 6237,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_triGly_value_first": {
+    "sentinel": -3.9462425000000008,
+    "decode_threshold": -1.8883712500000003,
+    "min_observed": 0.16949999999999996,
+    "max_observed": 16.63247,
+    "n_encoded": 546,
+    "n_observed": 5728,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_triGly_value_last": {
+    "sentinel": -4.9155,
+    "decode_threshold": -2.4408,
+    "min_observed": 0.0339,
+    "max_observed": 19.8315,
+    "n_encoded": 546,
+    "n_observed": 5728,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_cholTot_value_first": {
+    "sentinel": -1.7094,
+    "decode_threshold": -0.3367,
+    "min_observed": 1.036,
+    "max_observed": 12.0176,
+    "n_encoded": 423,
+    "n_observed": 5851,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_cholTot_value_last": {
+    "sentinel": -2.7454000000000005,
+    "decode_threshold": -1.0826200000000004,
+    "min_observed": 0.5801599999999999,
+    "max_observed": 13.8824,
+    "n_encoded": 424,
+    "n_observed": 5850,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_potassium_value_first": {
+    "sentinel": 0.13749999999999973,
+    "decode_threshold": 1.1237499999999998,
+    "min_observed": 2.11,
+    "max_observed": 10.0,
+    "n_encoded": 22,
+    "n_observed": 6252,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_potassium_value_last": {
+    "sentinel": -0.17499999999999982,
+    "decode_threshold": 0.7875000000000001,
+    "min_observed": 1.75,
+    "max_observed": 9.45,
+    "n_encoded": 25,
+    "n_observed": 6249,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_sodium_value_first": {
+    "sentinel": 74.25,
+    "decode_threshold": 84.125,
+    "min_observed": 94.0,
+    "max_observed": 173.0,
+    "n_encoded": 26,
+    "n_observed": 6248,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_sodium_value_last": {
+    "sentinel": 97.875,
+    "decode_threshold": 103.78750000000001,
+    "min_observed": 109.7,
+    "max_observed": 157.0,
+    "n_encoded": 26,
+    "n_observed": 6248,
+    "missingness_kind": "not_measured"
+  },
+  "lab_results_validSerumCreatinine_value_first": {
+    "sentinel": -4.9,
+    "decode_threshold": -2.15,
+    "min_observed": 0.6,
+    "max_observed": 22.6,
+    "n_encoded": 15,
+    "n_observed": 6259,
+    "missingness_kind": "not_measured"
+  },
+  "echocardiographs_lvef": {
+    "sentinel": -16.0,
+    "decode_threshold": -5.5,
+    "min_observed": 5.0,
+    "max_observed": 89.0,
+    "n_encoded": 3960,
+    "n_observed": 2314,
+    "missingness_kind": "not_measured"
+  },
+  "echocardiographs_lvef_pET_last": {
+    "sentinel": -16.0,
+    "decode_threshold": -5.5,
+    "min_observed": 5.0,
+    "max_observed": 89.0,
+    "n_encoded": 4055,
+    "n_observed": 2219,
+    "missingness_kind": "not_measured"
+  },
+  "echocardiographs_lvef_pET_first": {
+    "sentinel": -16.0,
+    "decode_threshold": -5.5,
+    "min_observed": 5.0,
+    "max_observed": 89.0,
+    "n_encoded": 4055,
+    "n_observed": 2219,
+    "missingness_kind": "not_measured"
+  },
+  "maggic_total_score": {
+    "sentinel": -1.0,
+    "decode_threshold": 3.5,
+    "min_observed": 8.0,
+    "max_observed": 44.0,
+    "n_encoded": 4055,
+    "n_observed": 2219,
+    "missingness_kind": "not_measured"
+  }
+}

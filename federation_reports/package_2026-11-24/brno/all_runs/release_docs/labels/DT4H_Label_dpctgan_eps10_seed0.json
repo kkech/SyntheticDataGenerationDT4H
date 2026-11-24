@@ -1,0 +1,47 @@
+{
+  "run_id": "dpctgan_eps10_seed0",
+  "file": "DT4H_Synthetic_dpctgan_eps10_seed0.csv",
+  "synthesizer": "dpctgan",
+  "base_synthesizer": "dpctgan",
+  "run_transform": null,
+  "differential_privacy": {
+    "formal_guarantee": true,
+    "epsilon": 10.0
+  },
+  "seed": 0,
+  "rows": 1549,
+  "columns": 256,
+  "fidelity": {
+    "ks_mean_numeric": 0.9348,
+    "tvd_mean_categorical": 0.2644,
+    "missing_rate_mad": 0.4003,
+    "c2st_auc": 1.0
+  },
+  "joint_structure": {
+    "fabricated_association_pairs": 58
+  },
+  "row_coherence": {
+    "violation_rate": 0.30884
+  },
+  "survival": {
+    "all_cause_death": false
+  },
+  "distances": {
+    "verbatim_training_rows": 0,
+    "dcr_median": 0.224143,
+    "share_closer_than_holdout_p5": 0.0,
+    "nndr_median": 0.994
+  },
+  "attacks": {
+    "mia_auc": 0.4869,
+    "mia_learned_auc": 0.4886,
+    "empirical_epsilon_lower_bound": 0.0,
+    "mia_auc_most_atypical_quartile": 0.4604,
+    "aia_worst_membership_advantage": 0.007,
+    "singling_out_risk": 0.0,
+    "linkability_risk": 0.0
+  },
+  "release_gate": "FAIL",
+  "release_gate_policy": "release",
+  "cleared_for_open_release": false
+}

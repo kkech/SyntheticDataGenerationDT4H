@@ -1,0 +1,187 @@
+{
+  "seed": 0,
+  "targets": [
+    {
+      "target": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "n_train_labelled": 456,
+      "n_holdout_labelled": 161,
+      "baseline_auc": 0.7179,
+      "tstr": [
+        {
+          "run_id": "tvae_seed0",
+          "auc": 0.6199,
+          "auc_gap": 0.098,
+          "auc_ci95": [
+            0.533,
+            0.703
+          ],
+          "brier": 0.3184,
+          "brier_gap": 0.0711,
+          "subgroup_auc": {
+            "female": 0.6324,
+            "male": 0.6208,
+            "age_under_65": 0.6629,
+            "age_65_79": 0.4412,
+            "age_80_plus": null
+          },
+          "subgroup_auc_gap": {
+            "female": 0.1146,
+            "male": 0.1036,
+            "age_under_65": 0.1067,
+            "age_65_79": 0.2192,
+            "age_80_plus": null
+          },
+          "auc_logreg": 0.4917,
+          "auc_gap_logreg": 0.1618,
+          "auc_augmented": 0.6744,
+          "augmentation_delta": -0.0435,
+          "auc_augmented_bootstrap": 0.7071,
+          "augmentation_delta_vs_bootstrap": -0.0327
+        }
+      ],
+      "baseline_auc_ci95": [
+        0.641,
+        0.7901
+      ],
+      "baseline_auc_logreg": 0.6535,
+      "baseline_brier": 0.2473,
+      "baseline_subgroup_auc": {
+        "female": 0.747,
+        "male": 0.7244,
+        "age_under_65": 0.7696,
+        "age_65_79": 0.6604,
+        "age_80_plus": null
+      },
+      "positives_train": 223,
+      "positives_holdout": 80
+    },
+    {
+      "target": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "n_train_labelled": 270,
+      "n_holdout_labelled": 98,
+      "baseline_auc": 0.8661,
+      "tstr": [
+        {
+          "run_id": "tvae_seed0",
+          "auc": 0.847,
+          "auc_gap": 0.0191,
+          "auc_ci95": [
+            0.7495,
+            0.9292
+          ],
+          "brier": 0.1486,
+          "brier_gap": 0.0262,
+          "subgroup_auc": {
+            "female": null,
+            "male": 0.8409,
+            "age_under_65": 0.8812,
+            "age_65_79": 0.7533,
+            "age_80_plus": null
+          },
+          "subgroup_auc_gap": {
+            "female": null,
+            "male": -0.0081,
+            "age_under_65": -0.0014,
+            "age_65_79": -0.06,
+            "age_80_plus": null
+          },
+          "auc_logreg": 0.5976,
+          "auc_gap_logreg": 0.2229,
+          "auc_augmented": 0.8544,
+          "augmentation_delta": -0.0117,
+          "auc_augmented_bootstrap": 0.8827,
+          "augmentation_delta_vs_bootstrap": -0.0283
+        }
+      ],
+      "baseline_auc_ci95": [
+        0.776,
+        0.9445
+      ],
+      "baseline_auc_logreg": 0.8205,
+      "baseline_brier": 0.1224,
+      "baseline_subgroup_auc": {
+        "female": null,
+        "male": 0.8328,
+        "age_under_65": 0.8798,
+        "age_65_79": 0.6933,
+        "age_80_plus": null
+      },
+      "positives_train": 151,
+      "positives_holdout": 59
+    },
+    {
+      "target": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "n_train_labelled": 270,
+      "n_holdout_labelled": 98,
+      "baseline_auc": 0.8661,
+      "tstr": [
+        {
+          "run_id": "tvae_seed0",
+          "auc": 0.8479,
+          "auc_gap": 0.0182,
+          "auc_ci95": [
+            0.7531,
+            0.9297
+          ],
+          "brier": 0.1545,
+          "brier_gap": 0.0321,
+          "subgroup_auc": {
+            "female": null,
+            "male": 0.8401,
+            "age_under_65": 0.8856,
+            "age_65_79": 0.7933,
+            "age_80_plus": null
+          },
+          "subgroup_auc_gap": {
+            "female": null,
+            "male": -0.0073,
+            "age_under_65": -0.0058,
+            "age_65_79": -0.1,
+            "age_80_plus": null
+          },
+          "auc_logreg": 0.6139,
+          "auc_gap_logreg": 0.2066,
+          "auc_augmented": 0.8588,
+          "augmentation_delta": -0.0073,
+          "auc_augmented_bootstrap": 0.8635,
+          "augmentation_delta_vs_bootstrap": -0.0047
+        }
+      ],
+      "baseline_auc_ci95": [
+        0.776,
+        0.9445
+      ],
+      "baseline_auc_logreg": 0.8205,
+      "baseline_brier": 0.1224,
+      "baseline_subgroup_auc": {
+        "female": null,
+        "male": 0.8328,
+        "age_under_65": 0.8798,
+        "age_65_79": 0.6933,
+        "age_80_plus": null
+      },
+      "positives_train": 119,
+      "positives_holdout": 39
+    }
+  ],
+  "n_train": 1862,
+  "n_holdout": 620,
+  "aggregate_auc_gap": {
+    "tvae_seed0": 0.0451
+  },
+  "grouped_auc_gap": [
+    {
+      "synthesizer": "tvae",
+      "epsilon": null,
+      "n_runs": 1,
+      "mean_gap": 0.0451,
+      "sd_gap": null,
+      "sd_gap_note": "not available (single run)",
+      "mean_gap_logreg": 0.1971,
+      "mean_augmentation_delta": -0.0208,
+      "mean_augmentation_delta_vs_bootstrap": -0.0219,
+      "mean_brier_gap": 0.0431,
+      "mean_worst_subgroup_gap": 0.0707
+    }
+  ]
+}

@@ -1,0 +1,1095 @@
+{
+  "input_rows": 6274,
+  "input_columns": 540,
+  "unique_patients": 6274,
+  "metadata_validation": {
+    "declared_in_metadata": 540,
+    "present_in_data": 540,
+    "matched": 540,
+    "declared_but_missing_from_data": [],
+    "in_data_but_not_declared": []
+  },
+  "expected_nonnull_checks": [
+    {
+      "col_a": "lab_results_hdl_value_first",
+      "n_a": 0,
+      "col_b": "lab_results_ldl_value_first",
+      "n_b": 0,
+      "note": "expected similar (ordered together)",
+      "mismatch": true
+    },
+    {
+      "col_a": "lab_results_potassium_value_first",
+      "n_a": 6252,
+      "col_b": "lab_results_sodium_value_first",
+      "n_b": 6248,
+      "note": "expected similar (ordered together)",
+      "mismatch": false
+    },
+    {
+      "col_a": "lab_results_albuminBS_value_first",
+      "n_a": 0,
+      "col_b": "lab_results_ntProBnp_value_first",
+      "n_b": 0,
+      "note": "expected similar",
+      "mismatch": true
+    },
+    {
+      "col_a": "lab_results_albuminBS_value_first",
+      "n_a": 0,
+      "col_b": "lab_results_crpNonHs_value_first",
+      "n_b": 0,
+      "note": "expected similar",
+      "mismatch": true
+    },
+    {
+      "col_a": "lab_results_albuminBS_value_first",
+      "n_a": 0,
+      "col_b": "lab_results_hba1c_value_first",
+      "n_b": 0,
+      "note": "expected similar",
+      "mismatch": true
+    },
+    {
+      "col_a": "vital_signs_heartRate_value_first",
+      "n_a": 3769,
+      "col_b": "vital_signs_oxygenSaturation_value_first",
+      "n_b": 3310,
+      "note": "expected similar, oxygen sat maybe slightly lower",
+      "mismatch": false
+    }
+  ],
+  "array_columns_flattened": {
+    "flattened": [
+      "electrocardiographs_ecg_type_of_rhythms_pET_first",
+      "electrocardiographs_ecg_type_of_rhythms_pET_last"
+    ]
+  },
+  "numeric_dtype_normalization": {
+    "decimal_cast_to_float": [
+      "vital_signs_weight_value_p6mo_max",
+      "vital_signs_weight_value_p6mo_min",
+      "vital_signs_weight_value_p6mo_first",
+      "vital_signs_weight_value_p6mo_avg",
+      "vital_signs_weight_value_p6mo_last",
+      "vital_signs_height_value_p1a_avg",
+      "vital_signs_weight_value_last",
+      "vital_signs_height_value_last",
+      "vital_signs_diastolicBp_value_first",
+      "vital_signs_diastolicBp_value_min",
+      "vital_signs_diastolicBp_value_max",
+      "vital_signs_diastolicBp_value_last",
+      "vital_signs_diastolicBp_value_avg",
+      "vital_signs_heartRate_value_first",
+      "vital_signs_heartRate_value_min",
+      "vital_signs_heartRate_value_max",
+      "vital_signs_heartRate_value_last",
+      "vital_signs_heartRate_value_avg",
+      "vital_signs_systolicBp_value_first",
+      "vital_signs_systolicBp_value_min",
+      "vital_signs_systolicBp_value_max",
+      "vital_signs_systolicBp_value_last",
+      "vital_signs_systolicBp_value_avg",
+      "vital_signs_oxygenSaturation_value_avg",
+      "vital_signs_oxygenSaturation_value_max",
+      "vital_signs_oxygenSaturation_value_last",
+      "vital_signs_oxygenSaturation_value_first",
+      "vital_signs_oxygenSaturation_value_min",
+      "lab_results_hemoglobin_value_first",
+      "lab_results_hemoglobin_value_avg",
+      "lab_results_hemoglobin_value_min",
+      "lab_results_hemoglobin_value_max",
+      "lab_results_hemoglobin_value_last",
+      "lab_results_ferritin_value_first",
+      "lab_results_ferritin_value_avg",
+      "lab_results_ferritin_value_min",
+      "lab_results_ferritin_value_max",
+      "lab_results_ferritin_value_last",
+      "lab_results_tfs_value_first",
+      "lab_results_tfs_value_avg",
+      "lab_results_tfs_value_min",
+      "lab_results_tfs_value_max",
+      "lab_results_tfs_value_last",
+      "lab_results_ntProBnp_value_first",
+      "lab_results_ntProBnp_value_avg",
+      "lab_results_ntProBnp_value_min",
+      "lab_results_ntProBnp_value_max",
+      "lab_results_ntProBnp_value_last",
+      "lab_results_bnp_value_first",
+      "lab_results_bnp_value_avg",
+      "lab_results_bnp_value_min",
+      "lab_results_bnp_value_max",
+      "lab_results_bnp_value_last",
+      "lab_results_crpNonHs_value_first",
+      "lab_results_crpNonHs_value_avg",
+      "lab_results_crpNonHs_value_min",
+      "lab_results_crpNonHs_value_max",
+      "lab_results_crpNonHs_value_last",
+      "lab_results_crpHs_value_first",
+      "lab_results_crpHs_value_avg",
+      "lab_results_crpHs_value_min",
+      "lab_results_crpHs_value_max",
+      "lab_results_crpHs_value_last",
+      "lab_results_tropIHs_value_first",
+      "lab_results_tropIHs_value_avg",
+      "lab_results_tropIHs_value_min",
+      "lab_results_tropIHs_value_max",
+      "lab_results_tropIHs_value_last",
+      "lab_results_tropInHs_value_first",
+      "lab_results_tropInHs_value_avg",
+      "lab_results_tropInHs_value_min",
+      "lab_results_tropInHs_value_max",
+      "lab_results_tropInHs_value_last",
+      "lab_results_tropTHs_value_first",
+      "lab_results_tropTHs_value_avg",
+      "lab_results_tropTHs_value_min",
+      "lab_results_tropTHs_value_max",
+      "lab_results_tropTHs_value_last",
+      "lab_results_tropTnHs_value_first",
+      "lab_results_tropTnHs_value_avg",
+      "lab_results_tropTnHs_value_min",
+      "lab_results_tropTnHs_value_max",
+      "lab_results_tropTnHs_value_last",
+      "lab_results_triGly_value_first",
+      "lab_results_triGly_value_avg",
+      "lab_results_triGly_value_min",
+      "lab_results_triGly_value_max",
+      "lab_results_triGly_value_last",
+      "lab_results_cholTot_value_first",
+      "lab_results_cholTot_value_avg",
+      "lab_results_cholTot_value_min",
+      "lab_results_cholTot_value_max",
+      "lab_results_cholTot_value_last",
+      "lab_results_hdl_value_first",
+      "lab_results_hdl_value_avg",
+      "lab_results_hdl_value_min",
+      "lab_results_hdl_value_max",
+      "lab_results_hdl_value_last",
+      "lab_results_creatUS_value_first",
+      "lab_results_creatUS_value_avg",
+      "lab_results_creatUS_value_min",
+      "lab_results_creatUS_value_max",
+      "lab_results_creatUS_value_last",
+      "lab_results_albuminUS_value_first",
+      "lab_results_albuminUS_value_avg",
+      "lab_results_albuminUS_value_min",
+      "lab_results_albuminUS_value_max",
+      "lab_results_albuminUS_value_last",
+      "lab_results_bun_value_first",
+      "lab_results_bun_value_avg",
+      "lab_results_bun_value_min",
+      "lab_results_bun_value_max",
+      "lab_results_bun_value_last",
+      "lab_results_acr_value_first",
+      "lab_results_acr_value_avg",
+      "lab_results_acr_value_min",
+      "lab_results_acr_value_max",
+      "lab_results_acr_value_last",
+      "lab_results_ldl_value_avg",
+      "lab_results_ldl_value_max",
+      "lab_results_ldl_value_last",
+      "lab_results_ldl_value_min",
+      "lab_results_ldl_value_first",
+      "lab_results_potassium_value_first",
+      "lab_results_potassium_value_max",
+      "lab_results_potassium_value_avg",
+      "lab_results_potassium_value_min",
+      "lab_results_potassium_value_last",
+      "lab_results_sodium_value_first",
+      "lab_results_sodium_value_min",
+      "lab_results_sodium_value_last",
+      "lab_results_sodium_value_max",
+      "lab_results_sodium_value_avg",
+      "lab_results_albuminBS_value_min",
+      "lab_results_albuminBS_value_avg",
+      "lab_results_albuminBS_value_first",
+      "lab_results_albuminBS_value_max",
+      "lab_results_albuminBS_value_last",
+      "lab_results_hba1c%_value_avg",
+      "lab_results_hba1c%_value_first",
+      "lab_results_hba1c%_value_max",
+      "lab_results_hba1c%_value_last",
+      "lab_results_hba1c%_value_min",
+      "lab_results_hba1c_value_first",
+      "lab_results_hba1c_value_max",
+      "lab_results_hba1c_value_avg",
+      "lab_results_hba1c_value_min",
+      "lab_results_hba1c_value_last",
+      "lab_results_validSerumCreatinine_value_first",
+      "lab_results_validSerumCreatinine_value_min",
+      "lab_results_validSerumCreatinine_value_max",
+      "lab_results_validSerumCreatinine_value_avg",
+      "lab_results_valideGFR_value_min",
+      "lab_results_valideGFR_value_first",
+      "lab_results_valideGFR_value_max",
+      "lab_results_valideGFR_value_last",
+      "lab_results_valideGFR_value_avg",
+      "echocardiographs_lvef",
+      "echocardiographs_lvef_pET_min",
+      "echocardiographs_lvef_pET_max",
+      "echocardiographs_lvef_pET_last",
+      "echocardiographs_lvef_pET_first",
+      "echocardiographs_lvef_pET_avg",
+      "electrocardiographs_ecg_qrs_duration_pET_first",
+      "electrocardiographs_ecg_qrs_duration_pET_avg",
+      "electrocardiographs_ecg_qrs_duration_pET_min",
+      "electrocardiographs_ecg_qrs_duration_pET_max",
+      "electrocardiographs_ecg_qrs_duration_pET_last",
+      "electrocardiographs_ecg_qrs_axis_pET_max",
+      "electrocardiographs_ecg_qrs_axis_pET_avg",
+      "electrocardiographs_ecg_qrs_axis_pET_first",
+      "electrocardiographs_ecg_qrs_axis_pET_last",
+      "electrocardiographs_ecg_qrs_axis_pET_min",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_max",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_min",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_first",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_avg",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_last",
+      "vital_signs_systolicBpDuringEncounter_value_pET",
+      "vital_signs_bmi_value_pET",
+      "lab_results_creatBS_value_p3a_avg",
+      "lab_results_validSerumCreatinine_value_pET",
+      "eGFR_2021_ckd_epi_creatinine"
+    ],
+    "nan_converted_to_null": {}
+  },
+  "out_of_domain_invalidation": {
+    "skipped": false,
+    "cells_invalidated_by_column": {
+      "vital_signs_systolicBp_value_first": 7,
+      "vital_signs_systolicBp_value_last": 5,
+      "lab_results_triGly_value_last": 1,
+      "lab_results_triGly_value_first": 1,
+      "lab_results_cholTot_value_last": 1,
+      "lab_results_potassium_value_last": 3
+    },
+    "total_cells_invalidated": 18
+  },
+  "symptom_columns": {
+    "count": 30,
+    "currently_constant": 30,
+    "dropped": false
+  },
+  "medications_combined": {
+    "features_created": [
+      "med_acei",
+      "med_activeDuringEncounter_ace_inhibitors_arb_use",
+      "med_activeDuringEncounter_bb",
+      "med_anti_coag",
+      "med_anti_plat",
+      "med_antiarrhytmic",
+      "med_antiinfl",
+      "med_arb",
+      "med_ari",
+      "med_arni",
+      "med_bb",
+      "med_ccb",
+      "med_cortico_syst",
+      "med_digitalis",
+      "med_diuretics",
+      "med_diuretics_loop",
+      "med_inotropes",
+      "med_insulins",
+      "med_ivabradine",
+      "med_ll",
+      "med_mra",
+      "med_oral_antidiabetic",
+      "med_platelet",
+      "med_potassium_binders",
+      "med_rasi",
+      "med_rdoad",
+      "med_rdoad_syst",
+      "med_sglt2i",
+      "med_thrombolytic",
+      "med_vasodil",
+      "med_acei_history",
+      "med_anti_coag_history",
+      "med_anti_plat_history",
+      "med_antiarrhytmic_history",
+      "med_antiinfl_history",
+      "med_arb_history",
+      "med_ari_history",
+      "med_arni_history",
+      "med_bb_history",
+      "med_ccb_history",
+      "med_cortico_syst_history",
+      "med_digitalis_history",
+      "med_diuretics_history",
+      "med_diuretics_loop_history",
+      "med_inotropes_history",
+      "med_insulins_history",
+      "med_ivabradine_history",
+      "med_ll_history",
+      "med_mra_history",
+      "med_oral_antidiabetic_history",
+      "med_platelet_history",
+      "med_potassium_binders_history",
+      "med_rasi_history",
+      "med_rdoad_history",
+      "med_rdoad_syst_history",
+      "med_sglt2i_history",
+      "med_thrombolytic_history",
+      "med_vasodil_history"
+    ],
+    "source_columns_dropped": 114
+  },
+  "conditions_combined": {
+    "features_created": [
+      "conditions_af",
+      "conditions_aidshiv",
+      "conditions_ap",
+      "conditions_ckd_chronic",
+      "conditions_cm",
+      "conditions_copd",
+      "conditions_dem",
+      "conditions_dep",
+      "conditions_devices",
+      "conditions_dia",
+      "conditions_diabetes",
+      "conditions_dysl",
+      "conditions_hf",
+      "conditions_hyp",
+      "conditions_hyperthyroid",
+      "conditions_hypothyroid",
+      "conditions_ibd",
+      "conditions_ihd",
+      "conditions_ld",
+      "conditions_mc",
+      "conditions_mi",
+      "conditions_myocarditis",
+      "conditions_osa",
+      "conditions_pad",
+      "conditions_pericardial",
+      "conditions_rd",
+      "conditions_revasc",
+      "conditions_stroke",
+      "conditions_substance_abuse",
+      "conditions_tia",
+      "conditions_vd"
+    ],
+    "source_columns_dropped": 78
+  },
+  "nyha_encoding": {
+    "skipped": false,
+    "maps": {
+      "nyha_nyha_pET": {
+        "LA28404-4": 1,
+        "LA28405-1": 2,
+        "LA28406-9": 3,
+        "LA28407-7": 4
+      },
+      "nyha_nyha": {
+        "LA28404-4": 1,
+        "LA28405-1": 2,
+        "LA28406-9": 3,
+        "LA28407-7": 4
+      }
+    },
+    "map": {
+      "LA28404-4": 1,
+      "LA28405-1": 2,
+      "LA28406-9": 3,
+      "LA28407-7": 4
+    }
+  },
+  "numeric_aggregates_dropped": {
+    "dropped": [
+      "lab_results_creatUS_value_min",
+      "lab_results_creatUS_value_max",
+      "lab_results_creatUS_value_avg",
+      "lab_results_creatUS_value_stddev",
+      "lab_results_tropIHs_value_min",
+      "lab_results_tropIHs_value_max",
+      "lab_results_tropIHs_value_avg",
+      "lab_results_tropIHs_value_stddev",
+      "lab_results_hdl_value_min",
+      "lab_results_hdl_value_max",
+      "lab_results_hdl_value_avg",
+      "lab_results_hdl_value_stddev",
+      "lab_results_tropInHs_value_min",
+      "lab_results_tropInHs_value_max",
+      "lab_results_tropInHs_value_avg",
+      "lab_results_tropInHs_value_stddev",
+      "lab_results_potassium_value_min",
+      "lab_results_potassium_value_max",
+      "lab_results_potassium_value_avg",
+      "lab_results_potassium_value_stddev",
+      "lab_results_ldl_value_min",
+      "lab_results_ldl_value_max",
+      "lab_results_ldl_value_avg",
+      "lab_results_ldl_value_stddev",
+      "vital_signs_systolicBp_value_min",
+      "vital_signs_systolicBp_value_max",
+      "vital_signs_systolicBp_value_avg",
+      "vital_signs_systolicBp_value_stddev",
+      "lab_results_crpHs_value_min",
+      "lab_results_crpHs_value_max",
+      "lab_results_crpHs_value_avg",
+      "lab_results_crpHs_value_stddev",
+      "lab_results_sodium_value_min",
+      "lab_results_sodium_value_max",
+      "lab_results_sodium_value_avg",
+      "lab_results_sodium_value_stddev",
+      "lab_results_crpNonHs_value_min",
+      "lab_results_crpNonHs_value_max",
+      "lab_results_crpNonHs_value_avg",
+      "lab_results_crpNonHs_value_stddev",
+      "electrocardiographs_ecg_qrs_axis_pET_min",
+      "electrocardiographs_ecg_qrs_axis_pET_max",
+      "electrocardiographs_ecg_qrs_axis_pET_avg",
+      "electrocardiographs_ecg_qrs_axis_pET_stddev",
+      "electrocardiographs_ecg_qrs_duration_pET_min",
+      "electrocardiographs_ecg_qrs_duration_pET_max",
+      "electrocardiographs_ecg_qrs_duration_pET_avg",
+      "electrocardiographs_ecg_qrs_duration_pET_stddev",
+      "lab_results_hba1c%_value_min",
+      "lab_results_hba1c%_value_max",
+      "lab_results_hba1c%_value_avg",
+      "lab_results_hba1c%_value_stddev",
+      "lab_results_albuminUS_value_min",
+      "lab_results_albuminUS_value_max",
+      "lab_results_albuminUS_value_avg",
+      "lab_results_albuminUS_value_stddev",
+      "lab_results_acr_value_min",
+      "lab_results_acr_value_max",
+      "lab_results_acr_value_avg",
+      "lab_results_acr_value_stddev",
+      "echocardiographs_lvef_pET_min",
+      "echocardiographs_lvef_pET_max",
+      "echocardiographs_lvef_pET_avg",
+      "echocardiographs_lvef_pET_stddev",
+      "lab_results_albuminBS_value_min",
+      "lab_results_albuminBS_value_max",
+      "lab_results_albuminBS_value_avg",
+      "lab_results_albuminBS_value_stddev",
+      "lab_results_hemoglobin_value_min",
+      "lab_results_hemoglobin_value_max",
+      "lab_results_hemoglobin_value_avg",
+      "lab_results_hemoglobin_value_stddev",
+      "vital_signs_weight_value_p6mo_min",
+      "vital_signs_weight_value_p6mo_max",
+      "vital_signs_weight_value_p6mo_avg",
+      "vital_signs_weight_value_p6mo_stddev",
+      "lab_results_cholTot_value_min",
+      "lab_results_cholTot_value_max",
+      "lab_results_cholTot_value_avg",
+      "lab_results_cholTot_value_stddev",
+      "vital_signs_diastolicBp_value_min",
+      "vital_signs_diastolicBp_value_max",
+      "vital_signs_diastolicBp_value_avg",
+      "vital_signs_diastolicBp_value_stddev",
+      "lab_results_triGly_value_min",
+      "lab_results_triGly_value_max",
+      "lab_results_triGly_value_avg",
+      "lab_results_triGly_value_stddev",
+      "lab_results_ntProBnp_value_min",
+      "lab_results_ntProBnp_value_max",
+      "lab_results_ntProBnp_value_avg",
+      "lab_results_ntProBnp_value_stddev",
+      "vital_signs_oxygenSaturation_value_min",
+      "vital_signs_oxygenSaturation_value_max",
+      "vital_signs_oxygenSaturation_value_avg",
+      "vital_signs_oxygenSaturation_value_stddev",
+      "lab_results_ferritin_value_min",
+      "lab_results_ferritin_value_max",
+      "lab_results_ferritin_value_avg",
+      "lab_results_ferritin_value_stddev",
+      "vital_signs_heartRate_value_min",
+      "vital_signs_heartRate_value_max",
+      "vital_signs_heartRate_value_avg",
+      "vital_signs_heartRate_value_stddev",
+      "lab_results_validSerumCreatinine_value_min",
+      "lab_results_validSerumCreatinine_value_max",
+      "lab_results_validSerumCreatinine_value_avg",
+      "lab_results_validSerumCreatinine_value_stddev",
+      "lab_results_bnp_value_min",
+      "lab_results_bnp_value_max",
+      "lab_results_bnp_value_avg",
+      "lab_results_bnp_value_stddev",
+      "lab_results_tropTnHs_value_min",
+      "lab_results_tropTnHs_value_max",
+      "lab_results_tropTnHs_value_avg",
+      "lab_results_tropTnHs_value_stddev",
+      "lab_results_tfs_value_min",
+      "lab_results_tfs_value_max",
+      "lab_results_tfs_value_avg",
+      "lab_results_tfs_value_stddev",
+      "lab_results_valideGFR_value_min",
+      "lab_results_valideGFR_value_max",
+      "lab_results_valideGFR_value_avg",
+      "lab_results_valideGFR_value_stddev",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_min",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_max",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_avg",
+      "electrocardiographs_ecg_qt_duration_corrected_pET_stddev",
+      "lab_results_bun_value_min",
+      "lab_results_bun_value_max",
+      "lab_results_bun_value_avg",
+      "lab_results_bun_value_stddev",
+      "lab_results_tropTHs_value_min",
+      "lab_results_tropTHs_value_max",
+      "lab_results_tropTHs_value_avg",
+      "lab_results_tropTHs_value_stddev",
+      "lab_results_hba1c_value_min",
+      "lab_results_hba1c_value_max",
+      "lab_results_hba1c_value_avg",
+      "lab_results_hba1c_value_stddev"
+    ]
+  },
+  "identifiers_datetimes_dropped": {
+    "dropped": [
+      "pid",
+      "encounterId",
+      "eventTime",
+      "exitTime",
+      "referenceTimePoint",
+      "encounters_admissionDate",
+      "encounters_dischargeDate"
+    ]
+  },
+  "near_unique_columns_dropped": {
+    "dropped": [
+      "patient_demographics_sourceIdentifier"
+    ]
+  },
+  "nyha_missing_imputation": {
+    "filled": 0,
+    "sentinel": 0
+  },
+  "numeric_missing_encoding": {
+    "encoded": {
+      "vital_signs_diastolicBp_value_first": {
+        "sentinel": -41.25,
+        "decode_threshold": -17.125,
+        "min_observed": 7.0,
+        "max_observed": 200.0,
+        "n_encoded": 1294,
+        "n_observed": 4980,
+        "missingness_kind": "not_measured"
+      },
+      "vital_signs_diastolicBp_value_last": {
+        "sentinel": -41.25,
+        "decode_threshold": -17.125,
+        "min_observed": 7.0,
+        "max_observed": 200.0,
+        "n_encoded": 1294,
+        "n_observed": 4980,
+        "missingness_kind": "not_measured"
+      },
+      "vital_signs_heartRate_value_first": {
+        "sentinel": -57.5,
+        "decode_threshold": -26.75,
+        "min_observed": 4.0,
+        "max_observed": 250.0,
+        "n_encoded": 2505,
+        "n_observed": 3769,
+        "missingness_kind": "not_measured"
+      },
+      "vital_signs_heartRate_value_last": {
+        "sentinel": -45.0,
+        "decode_threshold": -20.5,
+        "min_observed": 4.0,
+        "max_observed": 200.0,
+        "n_encoded": 2505,
+        "n_observed": 3769,
+        "missingness_kind": "not_measured"
+      },
+      "vital_signs_systolicBp_value_first": {
+        "sentinel": -31.5,
+        "decode_threshold": -0.75,
+        "min_observed": 30.0,
+        "max_observed": 276.0,
+        "n_encoded": 1271,
+        "n_observed": 5003,
+        "missingness_kind": "not_measured"
+      },
+      "vital_signs_systolicBp_value_last": {
+        "sentinel": -5.0,
+        "decode_threshold": 22.5,
+        "min_observed": 50.0,
+        "max_observed": 270.0,
+        "n_encoded": 1269,
+        "n_observed": 5005,
+        "missingness_kind": "not_measured"
+      },
+      "vital_signs_oxygenSaturation_value_first": {
+        "sentinel": -16.25,
+        "decode_threshold": -4.625,
+        "min_observed": 7.0,
+        "max_observed": 100.0,
+        "n_encoded": 2964,
+        "n_observed": 3310,
+        "missingness_kind": "not_measured"
+      },
+      "vital_signs_oxygenSaturation_value_last": {
+        "sentinel": -16.25,
+        "decode_threshold": -4.625,
+        "min_observed": 7.0,
+        "max_observed": 100.0,
+        "n_encoded": 2964,
+        "n_observed": 3310,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_hemoglobin_value_first": {
+        "sentinel": -1.25,
+        "decode_threshold": 19.375,
+        "min_observed": 40.0,
+        "max_observed": 205.0,
+        "n_encoded": 37,
+        "n_observed": 6237,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_hemoglobin_value_last": {
+        "sentinel": -1.5,
+        "decode_threshold": 19.25,
+        "min_observed": 40.0,
+        "max_observed": 206.0,
+        "n_encoded": 37,
+        "n_observed": 6237,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_triGly_value_first": {
+        "sentinel": -3.9462425000000008,
+        "decode_threshold": -1.8883712500000003,
+        "min_observed": 0.16949999999999996,
+        "max_observed": 16.63247,
+        "n_encoded": 546,
+        "n_observed": 5728,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_triGly_value_last": {
+        "sentinel": -4.9155,
+        "decode_threshold": -2.4408,
+        "min_observed": 0.0339,
+        "max_observed": 19.8315,
+        "n_encoded": 546,
+        "n_observed": 5728,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_cholTot_value_first": {
+        "sentinel": -1.7094,
+        "decode_threshold": -0.3367,
+        "min_observed": 1.036,
+        "max_observed": 12.0176,
+        "n_encoded": 423,
+        "n_observed": 5851,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_cholTot_value_last": {
+        "sentinel": -2.7454000000000005,
+        "decode_threshold": -1.0826200000000004,
+        "min_observed": 0.5801599999999999,
+        "max_observed": 13.8824,
+        "n_encoded": 424,
+        "n_observed": 5850,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_potassium_value_first": {
+        "sentinel": 0.13749999999999973,
+        "decode_threshold": 1.1237499999999998,
+        "min_observed": 2.11,
+        "max_observed": 10.0,
+        "n_encoded": 22,
+        "n_observed": 6252,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_potassium_value_last": {
+        "sentinel": -0.17499999999999982,
+        "decode_threshold": 0.7875000000000001,
+        "min_observed": 1.75,
+        "max_observed": 9.45,
+        "n_encoded": 25,
+        "n_observed": 6249,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_sodium_value_first": {
+        "sentinel": 74.25,
+        "decode_threshold": 84.125,
+        "min_observed": 94.0,
+        "max_observed": 173.0,
+        "n_encoded": 26,
+        "n_observed": 6248,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_sodium_value_last": {
+        "sentinel": 97.875,
+        "decode_threshold": 103.78750000000001,
+        "min_observed": 109.7,
+        "max_observed": 157.0,
+        "n_encoded": 26,
+        "n_observed": 6248,
+        "missingness_kind": "not_measured"
+      },
+      "lab_results_validSerumCreatinine_value_first": {
+        "sentinel": -4.9,
+        "decode_threshold": -2.15,
+        "min_observed": 0.6,
+        "max_observed": 22.6,
+        "n_encoded": 15,
+        "n_observed": 6259,
+        "missingness_kind": "not_measured"
+      },
+      "echocardiographs_lvef": {
+        "sentinel": -16.0,
+        "decode_threshold": -5.5,
+        "min_observed": 5.0,
+        "max_observed": 89.0,
+        "n_encoded": 3960,
+        "n_observed": 2314,
+        "missingness_kind": "not_measured"
+      },
+      "echocardiographs_lvef_pET_last": {
+        "sentinel": -16.0,
+        "decode_threshold": -5.5,
+        "min_observed": 5.0,
+        "max_observed": 89.0,
+        "n_encoded": 4055,
+        "n_observed": 2219,
+        "missingness_kind": "not_measured"
+      },
+      "echocardiographs_lvef_pET_first": {
+        "sentinel": -16.0,
+        "decode_threshold": -5.5,
+        "min_observed": 5.0,
+        "max_observed": 89.0,
+        "n_encoded": 4055,
+        "n_observed": 2219,
+        "missingness_kind": "not_measured"
+      },
+      "maggic_total_score": {
+        "sentinel": -1.0,
+        "decode_threshold": 3.5,
+        "min_observed": 8.0,
+        "max_observed": 44.0,
+        "n_encoded": 4055,
+        "n_observed": 2219,
+        "missingness_kind": "not_measured"
+      }
+    },
+    "n_columns_encoded": 23,
+    "n_no_event_columns": 0,
+    "min_nonnull_required": 313,
+    "dropped_too_few": [
+      {
+        "column": "vital_signs_weight_value_p6mo_first",
+        "n_observed": 0
+      },
+      {
+        "column": "vital_signs_weight_value_p6mo_last",
+        "n_observed": 0
+      },
+      {
+        "column": "vital_signs_height_value_p1a_avg",
+        "n_observed": 0
+      },
+      {
+        "column": "vital_signs_weight_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "vital_signs_height_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_ferritin_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_ferritin_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_tfs_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_tfs_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_ntProBnp_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_ntProBnp_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_bnp_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_bnp_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_crpNonHs_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_crpNonHs_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_crpHs_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_crpHs_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_tropIHs_value_first",
+        "n_observed": 196
+      },
+      {
+        "column": "lab_results_tropIHs_value_last",
+        "n_observed": 196
+      },
+      {
+        "column": "lab_results_tropInHs_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_tropInHs_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_tropTHs_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_tropTHs_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_tropTnHs_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_tropTnHs_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_hdl_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_hdl_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_creatUS_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_creatUS_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_albuminUS_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_albuminUS_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_bun_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_bun_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_acr_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_acr_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_ldl_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_ldl_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_albuminBS_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_albuminBS_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_hba1c%_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_hba1c%_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_hba1c_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_hba1c_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_valideGFR_value_first",
+        "n_observed": 0
+      },
+      {
+        "column": "lab_results_valideGFR_value_last",
+        "n_observed": 0
+      },
+      {
+        "column": "electrocardiographs_ecg_qrs_duration_pET_first",
+        "n_observed": 0
+      },
+      {
+        "column": "electrocardiographs_ecg_qrs_duration_pET_last",
+        "n_observed": 0
+      },
+      {
+        "column": "electrocardiographs_ecg_qrs_axis_pET_last",
+        "n_observed": 0
+      },
+      {
+        "column": "electrocardiographs_ecg_qrs_axis_pET_first",
+        "n_observed": 0
+      },
+      {
+        "column": "electrocardiographs_ecg_qt_duration_corrected_pET_last",
+        "n_observed": 0
+      },
+      {
+        "column": "electrocardiographs_ecg_qt_duration_corrected_pET_first",
+        "n_observed": 0
+      },
+      {
+        "column": "smoking_status_smoker_totalSmokingDuration_sum",
+        "n_observed": 0
+      },
+      {
+        "column": "encounter_primary_reason_number_of_days_to_rehosp_for_heart_failure_f5a_first",
+        "n_observed": 3
+      },
+      {
+        "column": "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first",
+        "n_observed": 96
+      },
+      {
+        "column": "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first",
+        "n_observed": 71
+      },
+      {
+        "column": "encounter_primary_reason_number_of_days_to_rehosp_for_renal_complications_f5a_first",
+        "n_observed": 0
+      },
+      {
+        "column": "cause_of_death_number_of_days_to_death_for_CV_f5a_first",
+        "n_observed": 0
+      },
+      {
+        "column": "cause_of_death_number_of_days_to_death_for_renal_f5a_first",
+        "n_observed": 0
+      },
+      {
+        "column": "cause_of_death_number_of_days_to_death_for_non_renal_and_non_CV_f5a_first",
+        "n_observed": 0
+      },
+      {
+        "column": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+        "n_observed": 1
+      }
+    ],
+    "encoding_path": "/home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/preprocess/DT4H_Numeric_Missing_Encoding.json"
+  },
+  "categorical_imputation": {
+    "normalized_columns": 190,
+    "filled_columns": [
+      "electrocardiographs_ecg_st_pET",
+      "electrocardiographs_ecg_ischemia_without_st_pET",
+      "electrocardiographs_ecg_type_of_rhythms_pET_first",
+      "electrocardiographs_ecg_type_of_rhythms_pET_last",
+      "smoking_status_formerSmoker_last",
+      "hyperkalemia_severity_categorizedValue",
+      "ckd_severity_categorizedValue",
+      "encounter_primary_reason_HF_Disease_f5a_w7d_first",
+      "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "encounter_primary_reason_renal_complications_f5a_w7d_first",
+      "encounter_primary_reason_renal_complications_f5a_w1mo_first",
+      "encounter_primary_reason_renal_complications_f5a_w3mo_first",
+      "encounter_primary_reason_renal_complications_f5a_w6mo_first",
+      "encounter_primary_reason_renal_complications_f5a_w1a_first",
+      "encounter_primary_reason_renal_complications_f5a_w3a_first",
+      "encounter_primary_reason_renal_complications_f5a_w5a_first",
+      "cause_of_death_isCV_f5a_w7d_first",
+      "cause_of_death_isCV_f5a_w1mo_first",
+      "cause_of_death_isCV_f5a_w3mo_first",
+      "cause_of_death_isCV_f5a_w6mo_first",
+      "cause_of_death_isCV_f5a_w1a_first",
+      "cause_of_death_isCV_f5a_w3a_first",
+      "cause_of_death_isCV_f5a_w5a_first",
+      "cause_of_death_isRenal_f5a_w7d_first",
+      "cause_of_death_isRenal_f5a_w1mo_first",
+      "cause_of_death_isRenal_f5a_w3mo_first",
+      "cause_of_death_isRenal_f5a_w6mo_first",
+      "cause_of_death_isRenal_f5a_w1a_first",
+      "cause_of_death_isRenal_f5a_w3a_first",
+      "cause_of_death_isRenal_f5a_w5a_first",
+      "cause_of_death_isNonRenalAndNonCV_f5a_w7d_first",
+      "cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first",
+      "cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first",
+      "cause_of_death_isNonRenalAndNonCV_f5a_w6mo_first",
+      "cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
+      "cause_of_death_isNonRenalAndNonCV_f5a_w3a_first",
+      "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first",
+      "cause_of_death_isAllCause_f5a_w7d_first",
+      "cause_of_death_isAllCause_f5a_w1mo_first",
+      "cause_of_death_isAllCause_f5a_w3mo_first",
+      "cause_of_death_isAllCause_f5a_w6mo_first",
+      "cause_of_death_isAllCause_f5a_w1a_first",
+      "cause_of_death_isAllCause_f5a_w3a_first",
+      "cause_of_death_isAllCause_f5a_w5a_first"
+    ]
+  },
+  "remaining_null_cells": 0,
+  "remaining_nan_cells": 0,
+  "output_rows": 6274,
+  "output_columns": 229,
+  "holdout_split": {
+    "seed": 0,
+    "holdout_fraction": 0.25,
+    "n_total": 6274,
+    "n_train": 4706,
+    "n_holdout": 1568
+  }
+}

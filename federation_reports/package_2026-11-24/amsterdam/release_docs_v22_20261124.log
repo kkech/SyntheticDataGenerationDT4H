@@ -1,0 +1,12 @@
+🧹 Deleted previous outputs of 'release_docs' (/home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/release_docs) for a clean rerun.
+
+======================================================================
+▶️  RUNNING 'release_docs' (started 09:45:50)
+======================================================================
+Saved codebook (254 columns) -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/release_docs/DT4H_Codebook.md
+Saved datasheet -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/release_docs/DT4H_Datasheet.md
+Saved environment freeze (97 packages) -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/release_docs/DT4H_Environment_Freeze.txt
+Saved capability labels for 47 released file(s) -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/release_docs/labels
+✅ 'release_docs' completed in 1s.
+
+Full log written to logs.txt

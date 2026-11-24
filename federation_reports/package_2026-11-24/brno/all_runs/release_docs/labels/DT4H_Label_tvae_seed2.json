@@ -1,0 +1,47 @@
+{
+  "run_id": "tvae_seed2",
+  "file": "DT4H_Synthetic_tvae_seed2.csv",
+  "synthesizer": "tvae",
+  "base_synthesizer": "tvae",
+  "run_transform": null,
+  "differential_privacy": {
+    "formal_guarantee": false,
+    "epsilon": null
+  },
+  "seed": 2,
+  "rows": 1549,
+  "columns": 256,
+  "fidelity": {
+    "ks_mean_numeric": 0.1778,
+    "tvd_mean_categorical": 0.0567,
+    "missing_rate_mad": 0.043,
+    "c2st_auc": 0.9989
+  },
+  "joint_structure": {
+    "fabricated_association_pairs": null
+  },
+  "row_coherence": {
+    "violation_rate": 0.01097
+  },
+  "survival": {
+    "all_cause_death": false
+  },
+  "distances": {
+    "verbatim_training_rows": 0,
+    "dcr_median": 0.083266,
+    "share_closer_than_holdout_p5": 0.0813,
+    "nndr_median": 0.9307
+  },
+  "attacks": {
+    "mia_auc": 0.5276,
+    "mia_learned_auc": 0.5239,
+    "empirical_epsilon_lower_bound": 0.145,
+    "mia_auc_most_atypical_quartile": 0.5686,
+    "aia_worst_membership_advantage": 0.0203,
+    "singling_out_risk": 0.005,
+    "linkability_risk": 0.0
+  },
+  "release_gate": "FAIL",
+  "release_gate_policy": "release",
+  "cleared_for_open_release": false
+}

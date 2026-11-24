@@ -1,0 +1,2 @@
+mst_eps15_seed0: 754 synthetic rows, 0 stale cell(s) in 0 column(s)
+tvae_seed0: 754 synthetic rows, 0 stale cell(s) in 0 column(s)

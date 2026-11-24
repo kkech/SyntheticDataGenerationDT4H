@@ -1,0 +1,1686 @@
+{
+  "parameters": {
+    "min_support": 50,
+    "max_train_violation": 0.002,
+    "range_margin_fraction": 0.05
+  },
+  "rules": [
+    {
+      "type": "implication",
+      "if_true": "smoking_status_smoker_last",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 162,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_formerSmoker_last",
+      "then_true": "smoking_status_smoker_last",
+      "train_support": 162,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "train_support": 215,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "train_support": 215,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 215,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 215,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 215,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "train_support": 215,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "train_support": 232,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 215,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 232,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 232,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w6mo_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w1a_first",
+      "train_support": 215,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_HF_Disease_f5a_w3a_first",
+      "train_support": 232,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 215,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 232,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_HF_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 234,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 491,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 491,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 491,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 491,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 491,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 604,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 604,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 604,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 491,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 604,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 662,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 662,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 491,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 604,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 662,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 717,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 315,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 491,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 604,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 662,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 717,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 846,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 846,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 846,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 846,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 846,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 991,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 991,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 991,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 846,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 991,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 1101,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 1101,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 846,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 991,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 1101,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 1191,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 203,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 501,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 846,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 991,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 1101,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 1191,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 402,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 402,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 402,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 402,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 402,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 557,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 557,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 557,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 402,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 557,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 705,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 705,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 402,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 557,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 705,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 958,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 402,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 557,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 705,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 958,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei",
+      "then_true": "med_rasi",
+      "train_support": 1287,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat",
+      "then_true": "med_platelet",
+      "train_support": 1390,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb",
+      "then_true": "med_rasi",
+      "train_support": 794,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arni",
+      "then_true": "med_arb",
+      "train_support": 287,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arni",
+      "then_true": "med_rasi",
+      "train_support": 287,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_sglt2i",
+      "then_true": "med_oral_antidiabetic",
+      "train_support": 725,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei_history",
+      "then_true": "med_rasi_history",
+      "train_support": 1238,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat_history",
+      "then_true": "med_platelet_history",
+      "train_support": 1208,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb_history",
+      "then_true": "med_rasi_history",
+      "train_support": 795,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arni_history",
+      "then_true": "med_arb_history",
+      "train_support": 231,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arni_history",
+      "then_true": "med_diuretics_history",
+      "train_support": 231,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arni_history",
+      "then_true": "med_rasi_history",
+      "train_support": 231,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop_history",
+      "then_true": "med_diuretics_history",
+      "train_support": 2664,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra_history",
+      "then_true": "med_diuretics_history",
+      "train_support": 1254,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_potassium_binders_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_sglt2i_history",
+      "then_true": "med_oral_antidiabetic_history",
+      "train_support": 338,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ap",
+      "then_true": "conditions_ihd",
+      "train_support": 489,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mc",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 67,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "conditions_ihd",
+      "train_support": 545,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 51,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 69,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 112,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "category_range",
+      "categorical": "ckd_severity_from_calculated_egfr",
+      "numeric": "lab_results_valideGFR_value_first",
+      "ranges": {
+        "mild_to_moderate_decrease": [
+          -0.3,
+          94.3
+        ],
+        "mildly_decreased": [
+          0.7,
+          94.3
+        ],
+        "moderate_to_severe_decrease": [
+          0.7,
+          94.3
+        ],
+        "normal_or_high": [
+          0.7,
+          94.3
+        ],
+        "severe_decrease": [
+          0.7,
+          84.3
+        ]
+      },
+      "margin": 4.3
+    },
+    {
+      "type": "category_range",
+      "categorical": "ckd_severity_from_calculated_egfr",
+      "numeric": "lab_results_valideGFR_value_last",
+      "ranges": {
+        "mild_to_moderate_decrease": [
+          -0.55,
+          94.55
+        ],
+        "mildly_decreased": [
+          0.45,
+          94.55
+        ],
+        "moderate_to_severe_decrease": [
+          0.45,
+          94.55
+        ],
+        "normal_or_high": [
+          0.45,
+          99.55
+        ],
+        "severe_decrease": [
+          0.45,
+          44.55
+        ]
+      },
+      "margin": 4.55
+    },
+    {
+      "type": "category_range",
+      "categorical": "hyperkalemia_severity_categorizedValue",
+      "numeric": "lab_results_potassium_value_first",
+      "ranges": {
+        "mild": [
+          2.68,
+          6.38
+        ],
+        "moderate": [
+          2.61,
+          6.72
+        ],
+        "normal": [
+          0.88,
+          7.92
+        ],
+        "severe": [
+          2.58,
+          6.86
+        ]
+      },
+      "margin": 0.32
+    },
+    {
+      "type": "category_range",
+      "categorical": "hyperkalemia_severity_categorizedValue",
+      "numeric": "lab_results_potassium_value_last",
+      "ranges": {
+        "mild": [
+          3.5965,
+          6.0835
+        ],
+        "moderate": [
+          3.6965,
+          6.9035
+        ],
+        "normal": [
+          1.6965,
+          7.4035
+        ],
+        "severe": [
+          3.5965,
+          8.3735
+        ]
+      },
+      "margin": 0.3035
+    },
+    {
+      "type": "days_bounds",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "max_days": 1825
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w7d_first",
+      "window_days": 7
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "window_days": 30
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "window_days": 91
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "window_days": 182
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w1a_first",
+      "window_days": 365
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w3a_first",
+      "window_days": 1095
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w5a_first",
+      "window_days": 1825
+    }
+  ]
+}

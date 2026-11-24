@@ -1,0 +1,47 @@
+{
+  "run_id": "gaussian_copula_seed1",
+  "file": "DT4H_Synthetic_gaussian_copula_seed1.csv",
+  "synthesizer": "gaussian_copula",
+  "base_synthesizer": "gaussian_copula",
+  "run_transform": null,
+  "differential_privacy": {
+    "formal_guarantee": false,
+    "epsilon": null
+  },
+  "seed": 1,
+  "rows": 1549,
+  "columns": 256,
+  "fidelity": {
+    "ks_mean_numeric": 0.3303,
+    "tvd_mean_categorical": 0.0144,
+    "missing_rate_mad": 0.139,
+    "c2st_auc": 1.0
+  },
+  "joint_structure": {
+    "fabricated_association_pairs": 16
+  },
+  "row_coherence": {
+    "violation_rate": 0.07181
+  },
+  "survival": {
+    "all_cause_death": false
+  },
+  "distances": {
+    "verbatim_training_rows": 0,
+    "dcr_median": 0.172758,
+    "share_closer_than_holdout_p5": 0.0,
+    "nndr_median": 0.9761
+  },
+  "attacks": {
+    "mia_auc": 0.5126,
+    "mia_learned_auc": 0.5073,
+    "empirical_epsilon_lower_bound": 0.0,
+    "mia_auc_most_atypical_quartile": 0.4991,
+    "aia_worst_membership_advantage": 0.0436,
+    "singling_out_risk": 0.0132,
+    "linkability_risk": 0.0
+  },
+  "release_gate": "FAIL",
+  "release_gate_policy": "release",
+  "cleared_for_open_release": false
+}

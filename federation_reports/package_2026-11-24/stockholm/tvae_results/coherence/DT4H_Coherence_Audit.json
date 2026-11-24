@@ -1,0 +1,105 @@
+{
+  "n_rules": 220,
+  "rules_by_type": {
+    "implication": 208,
+    "category_range": 4,
+    "days_bounds": 1,
+    "flag_days_consistency": 7
+  },
+  "frames": [
+    {
+      "rules": 220,
+      "rule_checks_applicable": 43351,
+      "violations": 0,
+      "overall_violation_rate": 0.0,
+      "rules_violated": 0,
+      "consequent_missing_share": 0.03372,
+      "rows": 602,
+      "rows_with_any_violation": 0,
+      "share_rows_with_any_violation": 0.0,
+      "frame": "train (real)"
+    },
+    {
+      "rules": 220,
+      "rule_checks_applicable": 15156,
+      "violations": 2,
+      "overall_violation_rate": 0.00013,
+      "rules_violated": 2,
+      "consequent_missing_share": 0.03763,
+      "rows": 200,
+      "rows_with_any_violation": 2,
+      "share_rows_with_any_violation": 0.01,
+      "frame": "holdout (real, unseen)"
+    },
+    {
+      "rules": 220,
+      "rule_checks_applicable": 45517,
+      "violations": 469,
+      "overall_violation_rate": 0.0103,
+      "rules_violated": 118,
+      "consequent_missing_share": 0.03809,
+      "rows": 602,
+      "rows_with_any_violation": 136,
+      "share_rows_with_any_violation": 0.22591,
+      "frame": "synthetic[tvae_seed0]",
+      "run_id": "tvae_seed0",
+      "worst_rules": [
+        {
+          "type": "flag_days_consistency",
+          "if_true": null,
+          "then_true": null,
+          "categorical": null,
+          "numeric": null,
+          "days": "cause_of_death_number_of_days_to_death_for_CV_f5a_first",
+          "flag": "cause_of_death_isCV_f5a_w1mo_first",
+          "violation_rate": 1.0,
+          "applicable": 7
+        },
+        {
+          "type": "flag_days_consistency",
+          "if_true": null,
+          "then_true": null,
+          "categorical": null,
+          "numeric": null,
+          "days": "cause_of_death_number_of_days_to_death_for_CV_f5a_first",
+          "flag": "cause_of_death_isCV_f5a_w3mo_first",
+          "violation_rate": 0.47619,
+          "applicable": 42
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isNonRenalAndNonCV_f5a_w1a_first",
+          "then_true": "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.175,
+          "applicable": 40
+        },
+        {
+          "type": "flag_days_consistency",
+          "if_true": null,
+          "then_true": null,
+          "categorical": null,
+          "numeric": null,
+          "days": "cause_of_death_number_of_days_to_death_for_CV_f5a_first",
+          "flag": "cause_of_death_isCV_f5a_w5a_first",
+          "violation_rate": 0.17143,
+          "applicable": 280
+        },
+        {
+          "type": "implication",
+          "if_true": "cause_of_death_isNonRenalAndNonCV_f5a_w3a_first",
+          "then_true": "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.13043,
+          "applicable": 69
+        }
+      ]
+    }
+  ]
+}

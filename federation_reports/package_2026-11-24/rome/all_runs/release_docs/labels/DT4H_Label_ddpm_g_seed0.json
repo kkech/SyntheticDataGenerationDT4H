@@ -1,0 +1,45 @@
+{
+  "run_id": "ddpm_g_seed0",
+  "file": "DT4H_Synthetic_ddpm_g_seed0.csv",
+  "synthesizer": "ddpm_g",
+  "base_synthesizer": "ddpm",
+  "run_transform": null,
+  "differential_privacy": {
+    "formal_guarantee": false,
+    "epsilon": null
+  },
+  "seed": 0,
+  "rows": 3773,
+  "columns": 255,
+  "fidelity": {
+    "ks_mean_numeric": 0.3675,
+    "tvd_mean_categorical": 0.1105,
+    "missing_rate_mad": 0.1071,
+    "c2st_auc": 1.0
+  },
+  "joint_structure": {
+    "fabricated_association_pairs": 35
+  },
+  "row_coherence": {
+    "violation_rate": 0.00719
+  },
+  "survival": {},
+  "distances": {
+    "verbatim_training_rows": 0,
+    "dcr_median": 0.08191,
+    "share_closer_than_holdout_p5": 0.0,
+    "nndr_median": 0.9608
+  },
+  "attacks": {
+    "mia_auc": 0.4753,
+    "mia_learned_auc": 0.5135,
+    "empirical_epsilon_lower_bound": 0.0091,
+    "mia_auc_most_atypical_quartile": 0.4937,
+    "aia_worst_membership_advantage": -0.0023,
+    "singling_out_risk": 0.0,
+    "linkability_risk": 0.0
+  },
+  "release_gate": "PASS",
+  "release_gate_policy": "release",
+  "cleared_for_open_release": true
+}

@@ -1,0 +1,1898 @@
+{
+  "n_rules": 10,
+  "rules_by_type": {
+    "implication": 8,
+    "category_range": 2
+  },
+  "frames": [
+    {
+      "rules": 10,
+      "rule_checks_applicable": 11444,
+      "violations": 0,
+      "overall_violation_rate": 0.0,
+      "rules_violated": 0,
+      "consequent_missing_share": 0.01308,
+      "rows": 4706,
+      "rows_with_any_violation": 0,
+      "share_rows_with_any_violation": 0.0,
+      "frame": "train (real)"
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 3836,
+      "violations": 0,
+      "overall_violation_rate": 0.0,
+      "rules_violated": 0,
+      "consequent_missing_share": 0.02473,
+      "rows": 1568,
+      "rows_with_any_violation": 0,
+      "share_rows_with_any_violation": 0.0,
+      "frame": "holdout (real, unseen)"
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 13132,
+      "violations": 1762,
+      "overall_violation_rate": 0.13418,
+      "rules_violated": 10,
+      "consequent_missing_share": 0.12305,
+      "rows": 4706,
+      "rows_with_any_violation": 1246,
+      "share_rows_with_any_violation": 0.26477,
+      "frame": "synthetic[ctgan_qt_seed0]",
+      "run_id": "ctgan_qt_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.36811,
+          "applicable": 508
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.34454,
+          "applicable": 476
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.24648,
+          "applicable": 426
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.24312,
+          "applicable": 436
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.23,
+          "applicable": 500
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 13509,
+      "violations": 1702,
+      "overall_violation_rate": 0.12599,
+      "rules_violated": 10,
+      "consequent_missing_share": 0.07056,
+      "rows": 4706,
+      "rows_with_any_violation": 1076,
+      "share_rows_with_any_violation": 0.22864,
+      "frame": "synthetic[ctgan_seed0]",
+      "run_id": "ctgan_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.55987,
+          "applicable": 309
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.54464,
+          "applicable": 448
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.43234,
+          "applicable": 569
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.42632,
+          "applicable": 699
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.28846,
+          "applicable": 676
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 13500,
+      "violations": 1829,
+      "overall_violation_rate": 0.13548,
+      "rules_violated": 10,
+      "consequent_missing_share": 0.05594,
+      "rows": 4706,
+      "rows_with_any_violation": 1159,
+      "share_rows_with_any_violation": 0.24628,
+      "frame": "synthetic[ctgan_seed1]",
+      "run_id": "ctgan_seed1",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.67877,
+          "applicable": 358
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.65714,
+          "applicable": 420
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.48889,
+          "applicable": 225
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.48086,
+          "applicable": 418
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.41979,
+          "applicable": 374
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 13667,
+      "violations": 1610,
+      "overall_violation_rate": 0.1178,
+      "rules_violated": 10,
+      "consequent_missing_share": 0.07397,
+      "rows": 4706,
+      "rows_with_any_violation": 1060,
+      "share_rows_with_any_violation": 0.22524,
+      "frame": "synthetic[ctgan_seed2]",
+      "run_id": "ctgan_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.36803,
+          "applicable": 269
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.3557,
+          "applicable": 790
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.34043,
+          "applicable": 564
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.33059,
+          "applicable": 608
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.25714,
+          "applicable": 595
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 9308,
+      "violations": 37,
+      "overall_violation_rate": 0.00398,
+      "rules_violated": 1,
+      "consequent_missing_share": null,
+      "rows": 4706,
+      "rows_with_any_violation": 37,
+      "share_rows_with_any_violation": 0.00786,
+      "frame": "synthetic[ddpm_g_seed0]",
+      "run_id": "ddpm_g_seed0",
+      "worst_rules": [
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00795,
+          "applicable": 4653
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10514,
+      "violations": 121,
+      "overall_violation_rate": 0.01151,
+      "rules_violated": 9,
+      "consequent_missing_share": 0.00994,
+      "rows": 4706,
+      "rows_with_any_violation": 113,
+      "share_rows_with_any_violation": 0.02401,
+      "frame": "synthetic[ddpm_seed0]",
+      "run_id": "ddpm_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.17857,
+          "applicable": 28
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.14286,
+          "applicable": 28
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.08015,
+          "applicable": 524
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.07692,
+          "applicable": 507
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.06667,
+          "applicable": 30
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10520,
+      "violations": 148,
+      "overall_violation_rate": 0.01407,
+      "rules_violated": 9,
+      "consequent_missing_share": 0.01687,
+      "rows": 4706,
+      "rows_with_any_violation": 136,
+      "share_rows_with_any_violation": 0.0289,
+      "frame": "synthetic[ddpm_seed1]",
+      "run_id": "ddpm_seed1",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.18182,
+          "applicable": 33
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.15152,
+          "applicable": 33
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.15152,
+          "applicable": 33
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.12903,
+          "applicable": 31
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.10536,
+          "applicable": 541
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10637,
+      "violations": 132,
+      "overall_violation_rate": 0.01241,
+      "rules_violated": 9,
+      "consequent_missing_share": 0.00819,
+      "rows": 4706,
+      "rows_with_any_violation": 122,
+      "share_rows_with_any_violation": 0.02592,
+      "frame": "synthetic[ddpm_seed2]",
+      "run_id": "ddpm_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.12195,
+          "applicable": 41
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.09756,
+          "applicable": 41
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.09392,
+          "applicable": 543
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.07509,
+          "applicable": 546
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.06977,
+          "applicable": 43
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 12357,
+      "violations": 2254,
+      "overall_violation_rate": 0.18241,
+      "rules_violated": 3,
+      "consequent_missing_share": 0.00729,
+      "rows": 4706,
+      "rows_with_any_violation": 2231,
+      "share_rows_with_any_violation": 0.47408,
+      "frame": "synthetic[dpctgan_eps10_seed0]",
+      "run_id": "dpctgan_eps10_seed0",
+      "worst_rules": [
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.47626,
+          "applicable": 4655
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00759,
+          "applicable": 4086
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_first",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00166,
+          "applicable": 3614
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 8230,
+      "violations": 132,
+      "overall_violation_rate": 0.01604,
+      "rules_violated": 2,
+      "consequent_missing_share": 0.00047,
+      "rows": 4706,
+      "rows_with_any_violation": 132,
+      "share_rows_with_any_violation": 0.02805,
+      "frame": "synthetic[dpctgan_eps15_seed0]",
+      "run_id": "dpctgan_eps15_seed0",
+      "worst_rules": [
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.0321,
+          "applicable": 3988
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00096,
+          "applicable": 4181
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 8391,
+      "violations": 0,
+      "overall_violation_rate": 0.0,
+      "rules_violated": 0,
+      "consequent_missing_share": 0.00217,
+      "rows": 4706,
+      "rows_with_any_violation": 0,
+      "share_rows_with_any_violation": 0.0,
+      "frame": "synthetic[dpctgan_eps15_seed1]",
+      "run_id": "dpctgan_eps15_seed1",
+      "worst_rules": []
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 4855,
+      "violations": 9,
+      "overall_violation_rate": 0.00185,
+      "rules_violated": 4,
+      "consequent_missing_share": 0.77778,
+      "rows": 4706,
+      "rows_with_any_violation": 9,
+      "share_rows_with_any_violation": 0.00191,
+      "frame": "synthetic[dpctgan_eps15_seed2]",
+      "run_id": "dpctgan_eps15_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 2
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.0033,
+          "applicable": 1211
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_first",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00027,
+          "applicable": 3640
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 4705,
+      "violations": 2670,
+      "overall_violation_rate": 0.56748,
+      "rules_violated": 2,
+      "consequent_missing_share": 0.85714,
+      "rows": 4706,
+      "rows_with_any_violation": 2667,
+      "share_rows_with_any_violation": 0.56672,
+      "frame": "synthetic[dpctgan_eps1_seed0]",
+      "run_id": "dpctgan_eps1_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.66667,
+          "applicable": 6
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.57149,
+          "applicable": 4665
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 4897,
+      "violations": 1,
+      "overall_violation_rate": 0.0002,
+      "rules_violated": 1,
+      "consequent_missing_share": 0.85714,
+      "rows": 4706,
+      "rows_with_any_violation": 1,
+      "share_rows_with_any_violation": 0.00021,
+      "frame": "synthetic[dpctgan_eps20_seed0]",
+      "run_id": "dpctgan_eps20_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 13426,
+      "violations": 1599,
+      "overall_violation_rate": 0.1191,
+      "rules_violated": 2,
+      "consequent_missing_share": 0.01155,
+      "rows": 4706,
+      "rows_with_any_violation": 1598,
+      "share_rows_with_any_violation": 0.33957,
+      "frame": "synthetic[dpctgan_eps5_seed0]",
+      "run_id": "dpctgan_eps5_seed0",
+      "worst_rules": [
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.34645,
+          "applicable": 4601
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00107,
+          "applicable": 4679
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 6462,
+      "violations": 162,
+      "overall_violation_rate": 0.02507,
+      "rules_violated": 1,
+      "consequent_missing_share": 0.00227,
+      "rows": 4706,
+      "rows_with_any_violation": 162,
+      "share_rows_with_any_violation": 0.03442,
+      "frame": "synthetic[dpctgan_eps8_seed0]",
+      "run_id": "dpctgan_eps8_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.0922,
+          "applicable": 1757
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 11137,
+      "violations": 673,
+      "overall_violation_rate": 0.06043,
+      "rules_violated": 6,
+      "consequent_missing_share": 0.15604,
+      "rows": 4706,
+      "rows_with_any_violation": 623,
+      "share_rows_with_any_violation": 0.13238,
+      "frame": "synthetic[gaussian_copula_seed0]",
+      "run_id": "gaussian_copula_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.32717,
+          "applicable": 920
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.32423,
+          "applicable": 842
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.01944,
+          "applicable": 4681
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 11191,
+      "violations": 733,
+      "overall_violation_rate": 0.0655,
+      "rules_violated": 7,
+      "consequent_missing_share": 0.15143,
+      "rows": 4706,
+      "rows_with_any_violation": 674,
+      "share_rows_with_any_violation": 0.14322,
+      "frame": "synthetic[gaussian_copula_seed1]",
+      "run_id": "gaussian_copula_seed1",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 1.0,
+          "applicable": 1
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 4
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.33743,
+          "applicable": 895
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.33333,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.32868,
+          "applicable": 931
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 11203,
+      "violations": 655,
+      "overall_violation_rate": 0.05847,
+      "rules_violated": 9,
+      "consequent_missing_share": 0.17038,
+      "rows": 4706,
+      "rows_with_any_violation": 618,
+      "share_rows_with_any_violation": 0.13132,
+      "frame": "synthetic[gaussian_copula_seed2]",
+      "run_id": "gaussian_copula_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.66667,
+          "applicable": 3
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 2
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.5,
+          "applicable": 2
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 11400,
+      "violations": 199,
+      "overall_violation_rate": 0.01746,
+      "rules_violated": 9,
+      "consequent_missing_share": 0.01647,
+      "rows": 4706,
+      "rows_with_any_violation": 114,
+      "share_rows_with_any_violation": 0.02422,
+      "frame": "synthetic[mst_eps15_seed0]",
+      "run_id": "mst_eps15_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.85106,
+          "applicable": 47
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.84783,
+          "applicable": 46
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.64516,
+          "applicable": 62
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.63333,
+          "applicable": 60
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.28788,
+          "applicable": 66
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10934,
+      "violations": 178,
+      "overall_violation_rate": 0.01628,
+      "rules_violated": 4,
+      "consequent_missing_share": 0.0,
+      "rows": 4706,
+      "rows_with_any_violation": 173,
+      "share_rows_with_any_violation": 0.03676,
+      "frame": "synthetic[patectgan_eps15_seed0]",
+      "run_id": "patectgan_eps15_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.07123,
+          "applicable": 730
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.07053,
+          "applicable": 794
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.01232,
+          "applicable": 4706
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_first",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00255,
+          "applicable": 4704
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 9779,
+      "violations": 2092,
+      "overall_violation_rate": 0.21393,
+      "rules_violated": 10,
+      "consequent_missing_share": 0.55799,
+      "rows": 4706,
+      "rows_with_any_violation": 1686,
+      "share_rows_with_any_violation": 0.35827,
+      "frame": "synthetic[patectgan_eps1_seed0]",
+      "run_id": "patectgan_eps1_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.60645,
+          "applicable": 155
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.56774,
+          "applicable": 155
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.49178,
+          "applicable": 791
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.47425,
+          "applicable": 563
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.46491,
+          "applicable": 114
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10491,
+      "violations": 332,
+      "overall_violation_rate": 0.03165,
+      "rules_violated": 4,
+      "consequent_missing_share": 0.00184,
+      "rows": 4706,
+      "rows_with_any_violation": 315,
+      "share_rows_with_any_violation": 0.06694,
+      "frame": "synthetic[patectgan_eps5_seed0]",
+      "run_id": "patectgan_eps5_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.26449,
+          "applicable": 552
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.23452,
+          "applicable": 533
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.01212,
+          "applicable": 4703
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_first",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00085,
+          "applicable": 4703
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10996,
+      "violations": 42,
+      "overall_violation_rate": 0.00382,
+      "rules_violated": 4,
+      "consequent_missing_share": 0.03741,
+      "rows": 4706,
+      "rows_with_any_violation": 42,
+      "share_rows_with_any_violation": 0.00892,
+      "frame": "synthetic[tvae_cap256_seed0]",
+      "run_id": "tvae_cap256_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.07143,
+          "applicable": 14
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.01065,
+          "applicable": 845
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.0064,
+          "applicable": 4688
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00303,
+          "applicable": 661
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 11152,
+      "violations": 64,
+      "overall_violation_rate": 0.00574,
+      "rules_violated": 5,
+      "consequent_missing_share": 0.01912,
+      "rows": 4706,
+      "rows_with_any_violation": 63,
+      "share_rows_with_any_violation": 0.01339,
+      "frame": "synthetic[tvae_ep1000_seed0]",
+      "run_id": "tvae_ep1000_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.04762,
+          "applicable": 21
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.03571,
+          "applicable": 28
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.03251,
+          "applicable": 646
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.01508,
+          "applicable": 1061
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00539,
+          "applicable": 4638
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10729,
+      "violations": 18,
+      "overall_violation_rate": 0.00168,
+      "rules_violated": 5,
+      "consequent_missing_share": 0.04173,
+      "rows": 4706,
+      "rows_with_any_violation": 17,
+      "share_rows_with_any_violation": 0.00361,
+      "frame": "synthetic[tvae_ind_seed0]",
+      "run_id": "tvae_ind_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.08333,
+          "applicable": 12
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.06452,
+          "applicable": 31
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.03333,
+          "applicable": 30
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00851,
+          "applicable": 470
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00213,
+          "applicable": 4702
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10351,
+      "violations": 140,
+      "overall_violation_rate": 0.01353,
+      "rules_violated": 8,
+      "consequent_missing_share": 0.06698,
+      "rows": 4706,
+      "rows_with_any_violation": 136,
+      "share_rows_with_any_violation": 0.0289,
+      "frame": "synthetic[tvae_qt_seed0]",
+      "run_id": "tvae_qt_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.125,
+          "applicable": 16
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.07692,
+          "applicable": 39
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.06667,
+          "applicable": 15
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.05882,
+          "applicable": 17
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.05882,
+          "applicable": 17
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 11911,
+      "violations": 104,
+      "overall_violation_rate": 0.00873,
+      "rules_violated": 8,
+      "consequent_missing_share": 0.01672,
+      "rows": 4706,
+      "rows_with_any_violation": 100,
+      "share_rows_with_any_violation": 0.02125,
+      "frame": "synthetic[tvae_qt_seed1]",
+      "run_id": "tvae_qt_seed1",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.05556,
+          "applicable": 36
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.04348,
+          "applicable": 23
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.04348,
+          "applicable": 23
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.04348,
+          "applicable": 23
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.04348,
+          "applicable": 23
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10653,
+      "violations": 137,
+      "overall_violation_rate": 0.01286,
+      "rules_violated": 6,
+      "consequent_missing_share": 0.03986,
+      "rows": 4706,
+      "rows_with_any_violation": 135,
+      "share_rows_with_any_violation": 0.02869,
+      "frame": "synthetic[tvae_qt_seed2]",
+      "run_id": "tvae_qt_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.04878,
+          "applicable": 41
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.04545,
+          "applicable": 22
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.04545,
+          "applicable": 22
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.02565,
+          "applicable": 4639
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.01682,
+          "applicable": 535
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10804,
+      "violations": 52,
+      "overall_violation_rate": 0.00481,
+      "rules_violated": 5,
+      "consequent_missing_share": 0.0301,
+      "rows": 4706,
+      "rows_with_any_violation": 51,
+      "share_rows_with_any_violation": 0.01084,
+      "frame": "synthetic[tvae_seed0]",
+      "run_id": "tvae_seed0",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.04545,
+          "applicable": 22
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.02857,
+          "applicable": 35
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.026,
+          "applicable": 500
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00687,
+          "applicable": 4655
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00605,
+          "applicable": 826
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 11268,
+      "violations": 37,
+      "overall_violation_rate": 0.00328,
+      "rules_violated": 3,
+      "consequent_missing_share": 0.03785,
+      "rows": 4706,
+      "rows_with_any_violation": 37,
+      "share_rows_with_any_violation": 0.00786,
+      "frame": "synthetic[tvae_seed1]",
+      "run_id": "tvae_seed1",
+      "worst_rules": [
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00682,
+          "applicable": 4691
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00572,
+          "applicable": 699
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00097,
+          "applicable": 1032
+        }
+      ]
+    },
+    {
+      "rules": 10,
+      "rule_checks_applicable": 10965,
+      "violations": 54,
+      "overall_violation_rate": 0.00492,
+      "rules_violated": 5,
+      "consequent_missing_share": 0.03214,
+      "rows": 4706,
+      "rows_with_any_violation": 53,
+      "share_rows_with_any_violation": 0.01126,
+      "frame": "synthetic[tvae_seed2]",
+      "run_id": "tvae_seed2",
+      "worst_rules": [
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.05882,
+          "applicable": 17
+        },
+        {
+          "type": "implication",
+          "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+          "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.05556,
+          "applicable": 18
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_mi",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.01601,
+          "applicable": 937
+        },
+        {
+          "type": "implication",
+          "if_true": "conditions_ap",
+          "then_true": "conditions_ihd",
+          "categorical": null,
+          "numeric": null,
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.01093,
+          "applicable": 549
+        },
+        {
+          "type": "category_range",
+          "if_true": null,
+          "then_true": null,
+          "categorical": "hyperkalemia_severity_categorizedValue",
+          "numeric": "lab_results_potassium_value_last",
+          "days": null,
+          "flag": null,
+          "violation_rate": 0.00664,
+          "applicable": 4666
+        }
+      ]
+    }
+  ]
+}

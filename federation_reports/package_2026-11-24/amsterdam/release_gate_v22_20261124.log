@@ -1,0 +1,1051 @@
+Policy: release -- coherence 10x holdout baseline (or +1% absolute), distance 2x the natural 5% share
+Gating 47 file(s) under every policy...
+
+
+######################################################################
+# DT4H_Synthetic_aim40_eps10_seed0.csv
+######################################################################
+  note: 160032 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_aim40_eps10_seed0.csv (3334 x 77):
+  ✅ schema: 77 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 5.6% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02026 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 77 shared column(s); subset p5 = 0.039318 (committed full-width p5 0.070828 does not apply)
+  ✅ distance: 3/500 record(s) (0.6%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.039318, over 77 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps10_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps10_seed0.json
+
+######################################################################
+# DT4H_Synthetic_aim40_eps15_seed0.csv
+######################################################################
+  note: 160032 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_aim40_eps15_seed0.csv (3334 x 77):
+  ✅ schema: 77 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 5.4% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02235 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 77 shared column(s); subset p5 = 0.039318 (committed full-width p5 0.070828 does not apply)
+  ✅ distance: 2/500 record(s) (0.4%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.039318, over 77 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps15_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_aim40_eps1_seed0.csv
+######################################################################
+  note: 160032 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_aim40_eps1_seed0.csv (3334 x 77):
+  ✅ schema: 77 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 7.1% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02595 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 77 shared column(s); subset p5 = 0.039318 (committed full-width p5 0.070828 does not apply)
+  ✅ distance: 0/500 record(s) (0.0%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.039318, over 77 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps1_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_aim40_eps20_seed0.csv
+######################################################################
+  note: 160032 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_aim40_eps20_seed0.csv (3334 x 77):
+  ✅ schema: 77 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.3% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01289 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 77 shared column(s); subset p5 = 0.039318 (committed full-width p5 0.070828 does not apply)
+  ✅ distance: 9/500 record(s) (1.8%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.039318, over 77 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps20_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps20_seed0.json
+
+######################################################################
+# DT4H_Synthetic_aim40_eps8_seed0.csv
+######################################################################
+  note: 160032 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_aim40_eps8_seed0.csv (3334 x 77):
+  ✅ schema: 77 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.2% (real holdout: 0.4%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00868 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 77 shared column(s); subset p5 = 0.039318 (committed full-width p5 0.070828 does not apply)
+  ✅ distance: 4/500 record(s) (0.8%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.039318, over 77 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps8_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim40_eps8_seed0.json
+
+######################################################################
+# DT4H_Synthetic_aim50_eps1_seed0.csv
+######################################################################
+  note: 180036 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_aim50_eps1_seed0.csv (3334 x 87):
+  ✅ schema: 87 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 13.4% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.04284 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 87 shared column(s); subset p5 = 0.05087 (committed full-width p5 0.070828 does not apply)
+  ✅ distance: 1/500 record(s) (0.2%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.05087, over 87 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim50_eps1_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim50_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_aim50_eps5_seed0.csv
+######################################################################
+  note: 180036 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_aim50_eps5_seed0.csv (3334 x 87):
+  ✅ schema: 87 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.9% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.0118 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ⚠️  width-limited candidate: distance check restricted to the 87 shared column(s); subset p5 = 0.05087 (committed full-width p5 0.070828 does not apply)
+  ✅ distance: 22/500 record(s) (4.4%, spot check (500 sampled rows)) closer than the holdout p5 threshold (0.05087, over 87 column(s), SUBSET of the full schema); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim50_eps5_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_aim50_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_qt_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_ctgan_qt_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 92.4% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.35518 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_qt_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_qt_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_ctgan_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 96.6% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.38536 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_seed1.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_ctgan_seed1.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 97.4% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.4059 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed1.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed1.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_seed2.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_ctgan_seed2.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 98.5% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.36413 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed2.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed2.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_g_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_ddpm_g_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.0% (real holdout: 0.4%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00811 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_g_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_g_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_ddpm_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 85.8% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.15041 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_seed1.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_ddpm_seed1.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 87.2% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.164 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed1.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed1.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_seed2.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_ddpm_seed2.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 89.1% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.15339 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed2.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed2.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps10_seed0.csv
+######################################################################
+  note: 420084 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_dpctgan_eps10_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.44475 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps10_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps10_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps15_seed0.csv
+######################################################################
+  note: 416750 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_dpctgan_eps15_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.46191 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps15_seed1.csv
+######################################################################
+  note: 410082 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_dpctgan_eps15_seed1.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.4051 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed1.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed1.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps15_seed2.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_dpctgan_eps15_seed2.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.46238 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed2.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed2.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps1_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_dpctgan_eps1_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.54556 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps1_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps20_seed0.csv
+######################################################################
+  note: 416750 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_dpctgan_eps20_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.39064 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps20_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps20_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps5_seed0.csv
+######################################################################
+  note: 410082 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_dpctgan_eps5_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.8555 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps5_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps8_seed0.csv
+######################################################################
+  note: 416750 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_dpctgan_eps8_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.81102 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps8_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps8_seed0.json
+
+######################################################################
+# DT4H_Synthetic_gaussian_copula_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_gaussian_copula_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 95.1% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.33726 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed0.json
+
+######################################################################
+# DT4H_Synthetic_gaussian_copula_seed1.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_gaussian_copula_seed1.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 95.8% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.33009 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed1.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed1.json
+
+######################################################################
+# DT4H_Synthetic_gaussian_copula_seed2.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_gaussian_copula_seed2.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 94.8% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.3315 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed2.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed2.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps0p5_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_mst_eps0p5_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 83.6% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.21664 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 572/3334 record(s) (17.2%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps0p5_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps0p5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps10_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_mst_eps10_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 24.4% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.03767 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 763/3334 record(s) (22.9%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps10_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps10_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps15_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_mst_eps15_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 23.6% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.04194 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 737/3334 record(s) (22.1%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps15_seed1.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_mst_eps15_seed1.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 25.1% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.04237 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 798/3334 record(s) (23.9%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed1.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed1.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps15_seed2.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_mst_eps15_seed2.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 24.9% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.03948 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 783/3334 record(s) (23.5%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed2.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed2.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps1_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_mst_eps1_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 46.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.08873 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 669/3334 record(s) (20.1%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps1_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps20_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_mst_eps20_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 18.4% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02759 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 847/3334 record(s) (25.4%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps20_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps20_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps5_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_mst_eps5_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 26.5% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.04467 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 751/3334 record(s) (22.5%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps5_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps8_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_mst_eps8_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 23.7% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.04184 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 918/3334 record(s) (27.5%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps8_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps8_seed0.json
+
+######################################################################
+# DT4H_Synthetic_patectgan_eps15_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_patectgan_eps15_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 48.1% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.05122 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 35/3334 record(s) (1.1%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps15_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_patectgan_eps1_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_patectgan_eps1_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 100.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.45826 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps1_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_patectgan_eps5_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_patectgan_eps5_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 82.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.07056 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/3334 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps5_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_cap256_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_tvae_cap256_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 17.6% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01831 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 438/3334 record(s) (13.1%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_cap256_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_cap256_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_ep1000_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_tvae_ep1000_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 17.9% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02128 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 377/3334 record(s) (11.3%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ep1000_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ep1000_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_ind_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_tvae_ind_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 17.5% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.03265 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 523/3334 record(s) (15.7%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ind_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ind_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_qt_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_tvae_qt_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 18.8% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01964 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 361/3334 record(s) (10.8%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_qt_seed1.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_tvae_qt_seed1.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 18.1% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01814 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ✅ distance: 330/3334 record(s) (9.9%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03037), distance ok (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed1.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed1.json
+
+######################################################################
+# DT4H_Synthetic_tvae_qt_seed2.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_tvae_qt_seed2.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 14.5% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01703 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 428/3334 record(s) (12.8%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed2.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed2.json
+
+######################################################################
+# DT4H_Synthetic_tvae_seed0.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_tvae_seed0.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 18.4% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02116 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 405/3334 record(s) (12.2%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed0.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_seed1.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_tvae_seed1.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 18.9% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02263 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 407/3334 record(s) (12.2%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed1.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed1.json
+
+######################################################################
+# DT4H_Synthetic_tvae_seed2.csv
+######################################################################
+  note: 406748 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Synthetic_tvae_seed2.csv (3334 x 254):
+  ✅ schema: 254 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 19.0% (real holdout: 0.4%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02136 vs holdout baseline 0.00037 (threshold 0.01037 = max(10x baseline, baseline+0.01))
+  ❌ distance: 428/3334 record(s) (12.8%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.070828, over 254 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01037), distance over (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03037), distance over (limit 0.1)
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed2.md
+Report -> /home/lorenzo.pratesi@mydre.org/dt4h-v22-gate/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed2.json
+
+======================================================================
+GATE SUMMARY (same measurement, both policies)
+======================================================================
+file                                         release  controlled failing checks
+DT4H_Synthetic_aim40_eps10_seed0             FAIL     PASS       coherence
+DT4H_Synthetic_aim40_eps15_seed0             FAIL     PASS       coherence
+DT4H_Synthetic_aim40_eps1_seed0              FAIL     PASS       coherence
+DT4H_Synthetic_aim40_eps20_seed0             FAIL     PASS       coherence
+DT4H_Synthetic_aim40_eps8_seed0              PASS     PASS       -
+DT4H_Synthetic_aim50_eps1_seed0              FAIL     FAIL       coherence
+DT4H_Synthetic_aim50_eps5_seed0              FAIL     PASS       coherence
+DT4H_Synthetic_ctgan_qt_seed0                FAIL     FAIL       coherence
+DT4H_Synthetic_ctgan_seed0                   FAIL     FAIL       coherence
+DT4H_Synthetic_ctgan_seed1                   FAIL     FAIL       coherence
+DT4H_Synthetic_ctgan_seed2                   FAIL     FAIL       coherence
+DT4H_Synthetic_ddpm_g_seed0                  PASS     PASS       -
+DT4H_Synthetic_ddpm_seed0                    FAIL     FAIL       coherence
+DT4H_Synthetic_ddpm_seed1                    FAIL     FAIL       coherence
+DT4H_Synthetic_ddpm_seed2                    FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps10_seed0           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps15_seed0           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps15_seed1           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps15_seed2           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps1_seed0            FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps20_seed0           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps5_seed0            FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps8_seed0            FAIL     FAIL       coherence
+DT4H_Synthetic_gaussian_copula_seed0         FAIL     FAIL       coherence
+DT4H_Synthetic_gaussian_copula_seed1         FAIL     FAIL       coherence
+DT4H_Synthetic_gaussian_copula_seed2         FAIL     FAIL       coherence
+DT4H_Synthetic_mst_eps0p5_seed0              FAIL     FAIL       coherence,distance
+DT4H_Synthetic_mst_eps10_seed0               FAIL     FAIL       coherence,distance
+DT4H_Synthetic_mst_eps15_seed0               FAIL     FAIL       coherence,distance
+DT4H_Synthetic_mst_eps15_seed1               FAIL     FAIL       coherence,distance
+DT4H_Synthetic_mst_eps15_seed2               FAIL     FAIL       coherence,distance
+DT4H_Synthetic_mst_eps1_seed0                FAIL     FAIL       coherence,distance
+DT4H_Synthetic_mst_eps20_seed0               FAIL     FAIL       coherence,distance
+DT4H_Synthetic_mst_eps5_seed0                FAIL     FAIL       coherence,distance
+DT4H_Synthetic_mst_eps8_seed0                FAIL     FAIL       coherence,distance
+DT4H_Synthetic_patectgan_eps15_seed0         FAIL     FAIL       coherence
+DT4H_Synthetic_patectgan_eps1_seed0          FAIL     FAIL       coherence
+DT4H_Synthetic_patectgan_eps5_seed0          FAIL     FAIL       coherence
+DT4H_Synthetic_tvae_cap256_seed0             FAIL     FAIL       coherence,distance
+DT4H_Synthetic_tvae_ep1000_seed0             FAIL     FAIL       coherence,distance
+DT4H_Synthetic_tvae_ind_seed0                FAIL     FAIL       coherence,distance
+DT4H_Synthetic_tvae_qt_seed0                 FAIL     FAIL       coherence,distance
+DT4H_Synthetic_tvae_qt_seed1                 FAIL     PASS       coherence
+DT4H_Synthetic_tvae_qt_seed2                 FAIL     FAIL       coherence,distance
+DT4H_Synthetic_tvae_seed0                    FAIL     FAIL       coherence,distance
+DT4H_Synthetic_tvae_seed1                    FAIL     FAIL       coherence,distance
+DT4H_Synthetic_tvae_seed2                    FAIL     FAIL       coherence,distance
+
+2/47 pass 'release'; 8/47 pass 'controlled'. Reports written next to each file.

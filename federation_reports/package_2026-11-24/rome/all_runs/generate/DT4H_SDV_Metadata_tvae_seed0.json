@@ -1,0 +1,464 @@
+{
+    "tables": {
+        "table": {
+            "columns": {
+                "patient_demographics_gender": {
+                    "sdtype": "categorical"
+                },
+                "patient_demographics_age": {
+                    "sdtype": "numerical"
+                },
+                "encounters_admissionYear": {
+                    "datetime_format": "%Y",
+                    "sdtype": "datetime"
+                },
+                "encounters_lengthOfStay": {
+                    "sdtype": "numerical"
+                },
+                "encounters_numOfPreviousHFStays_count": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_weight_value_p6mo_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_weight_value_p6mo_first": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_height_value_p1a_avg": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_weight_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_height_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_diastolicBp_value_first": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_diastolicBp_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_heartRate_value_first": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_heartRate_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_systolicBp_value_first": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_systolicBp_value_last": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_oxygenSaturation_value_first": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_oxygenSaturation_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_hemoglobin_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_hemoglobin_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ferritin_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ferritin_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ntProBnp_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_ntProBnp_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_crpNonHs_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_crpNonHs_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_triGly_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_triGly_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_bun_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_bun_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_potassium_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_potassium_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_sodium_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_sodium_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_albuminBS_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_albuminBS_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_hba1c%_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_hba1c%_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_validSerumCreatinine_value_first": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_valideGFR_value_last": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_valideGFR_value_first": {
+                    "sdtype": "numerical"
+                },
+                "echocardiographs_lvef": {
+                    "sdtype": "numerical"
+                },
+                "echocardiographs_lvef_pET_first": {
+                    "sdtype": "numerical"
+                },
+                "echocardiographs_lvef_pET_last": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qrs_duration_pET_first": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qrs_duration_pET_last": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qrs_axis_pET_first": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qrs_axis_pET_last": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qt_duration_corrected_pET_last": {
+                    "sdtype": "numerical"
+                },
+                "electrocardiographs_ecg_qt_duration_corrected_pET_first": {
+                    "sdtype": "numerical"
+                },
+                "smoking_status_smoker_last": {
+                    "sdtype": "categorical"
+                },
+                "smoking_status_formerSmoker_last": {
+                    "sdtype": "categorical"
+                },
+                "smoking_status_smoker_totalSmokingDuration_sum": {
+                    "sdtype": "numerical"
+                },
+                "smoking_status_smoker_startTime_count": {
+                    "sdtype": "categorical"
+                },
+                "nyha_nyha": {
+                    "sdtype": "categorical"
+                },
+                "nyha_nyha_pET": {
+                    "sdtype": "categorical"
+                },
+                "vital_signs_systolicBpDuringEncounter_value_pET": {
+                    "sdtype": "numerical"
+                },
+                "vital_signs_bmi_value_pET": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_creatBS_value_p3a_avg": {
+                    "sdtype": "numerical"
+                },
+                "lab_results_validSerumCreatinine_value_pET": {
+                    "sdtype": "numerical"
+                },
+                "hyperkalemia_severity_categorizedValue": {
+                    "sdtype": "categorical"
+                },
+                "ckd_severity_categorizedValue": {
+                    "sdtype": "categorical"
+                },
+                "conditions_heartFailure_timeFromEarliest_first": {
+                    "sdtype": "numerical"
+                },
+                "conditions_heart_failure_occurred_prior_to_18_months_any": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_HF_Disease_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_number_of_HF_rehospitalizations_5a_f5a_count": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_CV_Disease_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first": {
+                    "sdtype": "numerical"
+                },
+                "encounter_primary_reason_number_of_CV_rehospitalizations_5a_f5a_count": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_non_CV_Disease_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first": {
+                    "sdtype": "numerical"
+                },
+                "encounter_primary_reason_number_of_non_CV_rehospitalizations_5a_f5a_count": {
+                    "sdtype": "numerical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_renal_complications_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "encounter_primary_reason_number_of_renal_rehospitalizations_5a_f5a_count": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isCV_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isRenal_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w7d_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w1mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w3mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w6mo_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w1a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w3a_first": {
+                    "sdtype": "categorical"
+                },
+                "cause_of_death_isAllCause_f5a_w5a_first": {
+                    "sdtype": "categorical"
+                },
+                "eGFR_2021_ckd_epi_creatinine": {
+                    "sdtype": "numerical"
+                },
+                "ckd_severity_from_calculated_egfr": {
+                    "sdtype": "categorical"
+                },
+                "ckd_severity_calculated_or_measured": {
+                    "sdtype": "categorical"
+                },
+                "maggic_total_score": {
+                    "sdtype": "numerical"
+                },
+                "conditions_af": {
+                    "sdtype": "categorical"
+                },
+                "conditions_aidshiv": {
+                    "sdtype": "categorical"
+                },
+                "conditions_ap": {
+                    "sdtype": "categorical"
+                },
+                "conditions_ckd_chronic": {
+                    "sdtype": "categorical"
+                },
+                "conditions_cm": {
+                    "sdtype": "categorical"
+                },
+                "conditions_copd": {
+                    "sdtype": "categorical"
+                },
+                "conditions_dem": {
+                    "sdtype": "categorical"
+                },
+                "conditions_diabetes": {
+                    "sdtype": "categorical"
+                },
+                "conditions_dysl": {
+                    "sdtype": "categorical"
+                },
+                "conditions_hyp": {
+                    "sdtype": "categorical"
+                },
+                "conditions_ihd": {
+                    "sdtype": "categorical"
+                },
+                "conditions_ld": {
+                    "sdtype": "categorical"
+                },
+                "conditions_mc": {
+                    "sdtype": "categorical"
+                },
+                "conditions_mi": {
+                    "sdtype": "categorical"
+                },
+                "conditions_osa": {
+                    "sdtype": "categorical"
+                },
+                "conditions_pad": {
+                    "sdtype": "categorical"
+                },
+                "conditions_pericardial": {
+                    "sdtype": "categorical"
+                },
+                "conditions_rd": {
+                    "sdtype": "categorical"
+                },
+                "conditions_stroke": {
+                    "sdtype": "categorical"
+                },
+                "conditions_tia": {
+                    "sdtype": "categorical"
+                },
+                "conditions_vd": {
+                    "sdtype": "categorical"
+                }
+            }
+        }
+    },
+    "relationships": [],
+    "METADATA_SPEC_VERSION": "V1"
+}

@@ -1,0 +1,4012 @@
+{
+  "total_rows": 2065,
+  "total_columns": 256,
+  "columns": {
+    "patient_demographics_gender": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "male": 1280,
+        "female": 785
+      }
+    },
+    "patient_demographics_age": {
+      "dtype": "Int32",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 18.0,
+      "max": 100.0,
+      "mean": 72.79709443099273,
+      "std": 12.495774141626429,
+      "quantiles": {
+        "0.05": 49.0,
+        "0.25": 66.0,
+        "0.5": 74.0,
+        "0.75": 82.0,
+        "0.95": 90.0
+      },
+      "is_constant": false
+    },
+    "encounters_encounterClass": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "IMP": 2065
+      }
+    },
+    "encounters_admissionYear": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 14,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "2025": 243,
+        "2016": 221,
+        "2017": 203,
+        "2018": 171,
+        "2015": 162,
+        "2014": 159,
+        "2021": 149,
+        "2019": 139,
+        "2024": 119,
+        "2023": 117,
+        "2022": 108,
+        "2026": 108,
+        "2020": 106,
+        "2013": 60
+      }
+    },
+    "encounters_lengthOfStay": {
+      "dtype": "Int32",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 0.0,
+      "max": 69.0,
+      "mean": 6.527845036319612,
+      "std": 6.328715507587193,
+      "quantiles": {
+        "0.05": 1.0,
+        "0.25": 2.0,
+        "0.5": 4.0,
+        "0.75": 8.0,
+        "0.95": 18.0
+      },
+      "is_constant": false
+    },
+    "encounters_numOfPreviousHFStays_count": {
+      "dtype": "Int64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 0.0,
+      "max": 450.0,
+      "mean": 10.647457627118644,
+      "std": 22.56793522169907,
+      "quantiles": {
+        "0.05": 0.0,
+        "0.25": 0.0,
+        "0.5": 4.0,
+        "0.75": 12.0,
+        "0.95": 41.799999999999955
+      },
+      "is_constant": false
+    },
+    "vital_signs_weight_value_p6mo_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 3.7,
+      "max": 190.0,
+      "mean": 74.51125907990314,
+      "std": 32.34740039581911,
+      "quantiles": {
+        "0.05": 3.75,
+        "0.25": 65.0,
+        "0.5": 80.0,
+        "0.75": 92.0,
+        "0.95": 116.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_weight_value_p6mo_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 3.7,
+      "max": 190.0,
+      "mean": 74.26573849878935,
+      "std": 32.154440770882225,
+      "quantiles": {
+        "0.05": 3.75,
+        "0.25": 65.0,
+        "0.5": 80.0,
+        "0.75": 92.0,
+        "0.95": 115.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_height_value_p1a_avg": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 69.0,
+      "max": 200.0,
+      "mean": 169.86837772397095,
+      "std": 14.2131994470703,
+      "quantiles": {
+        "0.05": 155.0,
+        "0.25": 165.0,
+        "0.5": 171.0,
+        "0.75": 178.0,
+        "0.95": 185.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_weight_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 3.7,
+      "max": 190.0,
+      "mean": 71.91186440677966,
+      "std": 34.14163357372316,
+      "quantiles": {
+        "0.05": 3.75,
+        "0.25": 62.0,
+        "0.5": 79.0,
+        "0.75": 92.0,
+        "0.95": 115.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_height_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 69.0,
+      "max": 200.0,
+      "mean": 169.3820823244552,
+      "std": 15.90855556113342,
+      "quantiles": {
+        "0.05": 155.0,
+        "0.25": 165.0,
+        "0.5": 171.0,
+        "0.75": 178.0,
+        "0.95": 185.79999999999995
+      },
+      "is_constant": false
+    },
+    "vital_signs_diastolicBp_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -30.0,
+      "max": 150.0,
+      "mean": 22.142372881355932,
+      "std": 53.22465979284772,
+      "quantiles": {
+        "0.05": -29.5,
+        "0.25": -29.5,
+        "0.5": -29.5,
+        "0.75": 75.0,
+        "0.95": 90.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_diastolicBp_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -30.0,
+      "max": 150.0,
+      "mean": 22.142372881355932,
+      "std": 53.22465979284772,
+      "quantiles": {
+        "0.05": -29.5,
+        "0.25": -29.5,
+        "0.5": -29.5,
+        "0.75": 75.0,
+        "0.95": 90.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_heartRate_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -14.0,
+      "max": 180.0,
+      "mean": 26.952663438256657,
+      "std": 50.06809285529284,
+      "quantiles": {
+        "0.05": -13.75,
+        "0.25": -13.75,
+        "0.5": -13.75,
+        "0.75": 75.0,
+        "0.95": 110.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_heartRate_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -14.0,
+      "max": 180.0,
+      "mean": 26.952663438256657,
+      "std": 50.06809285529284,
+      "quantiles": {
+        "0.05": -13.75,
+        "0.25": -13.75,
+        "0.5": -13.75,
+        "0.75": 75.0,
+        "0.95": 110.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_systolicBp_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 17.0,
+      "max": 230.0,
+      "mean": 72.490799031477,
+      "std": 57.86121512454399,
+      "quantiles": {
+        "0.05": 17.5,
+        "0.25": 17.5,
+        "0.5": 17.5,
+        "0.75": 125.0,
+        "0.95": 157.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_systolicBp_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 17.0,
+      "max": 230.0,
+      "mean": 72.490799031477,
+      "std": 57.86121512454399,
+      "quantiles": {
+        "0.05": 17.5,
+        "0.25": 17.5,
+        "0.5": 17.5,
+        "0.75": 125.0,
+        "0.95": 157.0
+      },
+      "is_constant": false
+    },
+    "lab_results_hemoglobin_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 13.0,
+      "max": 200.0,
+      "mean": 32.10363196125908,
+      "std": 43.42843519971091,
+      "quantiles": {
+        "0.05": 13.0,
+        "0.25": 13.0,
+        "0.5": 13.0,
+        "0.75": 13.0,
+        "0.95": 140.0
+      },
+      "is_constant": false
+    },
+    "lab_results_hemoglobin_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 13.0,
+      "max": 200.0,
+      "mean": 32.13123486682809,
+      "std": 43.497991997621455,
+      "quantiles": {
+        "0.05": 13.0,
+        "0.25": 13.0,
+        "0.5": 13.0,
+        "0.75": 13.0,
+        "0.95": 140.0
+      },
+      "is_constant": false
+    },
+    "lab_results_ntProBnp_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -8800.0,
+      "max": 35000.0,
+      "mean": 580.9389830508475,
+      "std": 10166.20477948227,
+      "quantiles": {
+        "0.05": -8750.0,
+        "0.25": -8750.0,
+        "0.5": 838.0,
+        "0.75": 4498.0,
+        "0.95": 21042.0
+      },
+      "is_constant": false
+    },
+    "lab_results_ntProBnp_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -8800.0,
+      "max": 35000.0,
+      "mean": 585.2295399515739,
+      "std": 10166.609772156173,
+      "quantiles": {
+        "0.05": -8750.0,
+        "0.25": -8750.0,
+        "0.5": 838.0,
+        "0.75": 4500.0,
+        "0.95": 21042.0
+      },
+      "is_constant": false
+    },
+    "lab_results_crpNonHs_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -99.0,
+      "max": 400.0,
+      "mean": 35.77820823244552,
+      "std": 66.07340372591341,
+      "quantiles": {
+        "0.05": 0.6,
+        "0.25": 2.7,
+        "0.5": 10.1,
+        "0.75": 44.5,
+        "0.95": 180.07999999999996
+      },
+      "is_constant": false
+    },
+    "lab_results_crpNonHs_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -99.0,
+      "max": 400.0,
+      "mean": 35.78387409200968,
+      "std": 66.21493628562759,
+      "quantiles": {
+        "0.05": 0.6,
+        "0.25": 2.7,
+        "0.5": 10.0,
+        "0.75": 44.4,
+        "0.95": 180.07999999999996
+      },
+      "is_constant": false
+    },
+    "lab_results_tropTHs_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -2.5,
+      "max": 10.0,
+      "mean": -0.948772397094431,
+      "std": 2.2261261751280905,
+      "quantiles": {
+        "0.05": -2.5,
+        "0.25": -2.5,
+        "0.5": -2.5,
+        "0.75": 0.1,
+        "0.95": 3.0437999999999983
+      },
+      "is_constant": false
+    },
+    "lab_results_tropTHs_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -2.5,
+      "max": 10.0,
+      "mean": -0.9373786924939468,
+      "std": 2.2530221608966716,
+      "quantiles": {
+        "0.05": -2.5,
+        "0.25": -2.5,
+        "0.5": -2.5,
+        "0.75": 0.102,
+        "0.95": 3.1145999999999994
+      },
+      "is_constant": false
+    },
+    "lab_results_triGly_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -3.4,
+      "max": 14.0,
+      "mean": -1.1486731234866827,
+      "std": 2.4514169850659324,
+      "quantiles": {
+        "0.05": -3.325,
+        "0.25": -3.325,
+        "0.5": -3.325,
+        "0.75": 1.04,
+        "0.95": 2.1779999999999995
+      },
+      "is_constant": false
+    },
+    "lab_results_triGly_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -3.0,
+      "max": 14.0,
+      "mean": -0.9280484261501211,
+      "std": 2.256373244949068,
+      "quantiles": {
+        "0.05": -2.9125,
+        "0.25": -2.9125,
+        "0.5": -2.9125,
+        "0.75": 1.04,
+        "0.95": 2.1779999999999995
+      },
+      "is_constant": false
+    },
+    "lab_results_cholTot_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -0.69,
+      "max": 8.9,
+      "mean": 1.5085714285714285,
+      "std": 2.534732565602363,
+      "quantiles": {
+        "0.05": -0.685,
+        "0.25": -0.685,
+        "0.5": -0.685,
+        "0.75": 3.81,
+        "0.95": 5.71
+      },
+      "is_constant": false
+    },
+    "lab_results_cholTot_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -0.69,
+      "max": 8.9,
+      "mean": 1.510690072639225,
+      "std": 2.534926626123274,
+      "quantiles": {
+        "0.05": -0.685,
+        "0.25": -0.685,
+        "0.5": -0.685,
+        "0.75": 3.81,
+        "0.95": 5.71
+      },
+      "is_constant": false
+    },
+    "lab_results_hdl_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -1.0,
+      "max": 3.0,
+      "mean": -0.05716707021791768,
+      "std": 1.059332219668732,
+      "quantiles": {
+        "0.05": -1.0,
+        "0.25": -1.0,
+        "0.5": -1.0,
+        "0.75": 0.99,
+        "0.95": 1.5179999999999996
+      },
+      "is_constant": false
+    },
+    "lab_results_hdl_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -0.87,
+      "max": 3.0,
+      "mean": 0.0143728813559322,
+      "std": 0.9966289140334424,
+      "quantiles": {
+        "0.05": -0.87,
+        "0.25": -0.87,
+        "0.5": -0.87,
+        "0.75": 0.99,
+        "0.95": 1.5179999999999996
+      },
+      "is_constant": false
+    },
+    "lab_results_potassium_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 0.57,
+      "max": 7.7,
+      "mean": 4.028087167070218,
+      "std": 0.900648034435819,
+      "quantiles": {
+        "0.05": 3.0,
+        "0.25": 3.7,
+        "0.5": 4.1,
+        "0.75": 4.5,
+        "0.95": 5.2
+      },
+      "is_constant": false
+    },
+    "lab_results_potassium_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 0.72,
+      "max": 7.1,
+      "mean": 4.039261501210654,
+      "std": 0.872037828989452,
+      "quantiles": {
+        "0.05": 3.0,
+        "0.25": 3.7,
+        "0.5": 4.1,
+        "0.75": 4.5,
+        "0.95": 5.2
+      },
+      "is_constant": false
+    },
+    "lab_results_sodium_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 100.0,
+      "max": 170.0,
+      "mean": 136.5238498789346,
+      "std": 7.962329181520606,
+      "quantiles": {
+        "0.05": 126.0,
+        "0.25": 135.0,
+        "0.5": 138.0,
+        "0.75": 141.0,
+        "0.95": 144.0
+      },
+      "is_constant": false
+    },
+    "lab_results_sodium_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 98.0,
+      "max": 170.0,
+      "mean": 136.54455205811138,
+      "std": 8.206708301662278,
+      "quantiles": {
+        "0.05": 126.0,
+        "0.25": 135.0,
+        "0.5": 138.0,
+        "0.75": 141.0,
+        "0.95": 144.0
+      },
+      "is_constant": false
+    },
+    "lab_results_albuminBS_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 8.8,
+      "max": 56.0,
+      "mean": 19.25451573849879,
+      "std": 14.582831479721575,
+      "quantiles": {
+        "0.05": 8.825000000000001,
+        "0.25": 8.825000000000001,
+        "0.5": 8.825000000000001,
+        "0.75": 35.8,
+        "0.95": 44.08
+      },
+      "is_constant": false
+    },
+    "lab_results_albuminBS_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 8.8,
+      "max": 56.0,
+      "mean": 19.25470944309927,
+      "std": 14.581599430294832,
+      "quantiles": {
+        "0.05": 8.825000000000001,
+        "0.25": 8.825000000000001,
+        "0.5": 8.825000000000001,
+        "0.75": 35.9,
+        "0.95": 44.08
+      },
+      "is_constant": false
+    },
+    "lab_results_hba1c_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -2.5,
+      "max": 130.0,
+      "mean": 11.081598062953995,
+      "std": 24.2568818726025,
+      "quantiles": {
+        "0.05": -2.5,
+        "0.25": -2.5,
+        "0.5": -2.5,
+        "0.75": 35.0,
+        "0.95": 59.0
+      },
+      "is_constant": false
+    },
+    "lab_results_hba1c_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -2.5,
+      "max": 130.0,
+      "mean": 11.081598062953995,
+      "std": 24.2568818726025,
+      "quantiles": {
+        "0.05": -2.5,
+        "0.25": -2.5,
+        "0.5": -2.5,
+        "0.75": 35.0,
+        "0.95": 59.0
+      },
+      "is_constant": false
+    },
+    "lab_results_validSerumCreatinine_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -1.5,
+      "max": 23.0,
+      "mean": 10.997772881355932,
+      "std": 5.434242938213378,
+      "quantiles": {
+        "0.05": -1.4125,
+        "0.25": 8.701,
+        "0.5": 11.074,
+        "0.75": 14.238,
+        "0.95": 20.001
+      },
+      "is_constant": false
+    },
+    "lab_results_valideGFR_value_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -35.0,
+      "max": 150.0,
+      "mean": 51.04458353510896,
+      "std": 29.57371005646807,
+      "quantiles": {
+        "0.05": 8.4,
+        "0.25": 33.6,
+        "0.5": 51.0,
+        "0.75": 72.0,
+        "0.95": 95.4
+      },
+      "is_constant": false
+    },
+    "lab_results_valideGFR_value_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -35.0,
+      "max": 150.0,
+      "mean": 51.050351089588375,
+      "std": 29.61117739652722,
+      "quantiles": {
+        "0.05": 8.4,
+        "0.25": 33.6,
+        "0.5": 51.0,
+        "0.75": 71.4,
+        "0.95": 96.0
+      },
+      "is_constant": false
+    },
+    "symptoms_Ankle_swelling_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1633,
+        "true": 432
+      }
+    },
+    "symptoms_Ascites_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2052,
+        "true": 13
+      }
+    },
+    "symptoms_Breathlessness_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1953,
+        "true": 112
+      }
+    },
+    "symptoms_Cardiac_murmur_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2063
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 2,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "symptoms_Chest_pain_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2019,
+        "true": 46
+      }
+    },
+    "symptoms_Cheyne_stokes_respiration_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "symptoms_Depression_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1745,
+        "true": 320
+      }
+    },
+    "symptoms_Dizziness_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2036,
+        "true": 29
+      }
+    },
+    "symptoms_Elevated_jugular_venous_pressure_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "symptoms_Fatigue_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2052,
+        "true": 13
+      }
+    },
+    "symptoms_Hepatojugular_reflux_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "symptoms_Hepatomegaly_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2051,
+        "true": 14
+      }
+    },
+    "symptoms_Intermittent_claudication_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "symptoms_Irregular_pulse_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2058,
+        "true": 7
+      }
+    },
+    "symptoms_Loss_of_appetite_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "symptoms_Nocturnal_cough_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "symptoms_Oliguria_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "symptoms_Orthopnoea_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2062
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 3,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "symptoms_Palpitations_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2063
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 2,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "symptoms_Paroxysmal_nocturnal_dyspnea_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2064
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 1,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "symptoms_Peripheral_edema_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1795,
+        "true": 270
+      }
+    },
+    "symptoms_Pleural_effusion_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1942,
+        "true": 123
+      }
+    },
+    "symptoms_Pulmonary_crepitations_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2043,
+        "true": 22
+      }
+    },
+    "symptoms_Reduced_exercise_tolerance_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "symptoms_Syncope_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2052,
+        "true": 13
+      }
+    },
+    "symptoms_Tachycardia_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2001,
+        "true": 64
+      }
+    },
+    "symptoms_Tachypnoea_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2063
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 2,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "symptoms_Third_heart_sound_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2060,
+        "true": 5
+      }
+    },
+    "symptoms_Weight_gain_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "symptoms_Weight_loss_display_pET_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "echocardiographs_lvef": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -8.8,
+      "max": 75.0,
+      "mean": 20.573002421307507,
+      "std": 26.825780216018938,
+      "quantiles": {
+        "0.05": -8.75,
+        "0.25": -8.75,
+        "0.5": 25.0,
+        "0.75": 44.0,
+        "0.95": 62.799999999999955
+      },
+      "is_constant": false
+    },
+    "echocardiographs_lvef_pET_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -18.0,
+      "max": 75.0,
+      "mean": 9.060072639225181,
+      "std": 30.011791937099137,
+      "quantiles": {
+        "0.05": -17.75,
+        "0.25": -17.75,
+        "0.5": -17.75,
+        "0.75": 35.0,
+        "0.95": 60.0
+      },
+      "is_constant": false
+    },
+    "echocardiographs_lvef_pET_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -8.8,
+      "max": 75.0,
+      "mean": 13.728934624697336,
+      "std": 25.986296176652505,
+      "quantiles": {
+        "0.05": -8.75,
+        "0.25": -8.75,
+        "0.5": -8.75,
+        "0.75": 35.0,
+        "0.95": 60.0
+      },
+      "is_constant": false
+    },
+    "electrocardiographs_ecg_qrs_duration_pET_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -31.0,
+      "max": 250.0,
+      "mean": 38.21646489104116,
+      "std": 80.93416024564344,
+      "quantiles": {
+        "0.05": -31.0,
+        "0.25": -31.0,
+        "0.5": -31.0,
+        "0.75": 107.0,
+        "0.95": 180.0
+      },
+      "is_constant": false
+    },
+    "electrocardiographs_ecg_qrs_duration_pET_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -44.0,
+      "max": 280.0,
+      "mean": 30.81682808716707,
+      "std": 86.5757153184939,
+      "quantiles": {
+        "0.05": -43.75,
+        "0.25": -43.75,
+        "0.5": -43.75,
+        "0.75": 108.0,
+        "0.95": 173.0
+      },
+      "is_constant": false
+    },
+    "electrocardiographs_ecg_qrs_axis_pET_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -180.0,
+      "max": 270.0,
+      "mean": -93.88401937046005,
+      "std": 106.58733720222159,
+      "quantiles": {
+        "0.05": -177.5,
+        "0.25": -177.5,
+        "0.5": -177.5,
+        "0.75": -14.0,
+        "0.95": 91.0
+      },
+      "is_constant": false
+    },
+    "electrocardiographs_ecg_qrs_axis_pET_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -180.0,
+      "max": 270.0,
+      "mean": -94.27699757869249,
+      "std": 105.10164033015673,
+      "quantiles": {
+        "0.05": -177.75,
+        "0.25": -177.75,
+        "0.5": -177.75,
+        "0.75": -13.0,
+        "0.95": 89.0
+      },
+      "is_constant": false
+    },
+    "electrocardiographs_ecg_qt_duration_corrected_pET_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 58.0,
+      "max": 690.0,
+      "mean": 240.55193704600484,
+      "std": 205.81177118559626,
+      "quantiles": {
+        "0.05": 58.25,
+        "0.25": 58.25,
+        "0.5": 58.25,
+        "0.75": 458.0,
+        "0.95": 522.0
+      },
+      "is_constant": false
+    },
+    "electrocardiographs_ecg_qt_duration_corrected_pET_last": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 92.0,
+      "max": 670.0,
+      "mean": 260.4523002421308,
+      "std": 189.8348808879219,
+      "quantiles": {
+        "0.05": 92.5,
+        "0.25": 92.5,
+        "0.5": 92.5,
+        "0.75": 458.0,
+        "0.95": 528.8
+      },
+      "is_constant": false
+    },
+    "electrocardiographs_ecg_st_pET": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1148,
+        "false": 896,
+        "true": 21
+      }
+    },
+    "electrocardiographs_ecg_ischemia_without_st_pET": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1148,
+        "false": 898,
+        "true": 19
+      }
+    },
+    "electrocardiographs_ecg_type_of_rhythms_pET_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1141,
+        "LA17059-9": 924
+      }
+    },
+    "electrocardiographs_ecg_type_of_rhythms_pET_last": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1141,
+        "LA17059-9": 924
+      }
+    },
+    "smoking_status_smoker_last": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1667,
+        "true": 398
+      }
+    },
+    "smoking_status_formerSmoker_last": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 743,
+        "true": 682,
+        "Missing": 640
+      }
+    },
+    "smoking_status_smoker_totalSmokingDuration_sum": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -7600.0,
+      "max": 31000.0,
+      "mean": -5626.128813559322,
+      "std": 3715.1474873260513,
+      "quantiles": {
+        "0.05": -7573.0,
+        "0.25": -7573.0,
+        "0.5": -7573.0,
+        "0.75": -7573.0,
+        "0.95": 1064.399999999999
+      },
+      "is_constant": false
+    },
+    "smoking_status_smoker_startTime_count": {
+      "dtype": "Int64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 0.0,
+      "max": 15.0,
+      "mean": 0.40290556900726393,
+      "std": 1.053046191893137,
+      "quantiles": {
+        "0.05": 0.0,
+        "0.25": 0.0,
+        "0.5": 0.0,
+        "0.75": 0.0,
+        "0.95": 2.0
+      },
+      "is_constant": false
+    },
+    "nyha_nyha": {
+      "dtype": "Int64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 1.0,
+      "max": 3.0,
+      "mean": 2.3627118644067795,
+      "std": 0.5325312586629632,
+      "quantiles": {
+        "0.05": 2.0,
+        "0.25": 2.0,
+        "0.5": 2.0,
+        "0.75": 3.0,
+        "0.95": 3.0
+      },
+      "is_constant": false
+    },
+    "nyha_nyha_pET": {
+      "dtype": "Int64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 1.0,
+      "max": 3.0,
+      "mean": 2.3791767554479417,
+      "std": 0.5525244217848939,
+      "quantiles": {
+        "0.05": 2.0,
+        "0.25": 2.0,
+        "0.5": 2.0,
+        "0.75": 3.0,
+        "0.95": 3.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_systolicBpDuringEncounter_value_pET": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 60.0,
+      "max": 230.0,
+      "mean": 129.31005939535316,
+      "std": 17.60202276907315,
+      "quantiles": {
+        "0.05": 100.2,
+        "0.25": 120.0,
+        "0.5": 128.29355177418137,
+        "0.75": 137.04476072292678,
+        "0.95": 160.0
+      },
+      "is_constant": false
+    },
+    "vital_signs_bmi_value_pET": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 1.9,
+      "max": 71.0,
+      "mean": 27.961887362056785,
+      "std": 6.103675420463612,
+      "quantiles": {
+        "0.05": 19.782647899074277,
+        "0.25": 23.875114784205692,
+        "0.5": 27.34375,
+        "0.75": 31.141868512110726,
+        "0.95": 38.56011693933772
+      },
+      "is_constant": false
+    },
+    "lab_results_creatBS_value_p3a_avg": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 3.7,
+      "max": 87.0,
+      "mean": 13.942907846923639,
+      "std": 7.587868038994555,
+      "quantiles": {
+        "0.05": 7.29528,
+        "0.25": 9.680333333333333,
+        "0.5": 12.091,
+        "0.75": 15.661799999999998,
+        "0.95": 26.540471428571426
+      },
+      "is_constant": false
+    },
+    "lab_results_validSerumCreatinine_value_pET": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 3.3,
+      "max": 23.0,
+      "mean": 12.52719800237284,
+      "std": 3.927252612022608,
+      "quantiles": {
+        "0.05": 7.232,
+        "0.25": 9.605,
+        "0.5": 11.751999999999999,
+        "0.75": 14.802999999999999,
+        "0.95": 20.34
+      },
+      "is_constant": false
+    },
+    "hyperkalemia_severity_categorizedValue": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 5,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "normal": 1827,
+        "mild": 123,
+        "Missing": 61,
+        "moderate": 37,
+        "severe": 17
+      }
+    },
+    "ckd_severity_categorizedValue": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 7,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "mildly_decreased": 607,
+        "mild_to_moderate_decrease": 462,
+        "moderate_to_severe_decrease": 388,
+        "severe_decrease": 250,
+        "normal_or_high": 197,
+        "kidney_failure": 83,
+        "Missing": 78
+      }
+    },
+    "conditions_heartFailure_timeFromEarliest_first": {
+      "dtype": "Int64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 0.0,
+      "max": 150.0,
+      "mean": 5.735108958837772,
+      "std": 18.33675229660521,
+      "quantiles": {
+        "0.05": 0.0,
+        "0.25": 0.0,
+        "0.5": 0.0,
+        "0.75": 0.0,
+        "0.95": 41.799999999999955
+      },
+      "is_constant": false
+    },
+    "conditions_heart_failure_hf_within_18mo_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 2065
+      }
+    },
+    "conditions_heart_failure_occurred_prior_to_18_months_any": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1875,
+        "true": 190
+      }
+    },
+    "encounter_primary_reason_HF_Disease_f5a_w7d_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1823,
+        "false": 229,
+        "true": 13
+      }
+    },
+    "encounter_primary_reason_HF_Disease_f5a_w1mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1470,
+        "false": 565,
+        "true": 30
+      }
+    },
+    "encounter_primary_reason_HF_Disease_f5a_w3mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1030,
+        "false": 990,
+        "true": 45
+      }
+    },
+    "encounter_primary_reason_HF_Disease_f5a_w6mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1114,
+        "Missing": 906,
+        "true": 45
+      }
+    },
+    "encounter_primary_reason_HF_Disease_f5a_w1a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1202,
+        "Missing": 817,
+        "true": 46
+      }
+    },
+    "encounter_primary_reason_HF_Disease_f5a_w3a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1312,
+        "Missing": 706,
+        "true": 47
+      }
+    },
+    "encounter_primary_reason_HF_Disease_f5a_w5a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1341,
+        "Missing": 677,
+        "true": 47
+      }
+    },
+    "encounter_primary_reason_number_of_HF_rehospitalizations_5a_f5a_count": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -7.5,
+      "max": 30.0,
+      "mean": 0.3305084745762712,
+      "std": 1.5797099451190986,
+      "quantiles": {
+        "0.05": 0.0,
+        "0.25": 0.0,
+        "0.5": 0.0,
+        "0.75": 0.0,
+        "0.95": 2.0
+      },
+      "is_constant": false
+    },
+    "encounter_primary_reason_CV_Disease_f5a_w7d_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1823,
+        "true": 129,
+        "false": 113
+      }
+    },
+    "encounter_primary_reason_CV_Disease_f5a_w1mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1470,
+        "true": 305,
+        "false": 290
+      }
+    },
+    "encounter_primary_reason_CV_Disease_f5a_w3mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1030,
+        "false": 536,
+        "true": 499
+      }
+    },
+    "encounter_primary_reason_CV_Disease_f5a_w6mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 906,
+        "false": 590,
+        "true": 569
+      }
+    },
+    "encounter_primary_reason_CV_Disease_f5a_w1a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 817,
+        "false": 636,
+        "true": 612
+      }
+    },
+    "encounter_primary_reason_CV_Disease_f5a_w3a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 706,
+        "false": 688,
+        "true": 671
+      }
+    },
+    "encounter_primary_reason_CV_Disease_f5a_w5a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 704,
+        "true": 684,
+        "Missing": 677
+      }
+    },
+    "encounter_primary_reason_number_of_days_to_rehosp_for_CV_f5a_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -430.0,
+      "max": 1700.0,
+      "mean": -238.98438256658596,
+      "std": 301.5391370404057,
+      "quantiles": {
+        "0.05": -422.75,
+        "0.25": -422.75,
+        "0.5": -422.75,
+        "0.75": 13.0,
+        "0.95": 211.79999999999995
+      },
+      "is_constant": false
+    },
+    "encounter_primary_reason_number_of_CV_rehospitalizations_5a_f5a_count": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -13.0,
+      "max": 50.0,
+      "mean": 4.875302663438257,
+      "std": 8.446684720604887,
+      "quantiles": {
+        "0.05": 0.0,
+        "0.25": 0.0,
+        "0.5": 1.0,
+        "0.75": 6.0,
+        "0.95": 24.0
+      },
+      "is_constant": false
+    },
+    "encounter_primary_reason_non_CV_Disease_f5a_w7d_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1823,
+        "false": 129,
+        "true": 113
+      }
+    },
+    "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1470,
+        "false": 305,
+        "true": 290
+      }
+    },
+    "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1030,
+        "true": 536,
+        "false": 499
+      }
+    },
+    "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 906,
+        "true": 590,
+        "false": 569
+      }
+    },
+    "encounter_primary_reason_non_CV_Disease_f5a_w1a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 817,
+        "true": 636,
+        "false": 612
+      }
+    },
+    "encounter_primary_reason_non_CV_Disease_f5a_w3a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 706,
+        "true": 688,
+        "false": 671
+      }
+    },
+    "encounter_primary_reason_non_CV_Disease_f5a_w5a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 704,
+        "false": 684,
+        "Missing": 677
+      }
+    },
+    "encounter_primary_reason_number_of_days_to_rehosp_for_non_CV_f5a_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -460.0,
+      "max": 1900.0,
+      "mean": -255.24067796610169,
+      "std": 319.4826838235619,
+      "quantiles": {
+        "0.05": -455.25,
+        "0.25": -455.25,
+        "0.5": -455.25,
+        "0.75": 17.0,
+        "0.95": 220.79999999999973
+      },
+      "is_constant": false
+    },
+    "encounter_primary_reason_number_of_non_CV_rehospitalizations_5a_f5a_count": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -13.0,
+      "max": 50.0,
+      "mean": 4.67409200968523,
+      "std": 8.235560064431771,
+      "quantiles": {
+        "0.05": 0.0,
+        "0.25": 0.0,
+        "0.5": 1.0,
+        "0.75": 7.0,
+        "0.95": 21.0
+      },
+      "is_constant": false
+    },
+    "encounter_primary_reason_renal_complications_f5a_w7d_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1823,
+        "false": 242
+      }
+    },
+    "encounter_primary_reason_renal_complications_f5a_w1mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1470,
+        "false": 594
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 1,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "encounter_primary_reason_renal_complications_f5a_w3mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1034,
+        "Missing": 1030
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 1,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "encounter_primary_reason_renal_complications_f5a_w6mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1158,
+        "Missing": 906
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 1,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "encounter_primary_reason_renal_complications_f5a_w1a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1246,
+        "Missing": 817
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 2,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "encounter_primary_reason_renal_complications_f5a_w3a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1357,
+        "Missing": 706
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 2,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "encounter_primary_reason_renal_complications_f5a_w5a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 3,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1386,
+        "Missing": 677
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 2,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "encounter_primary_reason_number_of_renal_rehospitalizations_5a_f5a_count": {
+      "dtype": "Int64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 0.0,
+      "max": 8.0,
+      "mean": 0.0576271186440678,
+      "std": 0.3710335272370817,
+      "quantiles": {
+        "0.05": 0.0,
+        "0.25": 0.0,
+        "0.5": 0.0,
+        "0.75": 0.0,
+        "0.95": 0.0
+      },
+      "is_constant": false
+    },
+    "cause_of_death_isCV_f5a_w7d_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1873,
+        "false": 192
+      }
+    },
+    "cause_of_death_isCV_f5a_w1mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1787,
+        "false": 278
+      }
+    },
+    "cause_of_death_isCV_f5a_w3mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1700,
+        "false": 365
+      }
+    },
+    "cause_of_death_isCV_f5a_w6mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1606,
+        "false": 459
+      }
+    },
+    "cause_of_death_isCV_f5a_w1a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1502,
+        "false": 563
+      }
+    },
+    "cause_of_death_isCV_f5a_w3a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1244,
+        "false": 821
+      }
+    },
+    "cause_of_death_isCV_f5a_w5a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1088,
+        "false": 977
+      }
+    },
+    "cause_of_death_isRenal_f5a_w7d_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1873,
+        "false": 192
+      }
+    },
+    "cause_of_death_isRenal_f5a_w1mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1787,
+        "false": 278
+      }
+    },
+    "cause_of_death_isRenal_f5a_w3mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1700,
+        "false": 365
+      }
+    },
+    "cause_of_death_isRenal_f5a_w6mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1606,
+        "false": 459
+      }
+    },
+    "cause_of_death_isRenal_f5a_w1a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1502,
+        "false": 563
+      }
+    },
+    "cause_of_death_isRenal_f5a_w3a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1244,
+        "false": 821
+      }
+    },
+    "cause_of_death_isRenal_f5a_w5a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1088,
+        "false": 977
+      }
+    },
+    "cause_of_death_isNonRenalAndNonCV_f5a_w7d_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1873,
+        "false": 192
+      }
+    },
+    "cause_of_death_isNonRenalAndNonCV_f5a_w1mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1787,
+        "false": 278
+      }
+    },
+    "cause_of_death_isNonRenalAndNonCV_f5a_w3mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1700,
+        "false": 365
+      }
+    },
+    "cause_of_death_isNonRenalAndNonCV_f5a_w6mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1606,
+        "false": 459
+      }
+    },
+    "cause_of_death_isNonRenalAndNonCV_f5a_w1a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1502,
+        "false": 563
+      }
+    },
+    "cause_of_death_isNonRenalAndNonCV_f5a_w3a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1244,
+        "false": 821
+      }
+    },
+    "cause_of_death_isNonRenalAndNonCV_f5a_w5a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1088,
+        "false": 977
+      }
+    },
+    "cause_of_death_isAllCause_f5a_w7d_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1873,
+        "true": 192
+      }
+    },
+    "cause_of_death_isAllCause_f5a_w1mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1787,
+        "true": 278
+      }
+    },
+    "cause_of_death_isAllCause_f5a_w3mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1700,
+        "true": 365
+      }
+    },
+    "cause_of_death_isAllCause_f5a_w6mo_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1606,
+        "true": 459
+      }
+    },
+    "cause_of_death_isAllCause_f5a_w1a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1502,
+        "true": 563
+      }
+    },
+    "cause_of_death_isAllCause_f5a_w3a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1244,
+        "true": 821
+      }
+    },
+    "cause_of_death_isAllCause_f5a_w5a_first": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "Missing": 1088,
+        "true": 977
+      }
+    },
+    "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -460.0,
+      "max": 1900.0,
+      "mean": -23.149636803874092,
+      "std": 579.9250071648815,
+      "quantiles": {
+        "0.05": -454.75,
+        "0.25": -454.75,
+        "0.5": -454.75,
+        "0.75": 181.0,
+        "0.95": 1297.7999999999997
+      },
+      "is_constant": false
+    },
+    "eGFR_2021_ckd_epi_creatinine": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": 20.0,
+      "max": 140.0,
+      "mean": 61.168670262954,
+      "std": 22.487808215982625,
+      "quantiles": {
+        "0.05": 28.1155732,
+        "0.25": 42.845709,
+        "0.5": 59.125829,
+        "0.75": 77.762526,
+        "0.95": 99.9534602
+      },
+      "is_constant": false
+    },
+    "ckd_severity_from_calculated_egfr": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 5,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "mildly_decreased": 752,
+        "mild_to_moderate_decrease": 487,
+        "moderate_to_severe_decrease": 423,
+        "normal_or_high": 286,
+        "severe_decrease": 117
+      }
+    },
+    "ckd_severity_calculated_or_measured": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 5,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "mildly_decreased": 752,
+        "mild_to_moderate_decrease": 487,
+        "moderate_to_severe_decrease": 423,
+        "normal_or_high": 286,
+        "severe_decrease": 117
+      }
+    },
+    "maggic_total_score": {
+      "dtype": "Float64",
+      "inferred_type": "numeric",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "min": -6.3,
+      "max": 40.0,
+      "mean": 6.9688861985472155,
+      "std": 14.55348518154287,
+      "quantiles": {
+        "0.05": -6.25,
+        "0.25": -6.25,
+        "0.5": -6.25,
+        "0.75": 21.0,
+        "0.95": 29.0
+      },
+      "is_constant": false
+    },
+    "med_acei": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1078,
+        "true": 987
+      }
+    },
+    "med_activeDuringEncounter_ace_inhibitors_arb_use": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1555,
+        "false": 510
+      }
+    },
+    "med_activeDuringEncounter_bb": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1619,
+        "false": 446
+      }
+    },
+    "med_anti_coag": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1218,
+        "false": 847
+      }
+    },
+    "med_anti_plat": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1475,
+        "true": 590
+      }
+    },
+    "med_antiarrhytmic": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1746,
+        "true": 319
+      }
+    },
+    "med_antiinfl": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2054,
+        "true": 11
+      }
+    },
+    "med_arb": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1679,
+        "true": 386
+      }
+    },
+    "med_ari": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "med_arni": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1967,
+        "true": 98
+      }
+    },
+    "med_bb": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1461,
+        "false": 604
+      }
+    },
+    "med_ccb": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1679,
+        "true": 386
+      }
+    },
+    "med_cortico_syst": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "med_digitalis": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1715,
+        "true": 350
+      }
+    },
+    "med_diuretics": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1790,
+        "false": 275
+      }
+    },
+    "med_diuretics_loop": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1628,
+        "false": 437
+      }
+    },
+    "med_inotropes": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2056,
+        "true": 9
+      }
+    },
+    "med_insulins": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1963,
+        "true": 102
+      }
+    },
+    "med_ivabradine": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2044,
+        "true": 21
+      }
+    },
+    "med_ll": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1103,
+        "false": 962
+      }
+    },
+    "med_mra": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1289,
+        "false": 776
+      }
+    },
+    "med_oral_antidiabetic": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1413,
+        "true": 652
+      }
+    },
+    "med_platelet": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1475,
+        "true": 590
+      }
+    },
+    "med_potassium_binders": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2063
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 2,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "med_rasi": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1344,
+        "false": 721
+      }
+    },
+    "med_rdoad": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1934,
+        "true": 131
+      }
+    },
+    "med_rdoad_syst": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1959,
+        "true": 106
+      }
+    },
+    "med_sglt2i": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1689,
+        "true": 376
+      }
+    },
+    "med_thrombolytic": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2064
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 1,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "med_vasodil": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2015,
+        "true": 50
+      }
+    },
+    "med_acei_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1516,
+        "true": 549
+      }
+    },
+    "med_anti_coag_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1485,
+        "true": 580
+      }
+    },
+    "med_anti_plat_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1780,
+        "true": 285
+      }
+    },
+    "med_antiarrhytmic_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1851,
+        "true": 214
+      }
+    },
+    "med_antiinfl_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2046,
+        "true": 19
+      }
+    },
+    "med_arb_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1813,
+        "true": 252
+      }
+    },
+    "med_ari_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "med_arni_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2018,
+        "true": 47
+      }
+    },
+    "med_bb_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1366,
+        "true": 699
+      }
+    },
+    "med_ccb_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1746,
+        "true": 319
+      }
+    },
+    "med_cortico_syst_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "med_digitalis_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1874,
+        "true": 191
+      }
+    },
+    "med_diuretics_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1312,
+        "true": 753
+      }
+    },
+    "med_diuretics_loop_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1412,
+        "true": 653
+      }
+    },
+    "med_inotropes_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2059,
+        "true": 6
+      }
+    },
+    "med_insulins_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1976,
+        "true": 89
+      }
+    },
+    "med_ivabradine_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2048,
+        "true": 17
+      }
+    },
+    "med_ll_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1523,
+        "true": 542
+      }
+    },
+    "med_mra_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1520,
+        "true": 545
+      }
+    },
+    "med_oral_antidiabetic_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1732,
+        "true": 333
+      }
+    },
+    "med_platelet_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1780,
+        "true": 285
+      }
+    },
+    "med_potassium_binders_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2064
+      },
+      "suppressed": {
+        "distinct_values_suppressed": 1,
+        "rows_covered": 1,
+        "reason": "count below 5 and/or ranked beyond top 20"
+      }
+    },
+    "med_rasi_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1346,
+        "true": 719
+      }
+    },
+    "med_rdoad_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1959,
+        "true": 106
+      }
+    },
+    "med_rdoad_syst_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1966,
+        "true": 99
+      }
+    },
+    "med_sglt2i_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1941,
+        "true": 124
+      }
+    },
+    "med_thrombolytic_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "med_vasodil_history": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2002,
+        "true": 63
+      }
+    },
+    "conditions_af": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1052,
+        "false": 1013
+      }
+    },
+    "conditions_aidshiv": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "conditions_ap": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1866,
+        "true": 199
+      }
+    },
+    "conditions_ckd_chronic": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1844,
+        "true": 221
+      }
+    },
+    "conditions_cm": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1731,
+        "true": 334
+      }
+    },
+    "conditions_copd": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1669,
+        "true": 396
+      }
+    },
+    "conditions_dem": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2040,
+        "true": 25
+      }
+    },
+    "conditions_dep": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1987,
+        "true": 78
+      }
+    },
+    "conditions_devices": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1526,
+        "true": 539
+      }
+    },
+    "conditions_dia": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2065
+      }
+    },
+    "conditions_diabetes": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1191,
+        "true": 874
+      }
+    },
+    "conditions_dysl": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1095,
+        "true": 970
+      }
+    },
+    "conditions_hf": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 1,
+      "is_constant": true,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 2065
+      }
+    },
+    "conditions_hyp": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1666,
+        "false": 399
+      }
+    },
+    "conditions_hyperthyroid": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2049,
+        "true": 16
+      }
+    },
+    "conditions_hypothyroid": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1883,
+        "true": 182
+      }
+    },
+    "conditions_ibd": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2047,
+        "true": 18
+      }
+    },
+    "conditions_ihd": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "true": 1555,
+        "false": 510
+      }
+    },
+    "conditions_ld": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2041,
+        "true": 24
+      }
+    },
+    "conditions_mc": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1982,
+        "true": 83
+      }
+    },
+    "conditions_mi": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1287,
+        "true": 778
+      }
+    },
+    "conditions_myocarditis": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2039,
+        "true": 26
+      }
+    },
+    "conditions_osa": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2038,
+        "true": 27
+      }
+    },
+    "conditions_pad": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1590,
+        "true": 475
+      }
+    },
+    "conditions_pericardial": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1923,
+        "true": 142
+      }
+    },
+    "conditions_rd": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2034,
+        "true": 31
+      }
+    },
+    "conditions_revasc": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2034,
+        "true": 31
+      }
+    },
+    "conditions_stroke": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1815,
+        "true": 250
+      }
+    },
+    "conditions_substance_abuse": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 2050,
+        "true": 15
+      }
+    },
+    "conditions_tia": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1958,
+        "true": 107
+      }
+    },
+    "conditions_vd": {
+      "dtype": "String",
+      "inferred_type": "categorical",
+      "row_count": 2065,
+      "null_count": 0,
+      "null_pct": 0.0,
+      "unique_count": 2,
+      "is_constant": false,
+      "high_cardinality": false,
+      "top_values": {
+        "false": 1756,
+        "true": 309
+      }
+    }
+  }
+}

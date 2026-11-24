@@ -1,0 +1,714 @@
+Policy: release -- coherence 10x holdout baseline (or +1% absolute), distance 2x the natural 5% share
+Gating 32 file(s) under every policy...
+
+
+######################################################################
+# DT4H_Synthetic_ctgan_qt_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ctgan_qt_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 26.5% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.13418 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_qt_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_qt_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ctgan_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 22.9% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.12599 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_seed1.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ctgan_seed1.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 24.6% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.13548 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed1.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed1.json
+
+######################################################################
+# DT4H_Synthetic_ctgan_seed2.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ctgan_seed2.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 22.5% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.1178 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 1/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed2.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ctgan_seed2.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_g_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ddpm_g_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.8% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00398 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 57/4706 record(s) (1.2%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_g_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_g_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ddpm_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.4% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01151 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 152/4706 record(s) (3.2%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed0.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_seed1.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ddpm_seed1.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.9% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01407 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 156/4706 record(s) (3.3%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed1.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed1.json
+
+######################################################################
+# DT4H_Synthetic_ddpm_seed2.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_ddpm_seed2.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.6% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01241 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 146/4706 record(s) (3.1%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed2.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_ddpm_seed2.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps10_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps10_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 47.4% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.18241 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps10_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps10_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps15_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps15_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.8% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01604 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps15_seed1.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps15_seed1.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.0% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.0 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed1.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed1.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps15_seed2.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps15_seed2.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.2% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00185 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed2.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps15_seed2.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps1_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps1_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 56.7% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.56748 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps1_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps20_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps20_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.0% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.0002 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps20_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps20_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps5_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps5_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 34.0% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.1191 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps5_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_dpctgan_eps8_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_dpctgan_eps8_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.4% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.02507 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps8_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_dpctgan_eps8_seed0.json
+
+######################################################################
+# DT4H_Synthetic_gaussian_copula_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_gaussian_copula_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 13.2% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.06043 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed0.json
+
+######################################################################
+# DT4H_Synthetic_gaussian_copula_seed1.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_gaussian_copula_seed1.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 14.3% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.0655 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 1/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed1.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed1.json
+
+######################################################################
+# DT4H_Synthetic_gaussian_copula_seed2.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_gaussian_copula_seed2.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 13.1% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.05847 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 1/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed2.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_gaussian_copula_seed2.json
+
+######################################################################
+# DT4H_Synthetic_mst_eps15_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_mst_eps15_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.4% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01746 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_mst_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_patectgan_eps15_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_patectgan_eps15_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 3.7% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01628 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 24/4706 record(s) (0.5%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps15_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps15_seed0.json
+
+######################################################################
+# DT4H_Synthetic_patectgan_eps1_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_patectgan_eps1_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 35.8% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.21393 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 0/4706 record(s) (0.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps1_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps1_seed0.json
+
+######################################################################
+# DT4H_Synthetic_patectgan_eps5_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_patectgan_eps5_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 6.7% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.03165 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 4/4706 record(s) (0.1%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence over (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps5_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_patectgan_eps5_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_cap256_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_cap256_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.9% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00382 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 377/4706 record(s) (8.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_cap256_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_cap256_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_ep1000_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_ep1000_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 1.3% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00574 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 299/4706 record(s) (6.3%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ep1000_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ep1000_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_ind_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_ind_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ❌ freshness: 4 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.4% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00168 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 469/4706 record(s) (10.0%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   FAIL  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ind_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_ind_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_qt_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_qt_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.9% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01353 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 324/4706 record(s) (6.9%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_qt_seed1.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_qt_seed1.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.1% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00873 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 269/4706 record(s) (5.7%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed1.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed1.json
+
+######################################################################
+# DT4H_Synthetic_tvae_qt_seed2.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_qt_seed2.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 2.9% (real holdout: 0.0%) -- reported, not thresholded
+  ❌ coherence: violation rate 0.01286 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 382/4706 record(s) (8.1%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+🚫 FAIL -- DO NOT RELEASE
+
+Same measurement under every policy:
+  release      FAIL  coherence over (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed2.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_qt_seed2.json
+
+######################################################################
+# DT4H_Synthetic_tvae_seed0.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_seed0.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 1.1% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00481 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 352/4706 record(s) (7.5%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed0.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed0.json
+
+######################################################################
+# DT4H_Synthetic_tvae_seed1.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_seed1.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 0.8% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00328 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 384/4706 record(s) (8.2%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed1.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed1.json
+
+######################################################################
+# DT4H_Synthetic_tvae_seed2.csv
+######################################################################
+  note: 574132 categorical cell(s) normalized to the real schema's spellings after CSV parsing (expected for boolean columns, which pandas parses to bool dtype)
+Release gate for /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Synthetic_tvae_seed2.csv (4706 x 229):
+  ✅ schema: 229 columns, 0 not in released schema
+  ✅ representation: representation audit clean
+  ✅ freshness: 0 cell(s) an up-to-date decode would change
+  ✅ leakage: 0 verbatim training row(s) (compared in released/decoded space)
+     rows carrying at least one violation: 1.1% (real holdout: 0.0%) -- reported, not thresholded
+  ✅ coherence: violation rate 0.00492 vs holdout baseline 0.0 (threshold 0.01 = max(10x baseline, baseline+0.01))
+  ✅ distance: 308/4706 record(s) (6.5%, privacy step (all rows, same encoder)) closer than the holdout p5 threshold (0.025555, over 229 column(s)); policy limit 10% = 2x the natural 5% share
+
+✅ PASS -- cleared for release
+
+Same measurement under every policy:
+  release      PASS  coherence ok (limit 0.01), distance ok (limit 0.1) <- selected
+  controlled   PASS  coherence ok (limit 0.03), distance ok (limit 0.1)
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed2.md
+Report -> /home/translated/cardioData/SyntheticDataGenerationTabularDT4H/output/generate/DT4H_Release_Gate_DT4H_Synthetic_tvae_seed2.json
+
+======================================================================
+GATE SUMMARY (same measurement, both policies)
+======================================================================
+file                                         release  controlled failing checks
+DT4H_Synthetic_ctgan_qt_seed0                FAIL     FAIL       coherence
+DT4H_Synthetic_ctgan_seed0                   FAIL     FAIL       coherence
+DT4H_Synthetic_ctgan_seed1                   FAIL     FAIL       coherence
+DT4H_Synthetic_ctgan_seed2                   FAIL     FAIL       coherence
+DT4H_Synthetic_ddpm_g_seed0                  PASS     PASS       -
+DT4H_Synthetic_ddpm_seed0                    FAIL     PASS       coherence
+DT4H_Synthetic_ddpm_seed1                    FAIL     PASS       coherence
+DT4H_Synthetic_ddpm_seed2                    FAIL     PASS       coherence
+DT4H_Synthetic_dpctgan_eps10_seed0           FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps15_seed0           FAIL     PASS       coherence
+DT4H_Synthetic_dpctgan_eps15_seed1           PASS     PASS       -
+DT4H_Synthetic_dpctgan_eps15_seed2           PASS     PASS       -
+DT4H_Synthetic_dpctgan_eps1_seed0            FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps20_seed0           PASS     PASS       -
+DT4H_Synthetic_dpctgan_eps5_seed0            FAIL     FAIL       coherence
+DT4H_Synthetic_dpctgan_eps8_seed0            FAIL     PASS       coherence
+DT4H_Synthetic_gaussian_copula_seed0         FAIL     FAIL       coherence
+DT4H_Synthetic_gaussian_copula_seed1         FAIL     FAIL       coherence
+DT4H_Synthetic_gaussian_copula_seed2         FAIL     FAIL       coherence
+DT4H_Synthetic_mst_eps15_seed0               FAIL     PASS       coherence
+DT4H_Synthetic_patectgan_eps15_seed0         FAIL     PASS       coherence
+DT4H_Synthetic_patectgan_eps1_seed0          FAIL     FAIL       coherence
+DT4H_Synthetic_patectgan_eps5_seed0          FAIL     FAIL       coherence
+DT4H_Synthetic_tvae_cap256_seed0             PASS     PASS       -
+DT4H_Synthetic_tvae_ep1000_seed0             PASS     PASS       -
+DT4H_Synthetic_tvae_ind_seed0                FAIL     FAIL       freshness
+DT4H_Synthetic_tvae_qt_seed0                 FAIL     PASS       coherence
+DT4H_Synthetic_tvae_qt_seed1                 PASS     PASS       -
+DT4H_Synthetic_tvae_qt_seed2                 FAIL     PASS       coherence
+DT4H_Synthetic_tvae_seed0                    PASS     PASS       -
+DT4H_Synthetic_tvae_seed1                    PASS     PASS       -
+DT4H_Synthetic_tvae_seed2                    PASS     PASS       -
+
+10/32 pass 'release'; 19/32 pass 'controlled'. Reports written next to each file.

@@ -1,0 +1,40 @@
+{
+  "model": "mst",
+  "run_id": "mst_eps15_seed0",
+  "status": "ok",
+  "epsilon": 15.0,
+  "seed": 0,
+  "synthetic_csv": "/home/yugurses/cardiosynth/mst_results/generate/DT4H_Synthetic_mst_eps15_seed0.csv",
+  "output_dir": "/home/yugurses/cardiosynth/mst_results",
+  "generated_at": "2026-11-04T17:57:28.301239+00:00",
+  "reports": {
+    "evaluate": {
+      "md": "/home/yugurses/cardiosynth/mst_results/evaluate/DT4H_Evaluation.md",
+      "json": "/home/yugurses/cardiosynth/mst_results/evaluate/DT4H_Evaluation.json"
+    },
+    "coherence": {
+      "md": "/home/yugurses/cardiosynth/mst_results/coherence/DT4H_Coherence_Audit.md",
+      "json": "/home/yugurses/cardiosynth/mst_results/coherence/DT4H_Coherence_Audit.json"
+    },
+    "survival": {
+      "md": "/home/yugurses/cardiosynth/mst_results/survival/DT4H_Survival_Fidelity.md",
+      "json": "/home/yugurses/cardiosynth/mst_results/survival/DT4H_Survival_Fidelity.json"
+    },
+    "utility": {
+      "md": "/home/yugurses/cardiosynth/mst_results/utility/DT4H_Utility_TSTR.md",
+      "json": "/home/yugurses/cardiosynth/mst_results/utility/DT4H_Utility_TSTR.json"
+    },
+    "privacy": {
+      "md": "/home/yugurses/cardiosynth/mst_results/privacy/DT4H_Privacy_Assessment.md",
+      "json": "/home/yugurses/cardiosynth/mst_results/privacy/DT4H_Privacy_Assessment.json"
+    },
+    "attacks": {
+      "md": "/home/yugurses/cardiosynth/mst_results/attacks/DT4H_Privacy_Attacks.md",
+      "json": "/home/yugurses/cardiosynth/mst_results/attacks/DT4H_Privacy_Attacks.json"
+    },
+    "figures_dir": "/home/yugurses/cardiosynth/mst_results/figures",
+    "datasheet": "/home/yugurses/cardiosynth/mst_results/release_docs/DT4H_Datasheet.md",
+    "codebook": "/home/yugurses/cardiosynth/mst_results/release_docs/DT4H_Codebook.md",
+    "release_label": "/home/yugurses/cardiosynth/mst_results/release_docs/labels/DT4H_Label_mst_eps15_seed0.json"
+  }
+}

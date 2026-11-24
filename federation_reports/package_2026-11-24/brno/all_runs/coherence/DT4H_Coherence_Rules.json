@@ -1,0 +1,3645 @@
+{
+  "parameters": {
+    "min_support": 50,
+    "max_train_violation": 0.002,
+    "range_margin_fraction": 0.05
+  },
+  "rules": [
+    {
+      "type": "implication",
+      "if_true": "symptoms_Ankle_swelling_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 52,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Ankle_swelling_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 65,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Ankle_swelling_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 73,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Ankle_swelling_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 100,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Ankle_swelling_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 129,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Depression_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 68,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Depression_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 93,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Peripheral_edema_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 53,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Peripheral_edema_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 66,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Peripheral_edema_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 79,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Peripheral_edema_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 108,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Peripheral_edema_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 124,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "symptoms_Pleural_effusion_display_pET_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 51,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_smoker_last",
+      "then_true": "smoking_status_formerSmoker_last",
+      "train_support": 303,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_smoker_last",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 60,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_smoker_last",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 95,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_smoker_last",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 126,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_formerSmoker_last",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 56,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_formerSmoker_last",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 74,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_formerSmoker_last",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_formerSmoker_last",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 120,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_formerSmoker_last",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 178,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "smoking_status_formerSmoker_last",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 360,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 436,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 626,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_hf_within_18mo_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 746,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_occurred_prior_to_18_months_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 56,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_occurred_prior_to_18_months_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 67,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_occurred_prior_to_18_months_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 88,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_heart_failure_occurred_prior_to_18_months_any",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 99,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 52,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 71,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 88,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 359,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 359,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 359,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 359,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 50,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 72,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 108,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 132,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 359,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 414,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 414,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 414,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 54,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 81,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 125,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 152,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 359,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 414,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 446,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 446,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 55,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 87,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 136,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 165,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 359,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 414,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 446,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "train_support": 487,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 55,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 87,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 149,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 185,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w7d_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3mo_first",
+      "train_support": 359,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w6mo_first",
+      "train_support": 414,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w1a_first",
+      "train_support": 446,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_CV_Disease_f5a_w3a_first",
+      "train_support": 487,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 55,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 87,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 149,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_CV_Disease_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 187,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 69,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 90,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 413,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 413,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 413,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 413,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 64,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 79,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 124,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 168,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 413,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 454,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 454,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 454,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 73,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 93,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 144,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 194,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 413,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 454,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 487,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 487,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 74,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 100,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 155,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 210,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 413,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 454,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 487,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "train_support": 523,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 74,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 100,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 173,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 234,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w7d_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1mo_first",
+      "train_support": 218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3mo_first",
+      "train_support": 413,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w6mo_first",
+      "train_support": 454,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w1a_first",
+      "train_support": 487,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "encounter_primary_reason_non_CV_Disease_f5a_w3a_first",
+      "train_support": 523,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 74,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 100,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 173,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "encounter_primary_reason_non_CV_Disease_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 238,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 360,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 360,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 360,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 360,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 436,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 436,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 360,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 436,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 626,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 360,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 436,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 626,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 67,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 95,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 124,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 306,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei",
+      "then_true": "med_rasi",
+      "train_support": 737,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_ace_inhibitors_arb_use",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 78,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_ace_inhibitors_arb_use",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 129,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_ace_inhibitors_arb_use",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 182,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_ace_inhibitors_arb_use",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 233,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_ace_inhibitors_arb_use",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 292,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_ace_inhibitors_arb_use",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 437,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_ace_inhibitors_arb_use",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 537,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 81,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 134,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 191,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 243,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 305,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 455,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_activeDuringEncounter_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 555,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 87,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 136,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 183,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 222,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 266,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 367,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 440,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 52,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 83,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 141,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 186,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat",
+      "then_true": "med_platelet",
+      "train_support": 445,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_antiarrhytmic",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 58,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_antiarrhytmic",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 98,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_antiarrhytmic",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 116,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 66,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 97,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 121,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb",
+      "then_true": "med_rasi",
+      "train_support": 303,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arni",
+      "then_true": "med_activeDuringEncounter_ace_inhibitors_arb_use",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arni",
+      "then_true": "med_arb",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arni",
+      "then_true": "med_diuretics",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arni",
+      "then_true": "med_rasi",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 75,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 125,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 168,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 219,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 363,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 458,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 53,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 63,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 118,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 149,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_digitalis",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 53,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_digitalis",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 67,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_digitalis",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 108,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_digitalis",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 126,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 98,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 160,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 281,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 354,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 529,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 643,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 93,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 152,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 209,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 264,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 334,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 497,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 605,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop",
+      "then_true": "med_diuretics",
+      "train_support": 1218,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 83,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 115,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 144,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 241,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 313,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 73,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 119,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 159,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 217,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 351,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 445,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra",
+      "then_true": "med_diuretics",
+      "train_support": 981,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 64,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 125,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 155,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 52,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 83,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 141,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 186,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet",
+      "then_true": "med_anti_plat",
+      "train_support": 445,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 63,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 102,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 142,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 188,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 322,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 416,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_sglt2i",
+      "then_true": "med_oral_antidiabetic",
+      "train_support": 273,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 75,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 97,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 126,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 148,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 202,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 237,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_acei_history",
+      "then_true": "med_rasi_history",
+      "train_support": 412,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 73,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 99,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 125,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 157,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 187,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 240,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_coag_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 262,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 59,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 97,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 118,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_anti_plat_history",
+      "then_true": "med_platelet_history",
+      "train_support": 213,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_antiarrhytmic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 59,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_antiarrhytmic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 73,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_antiarrhytmic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 95,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_antiarrhytmic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 65,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 76,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 97,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 115,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 127,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_arb_history",
+      "then_true": "med_rasi_history",
+      "train_support": 194,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 98,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 129,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 164,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 201,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 268,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_bb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 307,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 57,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 75,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 93,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 141,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ccb_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 158,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_digitalis_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 62,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_digitalis_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 83,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_digitalis_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 88,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 82,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 113,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 148,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 188,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 227,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 297,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 341,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 78,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 107,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 138,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 172,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 207,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 271,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 309,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_diuretics_loop_history",
+      "then_true": "med_diuretics_history",
+      "train_support": 488,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_insulins_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 51,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_insulins_history",
+      "then_true": "conditions_diabetes",
+      "train_support": 73,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 66,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 92,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 114,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 135,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 186,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_ll_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 217,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 62,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 83,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 135,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 168,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 225,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 251,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_mra_history",
+      "then_true": "med_diuretics_history",
+      "train_support": 412,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 55,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 85,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 101,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 128,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_oral_antidiabetic_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 142,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 59,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 97,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 118,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_platelet_history",
+      "then_true": "med_anti_plat_history",
+      "train_support": 213,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 73,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 139,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 176,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 214,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 281,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rasi_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 322,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rdoad_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 51,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rdoad_syst_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 57,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_rdoad_syst_history",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 60,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "med_sglt2i_history",
+      "then_true": "med_oral_antidiabetic_history",
+      "train_support": 88,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 138,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 182,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 224,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 267,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 362,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_af",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 416,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ap",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 59,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ap",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 74,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ap",
+      "then_true": "conditions_ihd",
+      "train_support": 146,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ckd_chronic",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 58,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ckd_chronic",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 71,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ckd_chronic",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 81,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ckd_chronic",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 105,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ckd_chronic",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 120,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_cm",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 64,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_cm",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 91,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_cm",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 107,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_copd",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 63,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_copd",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 80,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_copd",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 91,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_copd",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 110,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_copd",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 149,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_copd",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 175,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_devices",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 56,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_devices",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 74,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_devices",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 95,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_devices",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 122,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_devices",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 176,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_devices",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 216,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_diabetes",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 72,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_diabetes",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 106,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_diabetes",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 138,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_diabetes",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 170,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_diabetes",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 209,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_diabetes",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 298,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_diabetes",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 355,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_dysl",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 66,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_dysl",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 97,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_dysl",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 127,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_dysl",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 168,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_dysl",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 200,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_dysl",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 287,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_dysl",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 344,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 153,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 223,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 295,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 360,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 436,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 626,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hf",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 746,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 129,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 189,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 250,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 305,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 369,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 532,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hyp",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 642,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hypothyroid",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 51,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hypothyroid",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 70,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_hypothyroid",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 78,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ihd",
+      "then_true": "cause_of_death_isAllCause_f5a_w7d_first",
+      "train_support": 107,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ihd",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 157,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ihd",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 205,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ihd",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 259,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ihd",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 319,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ihd",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 467,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_ihd",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 562,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 77,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 101,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 125,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 144,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 220,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 262,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_mi",
+      "then_true": "conditions_ihd",
+      "train_support": 575,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_pad",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 67,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_pad",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 79,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_pad",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 98,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_pad",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 117,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_pad",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 163,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_pad",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 188,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_pericardial",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 52,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "train_support": 52,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "train_support": 63,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 74,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 84,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 109,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_stroke",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 119,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_tia",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 51,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_tia",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 54,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_vd",
+      "then_true": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "train_support": 54,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_vd",
+      "then_true": "cause_of_death_isAllCause_f5a_w1a_first",
+      "train_support": 64,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_vd",
+      "then_true": "cause_of_death_isAllCause_f5a_w3a_first",
+      "train_support": 94,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "implication",
+      "if_true": "conditions_vd",
+      "then_true": "cause_of_death_isAllCause_f5a_w5a_first",
+      "train_support": 107,
+      "train_violation_rate": 0.0
+    },
+    {
+      "type": "category_range",
+      "categorical": "ckd_severity_from_calculated_egfr",
+      "numeric": "lab_results_valideGFR_value_first",
+      "ranges": {
+        "mild_to_moderate_decrease": [
+          -0.7585,
+          96.7585
+        ],
+        "mildly_decreased": [
+          -5.1285,
+          110.5585
+        ],
+        "moderate_to_severe_decrease": [
+          -0.1585,
+          88.3585
+        ],
+        "normal_or_high": [
+          -4.5285,
+          130.3585
+        ],
+        "severe_decrease": [
+          3.4415,
+          56.5585
+        ]
+      },
+      "margin": 6.1585
+    },
+    {
+      "type": "category_range",
+      "categorical": "ckd_severity_from_calculated_egfr",
+      "numeric": "lab_results_valideGFR_value_last",
+      "ranges": {
+        "mild_to_moderate_decrease": [
+          -0.1585,
+          96.7585
+        ],
+        "mildly_decreased": [
+          -5.1285,
+          110.5585
+        ],
+        "moderate_to_severe_decrease": [
+          -0.1585,
+          88.3585
+        ],
+        "normal_or_high": [
+          -4.5285,
+          130.3585
+        ],
+        "severe_decrease": [
+          3.4415,
+          56.5585
+        ]
+      },
+      "margin": 6.1585
+    },
+    {
+      "type": "category_range",
+      "categorical": "hyperkalemia_severity_categorizedValue",
+      "numeric": "lab_results_potassium_value_first",
+      "ranges": {
+        "mild": [
+          4.27,
+          6.23
+        ],
+        "moderate": [
+          4.17,
+          6.83
+        ],
+        "normal": [
+          2.17,
+          6.63
+        ]
+      },
+      "margin": 0.23
+    },
+    {
+      "type": "category_range",
+      "categorical": "hyperkalemia_severity_categorizedValue",
+      "numeric": "lab_results_potassium_value_last",
+      "ranges": {
+        "mild": [
+          4.015,
+          5.685
+        ],
+        "moderate": [
+          5.115,
+          7.985
+        ],
+        "normal": [
+          1.715,
+          5.185
+        ]
+      },
+      "margin": 0.285
+    },
+    {
+      "type": "days_bounds",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "max_days": 1825
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w7d_first",
+      "window_days": 7
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w1mo_first",
+      "window_days": 30
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w3mo_first",
+      "window_days": 91
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w6mo_first",
+      "window_days": 182
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w1a_first",
+      "window_days": 365
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w3a_first",
+      "window_days": 1095
+    },
+    {
+      "type": "flag_days_consistency",
+      "days": "cause_of_death_number_of_days_to_death_for_all_cause_f5a_first",
+      "flag": "cause_of_death_isAllCause_f5a_w5a_first",
+      "window_days": 1825
+    }
+  ]
+}
