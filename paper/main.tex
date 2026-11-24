@@ -1090,7 +1090,10 @@ site at London and Stockholm.
 % summary and from the rows of Table~\ref{tab:runs}; the abstract, Methods and
 % that table's total line say 43/51 -- left as is at the author's request.
 % NOTE: reference-site values here are the pre-v2.2 campaign (3,520 training
-% records, gated 27 Aug 2026); replace with the v2.2 run once evaluated and gated.
+% records, gated 27 Aug 2026). The v2.2 run (3,334 training records, 47 of 52
+% runs, gated 24 Nov 2026: 2 open / 8 controlled) is evaluated; the numbers
+% refresh of Sections 4.1--4.9 and of these rows is pending the post-processed
+% TVAE candidate.
 
 \begin{table}[htbp]
 \centering
@@ -1160,9 +1163,11 @@ AUC 0.535 [0.518, 0.550] at Bucharest and 0.543 [0.516, 0.571] at Utrecht), and
 the effects are small. MST places no record
 nearer the training data than the unseen-patient p5 threshold at any partner
 site; TVAE places 4--20\% there, the highest share at London (20.2\%), where both
-membership attacks remain at chance (AUC 0.51 and 0.52). The 24\% MST share at
-the reference site belongs to the pre-re-fit campaign and is the one figure in
-this comparison that does not replicate.
+membership attacks remain at chance (AUC 0.51 and 0.52). MST's distance share
+at the reference site is the one figure in this comparison that does not
+replicate: 24\% in the campaign reported here and 22\% in the re-fit under the
+reviewed domains, against 0\% at every partner site. The re-fit rules out the
+bounds accounting as the cause; the cause is not established.
 
 \emph{Gate verdicts.} Of the 169 files gated across the seven sites, 24 pass the
 open-release policy and 68 the controlled-access policy
@@ -1237,7 +1242,9 @@ Stockholm & real (train vs holdout) & 0.108 & 0.022 & 0.434 & 1.0 & 5.0 & 0.500 
 \end{tabular}
 
 \raggedright\footnotesize \textsuperscript{a}\,Reference site; its files
-predate the reviewed-public-domain re-fit.% REFIT
+predate the reviewed-public-domain re-fit. In the re-fit on the v2.2 extract
+(4{,}445 patients) both files again fail both policies (MST: coherence 4.19\%,
+distance 22.1\%; TVAE: distance 12.2\%).% REFIT
 \textsuperscript{b}\,Gated after the NYHA decode of Table~\ref{tab:sites}.
 \end{table}
 

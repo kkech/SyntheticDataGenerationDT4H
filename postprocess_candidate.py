@@ -26,7 +26,14 @@ overrides with a loud warning; the output then carries no DP claim.
 
 The output is re-audited (representation, leakage in decoded space,
 distance re-check) and written next to the input as
-<name>_postprocessed.csv (or --out). It is a NEW release candidate:
+<name>_postprocessed.csv (or --out). A row map is written beside it
+(<output>.rowmap.json): for every output row, the 0-based position of
+the input row it came from (null for a top-up row drawn from --model),
+plus the list of dropped input rows. Anything linked to the input by
+record index -- generated clinical notes, for one -- is carried over to
+the candidate through that map; run without --model and with --no-snap
+when the linked material must keep describing exactly the rows it was
+generated from. It is a NEW release candidate:
 run release_gate.py on it, and treat its fidelity as changed -- the
 filter deliberately trades marginal fidelity for distance margin, and
 the evaluate step quantifies that honestly if pointed at the file.
@@ -69,6 +76,29 @@ def _require_csv(path: str) -> None:
                          f"synthetic DT4H_Synthetic_*.csv.")
     if _os.path.basename(path).endswith(".pkl"):
         raise SystemExit(f"❌ {path} looks like a model pickle. --file takes the synthetic CSV.")
+
+def build_row_map(input_file, input_rows, source_rows, *, snapped, filtered,
+                  threshold, columns_used):
+    """The provenance of every output row: `source_rows[i]` is the
+    0-based position in the input file of output row i, or None when the
+    row is a top-up sample that has no counterpart in the input. Row
+    positions of a synthetic file carry no patient information."""
+    kept = [None if s is None or int(s) < 0 else int(s) for s in source_rows]
+    present = {s for s in kept if s is not None}
+    return {
+        "input_file": os.path.basename(input_file),
+        "input_rows": int(input_rows),
+        "output_rows": len(kept),
+        "granularity_snap_applied": bool(snapped),
+        "distance_filter_applied": bool(filtered),
+        "distance_threshold": threshold,
+        "distance_columns_used": int(columns_used),
+        "rows_kept_from_input": len(present),
+        "rows_topped_up": sum(1 for s in kept if s is None),
+        "source_row_of_output_row": kept,
+        "dropped_input_rows": [i for i in range(int(input_rows)) if i not in present],
+    }
+
 
 def _distances_to_train(frame, train, encode, columns):
     """Nearest-training-record distance for every row of `frame`,
@@ -170,6 +200,7 @@ def main() -> int:
     candidate = pd.read_csv(args.file, low_memory=False, float_precision="round_trip")
     candidate, _ = align_categorical_case(candidate, train_decoded)
     target_rows = len(candidate)
+    source_rows = list(range(target_rows))   # provenance of each output row
     print(f"Candidate: {target_rows} x {candidate.shape[1]} ({os.path.basename(args.file)})")
 
     # SUBSET-AWARE distances: encoder and threshold both live on the
@@ -208,6 +239,7 @@ def main() -> int:
               f"({close.mean():.1%}) below the holdout p5 threshold ({p5}, "
               f"over {len(subset)} column(s)) -- dropping them "
               f"(natural rate for real unseen patients: 5%).")
+        source_rows = [s for s, c in zip(source_rows, np.asarray(close)) if not c]
         candidate = candidate.loc[~close].reset_index(drop=True)
 
         rounds = 0
@@ -237,6 +269,7 @@ def main() -> int:
                   f"still need {max(need - len(keep), 0)}")
             if len(keep):
                 candidate = pd.concat([candidate, keep], ignore_index=True)
+                source_rows.extend([None] * len(keep))   # top-up: no input counterpart
         if len(candidate) < target_rows:
             print(f"⚠️  Output has {len(candidate)} rows (< target {target_rows})"
                   + ("" if args.model else " -- pass --model to top up from the saved generator."))
@@ -258,6 +291,17 @@ def main() -> int:
 
     candidate.to_csv(out_path, index=False)
     print(f"✅ {len(candidate)} x {candidate.shape[1]} -> {out_path}")
+    assert len(source_rows) == len(candidate), "row map out of step with the output"
+    map_path = out_path[:-4] + ".rowmap.json" if out_path.endswith(".csv") else out_path + ".rowmap.json"
+    row_map = build_row_map(args.file, target_rows, source_rows,
+                            snapped=not args.no_snap, filtered=not args.no_filter,
+                            threshold=None if args.no_filter else p5,
+                            columns_used=len(subset))
+    with open(map_path, "w") as f:
+        json.dump(row_map, f)
+    print(f"Row map ({row_map['rows_kept_from_input']} input row(s) kept, "
+          f"{len(row_map['dropped_input_rows'])} dropped, "
+          f"{row_map['rows_topped_up']} topped up) -> {map_path}")
     print(f"Next: python release_gate.py --file {out_path}")
     return 0 if rep["clean"] and leak.get("exact_duplicates_of_training_rows", 1) == 0 else 1
 
